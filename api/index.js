@@ -58,7 +58,9 @@ function isStaticAsset(pathname) {
 // Serve static file
 function serveStaticFile(filePath, res) {
   try {
+    console.log('[api/index] Checking static file:', filePath);
     if (!fs.existsSync(filePath)) {
+      console.log('[api/index] File not found:', filePath);
       return false;
     }
     
@@ -86,6 +88,7 @@ function serveStaticFile(filePath, res) {
     res.statusCode = 200;
     res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    console.log('[api/index] Serving static file:', filePath, 'Content-Type:', contentType);
     res.end(content);
     return true;
   } catch (err) {
@@ -148,13 +151,17 @@ async function fetchResponseToExpress(fetchResponse, res) {
 export default async function handler(req, res) {
   try {
     const pathname = new URL(req.url, `https://${req.headers.host}`).pathname;
+    console.log('[api/index] Request:', req.method, pathname);
     
     // Try to serve static assets
     if (isStaticAsset(pathname)) {
+      console.log('[api/index] Detected static asset request for:', pathname);
       const staticPaths = [
         path.join(projectRoot, 'dist/client', pathname),
         path.join(projectRoot, 'public', pathname)
       ];
+      
+      console.log('[api/index] Attempting to serve from paths:', staticPaths);
       
       for (const filePath of staticPaths) {
         if (serveStaticFile(filePath, res)) {
@@ -163,6 +170,7 @@ export default async function handler(req, res) {
       }
       
       // If static file not found, let it fall through to 404
+      console.log('[api/index] Static file not found, returning 404');
       res.statusCode = 404;
       res.setHeader('Content-Type', 'text/plain');
       res.end('Not Found');
@@ -170,6 +178,7 @@ export default async function handler(req, res) {
     }
     
     // Handle SSR requests
+    console.log('[api/index] Handling SSR request for:', pathname);
     const server = await loadServerModule();
     const fetchRequest = await expressToFetchRequest(req);
     const fetchResponse = await server.fetch(fetchRequest);

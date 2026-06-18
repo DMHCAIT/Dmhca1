@@ -9,19 +9,7 @@
   },
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/client/assets/$1"
-    },
-    {
-      "src": "/public/(.*)",
-      "dest": "/public/$1"
-    },
-    {
-      "src": "/(.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.svg|.*\\.ico|.*\\.woff|.*\\.woff2|.*\\.ttf|.*\\.eot|.*\\.otf)",
-      "dest": "/dist/client/$1"
-    },
-    {
-      "src": "^(?!/api|/assets|/public).*",
+      "src": "/(.*)",
       "dest": "/api/index.js"
     }
   ]
