@@ -1,4 +1,4 @@
-// Root API handler - converts Express req/res to Fetch API and calls TanStack Start server
+// Root API handler - serves static assets and SSR content
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -38,6 +38,59 @@ async function loadServerModule() {
   } catch (err) {
     console.error('[api/index] Server load failed:', err.message);
     throw err;
+  }
+}
+
+// Check if request is for a static asset
+function isStaticAsset(pathname) {
+  const staticPatterns = [
+    /^\/assets\//,
+    /^\/courses\//,
+    /^\/events-content\//,
+    /^\/Faculty_images\//,
+    /^\/Training partners\//,
+    /^\/ACADEMIC PARTNERS\//,
+    /\.(js|css|woff|woff2|ttf|eot|otf|png|jpg|jpeg|gif|webp|svg|ico)$/i
+  ];
+  return staticPatterns.some(pattern => pattern.test(pathname));
+}
+
+// Serve static file
+function serveStaticFile(filePath, res) {
+  try {
+    if (!fs.existsSync(filePath)) {
+      return false;
+    }
+    
+    const content = fs.readFileSync(filePath);
+    const ext = path.extname(filePath).toLowerCase();
+    
+    const mimeTypes = {
+      '.js': 'application/javascript; charset=utf-8',
+      '.css': 'text/css; charset=utf-8',
+      '.png': 'image/png',
+      '.jpg': 'image/jpeg',
+      '.jpeg': 'image/jpeg',
+      '.gif': 'image/gif',
+      '.webp': 'image/webp',
+      '.svg': 'image/svg+xml',
+      '.ico': 'image/x-icon',
+      '.woff': 'font/woff',
+      '.woff2': 'font/woff2',
+      '.ttf': 'font/ttf',
+      '.eot': 'application/vnd.ms-fontobject',
+      '.otf': 'font/otf'
+    };
+    
+    const contentType = mimeTypes[ext] || 'application/octet-stream';
+    res.statusCode = 200;
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    res.end(content);
+    return true;
+  } catch (err) {
+    console.error('[api/index] Static file error:', err.message);
+    return false;
   }
 }
 
@@ -94,8 +147,30 @@ async function fetchResponseToExpress(fetchResponse, res) {
 
 export default async function handler(req, res) {
   try {
-    const server = await loadServerModule();
+    const pathname = new URL(req.url, `https://${req.headers.host}`).pathname;
     
+    // Try to serve static assets
+    if (isStaticAsset(pathname)) {
+      const staticPaths = [
+        path.join(projectRoot, 'dist/client', pathname),
+        path.join(projectRoot, 'public', pathname)
+      ];
+      
+      for (const filePath of staticPaths) {
+        if (serveStaticFile(filePath, res)) {
+          return;
+        }
+      }
+      
+      // If static file not found, let it fall through to 404
+      res.statusCode = 404;
+      res.setHeader('Content-Type', 'text/plain');
+      res.end('Not Found');
+      return;
+    }
+    
+    // Handle SSR requests
+    const server = await loadServerModule();
     const fetchRequest = await expressToFetchRequest(req);
     const fetchResponse = await server.fetch(fetchRequest);
     
