@@ -1,79 +1,62 @@
-// Simple static file server for dist/client
-import fs from 'fs';
+// API handler that loads and executes the TanStack Start server
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.dirname(__dirname);
-const clientDir = path.join(projectRoot, 'dist', 'client');
 
-// MIME types
-const mimeTypes = {
-  '.html': 'text/html; charset=utf-8',
-  '.js': 'application/javascript',
-  '.mjs': 'application/javascript',
-  '.css': 'text/css',
-  '.json': 'application/json',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.gif': 'image/gif',
-  '.svg': 'image/svg+xml',
-  '.webp': 'image/webp',
-  '.woff': 'font/woff',
-  '.woff2': 'font/woff2',
-  '.ttf': 'font/ttf',
-  '.eot': 'application/vnd.ms-fontobject'
-};
+let serverHandler = null;
 
-export default function handler(req, res) {
+async function loadServerHandler() {
+  if (serverHandler) return serverHandler;
+  
   try {
-    // Parse the URL
-    let filePath = decodeURIComponent(req.url || '/');
+    console.log('[api] Loading server from:', path.join(projectRoot, 'dist/server/server.js'));
     
-    // Default to index.html for root
-    if (filePath === '/' || filePath === '') {
-      filePath = '/index.html';
+    // Import the server module
+    const serverUrl = new URL(`file://${path.join(projectRoot, 'dist/server/server.js').replace(/\\/g, '/')}`);
+    console.log('[api] Server URL:', serverUrl.href);
+    
+    const serverModule = await import(serverUrl.href);
+    console.log('[api] Server module loaded');
+    
+    // The server module should have a default handler
+    serverHandler = serverModule.default;
+    
+    if (!serverHandler) {
+      throw new Error('Server module has no default export');
     }
     
-    // Build full file path
-    const fullPath = path.join(clientDir, filePath);
-    
-    // Security: prevent directory traversal
-    if (!fullPath.startsWith(clientDir)) {
-      res.statusCode = 404;
-      res.end('Not Found');
-      return;
-    }
-    
-    // Try to serve the file
-    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
-      const ext = path.extname(fullPath).toLowerCase();
-      const contentType = mimeTypes[ext] || 'application/octet-stream';
-      const fileContent = fs.readFileSync(fullPath);
-      
-      res.statusCode = 200;
-      res.setHeader('Content-Type', contentType);
-      res.setHeader('Cache-Control', 'public, max-age=3600');
-      res.end(fileContent);
-    } else {
-      // File not found - serve index.html for SPA routing
-      const indexPath = path.join(clientDir, 'index.html');
-      if (fs.existsSync(indexPath)) {
-        const indexContent = fs.readFileSync(indexPath);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.end(indexContent);
-      } else {
-        res.statusCode = 404;
-        res.end('Not Found');
-      }
-    }
-  } catch (error) {
-    console.error('[api] Error:', error);
-    res.statusCode = 500;
-    res.end('Internal Server Error');
+    console.log('[api] Server handler ready');
+    return serverHandler;
+  } catch (err) {
+    console.error('[api] Failed to load server:', err.message || err);
+    throw err;
   }
 }
+
+export default async function handler(req, res) {
+  try {
+    const serverHandler = await loadServerHandler();
+    
+    // Call the server handler with the request/response
+    if (typeof serverHandler === 'function') {
+      // For async handlers
+      const result = serverHandler(req, res);
+      if (result && typeof result.then === 'function') {
+        await result;
+      }
+    } else {
+      console.error('[api] Server handler is not a function');
+      res.statusCode = 500;
+      res.end('Server handler error');
+    }
+  } catch (error) {
+    console.error('[api] Handler error:', error.message || error);
+    res.statusCode = 500;
+    res.end(`Error: ${error.message || 'Unknown error'}`);
+  }
+}
+
 
