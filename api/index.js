@@ -1,65 +1,79 @@
-// Vercel API handler - serves the TanStack Start app
+// Simple static file server for dist/client
+import fs from 'fs';
+import path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import fs from 'fs/promises';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-const projectRoot = dirname(__dirname);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.dirname(__dirname);
+const clientDir = path.join(projectRoot, 'dist', 'client');
 
-let serverModule = null;
+// MIME types
+const mimeTypes = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript',
+  '.mjs': 'application/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.webp': 'image/webp',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf',
+  '.eot': 'application/vnd.ms-fontobject'
+};
 
-async function loadServer() {
-  if (serverModule) return serverModule;
-  
+export default function handler(req, res) {
   try {
-    console.log('[api] Attempting to load server from:', join(projectRoot, 'dist/server/server.js'));
+    // Parse the URL
+    let filePath = decodeURIComponent(req.url || '/');
     
-    // Check if file exists
-    try {
-      await fs.access(join(projectRoot, 'dist/server/server.js'));
-    } catch {
-      console.error('[api] Server file not found. Running build...');
-      // If dist doesn't exist, try to require dynamic import
-      const { execSync } = await import('child_process');
-      try {
-        execSync('npm run build', { cwd: projectRoot, stdio: 'inherit' });
-      } catch (buildErr) {
-        console.error('[api] Build failed:', buildErr);
-      }
+    // Default to index.html for root
+    if (filePath === '/' || filePath === '') {
+      filePath = '/index.html';
     }
     
-    const serverUrl = new URL('../dist/server/server.js', import.meta.url);
-    serverModule = await import(serverUrl.href);
-    console.log('[api] Server module loaded successfully');
-    return serverModule;
-  } catch (err) {
-    console.error('[api] Failed to load server:', err);
-    throw err;
-  }
-}
-
-export default async function handler(req, res) {
-  try {
-    const server = await loadServer();
+    // Build full file path
+    const fullPath = path.join(clientDir, filePath);
     
-    if (!server.default) {
-      console.error('[api] No default export from server module');
-      res.status(500).json({ error: 'Server module missing default export' });
+    // Security: prevent directory traversal
+    if (!fullPath.startsWith(clientDir)) {
+      res.statusCode = 404;
+      res.end('Not Found');
       return;
     }
     
-    // If server is an http server or handler, use it
-    if (typeof server.default === 'function') {
-      await server.default(req, res);
+    // Try to serve the file
+    if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
+      const ext = path.extname(fullPath).toLowerCase();
+      const contentType = mimeTypes[ext] || 'application/octet-stream';
+      const fileContent = fs.readFileSync(fullPath);
+      
+      res.statusCode = 200;
+      res.setHeader('Content-Type', contentType);
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.end(fileContent);
     } else {
-      res.status(500).json({ error: 'Server module is not a function' });
+      // File not found - serve index.html for SPA routing
+      const indexPath = path.join(clientDir, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        const indexContent = fs.readFileSync(indexPath);
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.end(indexContent);
+      } else {
+        res.statusCode = 404;
+        res.end('Not Found');
+      }
     }
   } catch (error) {
     console.error('[api] Error:', error);
-    res.status(500).json({ 
-      error: 'Internal Server Error',
-      message: error.message 
-    });
+    res.statusCode = 500;
+    res.end('Internal Server Error');
   }
 }
+
