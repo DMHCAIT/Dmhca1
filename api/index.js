@@ -43,6 +43,9 @@ async function loadServerModule() {
 
 // Check if request is for a static asset
 function isStaticAsset(pathname) {
+  // Decode the pathname to handle URL-encoded spaces
+  const decodedPathname = decodeURIComponent(pathname);
+  
   const staticPatterns = [
     /^\/assets\//,
     /^\/courses\//,
@@ -52,7 +55,7 @@ function isStaticAsset(pathname) {
     /^\/ACADEMIC PARTNERS\//,
     /\.(js|css|woff|woff2|ttf|eot|otf|png|jpg|jpeg|gif|webp|svg|ico)$/i
   ];
-  return staticPatterns.some(pattern => pattern.test(pathname));
+  return staticPatterns.some(pattern => pattern.test(decodedPathname));
 }
 
 // Serve static file
@@ -151,14 +154,15 @@ async function fetchResponseToExpress(fetchResponse, res) {
 export default async function handler(req, res) {
   try {
     const pathname = new URL(req.url, `https://${req.headers.host}`).pathname;
-    console.log('[api/index] Request:', req.method, pathname);
+    const decodedPathname = decodeURIComponent(pathname);
+    console.log('[api/index] Request:', req.method, pathname, '-> decoded:', decodedPathname);
     
     // Try to serve static assets
     if (isStaticAsset(pathname)) {
-      console.log('[api/index] Detected static asset request for:', pathname);
+      console.log('[api/index] Detected static asset request for:', decodedPathname);
       const staticPaths = [
-        path.join(projectRoot, 'dist/client', pathname),
-        path.join(projectRoot, 'public', pathname)
+        path.join(projectRoot, 'dist/client', decodedPathname),
+        path.join(projectRoot, 'public', decodedPathname)
       ];
       
       console.log('[api/index] Attempting to serve from paths:', staticPaths);
@@ -178,7 +182,7 @@ export default async function handler(req, res) {
     }
     
     // Handle SSR requests
-    console.log('[api/index] Handling SSR request for:', pathname);
+    console.log('[api/index] Handling SSR request for:', decodedPathname);
     const server = await loadServerModule();
     const fetchRequest = await expressToFetchRequest(req);
     const fetchResponse = await server.fetch(fetchRequest);
