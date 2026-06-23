@@ -1,0 +1,55 @@
+import { Link } from "@tanstack/react-router";
+import { Clock, BookOpen, ArrowUpRight, Star } from "lucide-react";
+import { type Course, formatINR, getCategory } from "@/data/courses";
+
+export function CourseCard({ course }: { course: Course }) {
+  const cat = getCategory(course.categories[0]);
+  const programType = course.program || course.meta?.skill_level || (course.title.toLowerCase().includes("fellowship") ? "Fellowship" : course.title.toLowerCase().includes("pg diploma") ? "PG Diploma" : "Certificate");
+  return (
+    <Link
+      to="/courses/$slug"
+      params={{ slug: course.slug }}
+      className="group block bg-card border border-border rounded-md overflow-hidden hover:border-navy-deep/40 hover:shadow-[0_24px_50px_-30px_rgba(15,27,61,0.45)] transition"
+    >
+      <div className="aspect-[5/3] relative overflow-hidden bg-navy-deep">
+        <img
+          src={course.image}
+          alt={`${course.title} - ${cat?.name || "Medical"} Course`}
+          loading="lazy"
+          referrerPolicy="no-referrer"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+          onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/85 via-navy-deep/30 to-transparent" />
+        <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] px-2 py-1 bg-primary-foreground/15 text-primary-foreground rounded-sm backdrop-blur">
+          <span className="w-1 h-1 rounded-full bg-gold" /> {programType}
+        </div>
+        {course.rating && (
+          <div className="absolute top-3 right-3 inline-flex items-center gap-1 text-[11px] px-2 py-1 bg-primary-foreground/95 text-navy-deep rounded-sm">
+            <Star className="w-3 h-3 fill-gold text-gold" /> {course.rating} <span className="text-muted-foreground">({course.reviewCount})</span>
+          </div>
+        )}
+        <div className="absolute bottom-3 left-3 right-3">
+          <div className="text-[10px] uppercase tracking-[0.2em] text-gold/90 mb-1">{cat?.name}</div>
+          <div className="font-display text-primary-foreground text-lg leading-tight line-clamp-2">{course.title}</div>
+        </div>
+      </div>
+      <div className="p-5">
+        <div className="flex items-center gap-4 text-xs text-muted-foreground">
+          {course.lessons != null && <span className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons</span>}
+          {course.weeks != null && <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {course.weeks} week</span>}
+          <span className="capitalize">{course.level}</span>
+        </div>
+        <div className="mt-4 flex items-end justify-between">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Tuition</div>
+            <div className="text-lg font-semibold text-navy-deep tracking-tight">{formatINR(course.priceINR)}</div>
+          </div>
+          <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition">
+            View <ArrowUpRight className="w-4 h-4" />
+          </span>
+        </div>
+      </div>
+    </Link>
+  );
+}
