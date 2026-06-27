@@ -213,20 +213,29 @@ function Sitemap() {
           </div>
 
           {/* Quick Links */}
-          <div className="bg-navy-deep text-primary-foreground rounded-xl p-8">
-            <h2 className="font-display text-2xl mb-6">Quick Links</h2>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Link to="/" className="text-primary-foreground hover:text-gold transition">Home</Link>
-              <Link to="/about-dmhca" className="text-primary-foreground hover:text-gold transition">About Us</Link>
-              <Link to="/top-medical-courses" className="text-primary-foreground hover:text-gold transition">All Courses</Link>
-              <Link to="/simple-event" className="text-primary-foreground hover:text-gold transition">Events</Link>
-              <Link to="/blog/" className="text-primary-foreground hover:text-gold transition">Blogs</Link>
-              <Link to="/faculty" className="text-primary-foreground hover:text-gold transition">Faculty</Link>
-              <Link to="/fellowship" className="text-primary-foreground hover:text-gold transition">Fellowships</Link>
-              <Link to="/contact-us" className="text-primary-foreground hover:text-gold transition">Contact</Link>
-              <a href="/sitemap.xml" className="text-primary-foreground hover:text-gold transition">XML Sitemap</a>
+          <div className="bg-navy-deep text-primary-foreground rounded-lg py-3 px-6 md:py-4 md:px-10 max-w-4xl mx-auto">
+            <h2 className="font-display text-lg mb-3">Quick Links</h2>
+            <div className="grid grid-cols-3 gap-y-4 gap-x-8 items-start">
+              <div className="">
+                <Link to="/" className="text-primary-foreground hover:text-gold transition text-base">Home</Link>
+              </div>
+              <div>
+                <Link to="/simple-event" className="text-primary-foreground hover:text-gold transition text-base">Events</Link>
+              </div>
+              <div>
+                <Link to="/about-dmhca" className="text-primary-foreground hover:text-gold transition text-base">About Us</Link>
+              </div>
+              <div>
+                <Link to="/blog/" className="text-primary-foreground hover:text-gold transition text-base">Blogs</Link>
+              </div>
+              <div>
+                <Link to="/top-medical-courses" className="text-primary-foreground hover:text-gold transition text-base">All Courses</Link>
+              </div>
+              <div>
+                <Link to="/contact-us" className="text-primary-foreground hover:text-gold transition text-base">Contact</Link>
+              </div>
             </div>
-          </div>
+            </div>
         </div>
       </section>
     </div>
