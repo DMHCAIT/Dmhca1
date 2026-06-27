@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, Users, Globe, BookOpen, Award, Zap, Heart, Target, Sparkles, ArrowRight, Stethoscope } from "lucide-react";
+import { CheckCircle2, Sparkles, ArrowRight, Zap, Stethoscope, BookOpen } from "lucide-react";
 
 export const Route = createFileRoute("/about-dmhca")({
   head: () => ({
@@ -47,57 +47,102 @@ function About() {
         </div>
       </section>
 
-      {/* Stats */}
+      {/* About Content Intro */}
       <section className="bg-white border-b border-border">
-        <div className="container-x py-10">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Users, stat: "42,000+", label: "Students Trained" },
-              { icon: Globe, stat: "120+", label: "Countries" },
-              { icon: Award, stat: "60+", label: "Expert Faculty" },
-              { icon: BookOpen, stat: "103+", label: "Courses" },
-            ].map(({ icon: Icon, stat, label }) => (
-              <div key={label} className="text-center p-4 rounded-lg">
-                <div className="flex justify-center mb-3">
-                  <div className="p-2 bg-gradient-to-br from-gold/10 to-gold/5 rounded-lg">
-                    <Icon className="w-6 h-6 text-gold" />
+        <div className="container-x py-12 lg:py-16">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep mb-4">DMHCA — Delhi Medical Health Care Academy</h2>
+            <p className="text-base text-muted-foreground leading-relaxed mb-6">DMHCA, also known as the Delhi Medical Health Care Academy, is a prestigious institute that specializes in medical training courses. Our institute is dedicated to equipping students with the knowledge and skills necessary to provide compassionate, understanding, and effective healthcare to those in need.</p>
+            <p className="text-base text-muted-foreground leading-relaxed">Our mission at DMHCA is to provide a transformative healthcare education experience. We believe that education is the key to the future and that healthcare is an essential field for the sustenance, maintenance, and existence of human beings. That is why we are committed to providing our trainees with the competence and skills necessary to ensure the well-being of the world's population with knowledge, conviction, and confidence.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-12 lg:py-16">
+        <div className="container-x">
+          <div className="max-w-4xl mx-auto text-center mb-8">
+            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep mb-2">How it works?</h2>
+            <p className="text-sm text-muted-foreground">Explore courses, enroll, and start learning — three simple steps to upskill.</p>
+          </div>
+
+          <div className="max-w-5xl mx-auto grid sm:grid-cols-3 gap-6 mb-10">
+            {[{
+              num: '01', title: 'Browse courses', desc: 'Discover curated courses from expert contributors.'
+            },{
+              num: '02', title: 'Enroll securely', desc: 'Fast, secure checkout with multiple payment options.'
+            },{
+              num: '03', title: 'Start learning', desc: 'Access materials instantly and follow guided practical modules.'
+            }].map((c) => (
+              <div key={c.num} className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-white font-semibold">{c.num}</div>
+                  <div>
+                    <h4 className="font-semibold text-navy-deep">{c.title}</h4>
+                    <p className="text-sm text-muted-foreground">{c.desc}</p>
                   </div>
                 </div>
-                <div className="font-display text-2xl text-navy-deep font-bold mb-1">{stat}</div>
-                <div className="text-sm text-muted-foreground">{label}</div>
               </div>
             ))}
           </div>
+
+          <div className="max-w-5xl mx-auto">
+            <div className="bg-white rounded-2xl p-8 border border-border shadow-lg">
+              <div className="grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                  <h3 className="font-display text-3xl text-navy-deep leading-tight mb-3">Start your Learning Journey Today!</h3>
+                  <p className="text-base text-muted-foreground mb-6">Join thousands of healthcare professionals who upskill with DMHCA — high-quality courses, practical training, and industry-recognized certifications designed for working clinicians.</p>
+
+                  <div className="grid sm:grid-cols-2 gap-4 mb-6">
+                    {[
+                      ['Comprehensive Curriculum','Practical, evidence-based modules.'],
+                      ['Flexible Learning','Self-paced and live options.'],
+                      ['Global Recognition','Certificates accepted by partners.'],
+                      ['Mentorship','Dedicated tutor support.']
+                    ].map(([t,s]) => (
+                      <div key={t} className="flex items-start gap-3 bg-muted-foreground/3 p-4 rounded-lg">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gold flex items-center justify-center text-white">
+                          <CheckCircle2 className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-navy-deep">{t}</div>
+                          <div className="text-sm text-muted-foreground">{s}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <Link to="/top-medical-courses" className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy-deep rounded-lg font-semibold shadow">Get Started Free <ArrowRight className="w-4 h-4" /></Link>
+                    <Link to="/contact-us" className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm">Contact Admissions</Link>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-center">
+                  <div className="w-full max-w-md rounded-xl overflow-hidden border border-border">
+                    <img src="/herocertificatelarge.webp" alt="Students learning" className="w-full h-56 object-cover" />
+                    <div className="p-4 bg-white">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-sm text-muted-foreground">Courses available</div>
+                          <div className="text-2xl font-semibold text-navy-deep">12,000+</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm text-muted-foreground">Learners</div>
+                          <div className="text-2xl font-semibold text-navy-deep">42,000+</div>
+                        </div>
+                      </div>
+                      <div className="mt-3 text-sm text-muted-foreground">Hands-on modules, expert mentors, and industry-aligned certificates.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Mission / Vision */}
-      <section className="bg-gradient-to-b from-blue-50 to-white py-12 lg:py-16">
-        <div className="container-x">
-          <div className="max-w-3xl mx-auto text-center mb-8">
-            <h2 className="font-display text-2xl lg:text-3xl text-navy-deep mb-2">Our Mission & Vision</h2>
-            <p className="text-sm text-muted-foreground">Empowering healthcare professionals through excellence</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white border border-border rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-gold/10 rounded-lg"><Target className="w-5 h-5 text-gold" /></div>
-                <h3 className="font-display text-lg text-navy-deep">Our Mission</h3>
-              </div>
-              <p className="text-sm text-muted-foreground">We provide competency-based education and practical training to improve clinical outcomes worldwide.</p>
-            </div>
-            <div className="bg-gradient-to-br from-navy-deep to-blue-900 rounded-xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 bg-gold/20 rounded-lg"><Sparkles className="w-5 h-5 text-gold" /></div>
-                <h3 className="font-display text-lg text-white">Our Vision</h3>
-              </div>
-              <p className="text-sm text-blue-100">To be a global leader in medical education, delivering accessible, practice-focused programs.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Academic Leadership Members - marquee */}
+      {/* Academic Leadership Members */}
       <section className="bg-white py-10 lg:py-12">
         <div className="container-x">
           <div className="max-w-3xl mx-auto text-center mb-6">

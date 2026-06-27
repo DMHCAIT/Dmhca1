@@ -9,23 +9,30 @@ import { CourseCard } from "@/components/site/CourseCard";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DMHCA - Top Institute For Medical Courses" },
+      { title: "DMHCA - Top Institute For Medical Courses | Accredited Online Fellowships" },
       { name: "description", content: "Advance your medical career with accredited online fellowships and certificate programs across radiology, cardiology, gynaecology, dermatology, oncology and more." },
-      { name: "keywords", content: "medical courses, online fellowship, medical education, cardiology, radiology, gynecology, dermatology" },
-      { property: "og:title", content: "DMHCA - Top Institute For Medical Courses" },
+      { name: "keywords", content: "medical courses, online fellowship, medical education, cardiology, radiology, gynecology, dermatology, PG diploma, certificate courses" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=5.0" },
+      { name: "author", content: "DMHCA" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "DMHCA - Top Institute For Medical Courses | Accredited Online Fellowships" },
       { property: "og:description", content: "Advance your medical career with accredited online fellowships and certificate programs across radiology, cardiology, gynaecology, dermatology, oncology and more." },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "/logo.webp" },
+      { property: "og:image", content: "https://dmhca.in/logo.webp" },
+      { property: "og:url", content: "https://dmhca.in/" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "DMHCA - Top Institute For Medical Courses" },
       { name: "twitter:description", content: "Advance your medical career with accredited online fellowships and certificate programs" },
-      { name: "twitter:image", content: "/logo.webp" },
+      { name: "twitter:image", content: "https://dmhca.in/logo.webp" },
+      { name: "theme-color", content: "#1a2a4a" },
     ],
     links: [
       { rel: "canonical", href: "https://dmhca.in/" },
-      { rel: "preload", as: "image", href: "/herofellowshiplarge.webp" },
-      { rel: "preload", as: "image", href: "/heropgdiplomalarge.webp" },
-      { rel: "preload", as: "image", href: "/herocertificatelarge.webp" },
+      { rel: "preload", as: "image", href: "/herofellowshiplarge.webp", imagesrcset: "/herofellowshiplarge.webp 1200w" },
+      { rel: "preload", as: "image", href: "/heropgdiplomalarge.webp", imagesrcset: "/heropgdiplomalarge.webp 1200w" },
+      { rel: "preload", as: "image", href: "/herocertificatelarge.webp", imagesrcset: "/herocertificatelarge.webp 1200w" },
+      { rel: "prefetch", href: "/top-medical-courses" },
+      { rel: "dns-prefetch", href: "https://cdn.jsdelivr.net" },
     ],
   }),
   component: Home,
@@ -143,7 +150,7 @@ function Home() {
               {slides.map((s, i) => (
                 <div key={i} className="w-1/3 h-full flex-shrink-0 relative">
                   <div
-                    className="absolute inset-0 bg-center bg-cover brightness-50"
+                    className="absolute inset-0 bg-center bg-cover brightness-75"
                     style={{ backgroundImage: `url(${s.heroImg || '/hero-fallback.webp'})` }}
                     onError={(_e: any) => { console.error('background failed:', s.heroImg, 'index', i); }}
                   />
@@ -153,27 +160,27 @@ function Home() {
             </div>
           </motion.div>
         
-        <div className="container-home py-6 md:py-8 grid lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
+        <div className="container-home py-4 sm:py-6 md:py-8 lg:py-12 grid grid-cols-12 gap-3 sm:gap-4 md:gap-6 lg:gap-8 items-center relative z-10">
           {/* Left: content */}
           <motion.div 
-            className="lg:col-span-8 space-y-6 relative z-30"
+            className="col-span-7 sm:col-span-6 md:col-span-8 lg:col-span-8 space-y-3 sm:space-y-4 md:space-y-6 relative z-30"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             {/* Premium badge */}
             <motion.div 
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-sm w-fit"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/30 bg-gold/5 w-fit text-center sm:text-left"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+              <div className="w-2 h-2 rounded-full bg-gold animate-pulse flex-shrink-0" />
               <span className="text-xs font-semibold text-gold uppercase tracking-wider">Excellence in Medical Education</span>
             </motion.div>
 
             <div className="space-y-3">
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl text-white leading-[1.05] tracking-tight drop-shadow-lg">
+              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] sm:leading-[1.05] tracking-tight">
                 <div>
                   <motion.span className="relative inline-block" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.1 }}>
                     {slides[slide].titleMain}
@@ -186,7 +193,7 @@ function Home() {
                 </div>
               </h1>
 
-              <motion.p className="text-base md:text-lg text-white/90 max-w-lg leading-relaxed drop-shadow" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
+              <motion.p className="text-sm sm:text-base md:text-lg text-white max-w-lg leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
                 {slides[slide].desc}
               </motion.p>
             </div>
@@ -245,15 +252,15 @@ function Home() {
 
           {/* Right: portrait + stat card */}
           <motion.div 
-            className="lg:col-span-4 relative"
+            className="col-span-5 sm:col-span-6 md:col-span-4 lg:col-span-4 relative"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="relative aspect-[4/5] max-w-[380px] lg:max-w-none mx-auto z-20">
+            <div className="relative aspect-[3/4] sm:aspect-[4/5] max-w-full sm:max-w-sm md:max-w-md lg:max-w-none mx-auto z-20">
               {/* Gold offset frame */}
               <motion.div 
-                className="absolute inset-0 translate-x-2 translate-y-2 border-2 border-gold/40 rounded-sm"
+                className="absolute inset-0 translate-x-1.5 sm:translate-x-2 translate-y-1.5 sm:translate-y-2 border-2 border-gold/40 rounded-sm"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -278,18 +285,18 @@ function Home() {
               </motion.div>
               {/* Floating stat card */}
               <motion.div 
-                className="absolute -left-3 sm:-left-6 bottom-6 bg-white p-4 shadow-2xl border-l-2 border-gold max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
+                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 whileHover={{ y: -5 }}
               >
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
-                  <p className="font-display text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
-                  <div className="mt-2 flex items-center justify-center gap-2 text-sm text-navy">
-                    <Star className="w-4 h-4 fill-gold text-gold" />
-                    <span className="ml-1 font-medium">4.8 / 5 alumni rating</span>
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
+                  <p className="font-display text-xl sm:text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
+                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-gold text-gold" />
+                    <span className="ml-1 font-medium">4.8 / 5</span>
                   </div>
                 </div>
               </motion.div>
@@ -484,23 +491,27 @@ function Home() {
             <h2 className="font-display text-3xl md:text-4xl text-primary-foreground mt-3">Loved by Doctors Worldwide</h2>
             <p className="text-primary-foreground/85 mt-2 text-sm">2,100+ verified reviews from practicing physicians</p>
           </div>
-          <div className="flex items-center gap-3 mb-6">
-            <button onClick={prevReviews} className="p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
-            <div className="flex-1 grid md:grid-cols-3 gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+            <button onClick={prevReviews} className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
+            <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayedReviews.map((r) => (
-                <motion.div key={r.name} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="bg-white/6 border border-white/10 rounded-md p-6 flex flex-col shadow-xl backdrop-blur-sm">
+                <motion.div key={r.name} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl">
                   <div className="mb-3">
                     <div>
                       <div className="text-sm font-medium text-primary-foreground">{r.name}</div>
                       <div className="text-xs text-primary-foreground/80">{r.role}</div>
                     </div>
                   </div>
-                  <Quote className="w-6 h-6 text-gold/70" />
-                  <p className="text-sm text-primary-foreground/90 mt-2 leading-relaxed flex-1">{r.text}</p>
-                  <div className="flex items-center gap-1 text-gold mt-3">{Array.from({length:5}).map((_,i)=><Star key={i} className="w-3.5 h-3.5 fill-gold"/>)}</div>
+                  <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-gold/70" />
+                  <p className="text-xs sm:text-sm text-primary-foreground/90 mt-2 leading-relaxed flex-1">{r.text}</p>
+                  <div className="flex items-center gap-1 text-gold mt-3">{Array.from({length:5}).map((_,i)=><Star key={i} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-gold"/>)}</div>
                 </motion.div>
               ))}
             </div>
+            <button onClick={nextReviews} className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Next reviews"><ChevronRight className="w-5 h-5 text-primary-foreground" /></button>
+          </div>
+          <div className="flex sm:hidden justify-center gap-2">
+            <button onClick={prevReviews} className="p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
             <button onClick={nextReviews} className="p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Next reviews"><ChevronRight className="w-5 h-5 text-primary-foreground" /></button>
           </div>
         </div>

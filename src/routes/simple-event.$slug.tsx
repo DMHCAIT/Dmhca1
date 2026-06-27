@@ -68,7 +68,7 @@ function EventDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
             <div>
-              <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full">
+              <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 bg-white/15 border border-white/25 rounded-full">
                 <Sparkles className="w-4 h-4 text-yellow-300" />
                 <span className="text-white text-xs font-bold uppercase tracking-wider">Premium Event</span>
               </div>
@@ -83,7 +83,7 @@ function EventDetailPage() {
 
               {/* Info Pills */}
               <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/20">
+                <div className="flex items-center gap-3 bg-white/15 px-6 py-3 rounded-xl border border-white/25">
                   <Calendar className="w-5 h-5 text-yellow-300" />
                   <div>
                     <p className="text-xs text-blue-100 uppercase font-bold">Date</p>
@@ -91,7 +91,7 @@ function EventDetailPage() {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md px-6 py-3 rounded-xl border border-white/20">
+                <div className="flex items-center gap-3 bg-white/15 px-6 py-3 rounded-xl border border-white/25">
                   <MapPin className="w-5 h-5 text-yellow-300" />
                   <div>
                     <p className="text-xs text-blue-100 uppercase font-bold">Location</p>

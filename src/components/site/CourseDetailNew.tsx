@@ -123,7 +123,7 @@ export function CourseDetailNew({
       </section>
 
       {/* Navigation */}
-      <nav className="sticky top-16 z-30 bg-background/95 backdrop-blur border-b border-border">
+      <nav className="sticky top-16 z-30 bg-background/98 border-b border-border">
         <div className="container-x flex gap-6 overflow-x-auto text-sm">
           {["overview", "curriculum", "instructors", "reviews", "faqs"].map((id) => (
             <a 

@@ -124,7 +124,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
       </section>
 
       {/* Sticky Navigation */}
-      <nav className="sticky top-16 z-30 bg-slate-900/90 backdrop-blur-md border-b border-slate-700 shadow-sm">
+      <nav className="sticky top-16 z-30 bg-slate-900/95 border-b border-slate-700 shadow-sm">
         <div className="container-x flex gap-8 overflow-x-auto text-sm">
           {[
             "overview",
@@ -604,7 +604,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent" />
-                      <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest px-3 py-1.5 bg-slate-900/90 text-white rounded-lg backdrop-blur font-bold">
+                      <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest px-3 py-1.5 bg-slate-900/95 text-white rounded-lg font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> {relProgramType}
                       </div>
                       {r.rating && (

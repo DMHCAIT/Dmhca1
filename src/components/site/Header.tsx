@@ -14,10 +14,10 @@ export function Header() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 bg-background/95 backdrop-blur-md hairline">
+    <header className="sticky top-0 z-40 bg-background/98 hairline">
       <div className="container-x flex items-center justify-between h-16">
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="DMHCA" className="h-10 w-auto" />
+          <img src={logo} alt="DMHCA" className="h-10 w-auto transition-opacity hover:opacity-75" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 text-base">

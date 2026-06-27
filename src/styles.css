@@ -76,6 +76,11 @@
     font-feature-settings: "ss01", "cv11";
     font-size: 16px; /* increased slightly for better readability */
   }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; font-weight: 500; }
 }
 
@@ -124,7 +129,7 @@
 
   /* Hero-based themed sections */
   .bg-hero-dark {
-    background: linear-gradient(180deg, color-mix(in oklab, var(--navy-deep) 85%, black 5%), color-mix(in oklab, var(--navy-deep) 70%, black 20%));
+    background: linear-gradient(180deg, color-mix(in oklab, var(--navy-deep) 80%, black 2%), color-mix(in oklab, var(--navy-deep) 65%, black 15%));
     color: var(--primary-foreground);
   }
 
