@@ -24,6 +24,8 @@ export const Route = createFileRoute("/")({
     links: [
       { rel: "canonical", href: "https://dmhca.in/" },
       { rel: "preload", as: "image", href: "/herofellowshiplarge.webp" },
+      { rel: "preload", as: "image", href: "/heropgdiplomalarge.webp" },
+      { rel: "preload", as: "image", href: "/herocertificatelarge.webp" },
     ],
   }),
   component: Home,
@@ -41,7 +43,8 @@ function Home() {
       id: 0,
       program: 'Fellowship',
       theme: 'dark',
-      heroImg: '/herofellowshiplarge.webp',
+        heroImg: '/herofellowshiplarge.webp',
+        blockImg: '/herofellowshipblock.webp',
       titleMain: 'Medical mastery,',
       titleSub: 'delivered with precision.',
       desc: 'Develop your medical career with accessible online fellowships and hands-on training from leading universities.'
@@ -50,7 +53,8 @@ function Home() {
       id: 1,
       program: 'PG Diploma',
       theme: 'muted',
-      heroImg: '/heropgdiplomalarge.webp',
+        heroImg: '/heropgdiplomalarge.webp',
+        blockImg: '/heropgdiplomablock.webp',
       titleMain: 'Deep clinical training,',
       titleSub: 'structured for practice.',
       desc: 'Comprehensive PG Diploma programs blending theory and supervised clinical exposure over months.'
@@ -59,7 +63,8 @@ function Home() {
       id: 2,
       program: 'Certificate',
       theme: 'light',
-      heroImg: '/herocertificatelarge.webp',
+        heroImg: '/herocertificatelarge.webp',
+        blockImg: '/herocertificateblock.webp',
       titleMain: 'Upskill clinically,',
       titleSub: 'fast and focused.',
       desc: 'Short certificate courses designed to build practical skills and clinical confidence for busy clinicians.'
@@ -67,11 +72,29 @@ function Home() {
   ];
 
   const [isPaused, setIsPaused] = useState(false);
+  const [animDuration, setAnimDuration] = useState(0.6);
   useEffect(() => {
     if (isPaused) return;
-    const t = setInterval(() => setSlide((s) => (s + 1) % slides.length), 1200);
+    console.log('starting slide interval, isPaused=', isPaused);
+    // Advance immediately once when autoplay starts
+    setSlide((s) => {
+      const next = (s + 1) % slides.length;
+      console.log('advancing slide (immediate)', s, '->', next);
+      return next;
+    });
+    const t = setInterval(() => {
+      setSlide((s) => {
+        const next = (s + 1) % slides.length;
+        console.log('advancing slide', s, '->', next);
+        return next;
+      });
+    }, 2000);
     return () => clearInterval(t);
   }, [isPaused]);
+
+  useEffect(() => {
+    console.log('slide state changed:', slide);
+  }, [slide]);
   const featured = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
   
   const reviews = [
@@ -115,11 +138,15 @@ function Home() {
         <div className="absolute inset-0 opacity-30 pointer-events-none" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(203, 163, 91, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(203, 163, 91, 0.08) 0%, transparent 50%)'}} />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
           {/* Sliding background images (translateX) */}
-          <motion.div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" initial={false} animate={{ x: `-${slide * 100}%` }} transition={{ duration: 0.6, ease: 'easeInOut' }}>
+          <motion.div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" initial={false} animate={{ x: `-${slide * 100}%` }} transition={{ duration: animDuration, ease: 'easeInOut' }}>
             <div className="flex h-full w-[300%]">
               {slides.map((s, i) => (
                 <div key={i} className="w-1/3 h-full flex-shrink-0 relative">
-                  <img src={s.heroImg || '/hero-fallback.webp'} alt={s.titleMain} className="w-full h-full object-cover object-center brightness-75" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+                  <div
+                    className="absolute inset-0 bg-center bg-cover brightness-50"
+                    style={{ backgroundImage: `url(${s.heroImg || '/hero-fallback.webp'})` }}
+                    onError={(_e: any) => { console.error('background failed:', s.heroImg, 'index', i); }}
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent" />
                 </div>
               ))}
@@ -177,9 +204,9 @@ function Home() {
                 <Link to="/top-medical-courses" search={(() => { const s = new URLSearchParams(location.search || ''); s.set('fmt', slides[slide].program); return Object.fromEntries(s.entries()); })()} className="px-4 py-2 rounded-sm border border-border text-sm text-navy-deep hover:bg-gold/10 transition bg-navy-deep text-primary-foreground">
                   {slides[slide].program}
                 </Link>
-                <div className="ml-2 inline-flex items-center gap-1">
-                  <button aria-label="Previous slide" onClick={() => setSlide((slide - 1 + slides.length) % slides.length)} className="p-2 rounded-sm border border-border text-sm">‹</button>
-                  <button aria-label="Next slide" onClick={() => setSlide((slide + 1) % slides.length)} className="p-2 rounded-sm border border-border text-sm">›</button>
+                  <div className="ml-2 inline-flex items-center gap-1">
+                  <button aria-label="Previous slide" onClick={() => { setAnimDuration(0); setSlide((slide - 1 + slides.length) % slides.length); setTimeout(()=>setAnimDuration(0.6), 50); }} className="p-2 rounded-sm border border-border text-sm">‹</button>
+                  <button aria-label="Next slide" onClick={() => { setAnimDuration(0); setSlide((slide + 1) % slides.length); setTimeout(()=>setAnimDuration(0.6), 50); }} className="p-2 rounded-sm border border-border text-sm">›</button>
                 </div>
               </div>
             </motion.div>
@@ -233,28 +260,37 @@ function Home() {
               />
               {/* Main image */}
               <motion.div 
-                className="relative w-full h-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep"
+                className="relative w-full h-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep lg:pr-[420px]"
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 whileHover={{ scale: 1.02 }}
               >
-                <img src={slides[slide].heroImg} alt="DMHCA faculty" className="w-full h-full object-cover object-top" />
+                <img src={slides[slide].heroImg} alt="DMHCA faculty" className={`w-full h-full object-cover object-center brightness-50`} onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+                {slides[slide].blockImg ? (
+                  <div className="hidden lg:block absolute top-6 right-6 z-50" style={{ width: 360, height: 480 }}>
+                    <div className="w-full h-full rounded-lg overflow-hidden border-2 border-gold bg-white shadow-2xl">
+                      <img src={slides[slide].blockImg} alt="block" style={{ width: '360px', height: '480px', objectFit: 'cover' }} />
+                    </div>
+                  </div>
+                ) : null}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               </motion.div>
               {/* Floating stat card */}
               <motion.div 
-                className="absolute -left-3 sm:-left-6 bottom-6 bg-white p-4 shadow-2xl border-l-2 border-gold max-w-[220px] z-50 rounded-md stat-card"
+                className="absolute -left-3 sm:-left-6 bottom-6 bg-white p-4 shadow-2xl border-l-2 border-gold max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 whileHover={{ y: -5 }}
               >
-                <p className="text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
-                <p className="font-display text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
-                <div className="mt-2 flex items-center gap-2 text-sm text-navy">
-                  <Star className="w-4 h-4 fill-gold text-gold" />
-                  <span className="ml-1 font-medium">4.8 / 5 alumni rating</span>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
+                  <p className="font-display text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
+                  <div className="mt-2 flex items-center justify-center gap-2 text-sm text-navy">
+                    <Star className="w-4 h-4 fill-gold text-gold" />
+                    <span className="ml-1 font-medium">4.8 / 5 alumni rating</span>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -324,18 +360,18 @@ function Home() {
             };
 
             // Working medical images from Unsplash
-            const specialtyImages: {[key: string]: string} = {
-              'radiology': 'https://images.unsplash.com/photo-1631217314985-abc2ced88d60?w=800&h=600&fit=crop&q=80&auto=format',
-              'dermatology': 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=80&auto=format',
-              'endocrinology': 'https://images.unsplash.com/photo-1576091160399-7c2172fcd7a7?w=800&h=600&fit=crop&q=80&auto=format',
-              'cardiology': 'https://images.unsplash.com/photo-1576091160399-7c2172fcd7a7?w=800&h=600&fit=crop&q=80&auto=format',
-              'emergency': 'https://images.unsplash.com/photo-1587854692152-cbe660dbde0b?w=800&h=600&fit=crop&q=80&auto=format',
-              'orthopedics': 'https://images.unsplash.com/photo-1576091160681-112b5879f967?w=800&h=600&fit=crop&q=80&auto=format',
-              'medicine': 'https://images.unsplash.com/photo-1578496781514-637d1afc2ba9?w=800&h=600&fit=crop&q=80&auto=format',
-              'oncology': 'https://images.unsplash.com/photo-1559839734945-08b6332c0ff3?w=800&h=600&fit=crop&q=80&auto=format',
+              const specialtyImages: {[key: string]: string} = {
+              'radiology': '/courses/Radiology.webp',
+              'dermatology': '/courses/Dermatology.webp',
+              'endocrinology': '/courses/Endocrinology.webp',
+              'cardiology': '/courses/Cardiology.webp',
+              'emergency': '/courses/Emergency.webp',
+              'orthopedics': '/courses/Orthopedics.webp',
+              'medicine': '/courses/Medicine.webp',
+              'oncology': '/courses/Oncology.webp',
             };
             
-            const imageUrl = specialtyImages[slug] || 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop&q=90';
+            const imageUrl = specialtyImages[slug] || '/courses/default.webp';
             
             return (
               <motion.div
@@ -430,7 +466,7 @@ function Home() {
                 ))}
               </div>
             </div>
-            <style jsx>{`
+            <style>{`
               .partners-carousel { background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2)); border-radius: 12px; }
               .scrollbar-hide::-webkit-scrollbar { display: none; }
               .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -505,7 +541,7 @@ function Home() {
                 })()}
               </div>
             </div>
-            <style jsx>{`
+            <style>{`
               .marquee { --gap: 2rem; }
               .marquee__inner { display: flex; gap: var(--gap); width: max-content; animation: marquee-left 18s linear infinite; }
               @keyframes marquee-left {

@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-DVpe7PXp.js";import{u as t}from"./index-C1FVoxzq.js";var n=e(),r=()=>(0,n.jsx)(t,{to:`/contact-us`});export{r as component};

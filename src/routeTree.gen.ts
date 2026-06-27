@@ -9,23 +9,90 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestPageRouteImport } from './routes/test-page'
+import { Route as TermConditionsRouteImport } from './routes/term-conditions'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SimpleEventRouteImport } from './routes/simple-event'
+import { Route as ScopeOfRadiologyRouteImport } from './routes/scope-of-radiology'
+import { Route as ScopeOfPaediatricsRouteImport } from './routes/scope-of-paediatrics'
+import { Route as ScopeOfOncologyRouteImport } from './routes/scope-of-oncology'
+import { Route as ScopeOfObstetricsAndGynecologyRouteImport } from './routes/scope-of-obstetrics-and-gynecology'
+import { Route as ScopeOfNeurologyRouteImport } from './routes/scope-of-neurology'
+import { Route as ScopeOfEndocrinologyRouteImport } from './routes/scope-of-endocrinology'
+import { Route as ScopeOfEchocardiographyRouteImport } from './routes/scope-of-echocardiography'
+import { Route as ScopeOfDiabetologyRouteImport } from './routes/scope-of-diabetology'
+import { Route as ScopeOfCosmetologyRouteImport } from './routes/scope-of-cosmetology'
+import { Route as ScopeOfCardiologyRouteImport } from './routes/scope-of-cardiology'
+import { Route as RefundReturnsPolicyRouteImport } from './routes/refund-returns-policy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as LpProfileRouteImport } from './routes/lp-profile'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as HowToCrackNeetPgRouteImport } from './routes/how-to-crack-neet-pg'
+import { Route as HowToBecomeAnOncologistRouteImport } from './routes/how-to-become-an-oncologist'
+import { Route as HowToBecomeAnObstetricianGynecologistRouteImport } from './routes/how-to-become-an-obstetrician-gynecologist'
+import { Route as HowToBecomeAnEndocrinologistRouteImport } from './routes/how-to-become-an-endocrinologist'
+import { Route as HowToBecomeAnEmbryologistRouteImport } from './routes/how-to-become-an-embryologist'
+import { Route as HowToBecomeARadiologistRouteImport } from './routes/how-to-become-a-radiologist'
+import { Route as HowToBecomeAPediatricianRouteImport } from './routes/how-to-become-a-pediatrician'
+import { Route as HowToBecomeANeurologistRouteImport } from './routes/how-to-become-a-neurologist'
+import { Route as HowToBecomeADiabetologistRouteImport } from './routes/how-to-become-a-diabetologist'
+import { Route as HowToBecomeACosmetologistRouteImport } from './routes/how-to-become-a-cosmetologist'
+import { Route as HowToBecomeACardiologistRouteImport } from './routes/how-to-become-a-cardiologist'
 import { Route as FellowshipRouteImport } from './routes/fellowship'
 import { Route as FacultyRouteImport } from './routes/faculty'
+import { Route as CoursesAfterMbbsInIndiaRouteImport } from './routes/courses-after-mbbs-in-india'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as ContactRedirectRouteImport } from './routes/contact-redirect'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AdminLoginRouteImport } from './routes/admin-login'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutDmhcaRouteImport } from './routes/about-dmhca'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TopMedicalCoursesIndexRouteImport } from './routes/top-medical-courses.index'
+import { Route as SitemapIndexRouteImport } from './routes/sitemap.index'
+import { Route as SimpleEventIndexRouteImport } from './routes/simple-event.index'
+import { Route as RadiologyCoursesIndexRouteImport } from './routes/radiology-courses.index'
+import { Route as PaediatricsCoursesIndexRouteImport } from './routes/paediatrics-courses.index'
+import { Route as OncologyCoursesIndexRouteImport } from './routes/oncology-courses.index'
+import { Route as ObstetricsAndGynecologyCoursesIndexRouteImport } from './routes/obstetrics-and-gynecology-courses.index'
+import { Route as NeurologyCoursesIndexRouteImport } from './routes/neurology-courses.index'
+import { Route as InternalMedicineCoursesIndexRouteImport } from './routes/internal-medicine-courses.index'
+import { Route as EndocrinologyCoursesIndexRouteImport } from './routes/endocrinology-courses.index'
+import { Route as EmbryologyCoursesIndexRouteImport } from './routes/embryology-courses.index'
+import { Route as EchocardiographyCoursesIndexRouteImport } from './routes/echocardiography-courses.index'
+import { Route as DiabetologyCoursesIndexRouteImport } from './routes/diabetology-courses.index'
+import { Route as CriticalCareMedicineCoursesIndexRouteImport } from './routes/critical-care-medicine-courses.index'
+import { Route as CosmetologyCoursesIndexRouteImport } from './routes/cosmetology-courses.index'
+import { Route as ClinicalEmbryologyCoursesIndexRouteImport } from './routes/clinical-embryology-courses.index'
+import { Route as ClinicalCardiologyCoursesIndexRouteImport } from './routes/clinical-cardiology-courses.index'
+import { Route as CardiologyCoursesIndexRouteImport } from './routes/cardiology-courses.index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as SimpleEventSlugRouteImport } from './routes/simple-event.$slug'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as CourseCategorySlugRouteImport } from './routes/course-category.$slug'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminPagesRouteImport } from './routes/admin.pages'
+import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
+import { Route as AdminMediaRouteImport } from './routes/admin.media'
+import { Route as AdminEventsRouteImport } from './routes/admin.events'
+import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
+import { Route as AdminCommentsRouteImport } from './routes/admin.comments'
 
+const TestPageRoute = TestPageRouteImport.update({
+  id: '/test-page',
+  path: '/test-page',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermConditionsRoute = TermConditionsRouteImport.update({
+  id: '/term-conditions',
+  path: '/term-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -36,11 +103,139 @@ const SimpleEventRoute = SimpleEventRouteImport.update({
   path: '/simple-event',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScopeOfRadiologyRoute = ScopeOfRadiologyRouteImport.update({
+  id: '/scope-of-radiology',
+  path: '/scope-of-radiology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfPaediatricsRoute = ScopeOfPaediatricsRouteImport.update({
+  id: '/scope-of-paediatrics',
+  path: '/scope-of-paediatrics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfOncologyRoute = ScopeOfOncologyRouteImport.update({
+  id: '/scope-of-oncology',
+  path: '/scope-of-oncology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfObstetricsAndGynecologyRoute =
+  ScopeOfObstetricsAndGynecologyRouteImport.update({
+    id: '/scope-of-obstetrics-and-gynecology',
+    path: '/scope-of-obstetrics-and-gynecology',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ScopeOfNeurologyRoute = ScopeOfNeurologyRouteImport.update({
+  id: '/scope-of-neurology',
+  path: '/scope-of-neurology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfEndocrinologyRoute = ScopeOfEndocrinologyRouteImport.update({
+  id: '/scope-of-endocrinology',
+  path: '/scope-of-endocrinology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfEchocardiographyRoute = ScopeOfEchocardiographyRouteImport.update({
+  id: '/scope-of-echocardiography',
+  path: '/scope-of-echocardiography',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfDiabetologyRoute = ScopeOfDiabetologyRouteImport.update({
+  id: '/scope-of-diabetology',
+  path: '/scope-of-diabetology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfCosmetologyRoute = ScopeOfCosmetologyRouteImport.update({
+  id: '/scope-of-cosmetology',
+  path: '/scope-of-cosmetology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScopeOfCardiologyRoute = ScopeOfCardiologyRouteImport.update({
+  id: '/scope-of-cardiology',
+  path: '/scope-of-cardiology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundReturnsPolicyRoute = RefundReturnsPolicyRouteImport.update({
+  id: '/refund-returns-policy',
+  path: '/refund-returns-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LpProfileRoute = LpProfileRouteImport.update({
+  id: '/lp-profile',
+  path: '/lp-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToCrackNeetPgRoute = HowToCrackNeetPgRouteImport.update({
+  id: '/how-to-crack-neet-pg',
+  path: '/how-to-crack-neet-pg',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToBecomeAnOncologistRoute = HowToBecomeAnOncologistRouteImport.update({
+  id: '/how-to-become-an-oncologist',
+  path: '/how-to-become-an-oncologist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToBecomeAnObstetricianGynecologistRoute =
+  HowToBecomeAnObstetricianGynecologistRouteImport.update({
+    id: '/how-to-become-an-obstetrician-gynecologist',
+    path: '/how-to-become-an-obstetrician-gynecologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToBecomeAnEndocrinologistRoute =
+  HowToBecomeAnEndocrinologistRouteImport.update({
+    id: '/how-to-become-an-endocrinologist',
+    path: '/how-to-become-an-endocrinologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToBecomeAnEmbryologistRoute =
+  HowToBecomeAnEmbryologistRouteImport.update({
+    id: '/how-to-become-an-embryologist',
+    path: '/how-to-become-an-embryologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToBecomeARadiologistRoute = HowToBecomeARadiologistRouteImport.update({
+  id: '/how-to-become-a-radiologist',
+  path: '/how-to-become-a-radiologist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToBecomeAPediatricianRoute =
+  HowToBecomeAPediatricianRouteImport.update({
+    id: '/how-to-become-a-pediatrician',
+    path: '/how-to-become-a-pediatrician',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToBecomeANeurologistRoute = HowToBecomeANeurologistRouteImport.update({
+  id: '/how-to-become-a-neurologist',
+  path: '/how-to-become-a-neurologist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToBecomeADiabetologistRoute =
+  HowToBecomeADiabetologistRouteImport.update({
+    id: '/how-to-become-a-diabetologist',
+    path: '/how-to-become-a-diabetologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToBecomeACosmetologistRoute =
+  HowToBecomeACosmetologistRouteImport.update({
+    id: '/how-to-become-a-cosmetologist',
+    path: '/how-to-become-a-cosmetologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const HowToBecomeACardiologistRoute =
+  HowToBecomeACardiologistRouteImport.update({
+    id: '/how-to-become-a-cardiologist',
+    path: '/how-to-become-a-cardiologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const FellowshipRoute = FellowshipRouteImport.update({
   id: '/fellowship',
   path: '/fellowship',
@@ -49,6 +244,11 @@ const FellowshipRoute = FellowshipRouteImport.update({
 const FacultyRoute = FacultyRouteImport.update({
   id: '/faculty',
   path: '/faculty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoursesAfterMbbsInIndiaRoute = CoursesAfterMbbsInIndiaRouteImport.update({
+  id: '/courses-after-mbbs-in-india',
+  path: '/courses-after-mbbs-in-india',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactUsRoute = ContactUsRouteImport.update({
@@ -64,6 +264,16 @@ const ContactRedirectRoute = ContactRedirectRouteImport.update({
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin-login',
+  path: '/admin-login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutDmhcaRoute = AboutDmhcaRouteImport.update({
@@ -86,6 +296,108 @@ const TopMedicalCoursesIndexRoute = TopMedicalCoursesIndexRouteImport.update({
   path: '/top-medical-courses/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapIndexRoute = SitemapIndexRouteImport.update({
+  id: '/sitemap/',
+  path: '/sitemap/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimpleEventIndexRoute = SimpleEventIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SimpleEventRoute,
+} as any)
+const RadiologyCoursesIndexRoute = RadiologyCoursesIndexRouteImport.update({
+  id: '/radiology-courses/',
+  path: '/radiology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaediatricsCoursesIndexRoute = PaediatricsCoursesIndexRouteImport.update({
+  id: '/paediatrics-courses/',
+  path: '/paediatrics-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OncologyCoursesIndexRoute = OncologyCoursesIndexRouteImport.update({
+  id: '/oncology-courses/',
+  path: '/oncology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObstetricsAndGynecologyCoursesIndexRoute =
+  ObstetricsAndGynecologyCoursesIndexRouteImport.update({
+    id: '/obstetrics-and-gynecology-courses/',
+    path: '/obstetrics-and-gynecology-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const NeurologyCoursesIndexRoute = NeurologyCoursesIndexRouteImport.update({
+  id: '/neurology-courses/',
+  path: '/neurology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternalMedicineCoursesIndexRoute =
+  InternalMedicineCoursesIndexRouteImport.update({
+    id: '/internal-medicine-courses/',
+    path: '/internal-medicine-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EndocrinologyCoursesIndexRoute =
+  EndocrinologyCoursesIndexRouteImport.update({
+    id: '/endocrinology-courses/',
+    path: '/endocrinology-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EmbryologyCoursesIndexRoute = EmbryologyCoursesIndexRouteImport.update({
+  id: '/embryology-courses/',
+  path: '/embryology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EchocardiographyCoursesIndexRoute =
+  EchocardiographyCoursesIndexRouteImport.update({
+    id: '/echocardiography-courses/',
+    path: '/echocardiography-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DiabetologyCoursesIndexRoute = DiabetologyCoursesIndexRouteImport.update({
+  id: '/diabetology-courses/',
+  path: '/diabetology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriticalCareMedicineCoursesIndexRoute =
+  CriticalCareMedicineCoursesIndexRouteImport.update({
+    id: '/critical-care-medicine-courses/',
+    path: '/critical-care-medicine-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CosmetologyCoursesIndexRoute = CosmetologyCoursesIndexRouteImport.update({
+  id: '/cosmetology-courses/',
+  path: '/cosmetology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClinicalEmbryologyCoursesIndexRoute =
+  ClinicalEmbryologyCoursesIndexRouteImport.update({
+    id: '/clinical-embryology-courses/',
+    path: '/clinical-embryology-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ClinicalCardiologyCoursesIndexRoute =
+  ClinicalCardiologyCoursesIndexRouteImport.update({
+    id: '/clinical-cardiology-courses/',
+    path: '/clinical-cardiology-courses/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CardiologyCoursesIndexRoute = CardiologyCoursesIndexRouteImport.update({
+  id: '/cardiology-courses/',
+  path: '/cardiology-courses/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const SitemapXmlRoute = SitemapXmlRouteImport.update({
   id: '/sitemap/xml',
   path: '/sitemap/xml',
@@ -106,41 +418,197 @@ const CourseCategorySlugRoute = CourseCategorySlugRouteImport.update({
   path: '/course-category/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPagesRoute = AdminPagesRouteImport.update({
+  id: '/pages',
+  path: '/pages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMediaRoute = AdminMediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEventsRoute = AdminEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCoursesRoute = AdminCoursesRouteImport.update({
+  id: '/courses',
+  path: '/courses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCommentsRoute = AdminCommentsRouteImport.update({
+  id: '/comments',
+  path: '/comments',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
-  '/blog': typeof BlogRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin-login': typeof AdminLoginRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
+  '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
+  '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
+  '/how-to-become-a-cosmetologist': typeof HowToBecomeACosmetologistRoute
+  '/how-to-become-a-diabetologist': typeof HowToBecomeADiabetologistRoute
+  '/how-to-become-a-neurologist': typeof HowToBecomeANeurologistRoute
+  '/how-to-become-a-pediatrician': typeof HowToBecomeAPediatricianRoute
+  '/how-to-become-a-radiologist': typeof HowToBecomeARadiologistRoute
+  '/how-to-become-an-embryologist': typeof HowToBecomeAnEmbryologistRoute
+  '/how-to-become-an-endocrinologist': typeof HowToBecomeAnEndocrinologistRoute
+  '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
+  '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
+  '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
   '/login': typeof LoginRoute
+  '/lp-profile': typeof LpProfileRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-returns-policy': typeof RefundReturnsPolicyRoute
+  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
+  '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
+  '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
+  '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
+  '/scope-of-endocrinology': typeof ScopeOfEndocrinologyRoute
+  '/scope-of-neurology': typeof ScopeOfNeurologyRoute
+  '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
+  '/scope-of-oncology': typeof ScopeOfOncologyRoute
+  '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
+  '/scope-of-radiology': typeof ScopeOfRadiologyRoute
   '/simple-event': typeof SimpleEventRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/term-conditions': typeof TermConditionsRoute
+  '/test-page': typeof TestPageRoute
+  '/admin/comments': typeof AdminCommentsRoute
+  '/admin/courses': typeof AdminCoursesRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/pages': typeof AdminPagesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
+  '/admin/': typeof AdminIndexRoute
+  '/blog/': typeof BlogIndexRoute
+  '/cardiology-courses/': typeof CardiologyCoursesIndexRoute
+  '/clinical-cardiology-courses/': typeof ClinicalCardiologyCoursesIndexRoute
+  '/clinical-embryology-courses/': typeof ClinicalEmbryologyCoursesIndexRoute
+  '/cosmetology-courses/': typeof CosmetologyCoursesIndexRoute
+  '/critical-care-medicine-courses/': typeof CriticalCareMedicineCoursesIndexRoute
+  '/diabetology-courses/': typeof DiabetologyCoursesIndexRoute
+  '/echocardiography-courses/': typeof EchocardiographyCoursesIndexRoute
+  '/embryology-courses/': typeof EmbryologyCoursesIndexRoute
+  '/endocrinology-courses/': typeof EndocrinologyCoursesIndexRoute
+  '/internal-medicine-courses/': typeof InternalMedicineCoursesIndexRoute
+  '/neurology-courses/': typeof NeurologyCoursesIndexRoute
+  '/obstetrics-and-gynecology-courses/': typeof ObstetricsAndGynecologyCoursesIndexRoute
+  '/oncology-courses/': typeof OncologyCoursesIndexRoute
+  '/paediatrics-courses/': typeof PaediatricsCoursesIndexRoute
+  '/radiology-courses/': typeof RadiologyCoursesIndexRoute
+  '/simple-event/': typeof SimpleEventIndexRoute
+  '/sitemap/': typeof SitemapIndexRoute
   '/top-medical-courses/': typeof TopMedicalCoursesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
-  '/blog': typeof BlogRoute
+  '/admin-login': typeof AdminLoginRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
+  '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
+  '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
+  '/how-to-become-a-cosmetologist': typeof HowToBecomeACosmetologistRoute
+  '/how-to-become-a-diabetologist': typeof HowToBecomeADiabetologistRoute
+  '/how-to-become-a-neurologist': typeof HowToBecomeANeurologistRoute
+  '/how-to-become-a-pediatrician': typeof HowToBecomeAPediatricianRoute
+  '/how-to-become-a-radiologist': typeof HowToBecomeARadiologistRoute
+  '/how-to-become-an-embryologist': typeof HowToBecomeAnEmbryologistRoute
+  '/how-to-become-an-endocrinologist': typeof HowToBecomeAnEndocrinologistRoute
+  '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
+  '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
+  '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
   '/login': typeof LoginRoute
-  '/simple-event': typeof SimpleEventRouteWithChildren
+  '/lp-profile': typeof LpProfileRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-returns-policy': typeof RefundReturnsPolicyRoute
+  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
+  '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
+  '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
+  '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
+  '/scope-of-endocrinology': typeof ScopeOfEndocrinologyRoute
+  '/scope-of-neurology': typeof ScopeOfNeurologyRoute
+  '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
+  '/scope-of-oncology': typeof ScopeOfOncologyRoute
+  '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
+  '/scope-of-radiology': typeof ScopeOfRadiologyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/term-conditions': typeof TermConditionsRoute
+  '/test-page': typeof TestPageRoute
+  '/admin/comments': typeof AdminCommentsRoute
+  '/admin/courses': typeof AdminCoursesRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/pages': typeof AdminPagesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
+  '/admin': typeof AdminIndexRoute
+  '/blog': typeof BlogIndexRoute
+  '/cardiology-courses': typeof CardiologyCoursesIndexRoute
+  '/clinical-cardiology-courses': typeof ClinicalCardiologyCoursesIndexRoute
+  '/clinical-embryology-courses': typeof ClinicalEmbryologyCoursesIndexRoute
+  '/cosmetology-courses': typeof CosmetologyCoursesIndexRoute
+  '/critical-care-medicine-courses': typeof CriticalCareMedicineCoursesIndexRoute
+  '/diabetology-courses': typeof DiabetologyCoursesIndexRoute
+  '/echocardiography-courses': typeof EchocardiographyCoursesIndexRoute
+  '/embryology-courses': typeof EmbryologyCoursesIndexRoute
+  '/endocrinology-courses': typeof EndocrinologyCoursesIndexRoute
+  '/internal-medicine-courses': typeof InternalMedicineCoursesIndexRoute
+  '/neurology-courses': typeof NeurologyCoursesIndexRoute
+  '/obstetrics-and-gynecology-courses': typeof ObstetricsAndGynecologyCoursesIndexRoute
+  '/oncology-courses': typeof OncologyCoursesIndexRoute
+  '/paediatrics-courses': typeof PaediatricsCoursesIndexRoute
+  '/radiology-courses': typeof RadiologyCoursesIndexRoute
+  '/simple-event': typeof SimpleEventIndexRoute
+  '/sitemap': typeof SitemapIndexRoute
   '/top-medical-courses': typeof TopMedicalCoursesIndexRoute
 }
 export interface FileRoutesById {
@@ -148,18 +616,75 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
-  '/blog': typeof BlogRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/admin-login': typeof AdminLoginRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
+  '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
+  '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
+  '/how-to-become-a-cosmetologist': typeof HowToBecomeACosmetologistRoute
+  '/how-to-become-a-diabetologist': typeof HowToBecomeADiabetologistRoute
+  '/how-to-become-a-neurologist': typeof HowToBecomeANeurologistRoute
+  '/how-to-become-a-pediatrician': typeof HowToBecomeAPediatricianRoute
+  '/how-to-become-a-radiologist': typeof HowToBecomeARadiologistRoute
+  '/how-to-become-an-embryologist': typeof HowToBecomeAnEmbryologistRoute
+  '/how-to-become-an-endocrinologist': typeof HowToBecomeAnEndocrinologistRoute
+  '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
+  '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
+  '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
   '/login': typeof LoginRoute
+  '/lp-profile': typeof LpProfileRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
+  '/refund-returns-policy': typeof RefundReturnsPolicyRoute
+  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
+  '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
+  '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
+  '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
+  '/scope-of-endocrinology': typeof ScopeOfEndocrinologyRoute
+  '/scope-of-neurology': typeof ScopeOfNeurologyRoute
+  '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
+  '/scope-of-oncology': typeof ScopeOfOncologyRoute
+  '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
+  '/scope-of-radiology': typeof ScopeOfRadiologyRoute
   '/simple-event': typeof SimpleEventRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/term-conditions': typeof TermConditionsRoute
+  '/test-page': typeof TestPageRoute
+  '/admin/comments': typeof AdminCommentsRoute
+  '/admin/courses': typeof AdminCoursesRoute
+  '/admin/events': typeof AdminEventsRoute
+  '/admin/media': typeof AdminMediaRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/pages': typeof AdminPagesRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
+  '/admin/': typeof AdminIndexRoute
+  '/blog/': typeof BlogIndexRoute
+  '/cardiology-courses/': typeof CardiologyCoursesIndexRoute
+  '/clinical-cardiology-courses/': typeof ClinicalCardiologyCoursesIndexRoute
+  '/clinical-embryology-courses/': typeof ClinicalEmbryologyCoursesIndexRoute
+  '/cosmetology-courses/': typeof CosmetologyCoursesIndexRoute
+  '/critical-care-medicine-courses/': typeof CriticalCareMedicineCoursesIndexRoute
+  '/diabetology-courses/': typeof DiabetologyCoursesIndexRoute
+  '/echocardiography-courses/': typeof EchocardiographyCoursesIndexRoute
+  '/embryology-courses/': typeof EmbryologyCoursesIndexRoute
+  '/endocrinology-courses/': typeof EndocrinologyCoursesIndexRoute
+  '/internal-medicine-courses/': typeof InternalMedicineCoursesIndexRoute
+  '/neurology-courses/': typeof NeurologyCoursesIndexRoute
+  '/obstetrics-and-gynecology-courses/': typeof ObstetricsAndGynecologyCoursesIndexRoute
+  '/oncology-courses/': typeof OncologyCoursesIndexRoute
+  '/paediatrics-courses/': typeof PaediatricsCoursesIndexRoute
+  '/radiology-courses/': typeof RadiologyCoursesIndexRoute
+  '/simple-event/': typeof SimpleEventIndexRoute
+  '/sitemap/': typeof SitemapIndexRoute
   '/top-medical-courses/': typeof TopMedicalCoursesIndexRoute
 }
 export interface FileRouteTypes {
@@ -168,54 +693,222 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/about-dmhca'
+    | '/admin'
+    | '/admin-login'
     | '/blog'
     | '/contact-redirect'
     | '/contact-us'
+    | '/courses-after-mbbs-in-india'
     | '/faculty'
     | '/fellowship'
+    | '/how-to-become-a-cardiologist'
+    | '/how-to-become-a-cosmetologist'
+    | '/how-to-become-a-diabetologist'
+    | '/how-to-become-a-neurologist'
+    | '/how-to-become-a-pediatrician'
+    | '/how-to-become-a-radiologist'
+    | '/how-to-become-an-embryologist'
+    | '/how-to-become-an-endocrinologist'
+    | '/how-to-become-an-obstetrician-gynecologist'
+    | '/how-to-become-an-oncologist'
+    | '/how-to-crack-neet-pg'
     | '/login'
+    | '/lp-profile'
+    | '/privacy-policy'
+    | '/refund-returns-policy'
+    | '/scope-of-cardiology'
+    | '/scope-of-cosmetology'
+    | '/scope-of-diabetology'
+    | '/scope-of-echocardiography'
+    | '/scope-of-endocrinology'
+    | '/scope-of-neurology'
+    | '/scope-of-obstetrics-and-gynecology'
+    | '/scope-of-oncology'
+    | '/scope-of-paediatrics'
+    | '/scope-of-radiology'
     | '/simple-event'
     | '/sitemap.xml'
+    | '/term-conditions'
+    | '/test-page'
+    | '/admin/comments'
+    | '/admin/courses'
+    | '/admin/events'
+    | '/admin/media'
+    | '/admin/messages'
+    | '/admin/pages'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/blog/$slug'
     | '/course-category/$slug'
     | '/courses/$slug'
     | '/simple-event/$slug'
     | '/sitemap/xml'
+    | '/admin/'
+    | '/blog/'
+    | '/cardiology-courses/'
+    | '/clinical-cardiology-courses/'
+    | '/clinical-embryology-courses/'
+    | '/cosmetology-courses/'
+    | '/critical-care-medicine-courses/'
+    | '/diabetology-courses/'
+    | '/echocardiography-courses/'
+    | '/embryology-courses/'
+    | '/endocrinology-courses/'
+    | '/internal-medicine-courses/'
+    | '/neurology-courses/'
+    | '/obstetrics-and-gynecology-courses/'
+    | '/oncology-courses/'
+    | '/paediatrics-courses/'
+    | '/radiology-courses/'
+    | '/simple-event/'
+    | '/sitemap/'
     | '/top-medical-courses/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/about-dmhca'
-    | '/blog'
+    | '/admin-login'
     | '/contact-redirect'
     | '/contact-us'
+    | '/courses-after-mbbs-in-india'
     | '/faculty'
     | '/fellowship'
+    | '/how-to-become-a-cardiologist'
+    | '/how-to-become-a-cosmetologist'
+    | '/how-to-become-a-diabetologist'
+    | '/how-to-become-a-neurologist'
+    | '/how-to-become-a-pediatrician'
+    | '/how-to-become-a-radiologist'
+    | '/how-to-become-an-embryologist'
+    | '/how-to-become-an-endocrinologist'
+    | '/how-to-become-an-obstetrician-gynecologist'
+    | '/how-to-become-an-oncologist'
+    | '/how-to-crack-neet-pg'
     | '/login'
-    | '/simple-event'
+    | '/lp-profile'
+    | '/privacy-policy'
+    | '/refund-returns-policy'
+    | '/scope-of-cardiology'
+    | '/scope-of-cosmetology'
+    | '/scope-of-diabetology'
+    | '/scope-of-echocardiography'
+    | '/scope-of-endocrinology'
+    | '/scope-of-neurology'
+    | '/scope-of-obstetrics-and-gynecology'
+    | '/scope-of-oncology'
+    | '/scope-of-paediatrics'
+    | '/scope-of-radiology'
     | '/sitemap.xml'
+    | '/term-conditions'
+    | '/test-page'
+    | '/admin/comments'
+    | '/admin/courses'
+    | '/admin/events'
+    | '/admin/media'
+    | '/admin/messages'
+    | '/admin/pages'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/blog/$slug'
     | '/course-category/$slug'
     | '/courses/$slug'
     | '/simple-event/$slug'
     | '/sitemap/xml'
+    | '/admin'
+    | '/blog'
+    | '/cardiology-courses'
+    | '/clinical-cardiology-courses'
+    | '/clinical-embryology-courses'
+    | '/cosmetology-courses'
+    | '/critical-care-medicine-courses'
+    | '/diabetology-courses'
+    | '/echocardiography-courses'
+    | '/embryology-courses'
+    | '/endocrinology-courses'
+    | '/internal-medicine-courses'
+    | '/neurology-courses'
+    | '/obstetrics-and-gynecology-courses'
+    | '/oncology-courses'
+    | '/paediatrics-courses'
+    | '/radiology-courses'
+    | '/simple-event'
+    | '/sitemap'
     | '/top-medical-courses'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/about-dmhca'
+    | '/admin'
+    | '/admin-login'
     | '/blog'
     | '/contact-redirect'
     | '/contact-us'
+    | '/courses-after-mbbs-in-india'
     | '/faculty'
     | '/fellowship'
+    | '/how-to-become-a-cardiologist'
+    | '/how-to-become-a-cosmetologist'
+    | '/how-to-become-a-diabetologist'
+    | '/how-to-become-a-neurologist'
+    | '/how-to-become-a-pediatrician'
+    | '/how-to-become-a-radiologist'
+    | '/how-to-become-an-embryologist'
+    | '/how-to-become-an-endocrinologist'
+    | '/how-to-become-an-obstetrician-gynecologist'
+    | '/how-to-become-an-oncologist'
+    | '/how-to-crack-neet-pg'
     | '/login'
+    | '/lp-profile'
+    | '/privacy-policy'
+    | '/refund-returns-policy'
+    | '/scope-of-cardiology'
+    | '/scope-of-cosmetology'
+    | '/scope-of-diabetology'
+    | '/scope-of-echocardiography'
+    | '/scope-of-endocrinology'
+    | '/scope-of-neurology'
+    | '/scope-of-obstetrics-and-gynecology'
+    | '/scope-of-oncology'
+    | '/scope-of-paediatrics'
+    | '/scope-of-radiology'
     | '/simple-event'
     | '/sitemap.xml'
+    | '/term-conditions'
+    | '/test-page'
+    | '/admin/comments'
+    | '/admin/courses'
+    | '/admin/events'
+    | '/admin/media'
+    | '/admin/messages'
+    | '/admin/pages'
+    | '/admin/settings'
+    | '/admin/users'
+    | '/blog/$slug'
     | '/course-category/$slug'
     | '/courses/$slug'
     | '/simple-event/$slug'
     | '/sitemap/xml'
+    | '/admin/'
+    | '/blog/'
+    | '/cardiology-courses/'
+    | '/clinical-cardiology-courses/'
+    | '/clinical-embryology-courses/'
+    | '/cosmetology-courses/'
+    | '/critical-care-medicine-courses/'
+    | '/diabetology-courses/'
+    | '/echocardiography-courses/'
+    | '/embryology-courses/'
+    | '/endocrinology-courses/'
+    | '/internal-medicine-courses/'
+    | '/neurology-courses/'
+    | '/obstetrics-and-gynecology-courses/'
+    | '/oncology-courses/'
+    | '/paediatrics-courses/'
+    | '/radiology-courses/'
+    | '/simple-event/'
+    | '/sitemap/'
     | '/top-medical-courses/'
   fileRoutesById: FileRoutesById
 }
@@ -223,22 +916,81 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AboutDmhcaRoute: typeof AboutDmhcaRoute
-  BlogRoute: typeof BlogRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRedirectRoute: typeof ContactRedirectRoute
   ContactUsRoute: typeof ContactUsRoute
+  CoursesAfterMbbsInIndiaRoute: typeof CoursesAfterMbbsInIndiaRoute
   FacultyRoute: typeof FacultyRoute
   FellowshipRoute: typeof FellowshipRoute
+  HowToBecomeACardiologistRoute: typeof HowToBecomeACardiologistRoute
+  HowToBecomeACosmetologistRoute: typeof HowToBecomeACosmetologistRoute
+  HowToBecomeADiabetologistRoute: typeof HowToBecomeADiabetologistRoute
+  HowToBecomeANeurologistRoute: typeof HowToBecomeANeurologistRoute
+  HowToBecomeAPediatricianRoute: typeof HowToBecomeAPediatricianRoute
+  HowToBecomeARadiologistRoute: typeof HowToBecomeARadiologistRoute
+  HowToBecomeAnEmbryologistRoute: typeof HowToBecomeAnEmbryologistRoute
+  HowToBecomeAnEndocrinologistRoute: typeof HowToBecomeAnEndocrinologistRoute
+  HowToBecomeAnObstetricianGynecologistRoute: typeof HowToBecomeAnObstetricianGynecologistRoute
+  HowToBecomeAnOncologistRoute: typeof HowToBecomeAnOncologistRoute
+  HowToCrackNeetPgRoute: typeof HowToCrackNeetPgRoute
   LoginRoute: typeof LoginRoute
+  LpProfileRoute: typeof LpProfileRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  RefundReturnsPolicyRoute: typeof RefundReturnsPolicyRoute
+  ScopeOfCardiologyRoute: typeof ScopeOfCardiologyRoute
+  ScopeOfCosmetologyRoute: typeof ScopeOfCosmetologyRoute
+  ScopeOfDiabetologyRoute: typeof ScopeOfDiabetologyRoute
+  ScopeOfEchocardiographyRoute: typeof ScopeOfEchocardiographyRoute
+  ScopeOfEndocrinologyRoute: typeof ScopeOfEndocrinologyRoute
+  ScopeOfNeurologyRoute: typeof ScopeOfNeurologyRoute
+  ScopeOfObstetricsAndGynecologyRoute: typeof ScopeOfObstetricsAndGynecologyRoute
+  ScopeOfOncologyRoute: typeof ScopeOfOncologyRoute
+  ScopeOfPaediatricsRoute: typeof ScopeOfPaediatricsRoute
+  ScopeOfRadiologyRoute: typeof ScopeOfRadiologyRoute
   SimpleEventRoute: typeof SimpleEventRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermConditionsRoute: typeof TermConditionsRoute
+  TestPageRoute: typeof TestPageRoute
   CourseCategorySlugRoute: typeof CourseCategorySlugRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
   SitemapXmlRoute: typeof SitemapXmlRoute
+  CardiologyCoursesIndexRoute: typeof CardiologyCoursesIndexRoute
+  ClinicalCardiologyCoursesIndexRoute: typeof ClinicalCardiologyCoursesIndexRoute
+  ClinicalEmbryologyCoursesIndexRoute: typeof ClinicalEmbryologyCoursesIndexRoute
+  CosmetologyCoursesIndexRoute: typeof CosmetologyCoursesIndexRoute
+  CriticalCareMedicineCoursesIndexRoute: typeof CriticalCareMedicineCoursesIndexRoute
+  DiabetologyCoursesIndexRoute: typeof DiabetologyCoursesIndexRoute
+  EchocardiographyCoursesIndexRoute: typeof EchocardiographyCoursesIndexRoute
+  EmbryologyCoursesIndexRoute: typeof EmbryologyCoursesIndexRoute
+  EndocrinologyCoursesIndexRoute: typeof EndocrinologyCoursesIndexRoute
+  InternalMedicineCoursesIndexRoute: typeof InternalMedicineCoursesIndexRoute
+  NeurologyCoursesIndexRoute: typeof NeurologyCoursesIndexRoute
+  ObstetricsAndGynecologyCoursesIndexRoute: typeof ObstetricsAndGynecologyCoursesIndexRoute
+  OncologyCoursesIndexRoute: typeof OncologyCoursesIndexRoute
+  PaediatricsCoursesIndexRoute: typeof PaediatricsCoursesIndexRoute
+  RadiologyCoursesIndexRoute: typeof RadiologyCoursesIndexRoute
+  SitemapIndexRoute: typeof SitemapIndexRoute
   TopMedicalCoursesIndexRoute: typeof TopMedicalCoursesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/test-page': {
+      id: '/test-page'
+      path: '/test-page'
+      fullPath: '/test-page'
+      preLoaderRoute: typeof TestPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/term-conditions': {
+      id: '/term-conditions'
+      path: '/term-conditions'
+      fullPath: '/term-conditions'
+      preLoaderRoute: typeof TermConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -253,11 +1005,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SimpleEventRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scope-of-radiology': {
+      id: '/scope-of-radiology'
+      path: '/scope-of-radiology'
+      fullPath: '/scope-of-radiology'
+      preLoaderRoute: typeof ScopeOfRadiologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-paediatrics': {
+      id: '/scope-of-paediatrics'
+      path: '/scope-of-paediatrics'
+      fullPath: '/scope-of-paediatrics'
+      preLoaderRoute: typeof ScopeOfPaediatricsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-oncology': {
+      id: '/scope-of-oncology'
+      path: '/scope-of-oncology'
+      fullPath: '/scope-of-oncology'
+      preLoaderRoute: typeof ScopeOfOncologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-obstetrics-and-gynecology': {
+      id: '/scope-of-obstetrics-and-gynecology'
+      path: '/scope-of-obstetrics-and-gynecology'
+      fullPath: '/scope-of-obstetrics-and-gynecology'
+      preLoaderRoute: typeof ScopeOfObstetricsAndGynecologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-neurology': {
+      id: '/scope-of-neurology'
+      path: '/scope-of-neurology'
+      fullPath: '/scope-of-neurology'
+      preLoaderRoute: typeof ScopeOfNeurologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-endocrinology': {
+      id: '/scope-of-endocrinology'
+      path: '/scope-of-endocrinology'
+      fullPath: '/scope-of-endocrinology'
+      preLoaderRoute: typeof ScopeOfEndocrinologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-echocardiography': {
+      id: '/scope-of-echocardiography'
+      path: '/scope-of-echocardiography'
+      fullPath: '/scope-of-echocardiography'
+      preLoaderRoute: typeof ScopeOfEchocardiographyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-diabetology': {
+      id: '/scope-of-diabetology'
+      path: '/scope-of-diabetology'
+      fullPath: '/scope-of-diabetology'
+      preLoaderRoute: typeof ScopeOfDiabetologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-cosmetology': {
+      id: '/scope-of-cosmetology'
+      path: '/scope-of-cosmetology'
+      fullPath: '/scope-of-cosmetology'
+      preLoaderRoute: typeof ScopeOfCosmetologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scope-of-cardiology': {
+      id: '/scope-of-cardiology'
+      path: '/scope-of-cardiology'
+      fullPath: '/scope-of-cardiology'
+      preLoaderRoute: typeof ScopeOfCardiologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-returns-policy': {
+      id: '/refund-returns-policy'
+      path: '/refund-returns-policy'
+      fullPath: '/refund-returns-policy'
+      preLoaderRoute: typeof RefundReturnsPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/lp-profile': {
+      id: '/lp-profile'
+      path: '/lp-profile'
+      fullPath: '/lp-profile'
+      preLoaderRoute: typeof LpProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-crack-neet-pg': {
+      id: '/how-to-crack-neet-pg'
+      path: '/how-to-crack-neet-pg'
+      fullPath: '/how-to-crack-neet-pg'
+      preLoaderRoute: typeof HowToCrackNeetPgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-an-oncologist': {
+      id: '/how-to-become-an-oncologist'
+      path: '/how-to-become-an-oncologist'
+      fullPath: '/how-to-become-an-oncologist'
+      preLoaderRoute: typeof HowToBecomeAnOncologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-an-obstetrician-gynecologist': {
+      id: '/how-to-become-an-obstetrician-gynecologist'
+      path: '/how-to-become-an-obstetrician-gynecologist'
+      fullPath: '/how-to-become-an-obstetrician-gynecologist'
+      preLoaderRoute: typeof HowToBecomeAnObstetricianGynecologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-an-endocrinologist': {
+      id: '/how-to-become-an-endocrinologist'
+      path: '/how-to-become-an-endocrinologist'
+      fullPath: '/how-to-become-an-endocrinologist'
+      preLoaderRoute: typeof HowToBecomeAnEndocrinologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-an-embryologist': {
+      id: '/how-to-become-an-embryologist'
+      path: '/how-to-become-an-embryologist'
+      fullPath: '/how-to-become-an-embryologist'
+      preLoaderRoute: typeof HowToBecomeAnEmbryologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-a-radiologist': {
+      id: '/how-to-become-a-radiologist'
+      path: '/how-to-become-a-radiologist'
+      fullPath: '/how-to-become-a-radiologist'
+      preLoaderRoute: typeof HowToBecomeARadiologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-a-pediatrician': {
+      id: '/how-to-become-a-pediatrician'
+      path: '/how-to-become-a-pediatrician'
+      fullPath: '/how-to-become-a-pediatrician'
+      preLoaderRoute: typeof HowToBecomeAPediatricianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-a-neurologist': {
+      id: '/how-to-become-a-neurologist'
+      path: '/how-to-become-a-neurologist'
+      fullPath: '/how-to-become-a-neurologist'
+      preLoaderRoute: typeof HowToBecomeANeurologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-a-diabetologist': {
+      id: '/how-to-become-a-diabetologist'
+      path: '/how-to-become-a-diabetologist'
+      fullPath: '/how-to-become-a-diabetologist'
+      preLoaderRoute: typeof HowToBecomeADiabetologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-a-cosmetologist': {
+      id: '/how-to-become-a-cosmetologist'
+      path: '/how-to-become-a-cosmetologist'
+      fullPath: '/how-to-become-a-cosmetologist'
+      preLoaderRoute: typeof HowToBecomeACosmetologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-become-a-cardiologist': {
+      id: '/how-to-become-a-cardiologist'
+      path: '/how-to-become-a-cardiologist'
+      fullPath: '/how-to-become-a-cardiologist'
+      preLoaderRoute: typeof HowToBecomeACardiologistRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fellowship': {
@@ -272,6 +1192,13 @@ declare module '@tanstack/react-router' {
       path: '/faculty'
       fullPath: '/faculty'
       preLoaderRoute: typeof FacultyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/courses-after-mbbs-in-india': {
+      id: '/courses-after-mbbs-in-india'
+      path: '/courses-after-mbbs-in-india'
+      fullPath: '/courses-after-mbbs-in-india'
+      preLoaderRoute: typeof CoursesAfterMbbsInIndiaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact-us': {
@@ -293,6 +1220,20 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-login': {
+      id: '/admin-login'
+      path: '/admin-login'
+      fullPath: '/admin-login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about-dmhca': {
@@ -323,6 +1264,139 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TopMedicalCoursesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap/': {
+      id: '/sitemap/'
+      path: '/sitemap'
+      fullPath: '/sitemap/'
+      preLoaderRoute: typeof SitemapIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simple-event/': {
+      id: '/simple-event/'
+      path: '/'
+      fullPath: '/simple-event/'
+      preLoaderRoute: typeof SimpleEventIndexRouteImport
+      parentRoute: typeof SimpleEventRoute
+    }
+    '/radiology-courses/': {
+      id: '/radiology-courses/'
+      path: '/radiology-courses'
+      fullPath: '/radiology-courses/'
+      preLoaderRoute: typeof RadiologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paediatrics-courses/': {
+      id: '/paediatrics-courses/'
+      path: '/paediatrics-courses'
+      fullPath: '/paediatrics-courses/'
+      preLoaderRoute: typeof PaediatricsCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oncology-courses/': {
+      id: '/oncology-courses/'
+      path: '/oncology-courses'
+      fullPath: '/oncology-courses/'
+      preLoaderRoute: typeof OncologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obstetrics-and-gynecology-courses/': {
+      id: '/obstetrics-and-gynecology-courses/'
+      path: '/obstetrics-and-gynecology-courses'
+      fullPath: '/obstetrics-and-gynecology-courses/'
+      preLoaderRoute: typeof ObstetricsAndGynecologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/neurology-courses/': {
+      id: '/neurology-courses/'
+      path: '/neurology-courses'
+      fullPath: '/neurology-courses/'
+      preLoaderRoute: typeof NeurologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internal-medicine-courses/': {
+      id: '/internal-medicine-courses/'
+      path: '/internal-medicine-courses'
+      fullPath: '/internal-medicine-courses/'
+      preLoaderRoute: typeof InternalMedicineCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/endocrinology-courses/': {
+      id: '/endocrinology-courses/'
+      path: '/endocrinology-courses'
+      fullPath: '/endocrinology-courses/'
+      preLoaderRoute: typeof EndocrinologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/embryology-courses/': {
+      id: '/embryology-courses/'
+      path: '/embryology-courses'
+      fullPath: '/embryology-courses/'
+      preLoaderRoute: typeof EmbryologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/echocardiography-courses/': {
+      id: '/echocardiography-courses/'
+      path: '/echocardiography-courses'
+      fullPath: '/echocardiography-courses/'
+      preLoaderRoute: typeof EchocardiographyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/diabetology-courses/': {
+      id: '/diabetology-courses/'
+      path: '/diabetology-courses'
+      fullPath: '/diabetology-courses/'
+      preLoaderRoute: typeof DiabetologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/critical-care-medicine-courses/': {
+      id: '/critical-care-medicine-courses/'
+      path: '/critical-care-medicine-courses'
+      fullPath: '/critical-care-medicine-courses/'
+      preLoaderRoute: typeof CriticalCareMedicineCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cosmetology-courses/': {
+      id: '/cosmetology-courses/'
+      path: '/cosmetology-courses'
+      fullPath: '/cosmetology-courses/'
+      preLoaderRoute: typeof CosmetologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clinical-embryology-courses/': {
+      id: '/clinical-embryology-courses/'
+      path: '/clinical-embryology-courses'
+      fullPath: '/clinical-embryology-courses/'
+      preLoaderRoute: typeof ClinicalEmbryologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clinical-cardiology-courses/': {
+      id: '/clinical-cardiology-courses/'
+      path: '/clinical-cardiology-courses'
+      fullPath: '/clinical-cardiology-courses/'
+      preLoaderRoute: typeof ClinicalCardiologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cardiology-courses/': {
+      id: '/cardiology-courses/'
+      path: '/cardiology-courses'
+      fullPath: '/cardiology-courses/'
+      preLoaderRoute: typeof CardiologyCoursesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/sitemap/xml': {
       id: '/sitemap/xml'
       path: '/sitemap/xml'
@@ -351,15 +1425,118 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CourseCategorySlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/pages': {
+      id: '/admin/pages'
+      path: '/pages'
+      fullPath: '/admin/pages'
+      preLoaderRoute: typeof AdminPagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/media': {
+      id: '/admin/media'
+      path: '/media'
+      fullPath: '/admin/media'
+      preLoaderRoute: typeof AdminMediaRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/events': {
+      id: '/admin/events'
+      path: '/events'
+      fullPath: '/admin/events'
+      preLoaderRoute: typeof AdminEventsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/courses': {
+      id: '/admin/courses'
+      path: '/courses'
+      fullPath: '/admin/courses'
+      preLoaderRoute: typeof AdminCoursesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/comments': {
+      id: '/admin/comments'
+      path: '/comments'
+      fullPath: '/admin/comments'
+      preLoaderRoute: typeof AdminCommentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminCommentsRoute: typeof AdminCommentsRoute
+  AdminCoursesRoute: typeof AdminCoursesRoute
+  AdminEventsRoute: typeof AdminEventsRoute
+  AdminMediaRoute: typeof AdminMediaRoute
+  AdminMessagesRoute: typeof AdminMessagesRoute
+  AdminPagesRoute: typeof AdminPagesRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCommentsRoute: AdminCommentsRoute,
+  AdminCoursesRoute: AdminCoursesRoute,
+  AdminEventsRoute: AdminEventsRoute,
+  AdminMediaRoute: AdminMediaRoute,
+  AdminMessagesRoute: AdminMessagesRoute,
+  AdminPagesRoute: AdminPagesRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface SimpleEventRouteChildren {
   SimpleEventSlugRoute: typeof SimpleEventSlugRoute
+  SimpleEventIndexRoute: typeof SimpleEventIndexRoute
 }
 
 const SimpleEventRouteChildren: SimpleEventRouteChildren = {
   SimpleEventSlugRoute: SimpleEventSlugRoute,
+  SimpleEventIndexRoute: SimpleEventIndexRoute,
 }
 
 const SimpleEventRouteWithChildren = SimpleEventRoute._addFileChildren(
@@ -370,17 +1547,64 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AboutDmhcaRoute: AboutDmhcaRoute,
-  BlogRoute: BlogRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRedirectRoute: ContactRedirectRoute,
   ContactUsRoute: ContactUsRoute,
+  CoursesAfterMbbsInIndiaRoute: CoursesAfterMbbsInIndiaRoute,
   FacultyRoute: FacultyRoute,
   FellowshipRoute: FellowshipRoute,
+  HowToBecomeACardiologistRoute: HowToBecomeACardiologistRoute,
+  HowToBecomeACosmetologistRoute: HowToBecomeACosmetologistRoute,
+  HowToBecomeADiabetologistRoute: HowToBecomeADiabetologistRoute,
+  HowToBecomeANeurologistRoute: HowToBecomeANeurologistRoute,
+  HowToBecomeAPediatricianRoute: HowToBecomeAPediatricianRoute,
+  HowToBecomeARadiologistRoute: HowToBecomeARadiologistRoute,
+  HowToBecomeAnEmbryologistRoute: HowToBecomeAnEmbryologistRoute,
+  HowToBecomeAnEndocrinologistRoute: HowToBecomeAnEndocrinologistRoute,
+  HowToBecomeAnObstetricianGynecologistRoute:
+    HowToBecomeAnObstetricianGynecologistRoute,
+  HowToBecomeAnOncologistRoute: HowToBecomeAnOncologistRoute,
+  HowToCrackNeetPgRoute: HowToCrackNeetPgRoute,
   LoginRoute: LoginRoute,
+  LpProfileRoute: LpProfileRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
+  RefundReturnsPolicyRoute: RefundReturnsPolicyRoute,
+  ScopeOfCardiologyRoute: ScopeOfCardiologyRoute,
+  ScopeOfCosmetologyRoute: ScopeOfCosmetologyRoute,
+  ScopeOfDiabetologyRoute: ScopeOfDiabetologyRoute,
+  ScopeOfEchocardiographyRoute: ScopeOfEchocardiographyRoute,
+  ScopeOfEndocrinologyRoute: ScopeOfEndocrinologyRoute,
+  ScopeOfNeurologyRoute: ScopeOfNeurologyRoute,
+  ScopeOfObstetricsAndGynecologyRoute: ScopeOfObstetricsAndGynecologyRoute,
+  ScopeOfOncologyRoute: ScopeOfOncologyRoute,
+  ScopeOfPaediatricsRoute: ScopeOfPaediatricsRoute,
+  ScopeOfRadiologyRoute: ScopeOfRadiologyRoute,
   SimpleEventRoute: SimpleEventRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermConditionsRoute: TermConditionsRoute,
+  TestPageRoute: TestPageRoute,
   CourseCategorySlugRoute: CourseCategorySlugRoute,
   CoursesSlugRoute: CoursesSlugRoute,
   SitemapXmlRoute: SitemapXmlRoute,
+  CardiologyCoursesIndexRoute: CardiologyCoursesIndexRoute,
+  ClinicalCardiologyCoursesIndexRoute: ClinicalCardiologyCoursesIndexRoute,
+  ClinicalEmbryologyCoursesIndexRoute: ClinicalEmbryologyCoursesIndexRoute,
+  CosmetologyCoursesIndexRoute: CosmetologyCoursesIndexRoute,
+  CriticalCareMedicineCoursesIndexRoute: CriticalCareMedicineCoursesIndexRoute,
+  DiabetologyCoursesIndexRoute: DiabetologyCoursesIndexRoute,
+  EchocardiographyCoursesIndexRoute: EchocardiographyCoursesIndexRoute,
+  EmbryologyCoursesIndexRoute: EmbryologyCoursesIndexRoute,
+  EndocrinologyCoursesIndexRoute: EndocrinologyCoursesIndexRoute,
+  InternalMedicineCoursesIndexRoute: InternalMedicineCoursesIndexRoute,
+  NeurologyCoursesIndexRoute: NeurologyCoursesIndexRoute,
+  ObstetricsAndGynecologyCoursesIndexRoute:
+    ObstetricsAndGynecologyCoursesIndexRoute,
+  OncologyCoursesIndexRoute: OncologyCoursesIndexRoute,
+  PaediatricsCoursesIndexRoute: PaediatricsCoursesIndexRoute,
+  RadiologyCoursesIndexRoute: RadiologyCoursesIndexRoute,
+  SitemapIndexRoute: SitemapIndexRoute,
   TopMedicalCoursesIndexRoute: TopMedicalCoursesIndexRoute,
 }
 export const routeTree = rootRouteImport

@@ -535,13 +535,13 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="text-xs uppercase tracking-widest text-slate-600 font-bold">Course Price</div>
                 <div className="flex items-baseline gap-3">
                   <div className="text-4xl font-black text-slate-900">{formatINR(course.priceINR)}</div>
-                  <div className="text-lg font-bold text-slate-700">+GST+PG</div>
+                  <div className="text-lg font-bold text-slate-700">+GST+Misc.</div>
                 </div>
                 <div className="text-sm text-slate-700 font-semibold">Total: {formatINR(totalPrice)}</div>
               </div>
               <div className="px-6 pb-6 space-y-3">
                 <Link to="/contact-us" className="w-full inline-flex justify-center items-center px-5 py-3.5 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 hover:from-slate-800 hover:via-slate-800 hover:to-slate-700 text-white text-base font-bold rounded-lg transition shadow-md hover:shadow-lg tracking-wide">Apply Now</Link>
-                <a href="tel:+917042011441" className="w-full inline-flex justify-center items-center px-5 py-3.5 border-2 border-slate-300 hover:border-slate-900 text-slate-900 text-base font-bold rounded-lg transition hover:bg-slate-50 tracking-wide">Book a Demo Class</a>
+                {/* Removed 'Book a Demo Class' per request; only Apply Now remains */}
               </div>
 
               <div className="px-6 py-6 border-t border-slate-300 space-y-4">

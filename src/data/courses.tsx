@@ -1935,59 +1935,125 @@ moduleDetails: [
     title: "Fellowship in High Risk Pregnancy",
     categories: ["obs-gynae"],
     image: "/courses/High-Risk-Pregnancy-410x290.webp",
-    heroDescription: "Ensure Safe Outcomes: Fellowship in High-Risk Pregnancy for Advanced Maternal and Fetal Care Expertise.",
-    lessons: 0,
+    lessons: 53,
     weeks: 50,
     level: "expert",
     priceINR: 130000,
     rating: null,
     reviewCount: 0,
     program: "Fellowship",
-    overview: "A Fellowship in High-Risk Pregnancy provides advanced training in the management of pregnancies complicated by medical, surgical, or obstetric conditions. The program emphasizes the care of both mother and fetus, covering prenatal diagnosis, maternal-fetal medicine, and advanced obstetric procedures. Fellows gain hands-on experience in managing complex cases, including preeclampsia, gestational diabetes, preterm labor, and fetal abnormalities.",
-trainers: [
+  trainers:[
   {
     name: "Dr. Prabhdeep Kaur",
     title: "Obs & Gynea Specialist",
     image: "/Faculty_images/Dr. Prabhdeep Kaur.webp"
   }
 ],
-learn: [
-  "Management of pregnancies complicated by hypertension, diabetes, and autoimmune diseases.",
-  "Advanced prenatal testing including amniocentesis, CVS, and fetal ultrasound.",
-  "Diagnosis and management of IUGR, congenital anomalies, and twin-to-twin transfusion syndrome.",
-  "Prevention and management of preterm labor and neonatal outcomes.",
-  "Management of hypertensive disorders including preeclampsia and eclampsia.",
-  "Diagnosis and management of gestational diabetes.",
-  "High-risk obstetric procedures including cervical cerclage and fetal monitoring."
-],
-
 requirements: [
   "MBBS/MD/MS/Equivalent"
 ],
 
-modules: [
-  "Pre Conceptional Counseling",
-  "Normal Antenatal Care (LR & HR)",
-  "Antenatal Screening Protocols",
-  "Identification of High-Risk Pregnancies",
-  "First and Second Trimester Screening & Counseling",
-  "Soft Marker Counseling in Mid-Trimester Scan",
-  "Follow-up of High-Risk Pregnancies",
-  "Antenatal Care of Multiple Pregnancies",
-  "Management of PROM",
-  "Induction of Labour Protocols"
+heroDescription: "Develop advanced expertise in managing high-risk pregnancies, fetal complications, obstetric emergencies, and maternal-fetal surveillance for improved pregnancy outcomes.",
+
+overview: "High-Risk Pregnancy focuses on the care of pregnancies complicated by maternal diseases, fetal conditions, or obstetric complications that increase risks to the mother and fetus. Early diagnosis, close monitoring, and timely intervention are essential to improve outcomes. This 6-month fellowship provides focused training in the identification, monitoring, and management of high-risk pregnancies, including obstetric emergencies and fetal surveillance techniques.",
+
+learn: [
+"Identify and classify high-risk pregnancies.",
+"Manage common maternal and fetal complications.",
+"Perform and interpret fetal monitoring techniques.",
+"Handle obstetric emergencies effectively.",
+"Provide antenatal, intrapartum, and postnatal care in high-risk cases.",
+"Work in a multidisciplinary team for optimal maternal and neonatal outcomes."
 ],
+
+modules: [
+"Foundations of High-Risk Obstetrics & Antenatal Care",
+"Hypertensive Disorders in Pregnancy",
+"Medical Disorders Complicating Pregnancy",
+"Fetal Complications & Advanced Fetal Monitoring",
+"Obstetric Emergencies & Critical Care",
+"Intrapartum, Postpartum Care & Special High-Risk Conditions"
+],
+
+moduleDetails: [
+[
+"Definition and Classification of High-Risk Pregnancy",
+"Preconception Counseling & Risk Assessment",
+"Physiological Changes in Pregnancy",
+"Comprehensive Antenatal Care Protocols",
+"Maternal & Fetal Surveillance Techniques",
+"Antenatal Screening (Genetic, Biochemical & Ultrasound)",
+"Nutrition in High-Risk Pregnancy",
+"Documentation, Partograph & Risk Stratification",
+"Obstetric History Taking & Clinical Examination"
+],
+[
+"Gestational Hypertension",
+"Preeclampsia & Severe Preeclampsia",
+"Eclampsia: Prevention & Management",
+"HELLP Syndrome",
+"Chronic Hypertension with Pregnancy",
+"Antihypertensive Therapy in Pregnancy",
+"Monitoring Maternal & Fetal Complications",
+"Magnesium Sulfate Protocols",
+"Timing & Mode of Delivery in Hypertensive Disorders"
+],
+[
+"Diabetes in Pregnancy (GDM & Pre-existing DM)",
+"Thyroid Disorders in Pregnancy",
+"Cardiac Disease in Pregnancy",
+"Renal Disorders in Pregnancy",
+"Anemia in Pregnancy (Moderate & Severe)",
+"Autoimmune Disorders (SLE, APS)",
+"Infectious Diseases in Pregnancy",
+"Respiratory Disorders & Asthma in Pregnancy",
+"Multidisciplinary Management Approaches"
+],
+[
+"Fetal Growth Restriction (FGR/IUGR)",
+"Oligohydramnios & Polyhydramnios",
+"Multiple Pregnancy & Complications",
+"Fetal Anomalies & Prenatal Diagnosis",
+"Doppler Studies (Umbilical, MCA, Uterine Artery)",
+"Biophysical Profile & NST Interpretation",
+"Preterm Labor & PPROM",
+"Rh Isoimmunization & Fetal Therapy Basics",
+"Fetal Well-being Surveillance Protocols"
+],
+[
+"Obstetric Hemorrhage (APH & PPH)",
+"Placenta Previa & Placenta Accreta Spectrum",
+"Uterine Rupture & Obstructed Labor",
+"Sepsis in Pregnancy",
+"Amniotic Fluid Embolism (Overview)",
+"Shock Management in Obstetrics",
+"ICU Care in High-Risk Pregnancy",
+"Blood Transfusion Protocols & Massive Transfusion",
+"Emergency Obstetric Drills & Simulation Training"
+],
+[
+"Labor Management in High-Risk Pregnancy",
+"Induction of Labor & VBAC in High-Risk Cases",
+"Cesarean Section in High-Risk Patients",
+"Postpartum Monitoring & Complications",
+"Thromboembolism in Pregnancy",
+"Teenage Pregnancy & Advanced Maternal Age",
+"Recurrent Pregnancy Loss",
+"Assisted Reproductive Technology (ART) Pregnancies"
+]
+],
+
 faqs: [
-  { q: "Who should consider enrolling in the Fellowship in High-Risk Pregnancy?", a: "This course is designed for MBBS/MD/MS or equivalent holders seeking structured education in maternal-fetal medicine and high-risk obstetrics." },
-  { q: "What essential topics are covered in the High-Risk Pregnancy fellowship?", a: "The fellowship includes high-risk obstetric conditions, prenatal risk assessment, maternal-fetal monitoring, and evidence-based pregnancy care." },
-  { q: "How is the High-Risk Pregnancy fellowship delivered?", a: "The course is delivered through online lectures, expert-led discussions, case-based learning, and digital study materials." },
-  { q: "How can this fellowship improve my clinical practice?", a: "It helps strengthen risk assessment skills, improve decision-making, and enhance confidence in managing high-risk pregnancies." },
-  { q: "What is the fee for the Fellowship in High-Risk Pregnancy?", a: "Fees vary based on course structure and learning resources; detailed pricing is available upon inquiry." },
-  { q: "Can this fellowship enhance career prospects and earning potential?", a: "Yes, it can boost professional credibility, expand clinical opportunities, and support higher earning potential in obstetrics and maternal health." }
+{ q: "Who should enroll in the Fellowship in High-Risk Pregnancy?", a: "This course welcomes MBBS/MD/MS/DGO/DNB or equivalent healthcare professionals seeking advanced knowledge in maternal-fetal medicine and the management of high-risk pregnancies through structured learning." },
+{ q: "What advanced topics are included in the Fellowship in High-Risk Pregnancy?", a: "This fellowship covers high-risk pregnancy assessment, hypertensive disorders, gestational diabetes, fetal growth restriction, fetal monitoring, obstetric emergencies, critical care, maternal-fetal surveillance, and evidence-based management strategies." },
+{ q: "How is the High-Risk Pregnancy fellowship delivered?", a: "The course is provided through online lectures, expert-led discussions, case-based modules, clinical scenarios, and comprehensive digital study materials." },
+{ q: "How will this fellowship help improve my clinical practice?", a: "It helps strengthen clinical decision-making, improve fetal surveillance skills, enhance management of obstetric complications, and increase confidence in handling complex maternal-fetal cases." },
+{ q: "What is the fee for the High-Risk Pregnancy fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
+{ q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in obstetrics and maternal-fetal medicine, and support higher earning potential in hospitals, maternity centers, and specialized pregnancy care services." }
 ],
     meta: {
       duration: "50 week",
-      lessons: "0",
+      lessons: "53",
       skill_level: "Fellowship",
       certificate: "yes"
     }
@@ -6948,19 +7014,160 @@ faqs: [
     title: "Fellowship in Pediatrics",
     categories: ["pediatrics"],
     image: "",
-    lessons: 48,
+    lessons: 80,
     weeks: 50,
     level: "expert",
     priceINR: 120000,
     rating: null,
     reviewCount: 0,
     program: "Fellowship",
-    overview: "Comprehensive pediatric training covering general pediatrics and subspecialties.",
-    learn: ["Pediatric care", "Child development", "Vaccination", "Pediatric emergencies", "Preventive health"],
     requirements: ["MBBS"],
-    modules: ["General Pediatrics", "Neonatology", "Pediatric Emergencies", "Vaccination", "Growth monitoring"],
-    faqs: [{ q: "Specialization?", a: "Pediatrics" }],
-    meta: { duration: "50 week", lessons: "48", skill_level: "Fellowship", certificate: "yes" }
+    heroDescription: "Develop advanced expertise in child health, neonatal care, pediatric diseases, growth monitoring, and evidence-based management across all stages of childhood.",
+overview: "Paediatrics is a vital branch of medicine focused on the health, growth, and development of infants, children, and adolescents. It encompasses preventive care, early diagnosis, and management of a wide range of childhood illnesses, along with monitoring developmental milestones and promoting overall well-being. With increasing awareness of child health and the need for specialized care, there is a growing demand for skilled healthcare professionals in paediatric practice. The Fellowship in Paediatrics is designed to enhance clinical knowledge and practical skills in the comprehensive care of children. The program integrates theoretical learning with hands-on clinical experience, emphasizing child-centered care, early intervention, and evidence-based management. It prepares fellows to manage common and complex paediatric conditions across various healthcare settings while maintaining high standards of safety, ethics, and professionalism.",
+
+learn: [
+"Build a strong foundation in growth, development, and common paediatric diseases.",
+"Develop clinical skills in the assessment, diagnosis, and management of acute and chronic conditions in children.",
+"Enhance competence in neonatal care, immunization practices, and nutritional assessment.",
+"Train fellows in monitoring developmental milestones and identifying developmental delays.",
+"Strengthen skills in managing common paediatric emergencies and infections.",
+"Promote preventive care, health education, and family-centered approaches to child health.",
+"Improve communication skills for effective interaction with children and caregivers.",
+"Encourage multidisciplinary collaboration and appropriate referral practices.",
+"Ensure adherence to ethical standards, patient safety, and professionalism in paediatric care."
+],
+
+modules: [
+"Growth, Development & Preventive Pediatrics",
+"Neonatology",
+"Pediatric Infectious Diseases",
+"Pediatric Respiratory Disorders",
+"Pediatric Gastroenterology & Hepatology",
+"Pediatric Cardiology",
+"Pediatric Neurology",
+"Pediatric Nephrology",
+"Pediatric Hematology & Oncology",
+"Pediatric Endocrinology",
+"Pediatric Emergency & Critical Care",
+"Adolescent Medicine & Clinical Integration"
+],
+
+moduleDetails: [
+[
+"Normal growth and developmental milestones",
+"Growth charts and anthropometry",
+"Developmental assessment tools",
+"Immunization schedules and cold chain management",
+"Nutrition in infancy and childhood",
+"Breastfeeding practices",
+"Adolescent growth and development"
+],
+[
+"Care of normal newborn",
+"Neonatal resuscitation",
+"Preterm and low birth weight management",
+"Neonatal jaundice",
+"Neonatal sepsis",
+"Respiratory distress syndrome",
+"Neonatal metabolic disorders"
+],
+[
+"Common childhood infections",
+"Vaccine-preventable diseases",
+"Tuberculosis in children",
+"Dengue, malaria and tropical infections",
+"HIV in children",
+"Fever without focus",
+"Antimicrobial stewardship"
+],
+[
+"Asthma management",
+"Bronchiolitis",
+"Pneumonia",
+"Tuberculosis",
+"Pleural effusion",
+"Chronic lung diseases",
+"Oxygen therapy and nebulization"
+],
+[
+"Acute and chronic diarrhea",
+"Malnutrition and nutritional rehabilitation",
+"Celiac disease",
+"Inflammatory bowel disease (overview)",
+"Acute and chronic liver diseases",
+"Neonatal cholestasis",
+"GI bleeding in children"
+],
+[
+"Congenital heart diseases (cyanotic & acyanotic)",
+"Rheumatic heart disease",
+"Heart failure in children",
+"Pediatric arrhythmias (overview)",
+"Interpretation of pediatric ECG",
+"Basics of echocardiography (overview)"
+],
+[
+"Seizure disorders",
+"Status epilepticus",
+"Cerebral palsy",
+"Developmental delay",
+"Meningitis and encephalitis",
+"Neuromuscular disorders (overview)",
+"Headache disorders"
+],
+[
+"Acute kidney injury",
+"Nephrotic syndrome",
+"Glomerulonephritis",
+"Urinary tract infections",
+"Electrolyte disorders",
+"Hypertension in children",
+"Chronic kidney disease"
+],
+[
+"Anemia (nutritional and hemolytic)",
+"Thalassemia",
+"Bleeding disorders",
+"Leukemia (overview)",
+"Lymphoma (overview)",
+"Supportive care in pediatric oncology"
+],
+[
+"Type 1 diabetes mellitus",
+"Thyroid disorders in children",
+"Short stature evaluation",
+"Puberty disorders",
+"Obesity and metabolic syndrome",
+"Calcium and bone disorders"
+],
+[
+"Pediatric advanced life support (PALS)",
+"Shock management",
+"Acute respiratory failure",
+"Poisoning and toxicology",
+"Trauma management",
+"Fluid therapy in emergencies",
+"ICU monitoring basics"
+],
+[
+"Adolescent health issues",
+"Behavioral disorders",
+"School health programs",
+"Preventive adolescent care",
+"Ethics and medico-legal aspects in pediatrics",
+"Case presentations and exit assessment"
+]
+],
+
+faqs: [
+{ q: "Who should enroll in the Fellowship in Paediatrics?", a: "This course welcomes MBBS/MD/MS/DCH/DNB or equivalent healthcare professionals seeking advanced knowledge and clinical skills in child health, neonatal care, and pediatric medicine through structured learning." },
+{ q: "What advanced topics are included in the Fellowship in Paediatrics?", a: "This fellowship covers growth and development, neonatology, pediatric infectious diseases, respiratory disorders, gastroenterology, cardiology, neurology, nephrology, hematology, endocrinology, emergency care, and adolescent medicine." },
+{ q: "How is the Paediatrics fellowship delivered?", a: "The course is provided through online lectures, expert-led discussions, case-based modules, clinical learning activities, and comprehensive digital study materials." },
+{ q: "How will this fellowship help improve my clinical practice?", a: "It helps strengthen pediatric assessment and diagnostic skills, improve management of neonatal and childhood disorders, enhance emergency care capabilities, and increase confidence in delivering evidence-based pediatric care." },
+{ q: "What is the fee for the Paediatrics fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
+{ q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in pediatric clinics, hospitals, neonatal units, and child healthcare services, while supporting higher earning potential in pediatric practice." }
+],
+    meta: { duration: "50 week", lessons: "80", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatric-nephrology",
@@ -6986,38 +7193,269 @@ faqs: [
     title: "Fellowship in Pediatric Endocrinology",
     categories: ["pediatrics"],
     image: "",
-    lessons: 36,
+    lessons: 53,
     weeks: 50,
     level: "expert",
     priceINR: 140000,
     rating: null,
     reviewCount: 0,
     program: "Fellowship",
-    overview: "Training in pediatric endocrine disorders and metabolic diseases.",
-    learn: ["Pediatric endocrinology", "Diabetes", "Growth disorders", "Metabolic diseases"],
     requirements: ["MBBS", "Pediatrics background"],
-    modules: ["Endocrine System", "Diabetes in children", "Growth disorders", "Metabolic"],
-    faqs: [{ q: "Specialization?", a: "Pediatric endocrinology" }],
-    meta: { duration: "50 week", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
+    heroDescription: "Gain advanced expertise in diagnosing and managing hormonal, metabolic, growth, and developmental disorders in infants, children, and adolescents.",
+
+overview: "Pediatric Endocrinology is a specialized field focused on the diagnosis and management of hormonal and metabolic disorders in infants, children, and adolescents. These include conditions such as growth disorders, diabetes mellitus, thyroid abnormalities, pubertal disorders, and adrenal and pituitary diseases. With the increasing prevalence of pediatric endocrine conditions and the importance of early diagnosis and long-term management, specialized training in this field is essential. The Fellowship in Pediatric Endocrinology is designed to provide advanced training in the evaluation and treatment of endocrine disorders in children. The program integrates theoretical knowledge with clinical exposure, emphasizing diagnostic evaluation, hormonal investigations, and evidence-based management. It prepares fellows to deliver comprehensive, child-centered care while collaborating with multidisciplinary teams and supporting patients and families through chronic disease management.",
+
+learn: [
+"Develop a strong foundation in endocrine physiology, growth, and metabolic processes in children.",
+"Train fellows in the clinical assessment, diagnosis, and management of common and complex pediatric endocrine disorders.",
+"Enhance competence in managing conditions such as diabetes, growth disorders, thyroid diseases, and pubertal abnormalities.",
+"Provide exposure to hormonal assays, dynamic testing, and interpretation of endocrine investigations.",
+"Strengthen skills in long-term management, monitoring, and follow-up of chronic endocrine conditions.",
+"Promote patient and family education, including lifestyle management and adherence to treatment plans.",
+"Encourage evidence-based practice and application of current clinical guidelines.",
+"Foster multidisciplinary collaboration with pediatricians, dietitians, and other specialists.",
+"Ensure adherence to ethical standards, patient safety, and professionalism in pediatric care"
+],
+
+modules: [
+"Basics of Pediatric Endocrinology & Growth",
+"Disorders of the Pituitary & Hypothalamus",
+"Thyroid Disorders in Children",
+"Disorders of Puberty & Adrenal Gland",
+"Pediatric Diabetes & Metabolic Endocrinology",
+"Calcium, Bone & Miscellaneous Endocrine Disorders"
+],
+
+moduleDetails: [
+[
+"Introduction to Pediatric Endocrinology",
+"Physiology of Hormones in Childhood",
+"Growth and Development: Normal & Abnormal Patterns",
+"Growth Charts (WHO, CDC) and Interpretation",
+"Short Stature: Evaluation & Management",
+"Tall Stature Assessment",
+"Bone Age Assessment (Greulich & Pyle method)",
+"Endocrine History Taking & Clinical Examination",
+"Anthropometry & Auxology",
+"Basics of Hormonal Assays and Lab Interpretation"
+],
+[
+"Hypopituitarism in Children",
+"Growth Hormone Deficiency",
+"Gigantism and Pituitary Adenomas",
+"Hypothalamic Disorders",
+"Diabetes Insipidus (Central & Nephrogenic)",
+"SIADH in Pediatrics",
+"Pituitary Hormone Testing (Dynamic Tests)",
+"Imaging in Pituitary Disorders (MRI Basics)"
+],
+[
+"Congenital Hypothyroidism (Screening & Management)",
+"Acquired Hypothyroidism (Hashimoto’s Thyroiditis)",
+"Hyperthyroidism (Graves’ Disease)",
+"Thyroid Nodules & Goiter Evaluation",
+"Thyroid Function Tests Interpretation (T3, T4, TSH)",
+"Thyroid Autoimmune Disorders",
+"Neonatal Thyroid Disorders",
+"Management Protocols & Follow-up Care"
+],
+[
+"Normal Puberty Physiology",
+"Precocious Puberty (Central & Peripheral)",
+"Delayed Puberty",
+"Disorders of Sex Development (DSD)",
+"Congenital Adrenal Hyperplasia (CAH)",
+"Adrenal Insufficiency (Primary & Secondary)",
+"Cushing Syndrome in Children",
+"Adrenal Tumors in Pediatrics",
+"Hormonal Evaluation of Pubertal Disorders"
+],
+[
+"Type 1 Diabetes Mellitus in Children",
+"Type 2 Diabetes in Adolescents",
+"Diabetic Ketoacidosis (DKA) Management",
+"Insulin Therapy (Basal-Bolus, Pumps)",
+"Continuous Glucose Monitoring (CGM)",
+"Hypoglycemia Disorders",
+"Obesity & Metabolic Syndrome in Children",
+"Lipid Disorders in Pediatrics",
+"Nutrition in Pediatric Endocrine Disorders"
+],
+[
+"Rickets (Nutritional & Genetic)",
+"Vitamin D Disorders",
+"Hypocalcemia & Hypercalcemia",
+"Parathyroid Disorders",
+"Metabolic Bone Diseases",
+"Polycystic Ovarian Syndrome (PCOS) in Adolescents",
+"Endocrine Hypertension in Children",
+"Endocrine Emergencies in Pediatrics",
+"Clinical Audit, Ethics & Fellowship Exit Assessment"
+]
+],
+
+faqs: [
+{ q: "Who should enroll in the Fellowship in Pediatric Endocrinology?", a: "This course welcomes MBBS/MD/MS/DCH/DNB or equivalent healthcare professionals seeking advanced knowledge in pediatric endocrinology, growth disorders, diabetes, and hormonal diseases through structured learning." },
+{ q: "What advanced topics are included in the Fellowship in Pediatric Endocrinology?", a: "This fellowship covers growth disorders, pituitary and hypothalamic diseases, thyroid disorders, pubertal abnormalities, adrenal disorders, pediatric diabetes, metabolic endocrinology, calcium and bone disorders, and endocrine emergencies using evidence-based clinical approaches." },
+{ q: "How is the Pediatric Endocrinology fellowship delivered?", a: "The course is provided through online lectures, expert-led discussions, case-based modules, clinical learning activities, and comprehensive digital study materials." },
+{ q: "How will this fellowship help improve my clinical practice?", a: "It helps strengthen diagnostic skills in pediatric endocrine disorders, improve interpretation of hormonal investigations, enhance long-term disease management capabilities, and increase confidence in managing complex endocrine conditions in children." },
+{ q: "What is the fee for the Pediatric Endocrinology fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
+{ q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in pediatric endocrinology, children's hospitals, specialty clinics, and academic practice, while supporting higher earning potential in advanced pediatric healthcare." }
+],
+    meta: { duration: "50 week", lessons: "53", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-radiology",
     title: "Fellowship in Radiology",
     categories: ["radiology"],
     image: "",
-    lessons: 52,
+    lessons: 75,
     weeks: 50,
     level: "expert",
     priceINR: 150000,
     rating: null,
     reviewCount: 0,
     program: "Fellowship",
-    overview: "Comprehensive radiology training including various imaging modalities.",
-    learn: ["X-ray", "CT imaging", "MRI", "Ultrasound", "Nuclear imaging"],
     requirements: ["MBBS", "MD Radiology"],
-    modules: ["Imaging Basics", "CT", "MRI", "Ultrasound", "Interventional Radiology"],
-    faqs: [{ q: "Modalities?", a: "CT, MRI, X-ray, Ultrasound" }],
-    meta: { duration: "50 week", lessons: "52", skill_level: "Fellowship", certificate: "yes" }
+   heroDescription: "Develop advanced expertise in diagnostic imaging, radiological interpretation, ultrasound, CT, MRI, and interventional radiology across multiple clinical specialties.",
+
+overview: "Radiology is a specialized field of medicine focused on the use of imaging technologies for the diagnosis, monitoring, and management of diseases. It plays a critical role in modern healthcare by enabling accurate, non-invasive evaluation of various organ systems through modalities such as X-ray, ultrasound, CT, MRI, and interventional imaging. The Fellowship in Radiology is designed to provide comprehensive training in imaging interpretation, radiological techniques, radiation safety, and evidence-based diagnostic practices. The program integrates theoretical knowledge with clinical application, preparing healthcare professionals to deliver high-quality imaging-based patient care across diverse clinical settings.",
+
+learn: [
+"Understand the principles of radiological physics and imaging modalities.",
+"Interpret X-ray, ultrasound, CT, and MRI studies across multiple organ systems.",
+"Apply radiation safety and quality assurance practices in radiology.",
+"Recognize normal and pathological imaging findings in clinical practice.",
+"Develop expertise in diagnostic and interventional radiological procedures.",
+"Utilize imaging techniques for emergency, trauma, and critical care assessment.",
+"Enhance clinical decision-making through evidence-based image interpretation.",
+"Collaborate effectively with multidisciplinary healthcare teams.",
+"Maintain professional standards, patient safety, and ethical radiology practice."
+],
+
+modules: [
+"Basic Imaging Physics & Radiological Techniques",
+"Musculoskeletal Radiology",
+"Neuroradiology",
+"Chest & Cardiothoracic Imaging",
+"Abdominal & Gastrointestinal Radiology",
+"Genitourinary & Obstetric Radiology",
+"Ultrasound & Doppler Imaging",
+"Interventional Radiology",
+"Breast & Women’s Imaging",
+"Pediatric Radiology",
+"Emergency & Trauma Radiology"
+],
+
+moduleDetails: [
+[
+"Fundamentals of radiological physics",
+"Radiation safety and protection principles",
+"X-ray imaging techniques and quality control",
+"Digital radiography and PACS/RIS systems",
+"Contrast media: types, indications & reactions",
+"Image acquisition protocols and artifacts",
+"Radiological anatomy (cross-sectional basics)"
+],
+[
+"Imaging of bone tumors and tumor-like lesions",
+"Arthritis and inflammatory joint disorders",
+"Trauma imaging (fractures & dislocations)",
+"Spine imaging basics",
+"Sports injuries imaging",
+"MRI in musculoskeletal disorders",
+"Bone densitometry (DEXA) basics"
+],
+[
+"CT & MRI brain protocols",
+"Stroke imaging (ischemic & hemorrhagic)",
+"Intracranial tumors and infections",
+"Demyelinating disorders",
+"Pediatric neuroimaging basics",
+"Spine imaging (disc disease, trauma, tumors)",
+"Neurovascular imaging (MRA, MRV overview)"
+],
+[
+"HRCT lung interpretation",
+"Pulmonary infections (including TB)",
+"Interstitial lung diseases",
+"Lung nodules & malignancy imaging",
+"Mediastinal masses",
+"Cardiac CT and basics of cardiac MRI (overview)",
+"Pleural diseases and chest trauma"
+],
+[
+"Liver imaging (focal & diffuse diseases)",
+"Pancreaticobiliary imaging",
+"Gastrointestinal tract imaging",
+"Spleen and peritoneal pathologies",
+"CT abdomen protocols",
+"MRI abdomen & MRCP basics",
+"Acute abdomen imaging approach"
+],
+[
+"Renal imaging (stones, tumors, infections)",
+"Prostate imaging (overview)",
+"Female pelvic imaging (USG & MRI)",
+"Obstetric ultrasound basics",
+"Fetal anomaly scan principles",
+"Infertility imaging (overview)",
+"Doppler in obstetrics and gynecology"
+],
+[
+"Ultrasound physics and instrumentation",
+"Abdominal ultrasound techniques",
+"Small parts ultrasound (thyroid, breast, scrotum)",
+"Vascular Doppler studies",
+"Obstetric and fetal Doppler",
+"Interventional ultrasound guidance",
+"Emergency ultrasound (FAST, POCUS basics)"
+],
+[
+"Principles of image-guided interventions",
+"Biopsy and drainage procedures",
+"Angiography basics",
+"Vascular access techniques",
+"Embolization (overview)",
+"Interventional oncology basics",
+"Complications and management"
+],
+[
+"Mammography techniques and interpretation",
+"Breast ultrasound",
+"MRI breast (overview)",
+"BI-RADS classification",
+"Screening vs diagnostic imaging",
+"Image-guided breast interventions"
+],
+[
+"Neonatal imaging",
+"Pediatric chest and abdominal imaging",
+"Congenital anomalies imaging",
+"Pediatric neuroimaging",
+"Skeletal dysplasia imaging",
+"Radiation dose optimization in children"
+],
+[
+"Polytrauma imaging protocols",
+"Emergency CT interpretation",
+"Head injury imaging",
+"Acute stroke imaging pathways",
+"Acute abdominal emergencies",
+"FAST and trauma ultrasound",
+"ICU radiology practices"
+]
+],
+
+faqs: [
+{ q: "Who should enroll in the Fellowship in Radiology?", a: "This course welcomes MBBS/MD/MS/DNB or equivalent healthcare professionals seeking advanced knowledge in diagnostic imaging, radiological interpretation, and image-guided procedures through structured learning." },
+{ q: "What advanced topics are included in the Fellowship in Radiology?", a: "This fellowship covers radiological physics, musculoskeletal imaging, neuroradiology, chest imaging, abdominal radiology, obstetric and gynecological imaging, ultrasound, Doppler studies, interventional radiology, breast imaging, pediatric radiology, and emergency radiology." },
+{ q: "How is the Radiology fellowship delivered?", a: "The course is provided through online lectures, expert-led discussions, case-based modules, imaging reviews, and comprehensive digital study materials." },
+{ q: "How will this fellowship help improve my clinical practice?", a: "It helps strengthen diagnostic accuracy, improve image interpretation skills, enhance clinical decision-making, and increase confidence in utilizing imaging modalities for patient diagnosis and management." },
+{ q: "What is the fee for the Radiology fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
+{ q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in diagnostic imaging centers, hospitals, specialty clinics, and radiology departments, while supporting higher earning potential in imaging-based healthcare practice." }
+],
+    meta: { duration: "50 week", lessons: "75", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-neuroradiology",
@@ -7583,7 +8021,6 @@ trainers: [
     image: "/Faculty_images/Dr. Mysara.webp"
   }
 ],
-
 modules: [
   "Basics of Diabetology",
   "Anatomy and Physiology",
@@ -7685,38 +8122,124 @@ faqs: [
     title: "PG Diploma in Family Medicine",
     categories: ["medicine"],
     image: "",
-    lessons: 36,
+    lessons: 47,
     weeks: 50,
     level: "intermediate",
     priceINR: 110000,
     rating: null,
     reviewCount: 0,
     program: "PG Diploma",
-    overview: "Comprehensive training in family medicine and primary healthcare.",
-    learn: ["Primary healthcare", "Chronic disease management", "Preventive medicine", "Patient counseling", "Community health", "Clinical skills"],
-    requirements: ["MBBS"],
-    modules: ["Family Medicine Basics", "Chronic Diseases", "Prevention", "Patient Care", "Community Health", "Clinical Practice"],
-    faqs: [
-      { q: "Duration?", a: "12 months" },
-      { q: "Career?", a: "Family medicine physician" }
-    ],
-    moduleDetails: [
-      [
-        "Course overview and objectives",
-        "Learning outcomes",
-        "Prerequisites and requirements",
-        "Assessment methodology",
-        "Resource materials"
-      ],
-      [
-        "Advanced case studies",
-        "Comprehensive review",
-        "Exam preparation",
-        "Career opportunities",
-        "Continuous learning"
-      ]
-    ],
-    meta: { duration: "50 week", lessons: "36", skill_level: "PG Diploma", certificate: "yes" }
+    requirements: ["MBBS", "BDS", "BAMS", "BHMS", "BNYS", "BUMS", "equivalent"],
+    heroDescription: "Develop expertise in comprehensive primary care, preventive medicine, chronic disease management, and community-based healthcare for individuals and families.",
+overview: "The Postgraduate Diploma in Family Medicine is a specialized medical training program designed to prepare healthcare professionals to provide comprehensive, continuous, and community-based healthcare for individuals and families. Family medicine focuses on the holistic management of patients across all age groups, including prevention, diagnosis, treatment, and rehabilitation of common medical conditions. The program emphasizes primary care, patient-centered treatment, preventive medicine, and community health. This course equips practitioners with skills to manage acute and chronic diseases, maternal and child health, geriatric care, and lifestyle disorders, making them capable of delivering effective healthcare in clinics, hospitals, and community settings.",
+
+learn: [
+"Provide primary healthcare services for individuals and families",
+"Diagnose and manage common medical conditions",
+"Promote preventive healthcare and health education",
+"Manage chronic diseases and lifestyle disorders",
+"Provide maternal, child, and geriatric care",
+"Develop skills for community-oriented healthcare practice"
+],
+
+modules: [
+"Introduction to Family Medicine",
+"Primary Care Medicine",
+"Preventive and Community Medicine",
+"Maternal and Child Health",
+"Management of Chronic Diseases",
+"Geriatric Medicine",
+"Mental Health in Primary Care",
+"Emergency and Acute Care",
+"Nutrition and Lifestyle Medicine",
+"Clinical Skills and Diagnostics",
+"Practice Management",
+"Clinical Training and Case Studies"
+],
+
+moduleDetails: [
+[
+"Principles and scope of family medicine",
+"Role of family physician in healthcare",
+"Patient-centered care approach",
+"Medical ethics and professionalism"
+],
+[
+"Diagnosis and management of common illnesses",
+"Respiratory diseases",
+"Gastrointestinal disorders",
+"Infectious diseases"
+],
+[
+"Health promotion and disease prevention",
+"Immunization programs",
+"Screening and early detection of diseases",
+"Public health policies"
+],
+[
+"Antenatal and postnatal care",
+"Normal delivery basics",
+"Pediatric growth and development",
+"Childhood illnesses and immunization"
+],
+[
+"Diabetes management",
+"Hypertension and cardiovascular diseases",
+"Thyroid disorders",
+"Asthma and COPD"
+],
+[
+"Health issues in elderly patients",
+"Chronic disease management",
+"Rehabilitation and palliative care"
+],
+[
+"Depression and anxiety disorders",
+"Stress management",
+"Substance abuse disorders",
+"Counseling techniques"
+],
+[
+"Basic life support (BLS)",
+"Management of medical emergencies",
+"Trauma care basics",
+"Poisoning and acute infections"
+],
+[
+"Balanced diet and nutrition planning",
+"Obesity management",
+"Lifestyle modification",
+"Preventive strategies for chronic diseases"
+],
+[
+"Physical examination techniques",
+"Laboratory investigations",
+"Interpretation of diagnostic tests",
+"Clinical decision-making"
+],
+[
+"Setting up a family practice clinic",
+"Medical record management",
+"Healthcare communication",
+"Telemedicine and digital health"
+],
+[
+"Patient consultation and case management",
+"Community health visits",
+"Case presentations",
+"Clinical rotations"
+]
+],
+
+faqs: [
+{ q: "Who should pursue the PG Diploma in Family Medicine?", a: "The program is ideal for physicians, general practitioners, family physicians, primary care doctors, and healthcare professionals seeking advanced expertise in comprehensive family and community-based healthcare." },
+{ q: "What topics are included in the PG Diploma in Family Medicine?", a: "This diploma covers primary care medicine, preventive healthcare, maternal and child health, chronic disease management, geriatric care, mental health, emergency medicine, nutrition, diagnostics, practice management, and community health through structured modules." },
+{ q: "How is the PG Diploma in Family Medicine delivered?", a: "The course is delivered through structured academic modules, clinical training, case-based learning, practical exposure, and comprehensive study resources to support professional development in family medicine." },
+{ q: "What career benefits can I expect after completing this diploma?", a: "Completing this diploma enhances clinical decision-making, strengthens primary care expertise, improves patient-centered healthcare delivery, and supports career advancement in family and community medicine." },
+{ q: "What is the fee for the PG Diploma in Family Medicine?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
+{ q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in family medicine can elevate your professional profile, expand clinical practice opportunities, and support higher income potential in primary care, community health, and family practice settings." }
+],
+    meta: { duration: "50 week", lessons: "47", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-infertility-management",
@@ -7882,38 +8405,114 @@ faqs: [
     title: "PG Diploma in Dermatology",
     categories: ["dermatology"],
     image: "",
-    lessons: 40,
+    lessons: 38,
     weeks: 50,
     level: "intermediate",
     priceINR: 130000,
     rating: null,
     reviewCount: 0,
     program: "PG Diploma",
-    overview: "Comprehensive training in dermatology covering diagnosis and treatment of skin conditions.",
-    learn: ["Dermatological diagnosis", "Medical dermatology", "Surgical techniques", "Cosmetic procedures", "Laser therapy", "Patient management"],
-    requirements: ["MBBS"],
-    modules: ["Dermatology Basics", "Common Conditions", "Infections", "Surgical Dermatology", "Cosmetic", "Advanced Procedures"],
-    faqs: [
-      { q: "Duration?", a: "12 months" },
-      { q: "Career?", a: "Dermatologist" }
-    ],
-    moduleDetails: [
-      [
-        "Course overview and objectives",
-        "Learning outcomes",
-        "Prerequisites and requirements",
-        "Assessment methodology",
-        "Resource materials"
-      ],
-      [
-        "Advanced case studies",
-        "Comprehensive review",
-        "Exam preparation",
-        "Career opportunities",
-        "Continuous learning"
-      ]
-    ],
-    meta: { duration: "50 week", lessons: "40", skill_level: "PG Diploma", certificate: "yes" }
+    requirements: ["MBBS", "BDS", "BAMS", "BHMS", "BNYS", "BUMS", "equivalent"],
+    heroDescription: "Gain practical expertise in diagnosing and managing skin, hair, nail, and sexually transmitted disorders through comprehensive dermatology training.",
+
+overview: "Dermatology is a branch of medicine concerned with the diagnosis and management of diseases of the skin, hair, nails, and mucous membranes. With increasing incidence of infections, allergies, autoimmune disorders, and cosmetic concerns, dermatology has become a highly relevant specialty in clinical practice. Common conditions such as Acne Vulgaris, Psoriasis, and Atopic Dermatitis significantly impact quality of life. A PG Diploma in Dermatology (12 months) is designed to provide practical, clinically oriented training in diagnosing and managing a wide range of dermatological conditions. The course integrates clinical dermatology, venereology, leprology, and cosmetology, with emphasis on evidence-based and patient-centered care.",
+
+learn: [
+"Understand the structure and function of skin and appendages",
+"Perform thorough dermatological examination and diagnosis",
+"Identify and manage common skin diseases",
+"Diagnose and treat sexually transmitted infections (STIs)",
+"Recognize leprosy and other chronic infectious diseases",
+"Interpret laboratory and diagnostic tests (KOH, biopsy, etc.)",
+"Prescribe appropriate topical and systemic therapies",
+"Perform basic dermatological procedures",
+"Manage cosmetic and aesthetic conditions",
+"Educate patients on skin care, hygiene, and prevention"
+],
+
+modules: [
+"Basic Dermatology",
+"Diagnostic Techniques",
+"Bacterial & Viral Skin Infections",
+"Fungal & Parasitic Infections",
+"Inflammatory & Allergic Disorders",
+"Papulosquamous Disorders",
+"Pigmentary & Hair Disorders",
+"Sexually Transmitted Infections (STIs)",
+"Leprosy & Systemic Diseases",
+"Therapeutics & Cosmetic Dermatology"
+],
+
+moduleDetails: [
+[
+"Structure and function of skin",
+"Dermatological terminology",
+"Lesion morphology and classification",
+"Clinical examination of skin"
+],
+[
+"Skin biopsy and histopathology basics",
+"KOH examination and fungal studies",
+"Dermoscopy basics",
+"Patch testing and allergy testing"
+],
+[
+"Pyoderma, cellulitis, tuberculosis of skin",
+"Viral infections (warts, herpes, molluscum)",
+"Management and prevention"
+],
+[
+"Dermatophytosis (tinea)",
+"Candidiasis",
+"Scabies, pediculosis",
+"Deep fungal infections"
+],
+[
+"Eczema and dermatitis",
+"Atopic Dermatitis",
+"Urticaria and drug reactions",
+"Contact dermatitis"
+],
+[
+"Psoriasis",
+"Lichen planus",
+"Pityriasis rosea",
+"Scaling disorders"
+],
+[
+"Vitiligo",
+"Hyperpigmentation disorders",
+"Alopecia (hair loss conditions)",
+"Nail disorders"
+],
+[
+"Syphilis, gonorrhea, chlamydia",
+"Genital herpes and warts",
+"HIV-related skin conditions",
+"Counseling and prevention"
+],
+[
+"Leprosy classification and management",
+"Cutaneous manifestations of systemic diseases",
+"Autoimmune skin disorders"
+],
+[
+"Topical and systemic drugs",
+"Steroids, immunosuppressants",
+"Basic dermatological procedures (cryotherapy, cautery)",
+"Acne management and cosmetic treatments"
+]
+],
+
+faqs: [
+{ q: "Who should pursue the PG Diploma in Dermatology?", a: "The program is ideal for physicians, dermatologists, general practitioners, medical graduates, and healthcare professionals seeking advanced expertise in the diagnosis and management of skin, hair, nail, and sexually transmitted disorders." },
+{ q: "What topics are included in the PG Diploma in Dermatology?", a: "This diploma covers clinical dermatology, dermatological diagnostics, bacterial, viral, fungal and parasitic infections, inflammatory skin disorders, pigmentary diseases, STIs, leprosy, therapeutic dermatology, and cosmetic dermatology through structured modules." },
+{ q: "How is the PG Diploma in Dermatology delivered?", a: "The course is delivered through comprehensive academic modules, case-based learning, clinical discussions, practical training, and evidence-based study resources, enabling in-depth learning in dermatology." },
+{ q: "What career benefits can I expect after completing this diploma?", a: "Completing this diploma enhances dermatological diagnostic skills, strengthens clinical decision-making, improves patient management capabilities, and supports career growth in dermatology and aesthetic medicine." },
+{ q: "What is the fee for the PG Diploma in Dermatology?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
+{ q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in dermatology can elevate your professional profile, expand opportunities in clinical and cosmetic dermatology practice, and support higher income potential in specialized healthcare settings." }
+],
+    meta: { duration: "50 week", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-obstetrics-and-gynaecology",
@@ -7958,424 +8557,1089 @@ faqs: [
     title: "PG Diploma in Orthopaedics",
     categories: ["orthopedics"],
     image: "",
-    lessons: 35,
+    lessons: 28,
     weeks: 50,
     level: "intermediate",
     priceINR: 120000,
     rating: null,
     reviewCount: 0,
     program: "PG Diploma",
-    overview: "Professional training in orthopedic surgery and musculoskeletal disease management.",
-    learn: ["Bone and joint anatomy", "Fracture management", "Surgical techniques", "Rehabilitation", "Sports injuries", "Joint replacement"],
     requirements: ["MBBS"],
-    modules: ["Orthopedics Basics", "Fractures", "Surgical Techniques", "Joint Surgery", "Trauma", "Advanced Procedures"],
-    faqs: [
-      { q: "Duration?", a: "12 months" },
-      { q: "Career?", a: "Orthopedic surgeon" }
-    ],
-    moduleDetails: [
-      [
-        "Course overview and objectives",
-        "Learning outcomes",
-        "Prerequisites and requirements",
-        "Assessment methodology",
-        "Resource materials"
-      ],
-      [
-        "Advanced case studies",
-        "Comprehensive review",
-        "Exam preparation",
-        "Career opportunities",
-        "Continuous learning"
-      ]
-    ],
-    meta: { duration: "50 week", lessons: "35", skill_level: "PG Diploma", certificate: "yes" }
+    heroDescription: "Develop advanced skills in diagnosing, treating, and rehabilitating musculoskeletal disorders, fractures, trauma, and orthopaedic conditions.",
+
+overview: "Orthopaedics is a branch of medicine that deals with the musculoskeletal system, including bones, joints, ligaments, tendons, and muscles. With increasing cases of trauma (road accidents), sports injuries, degenerative joint diseases, and aging populations—especially in countries like India—the demand for trained orthopaedic professionals is rapidly rising. A 12-month PG Diploma in Orthopaedics is an intensive, clinically oriented program designed for medical graduates. It focuses on diagnosis, emergency management, surgical principles, and rehabilitation of musculoskeletal disorders, combining theory with practical clinical exposure.",
+
+learn: [
+"Understand anatomy, biomechanics, and pathology of the musculoskeletal system",
+"Perform clinical examination and diagnosis of orthopaedic conditions",
+"Manage fractures, trauma, and emergencies effectively",
+"Apply principles of operative and non-operative treatment",
+"Interpret X-rays and imaging techniques",
+"Manage joint diseases, spine disorders, and sports injuries",
+"Provide post-operative care and rehabilitation",
+"Perform basic orthopaedic procedures (casting, splinting, etc.)",
+"Work effectively in trauma centers and orthopaedic units"
+],
+
+modules: [
+"Basic Principles of Orthopaedics",
+"Orthopaedic Trauma & Emergencies",
+"Upper Limb Orthopaedics",
+"Lower Limb Orthopaedics",
+"Spine & Paediatric Orthopaedics",
+"Orthopaedic Diseases & Rehabilitation"
+],
+
+moduleDetails: [
+[
+"Anatomy of bones, joints, muscles",
+"Biomechanics of movement",
+"Bone healing and tissue repair",
+"Clinical examination methods",
+"Imaging (X-ray interpretation, basics of CT/MRI)"
+],
+[
+"Fracture classification and management",
+"Polytrauma and emergency care",
+"Dislocations and soft tissue injuries",
+"Principles of fracture fixation (internal/external)",
+"Initial stabilization and trauma protocols"
+],
+[
+"Shoulder disorders (dislocation, rotator cuff injury)",
+"Elbow and forearm injuries",
+"Wrist and hand conditions (carpal tunnel, fractures)",
+"Surgical and non-surgical management"
+],
+[
+"Hip fractures and joint diseases",
+"Knee injuries (ligament tears, meniscus)",
+"Ankle and foot disorders",
+"Arthritic conditions and deformities"
+],
+[
+"Spine anatomy and disorders (disc prolapse, trauma)",
+"Congenital deformities (e.g., clubfoot)",
+"Pediatric fractures and growth-related disorders",
+"Non-accidental injuries and pediatric care"
+],
+[
+"Bone infections (osteomyelitis)",
+"Tumors of bone",
+"Degenerative diseases (osteoarthritis)",
+"Sports injuries",
+"Rehabilitation and physiotherapy",
+"Prosthetics and orthotics"
+]
+],
+
+faqs: [
+{ q: "Who should pursue the PG Diploma in Orthopaedics?", a: "The program is ideal for physicians, orthopaedic practitioners, general practitioners, medical graduates, and healthcare professionals seeking advanced expertise in musculoskeletal disorders, trauma care, fracture management, and rehabilitation." },
+{ q: "What topics are included in the PG Diploma in Orthopaedics?", a: "This diploma covers musculoskeletal anatomy and biomechanics, orthopaedic trauma, fracture management, upper and lower limb disorders, spine and paediatric orthopaedics, bone diseases, sports injuries, rehabilitation, prosthetics, and orthotics through structured modules." },
+{ q: "How is the PG Diploma in Orthopaedics delivered?", a: "The course is delivered through clinically focused modules, case-based learning, practical training, clinical discussions, and comprehensive study resources, enabling in-depth learning in orthopaedic medicine." },
+{ q: "What career benefits can I expect after completing this diploma?", a: "Completing this diploma enhances orthopaedic diagnostic and treatment skills, strengthens trauma management expertise, improves clinical decision-making, and supports career advancement in orthopaedic and musculoskeletal healthcare." },
+{ q: "What is the fee for the PG Diploma in Orthopaedics?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
+{ q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in orthopaedics can elevate your professional profile, expand opportunities in trauma centers, orthopaedic units, and rehabilitation services, and support higher income potential in specialized musculoskeletal care." }
+],
+    meta: { duration: "50 week", lessons: "28", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-rheumatology",
     title: "PG Diploma in Rheumatology",
     categories: ["medicine"],
     image: "",
-    lessons: 32,
+    lessons: 38,
     weeks: 50,
     level: "intermediate",
     priceINR: 130000,
     rating: null,
     reviewCount: 0,
     program: "PG Diploma",
-    overview: "Advanced training in rheumatological diseases and immunology.",
-    learn: ["Autoimmune diseases", "SLE", "Rheumatoid arthritis", "Vasculitis", "Biologics", "Patient management"],
     requirements: ["MBBS", "MD Medicine preferred"],
-    modules: ["Rheumatology Basics", "Autoimmunity", "Connective Tissue Diseases", "Vasculitis", "Treatment", "Clinical Management"],
-    faqs: [
-      { q: "Duration?", a: "12 months" },
-      { q: "Career?", a: "Rheumatologist" }
-    ],
-    moduleDetails: [
-      [
-        "Course overview and objectives",
-        "Learning outcomes",
-        "Prerequisites and requirements",
-        "Assessment methodology",
-        "Resource materials"
-      ],
-      [
-        "Advanced case studies",
-        "Comprehensive review",
-        "Exam preparation",
-        "Career opportunities",
-        "Continuous learning"
-      ]
-    ],
-    meta: { duration: "50 week", lessons: "32", skill_level: "PG Diploma", certificate: "yes" }
+   heroDescription: "Develop advanced expertise in diagnosing, treating, and managing autoimmune, inflammatory, and degenerative rheumatic disorders through evidence-based clinical practice.",
+overview: "Rheumatology is a specialized field of medicine focused on autoimmune, inflammatory, and degenerative disorders of joints, muscles, and connective tissues. Diseases such as Rheumatoid Arthritis, Systemic Lupus Erythematosus, and Osteoarthritis are major causes of chronic pain, disability, and reduced quality of life. A PG Diploma in Rheumatology (12 months) is designed to equip medical graduates with specialized knowledge and clinical skills for early diagnosis, rational treatment, and long-term management of rheumatic diseases. The course integrates immunology, clinical medicine, pharmacology, and rehabilitation, with strong emphasis on patient-centered and evidence-based care.",
+
+learn: [
+"Understand the immunological basis of rheumatic diseases",
+"Perform detailed musculoskeletal examination",
+"Diagnose common and complex rheumatological disorders",
+"Interpret laboratory investigations (RF, ANA, anti-CCP, ESR, CRP)",
+"Utilize appropriate imaging techniques (X-ray, ultrasound, MRI)",
+"Prescribe and monitor DMARDs, biologics, and immunosuppressive therapy",
+"Manage acute and chronic pain effectively",
+"Recognize rheumatological emergencies and complications",
+"Provide rehabilitation and long-term follow-up care",
+"Educate patients regarding lifestyle modification and treatment adherence"
+],
+
+modules: [
+"Fundamentals of Rheumatology",
+"Immunology & Pathogenesis",
+"Diagnostic Techniques",
+"Rheumatoid Arthritis & Related Disorders",
+"Seronegative & Inflammatory Arthritides",
+"Connective Tissue Disorders",
+"Miscellaneous & Systemic Rheumatic Disorders",
+"Degenerative & Metabolic Disorders",
+"Pharmacology & Therapeutics",
+"Rehabilitation & Clinical Practice"
+],
+
+moduleDetails: [
+[
+"Introduction and classification of rheumatic diseases",
+"Inflammatory vs non-inflammatory disorders",
+"Multidisciplinary approach"
+],
+[
+"Autoimmunity and immune tolerance",
+"Cytokines and inflammatory pathways",
+"Genetic factors in rheumatic diseases"
+],
+[
+"ESR, CRP, RF, anti-CCP, ANA profile",
+"Synovial fluid analysis",
+"Imaging: X-ray, ultrasound, MRI",
+"Diagnostic criteria and scoring systems"
+],
+[
+"Rheumatoid arthritis",
+"Polymyalgia rheumatica",
+"Palindromic rheumatism",
+"Disease progression and complications"
+],
+[
+"Ankylosing spondylitis",
+"Psoriatic arthritis",
+"Reactive arthritis",
+"Enteropathic arthritis"
+],
+[
+"Systemic lupus erythematosus",
+"Sjögren’s syndrome",
+"Systemic sclerosis",
+"Vasculitis syndromes"
+],
+[
+"Sarcoidosis",
+"Behçet’s disease",
+"Myositis and dermatomyositis",
+"Autoinflammatory syndromes"
+],
+[
+"Osteoarthritis",
+"Osteoporosis",
+"Gout and crystal arthropathies",
+"Fibromyalgia"
+],
+[
+"NSAIDs and corticosteroids",
+"DMARDs (e.g., methotrexate)",
+"Biologic therapies (TNF inhibitors, monoclonal antibodies)",
+"Treatment guidelines and protocols"
+],
+[
+"Joint aspiration and injections",
+"Pain management",
+"Physiotherapy and rehabilitation",
+"Patient counseling and long-term care"
+]
+],
+
+faqs: [
+{ q: "Who should pursue the PG Diploma in Rheumatology?", a: "The program is ideal for physicians, rheumatologists, general practitioners, internal medicine specialists, and healthcare professionals seeking advanced expertise in autoimmune, inflammatory, and musculoskeletal disorders." },
+{ q: "What topics are included in the PG Diploma in Rheumatology?", a: "This diploma covers rheumatic disease classification, immunology, diagnostic investigations, rheumatoid arthritis, seronegative arthritides, connective tissue disorders, metabolic bone diseases, pharmacological therapies, rehabilitation, and long-term patient management through structured modules." },
+{ q: "How is the PG Diploma in Rheumatology delivered?", a: "The course is delivered through comprehensive academic modules, case-based discussions, clinical learning, practical exposure, and evidence-based study resources to strengthen expertise in rheumatological care." },
+{ q: "What career benefits can I expect after completing this diploma?", a: "Completing this diploma enhances diagnostic accuracy, strengthens clinical decision-making, improves management of complex rheumatic diseases, and supports career advancement in rheumatology and related specialties." },
+{ q: "What is the fee for the PG Diploma in Rheumatology?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
+{ q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in rheumatology can elevate your professional profile, expand opportunities in specialty clinics and hospitals, and support higher income potential in autoimmune and musculoskeletal healthcare practice." }
+],
+    meta: { duration: "50 week", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "certificate-in-respiratory-care",
     title: "Certificate in Respiratory Care",
     categories: ["pulmonary"],
     image: "",
-    lessons: 18,
+    lessons: 19,
     weeks: 12,
     level: "beginner",
     priceINR: 16000,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Respiratory care essentials and oxygen therapy management.",
-    learn: ["Respiratory anatomy", "Oxygen therapy", "Breathing techniques", "Patient assessment", "Respiratory conditions"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Respiratory System", "Oxygen Therapy", "Ventilation", "Assessment", "Diseases"],
-    moduleDetails: [
-      ["Anatomy", "Physiology", "Gas exchange"],
-      ["Oxygen devices", "Delivery methods", "Monitoring"],
-      ["Non-invasive ventilation", "Mechanical support", "Troubleshooting"],
-      ["Assessment techniques", "ABG basics", "Scoring systems"],
-      ["COPD", "Asthma", "Acute respiratory failure"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "18", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Learn the fundamentals of respiratory assessment, oxygen therapy, and management of common pulmonary disorders in clinical and emergency settings.",
+
+overview: "Respiratory care focuses on the assessment, diagnosis, and basic management of respiratory disorders affecting the lungs and airways. Conditions such as asthma, chronic obstructive pulmonary disease (COPD), pneumonia, tuberculosis, and respiratory failure require timely recognition and appropriate management to reduce complications and improve patient outcomes. This short-term certificate course provides essential training in respiratory assessment, diagnostic interpretation, oxygen therapy, and management of common pulmonary conditions in clinical and emergency settings.",
+
+learn: [
+"Understand the basic anatomy and physiology of the respiratory system.",
+"Perform clinical evaluation of patients with respiratory symptoms.",
+"Interpret basic respiratory investigations.",
+"Administer oxygen therapy and respiratory support.",
+"Manage common respiratory diseases.",
+"Recognize respiratory emergencies and initiate early management."
+],
+
+modules: [
+"Fundamentals of Respiratory Care",
+"Diagnostic & Therapeutic Techniques",
+"Common Respiratory Disorders & Emergencies"
+],
+
+moduleDetails: [
+[
+"Anatomy and physiology of the respiratory system",
+"Mechanics of breathing and gas exchange",
+"Clinical assessment of respiratory symptoms",
+"Respiratory examination techniques",
+"Introduction to respiratory diseases",
+"Chest X-ray basics"
+],
+[
+"Pulmonary function tests (PFTs) overview",
+"Arterial blood gas (ABG) interpretation basics",
+"Pulse oximetry and monitoring",
+"Oxygen therapy and delivery systems",
+"Nebulization and inhalation therapy",
+"Airway clearance techniques"
+],
+[
+"Asthma management",
+"Chronic obstructive pulmonary disease (COPD)",
+"Pneumonia and respiratory infections",
+"Tuberculosis overview",
+"Acute respiratory distress and respiratory failure",
+"Patient education and smoking cessation",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Respiratory Care?", a: "MBBS, MD, MS, DNB holders, nursing professionals, allied healthcare practitioners, and other healthcare professionals with a clinical background are eligible for the Certificate in Respiratory Care." },
+{ q: "What is the duration of the Certificate in Respiratory Care?", a: "The Certificate in Respiratory Care is a short-term training program designed to provide focused education in respiratory assessment, oxygen therapy, and pulmonary disease management." },
+{ q: "What will I learn in this respiratory care certification course?", a: "You will learn respiratory anatomy and physiology, clinical evaluation of respiratory symptoms, interpretation of respiratory investigations, oxygen therapy, respiratory support techniques, management of common respiratory diseases, and emergency respiratory care." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, pulmonary clinics, critical care units, emergency departments, respiratory therapy services, and other healthcare settings involved in respiratory disease management." },
+{ q: "What is the fee for the Certificate in Respiratory Care?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the respiratory care certificate?", a: "Salary depends on role, experience, and location; qualified professionals with expertise in respiratory care and pulmonary disease management typically earn competitive packages in healthcare settings." }
+],
+    meta: { duration: "3 month", lessons: "19", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-orthopedic-trauma-medicine",
     title: "Certificate in Orthopedic and Trauma Medicine",
     categories: ["orthopedics"],
     image: "",
-    lessons: 20,
+    lessons: 23,
     weeks: 24,
     level: "beginner",
     priceINR: 25000,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Comprehensive orthopedic and trauma medicine principles.",
-    learn: ["Orthopedic anatomy", "Fracture management", "Trauma protocols", "Rehabilitation", "Emergency care"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Orthopedic Anatomy", "Fracture Care", "Trauma Management", "Rehabilitation", "Emergency Protocols"],
-    moduleDetails: [
-      ["Skeletal anatomy", "Joint structure", "Muscle groups"],
-      ["Fracture types", "Classification", "Immobilization"],
-      ["Trauma assessment", "Initial care", "Surgical principles"],
-      ["Physical therapy", "Recovery", "Complications"],
-      ["Emergency response", "Triage", "Critical care"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "6 months (24 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "6 month", lessons: "20", skill_level: "Certificate", certificate: "yes" }
+   heroDescription: "Master musculoskeletal examination, fracture management, orthopedic trauma care, and rehabilitation principles for effective orthopedic practice.",
+overview: "Orthopedic and Trauma Medicine deals with the diagnosis, treatment, and rehabilitation of disorders affecting bones, joints, muscles, ligaments, and tendons. With the increasing burden of road traffic accidents, occupational injuries, and degenerative musculoskeletal diseases, clinicians must be well equipped to manage orthopedic conditions and trauma cases effectively. This certificate program provides structured training in musculoskeletal examination, fracture management, orthopedic emergencies, and rehabilitation principles, enabling healthcare professionals to deliver competent orthopedic care in clinical and emergency settings.",
+learn: [
+"Understand the anatomy and biomechanics of the musculoskeletal system.",
+"Perform systematic orthopedic clinical examination.",
+"Diagnose and manage common fractures and joint injuries.",
+"Interpret orthopedic imaging such as X-rays and basic CT findings.",
+"Provide emergency management of orthopedic trauma.",
+"Apply splints, casts, and immobilization techniques.",
+"Identify conditions requiring surgical referral.",
+"Implement rehabilitation and physiotherapy principles."
+],
+
+modules: [
+"Basics of Orthopedics",
+"Orthopedic Imaging & Diagnostic Techniques",
+"Fracture & Dislocation Management",
+"Trauma & Orthopedic Emergencies",
+"Common Orthopedic Disorders",
+"Rehabilitation & Clinical Integration"
+],
+
+moduleDetails: [
+[
+"Anatomy and physiology of bones, joints, muscles, and ligaments",
+"Biomechanics of the musculoskeletal system",
+"Principles of fracture healing",
+"Clinical examination of bones and joints",
+"Orthopedic history taking and documentation"
+],
+[
+"Interpretation of X-rays in orthopedic practice",
+"Basics of CT and MRI in musculoskeletal disorders",
+"Bone density assessment",
+"Laboratory investigations in orthopedic conditions",
+"Approach to musculoskeletal pain"
+],
+[
+"Classification of fractures",
+"Principles of fracture management",
+"Closed vs open fractures",
+"Dislocations and subluxations",
+"Splints and casting techniques",
+"Complications of fractures"
+],
+[
+"Principles of trauma care (primary and secondary survey)",
+"Polytrauma management",
+"Compartment syndrome",
+"Crush injuries",
+"Spinal trauma",
+"Pelvic fractures",
+"Initial stabilization techniques"
+],
+[
+"Osteoarthritis and degenerative joint diseases",
+"Rheumatoid arthritis overview",
+"Osteoporosis and metabolic bone diseases",
+"Back pain and spinal disorders",
+"Pediatric orthopedic conditions",
+"Sports injuries"
+],
+[
+"Physiotherapy and rehabilitation principles",
+"Post-fracture rehabilitation",
+"Orthopedic aids and braces",
+"Pain management strategies",
+"Case discussions"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Orthopedic and Trauma Medicine?", a: "MBBS, MD, MS, DNB holders and other healthcare professionals with a clinical background are eligible for the Certificate in Orthopedic and Trauma Medicine." },
+{ q: "What is the duration of the Certificate in Orthopedic and Trauma Medicine?", a: "The course provides comprehensive training in orthopedic assessment, trauma management, fracture care, and rehabilitation through a structured certificate program." },
+{ q: "What will I learn in this orthopedic and trauma medicine certification course?", a: "You will learn musculoskeletal anatomy and biomechanics, orthopedic examination techniques, fracture and dislocation management, orthopedic imaging interpretation, trauma care, immobilization techniques, surgical referral indications, and rehabilitation principles." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, orthopedic clinics, trauma centers, emergency departments, rehabilitation facilities, sports medicine settings, and musculoskeletal care services." },
+{ q: "What is the fee for the Certificate in Orthopedic and Trauma Medicine?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the orthopedic and trauma medicine certificate?", a: "Salary depends on role, experience, and location; skilled professionals in orthopedic care, trauma management, and rehabilitation typically earn competitive packages in clinical and emergency healthcare settings." }
+],
+    meta: { duration: "6 month", lessons: "23", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-neonatal-care",
     title: "Certificate in Neonatal Care",
     categories: ["pediatrics"],
     image: "",
-    lessons: 16,
+    lessons: 18,
     weeks: 12,
     level: "beginner",
     priceINR: 11500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Neonatal care essentials and newborn health management.",
-    learn: ["Newborn assessment", "Feeding care", "Common conditions", "Resuscitation", "Parent education"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Neonatal Assessment", "Feeding Care", "Common Conditions", "Resuscitation", "Parent Support"],
-    moduleDetails: [
-      ["Physical assessment", "APGAR scoring", "Vital signs"],
-      ["Breast feeding", "Bottle feeding", "Nutrition"],
-      ["Jaundice", "Infections", "Respiratory issues"],
-      ["CPR basics", "Emergency care", "Critical procedures"],
-      ["Parent counseling", "Support", "Education"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "16", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Develop essential skills in newborn assessment, neonatal resuscitation, and management of common neonatal conditions to improve neonatal health outcomes.",
+overview: "Neonatal care focuses on the health and medical management of newborn infants during the first 28 days of life. This period is critical as newborns are highly vulnerable to infections, birth complications, and developmental issues. Proper neonatal assessment, early detection of complications, and timely interventions significantly improve neonatal survival and long-term health outcomes. This certificate course provides healthcare professionals with essential knowledge and practical skills in newborn assessment, neonatal resuscitation, management of common neonatal conditions, and preventive newborn care.",
+
+learn: [
+"Understand the physiology and adaptation of newborns after birth.",
+"Perform comprehensive neonatal assessment and examination.",
+"Provide routine newborn care and support breastfeeding.",
+"Recognize and manage common neonatal disorders.",
+"Perform basic neonatal resuscitation and emergency care.",
+"Implement infection prevention and neonatal care protocols."
+],
+
+modules: [
+"Foundations of Neonatal Care",
+"Common Neonatal Disorders",
+"Neonatal Emergencies & Intensive Care Basics"
+],
+
+moduleDetails: [
+[
+"Physiology of the newborn",
+"Immediate care of the newborn at birth",
+"Neonatal history taking and physical examination",
+"Thermoregulation and newborn stabilization",
+"Breastfeeding and nutrition in neonates",
+"Neonatal screening and immunization"
+],
+[
+"Neonatal jaundice",
+"Neonatal infections and sepsis",
+"Respiratory distress in newborns",
+"Low birth weight and prematurity",
+"Hypoglycemia and metabolic disorders",
+"Congenital anomalies overview"
+],
+[
+"Neonatal resuscitation principles",
+"Management of birth asphyxia",
+"Oxygen therapy and respiratory support",
+"Fluid and electrolyte management",
+"Infection control in neonatal units",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Neonatal Care?", a: "MBBS, MD, MS, DNB holders, nursing professionals, pediatric healthcare providers, and other healthcare professionals with a clinical background are eligible for the Certificate in Neonatal Care." },
+{ q: "What is the duration of the Certificate in Neonatal Care?", a: "The course provides structured training in neonatal assessment, newborn care, neonatal emergencies, and management of common neonatal disorders through a comprehensive certificate program." },
+{ q: "What will I learn in this neonatal care certification course?", a: "You will learn newborn physiology, neonatal assessment, routine newborn care, breastfeeding support, neonatal resuscitation, management of neonatal disorders, infection prevention, and neonatal emergency care." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in neonatal units, maternity hospitals, pediatric departments, newborn care centers, community healthcare settings, and other facilities involved in neonatal and infant healthcare." },
+{ q: "What is the fee for the Certificate in Neonatal Care?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the neonatal care certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in neonatal care and newborn health management typically earn competitive packages in pediatric and neonatal healthcare settings." }
+],
+    meta: { duration: "3 month", lessons: "18", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-family-planning",
     title: "Certificate in Family Planning",
     categories: ["obs-gynae"],
     image: "",
-    lessons: 14,
+    lessons: 18,
     weeks: 12,
     level: "beginner",
     priceINR: 11500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Family planning and contraceptive counseling.",
-    learn: ["Contraceptive methods", "Counseling skills", "Family planning", "Population health", "Patient education"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Contraceptive Methods", "Counseling", "Family Planning", "Health Education", "Community Care"],
-    moduleDetails: [
-      ["Barrier methods", "Hormonal methods", "IUD/IUS"],
-      ["Counseling techniques", "Patient communication", "Informed consent"],
-      ["Planning services", "Accessibility", "Quality care"],
-      ["Health education", "Community outreach", "Prevention"],
-      ["Special populations", "Age groups", "Medical conditions"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "14", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Gain practical expertise in contraceptive counseling, family planning methods, and reproductive health services to support informed reproductive choices.",
+overview: "Family planning is an essential component of reproductive health that enables individuals and couples to plan the number and spacing of their children. Effective family planning services help reduce maternal and infant mortality, prevent unintended pregnancies, and improve overall reproductive health outcomes. This short-term certification program provides healthcare professionals with essential knowledge and practical skills in contraceptive counseling, selection of appropriate contraceptive methods, and management of family planning services.",
+
+learn: [
+"Understand reproductive physiology related to fertility and contraception.",
+"Counsel couples on various contraceptive methods and birth spacing.",
+"Identify appropriate temporary and long-acting contraceptive options.",
+"Recognize contraindications and manage side effects of contraceptives.",
+"Promote safe and effective family planning practices in clinical and community settings.",
+"Apply ethical and legal principles in reproductive health services."
+],
+
+modules: [
+"Fundamentals of Family Planning",
+"Contraceptive Methods",
+"Clinical Practice & Special Situations"
+],
+
+moduleDetails: [
+[
+"Reproductive anatomy and physiology",
+"Fertility cycle and ovulation",
+"Principles of contraception",
+"Counseling techniques and informed consent",
+"Population health and importance of birth spacing",
+"Overview of national family planning programs"
+],
+[
+"Barrier methods (male and female condoms)",
+"Oral contraceptive pills",
+"Injectable contraceptives",
+"Emergency contraception",
+"Intrauterine contraceptive devices (IUCDs) overview",
+"Long-acting reversible contraceptives (overview)",
+"Effectiveness, contraindications, and side effects"
+],
+[
+"Postpartum family planning",
+"Post-abortion contraception",
+"Contraception for adolescents and high-risk groups",
+"Prevention of sexually transmitted infections",
+"Documentation and follow-up",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Family Planning?", a: "MBBS, MD, MS, DGO, DNB holders, nursing professionals, allied healthcare practitioners, and other healthcare professionals with a clinical background are eligible for the Certificate in Family Planning." },
+{ q: "What is the duration of the Certificate in Family Planning?", a: "The course is a short-term certification program designed to provide comprehensive training in family planning services, contraceptive counseling, and reproductive healthcare." },
+{ q: "What will I learn in this family planning certification course?", a: "You will learn reproductive physiology, fertility and contraception, contraceptive counseling, temporary and long-acting contraceptive methods, management of side effects, family planning practices, and ethical aspects of reproductive healthcare." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, reproductive health clinics, maternal and child health programs, community healthcare services, family welfare centers, and public health initiatives focused on reproductive healthcare." },
+{ q: "What is the fee for the Certificate in Family Planning?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the family planning certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in reproductive health and family planning services typically earn competitive packages in clinical and public healthcare settings." }
+],
+    meta: { duration: "3 month", lessons: "18", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-diabetes-management",
     title: "Certificate in Diabetes Management",
     categories: ["endocrinology"],
     image: "",
-    lessons: 20,
+    lessons: 36,
     weeks: 24,
     level: "beginner",
     priceINR: 30000,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Comprehensive diabetes management and patient care.",
-    learn: ["Diabetes pathology", "Blood glucose monitoring", "Insulin therapy", "Medication management", "Patient counseling"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Diabetes Basics", "Monitoring", "Medication", "Nutrition", "Patient Care"],
-    moduleDetails: [
-      ["Type 1 diabetes", "Type 2 diabetes", "Complications"],
-      ["Blood glucose", "HbA1c", "Continuous monitoring"],
-      ["Insulin types", "Administration", "Dose adjustment"],
-      ["Dietary management", "Meal planning", "Nutrition education"],
-      ["Patient support", "Counseling", "Self-management"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "6 months (24 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "6 month", lessons: "20", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Develop practical expertise in diabetes diagnosis, treatment, monitoring, and complication prevention for comprehensive diabetes care.",
+overview: "Diabetes mellitus is a chronic metabolic disorder associated with significant long-term complications affecting the heart, kidneys, nerves, eyes, and blood vessels. Effective diabetes management requires early diagnosis, individualized treatment planning, lifestyle modification, continuous monitoring, and prevention of complications. This certificate course is designed to provide healthcare professionals with practical and evidence-based training in comprehensive diabetes care across outpatient and primary care settings.",
+
+learn: [
+"Understand the pathophysiology and classification of diabetes mellitus.",
+"Diagnose and initiate appropriate therapy for various types of diabetes.",
+"Prescribe and titrate oral and injectable antidiabetic medications.",
+"Monitor glycemic control using laboratory and digital tools.",
+"Identify and manage acute and chronic complications.",
+"Provide structured lifestyle and dietary counseling.",
+"Implement preventive strategies for long-term complication reduction.",
+"Apply current clinical guidelines in routine practice."
+],
+
+modules: [
+"Basics of Diabetes Mellitus",
+"Pharmacological Management",
+"Monitoring & Technology in Diabetes",
+"Acute & Chronic Complications",
+"Diabetes in Special Situations",
+"Integrated Diabetes Care & Clinical Practice"
+],
+
+moduleDetails: [
+[
+"Epidemiology and burden",
+"Pathophysiology of type 1 and type 2 diabetes",
+"Diagnostic criteria and classification",
+"Prediabetes and prevention strategies",
+"Glycemic targets",
+"Lifestyle modification principles"
+],
+[
+"Oral antidiabetic drugs (Metformin, Sulfonylureas, DPP-4 inhibitors, SGLT2 inhibitors)",
+"Injectable therapies (Insulin, GLP-1 receptor agonists)",
+"Insulin regimens and titration",
+"Hypoglycemia management",
+"Individualized treatment planning"
+],
+[
+"Self-monitoring of blood glucose (SMBG)",
+"HbA1c interpretation",
+"Continuous glucose monitoring (CGM) overview",
+"Insulin pumps overview",
+"Digital health tools",
+"Improving adherence"
+],
+[
+"Diabetic ketoacidosis (DKA)",
+"Hyperosmolar hyperglycemic state (HHS)",
+"Diabetic nephropathy",
+"Diabetic neuropathy",
+"Diabetic retinopathy",
+"Cardiovascular disease in diabetes"
+],
+[
+"Gestational diabetes mellitus",
+"Diabetes in children and adolescents",
+"Elderly patients",
+"Diabetes with chronic kidney disease",
+"Perioperative diabetes management",
+"Diabetes and infections"
+],
+[
+"Diabetic foot care",
+"Nutritional therapy and meal planning",
+"Exercise prescription",
+"Patient education and self-management",
+"Documentation and follow-up protocols",
+"Case discussions",
+"Final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Diabetes Management?", a: "MBBS, MD, MS, DNB holders and other healthcare professionals with a clinical background are eligible for the Certificate in Diabetes Management." },
+{ q: "What is the duration of the Certificate in Diabetes Management?", a: "The course provides comprehensive training in diabetes diagnosis, treatment, monitoring, and complication management through a structured certificate program." },
+{ q: "What will I learn in this diabetes management certification course?", a: "You will learn diabetes pathophysiology, diagnosis, pharmacological management, glycemic monitoring, diabetes technologies, complication management, lifestyle counseling, and evidence-based diabetes care practices." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, diabetes clinics, primary care centers, endocrinology practices, community healthcare programs, and chronic disease management services." },
+{ q: "What is the fee for the Certificate in Diabetes Management?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the diabetes management certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in diabetes care and chronic disease management typically earn competitive packages in clinical and preventive healthcare settings." }
+],
+    meta: { duration: "6 month", lessons: "36", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-child-health",
     title: "Certificate in Child Health",
     categories: ["pediatrics"],
     image: "",
-    lessons: 16,
+    lessons: 18,
     weeks: 12,
     level: "beginner",
     priceINR: 17500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Child health and pediatric nursing essentials.",
-    learn: ["Child development", "Immunization", "Common childhood illnesses", "Nutrition", "Growth monitoring"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Child Development", "Immunization", "Common Illnesses", "Nutrition", "Health Monitoring"],
-    moduleDetails: [
-      ["Developmental milestones", "Growth patterns", "Behavior"],
-      ["Vaccination schedules", "Administration", "Side effects"],
-      ["Common infections", "Fever management", "Treatment"],
-      ["Infant nutrition", "Feeding practices", "Dietary needs"],
-      ["Growth assessment", "Health screening", "Prevention"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "16", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Build essential skills in pediatric assessment, childhood disease management, growth monitoring, immunization, and preventive child healthcare.",
+
+overview: "Child health is a fundamental component of healthcare, focusing on the growth, development, and well-being of infants, children, and adolescents. Early identification and management of pediatric illnesses, proper nutrition, immunization, and preventive care play a crucial role in reducing childhood morbidity and mortality. This certificate course provides healthcare professionals with essential knowledge and practical skills in pediatric assessment, common childhood illnesses, preventive care, and growth monitoring.",
+
+learn: [
+"Understand the principles of child growth and development.",
+"Perform pediatric history taking and clinical examination.",
+"Diagnose and manage common childhood illnesses.",
+"Monitor growth and nutritional status in children.",
+"Implement immunization programs and preventive pediatric care.",
+"Recognize pediatric emergencies and provide initial management."
+],
+
+modules: [
+"Foundations of Child Health",
+"Common Pediatric Illnesses",
+"Preventive Care & Pediatric Emergencies"
+],
+
+moduleDetails: [
+[
+"Growth and development in children",
+"Pediatric history taking and examination",
+"Neonatal and infant care",
+"Nutritional requirements in children",
+"Breastfeeding and complementary feeding",
+"Immunization schedules and vaccines"
+],
+[
+"Respiratory infections in children",
+"Diarrheal diseases and dehydration",
+"Fever and common childhood infections",
+"Pediatric anemia and nutritional deficiencies",
+"Skin conditions in children",
+"Childhood allergies and asthma"
+],
+[
+"Growth monitoring and developmental screening",
+"Prevention of childhood illnesses",
+"Pediatric emergency recognition",
+"Management of dehydration and respiratory distress",
+"Health education for parents",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Child Health?", a: "MBBS, MD, MS, DNB holders, nursing professionals, allied healthcare practitioners, and other healthcare professionals with a clinical background are eligible for the Certificate in Child Health." },
+{ q: "What is the duration of the Certificate in Child Health?", a: "The course provides structured training in pediatric assessment, childhood disease management, preventive care, and growth monitoring through a comprehensive certificate program." },
+{ q: "What will I learn in this child health certification course?", a: "You will learn child growth and development, pediatric examination techniques, management of common childhood illnesses, nutritional assessment, immunization practices, preventive pediatric care, and pediatric emergency management." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in pediatric clinics, hospitals, community health centers, maternal and child health programs, school health services, and preventive healthcare settings focused on child wellbeing." },
+{ q: "What is the fee for the Certificate in Child Health?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the child health certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in pediatric care and child health management typically earn competitive packages in healthcare settings." }
+],
+    meta: { duration: "3 month", lessons: "18", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-antenatal-care",
     title: "Certificate in Antenatal Care",
     categories: ["obs-gynae"],
     image: "",
-    lessons: 14,
+    lessons: 21,
     weeks: 12,
     level: "beginner",
     priceINR: 11500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Antenatal care and pregnancy management.",
-    learn: ["Pregnancy physiology", "Antenatal screening", "Risk assessment", "Health education", "Complications"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Pregnancy Physiology", "Antenatal Screening", "Risk Assessment", "Health Education", "Complications"],
-    moduleDetails: [
-      ["Conception to fetal development", "Maternal changes", "Placental function"],
-      ["Screening tests", "Ultrasound", "Biochemical markers"],
-      ["High-risk pregnancy", "Assessment", "Management"],
-      ["Nutrition", "Exercise", "Lifestyle counseling"],
-      ["Gestational diabetes", "Hypertension", "Infections"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "14", skill_level: "Certificate", certificate: "yes" }
+   heroDescription: "Develop expertise in antenatal assessment, fetal monitoring, pregnancy screening, and management of common antenatal conditions for improved maternal and fetal outcomes.",
+overview: "Antenatal care is an essential component of maternal healthcare that focuses on monitoring the health of the mother and fetus throughout pregnancy. Regular antenatal care helps in early detection of complications, management of high-risk conditions, and preparation for safe delivery. Proper counseling on nutrition, lifestyle, and birth preparedness plays a key role in improving maternal and neonatal outcomes. This certificate course provides healthcare professionals with structured training in antenatal assessment, screening investigations, fetal monitoring, and management of common pregnancy-related conditions.",
+learn: [
+"Understand physiological changes during pregnancy.",
+"Conduct comprehensive antenatal assessments.",
+"Identify high-risk pregnancies and common complications.",
+"Interpret routine antenatal investigations.",
+"Monitor fetal growth and well-being.",
+"Provide counseling on nutrition, immunization, and birth preparedness."
+],
+
+modules: [
+"Foundations of Antenatal Care",
+"Common Pregnancy Conditions",
+"High-Risk Pregnancy & Birth Preparedness"
+],
+
+moduleDetails: [
+[
+"Physiology and hormonal changes during pregnancy",
+"Antenatal history taking and physical examination",
+"Pregnancy dating and gestational age assessment",
+"Routine antenatal investigations",
+"Nutritional requirements during pregnancy",
+"Antenatal supplementation and immunization",
+"Health education and lifestyle counseling"
+],
+[
+"Anemia in pregnancy",
+"Pregnancy-induced hypertension and preeclampsia",
+"Gestational diabetes mellitus",
+"Infections during pregnancy",
+"Multiple pregnancy overview",
+"Fetal growth monitoring and fundal height assessment",
+"Basic fetal surveillance methods"
+],
+[
+"Identification of high-risk pregnancies",
+"Management principles of obstetric complications",
+"Fetal distress recognition",
+"Counseling for labor and delivery",
+"Birth preparedness and complication readiness",
+"Documentation and antenatal record keeping",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Antenatal Care?", a: "MBBS, MD, MS, DGO, DNB holders, nursing professionals, midwives, allied healthcare practitioners, and other healthcare professionals with a clinical background are eligible for the Certificate in Antenatal Care." },
+{ q: "What is the duration of the Certificate in Antenatal Care?", a: "The course provides structured training in antenatal assessment, fetal monitoring, pregnancy screening, and management of common antenatal conditions through a comprehensive certificate program." },
+{ q: "What will I learn in this antenatal care certification course?", a: "You will learn physiological changes during pregnancy, antenatal assessment techniques, interpretation of antenatal investigations, identification of high-risk pregnancies, fetal monitoring, and counseling on nutrition, immunization, and birth preparedness." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in maternity hospitals, obstetric clinics, antenatal care centers, community health programs, maternal healthcare services, and other settings focused on pregnancy care and maternal wellbeing." },
+{ q: "What is the fee for the Certificate in Antenatal Care?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the antenatal care certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in maternal health and antenatal care typically earn competitive packages in healthcare settings." }
+],
+    meta: { duration: "3 month", lessons: "21", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-addiction-psychology",
     title: "Certificate in Addiction Psychology",
     categories: ["medicine"],
     image: "",
-    lessons: 14,
+    lessons: 18,
     weeks: 12,
     level: "beginner",
     priceINR: 11500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Addiction psychology and substance abuse management.",
-    learn: ["Addiction pathology", "Behavioral assessment", "Treatment approaches", "Counseling techniques", "Recovery support"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Addiction Basics", "Assessment", "Treatment", "Counseling", "Recovery"],
-    moduleDetails: [
-      ["Substance types", "Neurobiology", "Risk factors"],
-      ["Clinical evaluation", "Severity assessment", "Comorbidities"],
-      ["Pharmacotherapy", "Behavioral therapy", "Rehabilitation"],
-      ["Counseling skills", "Motivational interviewing", "Support groups"],
-      ["Long-term recovery", "Relapse prevention", "Community support"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "14", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Build essential skills in addiction assessment, counseling, rehabilitation, and relapse prevention to support individuals affected by substance use and behavioral addictions.",
+
+overview: "Addiction psychology focuses on understanding the psychological, behavioral, and social factors associated with substance use and addictive behaviors. Substance use disorders and behavioral addictions are significant public health challenges that require comprehensive psychological assessment, counseling, and rehabilitation strategies. This certificate course provides foundational knowledge in the psychological aspects of addiction, early identification of substance use disorders, counseling techniques, and basic rehabilitation approaches for individuals affected by addiction.",
+
+learn: [
+"Understand the psychological and neurobiological basis of addiction.",
+"Identify risk factors and warning signs of substance use disorders.",
+"Conduct basic psychological assessment for addiction.",
+"Apply counseling techniques for addiction management.",
+"Understand rehabilitation and relapse prevention strategies.",
+"Promote awareness and preventive measures for substance abuse."
+],
+
+modules: [
+"Foundations of Addiction Psychology",
+"Assessment and Counseling Approaches",
+"Treatment, Rehabilitation & Prevention"
+],
+
+moduleDetails: [
+[
+"Concepts and definitions of addiction",
+"Neurobiology of addiction",
+"Psychological theories of substance use",
+"Types of addiction (substance and behavioral)",
+"Risk factors and protective factors",
+"Impact of addiction on mental health and society"
+],
+[
+"Screening and assessment tools for addiction",
+"Interview techniques and case history taking",
+"Motivational interviewing",
+"Cognitive behavioral therapy (CBT) basics for addiction",
+"Family counseling in addiction treatment",
+"Ethical considerations in addiction counseling"
+],
+[
+"Detoxification and treatment approaches (overview)",
+"Psychological rehabilitation programs",
+"Relapse prevention strategies",
+"Community support systems and self-help groups",
+"Prevention programs and awareness initiatives",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Addiction Psychology?", a: "Psychologists, counselors, MBBS, MD, MS, DNB holders, social workers, nursing professionals, allied healthcare practitioners, and other healthcare professionals with an interest in mental health and addiction care are eligible for the Certificate in Addiction Psychology." },
+{ q: "What is the duration of the Certificate in Addiction Psychology?", a: "The course provides structured training in addiction assessment, counseling techniques, rehabilitation approaches, and relapse prevention through a comprehensive certificate program." },
+{ q: "What will I learn in this addiction psychology certification course?", a: "You will learn the psychological and neurobiological basis of addiction, addiction assessment methods, counseling techniques, motivational interviewing, CBT principles, rehabilitation strategies, and substance abuse prevention approaches." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in rehabilitation centers, de-addiction clinics, mental health facilities, counseling services, community outreach programs, NGOs, and healthcare settings focused on addiction recovery and prevention." },
+{ q: "What is the fee for the Certificate in Addiction Psychology?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the addiction psychology certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in addiction counseling, rehabilitation, and mental health support typically earn competitive packages in healthcare and behavioral health settings." }
+],
+    meta: { duration: "3 month", lessons: "18", skill_level: "Certificate", certificate: "yes" }
   },
   {
-    slug: "advanced-certificate-cath-lab-technology",
+    slug: "advanced-certificate-in=cath-lab-technology",
     title: "Advanced Certificate in Cath Lab Technology",
     categories: ["cardiology"],
     image: "",
-    lessons: 22,
+    lessons: 24,
     weeks: 24,
     level: "beginner",
     priceINR: 35000,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Advanced catheterization laboratory technology and cardiac interventions.",
-    learn: ["Cath lab equipment", "Sterile techniques", "Angiography", "Interventional procedures", "Patient safety"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Cath Lab Basics", "Equipment", "Procedures", "Safety", "Advanced Techniques"],
-    moduleDetails: [
-      ["Lab setup", "Equipment operation", "Maintenance"],
-      ["Sterile technique", "Contamination control", "Quality assurance"],
-      ["Diagnostic angiography", "Coronary angiography", "Imaging"],
-      ["PCI procedures", "Stent placement", "Atherectomy"],
-      ["Radiation safety", "Infection control", "Emergency protocols"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "6 months (24 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "6 month", lessons: "22", skill_level: "Certificate", certificate: "yes" }
+   heroDescription: "Gain advanced expertise in cath lab operations, cardiac procedures, patient monitoring, radiation safety, and interventional cardiology support.",
+overview: "Cardiac Catheterization Laboratory (Cath Lab) technology plays a critical role in the diagnosis and treatment of cardiovascular diseases. Cath lab technologists assist cardiologists during interventional procedures such as coronary angiography, angioplasty, pacemaker implantation, and other minimally invasive cardiac procedures. This advanced certificate program is designed to train healthcare professionals in cath lab operations, patient preparation, equipment handling, radiation safety, and assisting during diagnostic and interventional cardiac procedures.",
+learn: [
+"Understand the basic anatomy and physiology of the cardiovascular system.",
+"Assist in diagnostic and interventional cardiology procedures.",
+"Operate cath lab equipment and imaging systems.",
+"Maintain sterile techniques and infection control in the cath lab.",
+"Ensure patient safety and monitoring during procedures.",
+"Understand radiation safety and protection protocols.",
+"Provide post-procedure patient care and documentation."
+],
+
+modules: [
+"Fundamentals of Cardiovascular System",
+"Cath Lab Setup and Equipment",
+"Diagnostic Cardiac Procedures",
+"Interventional Cardiology Procedures",
+"Patient Care and Monitoring",
+"Radiation Safety & Clinical Practice"
+],
+
+moduleDetails: [
+[
+"Anatomy and physiology of the heart and blood vessels",
+"Coronary circulation",
+"Common cardiovascular diseases",
+"Basic principles of cardiac imaging"
+],
+[
+"Structure and functioning of a cath lab",
+"Cath lab equipment and instruments",
+"Imaging systems and fluoroscopy",
+"Sterilization and infection control"
+],
+[
+"Coronary angiography",
+"Right and left heart catheterization",
+"Hemodynamic monitoring",
+"Contrast media and its safety"
+],
+[
+"Percutaneous coronary intervention (PCI)",
+"Balloon angioplasty and stent placement",
+"Pacemaker and ICD implantation (overview)",
+"Peripheral angiography procedures"
+],
+[
+"Patient preparation for procedures",
+"Intra-procedure monitoring",
+"Management of complications",
+"Emergency protocols in cath lab"
+],
+[
+"Radiation hazards and protection measures",
+"Quality control and equipment maintenance",
+"Cath lab documentation and reporting",
+"Case discussions and practical training"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Advanced Certificate in Cath Lab Technology?", a: "MBBS, MD, DNB holders, nursing professionals, cardiovascular technologists, allied healthcare practitioners, and healthcare professionals interested in interventional cardiology support are eligible for the Advanced Certificate in Cath Lab Technology." },
+{ q: "What is the duration of the Advanced Certificate in Cath Lab Technology?", a: "The course is a 6-month advanced certificate program that provides comprehensive training in cath lab procedures, equipment handling, patient monitoring, and radiation safety." },
+{ q: "What will I learn in this cath lab technology certification course?", a: "You will learn cardiovascular anatomy and physiology, cath lab setup and equipment operation, coronary angiography, cardiac catheterization, interventional cardiology procedures, patient monitoring, radiation safety, and cath lab documentation practices." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in cath labs, cardiac centers, multispecialty hospitals, interventional cardiology units, cardiac diagnostic facilities, and healthcare institutions supporting cardiovascular procedures." },
+{ q: "What is the fee for the Advanced Certificate in Cath Lab Technology?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the cath lab technology certificate?", a: "Salary depends on role, experience, and location; skilled cath lab technologists and cardiovascular healthcare professionals typically earn competitive packages in cardiac care and interventional cardiology settings." }
+],
+    meta: { duration: "6 month", lessons: "24", skill_level: "Certificate", certificate: "yes" }
   },
   {
-    slug: "certificate-sexual-health-wellness",
+    slug: "certificate-in-sexual-health-wellness",
     title: "Certificate in Sexual Health & Wellness",
     categories: ["medicine"],
     image: "",
-    lessons: 15,
+    lessons: 16,
     weeks: 12,
     level: "beginner",
     priceINR: 16000,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Sexual health and wellness counseling.",
-    learn: ["Sexual physiology", "Sexual dysfunction", "Counseling skills", "Contraception", "STI prevention"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Sexual Health Basics", "Dysfunction Management", "Counseling", "Contraception", "Disease Prevention"],
-    moduleDetails: [
-      ["Normal sexual response", "Physiology", "Age-related changes"],
-      ["ED", "Orgasmic disorders", "Pain disorders"],
-      ["Patient assessment", "Counseling techniques", "Communication"],
-      ["Contraceptive methods", "Family planning", "Patient education"],
-      ["STI prevention", "Testing", "Treatment awareness"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "15", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Develop essential knowledge in sexual health education, counseling, reproductive health, STI prevention, and sexual wellness promotion.",
+
+overview: "Sexual health is an important component of overall physical, emotional, and social well-being. It involves a positive and respectful approach to sexuality, relationships, and reproductive health. Increasing awareness about sexual health, prevention of sexually transmitted infections (STIs), and addressing sexual dysfunction are essential aspects of modern healthcare. This certificate course provides healthcare professionals with foundational knowledge in sexual health education, counseling, reproductive health, and management of common sexual health concerns in a confidential and ethical manner.",
+
+learn: [
+"Understand the fundamentals of human sexuality and sexual health.",
+"Provide counseling on sexual wellness and healthy relationships.",
+"Identify and manage common sexual health concerns.",
+"Promote prevention and early detection of sexually transmitted infections (STIs).",
+"Address reproductive health and family planning issues.",
+"Apply ethical and culturally sensitive approaches in sexual health counseling."
+],
+
+modules: [
+"Foundations of Sexual Health",
+"Sexual Health Disorders & Reproductive Health",
+"Sexual Wellness & Clinical Practice"
+],
+
+moduleDetails: [
+[
+"Human sexual anatomy and physiology",
+"Sexual development across the lifespan",
+"Concepts of sexual health and wellness",
+"Gender identity and sexual orientation",
+"Communication and counseling skills in sexual health"
+],
+[
+"Sexual dysfunction in men and women",
+"Sexually transmitted infections (STIs)",
+"HIV/AIDS overview and prevention",
+"Contraceptive methods and family planning",
+"Reproductive health education and counseling"
+],
+[
+"Relationship counseling and intimacy issues",
+"Mental health and sexual well-being",
+"Prevention of sexual health problems",
+"Ethical and legal considerations in sexual health",
+"Patient confidentiality and professional conduct",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Sexual Health & Wellness?", a: "MBBS, MD, MS, DGO, DNB holders, psychologists, counselors, nursing professionals, allied healthcare practitioners, and other healthcare professionals with a clinical background are eligible for the Certificate in Sexual Health & Wellness." },
+{ q: "What is the duration of the Certificate in Sexual Health & Wellness?", a: "The course provides structured training in sexual health education, counseling, reproductive health, and sexual wellness through a comprehensive certificate program." },
+{ q: "What will I learn in this sexual health and wellness certification course?", a: "You will learn human sexuality, sexual health counseling, management of sexual health concerns, STI prevention, reproductive health education, family planning, and ethical approaches to sexual health practice." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, reproductive health clinics, counseling centers, sexual wellness programs, community health initiatives, and healthcare settings focused on sexual and reproductive health services." },
+{ q: "What is the fee for the Certificate in Sexual Health & Wellness?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the sexual health and wellness certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in sexual health counseling, reproductive health, and wellness education typically earn competitive packages in healthcare and counseling settings." }
+],
+    meta: { duration: "3 month", lessons: "16", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-preventive-cardiology",
     title: "Certificate in Preventive Cardiology",
     categories: ["cardiology"],
     image: "",
-    lessons: 16,
+    lessons: 18,
     weeks: 12,
     level: "beginner",
     priceINR: 17500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Preventive cardiology and cardiovascular risk management.",
-    learn: ["Risk assessment", "Lifestyle modification", "Hypertension management", "Lipid management", "Cardiac rehabilitation"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Cardiovascular Risk", "Lifestyle Modification", "Hypertension", "Lipid Management", "Rehabilitation"],
-    moduleDetails: [
-      ["Risk factors", "Risk stratification", "Assessment tools"],
-      ["Diet", "Exercise", "Stress management"],
-      ["BP monitoring", "Medication", "Lifestyle changes"],
-      ["Cholesterol", "LDL management", "Medication therapy"],
-      ["Cardiac rehab programs", "Exercise prescription", "Monitoring"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "3 months (12 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "3 month", lessons: "16", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Learn to assess cardiovascular risk, manage modifiable risk factors, and implement evidence-based strategies for the prevention of heart disease.",
+
+overview: "Preventive Cardiology focuses on reducing the risk of cardiovascular diseases through early detection, lifestyle modification, risk factor management, and evidence-based medical interventions. Cardiovascular diseases remain a leading cause of morbidity and mortality worldwide, making prevention a critical component of healthcare. This certificate course is designed to equip healthcare professionals with practical knowledge in cardiovascular risk assessment, prevention strategies, lifestyle counseling, and management of modifiable risk factors.",
+
+learn: [
+"Understand the epidemiology and risk factors of cardiovascular diseases.",
+"Perform cardiovascular risk assessment and screening.",
+"Manage modifiable risk factors such as hypertension, diabetes, obesity, and dyslipidemia.",
+"Counsel patients on lifestyle modification and preventive strategies.",
+"Interpret basic cardiovascular investigations.",
+"Implement evidence-based preventive cardiology practices."
+],
+
+modules: [
+"Foundations of Cardiovascular Prevention",
+"Risk Factor Management",
+"Lifestyle Medicine & Clinical Prevention"
+],
+
+moduleDetails: [
+[
+"Epidemiology of cardiovascular diseases",
+"Pathophysiology of atherosclerosis",
+"Cardiovascular risk factors",
+"Risk assessment tools and scoring systems",
+"Screening strategies in preventive cardiology",
+"Basics of lipid metabolism"
+],
+[
+"Dyslipidemia and lipid management",
+"Hypertension and cardiovascular risk",
+"Diabetes and cardiovascular disease",
+"Obesity and metabolic syndrome",
+"Pharmacological prevention (statins, antiplatelets overview)",
+"Lifestyle interventions and dietary management"
+],
+[
+"Exercise prescription for cardiovascular health",
+"Smoking cessation strategies",
+"Stress management and psychosocial factors",
+"Nutritional approaches in heart disease prevention",
+"Community-based prevention programs",
+"Case discussions and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certificate in Preventive Cardiology?", a: "MBBS, MD, MS, DNB holders and other healthcare professionals with a clinical background are eligible for the Certificate in Preventive Cardiology." },
+{ q: "What is the duration of the Certificate in Preventive Cardiology?", a: "The course provides comprehensive training in cardiovascular risk assessment, prevention strategies, and risk factor management through a structured certificate program." },
+{ q: "What will I learn in this preventive cardiology certification course?", a: "You will learn cardiovascular risk assessment, screening strategies, management of hypertension, diabetes, obesity, and dyslipidemia, lifestyle counseling, preventive interventions, and evidence-based cardiology practices." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, cardiology clinics, preventive healthcare centers, wellness programs, primary care settings, and cardiovascular risk management services focused on disease prevention." },
+{ q: "What is the fee for the Certificate in Preventive Cardiology?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the preventive cardiology certificate?", a: "Salary depends on role, experience, and location; professionals with expertise in cardiovascular prevention, risk assessment, and chronic disease management typically earn competitive packages in clinical and preventive healthcare settings." }
+],
+    meta: { duration: "3 month", lessons: "18", skill_level: "Certificate", certificate: "yes" }
   },
   {
-    slug: "certification-fetal-monitoring",
+    slug: "certification-in-fetal-monitoring",
     title: "Certification in Fetal Monitoring",
     categories: ["obs-gynae"],
     image: "",
-    lessons: 12,
+    lessons: 14,
     weeks: 8,
     level: "beginner",
     priceINR: 9500,
     rating: null,
     reviewCount: 0,
     program: "Certificate",
-    overview: "Fetal monitoring and interpretation for pregnancy management.",
-    learn: ["Fetal physiology", "CTG monitoring", "Pattern interpretation", "Risk assessment", "Clinical management"],
     requirements: ["Graduate: Nursing / Medical/ Healthcare/ Equivalent"],
-    modules: ["Fetal Physiology", "CTG Basics", "Pattern Interpretation", "Abnormalities", "Clinical Response"],
-    moduleDetails: [
-      ["Fetal heart rate", "Variability", "Accelerations"],
-      ["CTG equipment", "Monitoring setup", "Recording"],
-      ["Normal patterns", "Baseline", "Variability patterns"],
-      ["Decelerations", "Tachycardia", "Bradycardia"],
-      ["Action protocols", "Management", "Safety measures"]
-    ],
-    faqs: [
-      { q: "Duration?", a: "2 months (8 weeks)" },
-      { q: "Eligibility?", a: "Graduate: Nursing / Medical/ Healthcare/ Equivalent" }
-    ],
-    meta: { duration: "2 month", lessons: "12", skill_level: "Certificate", certificate: "yes" }
+    heroDescription: "Gain practical skills in fetal surveillance, CTG interpretation, and fetal distress recognition to support safe pregnancy and labor management.",
+overview: "Fetal monitoring is an important component of antenatal and intrapartum care used to evaluate fetal well-being and detect early signs of fetal compromise. Techniques such as cardiotocography (CTG), non-stress testing, and Doppler assessment help clinicians monitor fetal heart rate patterns and uterine activity to guide appropriate obstetric management. This short-term certification course provides focused training in fetal surveillance methods, interpretation of monitoring results, and timely clinical decision-making to improve maternal and fetal outcomes.",
+
+learn: [
+"Understand the basics of fetal physiology and fetal heart rate regulation.",
+"Perform and interpret common fetal monitoring techniques.",
+"Identify normal and abnormal fetal heart rate patterns.",
+"Recognize early signs of fetal distress during pregnancy and labor.",
+"Implement appropriate clinical responses to abnormal monitoring findings."
+],
+
+modules: [
+"Foundations of Fetal Monitoring",
+"Advanced Interpretation & Clinical Application"
+],
+
+moduleDetails: [
+[
+"Fetal physiology and oxygenation",
+"Fetal heart rate regulation",
+"Principles of fetal surveillance",
+"Introduction to cardiotocography (CTG)",
+"Non-stress test (NST) and contraction stress test (CST)",
+"Indications for fetal monitoring in pregnancy",
+"Basic CTG interpretation (baseline rate, variability, accelerations)"
+],
+[
+"Decelerations and abnormal CTG patterns",
+"Biophysical profile (BPP) overview",
+"Doppler ultrasound in fetal monitoring",
+"Fetal monitoring during labor",
+"Identification and management of fetal distress",
+"Monitoring in high-risk pregnancies",
+"Documentation, case discussions, and final assessment"
+]
+],
+
+faqs: [
+{ q: "Who is eligible for the Certification in Fetal Monitoring?", a: "MBBS, MD, MS, DGO, DNB holders, nursing professionals, midwives, allied healthcare practitioners, and other healthcare professionals involved in maternal and fetal care are eligible for the Certification in Fetal Monitoring." },
+{ q: "What is the duration of the Certification in Fetal Monitoring?", a: "This is a short-term certification program designed to provide focused training in fetal surveillance, monitoring techniques, and fetal well-being assessment." },
+{ q: "What will I learn in this fetal monitoring certification course?", a: "You will learn fetal physiology, fetal heart rate regulation, CTG interpretation, NST and CST techniques, Doppler assessment, recognition of fetal distress, and clinical decision-making during pregnancy and labor." },
+{ q: "What are the career opportunities after completing this course?", a: "Graduates can enhance their practice in obstetrics departments, maternity hospitals, fetal medicine units, antenatal clinics, labor wards, and maternal healthcare services." },
+{ q: "What is the fee for the Certification in Fetal Monitoring?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
+{ q: "What is the salary expectation after completing the fetal monitoring certification?", a: "Salary depends on role, experience, and location; professionals with expertise in fetal surveillance and maternal-fetal care typically earn competitive packages in obstetric and maternal healthcare settings." }
+],
+    meta: { duration: "2 month", lessons: "14", skill_level: "Certificate", certificate: "yes" }
   },
 ];
 

@@ -262,8 +262,10 @@ export function CourseDetailNew({
                         {trainer.image || trainer.name === "DMHCA Faculty" ? (
                           <img 
                             src={trainer.image || "/logo.webp"} 
-                            alt={trainer.name} 
+                            srcSet={`${trainer.image || "/logo.webp"} 1x, ${(trainer.image || "/logo.webp").replace(/(\.\w+)$/, '-2x$1')} 2x`}
+                            alt={`${trainer.name} - DMHCA Faculty`} 
                             className="w-full h-full object-contain"
+                            loading="lazy"
                           />
                         ) : (
                           <Users className="w-20 h-20 text-gold/40" />
@@ -539,8 +541,10 @@ export function CourseDetailNew({
             <div className="aspect-[5/3] bg-navy-deep relative overflow-hidden">
               <img 
                 src={course.image} 
-                alt={course.title}
+                srcSet={`${course.image} 1x, ${course.image.replace(/(\.\w+)$/, '-2x$1')} 2x`}
+                alt={`${course.title} - Sidebar Image`}
                 referrerPolicy="no-referrer" 
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover" 
               />
             </div>

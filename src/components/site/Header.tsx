@@ -29,7 +29,7 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <Link to="/login" className="text-base px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition">Log in</Link>
+          <Link to="/lp-profile" className="text-base px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition">Log in</Link>
         </div>
 
         <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -43,7 +43,7 @@ export function Header() {
             {nav.map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-1">{n.label}</Link>
             ))}
-            <Link to="/login" onClick={() => setOpen(false)} className="mt-2 inline-block w-fit px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm">Log in</Link>
+            <Link to="/lp-profile" onClick={() => setOpen(false)} className="mt-2 inline-block w-fit px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm">Log in</Link>
           </div>
         </div>
       )}

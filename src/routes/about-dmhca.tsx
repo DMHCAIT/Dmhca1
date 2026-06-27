@@ -55,7 +55,7 @@ function About() {
               { icon: Users, stat: "42,000+", label: "Students Trained" },
               { icon: Globe, stat: "120+", label: "Countries" },
               { icon: Award, stat: "60+", label: "Expert Faculty" },
-              { icon: BookOpen, stat: "75+", label: "Courses" },
+              { icon: BookOpen, stat: "103+", label: "Courses" },
             ].map(({ icon: Icon, stat, label }) => (
               <div key={label} className="text-center p-4 rounded-lg">
                 <div className="flex justify-center mb-3">

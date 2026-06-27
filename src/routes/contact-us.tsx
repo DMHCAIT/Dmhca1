@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
-export function Contact() {
+function Contact() {
   // Remove any trailing hash from URL (e.g., /contact-us/#) on mount
   useEffect(() => {
     if (typeof window !== 'undefined' && window.location.hash) {
