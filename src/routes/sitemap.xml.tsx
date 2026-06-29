@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { courses, categories } from "@/data/courses";
+import { cityWiseCourses } from "@/data/cityWiseCourses";
 
 export const Route = createFileRoute("/sitemap/xml")({
   beforeLoad: () => ({
@@ -36,6 +37,13 @@ function Sitemap() {
     // Individual course pages
     ...courses.map((course) => ({
       loc: `${baseUrl}/courses/${course.slug}`,
+      lastmod: new Date().toISOString().split("T")[0],
+      changefreq: "monthly",
+      priority: "0.7",
+    })),
+    // City-wise specialty pages
+    ...cityWiseCourses.map((c) => ({
+      loc: `${baseUrl}/${c.slug}/`,
       lastmod: new Date().toISOString().split("T")[0],
       changefreq: "monthly",
       priority: "0.7",

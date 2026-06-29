@@ -872,7 +872,7 @@ faqs: [
   {
     slug: "fellowship-in-breast-imaging",
     title: "Fellowship in Breast Imaging",
-    categories: ["radiology","obs-gynae"],
+    categories: ["obs-gynae"],
     image: "/courses/Fellowship-Course-in-Breast-Imaging-410x290.webp",
     heroDescription: "Advanced fellowship focused on mammography, breast ultrasound, MRI, and early breast cancer diagnosis.",
     lessons: 23,
@@ -905,7 +905,7 @@ faqs:[
   {
     slug: "fellowship-in-womens-imaging",
     title: "Fellowship in Women's Imaging",
-    categories: ["radiology", "obs-gynae"],
+    categories: ["obs-gynae"],
     image: "/courses/Fellowship-in-Womens-Imaging-410x290.webp",
     heroDescription: "Comprehensive imaging training for women's health including breast, gynecological, and pelvic imaging.",
     lessons: 27,
@@ -2156,7 +2156,7 @@ faqs: [
   {
     slug: "fellowship-in-obstetrics-ultrasound",
     title: "Fellowship in Obstetrics Ultrasound",
-    categories: ["obs-gynae", "radiology"],
+    categories: ["obs-gynae"],
     image: "/courses/Fellowship-in-Obstetrics-Ultrasound-410x290.webp",
     heroDescription: "Specialized fellowship offering advanced training in obstetric ultrasound, fetal imaging, Doppler, and prenatal diagnosis.",
     lessons: 24,
@@ -4639,7 +4639,7 @@ faqs: [
   {
     slug: "fellowship-in-pediatrics-neurology",
     title: "Fellowship in Pediatrics Neurology",
-    categories: ["pediatrics", "neurology"],
+    categories: ["neurology"],
     image: "/courses/Fellowship-in-Pediatrics-Neurology-410x290.webp",
     heroDescription: "Enhance your skills with a Fellowship in Pediatric Neurology. Diagnose and treat childhood disorders.",
     lessons: 44,

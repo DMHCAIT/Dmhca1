@@ -148,13 +148,16 @@ function Home() {
           <motion.div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" initial={false} animate={{ x: `-${slide * 100}%` }} transition={{ duration: animDuration, ease: 'easeInOut' }}>
             <div className="flex h-full w-[300%]">
               {slides.map((s, i) => (
-                <div key={i} className="w-1/3 h-full flex-shrink-0 relative">
+                  <div key={i} className="w-1/3 h-full flex-shrink-0 relative">
                   <div
                     className="absolute inset-0 bg-center bg-cover brightness-75"
                     style={{ backgroundImage: `url(${s.heroImg || '/hero-fallback.webp'})` }}
                     onError={(_e: any) => { console.error('background failed:', s.heroImg, 'index', i); }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent" />
+                  {s.program === 'Fellowship' && (
+                    <div className="absolute inset-0 bg-black/40" />
+                  )}
                 </div>
               ))}
             </div>
@@ -325,7 +328,7 @@ function Home() {
       </section>
 
       {/* Specialties - Large Image Cards */}
-      <section className="bg-hero-light text-on-hero-light py-12">
+      <section className="bg-hero-light text-on-hero-light py-8">
         <div className="container-home">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
           <div>
@@ -371,7 +374,7 @@ function Home() {
               'radiology': '/courses/Radiology.webp',
               'dermatology': '/courses/Dermatology.webp',
               'endocrinology': '/courses/Endocrinology.webp',
-              'cardiology': '/courses/Cardiology.webp',
+              'cardiology': '/courses/cardiology.webp',
               'emergency': '/courses/Emergency.webp',
               'orthopedics': '/courses/Orthopedics.webp',
               'medicine': '/courses/Medicine.webp',
@@ -456,8 +459,8 @@ function Home() {
         {/* Academic partners — styled horizontal carousel */}
         <div className="mb-16">
           <div className="relative">
-            <div className="mx-auto max-w-6xl py-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 px-4 items-center">
+            <div className="mx-auto max-w-6xl py-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-3 items-center">
                 {[
                   'ACTD-2.webp',
                   'btu_hero_logo.webp',
@@ -465,8 +468,8 @@ function Home() {
                   'IBMP LOGO .webp',
                   'logo-srdu.webp',
                 ].map((file) => (
-                  <div key={file} className="rounded-xl bg-white/80 dark:bg-slate-800/60 p-4 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                    <div className="w-48 h-32 md:w-56 md:h-36 lg:w-64 lg:h-40 flex items-center justify-center bg-white rounded-lg">
+                  <div key={file} className="rounded-xl bg-white/80 dark:bg-slate-800/60 p-3 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div className="w-40 h-28 md:w-48 md:h-32 lg:w-56 lg:h-36 flex items-center justify-center bg-white rounded-lg">
                       <img src={`/ACADEMIC PARTNERS/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
                     </div>
                   </div>

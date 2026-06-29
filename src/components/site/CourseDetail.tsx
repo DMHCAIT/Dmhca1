@@ -3,6 +3,31 @@ import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Star, BookOpen, Clock, Award, GraduationCap, Globe, FileCheck, ArrowUpRight } from "lucide-react";
 import { type Course } from "@/data/courses";
 
+// Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
+const courseNameMapping: Record<string, string> = {
+  "Fellowship in Echocardiography": "Echocardiography",
+  "Certificate Course in Hypertension": "Hypertension Management",
+  "Fellowship in Interventional Cardiology": "Interventional Cardiology",
+  "Fellowship in Clinical Cardiology": "Clinical Cardiology",
+  // Add more mappings as needed
+};
+
+function getIBMCourseName(dmhcaTitle: string): string {
+  // Check exact match first
+  if (courseNameMapping[dmhcaTitle]) {
+    return courseNameMapping[dmhcaTitle];
+  }
+  
+  // Fallback: extract specialty from title
+  // e.g., "Fellowship in X" -> "X", "Certificate Course in Y" -> "Y"
+  const match = dmhcaTitle.match(/(?:Fellowship|PG Diploma|Certificate Course) in\s+(.+)/i);
+  if (match) {
+    return match[1];
+  }
+  
+  return dmhcaTitle; // Return original if no pattern matches
+}
+
 export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmount, totalPrice, formatINR, related }: { course: Course; primaryCat: any; ptype: string; gstAmount: number; razorpayAmount: number; totalPrice: number; formatINR: (n:number)=>string; related: Course[] }) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
@@ -540,7 +565,13 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="text-sm text-slate-700 font-semibold">Total: {formatINR(totalPrice)}</div>
               </div>
               <div className="px-6 pb-6 space-y-3">
-                <Link to="/contact-us" className="w-full inline-flex justify-center items-center px-5 py-3.5 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 hover:from-slate-800 hover:via-slate-800 hover:to-slate-700 text-white text-base font-bold rounded-lg transition shadow-md hover:shadow-lg tracking-wide">Apply Now</Link>
+                <Link 
+                  to="/apply"
+                  search={{ program: course.program, course: getIBMCourseName(course.title) }}
+                  className="w-full inline-flex justify-center items-center px-5 py-3.5 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 hover:from-slate-800 hover:via-slate-800 hover:to-slate-700 text-white text-base font-bold rounded-lg transition shadow-md hover:shadow-lg tracking-wide"
+                >
+                  Apply Now
+                </Link>
                 {/* Removed 'Book a Demo Class' per request; only Apply Now remains */}
               </div>
 

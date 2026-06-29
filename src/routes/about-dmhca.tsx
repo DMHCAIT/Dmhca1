@@ -125,7 +125,7 @@ function About() {
                       <div className="flex items-center justify-between">
                         <div>
                           <div className="text-sm text-muted-foreground">Courses available</div>
-                          <div className="text-2xl font-semibold text-navy-deep">12,000+</div>
+                          <div className="text-2xl font-semibold text-navy-deep">103+</div>
                         </div>
                         <div className="text-right">
                           <div className="text-sm text-muted-foreground">Learners</div>

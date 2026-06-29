@@ -43,7 +43,10 @@ import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as CoursesAfterMbbsInIndiaRouteImport } from './routes/courses-after-mbbs-in-india'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as ContactRedirectRouteImport } from './routes/contact-redirect'
+import { Route as CityWiseMedicalCoursesRouteImport } from './routes/city-wise-medical-courses'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ApplyRouteImport } from './routes/apply'
+import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutDmhcaRouteImport } from './routes/about-dmhca'
@@ -69,10 +72,15 @@ import { Route as ClinicalCardiologyCoursesIndexRouteImport } from './routes/cli
 import { Route as CardiologyCoursesIndexRouteImport } from './routes/cardiology-courses.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as Char91specialtyChar93CoursesChar91cityChar93RouteImport } from './routes/[specialty]-courses.[city]'
 import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as SimpleEventSlugRouteImport } from './routes/simple-event.$slug'
+import { Route as RadiologyCoursesCityRouteImport } from './routes/radiology-courses/$city'
+import { Route as EmergencyMedicineCoursesCityRouteImport } from './routes/emergency-medicine-courses/$city'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as CourseCategorySlugRouteImport } from './routes/course-category.$slug'
+import { Route as CosmetologyCoursesCityRouteImport } from './routes/cosmetology-courses/$city'
+import { Route as CardiologyCoursesCityRouteImport } from './routes/cardiology-courses/$city'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
@@ -261,9 +269,24 @@ const ContactRedirectRoute = ContactRedirectRouteImport.update({
   path: '/contact-redirect',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CityWiseMedicalCoursesRoute = CityWiseMedicalCoursesRouteImport.update({
+  id: '/city-wise-medical-courses',
+  path: '/city-wise-medical-courses',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApplyRoute = ApplyRouteImport.update({
+  id: '/apply',
+  path: '/apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdmissionRoute = AdmissionRouteImport.update({
+  id: '/admission',
+  path: '/admission',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -398,6 +421,12 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const Char91specialtyChar93CoursesChar91cityChar93Route =
+  Char91specialtyChar93CoursesChar91cityChar93RouteImport.update({
+    id: '/specialty-courses/city',
+    path: '/specialty-courses/city',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SitemapXmlRoute = SitemapXmlRouteImport.update({
   id: '/sitemap/xml',
   path: '/sitemap/xml',
@@ -408,6 +437,17 @@ const SimpleEventSlugRoute = SimpleEventSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => SimpleEventRoute,
 } as any)
+const RadiologyCoursesCityRoute = RadiologyCoursesCityRouteImport.update({
+  id: '/radiology-courses/$city',
+  path: '/radiology-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EmergencyMedicineCoursesCityRoute =
+  EmergencyMedicineCoursesCityRouteImport.update({
+    id: '/emergency-medicine-courses/$city',
+    path: '/emergency-medicine-courses/$city',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CoursesSlugRoute = CoursesSlugRouteImport.update({
   id: '/courses/$slug',
   path: '/courses/$slug',
@@ -416,6 +456,16 @@ const CoursesSlugRoute = CoursesSlugRouteImport.update({
 const CourseCategorySlugRoute = CourseCategorySlugRouteImport.update({
   id: '/course-category/$slug',
   path: '/course-category/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CosmetologyCoursesCityRoute = CosmetologyCoursesCityRouteImport.update({
+  id: '/cosmetology-courses/$city',
+  path: '/cosmetology-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CardiologyCoursesCityRoute = CardiologyCoursesCityRouteImport.update({
+  id: '/cardiology-courses/$city',
+  path: '/cardiology-courses/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
@@ -470,7 +520,10 @@ export interface FileRoutesByFullPath {
   '/about-dmhca': typeof AboutDmhcaRoute
   '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
+  '/admission': typeof AdmissionRoute
+  '/apply': typeof ApplyRoute
   '/blog': typeof BlogRouteWithChildren
+  '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
   '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
@@ -514,10 +567,15 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
+  '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/emergency-medicine-courses/$city': typeof EmergencyMedicineCoursesCityRoute
+  '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
+  '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/cardiology-courses/': typeof CardiologyCoursesIndexRoute
@@ -544,6 +602,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
   '/admin-login': typeof AdminLoginRoute
+  '/admission': typeof AdmissionRoute
+  '/apply': typeof ApplyRoute
+  '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
   '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
@@ -586,10 +647,15 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
+  '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/emergency-medicine-courses/$city': typeof EmergencyMedicineCoursesCityRoute
+  '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
+  '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/cardiology-courses': typeof CardiologyCoursesIndexRoute
@@ -618,7 +684,10 @@ export interface FileRoutesById {
   '/about-dmhca': typeof AboutDmhcaRoute
   '/admin': typeof AdminRouteWithChildren
   '/admin-login': typeof AdminLoginRoute
+  '/admission': typeof AdmissionRoute
+  '/apply': typeof ApplyRoute
   '/blog': typeof BlogRouteWithChildren
+  '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
   '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
@@ -662,10 +731,15 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
+  '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/emergency-medicine-courses/$city': typeof EmergencyMedicineCoursesCityRoute
+  '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
+  '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/cardiology-courses/': typeof CardiologyCoursesIndexRoute
@@ -695,7 +769,10 @@ export interface FileRouteTypes {
     | '/about-dmhca'
     | '/admin'
     | '/admin-login'
+    | '/admission'
+    | '/apply'
     | '/blog'
+    | '/city-wise-medical-courses'
     | '/contact-redirect'
     | '/contact-us'
     | '/courses-after-mbbs-in-india'
@@ -739,10 +816,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/blog/$slug'
+    | '/cardiology-courses/$city'
+    | '/cosmetology-courses/$city'
     | '/course-category/$slug'
     | '/courses/$slug'
+    | '/emergency-medicine-courses/$city'
+    | '/radiology-courses/$city'
     | '/simple-event/$slug'
     | '/sitemap/xml'
+    | '/specialty-courses/city'
     | '/admin/'
     | '/blog/'
     | '/cardiology-courses/'
@@ -769,6 +851,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/about-dmhca'
     | '/admin-login'
+    | '/admission'
+    | '/apply'
+    | '/city-wise-medical-courses'
     | '/contact-redirect'
     | '/contact-us'
     | '/courses-after-mbbs-in-india'
@@ -811,10 +896,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/blog/$slug'
+    | '/cardiology-courses/$city'
+    | '/cosmetology-courses/$city'
     | '/course-category/$slug'
     | '/courses/$slug'
+    | '/emergency-medicine-courses/$city'
+    | '/radiology-courses/$city'
     | '/simple-event/$slug'
     | '/sitemap/xml'
+    | '/specialty-courses/city'
     | '/admin'
     | '/blog'
     | '/cardiology-courses'
@@ -842,7 +932,10 @@ export interface FileRouteTypes {
     | '/about-dmhca'
     | '/admin'
     | '/admin-login'
+    | '/admission'
+    | '/apply'
     | '/blog'
+    | '/city-wise-medical-courses'
     | '/contact-redirect'
     | '/contact-us'
     | '/courses-after-mbbs-in-india'
@@ -886,10 +979,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/users'
     | '/blog/$slug'
+    | '/cardiology-courses/$city'
+    | '/cosmetology-courses/$city'
     | '/course-category/$slug'
     | '/courses/$slug'
+    | '/emergency-medicine-courses/$city'
+    | '/radiology-courses/$city'
     | '/simple-event/$slug'
     | '/sitemap/xml'
+    | '/specialty-courses/city'
     | '/admin/'
     | '/blog/'
     | '/cardiology-courses/'
@@ -918,7 +1016,10 @@ export interface RootRouteChildren {
   AboutDmhcaRoute: typeof AboutDmhcaRoute
   AdminRoute: typeof AdminRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
+  AdmissionRoute: typeof AdmissionRoute
+  ApplyRoute: typeof ApplyRoute
   BlogRoute: typeof BlogRouteWithChildren
+  CityWiseMedicalCoursesRoute: typeof CityWiseMedicalCoursesRoute
   ContactRedirectRoute: typeof ContactRedirectRoute
   ContactUsRoute: typeof ContactUsRoute
   CoursesAfterMbbsInIndiaRoute: typeof CoursesAfterMbbsInIndiaRoute
@@ -953,9 +1054,14 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermConditionsRoute: typeof TermConditionsRoute
   TestPageRoute: typeof TestPageRoute
+  CardiologyCoursesCityRoute: typeof CardiologyCoursesCityRoute
+  CosmetologyCoursesCityRoute: typeof CosmetologyCoursesCityRoute
   CourseCategorySlugRoute: typeof CourseCategorySlugRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
+  EmergencyMedicineCoursesCityRoute: typeof EmergencyMedicineCoursesCityRoute
+  RadiologyCoursesCityRoute: typeof RadiologyCoursesCityRoute
   SitemapXmlRoute: typeof SitemapXmlRoute
+  Char91specialtyChar93CoursesChar91cityChar93Route: typeof Char91specialtyChar93CoursesChar91cityChar93Route
   CardiologyCoursesIndexRoute: typeof CardiologyCoursesIndexRoute
   ClinicalCardiologyCoursesIndexRoute: typeof ClinicalCardiologyCoursesIndexRoute
   ClinicalEmbryologyCoursesIndexRoute: typeof ClinicalEmbryologyCoursesIndexRoute
@@ -1215,11 +1321,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRedirectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/city-wise-medical-courses': {
+      id: '/city-wise-medical-courses'
+      path: '/city-wise-medical-courses'
+      fullPath: '/city-wise-medical-courses'
+      preLoaderRoute: typeof CityWiseMedicalCoursesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apply': {
+      id: '/apply'
+      path: '/apply'
+      fullPath: '/apply'
+      preLoaderRoute: typeof ApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admission': {
+      id: '/admission'
+      path: '/admission'
+      fullPath: '/admission'
+      preLoaderRoute: typeof AdmissionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin-login': {
@@ -1397,6 +1524,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/specialty-courses/city': {
+      id: '/specialty-courses/city'
+      path: '/specialty-courses/city'
+      fullPath: '/specialty-courses/city'
+      preLoaderRoute: typeof Char91specialtyChar93CoursesChar91cityChar93RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap/xml': {
       id: '/sitemap/xml'
       path: '/sitemap/xml'
@@ -1411,6 +1545,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SimpleEventSlugRouteImport
       parentRoute: typeof SimpleEventRoute
     }
+    '/radiology-courses/$city': {
+      id: '/radiology-courses/$city'
+      path: '/radiology-courses/$city'
+      fullPath: '/radiology-courses/$city'
+      preLoaderRoute: typeof RadiologyCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/emergency-medicine-courses/$city': {
+      id: '/emergency-medicine-courses/$city'
+      path: '/emergency-medicine-courses/$city'
+      fullPath: '/emergency-medicine-courses/$city'
+      preLoaderRoute: typeof EmergencyMedicineCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/courses/$slug': {
       id: '/courses/$slug'
       path: '/courses/$slug'
@@ -1423,6 +1571,20 @@ declare module '@tanstack/react-router' {
       path: '/course-category/$slug'
       fullPath: '/course-category/$slug'
       preLoaderRoute: typeof CourseCategorySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cosmetology-courses/$city': {
+      id: '/cosmetology-courses/$city'
+      path: '/cosmetology-courses/$city'
+      fullPath: '/cosmetology-courses/$city'
+      preLoaderRoute: typeof CosmetologyCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cardiology-courses/$city': {
+      id: '/cardiology-courses/$city'
+      path: '/cardiology-courses/$city'
+      fullPath: '/cardiology-courses/$city'
+      preLoaderRoute: typeof CardiologyCoursesCityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/blog/$slug': {
@@ -1549,7 +1711,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutDmhcaRoute: AboutDmhcaRoute,
   AdminRoute: AdminRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
+  AdmissionRoute: AdmissionRoute,
+  ApplyRoute: ApplyRoute,
   BlogRoute: BlogRouteWithChildren,
+  CityWiseMedicalCoursesRoute: CityWiseMedicalCoursesRoute,
   ContactRedirectRoute: ContactRedirectRoute,
   ContactUsRoute: ContactUsRoute,
   CoursesAfterMbbsInIndiaRoute: CoursesAfterMbbsInIndiaRoute,
@@ -1585,9 +1750,15 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermConditionsRoute: TermConditionsRoute,
   TestPageRoute: TestPageRoute,
+  CardiologyCoursesCityRoute: CardiologyCoursesCityRoute,
+  CosmetologyCoursesCityRoute: CosmetologyCoursesCityRoute,
   CourseCategorySlugRoute: CourseCategorySlugRoute,
   CoursesSlugRoute: CoursesSlugRoute,
+  EmergencyMedicineCoursesCityRoute: EmergencyMedicineCoursesCityRoute,
+  RadiologyCoursesCityRoute: RadiologyCoursesCityRoute,
   SitemapXmlRoute: SitemapXmlRoute,
+  Char91specialtyChar93CoursesChar91cityChar93Route:
+    Char91specialtyChar93CoursesChar91cityChar93Route,
   CardiologyCoursesIndexRoute: CardiologyCoursesIndexRoute,
   ClinicalCardiologyCoursesIndexRoute: ClinicalCardiologyCoursesIndexRoute,
   ClinicalEmbryologyCoursesIndexRoute: ClinicalEmbryologyCoursesIndexRoute,

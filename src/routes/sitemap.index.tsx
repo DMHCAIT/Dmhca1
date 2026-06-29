@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { courses, fellowships, pgDiplomas, certificates, formatINR } from "@/data/courses";
+import { courses, fellowships, pgDiplomas, certificates, formatINR, categories } from "@/data/courses";
+import { cityWiseCourses, getAllSpecialties } from "@/data/cityWiseCourses";
+import { events } from "@/data/events";
 import { ChevronRight } from "lucide-react";
+import { useMemo } from "react";
 
 export const Route = createFileRoute("/sitemap/")({
   head: () => ({
@@ -13,6 +16,31 @@ export const Route = createFileRoute("/sitemap/")({
 });
 
 function Sitemap() {
+  const specialties = getAllSpecialties();
+
+  // Group courses by specialty
+  const coursesBySpecialty = useMemo(() => {
+    const grouped: Record<string, typeof cityWiseCourses> = {};
+    specialties.forEach((specialty) => {
+      grouped[specialty] = cityWiseCourses.filter(
+        (course) => course.specialty === specialty
+      );
+    });
+    return grouped;
+  }, [specialties]);
+
+  // Get unique categories from courses
+  const categoriesWithCourses = useMemo(() => {
+    return categories
+      .map((category) => ({
+        ...category,
+        courseCount: courses.filter((c) =>
+          c.categories.includes(category.slug)
+        ).length,
+      }))
+      .filter((c) => c.courseCount > 0);
+  }, []);
+
   // Top Medical Courses - Specialty Pages (matching old website structure)
   const topMedicalCourses = [
     { name: "Radiology Courses", slug: "radiology-courses" },
@@ -27,7 +55,6 @@ function Sitemap() {
     { name: "Clinical Cardiology Courses", slug: "clinical-cardiology-courses" },
     { name: "Clinical Embryology Courses", slug: "clinical-embryology-courses" },
     { name: "Neurology Courses", slug: "neurology-courses" },
-    { name: "Echocardiography Courses", slug: "echocardiography-courses" },
     { name: "Endocrinology Courses", slug: "endocrinology-courses" },
     { name: "Diabetology Courses", slug: "diabetology-courses" },
   ];
@@ -60,6 +87,10 @@ function Sitemap() {
                 >
                   <div>
                     <div className="text-lg font-semibold text-navy-deep group-hover:text-navy">{specialty.name}</div>
+                    {/* Courses in Delhi quick link (links to the city-specific specialty page) */}
+                    <div className="text-sm text-muted-foreground mt-1">
+                      <Link to={`/${specialty.slug}/delhi/`} className="text-sm text-gold hover:underline">Courses in Delhi →</Link>
+                    </div>
                   </div>
                   <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-navy-deep transition" />
                 </Link>
@@ -67,9 +98,49 @@ function Sitemap() {
             </div>
           </div>
 
-          {/* List Of Medical Courses */}
+          {/* List Of Medical Courses City Wise */}
           <div>
-            <h2 className="font-display text-3xl text-navy-deep mb-8">List Of Medical Courses</h2>
+            <h2 className="font-display text-3xl text-navy-deep mb-8">List of Medical Courses City Wise</h2>
+            
+            {/* City-Wise Courses by Specialty */}
+            <div className="space-y-12">
+              {specialties.map((specialty) => (
+                <div key={specialty}>
+                  <h3 className="font-display text-2xl text-navy-deep mb-4 capitalize">
+                    {specialty} Courses by City
+                  </h3>
+                  <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {coursesBySpecialty[specialty].map((course) => (
+                      <Link
+                        key={course.slug}
+                        to={`/${course.slug}/`}
+                        className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                      >
+                        <div className="flex-1">
+                          <div className="font-medium text-navy-deep group-hover:text-navy">
+                            {specialty} in {course.city}
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                            {course.description}
+                          </div>
+                        </div>
+                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Course Categories removed per request (Medical Specializations) */}
+
+            {/* Extra curated city links removed to simplify markup; city-wise lists are generated above from data */}
+
+          </div>
+
+          {/* Original List Of Medical Courses */}
+          <div className="mt-12 pt-12 border-t border-slate-200">
+            <h2 className="font-display text-3xl text-navy-deep mb-8">All Medical Programs</h2>
             
             {/* Fellowships */}
             <div className="mb-12">
@@ -235,7 +306,7 @@ function Sitemap() {
                 <Link to="/contact-us" className="text-primary-foreground hover:text-gold transition text-base">Contact</Link>
               </div>
             </div>
-            </div>
+          </div>
         </div>
       </section>
     </div>

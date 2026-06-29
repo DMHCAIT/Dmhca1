@@ -2,6 +2,31 @@ import { Link } from "@tanstack/react-router";
 import { Clock, BookOpen, ArrowUpRight, Star } from "lucide-react";
 import { type Course, formatINR, getCategory } from "@/data/courses";
 
+// Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
+const courseNameMapping: Record<string, string> = {
+  "Fellowship in Echocardiography": "Echocardiography",
+  "Certificate Course in Hypertension": "Hypertension Management",
+  "Fellowship in Interventional Cardiology": "Interventional Cardiology",
+  "Fellowship in Clinical Cardiology": "Clinical Cardiology",
+  // Add more mappings as needed
+};
+
+function getIBMCourseName(dmhcaTitle: string): string {
+  // Check exact match first
+  if (courseNameMapping[dmhcaTitle]) {
+    return courseNameMapping[dmhcaTitle];
+  }
+  
+  // Fallback: extract specialty from title
+  // e.g., "Fellowship in X" -> "X", "Certificate Course in Y" -> "Y"
+  const match = dmhcaTitle.match(/(?:Fellowship|PG Diploma|Certificate Course) in\s+(.+)/i);
+  if (match) {
+    return match[1];
+  }
+  
+  return dmhcaTitle; // Return original if no pattern matches
+}
+
 export function CourseCard({ course }: { course: Course }) {
   const cat = getCategory(course.categories[0]);
   const programType = course.program || course.meta?.skill_level || (course.title.toLowerCase().includes("fellowship") ? "Fellowship" : course.title.toLowerCase().includes("pg diploma") ? "PG Diploma" : "Certificate");
