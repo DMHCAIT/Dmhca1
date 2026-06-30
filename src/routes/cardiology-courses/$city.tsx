@@ -86,6 +86,7 @@ function CardiologyCityPage() {
             </p>
             <Link
               to="/top-medical-courses"
+              search={{ cat: specialty }}
               className="text-emerald-600 hover:text-emerald-700 font-bold"
             >
               Explore all {specialty} courses →

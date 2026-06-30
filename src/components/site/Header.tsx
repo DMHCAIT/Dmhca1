@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const logo = "/logo.webp";
+const whiteLogo = "/logo-white.webp";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about-dmhca", label: "About" },
@@ -17,7 +18,18 @@ export function Header() {
     <header className="sticky top-0 z-40 bg-background/98 hairline">
       <div className="container-x flex items-center justify-between h-16">
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="DMHCA" className="h-10 w-auto transition-opacity hover:opacity-75" />
+          <img
+            src={whiteLogo}
+            alt="DMHCA"
+            className="h-10 w-auto transition-opacity hover:opacity-75"
+            onError={(e) => {
+              const t = e.currentTarget as HTMLImageElement;
+              t.src = logo;
+            
+              // ensure visibility on light backgrounds if only dark logo exists
+              t.style.filter = "brightness(0) invert(1)";
+            }}
+          />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 text-base">

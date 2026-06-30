@@ -375,10 +375,10 @@ function Home() {
               'dermatology': '/courses/Dermatology.webp',
               'endocrinology': '/courses/Endocrinology.webp',
               'cardiology': '/courses/cardiology.webp',
-              'emergency': '/courses/Emergency.webp',
-              'orthopedics': '/courses/Orthopedics.webp',
-              'medicine': '/courses/Medicine.webp',
-              'oncology': '/courses/Oncology.webp',
+              'emergency': '/courses/emergency.webp',
+              'orthopedics': '/courses/orthopedics.webp',
+              'medicine': '/courses/medicine.webp',
+              'oncology': '/courses/oncology.webp',
             };
             
             const imageUrl = specialtyImages[slug] || '/courses/default.webp';

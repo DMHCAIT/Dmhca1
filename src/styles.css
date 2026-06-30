@@ -171,3 +171,10 @@
     border-color: var(--navy-deep);
   }
 }
+
+/* Ensure images render sharply and no CSS blur is applied site-wide */
+img {
+  image-rendering: auto;
+  filter: none !important;
+  -webkit-backface-visibility: visible;
+}

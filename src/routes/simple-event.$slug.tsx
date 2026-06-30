@@ -58,7 +58,7 @@ function EventDetailPage() {
             backgroundImage: `linear-gradient(to top, rgba(3,7,18,0.86), rgba(3,7,18,0.6)), url(${event.image})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            filter: 'blur(8px) contrast(80%) saturate(45%)',
+            filter: 'none',
             opacity: 0.94,
             mixBlendMode: 'normal',
           }}

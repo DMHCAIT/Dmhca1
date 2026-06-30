@@ -72,7 +72,7 @@ export default function CityWiseCoursePage() {
               )}
             </div>
             <div className="mt-6">
-              <Link to={`/${specialty}-courses/`} className="text-emerald-600 hover:text-emerald-700 font-bold">Explore all {specialty} courses →</Link>
+              <Link to={`/${specialty}-courses/`} search={{ cat: specialty }} className="text-emerald-600 hover:text-emerald-700 font-bold">Explore all {specialty} courses →</Link>
             </div>
           </div>
 
