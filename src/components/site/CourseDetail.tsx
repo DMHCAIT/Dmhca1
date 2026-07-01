@@ -122,9 +122,17 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
       {faqSchema && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />}
       
       {/* Modern Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 border-b border-slate-700">
-        <div className="absolute inset-0 opacity-5">
-          <img src={course.heroImage || course.image} alt="" aria-hidden className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+      <section className="relative overflow-visible bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 border-b border-slate-700">
+        <div className="absolute right-0 top-0 bottom-0 opacity-5 pointer-events-none flex items-center justify-end pr-4">
+          <img
+            src={course.heroImage || course.image}
+            alt=""
+            aria-hidden
+            className="w-auto h-auto max-w-[48%] lg:max-w-[40%] md:max-w-[46%] sm:max-w-[60%] xs:max-w-[80%] max-h-[420px] sm:max-h-[360px] xs:max-h-[240px] object-contain object-right"
+            referrerPolicy="no-referrer"
+            decoding="async"
+            loading="lazy"
+          />
         </div>
         <div className="relative container-x py-6 lg:py-8">
           <Link to="/course-category/$slug" params={{ slug: primaryCat.slug }} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white mb-3 group">
@@ -136,6 +144,10 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               {course.heroDescription}
             </p>
           )}
+          {/* Mobile inline image hidden on small screens per request */}
+          <div className="hidden">
+            <img src={course.heroImage || course.image} alt="" aria-hidden className="w-full h-auto object-contain rounded-xl shadow-md" referrerPolicy="no-referrer" decoding="async" loading="lazy" />
+          </div>
           <div className="mt-4 flex flex-wrap gap-4 text-xs md:text-sm">
             {course.rating && (
               <div className="flex items-center gap-2"><div className="flex items-center gap-1"><Star className="w-4 h-4 fill-yellow-500 text-yellow-500" /> <span className="font-semibold text-white">{course.rating}</span></div> <span className="text-slate-400">({course.reviewCount} reviews)</span></div>

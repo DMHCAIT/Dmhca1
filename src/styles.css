@@ -98,6 +98,13 @@
   @media (min-width: 768px) { padding-inline: 2rem; }
 }
 
+@utility container-city {
+  margin-inline: auto;
+  padding-inline: 0;
+  max-width: 60rem;
+  @media (min-width: 768px) { padding-inline: 0; }
+}
+
 @utility hairline {
   border-bottom: 1px solid color-mix(in oklab, var(--navy-deep) 12%, transparent);
 }
@@ -119,8 +126,13 @@
 @layer utilities {
   .site-hero {
     @apply bg-gradient-to-br from-navy-deep via-navy-deep/95 to-navy-deep/90 border-b border-gold/10 relative overflow-hidden text-primary-foreground;
-    padding-block: 3rem; /* increase vertical size slightly */
-    padding-inline: 1.5rem; /* slightly larger horizontal padding */
+    padding-block: 2rem; /* reduced vertical padding for city pages */
+    padding-inline: 0.5rem; /* reduced horizontal padding */
+  }
+
+  /* Shorter hero on small screens */
+  @media (max-width: 640px) {
+    .site-hero { padding-block: 1.25rem !important; }
   }
 
   .site-hero :is(h1,h2,h3,h4,p,.gold-rule) {
@@ -169,6 +181,11 @@
     outline: none;
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--navy) 6%, transparent);
     border-color: var(--navy-deep);
+  }
+
+  /* Render non-white logos as white when needed */
+  .filter-white-logo {
+    filter: brightness(0) invert(1);
   }
 }
 

@@ -6,82 +6,102 @@ export const Route = createFileRoute("/lp-profile")({
     const [tab, setTab] = useState<'login'|'signup'>('login');
 
     return (
-      <div className="min-h-[70vh] flex items-start pt-12 pb-20">
+      <div className="min-h-[70vh] flex items-center py-20 bg-slate-50">
         <div className="container-x mx-auto">
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-            <div className="md:col-span-2 flex items-center justify-center md:justify-start gap-4 mb-2">
-              <button onClick={() => setTab('login')} className={`px-4 py-2 rounded-md font-medium border ${tab==='login'? 'bg-navy-deep text-white border-navy-deep' : 'bg-white text-foreground border-border'}`}>Log in</button>
-              <button onClick={() => setTab('signup')} className={`px-4 py-2 rounded-md font-medium border ${tab==='signup'? 'bg-navy-deep text-white border-navy-deep' : 'bg-white text-foreground border-border'}`}>Sign up</button>
-            </div>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            <aside className="md:col-span-4 bg-white rounded-2xl p-6 shadow-sm flex flex-col gap-4">
+              <h3 className="text-lg font-semibold">Account</h3>
+              <p className="text-sm text-muted-foreground">Quick access to login or create your DMHCA account.</p>
+              <nav className="mt-4 flex flex-col gap-2">
+                <button onClick={() => setTab('login')} className={`text-left px-3 py-2 rounded-lg ${tab==='login'? 'bg-navy-deep text-white' : 'text-slate-700 hover:bg-slate-100'}`}>Log in</button>
+                <button onClick={() => setTab('signup')} className={`text-left px-3 py-2 rounded-lg ${tab==='signup'? 'bg-navy-deep text-white' : 'text-slate-700 hover:bg-slate-100'}`}>Sign up</button>
+              </nav>
+              <div className="mt-auto text-sm text-muted-foreground">
+                <strong className="text-foreground">Need help?</strong>
+                <div className="mt-2">Call admissions: <a href="tel:+919899711530" className="text-navy-deep font-medium">+91 9899711530</a></div>
+              </div>
+            </aside>
 
+            <section className="md:col-span-8 bg-white rounded-2xl p-8 shadow-lg">
               {tab === 'login' ? (
-                <div className="bg-white p-10 rounded-lg shadow-lg w-full md:col-span-2 max-w-3xl mx-auto">
-                <h2 className="text-3xl font-display font-black mb-6">Welcome back.</h2>
-                <label className="block text-sm text-muted-foreground mb-2">Email</label>
-                <input type="email" className="w-full mb-4 input-base" placeholder="you@example.com" />
+                <div>
+                  <h2 className="text-2xl font-display font-bold mb-4">Welcome back</h2>
+                  <p className="text-sm text-muted-foreground mb-6">Enter your details to access your account.</p>
 
-                <label className="block text-sm text-muted-foreground mb-2">Password</label>
-                <input type="password" className="w-full mb-4 input-base" placeholder="Password" />
-
-                <div className="flex items-center justify-between mb-6">
-                  <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="form-checkbox" /> Remember me</label>
-                  <a href="#" className="text-sm text-navy-deep hover:underline">Forgot password?</a>
-                </div>
-
-                <button className="w-full px-4 py-3 bg-navy-deep text-primary-foreground rounded-md text-lg">Log in</button>
-                <div className="mt-6 text-center text-sm text-muted-foreground">
-                  Don't have an account? <button onClick={() => setTab('signup')} className="text-navy-deep font-medium hover:underline">Sign up</button>
-                </div>
-              </div>
-            ) : (
-              <div className="bg-white p-10 rounded-lg shadow-lg w-full md:col-span-2 max-w-3xl mx-auto">
-                <h2 className="text-3xl font-display font-black mb-6">Create your account</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="block text-sm text-muted-foreground mb-2">First name</label>
-                    <input type="text" className="w-full mb-2 input-base" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="sr-only">Name (optional)</label>
+                      <input placeholder="Name (optional)" className="input-base w-full" />
+                    </div>
+                    <div>
+                      <label className="sr-only">Mobile No</label>
+                      <input placeholder="Mobile No" className="input-base w-full" />
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-sm text-muted-foreground mb-2">Last name</label>
-                    <input type="text" className="w-full mb-2 input-base" />
+                  <div className="mb-4">
+                    <label className="sr-only">Email</label>
+                    <input type="email" placeholder="Email" className="input-base w-full" />
                   </div>
-                </div>
-
-                <label className="block text-sm text-muted-foreground mb-2">Email address</label>
-                <input type="email" className="w-full mb-4 input-base" />
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <label className="block text-sm text-muted-foreground mb-2">Password</label>
-                    <input type="password" className="w-full mb-2 input-base" />
+                  <div className="mb-4">
+                    <label className="sr-only">Password</label>
+                    <input type="password" placeholder="Password" className="input-base w-full" />
                   </div>
-                  <div>
-                    <label className="block text-sm text-muted-foreground mb-2">Confirm password</label>
-                    <input type="password" className="w-full mb-2 input-base" />
+
+                  <div className="flex items-center justify-between mb-6">
+                    <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="form-checkbox" /> Remember me</label>
+                    <a href="#" className="text-sm text-navy-deep hover:underline">Forgot password?</a>
+                  </div>
+
+                  <button className="w-full px-4 py-3 bg-gradient-to-br from-navy-deep to-navy text-primary-foreground rounded-full">Log in</button>
+                  <div className="mt-4 text-center text-sm text-muted-foreground">
+                    Don't have an account? <button onClick={() => setTab('signup')} className="text-navy-deep font-medium hover:underline">Sign up</button>
                   </div>
                 </div>
+              ) : (
+                <div>
+                  <h2 className="text-2xl font-display font-bold mb-2">Create your account</h2>
+                  <p className="text-sm text-muted-foreground mb-6">Start your learning journey with DMHCA.</p>
 
-                <label className="block text-sm text-muted-foreground mb-2">Mobile number</label>
-                <input type="tel" className="w-full mb-6 input-base" />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="sr-only">First name</label>
+                      <input placeholder="First name" className="input-base w-full" />
+                    </div>
+                    <div>
+                      <label className="sr-only">Last name</label>
+                      <input placeholder="Last name" className="input-base w-full" />
+                    </div>
+                  </div>
 
-                <button className="w-full px-4 py-3 bg-navy-deep text-primary-foreground rounded-md text-lg">Sign up</button>
-                <div className="mt-6 text-center text-sm text-muted-foreground">
-                  Already have an account? <button onClick={() => setTab('login')} className="text-navy-deep font-medium hover:underline">Log in</button>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="sr-only">Email</label>
+                      <input type="email" placeholder="Email" className="input-base w-full" />
+                    </div>
+                    <div>
+                      <label className="sr-only">Mobile No</label>
+                      <input type="tel" placeholder="Mobile No" className="input-base w-full" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <div>
+                      <label className="sr-only">Password</label>
+                      <input type="password" placeholder="Password" className="input-base w-full" />
+                    </div>
+                    <div>
+                      <label className="sr-only">Confirm password</label>
+                      <input type="password" placeholder="Confirm password" className="input-base w-full" />
+                    </div>
+                  </div>
+
+                  <button className="w-full px-4 py-3 bg-gradient-to-br from-navy-deep to-navy text-primary-foreground rounded-full">Sign up</button>
+                  <div className="mt-4 text-center text-sm text-muted-foreground">
+                    Already have an account? <button onClick={() => setTab('login')} className="text-navy-deep font-medium hover:underline">Log in</button>
+                  </div>
                 </div>
-              </div>
-            )}
-
-            <div className="hidden md:flex flex-col items-start text-sm text-muted-foreground">
-              <div className="mb-4">
-                <h3 className="text-xl font-semibold text-foreground mb-2">Why create an account?</h3>
-                <ul className="list-disc pl-5">
-                  <li>Access exclusive course materials</li>
-                  <li>Save your progress and certificates</li>
-                  <li>Faster event registrations</li>
-                </ul>
-              </div>
-            </div>
-            {/* divider removed per request */}
+              )}
+            </section>
           </div>
         </div>
       </div>

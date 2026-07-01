@@ -98,49 +98,9 @@ function Sitemap() {
             </div>
           </div>
 
-          {/* List Of Medical Courses City Wise */}
-          <div>
-            <h2 className="font-display text-3xl text-navy-deep mb-8">List of Medical Courses City Wise</h2>
-            
-            {/* City-Wise Courses by Specialty */}
-            <div className="space-y-12">
-              {specialties.map((specialty) => (
-                <div key={specialty}>
-                  <h3 className="font-display text-2xl text-navy-deep mb-4 capitalize">
-                    {specialty} Courses by City
-                  </h3>
-                  <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {coursesBySpecialty[specialty].map((course) => (
-                      <Link
-                        key={course.slug}
-                        to={`/${course.slug}/`}
-                        className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
-                      >
-                        <div className="flex-1">
-                          <div className="font-medium text-navy-deep group-hover:text-navy">
-                            {specialty} in {course.city}
-                          </div>
-                          <div className="text-xs text-muted-foreground mt-1 line-clamp-1">
-                            {course.description}
-                          </div>
-                        </div>
-                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Course Categories removed per request (Medical Specializations) */}
-
-            {/* Extra curated city links removed to simplify markup; city-wise lists are generated above from data */}
-
-          </div>
-
           {/* Original List Of Medical Courses */}
           <div className="mt-12 pt-12 border-t border-slate-200">
-            <h2 className="font-display text-3xl text-navy-deep mb-8">All Medical Programs</h2>
+            <h2 className="font-display text-3xl text-navy-deep mb-8">List Of Medical Courses</h2>
             
             {/* Fellowships */}
             <div className="mb-12">
@@ -204,6 +164,46 @@ function Sitemap() {
                 ))}
               </div>
             </div>
+          </div>
+
+           {/* List Of Medical Courses City Wise */}
+          <div>
+            <h2 className="font-display text-3xl text-navy-deep mb-8">List of Medical Courses City Wise</h2>
+            
+            {/* City-Wise Courses by Specialty */}
+            <div className="space-y-12">
+              {specialties.map((specialty) => (
+                <div key={specialty}>
+                  <h3 className="font-display text-2xl text-navy-deep mb-4 capitalize">
+                    {specialty} Courses by City
+                  </h3>
+                  <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                    {coursesBySpecialty[specialty].map((course) => (
+                      <Link
+                        key={course.slug}
+                        to={`/${course.slug}/`}
+                        className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                      >
+                        <div className="flex-1">
+                          <div className="font-medium text-navy-deep group-hover:text-navy">
+                            {specialty} in {course.city}
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-1 line-clamp-1">
+                            {course.description}
+                          </div>
+                        </div>
+                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Course Categories removed per request (Medical Specializations) */}
+
+            {/* Extra curated city links removed to simplify markup; city-wise lists are generated above from data */}
+
           </div>
 
           {/* Blogs Section */}

@@ -54,8 +54,8 @@ function EmergencyMedicineCityPage() {
     <div className="bg-white min-h-screen">
       {/* Header */}
       <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 py-12">
-        <div className="container-home">
-          <div className="max-w-3xl mx-auto">
+        <div className="container-city">
+          <div className="w-full">
             <Link to="/city-wise-medical-courses" className="text-emerald-100 hover:text-white mb-4 inline-block">
               ← Back to all courses
             </Link>
@@ -68,8 +68,8 @@ function EmergencyMedicineCityPage() {
       </div>
 
       {/* Main Content */}
-      <div className="container-home py-16">
-        <div className="max-w-3xl mx-auto">
+      <div className="container-city py-16">
+        <div className="w-full">
           {/* Introduction */}
           <div className="mb-12">
             <p className="text-lg text-slate-700 leading-relaxed mb-4">
@@ -87,83 +87,22 @@ function EmergencyMedicineCityPage() {
             </Link>
           </div>
 
-          {/* FAQs */}
-          <div className="space-y-8">
-            {/* FAQ 1 */}
-            <div className="border-l-4 border-emerald-600 pl-6 py-4 bg-slate-50 rounded-r-lg">
-              <h2 className="text-xl font-bold text-slate-900 mb-3">
-                Where to apply for {specialty} courses in {city.charAt(0).toUpperCase() + city.slice(1)}?
-              </h2>
-              <p className="text-slate-700 mb-4">
-                DMHCA Institute offers premium {specialty} programs designed for
-                medical professionals seeking advanced specialization. Our
-                courses provide:
-              </p>
-              <ul className="list-disc list-inside text-slate-700 space-y-2">
-                <li>Expert faculty from leading institutions worldwide</li>
-                <li>Comprehensive curriculum covering latest developments</li>
-                <li>Flexible learning formats (online and offline)</li>
-                <li>Accredited certifications recognized nationally</li>
-              </ul>
-            </div>
+          {/* FAQs - unified short answers for city pages */}
+          <div className="space-y-4">
+            <CollapsibleFAQ
+              question={`Where to apply for ${specialty} courses in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
+              shortAnswer={`You can go with DMHCA Institute in ${city.charAt(0).toUpperCase() + city.slice(1)} for your ${specialty} course because of their medical experts.`}
+            />
 
-            {/* FAQ 2 */}
-            <div className="border-l-4 border-blue-600 pl-6 py-4 bg-slate-50 rounded-r-lg">
-              <h2 className="text-xl font-bold text-slate-900 mb-3">
-                What is the fees of {specialty} course in{" "}
-                {city.charAt(0).toUpperCase() + city.slice(1)}?
-              </h2>
-              <p className="text-slate-700 mb-4">
-                Course fees for {specialty} programs at DMHCA typically range from{" "}
-                <strong>₹50,000 to ₹3,00,000</strong>, depending on course
-                duration and specialization level. We offer:
-              </p>
-              <ul className="list-disc list-inside text-slate-700 space-y-2">
-                <li>Flexible payment options</li>
-                <li>Installment plans available</li>
-                <li>Scholarships for deserving candidates</li>
-                <li>Special corporate discounts</li>
-              </ul>
-              <p className="text-slate-700 mt-4">
-                Contact our admission team for detailed fee structure and
-                available discounts.
-              </p>
-            </div>
+            <CollapsibleFAQ
+              question={`What is the fees of ${specialty} course in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
+              shortAnswer={`The fees of ${specialty} courses in ${city.charAt(0).toUpperCase() + city.slice(1)} varies from ₹50,000 to ₹3,00,000. For latest prices, contact the DMHCA medical experts.`}
+            />
 
-            {/* FAQ 3 */}
-            <div className="border-l-4 border-purple-600 pl-6 py-4 bg-slate-50 rounded-r-lg">
-              <h2 className="text-xl font-bold text-slate-900 mb-3">
-                How to apply for {specialty} course in{" "}
-                {city.charAt(0).toUpperCase() + city.slice(1)}?
-              </h2>
-              <p className="text-slate-700 mb-4">
-                Applying is simple and straightforward. Here's how:
-              </p>
-              <ol className="list-decimal list-inside text-slate-700 space-y-2 mb-4">
-                <li>Visit our website and fill out the application form</li>
-                <li>Upload required documents (medical degree, certificates)</li>
-                <li>Review your application and submit</li>
-                <li>Receive confirmation within 24 hours</li>
-                <li>Complete payment and begin your course</li>
-              </ol>
-              <div className="bg-white p-4 rounded border border-slate-200 mt-4">
-                <p className="text-slate-700 mb-2">
-                  <strong>Direct Contact:</strong>
-                </p>
-                <p className="text-slate-700 mb-2">
-                  <strong>Phone:</strong>{" "}
-                  <a href="tel:+919899711530" className="text-emerald-600 hover:text-emerald-700">
-                    +91 9899711530
-                  </a>
-                </p>
-                <p className="text-slate-700">
-                  <strong>Email:</strong>{" "}
-                  <a href="mailto:info@dmhca.in" className="text-emerald-600 hover:text-emerald-700">
-                    info@dmhca.in
-                  </a>
-                </p>
-              </div>
-            </div>
+            <CollapsibleFAQ
+              question={`How to apply for ${specialty} course in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
+              shortAnswer={`Directly contact the DMHCA medical professionals at +91 9899711530 and they will guide you thoroughly.`}
+            />
           </div>
 
           {/* CTA Section */}
@@ -188,19 +127,7 @@ function EmergencyMedicineCityPage() {
             </div>
           </div>
 
-          {/* Courses in this City (CourseCard grid filtered by specialty) */}
-          <div className="mt-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Courses in {city.charAt(0).toUpperCase() + city.slice(1)}</h2>
-            {cityCourses.length > 0 ? (
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {cityCourses.map((c) => (
-                  <CourseCard key={c.slug} course={c} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-slate-600">No course listings found for this specialty.</div>
-            )}
-          </div>
+          {/* Removed duplicate 'Courses in this City' section */}
 
           {/* Related Courses */}
           <div className="mt-16">
@@ -230,3 +157,23 @@ function EmergencyMedicineCityPage() {
     </div>
   );
 }
+
+  function CollapsibleFAQ({ question, shortAnswer }) {
+    const [open, setOpen] = React.useState(false);
+    return (
+      <div className="border rounded-lg overflow-hidden bg-white hover:shadow-md transition-shadow">
+        <button
+          onClick={() => setOpen((v) => !v)}
+          className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition text-left"
+        >
+          <div className="text-base font-bold text-slate-900">{question}</div>
+          <div className="text-slate-600 ml-4 text-xl">{open ? "−" : "+"}</div>
+        </button>
+        {open && (
+          <div className="px-6 py-4 bg-slate-50 text-slate-700 text-sm leading-relaxed border-t border-slate-200">
+            {shortAnswer}
+          </div>
+        )}
+      </div>
+    );
+  }

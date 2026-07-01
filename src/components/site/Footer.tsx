@@ -2,24 +2,23 @@ import { Link } from "@tanstack/react-router";
 import { categories } from "@/data/courses";
 import { Mail, Phone, MapPin, Facebook, Youtube, Instagram, Linkedin } from "lucide-react";
 
-const logo = "/logo.webp";
-const whiteLogo = "/logo-white.webp";
+  const logo = "/logo.webp";
+  const whiteLogo = "/logo-white.webp";
 
 export function Footer() {
   return (
     <footer className="mt-24 bg-navy-deep text-primary-foreground">
       <div className="container-x py-12 md:py-14 grid gap-8 grid-cols-2 md:grid-cols-4 lg:grid-cols-12">
         <div className="col-span-2 md:col-span-2 lg:col-span-4">
-          <img
-            src={whiteLogo}
-            alt="DMHCA Logo - Delhi Medical Health Care Academy"
-            className="h-10 w-auto transition-opacity hover:opacity-75"
-            onError={(e) => {
-              const t = e.currentTarget as HTMLImageElement;
-              t.src = logo;
-              t.style.filter = "brightness(0) invert(1)";
-            }}
-          />
+                  <img
+                    src={whiteLogo}
+                    alt="DMHCA Logo - Delhi Medical Health Care Academy"
+                    className="h-10 w-auto transition-opacity hover:opacity-75"
+                    onError={(e) => {
+                      const t = e.currentTarget as HTMLImageElement;
+                      t.src = whiteLogo;
+                    }}
+                  />
           <p className="mt-4 md:mt-6 text-xs md:text-sm text-primary-foreground/70">
             Accessible online medical education, accredited certificates, and advanced fellowships — delivered by faculty from leading institutions worldwide.
           </p>

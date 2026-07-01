@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const logo = "/logo.webp";
-const whiteLogo = "/logo-white.webp";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about-dmhca", label: "About" },
@@ -19,7 +18,7 @@ export function Header() {
       <div className="container-x flex items-center justify-between h-16">
         <Link to="/" className="flex items-center">
           <img
-            src={whiteLogo}
+            src={logo}
             alt="DMHCA"
             className="h-10 w-auto transition-opacity hover:opacity-75"
             onError={(e) => {

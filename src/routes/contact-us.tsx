@@ -93,7 +93,7 @@ function Contact() {
                     <textarea className="mt-1 block w-full rounded-xl border px-4 py-3 h-40 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" placeholder="Write your message"></textarea>
                   </div>
                   <div>
-                    <button type="button" className="inline-flex items-center px-6 py-3 bg-gold text-navy-deep rounded-xl shadow-lg font-semibold">Send message</button>
+                    <button type="button" className="inline-flex items-center px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl shadow-lg font-semibold">Send message</button>
                   </div>
                 </form>
               </section>

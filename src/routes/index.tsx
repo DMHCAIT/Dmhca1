@@ -143,6 +143,17 @@ function Home() {
       <section className="site-hero" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
         {/* Decorative background elements */}
         <div className="absolute inset-0 opacity-30 pointer-events-none" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(203, 163, 91, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(203, 163, 91, 0.08) 0%, transparent 50%)'}} />
+        {/* Mobile: use slide hero image as subtle background */}
+        <div
+          className="absolute inset-0 pointer-events-none sm:hidden"
+          style={{
+            backgroundImage: `url(${slides[slide].blockImg || slides[slide].heroImg})`,
+            opacity: 0.18,
+            backgroundPosition: 'center right',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
           {/* Sliding background images (translateX) */}
           <motion.div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" initial={false} animate={{ x: `-${slide * 100}%` }} transition={{ duration: animDuration, ease: 'easeInOut' }}>
@@ -166,7 +177,7 @@ function Home() {
         <div className="container-home py-4 sm:py-6 md:py-8 lg:py-12 grid grid-cols-12 gap-3 sm:gap-4 md:gap-6 lg:gap-8 items-center relative z-10">
           {/* Left: content */}
           <motion.div 
-            className="col-span-7 sm:col-span-6 md:col-span-8 lg:col-span-8 space-y-3 sm:space-y-4 md:space-y-6 relative z-30"
+            className="col-span-12 sm:col-span-6 md:col-span-8 lg:col-span-8 space-y-3 sm:space-y-4 md:space-y-6 relative z-30"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -182,8 +193,8 @@ function Home() {
               <span className="text-xs font-semibold text-gold uppercase tracking-wider">Excellence in Medical Education</span>
             </motion.div>
 
-            <div className="space-y-3">
-              <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] sm:leading-[1.05] tracking-tight">
+            <div className="space-y-2">
+              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.08] sm:leading-[1.05] tracking-tight max-w-full">
                 <div>
                   <motion.span className="relative inline-block" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.1 }}>
                     {slides[slide].titleMain}
@@ -196,7 +207,7 @@ function Home() {
                 </div>
               </h1>
 
-              <motion.p className="text-sm sm:text-base md:text-lg text-white max-w-lg leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
+              <motion.p className="text-sm sm:text-base md:text-lg text-white max-w-full leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
                 {slides[slide].desc}
               </motion.p>
             </div>
@@ -207,7 +218,7 @@ function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <Link to="/top-medical-courses" className="group inline-flex items-center gap-2 px-6 py-2.5 bg-gold text-navy-deep text-sm font-medium hover:shadow-lg hover:shadow-gold/30 transition rounded-sm">
+              <Link to="/top-medical-courses" className="group inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-gold text-navy-deep text-sm font-medium hover:shadow-lg hover:shadow-gold/30 transition rounded-sm">
                 Explore Courses <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
               <div className="inline-flex items-center gap-2">
@@ -227,8 +238,8 @@ function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <p className="text-xs text-gold/70 uppercase tracking-widest mb-2 font-semibold">Trending specialties</p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-medium">
+              <p className="text-xs text-gold/70 uppercase tracking-widest mb-2 font-semibold hidden sm:block">Trending specialties</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-medium hidden sm:flex">
                 {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map((s, i) => (
                   <motion.div 
                     key={s}
@@ -255,37 +266,26 @@ function Home() {
 
           {/* Right: portrait + stat card */}
           <motion.div 
-            className="col-span-5 sm:col-span-6 md:col-span-4 lg:col-span-4 relative"
+            className="col-span-5 sm:col-span-6 md:col-span-4 lg:col-span-4 relative hidden sm:block"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="relative aspect-[3/4] sm:aspect-[4/5] max-w-full sm:max-w-sm md:max-w-md lg:max-w-none mx-auto z-20">
-              {/* Gold offset frame */}
-              <motion.div 
-                className="absolute inset-0 translate-x-1.5 sm:translate-x-2 translate-y-1.5 sm:translate-y-2 border-2 border-gold/40 rounded-sm"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              />
-              {/* Main image */}
-              <motion.div 
-                className="relative w-full h-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep lg:pr-[420px]"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ scale: 1.02 }}
-              >
-                <img src={slides[slide].heroImg} alt="DMHCA faculty" className={`w-full h-full object-cover object-center brightness-50`} onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
-                {slides[slide].blockImg ? (
-                  <div className="hidden lg:block absolute top-6 right-6 z-50" style={{ width: 360, height: 480 }}>
-                    <div className="w-full h-full rounded-lg overflow-hidden border-2 border-gold bg-white shadow-2xl">
-                      <img src={slides[slide].blockImg} alt="block" style={{ width: '360px', height: '480px', objectFit: 'cover' }} />
-                    </div>
-                  </div>
-                ) : null}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              </motion.div>
+            <div className="relative w-full h-auto z-20">
+              {/* Block Image - All Screen Sizes */}
+              {slides[slide].blockImg ? (
+                <motion.div 
+                  className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep border-2 border-gold"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <img src={slides[slide].blockImg} alt="DMHCA faculty" className="w-full h-auto object-cover object-center" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                </motion.div>
+              ) : null}
+              
               {/* Floating stat card */}
               <motion.div 
                 className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
@@ -305,6 +305,12 @@ function Home() {
               </motion.div>
             </div>
           </motion.div>
+          {/* Mobile stacked image hidden on small screens per request */}
+          <div className="col-span-12 hidden">
+            <div className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep">
+              <img src={slides[slide].heroImg} alt="DMHCA faculty" className={`w-full h-auto object-cover object-center brightness-60`} onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+            </div>
+          </div>
         </div>
         
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
