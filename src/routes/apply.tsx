@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/apply")({
@@ -102,13 +101,6 @@ function ApplicationForm() {
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 mb-4 font-medium"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </Link>
             <div className="bg-white shadow-lg rounded-2xl p-6 inline-block">
               <h1 className="font-display text-3xl md:text-4xl text-navy-deep">Apply for a Course</h1>
               <p className="mt-2 text-sm md:text-base text-slate-600">Fill out this short form and our admissions team will contact you.</p>
