@@ -572,7 +572,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="text-xs uppercase tracking-widest text-slate-600 font-bold">Course Price</div>
                 <div className="flex items-baseline gap-3">
                   <div className="text-4xl font-black text-slate-900">{formatINR(course.priceINR)}</div>
-                  <div className="text-lg font-bold text-slate-700">+GST+Misc.</div>
+                  <div className="text-lg font-bold text-slate-700">+GST</div>
                 </div>
                 <div className="text-sm text-slate-700 font-semibold">Total: {formatINR(totalPrice)}</div>
               </div>
