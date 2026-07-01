@@ -120,9 +120,10 @@ function ApplicationForm() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-2xl shadow-xl p-8 space-y-6 border border-slate-100"
+              className="bg-white rounded-xl shadow-md p-6 md:p-8 space-y-5 border border-slate-200"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Full Name and Email - Side by side */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">Full Name *</label>
                   <input
@@ -131,11 +132,10 @@ function ApplicationForm() {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
-                    placeholder="Enter your full name"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
+                    placeholder="Your name"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">Email Address *</label>
                   <input
@@ -144,29 +144,14 @@ function ApplicationForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
-                    placeholder="Enter your email address"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
+                    placeholder="your@email.com"
                   />
                 </div>
               </div>
 
-              {/* Email */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                  placeholder="Enter your email address"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Phone and Qualification */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">Phone Number *</label>
                   <input
@@ -175,18 +160,17 @@ function ApplicationForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
-                    placeholder="Enter your phone number"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
+                    placeholder="+91 XXXXX XXXXX"
                   />
                 </div>
-
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">Highest Qualification</label>
                   <select
                     name="qualification"
                     value={formData.qualification}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900 bg-white"
                   >
                     <option value="">Select qualification</option>
                     <option value="MBBS">MBBS</option>
@@ -197,20 +181,21 @@ function ApplicationForm() {
                 </div>
               </div>
 
-              {/* Qualification */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Years of Experience</label>
-                  <input
-                    type="text"
-                    name="experience"
-                    value={formData.experience}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
-                    placeholder="e.g., 2 years"
-                  />
-                </div>
+              {/* Years of Experience */}
+              <div>
+                <label className="block text-sm font-semibold text-slate-900 mb-2">Years of Experience</label>
+                <input
+                  type="text"
+                  name="experience"
+                  value={formData.experience}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
+                  placeholder="e.g., 2 years"
+                />
+              </div>
 
+              {/* Program Type and Course of Interest */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">Program Type *</label>
                   <select
@@ -218,55 +203,50 @@ function ApplicationForm() {
                     value={formData.program}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900 bg-white"
                   >
                     <option value="">Select a program</option>
                     <option value="Fellowship">Fellowship</option>
                     <option value="PG Diploma">PG Diploma</option>
                     <option value="Certificate">Certificate Course</option>
-                    <option value="Other">Other</option>
                   </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-slate-900 mb-2">Course of Interest *</label>
+                  <input
+                    type="text"
+                    name="course"
+                    value={formData.course}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
+                    placeholder="Enter your desired course"
+                  />
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">Course of Interest *</label>
-                <input
-                  type="text"
-                  name="course"
-                  value={formData.course}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent bg-slate-50"
-                  placeholder="Course name"
-                />
-              </div>
-              
-
               {/* Message */}
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">
-                  Additional Message
-                </label>
+                <label className="block text-sm font-semibold text-slate-900 mb-2">Additional Message</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                  placeholder="Tell us about your interest and why you want to join this program"
+                  rows={3}
+                  className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
+                  placeholder="Tell us about your interest..."
                 />
               </div>
 
-              <div className="flex items-center gap-4">
+              {/* Submit Button */}
+              <div className="pt-2">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="flex-1 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-6 py-3 bg-navy-deep hover:bg-navy-deep/90 text-white font-bold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? "Submitting..." : "Submit Application"}
                 </button>
-                <Link to="/courses" className="px-4 py-3 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50">Browse Courses</Link>
               </div>
 
               <p className="text-xs text-slate-500 text-center">
