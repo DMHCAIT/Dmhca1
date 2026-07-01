@@ -60,17 +60,13 @@ export function CourseCard({ course }: { course: Course }) {
         </div>
       </div>
       <div className="p-5">
-        <div className="flex items-center gap-4 text-xs text-muted-foreground">
-          {course.lessons != null && <span className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons</span>}
-          {course.weeks != null && <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {course.weeks} week</span>}
-          <span className="capitalize">{course.level}</span>
-        </div>
-        <div className="mt-4 flex items-end justify-between">
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Tuition</div>
-            <div className="text-lg font-semibold text-navy-deep tracking-tight">{formatINR(course.priceINR)}</div>
+        <div className="flex items-center gap-4 text-xs text-muted-foreground justify-between">
+          <div className="flex items-center gap-4">
+            {course.lessons != null && <span className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons</span>}
+            {course.weeks != null && <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {Math.round(course.weeks / 4.33)} months</span>}
+            <span className="capitalize">{course.level}</span>
           </div>
-          <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition">
+          <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition whitespace-nowrap">
             View <ArrowUpRight className="w-4 h-4" />
           </span>
         </div>

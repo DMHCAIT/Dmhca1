@@ -153,7 +153,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               <div className="flex items-center gap-2"><div className="flex items-center gap-1"><Star className="w-4 h-4 fill-yellow-500 text-yellow-500" /> <span className="font-semibold text-white">{course.rating}</span></div> <span className="text-slate-400">({course.reviewCount} reviews)</span></div>
             )}
             {course.lessons != null && <div className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.lessons} lessons</span></div>}
-            {course.weeks != null && <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.weeks} weeks</span></div>}
+            {course.weeks != null && <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{Math.round(course.weeks / 4.33)} months</span></div>}
             <div className="flex items-center gap-2"><Award className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{ptype}</span></div>
             <div className="flex items-center gap-2"><GraduationCap className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.level}</span></div>
           </div>
@@ -240,7 +240,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
                 Curriculum
               </h2>
-              <p className="text-sm text-slate-600 mb-5">{course.modules.length} Sections · {course.lessons ?? "—"} Lessons · {course.weeks ?? "—"} Weeks</p>
+              <p className="text-sm text-slate-600 mb-5">{course.modules.length} Sections · {course.lessons ?? "—"} Lessons · {course.weeks ? `${Math.round(course.weeks / 4.33)} Months` : "—"}</p>
               <div className="space-y-3">
                 {course.modules.map((m: string, i: number) => (
                   <details key={m + i} className="group border border-slate-300 hover:border-blue-400 rounded-xl overflow-hidden transition-all bg-white hover:shadow-md">
@@ -591,7 +591,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="flex items-center gap-3">
                   <Clock className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
                   <div className="text-xs uppercase tracking-widest text-slate-600 font-bold min-w-24">Duration</div>
-                  <div className="font-bold text-slate-900 text-base tracking-wide">{course.meta?.duration || course.weeks + " weeks"}</div>
+                  <div className="font-bold text-slate-900 text-base tracking-wide">{course.meta?.duration || (course.weeks ? `${Math.round(course.weeks / 4.33)} months` : "—")}</div>
                 </div>
                 <div className="flex items-center gap-3">
                   <BookOpen className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
@@ -663,7 +663,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                     <div className="p-6 space-y-5">
                       <div className="flex items-center gap-5 text-xs text-slate-700 font-semibold">
                         {r.lessons != null && <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-slate-900" /> {r.lessons} lessons</span>}
-                        {r.weeks != null && <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-900" /> {r.weeks} weeks</span>}
+                        {r.weeks != null && <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-900" /> {Math.round(r.weeks / 4.33)} months</span>}
                         <span className="capitalize px-3 py-1 bg-slate-200 text-slate-800 rounded-full font-bold">{r.level}</span>
                       </div>
                       <div className="flex items-end justify-between">

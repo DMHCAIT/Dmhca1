@@ -194,7 +194,7 @@ faqs: [
   { q: "What is the salary expectation after a Fellowship in Echocardiography?", a: "Salary depends on experience and location, with growth opportunities as clinical expertise increases." }
 ],
     meta: {
-      duration: "52 week",
+      duration: "12 months",
       lessons: "41",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -251,14 +251,14 @@ moduleDetails: [
 
 faqs: [
   { q: "Who is eligible for the Certificate in Hypertension?", a: "MBBS, MD, MS, DGO, DNB holders and other healthcare professionals with a clinical background are eligible for the Certificate in Hypertension." },
-  { q: "What is the duration of the Certificate in Hypertension?", a: "The course runs for 50 weeks, providing comprehensive training in hypertension management and preventive care." },
+  { q: "What is the duration of the Certificate in Hypertension?", a: "The course runs for 12 months, providing comprehensive training in hypertension management and preventive care." },
   { q: "What will I learn in this hypertension certification course?", a: "You’ll learn about blood pressure measurement, risk factors, diagnosis, treatment guidelines, lifestyle modification, and patient education for better outcomes." },
   { q: "What are the career opportunities after completing this course?", a: "Graduates can work in hospitals, clinics, preventive care settings, and community health programs focusing on hypertension and cardiovascular risk management." },
   { q: "What is the fee for the Certificate in Hypertension?", a: "Fees vary by program structure and training scope; exact details are available on inquiry or enrollment request with the academy." },
   { q: "What is the salary expectation after completing the hypertension certificate?", a: "Salary depends on role, experience, and location; skilled professionals in hypertension care and chronic disease management typically earn competitive packages in clinical and preventive healthcare." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "35",
       skill_level: "Certificate",
       certificate: "yes"
@@ -365,7 +365,7 @@ faqs: [
   { q: "What is the salary expectation after a Fellowship in Interventional Cardiology?", a: "Salary depends on knowledge, experience, and location; interventional cardiologists typically earn high salaries with strong growth potential in private and hospital settings." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "37",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -524,7 +524,7 @@ faqs: [
   { q: "What is the salary after completion?", a: "Salary depends on experience and location, with strong earning potential in both hospital and private practice settings." }
 ],
     meta: {
-      duration: "52 week",
+      duration: "12 months",
       lessons: "70",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -617,7 +617,7 @@ faqs: [
     }
   ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "18",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -713,7 +713,7 @@ faqs: [
     }
   ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "17",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -729,8 +729,7 @@ faqs: [
     title: "Fellowship in Abdominal Imaging",
     categories: ["radiology"],
     image: "/courses/Fellowship-Course-in-Abdominal-Imaging-410x290.webp",
-    heroTitle: "Master Abdominal Imaging",
-    heroDescription: "Advanced training in imaging of abdominal organs using ultrasound, Doppler, CT, and MRI with focus on oncologic and...",
+    heroDescription: "Advanced training in imaging of abdominal organs using ultrasound, Doppler, CT, and MRI with focus on oncologic.",
     lessons: 28,
     weeks: 25,
     level: "expert",
@@ -785,7 +784,7 @@ faqs: [
   { q: "Can this abdominal imaging fellowship from DMHCA enhance my career and earning potential?", a: "Yes, This course providing advanced online training in abdominal imaging can boost your professional profile, expand clinical opportunities, and support higher earning prospects in radiology and diagnostic care." }
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "28",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -851,7 +850,7 @@ faqs: [
 
   faqs: [
     { q: "Who is eligible for the Fellowship in Pulmonology?", a: "MBBS, MD/MS or equivalent qualifications are required. Candidates should have a strong foundation in clinical medicine or internal medicine." },
-    { q: "What is the duration of the Fellowship in Pulmonology?", a: "The fellowship program runs for 50 weeks, providing comprehensive training in respiratory medicine and pulmonary diagnostics." },
+    { q: "What is the duration of the Fellowship in Pulmonology?", a: "The fellowship program runs for 12 months, providing comprehensive training in respiratory medicine and pulmonary diagnostics." },
     { q: "What will I learn in this pulmonology fellowship?", a: "You'll learn respiratory system anatomy and physiology, diagnosis and management of pulmonary diseases, pulmonary function testing, imaging interpretation, bronchoscopy techniques, and critical respiratory care management." },
     { q: "What are the career opportunities after this fellowship?", a: "Graduates can work as respiratory specialists in hospitals, clinics, research institutions, and critical care settings, managing respiratory diseases and providing expert pulmonary care." },
     { q: "What is the fee for the Fellowship in Pulmonology?", a: "The program fee is ₹140,000. Payment options and financial arrangements are available on inquiry." },
@@ -863,7 +862,7 @@ faqs: [
   ],
 
   meta: {
-    duration: "50 weeks",
+    duration: "12 months",
     lessons: "52",
     skill_level: "Fellowship",
     certificate: "yes"
@@ -896,7 +895,7 @@ faqs:[
 {q:"Can the Breast Imaging fellowship from DMHCA support career advancement and higher earnings?",a:"Yes, This advanced online training in breast imaging can boost your professional credibility, expand clinical opportunities, and support enhanced earning potential in radiology and diagnostic practice."}
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "23",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -962,7 +961,7 @@ faqs: [
   { q: "Can advanced online training in women’s imaging from DMHCA improve my career and earnings?", a: "Yes, after completing this fellowship can boost your professional profile, open advanced clinical opportunities, and support higher earning potential in women’s health and diagnostic imaging." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "27",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -1100,7 +1099,7 @@ faqs: [
   { q: "Can this PG Diploma help increase professional income?", a: "Yes — advanced academic knowledge in cosmetology and aesthetic medicine can improve professional credibility, leading to better career opportunities and income growth." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "46",
       skill_level: "PG Diploma",
       certificate: "yes"
@@ -1192,7 +1191,7 @@ faqs: [
   { q: "Can this infectious diseases diploma from DMHCA enhance my career and earning potential?", a: "Yes, it can improve professional credibility, expand specialized career opportunities, and support long-term career growth in healthcare." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "29",
       skill_level: "PG Diploma",
       certificate: "yes"
@@ -1276,7 +1275,7 @@ faqs: [
   { q: "Can completing this certificate support career growth and earning potential?", a: "Yes, This specialized online training in clinical psychology can boost professional credibility, expand opportunities in mental health and counseling settings, and support enhanced income prospects in psychological care." }
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "25",
       skill_level: "Certificate",
       certificate: "yes"
@@ -1336,7 +1335,7 @@ faqs: [
   { q: "Can this clinical nutrition certificate from DMHCA boost my career and earning potential?", a: "Yes, This program in clinical nutrition can boost your professional credibility, expand your career opportunities, and support higher income prospects in clinical, community, and wellness settings." }
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "36",
       skill_level: "Certificate",
       certificate: "yes"
@@ -1447,7 +1446,7 @@ faqs: [
   { q: "Can this HIV Medicine certificate from DMHCA support career growth and income potential?", a: "Yes, This Program is focused online training in HIV medicine can boost your professional credibility, expand clinical roles, and support improved earning opportunities in infectious disease and public health settings." }
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "42",
       skill_level: "Certificate",
       certificate: "yes"
@@ -1532,7 +1531,7 @@ faqs: [
   { q: "Can completing this tuberculosis certificate from DMHCA support my career growth and earning potential?", a: "Yes, This Course is focused online training in TB medicine can boost your professional credibility, open clinical and public health opportunities, and support enhanced income prospects in infectious disease care." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "27",
       skill_level: "Certificate",
       certificate: "yes"
@@ -1619,7 +1618,7 @@ faqs: [
     }
   ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "48",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -1680,7 +1679,7 @@ faqs: [
   { q: "Can this Rheumatology fellowship from DMHCA boost career opportunities and income potential?", a: "Yes, it can boost professional credibility, expand clinical roles, and support enhanced earning prospects in rheumatology and related specialties." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "24",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -1793,7 +1792,7 @@ faqs: [
   { q: "Can completing this certification support career growth and earning potential?", a: "Yes, This specialized online training in obstetric and gynecological nursing can boost professional credibility, expand career opportunities, and support enhanced income prospects in maternal healthcare settings." }
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "36",
       skill_level: "Certificate",
       certificate: "yes",
@@ -1924,7 +1923,7 @@ moduleDetails: [
     { q: "Can this maternal and child health diploma from DMHCA enhance my career and earning potential?", a: "Yes, it can strengthen professional credibility, expand healthcare career opportunities, and support long-term career growth in maternal and child health services." }
   ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "48",
       skill_level: "PG Diploma",
       certificate: "yes"
@@ -2052,7 +2051,7 @@ faqs: [
 { q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in obstetrics and maternal-fetal medicine, and support higher earning potential in hospitals, maternity centers, and specialized pregnancy care services." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "53",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -2147,7 +2146,7 @@ faqs: [
   { q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand clinical roles, and support higher earning potential in obstetrics, maternal-fetal medicine, and prenatal care." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "28",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -2210,7 +2209,7 @@ faqs:[
   {q:"Can the Obstetrics Ultrasound fellowship from DMHCA help enhance my career and income potential?",a:"Yes, This advanced online training in obstetric ultrasound can boost your professional credibility, expand clinical roles, and support higher earning opportunities in prenatal diagnostic and maternal-fetal care."}
 ],
     meta: {
-      duration: "25 week",
+      duration: "6 months",
       lessons: "24",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -2320,7 +2319,7 @@ faqs: [
   { q: "Can this online fellowship from DMHCA enhance my career prospects and earning potential?", a: "Yes, this course in laparoscopy and hysteroscopy can boost your professional profile, expand clinical opportunities, and support higher earning potential in gynecologic surgery and women’s health care." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "35",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -2418,7 +2417,7 @@ faqs: [
   { q: "Can it improve earning potential?", a: "Yes, specialized training in cosmetic gynecology can increase professional credibility and expand income opportunities in private and aesthetic practice." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "23",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -2580,7 +2579,7 @@ faqs: [
   { q: "Can this fellowship improve career growth?", a: "Yes, it enhances clinical expertise, professional credibility, and can improve career opportunities and earning potential." }
 ],
     meta: {
-      duration: "50 week",
+      duration: "12 months",
       lessons: "68",
       skill_level: "Fellowship",
       certificate: "yes"
@@ -2649,7 +2648,7 @@ faqs: [
   { q: "What is the fee for the Pediatric Rheumatology fellowship at DMHCA?", a: "Fees vary based on course structure and included digital learning materials; comprehensive pricing details are provided upon inquiry or enrollment request." },
   { q: "Can this online fellowship from DMHCA enhance my career prospects and earnings?", a: "Yes, This online training in pediatric rheumatology can boost your professional credibility, expand clinical roles, and support higher earning opportunities in pediatric care and autoimmune disease management." }
 ],
-    meta: { duration: "50 week", lessons: "42", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "42", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-nutrition-and-dietetics",
@@ -2745,7 +2744,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Nutrition and Dietetics at DMHCA?", a: "Fees vary depending on the course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can this nutrition and dietetics diploma from DMHCA enhance my career and earning potential?", a: "Yes, it can strengthen professional credibility, expand opportunities in healthcare, wellness, and nutrition services, and support long-term career growth." }
 ],
-    meta: { duration: "50 week", lessons: "32", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "32", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "certificate-in-clinical-embryology",
@@ -2833,7 +2832,7 @@ faqs: [
   { q: "What is the fee for the Certificate in Clinical Embryology?", a: "Fees vary based on course structure and included learning resources; detailed pricing information is provided upon inquiry or enrollment request." },
   { q: "Can completing this certificate support career growth and earning potential?", a: "Yes, This specialized online training in clinical embryology can boost professional credibility, expand opportunities in fertility centers and IVF laboratories, and support enhanced income prospects in reproductive medicine." }
 ],
-    meta: { duration: "25 week", lessons: "26", skill_level: "Certificate", certificate: "yes" }
+    meta: { duration: "6 months", lessons: "26", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "certificate-in-obesity-management",
@@ -2948,7 +2947,7 @@ faqs: [
   { q: "What is the fee for the Certificate in Obesity Management?", a: "The fee may vary depending on enrolment options. For the latest details, candidates are advised to contact DMHCA directly." },
   { q: "What is the salary expectation after this certification?", a: "Income potential depends on experience, location, and practice setup. Professionals offering obesity management services can significantly increase their consultation and treatment revenue." }
 ],
-    meta: { duration: "25 week", lessons: "26", skill_level: "Certificate", certificate: "yes" }
+    meta: { duration: "6 months", lessons: "26", skill_level: "Certificate", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-clinical-embryology",
@@ -3107,7 +3106,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Clinical Embryology at DMHCA?", a: "Fees vary based on course structure and included resources; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can this clinical embryology diploma from DMHCA boost career opportunities and earning potential?", a: "Yes, This program is providing advanced online training in clinical embryology can enhance your professional credibility, open doors to IVF lab roles, and support better income prospects in reproductive medicine." }
 ],
-    meta: { duration: "50 week", lessons: "73", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "73", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "fellowship-in-reproductive-medicine",
@@ -3272,7 +3271,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Reproductive Medicine at DMHCA?", a: "Fees vary depending on course structure and included learning resources; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can completing this online fellowship from DMHCA support my career growth and income potential?", a: "Yes, completing the DMHCA Fellowship in Reproductive Medicine can boost your career, enhance clinical credibility, and increase earning potential." }
 ],
-    meta: { duration: "50 week", lessons: "77", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "77", skill_level: "Fellowship", certificate: "yes" }
   },
 
   {
@@ -3329,7 +3328,7 @@ faqs: [
   { q: "What is the fee for the Certificate in Infertility at DMHCA?", a: "Fees vary based on course structure and included learning resources; full pricing details are shared upon inquiry or enrollment request." },
   { q: "Can completing this infertility certificate from DMHCA help my career and income potential?", a: "Yes, This Course in infertility can boost your professional credibility, expand clinical roles, and support higher earning opportunities in reproductive medicine and fertility care." }
 ],
-    meta: { duration: "25 week", lessons: "28", skill_level: "PG Diploma", certificate: "yes" },
+    meta: { duration: "6 months", lessons: "28", skill_level: "PG Diploma", certificate: "yes" },
   },
   {
     slug: "fellowship-in-clinical-embryology",
@@ -3465,7 +3464,7 @@ faqs: [
   { q: "What is the fee for this program?", a: "Fees vary based on structure and resources; exact details are shared during inquiry." },
   { q: "Can this fellowship improve career growth?", a: "Yes, it enhances clinical and laboratory expertise, improving career opportunities in fertility and ART labs." }
 ],
-    meta: { duration: "50 week", lessons: "55", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "55", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-endocrinology",
@@ -3557,7 +3556,7 @@ faqs: [
     a: "Fees vary based on course structure and academic resources provided; complete pricing details are shared during the inquiry or enrollment process."
   }
 ],
-    meta: { duration: "52 week", lessons: "16", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "16", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-diabetology",
@@ -3657,7 +3656,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Diabetology?", a: "Fees vary by course structure and resources; details are shared upon inquiry or enrollment." },
   { q: "Can this fellowship improve professional credibility and earning potential?", a: "Yes, it can strengthen professional credibility, expand clinical opportunities, and support higher earning potential." }
 ],
-    meta: { duration: "52 week", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "certificate-in-diabetic-foot-care",
@@ -3794,7 +3793,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Orthopedics at DMHCA?", a: "Fees vary based on course structure and included digital learning materials; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can this Orthopedic fellowship from DMHCA boost my career opportunities and earning potential?", a: "Yes, this course in orthopedics can boost your professional credibility, broaden your clinical roles, and support higher earning prospects in musculoskeletal and surgical care." }
 ],
-    meta: { duration: "50 week", lessons: "31", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "31", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-spine-surgery",
@@ -3940,7 +3939,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Spine Surgery?", a: "Fees vary based on course structure and learning resources; detailed pricing is available upon inquiry or enrollment request." },
   { q: "Can completing this fellowship increase my income and clinical stature?", a: "Yes, it can boost professional credibility, expand clinical opportunities, and support higher earning potential in surgical practice." }
 ],
-    meta: { duration: "50 week", lessons: "66", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "66", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-dermatology",
@@ -4105,7 +4104,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Dermatology?", a: "Fees vary based on program structure and learning resources; exact details are shared during inquiry or enrollment." },
   { q: "Can this fellowship increase earning potential in dermatology?", a: "Yes, advanced dermatology training can enhance professional credibility and help expand patient base and income opportunities." }
 ],
-    meta: { duration: "52 week", lessons: "78", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "78", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-trichology",
@@ -4216,7 +4215,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Trichology?", a: "Fees depend on the course structure and academic support provided; exact fee details are shared during the admission or inquiry process." },
   { q: "Can a Trichology fellowship improve earning potential?", a: "Yes, specialized training in trichology can enhance professional credibility, helping practitioners attract more patients and increase income opportunities." }
 ],
-    meta: { duration: "52 week", lessons: "47", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "47", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-cosmetology-and-aesthetic-medicine",
@@ -4380,7 +4379,7 @@ faqs: [
   { q: "What is the fee for this fellowship?", a: "Fees vary based on course structure and training components; exact details are shared during inquiry or enrollment." },
   { q: "Can it improve earning potential?", a: "Yes, advanced aesthetic training can increase professional credibility, patient trust, and income opportunities in cosmetic medicine." }
 ],
-    meta: { duration: "52 week", lessons: "75", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "75", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "certificate-course-in-cosmetology",
@@ -4420,7 +4419,7 @@ faqs: [
         "Continuous learning"
       ]
     ],
-    meta: { duration: "25 week", lessons: "15", skill_level: "Certificate", certificate: "yes" },
+    meta: { duration: "6 months", lessons: "15", skill_level: "Certificate", certificate: "yes" },
     trainers: [
       { name: "Dr Bhuvaneshwari", title: "Cosmetologist/Dermatologist", bio: "Expert in cosmetic dermatology and aesthetic procedures.", image: "/Faculty_images/dr-bhuvaneshwari.jpg" }
     ]
@@ -4516,7 +4515,7 @@ faqs: [
   { q: "What is the fee for the Robotic Surgery Fellowship at DMHCA?", a: "Course fees vary depending on structure and academic resources provided; complete pricing details are shared during the inquiry or enrollment process." },
   { q: "Can this fellowship at DMHCA boost my clinical credibility and income potential?", a: "Yes, this course in robotic surgery can improve professional credibility, open up advanced clinical opportunities and support better earning potential in surgical specialties." }
 ],
-    meta: { duration: "50 week", lessons: "29", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "29", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatric-surgery",
@@ -4634,7 +4633,7 @@ faqs: [
     a: "Yes, This advanced online training in pediatric surgery can boost professional credibility, expand clinical roles, and support higher income opportunities in pediatric surgical and hospital settings."
   }
 ],
-    meta: { duration: "52 week", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatrics-neurology",
@@ -4690,7 +4689,7 @@ faqs: [
   { q: "How much does the Fellowship in Pediatric Neurology at DMHCA cost?", a: "Fees depend on course structure and included learning resources; complete pricing information is shared upon inquiry or enrollment request." },
   { q: "Can this fellowship increase my career opportunities and earning potential?", a: "Yes, this advanced training in pediatric neurology can boost your professional profile, expand clinical roles, and support better income opportunities in child health and neurological care." }
 ],
-    meta: { duration: "50 week", lessons: "44", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "44", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-neonatology",
@@ -4811,7 +4810,7 @@ faqs: [
   { q: "What is the fee for the Neonatology fellowship at DMHCA?", a: "Fees vary depending on course structure and learning resources; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can completing this online fellowship from DMHCA enhance my career and earning potential?", a: "Yes, this program in neonatology can boost professional credibility, expand clinical opportunities, and support higher earning prospects in neonatal and pediatric care." }
 ],
-    meta: { duration: "50 week", lessons: "55", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "55", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatric-echocardiography",
@@ -4911,7 +4910,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Pediatric Echocardiography at DMHCA?", a: "Fees vary based on the course structure and included learning resources; detailed pricing information is provided upon inquiry or enrollment request." },
   { q: "Can completing this fellowship enhance my career opportunities and earning potential?", a: "Yes, this fellowship can strengthen your professional profile, expand opportunities in pediatric cardiology and cardiac imaging, and support increased earning potential in specialized healthcare settings." }
 ],
-    meta: { duration: "52 week", lessons: "30", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "30", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-emergency-medicine",
@@ -5075,7 +5074,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Emergency Medicine?", a: "Fees vary depending on the course structure and learning resources included; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can this fellowship improve career opportunities and earning potential?", a: "Yes, advanced training in emergency medicine can enhance professional credibility, expand clinical opportunities, and support higher earning potential in emergency and critical care settings." }
 ],
-    meta: { duration: "52 week", lessons: "79", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "79", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-emergency-medicine",
@@ -5162,7 +5161,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Emergency Medicine?", a: "Course fees vary based on program structure and learning resources provided; detailed pricing is available upon inquiry or enrollment request." },
   { q: "Can this PG Diploma improve earning potential in emergency care?", a: "Yes, This advanced understanding in emergency medicine can boost professional credibility, expand clinical roles, and support higher income opportunities in emergency and hospital environments." }
 ],
-    meta: { duration: "52 week", lessons: "29", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "29", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "fellowship-in-critical-care",
@@ -5318,7 +5317,7 @@ faqs: [
   { q: "What is the fee for this fellowship?", a: "Fees vary based on program structure and resources; detailed information is shared upon inquiry or enrollment." },
   { q: "Can this improve earning potential?", a: "Yes, advanced critical care training can improve professional credibility and open higher-paying clinical roles in ICU and emergency care." }
 ],
-    meta: { duration: "52 week", lessons: "74", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "74", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-critical-care",
@@ -5443,7 +5442,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Critical Care?", a: "Fees vary depending on course structure and included learning resources; detailed pricing is provided upon inquiry or enrollment request." },
   { q: "Can this PG Diploma improve my earning potential in critical care?", a: "Yes, This advanced training in critical care can boost professional credibility, career prospects, and potential income, especially in acute care and hospital settings." }
 ],
-    meta: { duration: "52 week", lessons: "48", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "48", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-hiv-medicine",
@@ -5524,7 +5523,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in HIV Medicine at DMHCA?", a: "Fees vary based on course structure and provided learning resources; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can completing this PG Diploma from DMHCA improve my career prospects and income potential?", a: "Yes — advanced online training in HIV medicine can boost your professional credibility, open up broader clinical roles, and support better earning opportunities in infectious disease and public health settings." }
 ],
-    meta: { duration: "52 week", lessons: "18", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "18", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-hospital-administration",
@@ -5665,7 +5664,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Hospital Administration at DMHCA?", a: "Fees vary depending on the course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can this hospital administration diploma from DMHCA enhance my career and earning potential?", a: "Yes, it can strengthen professional credibility, expand healthcare leadership opportunities, and support long-term career growth in hospital administration." }
 ],
-    meta: { duration: "50 week", lessons: "48", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "48", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-hospital-management",
@@ -5883,7 +5882,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Hospital Management at DMHCA?", a: "Fees vary depending on the course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can this hospital management diploma from DMHCA enhance my career and earning potential?", a: "Yes, it can strengthen professional credibility, expand healthcare leadership opportunities, and support long-term career growth in hospital management." }
 ],
-    meta: { duration: "50 week", lessons: "126", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "126", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "fellowship-in-family-medicine",
@@ -5951,7 +5950,7 @@ faqs: [
   { q: "What is the fee for the DMHCA Fellowship in Family Medicine?", a: "Fees vary by course structure and resources; details are shared upon inquiry or enrollment." },
   { q: "Can this fellowship from DMHCA boost my career and income potential?", a: "Yes, it can enhance professional credibility, expand clinical roles, and support higher earning opportunities." }
 ],
-    meta: { duration: "52 week", lessons: "73", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "73", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pain-management",
@@ -6047,7 +6046,7 @@ faqs: [
   { q: "What is the fee for the Pain Management fellowship at DMHCA?", a: "Fees vary depending on course structure and included digital learning materials; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can completing this fellowship from DMHCA enhance my career opportunities and earning potential?", a: "Yes, this program in pain management can boost your professional credibility, expand clinical roles, and support higher earning prospects in pain care and related specialties." }
 ],
-    meta: { duration: "50 week", lessons: "33", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "33", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-medical-oncology",
@@ -6200,7 +6199,7 @@ faqs: [
   { q: "What is the fee for the Medical Oncology fellowship at DMHCA?", a: "Fees vary based on course design and included digital study materials; full pricing information is provided upon inquiry or enrollment request." },
   { q: "Can advanced training in medical oncology from DMHCA boost my career and earning potential?", a: "Yes, this program in medical oncology can boost professional credibility, expand clinical opportunities, and support higher earning prospects in oncology and related specialties." }
 ],
-    meta: { duration: "50 week", lessons: "72", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "72", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-head-and-neck-oncology",
@@ -6304,7 +6303,7 @@ faqs: [
     a: "Yes, This program in head and neck oncology can boost your professional profile, expand clinical opportunities, and support higher earning potential in oncology and related specialties."
   }
 ],
-    meta: { duration: "50 week", lessons: "24", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "24", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-gynecologic-oncology",
@@ -6452,7 +6451,7 @@ faqs: [
   { q: "What is the fee for this fellowship?", a: "Fees vary based on structure and resources; exact details are provided during inquiry." },
   { q: "Can this fellowship improve career growth?", a: "Yes, it enhances clinical expertise, professional credibility, and career opportunities in oncology." }
 ],
-    meta: { duration: "50 week", lessons: "64", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "64", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-gastroenterology",
@@ -6572,7 +6571,7 @@ faqs: [
         "Endoscopic mucosal biopsy"
       ]
     ],
-    meta: { duration: "50 week", lessons: "46", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "46", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-gi-endoscopy",
@@ -6644,7 +6643,7 @@ faqs: [
   { q: "What is the fee for this program?", a: "Fees vary based on structure and resources; exact details are shared during inquiry or enrollment." },
   { q: "Can this fellowship improve career growth?", a: "Yes, it enhances clinical skills, professional credibility, and career opportunities in gastroenterology." }
 ],
-    meta: { duration: "50 week", lessons: "12", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "12", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-urology",
@@ -6746,7 +6745,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Urology at DMHCA?", a: "Fees vary by course structure and resources; details are shared upon inquiry or enrollment." },
   { q: "Can completing this online urology fellowship from DMHCA enhance my career and earnings?", a: "Yes, it can improve professional credibility, expand clinical opportunities, and support higher earning potential." }
 ],
-    meta: { duration: "50 week", lessons: "35", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "35", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-clinical-hematology",
@@ -6879,7 +6878,7 @@ faqs: [
   { q: "What is the fee for this fellowship?", a: "Fees vary based on structure and resources; exact details are shared during inquiry." },
   { q: "Can this fellowship improve career growth?", a: "Yes, it enhances clinical expertise, professional credibility, and career opportunities in hematology." }
 ],
-    meta: { duration: "50 week", lessons: "56", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "56", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-oral-implantology-and-laser-dentistry",
@@ -6949,7 +6948,7 @@ faqs: [
   { q: "What is the fee for the fellowship in Oral Implantology and Laser Dentistry?", a: "Course fees vary based on clinical exposure and training components; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can this fellowship improve my dental practice and earning potential?", a: "Yes — specialized expertise in implantology and laser dentistry enhances your professional profile, attracts more patients, and can significantly boost earning potential." }
 ],
-    meta: { duration: "50 week", lessons: "67", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "67", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-maxillofacial-and-oral-surgery",
@@ -7007,7 +7006,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Maxillofacial and Oral Surgery?", a: "Fees vary based on course structure and training components; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can this fellowship improve my career and earning potential?", a: "Yes, advanced training in maxillofacial and oral surgery can enhance professional credibility, expand clinical opportunities, and support higher earning potential." }
 ],
-    meta: { duration: "50 week", lessons: "46", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "46", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatrics",
@@ -7167,7 +7166,7 @@ faqs: [
 { q: "What is the fee for the Paediatrics fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
 { q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in pediatric clinics, hospitals, neonatal units, and child healthcare services, while supporting higher earning potential in pediatric practice." }
 ],
-    meta: { duration: "50 week", lessons: "80", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "80", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatric-nephrology",
@@ -7186,7 +7185,7 @@ faqs: [
     requirements: ["MBBS", "Pediatrics background"],
     modules: ["Renal Physiology", "Pediatric Kidney Diseases", "Dialysis", "Transplant"],
     faqs: [{ q: "Focus?", a: "Pediatric kidney disorders" }],
-    meta: { duration: "50 week", lessons: "40", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "40", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-pediatric-endocrinology",
@@ -7302,7 +7301,7 @@ faqs: [
 { q: "What is the fee for the Pediatric Endocrinology fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
 { q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in pediatric endocrinology, children's hospitals, specialty clinics, and academic practice, while supporting higher earning potential in advanced pediatric healthcare." }
 ],
-    meta: { duration: "50 week", lessons: "53", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "53", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-radiology",
@@ -7455,7 +7454,7 @@ faqs: [
 { q: "What is the fee for the Radiology fellowship?", a: "Fees vary based on course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
 { q: "Can this fellowship enhance my career prospects and earnings?", a: "Yes, it can boost your professional profile, expand opportunities in diagnostic imaging centers, hospitals, specialty clinics, and radiology departments, while supporting higher earning potential in imaging-based healthcare practice." }
 ],
-    meta: { duration: "50 week", lessons: "75", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "75", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-neuroradiology",
@@ -7474,7 +7473,7 @@ faqs: [
     requirements: ["MD Radiology"],
     modules: ["Neuro imaging", "Brain MRI", "Spine imaging", "Interventional"],
     faqs: [{ q: "Specialization?", a: "Neuroradiology" }],
-    meta: { duration: "50 week", lessons: "44", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "44", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-interventional-radiology",
@@ -7493,7 +7492,7 @@ faqs: [
     requirements: ["MD Radiology"],
     modules: ["Interventional Basics", "Vascular IR", "Drainage", "Biopsies", "Advanced"],
     faqs: [{ q: "Focus?", a: "Minimally invasive procedures" }],
-    meta: { duration: "50 week", lessons: "40", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "40", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-musculoskeletal-ultrasound",
@@ -7531,7 +7530,7 @@ faqs: [
     requirements: ["MBBS"],
     modules: ["Vascular anatomy", "Carotid", "Venous", "Arterial", "Hemodynamics"],
     faqs: [{ q: "Focus?", a: "Vascular imaging" }],
-    meta: { duration: "25 week", lessons: "30", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "6 months", lessons: "30", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-arthroscopy-and-arthroplasty",
@@ -7550,7 +7549,7 @@ faqs: [
     requirements: ["MS Orthopedics"],
     modules: ["Arthroscopy basics", "Knee arthroscopy", "Shoulder arthroscopy", "Joint replacement"],
     faqs: [{ q: "Procedures?", a: "Arthroscopy and joint replacement" }],
-    meta: { duration: "50 week", lessons: "48", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "48", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-arthroscopy-and-sports-medicine",
@@ -7569,7 +7568,7 @@ faqs: [
     requirements: ["MS Orthopedics"],
     modules: ["Sports medicine basics", "Injury assessment", "Arthroscopy", "Rehabilitation"],
     faqs: [{ q: "Focus?", a: "Sports injuries and arthroscopy" }],
-    meta: { duration: "50 week", lessons: "48", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "48", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-internal-medicine",
@@ -7740,7 +7739,7 @@ faqs: [
   { q: "What is the fee for the Fellowship in Internal Medicine at DMHCA?", a: "Fees vary based on course structure and included digital learning materials; detailed pricing information is shared upon inquiry or enrollment request." },
   { q: "Can advanced online training from DMHCA help boost my career opportunities and income?", a: "Yes, completing this fellowship can boost your professional credibility, open doors to advanced clinical roles, and support better earning potential in internal medicine and related healthcare fields." }
 ],
-    meta: { duration: "50 week", lessons: "84", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "84", skill_level: "Fellowship", certificate: "yes" }
   },
  
   {
@@ -7760,7 +7759,7 @@ faqs: [
     requirements: ["MD Medicine/Neurology"],
     modules: ["Sleep science", "Disorders", "Diagnostics", "Treatment"],
     faqs: [{ q: "Specialization?", a: "Sleep medicine" }],
-    meta: { duration: "50 week", lessons: "40", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "40", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-addiction-psychology",
@@ -7790,7 +7789,7 @@ faqs: [
       ["Advanced cases", "Comprehensive review", "Exam preparation", "Career opportunities", "Continuous learning"]
     ],
     trainers: [{ name: "DMHCA Faculty", title: "Addiction Psychology Specialists" }],
-    meta: { duration: "52 week", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "36", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-andrology",
@@ -7850,7 +7849,7 @@ faqs: [
       ["Advanced cases", "Comprehensive review", "Exam preparation", "Career opportunities", "Continuous learning"]
     ],
     trainers: [{ name: "DMHCA Faculty", title: "Neurosurgery Specialists" }],
-    meta: { duration: "52 week", lessons: "78", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "78", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "fellowship-in-diabetic-foot-care",
@@ -7984,7 +7983,7 @@ faqs: [
   { q: "Can this fellowship at DMHCA increase my clinical credibility and income potential?", a: "Yes, this program in minimal access surgery can boost your professional credibility, open up advanced clinical roles, and support higher earning opportunities in surgical specialties." }
 ],
     trainers: [{ name: "DMHCA Faculty", title: "Minimal Access Surgery Specialists" }],
-    meta: { duration: "52 week", lessons: "47", skill_level: "Fellowship", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "47", skill_level: "Fellowship", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-diabetology",
@@ -8115,7 +8114,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Diabetology?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
   { q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, This advanced expertise in diabetology can elevate your professional profile, open up advanced clinical roles, and support higher income opportunities in diabetes and metabolic care." }
 ],
-    meta: { duration: "52 week", lessons: "44", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "44", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-family-medicine",
@@ -8239,7 +8238,7 @@ faqs: [
 { q: "What is the fee for the PG Diploma in Family Medicine?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
 { q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in family medicine can elevate your professional profile, expand clinical practice opportunities, and support higher income potential in primary care, community health, and family practice settings." }
 ],
-    meta: { duration: "50 week", lessons: "47", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "47", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-infertility-management",
@@ -8360,7 +8359,7 @@ faqs: [
   { q: "What is the fee for the PG Diploma in Infertility Management at DMHCA?", a: "Fees vary depending on the course structure and included learning resources; detailed pricing is shared upon inquiry or enrollment request." },
   { q: "Can this infertility management diploma from DMHCA enhance my career and earning potential?", a: "Yes, it can strengthen professional credibility, expand opportunities in reproductive healthcare, and support long-term career growth in fertility medicine." }
 ],
-    meta: { duration: "50 week", lessons: "46", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "46", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-clinical-cardiology",
@@ -8398,7 +8397,7 @@ faqs: [
         "Continuous learning"
       ]
     ],
-    meta: { duration: "50 week", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-dermatology",
@@ -8512,7 +8511,7 @@ faqs: [
 { q: "What is the fee for the PG Diploma in Dermatology?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
 { q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in dermatology can elevate your professional profile, expand opportunities in clinical and cosmetic dermatology practice, and support higher income potential in specialized healthcare settings." }
 ],
-    meta: { duration: "50 week", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-obstetrics-and-gynaecology",
@@ -8550,7 +8549,7 @@ faqs: [
         "Continuous learning"
       ]
     ],
-    meta: { duration: "50 week", lessons: "42", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "42", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-orthopaedics",
@@ -8641,7 +8640,7 @@ faqs: [
 { q: "What is the fee for the PG Diploma in Orthopaedics?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
 { q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in orthopaedics can elevate your professional profile, expand opportunities in trauma centers, orthopaedic units, and rehabilitation services, and support higher income potential in specialized musculoskeletal care." }
 ],
-    meta: { duration: "50 week", lessons: "28", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "28", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "pg-diploma-in-rheumatology",
@@ -8754,7 +8753,7 @@ faqs: [
 { q: "What is the fee for the PG Diploma in Rheumatology?", a: "Fees vary based on course structure and included learning resources; detailed pricing is available upon inquiry or enrollment request." },
 { q: "Can this PG Diploma improve professional credibility and earning potential?", a: "Yes, this advanced expertise in rheumatology can elevate your professional profile, expand opportunities in specialty clinics and hospitals, and support higher income potential in autoimmune and musculoskeletal healthcare practice." }
 ],
-    meta: { duration: "50 week", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
+    meta: { duration: "12 months", lessons: "38", skill_level: "PG Diploma", certificate: "yes" }
   },
   {
     slug: "certificate-in-respiratory-care",
