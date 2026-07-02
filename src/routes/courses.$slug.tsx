@@ -1,38 +1,67 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Clock, BookOpen, Award, CheckCircle2, ArrowLeft, ChevronDown, Star, GraduationCap, Globe } from "lucide-react";
 import { getCourse, getCategory, relatedCourses, formatINR, type Course } from "@/data/courses";
+import { supabaseClient } from "@/lib/supabase";
 import { CourseCard } from "@/components/site/CourseCard";
 import CourseDetail from "@/components/site/CourseDetail";
 
 export const Route = createFileRoute("/courses/$slug")({
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
+    // Try to fetch from Supabase first
+    try {
+      const { data, error } = await supabaseClient
+        .from('courses')
+        .select('*')
+        .ilike('slug', params.slug)
+        .single();
+
+      if (data && !error) {
+        // Parse course data from testimonials column
+        let courseData: any = {};
+        if (data.testimonials && typeof data.testimonials === 'string') {
+          try {
+            courseData = JSON.parse(data.testimonials);
+          } catch (e) {
+            console.warn('Could not parse testimonials for course', data.id);
+          }
+        }
+        
+        if (courseData.title) {
+          return { course: courseData, slug: params.slug, fromDb: true };
+        }
+      }
+    } catch (e) {
+      console.warn('Error fetching course from DB, falling back to local data', e);
+    }
+
+    // Fallback to local data
     const course = getCourse(params.slug);
     if (!course) throw notFound();
-    return { course };
+    return { course, slug: params.slug, fromDb: false };
   },
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
           { title: `${loaderData.course.title} — DMHCA` },
-          { name: "description", content: loaderData.course.overview.slice(0, 160) },
+          { name: "description", content: loaderData.course.overview?.slice(0, 160) || '' },
           { property: "og:title", content: loaderData.course.title },
-          { property: "og:description", content: loaderData.course.overview.slice(0, 200) },
+          { property: "og:description", content: loaderData.course.overview?.slice(0, 200) || '' },
           { property: "og:type", content: "website" },
-          { property: "og:image", content: loaderData.course.image },
+          { property: "og:image", content: loaderData.course.image || loaderData.course.heroImage },
           { property: "og:image:width", content: "1200" },
           { property: "og:image:height", content: "630" },
           { name: "twitter:card", content: "summary_large_image" },
           { name: "twitter:title", content: loaderData.course.title },
-          { name: "twitter:description", content: loaderData.course.overview.slice(0, 160) },
-          { name: "twitter:image", content: loaderData.course.image },
-          { name: "canonical", content: `https://dmhca.in/courses/${loaderData.course.slug}` },
+          { name: "twitter:description", content: loaderData.course.overview?.slice(0, 160) || '' },
+          { name: "twitter:image", content: loaderData.course.image || loaderData.course.heroImage },
+          { name: "canonical", content: `https://dmhca.in/courses/${loaderData.slug}` },
         ]
       : [],
     links: loaderData
       ? [
-          { rel: "canonical", href: `https://dmhca.in/courses/${loaderData.course.slug}` },
-          { rel: "preload", as: "image", href: loaderData.course.image },
+          { rel: "canonical", href: `https://dmhca.in/courses/${loaderData.slug}` },
+          { rel: "preload", as: "image", href: loaderData.course.image || loaderData.course.heroImage },
         ]
       : [],
   }),
@@ -59,13 +88,91 @@ function calculateFees(price: number) {
 }
 
 function CoursePage() {
-  const { course } = Route.useLoaderData();
-  const primaryCat = getCategory(course.categories[0])!;
-  const related = relatedCourses(course.slug, 3);
-  const ptype = course.meta?.skill_level || programType(course);
-  const { gstAmount, razorpayAmount, totalPrice } = calculateFees(course.priceINR);
+  const { course, slug } = Route.useLoaderData();
+  const [courseData, setCourseData] = useState(course);
+  const [loading, setLoading] = useState(false);
 
-  return <CourseDetail course={course} primaryCat={primaryCat} ptype={ptype} gstAmount={gstAmount} razorpayAmount={razorpayAmount} totalPrice={totalPrice} formatINR={formatINR} related={related} />;
+  // Refresh course data from DB on mount
+  useEffect(() => {
+    const fetchLatestCourse = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await supabaseClient
+          .from('courses')
+          .select('*')
+          .ilike('slug', slug)
+          .single();
+
+        if (data && !error) {
+          let courseData: any = {};
+          if (data.testimonials && typeof data.testimonials === 'string') {
+            try {
+              courseData = JSON.parse(data.testimonials);
+              setCourseData(courseData);
+            } catch (e) {
+              console.warn('Could not parse testimonials');
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Error fetching latest course data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLatestCourse();
+  }, [slug]);
+
+  // Ensure course has default values for arrays
+  const finalCourse = {
+    ...courseData,
+    categories: courseData.categories || [],
+    learn: courseData.learn || [],
+    requirements: courseData.requirements || [],
+    modules: courseData.modules || [],
+    moduleDetails: courseData.moduleDetails || [],
+    faqs: courseData.faqs || [],
+    trainers: courseData.trainers || [],
+    reviews: courseData.reviews || [],
+  };
+
+  // Get category from local data (fallback)
+  let primaryCat: any = null;
+  if (finalCourse.categories?.[0]) {
+    try {
+      primaryCat = getCategory(finalCourse.categories[0]);
+    } catch (e) {
+      // Category not found in local data, use a default
+      primaryCat = { name: finalCourse.category || 'Medical Courses', slug: finalCourse.category?.toLowerCase().replace(/\s+/g, '-') || 'general' };
+    }
+  } else {
+    primaryCat = { name: 'Medical Courses', slug: 'general' };
+  }
+
+  // Get related courses from local data
+  let related: Course[] = [];
+  try {
+    related = relatedCourses(slug, 3);
+  } catch (e) {
+    related = [];
+  }
+
+  const ptype = finalCourse.program || finalCourse.meta?.skill_level || "Certificate";
+  const { gstAmount, razorpayAmount, totalPrice } = calculateFees(finalCourse.priceINR || 0);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+          <p className="text-gray-600">Loading course...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return <CourseDetail course={finalCourse} primaryCat={primaryCat} ptype={ptype} gstAmount={gstAmount} razorpayAmount={razorpayAmount} totalPrice={totalPrice} formatINR={formatINR} related={related} />;
 }
 
 function ModuleRow({ index, title }: { index: number; title: string }) {

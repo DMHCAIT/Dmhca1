@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { supabaseClient } from '@/lib/supabase';
-import { MessageSquare, Mail, FileText, TrendingUp } from 'lucide-react';
+import { MessageSquare, Mail, FileText, TrendingUp, BookOpen, Users } from 'lucide-react';
 
 export const Route = createFileRoute('/admin/')({
   head: () => ({
@@ -18,6 +18,9 @@ function AdminDashboard() {
     commentCount: 0,
     messageCount: 0,
     pendingMessages: 0,
+    applicationCount: 0,
+    newApplications: 0,
+    courseCount: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -37,12 +40,26 @@ function AdminDashboard() {
         .from('contact_messages')
         .select('id, status', { count: 'exact' });
 
+      // Fetch applications
+      const { count: applicationCount, data: applications } = await supabaseClient
+        .from('applications')
+        .select('id, status', { count: 'exact' });
+
+      // Fetch courses
+      const { count: courseCount } = await supabaseClient
+        .from('courses')
+        .select('id', { count: 'exact', head: true });
+
       const pendingMessages = messages?.filter((m) => m.status === 'new').length || 0;
+      const newApplications = applications?.filter((a) => a.status === 'new').length || 0;
 
       setStats({
         commentCount: commentCount || 0,
         messageCount: messageCount || 0,
         pendingMessages,
+        applicationCount: applicationCount || 0,
+        newApplications,
+        courseCount: courseCount || 0,
       });
     } catch (error) {
       console.error('Error loading stats:', error);
@@ -82,24 +99,42 @@ function AdminDashboard() {
         <p className="text-gray-600 mt-2">Manage comments, messages, and media content</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
         <StatCard
-          icon={MessageSquare}
-          title="Event Comments"
-          value={stats.commentCount}
-          subtitle="Total comments from events"
+          icon={BookOpen}
+          title="Total Courses"
+          value={stats.courseCount}
+          subtitle="Courses in system"
+        />
+        <StatCard
+          icon={Users}
+          title="Applications"
+          value={stats.applicationCount}
+          subtitle="All course applications"
+        />
+        <StatCard
+          icon={FileText}
+          title="New Applications"
+          value={stats.newApplications}
+          subtitle="Awaiting review"
         />
         <StatCard
           icon={Mail}
           title="Contact Messages"
           value={stats.messageCount}
-          subtitle="All inquiries received"
+          subtitle="All inquiries"
         />
         <StatCard
           icon={FileText}
-          title="Pending Review"
+          title="Pending Messages"
           value={stats.pendingMessages}
-          subtitle="New messages awaiting review"
+          subtitle="Awaiting response"
+        />
+        <StatCard
+          icon={MessageSquare}
+          title="Event Comments"
+          value={stats.commentCount}
+          subtitle="Comments received"
         />
         <StatCard
           icon={TrendingUp}

@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Link } from "@tanstack/react-router";
+import { supabaseClient } from "@/lib/supabase";
 
 export const Route = createFileRoute("/apply")({
+  head: () => ({
+    meta: [
+      { title: 'Apply for a Course — DMHCA' },
+      { name: 'description', content: 'Apply for medical courses at DMHCA' },
+    ],
+  }),
   component: ApplicationForm,
 });
 
@@ -20,27 +26,19 @@ function ApplicationForm() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  // Get course from query parameter
+  // Get course and program from query parameters
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const courseParam = params.get("course");
-    if (courseParam) {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const courseParam = params.get("course");
+      const programParam = params.get("program");
+      
       setFormData((prev) => ({
         ...prev,
-        course: decodeURIComponent(courseParam),
-      }));
-    }
-  }, []);
-
-  // Also read program from query param (if provided)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const programParam = params.get("program");
-    if (programParam) {
-      setFormData((prev) => ({
-        ...prev,
-        program: decodeURIComponent(programParam),
+        course: courseParam ? decodeURIComponent(courseParam) : "",
+        program: programParam ? decodeURIComponent(programParam) : "",
       }));
     }
   }, []);
@@ -60,36 +58,59 @@ function ApplicationForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
-      // Send to your backend or email service
-      const response = await fetch("/api/apply", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitted(true);
-        // Reset form after successful submission
-        setTimeout(() => {
-          setFormData({
-            program: "",
-            course: "",
-            fullName: "",
-            email: "",
-            phone: "",
-            qualification: "",
-            experience: "",
-            message: "",
-          });
-          setSubmitted(false);
-        }, 3000);
+      // Validate form
+      if (!formData.fullName.trim()) {
+        throw new Error("Full name is required");
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+      if (!formData.email.trim()) {
+        throw new Error("Email is required");
+      }
+      if (!formData.phone.trim()) {
+        throw new Error("Phone number is required");
+      }
+
+      // Save to database
+      const { error: dbError } = await supabaseClient
+        .from("applications")
+        .insert([
+          {
+            full_name: formData.fullName.trim(),
+            email: formData.email.trim(),
+            phone: formData.phone.trim(),
+            course_name: formData.course || null,
+            program_name: formData.program || null,
+            qualification: formData.qualification || null,
+            experience: formData.experience || null,
+            message: formData.message || null,
+            status: "new",
+          },
+        ]);
+
+      if (dbError) throw dbError;
+
+      setSubmitted(true);
+      // Reset form after successful submission
+      setTimeout(() => {
+        setFormData({
+          program: "",
+          course: "",
+          fullName: "",
+          email: "",
+          phone: "",
+          qualification: "",
+          experience: "",
+          message: "",
+        });
+        setSubmitted(false);
+      }, 5000);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to submit application"
+      );
+      console.error("Error submitting form:", err);
     } finally {
       setLoading(false);
     }
@@ -108,13 +129,20 @@ function ApplicationForm() {
           </div>
 
           {submitted ? (
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-8 text-center">
+            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-8 text-center shadow-md">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 mb-4">
+                <svg className="w-8 h-8 text-emerald-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </div>
               <h2 className="text-2xl font-bold text-emerald-900 mb-2">
-                Application Submitted!
+                Application Submitted Successfully!
               </h2>
-              <p className="text-emerald-800">
-                Thank you for your application. Our team will review it and
-                contact you soon.
+              <p className="text-emerald-800 mb-4">
+                Thank you for your application. Our admissions team will review your details and contact you soon at the provided contact information.
+              </p>
+              <p className="text-sm text-emerald-700">
+                Redirecting in 5 seconds...
               </p>
             </div>
           ) : (
@@ -122,6 +150,13 @@ function ApplicationForm() {
               onSubmit={handleSubmit}
               className="bg-white rounded-xl shadow-md p-6 md:p-8 space-y-5 border border-slate-200"
             >
+              {/* Error Message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <p className="text-red-800 font-medium">❌ {error}</p>
+                </div>
+              )}
+
               {/* Full Name and Email - Side by side */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
@@ -176,6 +211,8 @@ function ApplicationForm() {
                     <option value="MBBS">MBBS</option>
                     <option value="BDS">BDS</option>
                     <option value="MD/MS">MD/MS</option>
+                    <option value="DM">DM</option>
+                    <option value="MCh">MCh</option>
                     <option value="Other">Other</option>
                   </select>
                 </div>
@@ -208,7 +245,7 @@ function ApplicationForm() {
                     <option value="">Select a program</option>
                     <option value="Fellowship">Fellowship</option>
                     <option value="PG Diploma">PG Diploma</option>
-                    <option value="Certificate">Certificate Course</option>
+                    <option value="Certificate Course">Certificate Course</option>
                   </select>
                 </div>
                 <div>
@@ -239,18 +276,18 @@ function ApplicationForm() {
               </div>
 
               {/* Submit Button */}
-              <div className="pt-2">
+              <div className="pt-4">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full px-6 py-3 bg-navy-deep hover:bg-navy-deep/90 text-white font-bold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-6 py-3 bg-gradient-to-r from-navy-deep to-slate-800 hover:from-navy-deep/90 hover:to-slate-700 text-white font-bold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {loading ? "Submitting..." : "Submit Application"}
+                  {loading ? "Submitting Application..." : "Submit Application"}
                 </button>
               </div>
 
               <p className="text-xs text-slate-500 text-center">
-                * Required fields
+                * Required fields. We'll contact you within 24 hours.
               </p>
             </form>
           )}

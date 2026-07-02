@@ -84,12 +84,14 @@ import { Route as CardiologyCoursesCityRouteImport } from './routes/cardiology-c
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminPagesEditorRouteImport } from './routes/admin.pages-editor'
 import { Route as AdminPagesRouteImport } from './routes/admin.pages'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminEventsRouteImport } from './routes/admin.events'
 import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
 import { Route as AdminCommentsRouteImport } from './routes/admin.comments'
+import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
 
 const TestPageRoute = TestPageRouteImport.update({
   id: '/test-page',
@@ -483,6 +485,11 @@ const AdminSettingsRoute = AdminSettingsRouteImport.update({
   path: '/settings',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminPagesEditorRoute = AdminPagesEditorRouteImport.update({
+  id: '/pages-editor',
+  path: '/pages-editor',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminPagesRoute = AdminPagesRouteImport.update({
   id: '/pages',
   path: '/pages',
@@ -511,6 +518,11 @@ const AdminCoursesRoute = AdminCoursesRouteImport.update({
 const AdminCommentsRoute = AdminCommentsRouteImport.update({
   id: '/comments',
   path: '/comments',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
+  id: '/applications',
+  path: '/applications',
   getParentRoute: () => AdminRoute,
 } as any)
 
@@ -558,12 +570,14 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
+  '/admin/applications': typeof AdminApplicationsRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/pages-editor': typeof AdminPagesEditorRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -638,12 +652,14 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
+  '/admin/applications': typeof AdminApplicationsRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/pages-editor': typeof AdminPagesEditorRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -722,12 +738,14 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
+  '/admin/applications': typeof AdminApplicationsRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/pages': typeof AdminPagesRoute
+  '/admin/pages-editor': typeof AdminPagesEditorRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -807,12 +825,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
+    | '/admin/applications'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
     | '/admin/media'
     | '/admin/messages'
     | '/admin/pages'
+    | '/admin/pages-editor'
     | '/admin/settings'
     | '/admin/users'
     | '/blog/$slug'
@@ -887,12 +907,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
+    | '/admin/applications'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
     | '/admin/media'
     | '/admin/messages'
     | '/admin/pages'
+    | '/admin/pages-editor'
     | '/admin/settings'
     | '/admin/users'
     | '/blog/$slug'
@@ -970,12 +992,14 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
+    | '/admin/applications'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
     | '/admin/media'
     | '/admin/messages'
     | '/admin/pages'
+    | '/admin/pages-editor'
     | '/admin/settings'
     | '/admin/users'
     | '/blog/$slug'
@@ -1608,6 +1632,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSettingsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/pages-editor': {
+      id: '/admin/pages-editor'
+      path: '/pages-editor'
+      fullPath: '/admin/pages-editor'
+      preLoaderRoute: typeof AdminPagesEditorRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/pages': {
       id: '/admin/pages'
       path: '/pages'
@@ -1650,28 +1681,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCommentsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/applications': {
+      id: '/admin/applications'
+      path: '/applications'
+      fullPath: '/admin/applications'
+      preLoaderRoute: typeof AdminApplicationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
 interface AdminRouteChildren {
+  AdminApplicationsRoute: typeof AdminApplicationsRoute
   AdminCommentsRoute: typeof AdminCommentsRoute
   AdminCoursesRoute: typeof AdminCoursesRoute
   AdminEventsRoute: typeof AdminEventsRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminPagesRoute: typeof AdminPagesRoute
+  AdminPagesEditorRoute: typeof AdminPagesEditorRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminApplicationsRoute: AdminApplicationsRoute,
   AdminCommentsRoute: AdminCommentsRoute,
   AdminCoursesRoute: AdminCoursesRoute,
   AdminEventsRoute: AdminEventsRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminPagesRoute: AdminPagesRoute,
+  AdminPagesEditorRoute: AdminPagesEditorRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,

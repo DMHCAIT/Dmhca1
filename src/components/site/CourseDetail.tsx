@@ -28,7 +28,7 @@ function getIBMCourseName(dmhcaTitle: string): string {
   return dmhcaTitle; // Return original if no pattern matches
 }
 
-export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmount, totalPrice, formatINR, related }: { course: Course; primaryCat: any; ptype: string; gstAmount: number; razorpayAmount: number; totalPrice: number; formatINR: (n:number)=>string; related: Course[] }) {
+export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmount, totalPrice, formatINR, related }: { course: any; primaryCat: any; ptype: string; gstAmount: number; razorpayAmount: number; totalPrice: number; formatINR: (n:number)=>string; related: any[] }) {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   // JSON-LD Schemas
@@ -215,7 +215,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             )}
 
             {/* Requirements */}
-            {course.requirements.length > 0 && (
+            {course.requirements && course.requirements.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
                   <div className="w-1 h-6 bg-gradient-to-b from-orange-600 to-orange-500"></div>

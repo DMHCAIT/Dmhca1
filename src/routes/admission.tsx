@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { submitApplicationForm } from "@/lib/api/application-form.function";
 
 export const Route = createFileRoute("/admission")({
   component: AdmissionForm,
@@ -21,6 +22,7 @@ function AdmissionForm() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Get course from query parameter
   useEffect(() => {
@@ -49,18 +51,23 @@ function AdmissionForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
-      // Send to your backend or email service
-      const response = await fetch("/api/admission", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const result = await submitApplicationForm({
+        data: {
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          course: formData.course,
+          program: formData.program,
+          experience: formData.experience,
+          qualification: formData.qualification,
+          message: formData.message,
         },
-        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+      if (result.success) {
         setSubmitted(true);
         // Reset form after successful submission
         setTimeout(() => {
@@ -77,8 +84,11 @@ function AdmissionForm() {
           setSubmitted(false);
         }, 3000);
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Failed to submit application"
+      );
+      console.error("Error submitting form:", err);
     } finally {
       setLoading(false);
     }

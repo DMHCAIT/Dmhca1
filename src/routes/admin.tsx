@@ -55,11 +55,11 @@ function AdminLayout() {
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin', key: 'dashboard' },
     { icon: BookOpen, label: 'Courses', href: '/admin/courses', key: 'courses' },
     { icon: Calendar, label: 'Events', href: '/admin/events', key: 'events' },
+    { icon: Users, label: 'Applications', href: '/admin/applications', key: 'applications' },
     { icon: MessageSquare, label: 'Event Comments', href: '/admin/comments', key: 'comments' },
     { icon: Mail, label: 'Contact Messages', href: '/admin/messages', key: 'messages' },
-    { icon: Users, label: 'Users & Signups', href: '/admin/users', key: 'users' },
+    { icon: FileText, label: 'Page Editor', href: '/admin/pages-editor', key: 'pages-editor' },
     { icon: Image, label: 'Media Manager', href: '/admin/media', key: 'media' },
-    { icon: FileText, label: 'Pages', href: '/admin/pages', key: 'pages' },
     { icon: Settings, label: 'Settings', href: '/admin/settings', key: 'settings' },
   ];
 

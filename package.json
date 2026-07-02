@@ -9,7 +9,10 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "seed:courses": "bun run scripts/seed-courses-to-db.mts",
+    "seed:all": "bun run scripts/seed-all-courses.mts",
+    "seed:complete": "bun run scripts/seed-complete-courses.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

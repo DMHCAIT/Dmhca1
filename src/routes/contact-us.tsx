@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { supabaseClient } from "@/lib/supabase";
 
 function Contact() {
   // Remove any trailing hash from URL (e.g., /contact-us/#) on mount
@@ -35,6 +36,75 @@ function Contact() {
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const toggleFaq = (i: number) => setOpenIndex(openIndex === i ? null : i);
+
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      // Validate form
+      if (!formData.name.trim()) {
+        throw new Error('Name is required');
+      }
+      if (!formData.email.trim()) {
+        throw new Error('Email is required');
+      }
+      if (!formData.phone.trim()) {
+        throw new Error('Mobile number is required');
+      }
+      if (!formData.message.trim()) {
+        throw new Error('Message is required');
+      }
+
+      // Save to database
+      const { error: dbError } = await supabaseClient
+        .from('contact_messages')
+        .insert([
+          {
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            phone: formData.phone.trim(),
+            message: formData.message.trim(),
+            status: 'new'
+          }
+        ]);
+
+      if (dbError) throw dbError;
+
+      // Success
+      setSubmitted(true);
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 5000);
+    } catch (err: any) {
+      setError(err.message || 'Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="bg-slate-50">
@@ -79,21 +149,72 @@ function Contact() {
               <section className="bg-white p-6 rounded-2xl shadow-xl border border-white/10">
                 <h2 className="font-display text-2xl text-navy-deep">Send a Message</h2>
                 <p className="mt-2 text-sm text-muted-foreground">Send us a message and we'll get back to you shortly.</p>
-                <form className="mt-4 space-y-4">
+                <form className="mt-4 space-y-4" onSubmit={handleSubmit}>
+                  {submitted && (
+                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                      ✅ Thank you! Your message has been sent successfully. We'll get back to you shortly.
+                    </div>
+                  )}
+                  {error && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                      ❌ {error}
+                    </div>
+                  )}
                   <div>
                     <label className="block text-sm font-medium text-navy-deep">Name</label>
-                    <input className="mt-1 block w-full rounded-xl border px-4 py-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" placeholder="Your name" />
+                    <input 
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-xl border px-4 py-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" 
+                      placeholder="Your name" 
+                      required
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-navy-deep">Email</label>
-                    <input type="email" className="mt-1 block w-full rounded-xl border px-4 py-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" placeholder="you@example.com" />
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-xl border px-4 py-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" 
+                      placeholder="you@example.com" 
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-navy-deep">Mobile No</label>
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-xl border px-4 py-3 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" 
+                      placeholder="+91 XXXXX XXXXX" 
+                      required
+                    />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-navy-deep">Message</label>
-                    <textarea className="mt-1 block w-full rounded-xl border px-4 py-3 h-40 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" placeholder="Write your message"></textarea>
+                    <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="mt-1 block w-full rounded-xl border px-4 py-3 h-40 shadow-inner focus:outline-none focus:ring-2 focus:ring-gold" 
+                      placeholder="Write your message"
+                      required
+                    ></textarea>
                   </div>
                   <div>
-                    <button type="button" className="inline-flex items-center px-6 py-3 bg-emerald-700 hover:bg-emerald-800 text-white rounded-xl shadow-lg font-semibold">Send message</button>
+                    <button 
+                      type="submit" 
+                      disabled={loading}
+                      className="inline-flex items-center px-6 py-3 bg-emerald-700 hover:bg-emerald-800 disabled:bg-gray-400 text-white rounded-xl shadow-lg font-semibold transition disabled:cursor-not-allowed"
+                    >
+                      {loading ? 'Sending...' : 'Send message'}
+                    </button>
                   </div>
                 </form>
               </section>
