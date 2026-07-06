@@ -45,6 +45,7 @@ function Home() {
   })();
   const [reviewIndex, setReviewIndex] = useState(0);
   const [slide, setSlide] = useState(0);
+  // Slides order intentionally set to Certificate → PG Diploma → Fellowship
   const slides = [
     {
       id: 0,
