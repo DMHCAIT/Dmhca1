@@ -62,7 +62,7 @@ function Home() {
       program: 'PG Diploma',
       theme: 'muted',
         heroImg: '/heropgdiplomalarge.webp',
-        blockImg: '/heropgdiplomablock.webp',
+        blockImg: '/heropgdiplomablock-v2.webp',
       titleMain: 'Deep clinical training,',
       titleSub: 'structured for practice.',
       desc: 'Comprehensive PG Diploma programs blending theory and supervised clinical exposure over months.'
