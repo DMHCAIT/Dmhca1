@@ -48,13 +48,13 @@ function Home() {
   const slides = [
     {
       id: 0,
-      program: 'Fellowship',
+      program: 'Certificate',
       theme: 'dark',
-        heroImg: '/herofellowshiplarge.webp',
-        blockImg: '/herofellowshipblock.webp',
-      titleMain: 'Medical mastery,',
-      titleSub: 'delivered with precision.',
-      desc: 'Develop your medical career with accessible online fellowships and hands-on training from leading universities.'
+        heroImg: '/herocertificatelarge.webp',
+        blockImg: '/herocertificateblock.webp',
+      titleMain: 'Upskill clinically,',
+      titleSub: 'fast and focused.',
+      desc: 'Short certificate courses designed to build practical skills and clinical confidence for busy clinicians.'
     },
     {
       id: 1,
@@ -68,13 +68,13 @@ function Home() {
     },
     {
       id: 2,
-      program: 'Certificate',
-      theme: 'light',
-        heroImg: '/herocertificatelarge.webp',
-        blockImg: '/herocertificateblock.webp',
-      titleMain: 'Upskill clinically,',
-      titleSub: 'fast and focused.',
-      desc: 'Short certificate courses designed to build practical skills and clinical confidence for busy clinicians.'
+      program: 'Fellowship',
+      theme: 'dark',
+        heroImg: '/herofellowshiplarge.webp',
+        blockImg: '/herofellowshipblock.webp',
+      titleMain: 'Medical mastery,',
+      titleSub: 'delivered with precision.',
+      desc: 'Develop your medical career with accessible online fellowships and hands-on training from leading universities.'
     },
   ];
 
