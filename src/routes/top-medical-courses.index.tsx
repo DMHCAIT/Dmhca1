@@ -114,7 +114,7 @@ function AllCourses() {
             />
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mr-1">Format</span>
-              {["all", "Fellowship", "PG Diploma", "Certificate"].map((f) => {
+                {["all", "Certificate", "PG Diploma", "Fellowship"].map((f) => {
                 const s = new URLSearchParams(location.search || '');
                 if (f === 'all') s.delete('fmt'); else s.set('fmt', f);
                 const searchObj = Object.fromEntries(s.entries());
