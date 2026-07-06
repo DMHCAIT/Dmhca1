@@ -54,8 +54,18 @@ function AdminCourses() {
     metaValue: '',
   });
 
-  // Dynamically load ReactQuill to avoid SSR issues
-  const ReactQuill = typeof window !== 'undefined' ? require('react-quill') : null;
+  // Dynamically load ReactQuill in browser; fallback to a plain textarea
+  const [ReactQuill, setReactQuill] = useState<any>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    if (typeof window !== 'undefined') {
+      import('react-quill')
+        .then((mod) => { if (mounted) setReactQuill(mod.default || mod); })
+        .catch(() => { /* react-quill not installed or incompatible; ignore */ });
+    }
+    return () => { mounted = false; };
+  }, []);
 
   useEffect(() => {
     fetchCourses();
