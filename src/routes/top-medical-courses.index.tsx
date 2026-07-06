@@ -1,10 +1,8 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
-import { categories, type Course } from "@/data/courses";
-import { useState } from 'react';
+import { useMemo, useState, useEffect } from "react";
+import { categories, type Course, courses } from "@/data/courses";
 import { fetchCoursesFromSupabase } from '@/lib/courses-remote';
 import { CourseCard } from "@/components/site/CourseCard";
-import { useEffect } from "react";
 
 export const Route = createFileRoute("/top-medical-courses/")({
   head: () => ({
