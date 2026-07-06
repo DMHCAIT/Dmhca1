@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+// avoid Next.js dynamic import in this Vite app
 import { supabaseClient } from '@/lib/supabase';
 import { Plus, Edit2, Trash2, Eye, X, Upload, AlertCircle, ChevronUp, ChevronDown, Search } from 'lucide-react';
 
@@ -60,7 +60,7 @@ function AdminCourses() {
   useEffect(() => {
     let mounted = true;
     if (typeof window !== 'undefined') {
-      import('react-quill')
+      import(/* @vite-ignore */ 'react-quill')
         .then((mod) => { if (mounted) setReactQuill(mod.default || mod); })
         .catch(() => { /* react-quill not installed or incompatible; ignore */ });
     }
