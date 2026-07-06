@@ -17,7 +17,6 @@ interface PageContent {
   id: string;
   page_name: string;
   display_name: string;
-  heroTitle?: string;
   heroDescription?: string;
   heroImage?: string;
   sections?: any[];
@@ -43,7 +42,6 @@ function PagesEditor() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
-    heroTitle: '',
     heroDescription: '',
     heroImage: '',
     content: '',
@@ -82,7 +80,6 @@ function PagesEditor() {
             id: '',
             page_name: defaultPage.page_name,
             display_name: defaultPage.display_name,
-            heroTitle: '',
             heroDescription: '',
             heroImage: '',
             content: '',
@@ -106,7 +103,6 @@ function PagesEditor() {
   const selectPage = (page: PageContent) => {
     setSelectedPage(page);
     setFormData({
-      heroTitle: page.heroTitle || '',
       heroDescription: page.heroDescription || '',
       heroImage: page.heroImage || '',
       content: page.content || '',
@@ -242,18 +238,7 @@ function PagesEditor() {
                 <div className="border-b pb-6">
                   <h3 className="text-lg font-semibold mb-4 text-navy-deep">Hero Section</h3>
                   <div className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2">Hero Title</label>
-                      <input
-                        type="text"
-                        value={formData.heroTitle}
-                        onChange={(e) =>
-                          setFormData({ ...formData, heroTitle: e.target.value })
-                        }
-                        className="w-full border rounded-lg px-4 py-3 focus:border-gold focus:outline-none"
-                        placeholder="Main hero title"
-                      />
-                    </div>
+                    {/* Hero title removed - use page display name instead */}
                     <div>
                       <label className="block text-sm font-semibold mb-2">Hero Description</label>
                       <textarea

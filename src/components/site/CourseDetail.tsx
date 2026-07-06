@@ -138,7 +138,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           <Link to="/course-category/$slug" params={{ slug: primaryCat.slug }} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white mb-3 group">
             <ArrowLeft className="w-4 h-4 transition group-hover:-translate-x-1" /> {primaryCat.name}
           </Link>
-          <h1 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2 max-w-4xl leading-tight">{course.heroTitle || course.title}</h1>
+          <h1 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-white mt-2 max-w-4xl leading-tight">{course.title}</h1>
           {course.heroDescription && (
             <p className="mt-3 text-sm md:text-base text-slate-300 max-w-2xl leading-relaxed">
               {course.heroDescription}
