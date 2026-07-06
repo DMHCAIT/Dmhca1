@@ -1,6 +1,8 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { categories, courses, type Course } from "@/data/courses";
+import { categories, type Course } from "@/data/courses";
+import { useState } from 'react';
+import { fetchCoursesFromSupabase } from '@/lib/courses-remote';
 import { CourseCard } from "@/components/site/CourseCard";
 import { useEffect } from "react";
 
@@ -32,6 +34,7 @@ function AllCourses() {
     return 'all';
   }, [searchParams]);
   const [fmt, setFmt] = useState<string>("all");
+  const [remoteCourses, setRemoteCourses] = useState<Course[] | null>(null);
   // Initialize fmt from URL (so external links like ?fmt=Fellowship work)
   useEffect(() => {
     try {
@@ -40,6 +43,20 @@ function AllCourses() {
     } catch (e) {}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
+
+  // Load courses from Supabase (fallback to static file if unavailable)
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const remote = await fetchCoursesFromSupabase();
+        if (mounted && remote && Array.isArray(remote) && remote.length > 0) setRemoteCourses(remote as Course[]);
+      } catch (e) {
+        console.warn('Failed to load remote courses', e);
+      }
+    })();
+    return () => { mounted = false; };
+  }, []);
   const [q, setQ] = useState<string>(() => {
     try {
       const params = new URLSearchParams(window.location.search);
@@ -67,11 +84,12 @@ function AllCourses() {
     window.history.replaceState({}, '', newUrl);
   }
 
-  const filtered = useMemo(() => courses.filter((c) =>
-    (cat === "all" || c.categories.includes(cat)) &&
+  const allSource = remoteCourses || (courses as Course[]);
+  const filtered = useMemo(() => allSource.filter((c) =>
+    (cat === "all" || (c.categories || []).includes(cat)) &&
     (fmt === "all" || programType(c) === fmt) &&
-    (q.trim() === "" || c.title.toLowerCase().includes(q.toLowerCase()))
-  ), [cat, fmt, q]);
+    (q.trim() === "" || (c.title || '').toLowerCase().includes(q.toLowerCase()))
+  ), [cat, fmt, q, remoteCourses]);
 
   // CollectionPage Schema for all courses
   const allCoursesSchema = {
