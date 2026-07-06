@@ -46,14 +46,16 @@ function isStaticAsset(pathname) {
   // Decode the pathname to handle URL-encoded spaces
   const decodedPathname = decodeURIComponent(pathname);
   
+  // Only match actual file extensions and known static directories
+  // Do NOT match dynamic SPA routes like /courses/:slug
   const staticPatterns = [
-    /^\/assets\//,
-    /^\/courses\//,
-    /^\/events-content\//,
-    /^\/Faculty_images\//,
-    /^\/Training partners\//,
-    /^\/ACADEMIC PARTNERS\//,
-    /\.(js|css|woff|woff2|ttf|eot|otf|png|jpg|jpeg|gif|webp|svg|ico)$/i
+    /^\/assets\//,  // Built assets (JS, CSS, etc.)
+    /^\/public\//,  // Public folder
+    /^\/events-content\//,  // Event content (actual files)
+    /^\/Faculty_images\//,  // Faculty images (actual files)
+    /^\/Training partners\//,  // Training partners folder
+    /^\/ACADEMIC PARTNERS\//,  // Academic partners folder
+    /\.(js|css|woff|woff2|ttf|eot|otf|png|jpg|jpeg|gif|webp|svg|ico|txt|xml)$/i  // File extensions
   ];
   return staticPatterns.some(pattern => pattern.test(decodedPathname));
 }
