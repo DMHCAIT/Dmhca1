@@ -44,7 +44,6 @@ export type Course = {
   image: string;
   
   // Hero Section (Course Details Page) - Different from overview
-  heroTitle?: string; // Custom title for course details page hero
   heroImage?: string; // Custom image for course details page hero
   heroDescription?: string; // Custom description for hero section (optional)
   
@@ -1804,7 +1803,6 @@ faqs: [
   title: "PG Diploma in Maternal & Child Health",
   categories: ["pediatrics"],
   image: "/courses/PG-Diploma-in-Maternal-Child-Health.webp",
-  heroTitle: "Comprehensive Maternal & Child Health Diploma",
   heroDescription: "Enhance your expertise in maternal and child care - learn prenatal, postnatal, and pediatric practices to deliver better healthcare outcomes.",
   lessons: 48,
   weeks: 50,
@@ -4386,7 +4384,6 @@ faqs: [
     title: "Certificate Course in Cosmetology",
     categories: ["dermatology"],
     image: "/courses/cosmetologist-applies-white-mask-on-woman-s-face_8353-5674-410x290.webp",
-    heroTitle: "Advanced Cosmetology Certification",
     heroDescription: "Advanced laparoscopic and endoscopic surgery training including complex minimally invasive procedures.",
     lessons: 15,
     weeks: 25,
@@ -5449,7 +5446,6 @@ faqs: [
     title: "PG Diploma in HIV Medicine",
     categories: ["medicine"],
     image: "/courses/PG-Diploma-In-HIV-Medicine-410x290.webp",
-    heroTitle: "Comprehensive HIV Medicine Diploma",
     heroDescription: "PG Diploma in HIV Medicine: Specialized Training in Diagnosis, Treatment, and Management of HIV/AIDS",
     lessons: 18,
     weeks: 52,
@@ -7856,7 +7852,6 @@ faqs: [
     title: "Fellowship in Diabetic Foot Care",
     categories: ["endocrinology"],
     image: "/courses/fellowship_diabetic_foot_care_course.webp",
-    heroTitle: "Master Diabetic Foot Care",
     heroDescription: "Specialized training in diabetic foot ulcers, wound management, and amputation prevention.",
     lessons: 24,
     weeks: 26,
