@@ -70,6 +70,15 @@ export function CourseCard({ course }: { course: Course }) {
             View <ArrowUpRight className="w-4 h-4" />
           </span>
         </div>
+        <div className="mt-4 flex items-end justify-between">
+          <div>
+            <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-1.5">Tuition</div>
+            <div className="text-2xl font-extrabold text-navy-deep tracking-wide">{formatINR((course as any).priceINR ?? (course as any).price ?? 0)}</div>
+          </div>
+          <div className="text-sm font-bold text-navy-deep group-hover:text-gold">
+            View <ArrowUpRight className="w-4 h-4 inline-block ml-2" />
+          </div>
+        </div>
       </div>
     </Link>
   );
