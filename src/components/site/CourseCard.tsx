@@ -60,11 +60,11 @@ export function CourseCard({ course }: { course: Course }) {
         </div>
       </div>
       <div className="p-5">
-        <div className="flex items-center gap-4 text-xs text-muted-foreground justify-between">
-          <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 text-xs text-muted-foreground justify-between">
+          <div className="flex items-center gap-3">
             {course.lessons != null && <span className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons</span>}
             {course.weeks != null && <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {Math.round(course.weeks / 4.33)} months</span>}
-            <span className="capitalize">{course.level}</span>
+            <span className="inline-flex items-center gap-1 px-2 py-1 bg-slate-200 text-slate-700 rounded font-semibold text-[11px]">{programType} - {course.level}</span>
           </div>
           <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition whitespace-nowrap">
             View <ArrowUpRight className="w-4 h-4" />
