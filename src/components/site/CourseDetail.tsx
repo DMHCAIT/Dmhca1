@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "@tanstack/react-router";
+import { CourseCard } from "./CourseCard";
 import { ArrowLeft, Star, BookOpen, Clock, Award, GraduationCap, Globe, FileCheck, ArrowUpRight } from "lucide-react";
 import { type Course } from "@/data/courses";
 
@@ -627,58 +628,9 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             <div className="text-xs uppercase tracking-widest text-slate-600 font-bold mb-2">Explore More</div>
             <h2 className="text-3xl font-bold text-slate-900 mb-12">Related Courses</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-              {related.map((r) => {
-                const relCat = primaryCat;
-                const relProgramType = r.meta?.skill_level || (r.title.toLowerCase().includes("fellowship") ? "Fellowship" : r.title.toLowerCase().includes("pg diploma") ? "PG Diploma" : "Certificate");
-                return (
-                  <Link
-                    key={r.slug}
-                    to="/courses/$slug"
-                    params={{ slug: r.slug }}
-                    className="group block bg-white border border-slate-300 rounded-xl overflow-hidden hover:border-slate-500 hover:shadow-2xl transition-all"
-                  >
-                    <div className="aspect-[5/3] relative overflow-hidden bg-slate-900">
-                      <img
-                        src={r.image}
-                        alt={r.title}
-                        loading="lazy"
-                        referrerPolicy="no-referrer"
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-700"
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = "none"; }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/95 via-slate-900/50 to-transparent" />
-                      <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-widest px-3 py-1.5 bg-slate-900/95 text-white rounded-lg font-bold">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> {relProgramType}
-                      </div>
-                      {r.rating && (
-                        <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 text-[11px] px-3 py-1.5 bg-white text-slate-900 rounded-lg font-bold shadow-lg">
-                          <Star className="w-4 h-4 fill-amber-400 text-amber-400" /> {r.rating} <span className="text-slate-700 font-semibold">({r.reviewCount})</span>
-                        </div>
-                      )}
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <div className="text-[10px] uppercase tracking-widest text-emerald-300 mb-2 font-bold">{relCat?.name}</div>
-                        <div className="font-bold text-white text-lg leading-tight line-clamp-2 tracking-wide">{r.title}</div>
-                      </div>
-                    </div>
-                    <div className="p-6 space-y-5">
-                      <div className="flex items-center gap-5 text-xs text-slate-700 font-semibold">
-                        {r.lessons != null && <span className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-slate-900" /> {r.lessons} lessons</span>}
-                        {r.weeks != null && <span className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-900" /> {Math.round(r.weeks / 4.33)} months</span>}
-                        <span className="capitalize px-3 py-1 bg-slate-200 text-slate-800 rounded-full font-bold">{r.level}</span>
-                      </div>
-                      <div className="flex items-end justify-between">
-                        <div>
-                          <div className="text-[10px] uppercase tracking-widest text-slate-600 font-bold mb-1.5">Tuition</div>
-                          <div className="text-2xl font-black text-slate-900 tracking-wide">{formatINR(r.priceINR)}</div>
-                        </div>
-                        <span className="inline-flex items-center gap-2 text-base font-bold text-slate-900 group-hover:text-slate-900 transition tracking-wide">
-                          View <ArrowUpRight className="w-5 h-5" />
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
+              {related.map((r) => (
+                <CourseCard key={r.slug} course={r as any} />
+              ))}
             </div>
           </div>
         </section>
