@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { supabaseClient } from '@/lib/supabase';
 import { Plus, Edit2, Trash2, Eye, X, Upload, AlertCircle, ChevronUp, ChevronDown, Search } from 'lucide-react';
 
@@ -52,6 +53,9 @@ function AdminCourses() {
     metaKey: '',
     metaValue: '',
   });
+
+  // Dynamically load ReactQuill to avoid SSR issues
+  const ReactQuill = typeof window !== 'undefined' ? require('react-quill') : null;
 
   useEffect(() => {
     fetchCourses();
@@ -756,6 +760,40 @@ function AdminCourses() {
                         className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
                       />
                     </div>
+                  </div>
+                </div>
+
+                {/* SECTION 4: Descriptions (Rich Text) */}
+                <div className="border-b border-slate-600 pb-4">
+                  <h3 className="text-lg font-bold text-blue-300 mb-4">🖋️ Descriptions</h3>
+                  <div className="mb-4">
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">Overview</label>
+                    {ReactQuill ? (
+                      // @ts-ignore
+                      <ReactQuill value={formData.overview} onChange={(v: any) => setFormData({ ...formData, overview: v })} />
+                    ) : (
+                      <textarea
+                        value={formData.overview}
+                        onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
+                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                        rows={6}
+                      />
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">Hero Description</label>
+                    {ReactQuill ? (
+                      // @ts-ignore
+                      <ReactQuill value={formData.heroDescription} onChange={(v: any) => setFormData({ ...formData, heroDescription: v })} />
+                    ) : (
+                      <input
+                        type="text"
+                        value={formData.heroDescription}
+                        onChange={(e) => setFormData({ ...formData, heroDescription: e.target.value })}
+                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                      />
+                    )}
                   </div>
                 </div>
 
