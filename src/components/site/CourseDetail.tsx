@@ -174,10 +174,74 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
         </div>
       </nav>
 
-      <section className="bg-white min-h-screen">
-        <div className="container-x py-10 lg:py-14 grid lg:grid-cols-4 gap-6 course-detail-container">
-        <div className="lg:col-span-3 space-y-10">
-          {/* Course Overview */}
+      <section className="bg-gradient-to-b from-slate-50 to-white min-h-screen">
+        <div className="container-x py-10 lg:py-14">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+            
+            {/* LEFT SIDEBAR - COURSE DETAILS */}
+            <aside className="lg:col-span-2 space-y-5 h-fit">
+              {/* Course Details Card */}
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Course Details</h3>
+                
+                <div className="space-y-3.5">
+                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Duration</div>
+                      <div className="text-sm font-semibold text-slate-900">{course.meta?.duration || (course.weeks ? `${Math.round(course.weeks / 4.33)} months` : "—")}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center flex-shrink-0">
+                      <BookOpen className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Lessons</div>
+                      <div className="text-sm font-semibold text-slate-900">{course.lessons ?? "—"}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center flex-shrink-0">
+                      <Globe className="w-5 h-5 text-green-600" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Language</div>
+                      <div className="text-sm font-semibold text-slate-900">{course.meta?.language || "English"}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center flex-shrink-0">
+                      <GraduationCap className="w-5 h-5 text-purple-600" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Type</div>
+                      <div className="text-sm font-semibold text-slate-900">{ptype}</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center flex-shrink-0">
+                      <FileCheck className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <div>
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Certificate</div>
+                      <div className="text-sm font-semibold text-slate-900">{course.meta?.certificate === "no" ? "No" : "Yes"}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Level Badge */}
+              <div className="bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl p-5 text-white shadow-lg">
+                <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-2">Level</div>
+                <div className="text-2xl font-bold">{ptype === 'Certificate' ? 'Intermediate' : (ptype === 'PG Diploma' || ptype === 'Fellowship' ? 'Expert' : course.level)}</div>
+              </div>
+            </aside>
+
+            {/* MAIN CONTENT */}
+            <div className="lg:col-span-7 space-y-8">
           <div id="overview" className="scroll-mt-24">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
               <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
@@ -472,164 +536,128 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               </div>
             );
           })()}
-        </div>
+            </div>
 
-        <aside className="lg:col-span-1">
-          <div className="sticky top-32 space-y-6">
-            {/* Video Card */}
-            <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-slate-700 rounded-lg overflow-hidden shadow-xl">
-              {/* Video Block */}
-              <div className="aspect-[5/3] relative overflow-hidden bg-slate-900 group">
-                {!isVideoPlaying ? (
-                  <>
-                    {/* Thumbnail View */}
-                    <img 
-                      src="https://img.youtube.com/vi/5-2QOkBu180/maxresdefault.jpg" 
-                      alt="Course Video" 
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        (e.currentTarget as HTMLImageElement).src = 'https://img.youtube.com/vi/5-2QOkBu180/hqdefault.jpg';
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
-                    {/* Play Button */}
-                    <button 
-                      onClick={() => setIsVideoPlaying(true)}
-                      className="absolute inset-0 flex items-center justify-center group"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 hover:bg-red-700">
-                        <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {/* Video Player */}
-                    <iframe
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/5-2QOkBu180?autoplay=1&controls=1&rel=0&fs=1&modestbranding=1"
-                      title="Course Video"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className="absolute inset-0 w-full h-full"
-                    />
-                    {/* Close Video Button */}
-                    <button 
-                      onClick={() => setIsVideoPlaying(false)}
-                      className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center transition z-10"
-                      title="Close video"
-                    >
-                      ✕
-                    </button>
-                  </>
+            {/* RIGHT SIDEBAR - RELATED COURSES */}
+            <aside className="lg:col-span-3">
+              <div className="sticky top-32">
+                {/* Video Card */}
+                <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-xl mb-6">
+                  {/* Video Block */}
+                  <div className="aspect-[5/3] relative overflow-hidden bg-slate-900 group">
+                    {!isVideoPlaying ? (
+                      <>
+                        {/* Thumbnail View */}
+                        <img 
+                          src="https://img.youtube.com/vi/5-2QOkBu180/maxresdefault.jpg" 
+                          alt="Course Video" 
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = 'https://img.youtube.com/vi/5-2QOkBu180/hqdefault.jpg';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition" />
+                        {/* Play Button */}
+                        <button 
+                          onClick={() => setIsVideoPlaying(true)}
+                          className="absolute inset-0 flex items-center justify-center group"
+                        >
+                          <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 hover:bg-red-700">
+                            <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        {/* Video Player */}
+                        <iframe
+                          width="100%"
+                          height="100%"
+                          src="https://www.youtube.com/embed/5-2QOkBu180?autoplay=1&controls=1&rel=0&fs=1&modestbranding=1"
+                          title="Course Video"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                          className="absolute inset-0 w-full h-full"
+                        />
+                        {/* Close Video Button */}
+                        <button 
+                          onClick={() => setIsVideoPlaying(false)}
+                          className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center transition z-10"
+                          title="Close video"
+                        >
+                          ✕
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Pricing Card */}
+                <div className="bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all mb-6">
+                  {/* Header */}
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 sm:px-6 py-4 text-white">
+                    <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-1">Course Fee</div>
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <div className="text-3xl sm:text-4xl font-black" style={{ letterSpacing: '0.02em' }}>{formatINR(course.priceINR).replace('.00', '')}</div>
+                      <div className="text-sm sm:text-base font-bold">+GST</div>
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="p-5 sm:p-6 space-y-4">
+                    <div className="text-sm text-slate-600 font-semibold">
+                      Total: <span className="text-slate-900 font-bold" style={{ letterSpacing: '0.02em' }}>
+                        ₹ {Math.floor(totalPrice).toLocaleString('en-IN')}
+                      </span>
+                    </div>
+                    
+                    {/* CTAs */}
+                    <div className="space-y-3">
+                      <Link 
+                        to="/apply"
+                        search={{ program: course.program, course: getIBMCourseName(course.title) }}
+                        className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
+                      >
+                        Add to Cart
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Related Courses */}
+                {related.length > 0 && (
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6">
+                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Recommended Courses</h4>
+                    <div className="space-y-4">
+                      {related.slice(0, 3).map((r: any) => (
+                        <Link 
+                          key={r.slug}
+                          to="/courses/$slug"
+                          params={{ slug: r.slug }}
+                          className="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition group"
+                        >
+                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200 border border-slate-300">
+                            <img src={r.image} alt={r.title} className="w-full h-full object-cover" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition line-clamp-2">{r.title}</div>
+                            <div className="text-xs text-slate-600 mt-1">{r.lessons || 0} lessons</div>
+                          </div>
+                          <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition flex-shrink-0" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
-
-              {/* Card Footer */}
-              <div className="bg-gradient-to-r from-slate-900 to-slate-800 px-5 py-4 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-amber-400" />
-                  <span className="text-xs uppercase tracking-widest text-amber-300 font-bold">Premium Course</span>
-                </div>
-                <div className="flex gap-2">
-                  <button 
-                    onClick={() => setIsVideoPlaying(true)}
-                    className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition font-bold text-xs flex items-center gap-1.5"
-                    title="Play Video"
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                    Play
-                  </button>
-                  <a 
-                    href="https://www.youtube.com/watch?v=5-2QOkBu180"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition font-bold text-xs whitespace-nowrap"
-                    title="Watch on YouTube"
-                  >
-                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                    </svg>
-                    Youtube
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Pricing Card */}
-            <div className="bg-white border border-slate-300 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all">
-              <div className="p-6 space-y-3 mb-5 pb-6 border-b border-slate-300">
-                <div className="text-xs uppercase tracking-widest text-slate-600 font-bold">Course Price</div>
-                <div className="flex items-baseline gap-1">
-                  <div className="text-3xl font-black text-slate-900">{formatINR(course.priceINR)}</div>
-                  <div className="text-sm font-bold text-slate-700">+GST</div>
-                </div>
-                <div className="text-sm text-slate-700 font-semibold">Total: {formatINR(totalPrice)}</div>
-              </div>
-              <div className="px-6 pb-6 space-y-3">
-                <Link 
-                  to="/apply"
-                  search={{ program: course.program, course: getIBMCourseName(course.title) }}
-                  className="w-full inline-flex justify-center items-center px-5 py-3.5 bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 hover:from-slate-800 hover:via-slate-800 hover:to-slate-700 text-white text-base font-bold rounded-lg transition shadow-md hover:shadow-lg tracking-wide"
-                >
-                  Apply Now
-                </Link>
-                {/* Removed 'Book a Demo Class' per request; only Apply Now remains */}
-              </div>
-
-              <div className="px-6 py-6 border-t border-slate-300 space-y-4">
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
-                  <div className="text-xs uppercase tracking-widest text-slate-600 font-bold min-w-24">Duration</div>
-                  <div className="font-bold text-slate-900 text-base tracking-wide">{course.meta?.duration || (course.weeks ? `${Math.round(course.weeks / 4.33)} months` : "—")}</div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <BookOpen className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
-                  <div className="text-xs uppercase tracking-widest text-slate-600 font-bold min-w-24">Lessons</div>
-                  <div className="font-bold text-slate-900 text-base tracking-wide">{course.lessons ?? "—"}</div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Globe className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
-                  <div className="text-xs uppercase tracking-widest text-slate-600 font-bold min-w-24">Language</div>
-                  <div className="font-bold text-slate-900 text-base tracking-wide">{course.meta?.language || "English"}</div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <GraduationCap className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
-                  <div className="text-xs uppercase tracking-widest text-slate-600 font-bold min-w-24">Type</div>
-                  <div className="font-bold text-slate-900 text-base tracking-wide">{ptype}</div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FileCheck className="w-5 h-5 text-slate-900 flex-shrink-0 font-bold" />
-                  <div className="text-xs uppercase tracking-widest text-slate-600 font-bold min-w-24">Certificate</div>
-                  <div className="font-bold text-slate-900 text-base tracking-wide">{course.meta?.certificate === "no" ? "No" : "Yes"}</div>
-                </div>
-              </div>
-            </div>
+            </aside>
           </div>
-        </aside>
         </div>
       </section>
 
-      {/* Related */}
-      {related.length > 0 && (
-        <section className="bg-gradient-to-br from-slate-50 to-white border-t border-slate-300">
-          <div className="container-x py-16 lg:py-20">
-            <div className="text-xs uppercase tracking-widest text-slate-600 font-bold mb-2">Explore More</div>
-            <h2 className="text-3xl font-bold text-slate-900 mb-12">Related Courses</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
-              {related.map((r) => (
-                <CourseCard key={r.slug} course={r as any} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
     </div>
   );
 }
