@@ -164,79 +164,75 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
       {/* Sticky Navigation */}
       <nav className="sticky top-16 z-30 bg-slate-900/95 border-b border-slate-700 shadow-sm">
         <div className="container-x flex gap-8 overflow-x-auto text-sm">
-          {[
-            "overview",
-            "curriculum",
-            "instructor",
-            "faqs",
-            "reviews",
-          ].map((id) => (
-            <a key={id} href={`#${id}`} className="py-4 capitalize font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">{id}</a>
-          ))}
+          <a href="#overview" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Overview</a>
+          <a href="#learn" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">What You'll Learn</a>
+          <a href="#requirements" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Requirements</a>
+          <a href="#curriculum" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Curriculum</a>
+          <a href="#instructor" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Instructor</a>
+          <a href="#faqs" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">FAQs</a>
+          <a href="#reviews" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Reviews</a>
         </div>
       </nav>
 
       <section className="bg-white min-h-screen">
-        <div className="container-x py-10 lg:py-14 grid lg:grid-cols-3 gap-10 course-detail-container">
-        <div className="lg:col-span-2 space-y-10">
-          <div id="overview" className="space-y-10">
-            {/* Course Overview */}
-            <div>
+        <div className="container-x py-10 lg:py-14 grid lg:grid-cols-4 gap-6 course-detail-container">
+        <div className="lg:col-span-3 space-y-10">
+          {/* Course Overview */}
+          <div id="overview" className="scroll-mt-24">
+            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+              <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
+              Course Overview
+            </h2>
+            <div className="bg-white border border-slate-300 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <p className="text-slate-700 leading-relaxed text-base font-medium tracking-wide">{course.overview}</p>
+            </div>
+          </div>
+
+          {/* What you'll learn */}
+          {course.learn.length > 0 && (
+            <div id="learn" className="scroll-mt-24">
               <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
-                Course Overview
+                <div className="w-1 h-6 bg-gradient-to-b from-emerald-600 to-emerald-500"></div>
+                What You'll Learn
               </h2>
-              <div className="bg-white border border-slate-300 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <p className="text-slate-700 leading-relaxed text-base font-medium tracking-wide">{course.overview}</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                {course.learn.map((o: string, idx: number) => (
+                  <div key={idx} className="border border-slate-300 rounded-xl p-5 bg-white hover:border-emerald-300 hover:shadow-md transition-all">
+                    <div className="flex gap-3">
+                      <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                        </svg>
+                      </div>
+                      <p className="text-slate-700 text-base font-medium tracking-wide">{o}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
+          )}
 
-            {/* What you'll learn */}
-            {course.learn.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                  <div className="w-1 h-6 bg-gradient-to-b from-emerald-600 to-emerald-500"></div>
-                  What You'll Learn
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {course.learn.map((o: string, idx: number) => (
-                    <div key={idx} className="border border-slate-300 rounded-xl p-5 bg-white hover:border-emerald-300 hover:shadow-md transition-all">
-                      <div className="flex gap-3">
-                        <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <svg className="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                          </svg>
-                        </div>
-                        <p className="text-slate-700 text-base font-medium tracking-wide">{o}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+          {/* Requirements */}
+          {course.requirements && course.requirements.length > 0 && (
+            <div id="requirements" className="scroll-mt-24">
+              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <div className="w-1 h-6 bg-gradient-to-b from-orange-600 to-orange-500"></div>
+                Requirements
+              </h2>
+              <div className="flex flex-wrap gap-3">
+                {course.requirements.map((r: string, idx: number) => (
+                  <span key={idx} className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 text-slate-700 text-base font-semibold rounded-full hover:shadow-md transition-all hover:border-orange-300">
+                    <div className="w-2.5 h-2.5 rounded-full bg-orange-600"></div>
+                    {r}
+                  </span>
+                ))}
               </div>
-            )}
-
-            {/* Requirements */}
-            {course.requirements && course.requirements.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                  <div className="w-1 h-6 bg-gradient-to-b from-orange-600 to-orange-500"></div>
-                  Requirements
-                </h2>
-                <div className="flex flex-wrap gap-3">
-                  {course.requirements.map((r: string, idx: number) => (
-                    <span key={idx} className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 text-slate-700 text-base font-semibold rounded-full hover:shadow-md transition-all hover:border-orange-300">
-                      <div className="w-2.5 h-2.5 rounded-full bg-orange-600"></div>
-                      {r}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* CURRICULUM SECTION */}
           {course.modules.length > 0 && (
-            <div id="curriculum">
+            <div id="curriculum" className="scroll-mt-24">
               <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
                 Curriculum
@@ -286,7 +282,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           )}
 
           {/* INSTRUCTORS SECTION */}
-          <div id="instructor">
+          <div id="instructor" className="scroll-mt-24">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
               <div className="w-1 h-6 bg-gradient-to-b from-teal-600 to-teal-500"></div>
               Instructor
@@ -310,7 +306,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           </div>
 
           {course.faqs.length > 0 && (
-            <div id="faqs">
+            <div id="faqs" className="scroll-mt-24">
               <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
                 Frequently Asked Questions
@@ -414,7 +410,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             }
 
             return (
-              <div id="reviews">
+              <div id="reviews" className="scroll-mt-24">
                 <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
                   <div className="w-1 h-6 bg-gradient-to-b from-rose-600 to-rose-500"></div>
                   Student Reviews
@@ -570,9 +566,9 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             <div className="bg-white border border-slate-300 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all">
               <div className="p-6 space-y-3 mb-5 pb-6 border-b border-slate-300">
                 <div className="text-xs uppercase tracking-widest text-slate-600 font-bold">Course Price</div>
-                <div className="flex items-baseline gap-3">
-                  <div className="text-4xl font-black text-slate-900">{formatINR(course.priceINR)}</div>
-                  <div className="text-lg font-bold text-slate-700">+GST</div>
+                <div className="flex items-baseline gap-1">
+                  <div className="text-3xl font-black text-slate-900">{formatINR(course.priceINR)}</div>
+                  <div className="text-sm font-bold text-slate-700">+GST</div>
                 </div>
                 <div className="text-sm text-slate-700 font-semibold">Total: {formatINR(totalPrice)}</div>
               </div>
