@@ -183,8 +183,8 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
               Course Overview
             </h2>
-            <div className="bg-white border border-slate-300 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-              <p className="text-slate-700 leading-relaxed text-base font-medium tracking-wide">{course.overview}</p>
+            <div className="bg-white border border-slate-300 rounded-xl p-3 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+              <p className="text-slate-700 leading-relaxed text-sm sm:text-base font-medium tracking-wide">{course.overview}</p>
             </div>
           </div>
 
@@ -195,16 +195,16 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="w-1 h-6 bg-gradient-to-b from-emerald-600 to-emerald-500"></div>
                 What You'll Learn
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
                 {course.learn.map((o: string, idx: number) => (
-                  <div key={idx} className="border border-slate-300 rounded-xl p-5 bg-white hover:border-emerald-300 hover:shadow-md transition-all">
-                    <div className="flex gap-3">
-                      <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <svg className="w-4 h-4 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                  <div key={idx} className="border border-slate-300 rounded-xl p-3 sm:p-5 bg-white hover:border-emerald-300 hover:shadow-md transition-all">
+                    <div className="flex gap-2 sm:gap-3">
+                      <div className="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 sm:w-4 h-3 sm:h-4 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                         </svg>
                       </div>
-                      <p className="text-slate-700 text-base font-medium tracking-wide">{o}</p>
+                      <p className="text-slate-700 text-sm sm:text-base font-medium tracking-wide">{o}</p>
                     </div>
                   </div>
                 ))}
@@ -219,10 +219,10 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 <div className="w-1 h-6 bg-gradient-to-b from-orange-600 to-orange-500"></div>
                 Requirements
               </h2>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {course.requirements.map((r: string, idx: number) => (
-                  <span key={idx} className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 text-slate-700 text-base font-semibold rounded-full hover:shadow-md transition-all hover:border-orange-300">
-                    <div className="w-2.5 h-2.5 rounded-full bg-orange-600"></div>
+                  <span key={idx} className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 text-slate-700 text-xs sm:text-base font-semibold rounded-full hover:shadow-md transition-all hover:border-orange-300">
+                    <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-orange-600"></div>
                     {r}
                   </span>
                 ))}
@@ -287,17 +287,17 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               <div className="w-1 h-6 bg-gradient-to-b from-teal-600 to-teal-500"></div>
               Instructor
             </h2>
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 gap-3 sm:gap-5">
               {(course.trainers && course.trainers.length > 0 ? course.trainers : [{ name: "DMHCA Faculty", title: "Expert Faculty", bio: "Experienced clinicians and educators." }]).map((trainer: any, idx: number) => (
-                <div key={idx} className="border border-slate-300 rounded-xl p-6 bg-white hover:border-teal-300 hover:shadow-lg transition-all">
-                  <div className="flex gap-4">
-                    <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-3 border-slate-200 bg-slate-100">
+                <div key={idx} className="border border-slate-300 rounded-xl p-3 sm:p-6 bg-white hover:border-teal-300 hover:shadow-lg transition-all">
+                  <div className="flex gap-2 sm:gap-4">
+                    <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-2 sm:border-3 border-slate-200 bg-slate-100">
                       <img src={trainer.image || "/logo.webp"} alt={trainer.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-slate-900 text-base tracking-wide">{trainer.name}</div>
-                      {trainer.title && <div className="text-sm text-teal-700 font-semibold mt-1 tracking-wide">{trainer.title}</div>}
-                      {trainer.bio && <div className="text-sm text-slate-700 mt-2.5 leading-relaxed font-medium">{trainer.bio}</div>}
+                      <div className="font-bold text-slate-900 text-sm sm:text-base tracking-wide">{trainer.name}</div>
+                      {trainer.title && <div className="text-xs sm:text-sm text-teal-700 font-semibold mt-1 tracking-wide">{trainer.title}</div>}
+                      {trainer.bio && <div className="text-xs sm:text-sm text-slate-700 mt-2 sm:mt-2.5 leading-relaxed font-medium">{trainer.bio}</div>}
                     </div>
                   </div>
                 </div>
@@ -314,13 +314,13 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               <div className="border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm divide-y divide-slate-300">
                 {course.faqs.map((f: { q: string; a: string }, i: number) => (
                   <details key={i} className="group" open={i === 0}>
-                    <summary className="cursor-pointer px-6 py-5 font-bold text-base text-slate-900 hover:bg-indigo-50/40 transition flex items-center justify-between list-none tracking-wide">
+                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 font-bold text-sm sm:text-base text-slate-900 hover:bg-indigo-50/40 transition flex items-center justify-between list-none tracking-wide">
                       <span>{f.q}</span>
-                      <svg className="w-5 h-5 text-slate-700 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 sm:w-5 h-4 sm:h-5 text-slate-700 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                       </svg>
                     </summary>
-                    <div className="px-6 py-5 bg-indigo-50/20 text-base text-slate-700 leading-relaxed font-medium border-t border-slate-300 tracking-wide">{f.a}</div>
+                    <div className="px-3 sm:px-6 py-3 sm:py-5 bg-indigo-50/20 text-sm sm:text-base text-slate-700 leading-relaxed font-medium border-t border-slate-300 tracking-wide">{f.a}</div>
                   </details>
                 ))}
               </div>
@@ -417,36 +417,36 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 </h2>
                 <div className="space-y-4">
                   {localReviews.map((r: any, i: number) => (
-                    <div key={r.id || i} className="p-5 border border-slate-300 rounded-xl bg-white hover:shadow-lg transition-all">
-                      <div className="flex items-start gap-4">
-                        <div className="w-14 h-14 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border-2 border-slate-300">
-                          <img src={r.studentImage || '/reviews/default-avatar.svg'} alt={r.studentName} className="w-13 h-13 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).src = '/reviews/default-avatar.svg'; }} />
+                    <div key={r.id || i} className="p-3 sm:p-5 border border-slate-300 rounded-xl bg-white hover:shadow-lg transition-all">
+                      <div className="flex items-start gap-2 sm:gap-4">
+                        <div className="w-10 sm:w-14 h-10 sm:h-14 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border-2 border-slate-300 flex-shrink-0">
+                          <img src={r.studentImage || '/reviews/default-avatar.svg'} alt={r.studentName} className="w-9 sm:w-13 h-9 sm:h-13 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).src = '/reviews/default-avatar.svg'; }} />
                         </div>
                         <div className="flex-1">
-                          <div className="flex items-center justify-between gap-3">
+                          <div className="flex items-center justify-between gap-2 flex-wrap">
                             <div>
-                              <div className="font-bold text-base text-slate-900 tracking-wide">{r.studentName}</div>
-                              <div className="text-sm text-slate-600 mt-1 font-semibold">{r.title ? r.title + ' · ' : ''}<span className="text-rose-700 font-bold">{r.rating} ★</span></div>
+                              <div className="font-bold text-sm sm:text-base text-slate-900 tracking-wide">{r.studentName}</div>
+                              <div className="text-xs sm:text-sm text-slate-600 mt-0.5 sm:mt-1 font-semibold">{r.title ? r.title + ' · ' : ''}<span className="text-rose-700 font-bold">{r.rating} ★</span></div>
                             </div>
                           </div>
-                          <div className="mt-3 text-base text-slate-700 leading-relaxed font-medium tracking-wide">{r.comment}</div>
+                          <div className="mt-2 sm:mt-3 text-sm sm:text-base text-slate-700 leading-relaxed font-medium tracking-wide">{r.comment}</div>
                           {r.adminReply && (
-                            <div className="mt-4 p-4 border border-slate-300 rounded-lg bg-slate-50 text-sm">
-                              <div className="text-xs text-slate-600 font-bold uppercase mb-2 tracking-wider">Admin Reply</div>
-                              <div className="text-base text-slate-700 font-medium tracking-wide">{r.adminReply}</div>
+                            <div className="mt-3 sm:mt-4 p-2 sm:p-4 border border-slate-300 rounded-lg bg-slate-50 text-xs sm:text-sm">
+                              <div className="text-xs text-slate-600 font-bold uppercase mb-1 sm:mb-2 tracking-wider">Admin Reply</div>
+                              <div className="text-sm sm:text-base text-slate-700 font-medium tracking-wide">{r.adminReply}</div>
                             </div>
                           )}
                         </div>
-                        <button type="button" onClick={() => handleAdminReply(i)} className="text-xs px-3 py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-900 hover:text-white transition flex-shrink-0 font-semibold tracking-wide">Reply</button>
+                        <button type="button" onClick={() => handleAdminReply(i)} className="text-xs px-2 sm:px-3 py-1 sm:py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-900 hover:text-white transition flex-shrink-0 font-semibold tracking-wide">Reply</button>
                       </div>
                     </div>
                   ))}
 
-                  <div className="p-6 border border-dashed border-slate-400 rounded-xl bg-slate-50">
-                    <div className="text-sm text-slate-700 font-bold text-center mb-4 tracking-wide">Have feedback? Add a review below:</div>
-                    <form onSubmit={handleSubmit} className="space-y-3">
-                      <input ref={nameRef} className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-white text-base text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" placeholder="Your name" />
-                      <select ref={titleRef} defaultValue="Practical" className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-white text-base text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
+                  <div className="p-3 sm:p-6 border border-dashed border-slate-400 rounded-xl bg-slate-50">
+                    <div className="text-xs sm:text-sm text-slate-700 font-bold text-center mb-3 sm:mb-4 tracking-wide">Have feedback? Add a review below:</div>
+                    <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
+                      <input ref={nameRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-lg bg-white text-sm sm:text-base text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" placeholder="Your name" />
+                      <select ref={titleRef} defaultValue="Practical" className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-lg bg-white text-sm sm:text-base text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
                         <option value="Practical">Practical</option>
                         <option value="Learned">Learned</option>
                         <option value="Well structured">Well structured</option>
@@ -454,17 +454,17 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                         <option value="Concise modules">Concise modules</option>
                         <option value="Excellent content">Excellent content</option>
                       </select>
-                      <textarea ref={textRef} className="w-full px-4 py-3 border border-slate-300 rounded-lg bg-white text-base text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" rows={3} placeholder="Your review" />
-                      <div className="flex gap-3 items-center">
-                        <label className="text-base text-slate-700 font-bold tracking-wide">Rating:</label>
-                        <select ref={ratingRef} defaultValue="5" className="px-3 py-2.5 border border-slate-300 rounded-lg bg-white text-base font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
+                      <textarea ref={textRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-lg bg-white text-sm sm:text-base text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" rows={3} placeholder="Your review" />
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center">
+                        <label className="text-sm sm:text-base text-slate-700 font-bold tracking-wide">Rating:</label>
+                        <select ref={ratingRef} defaultValue="5" className="px-2 sm:px-3 py-2 sm:py-2.5 border border-slate-300 rounded-lg bg-white text-sm sm:text-base font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
                           <option value="5">5 ★</option>
                           <option value="4">4 ★</option>
                           <option value="3">3 ★</option>
                           <option value="2">2 ★</option>
                           <option value="1">1 ★</option>
                         </select>
-                        <button type="submit" className="ml-auto px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-base font-bold transition tracking-wide">Submit Review</button>
+                        <button type="submit" className="w-full sm:w-auto sm:ml-auto px-4 sm:px-6 py-2 sm:py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm sm:text-base font-bold transition tracking-wide">Submit Review</button>
                       </div>
                     </form>
                   </div>
