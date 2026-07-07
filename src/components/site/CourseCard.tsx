@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, BookOpen, ArrowUpRight, Star } from "lucide-react";
+import { Clock, BookOpen, ArrowUpRight, Star, Award } from "lucide-react";
 import { type Course, formatINR, getCategory } from "@/data/courses";
 
 // Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
@@ -30,6 +30,26 @@ function getIBMCourseName(dmhcaTitle: string): string {
 export function CourseCard({ course }: { course: Course }) {
   const cat = getCategory(course.categories[0]);
   const programType = course.program || course.meta?.skill_level || (course.title.toLowerCase().includes("fellowship") ? "Fellowship" : course.title.toLowerCase().includes("pg diploma") ? "PG Diploma" : "Certificate");
+  // Normalize program type for badge (Certificate / PG Diploma / Fellowship)
+  const programName = (() => {
+    const p = (programType || '').toLowerCase();
+    if (p.includes('fellowship')) return 'Fellowship';
+    if (p.includes('pg diploma') || p.includes('pg')) return 'PG Diploma';
+    if (p.includes('certificate') || p.includes('cert')) return 'Certificate';
+    return programType;
+  })();
+
+  // Map program types to display levels per request:
+  // - Fellowship and PG Diploma => "Expert"
+  // - Certificate courses => "Intermediate"
+  const displayLevel = (() => {
+    const p = (programType || '').toLowerCase();
+    if (p.includes('fellowship') || p.includes('pg diploma') || p.includes('pg') ) return 'Expert';
+    if (p.includes('certificate') || p.includes('cert')) return 'Intermediate';
+    // fallback to course.level if present, otherwise show programType
+    if (course.level) return course.level.charAt(0).toUpperCase() + course.level.slice(1);
+    return programType;
+  })();
   return (
     <Link
       to="/courses/$slug"
@@ -47,26 +67,35 @@ export function CourseCard({ course }: { course: Course }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/85 via-navy-deep/30 to-transparent" />
         <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] px-2 py-1 bg-primary-foreground/15 text-primary-foreground rounded-sm">
-          <span className="w-1 h-1 rounded-full bg-gold" /> {programType}
+          <span className="w-1 h-1 rounded-full bg-gold" /> {programName}
         </div>
         {course.rating && (
           <div className="absolute top-3 right-3 inline-flex items-center gap-1 text-[11px] px-2 py-1 bg-primary-foreground/95 text-navy-deep rounded-sm">
             <Star className="w-3 h-3 fill-gold text-gold" /> {course.rating} <span className="text-muted-foreground">({course.reviewCount})</span>
           </div>
         )}
-        <div className="absolute bottom-3 left-3 right-3">
-          <div className="text-[10px] uppercase tracking-[0.2em] text-gold/90 mb-1">{cat?.name}</div>
-          <div className="font-display text-primary-foreground text-lg leading-tight line-clamp-2">{course.title}</div>
-        </div>
+        <div className="absolute bottom-3 left-3 text-[10px] uppercase tracking-[0.2em] text-gold/60">{cat?.name}</div>
       </div>
       <div className="p-5">
-        <div className="flex items-center gap-3 text-xs text-muted-foreground justify-between">
-          <div className="flex items-center gap-3">
-            {course.lessons != null && <span className="flex items-center gap-1.5"><BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons</span>}
-            {course.weeks != null && <span className="flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> {Math.round(course.weeks / 4.33)} months</span>}
-            <span className="inline-flex items-center gap-1 px-2 py-1 bg-slate-200 text-slate-700 rounded font-semibold text-[11px]">{programType} - {course.level}</span>
+        <div className="font-display text-slate-900 text-lg leading-tight mb-2 line-clamp-2">{course.title}</div>
+        {((course as any).heroDescription || course.overview) && (
+          <p className="mt-0 text-[13px] text-slate-700 line-clamp-2 mb-3">{(course as any).heroDescription || course.overview}</p>
+        )}
+        <div className="flex items-center gap-3 text-xs text-muted-foreground justify-between flex-nowrap min-h-5">
+          <div className="flex items-center gap-3 flex-nowrap overflow-hidden">
+            {course.lessons != null && (
+              <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold">
+                <BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons
+              </span>
+            )}
+            {course.weeks != null && (
+              <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold">
+                <Clock className="w-3.5 h-3.5" /> {Math.round(course.weeks / 4.33)} months
+              </span>
+            )}
+            <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold"><Award className="w-3.5 h-3.5" /> {displayLevel}</span>
           </div>
-          <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition whitespace-nowrap">
+          <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition whitespace-nowrap flex-shrink-0">
             View <ArrowUpRight className="w-4 h-4" />
           </span>
         </div>

@@ -105,7 +105,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
   const faqSchema = course.faqs.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": course.faqs.map(faq => ({
+    "mainEntity": course.faqs.map((faq: any) => ({
       "@type": "Question",
       "name": faq.q,
       "acceptedAnswer": {
@@ -156,7 +156,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             {course.lessons != null && <div className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.lessons} lessons</span></div>}
             {course.weeks != null && <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{Math.round(course.weeks / 4.33)} months</span></div>}
             <div className="flex items-center gap-2"><Award className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{ptype}</span></div>
-            <div className="flex items-center gap-2"><GraduationCap className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.level}</span></div>
+            <div className="flex items-center gap-2"><GraduationCap className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{ptype === 'Certificate' ? 'Intermediate' : (ptype === 'PG Diploma' || ptype === 'Fellowship' ? 'Expert' : course.level)}</span></div>
           </div>
         </div>
       </section>
@@ -292,7 +292,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               Instructor
             </h2>
             <div className="grid sm:grid-cols-2 gap-5">
-              {(course.trainers && course.trainers.length > 0 ? course.trainers : [{ name: "DMHCA Faculty", title: "Expert Faculty", bio: "Experienced clinicians and educators." }]).map((trainer, idx) => (
+              {(course.trainers && course.trainers.length > 0 ? course.trainers : [{ name: "DMHCA Faculty", title: "Expert Faculty", bio: "Experienced clinicians and educators." }]).map((trainer: any, idx: number) => (
                 <div key={idx} className="border border-slate-300 rounded-xl p-6 bg-white hover:border-teal-300 hover:shadow-lg transition-all">
                   <div className="flex gap-4">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-3 border-slate-200 bg-slate-100">
@@ -309,6 +309,28 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             </div>
           </div>
 
+          {course.faqs.length > 0 && (
+            <div id="faqs">
+              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <div className="w-1 h-6 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
+                Frequently Asked Questions
+              </h2>
+              <div className="border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm divide-y divide-slate-300">
+                {course.faqs.map((f: { q: string; a: string }, i: number) => (
+                  <details key={i} className="group" open={i === 0}>
+                    <summary className="cursor-pointer px-6 py-5 font-bold text-base text-slate-900 hover:bg-indigo-50/40 transition flex items-center justify-between list-none tracking-wide">
+                      <span>{f.q}</span>
+                      <svg className="w-5 h-5 text-slate-700 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                    </summary>
+                    <div className="px-6 py-5 bg-indigo-50/20 text-base text-slate-700 leading-relaxed font-medium border-t border-slate-300 tracking-wide">{f.a}</div>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Student Reviews Section */}
           {(() => {
             // Local state for reviews with localStorage persistence per course slug
@@ -321,8 +343,8 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               // normalize existing course.reviews into student-style shape
               try {
                 const src = course.reviews || [];
-                return src.map((r: any) => ({
-                  id: r.id || `r-${course.slug}-${Math.random().toString(36).slice(2,9)}`,
+                return src.map((r: any, i: number) => ({
+                  id: r.id || `r-${course.slug}-${i}`,
                   studentName: r.studentName || r.author || r.name || 'Student',
                   studentImage: r.studentImage || r.image || '',
                   rating: r.rating || 5,
@@ -410,7 +432,6 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                               <div className="font-bold text-base text-slate-900 tracking-wide">{r.studentName}</div>
                               <div className="text-sm text-slate-600 mt-1 font-semibold">{r.title ? r.title + ' · ' : ''}<span className="text-rose-700 font-bold">{r.rating} ★</span></div>
                             </div>
-                            <div className="text-xs text-slate-500 font-medium whitespace-nowrap">{r.date}</div>
                           </div>
                           <div className="mt-3 text-base text-slate-700 leading-relaxed font-medium tracking-wide">{r.comment}</div>
                           {r.adminReply && (
@@ -455,28 +476,6 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               </div>
             );
           })()}
-
-          {course.faqs.length > 0 && (
-            <div id="faqs">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                <div className="w-1 h-6 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
-                Frequently Asked Questions
-              </h2>
-              <div className="border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm divide-y divide-slate-300">
-                {course.faqs.map((f: { q: string; a: string }, i: number) => (
-                  <details key={i} className="group" open={i === 0}>
-                    <summary className="cursor-pointer px-6 py-5 font-bold text-base text-slate-900 hover:bg-indigo-50/40 transition flex items-center justify-between list-none tracking-wide">
-                      <span>{f.q}</span>
-                      <svg className="w-5 h-5 text-slate-700 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                      </svg>
-                    </summary>
-                    <div className="px-6 py-5 bg-indigo-50/20 text-base text-slate-700 leading-relaxed font-medium border-t border-slate-300 tracking-wide">{f.a}</div>
-                  </details>
-                ))}
-              </div>
-            </div>
-          )}
         </div>
 
         <aside className="lg:col-span-1">

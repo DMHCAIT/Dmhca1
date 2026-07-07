@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
-import { ArrowUpRight, Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Star, StarHalf, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 const heroImg = "/herofellowshiplarge.webp";
@@ -45,13 +45,14 @@ function Home() {
   })();
   const [reviewIndex, setReviewIndex] = useState(0);
   const [slide, setSlide] = useState(0);
+  const [screenSize, setScreenSize] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
   // Slides order intentionally set to Certificate → PG Diploma → Fellowship
   const slides = [
     {
       id: 0,
       program: 'Certificate',
       theme: 'dark',
-        heroImg: '/herocertificatelarge.webp',
+        heroImg: '/herocertificateblock.webp',
         blockImg: '/herocertificateblock.webp',
       titleMain: 'Upskill clinically,',
       titleSub: 'fast and focused.',
@@ -96,26 +97,126 @@ function Home() {
         console.log('advancing slide', s, '->', next);
         return next;
       });
-    }, 2000);
+    }, 1000);
     return () => clearInterval(t);
   }, [isPaused]);
 
   useEffect(() => {
     console.log('slide state changed:', slide);
   }, [slide]);
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const reviewsPerPage = screenSize < 640 ? 1 : screenSize < 1024 ? 2 : 3;
   const featured = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
   
   const reviews = [
-    { name: "Ahsan Habib", role: "Bangladesh", text: "Hi I am Dr.Jakaria from Bangladesh. I have completed the fellowship on endocrinology course from here. Their educational system is very good.. thanks to DMHCA.", image: "/courses/Ahsan-Habib-150x150.jpg" },
-    { name: "Pragya Rajbhandari", role: "Jaipur", text: "My journey through the Pediatric Neurology Fellowship Program at your institute has been an incredibly rewarding experience. I've gained valuable clinical knowledge, hands-on training, and deepened my understanding of neurological conditions in children. Thank you for everything!", image: "/courses/Pragya-150x150.jpg" },
-    { name: "Shahjad Khan", role: "Lucknow", text: "I recently completed the Fellowship in Diabetology at DMHCA, and it has been a transformative journey in my medical career. The program is well-structured, combining updated theoretical modules with excellent hands-on clinical training.", image: "/courses/sahjad-khan-150x150.jpg" },
-    { name: "Rahul Jain", role: "Mumbai", text: "Very genuine and trustworthy platform for doing fellowship in various courses. Admin team and consultation team are very helpful, specially my guide from consultation team Mr Akshay Suryavanshi is very polite, cooperative and kind person. Thanks to DMHCA", image: "/courses/rahul-jain-150x150.jpg" },
-    { name: "Moomin Ahmad Mir", role: "Kashmir", text: "I am truly grateful to Delhi Medical Health Care Academy for providing me the opportunity to pursue a Fellowship in Critical Care. The admission process was extremely smooth and hassle-free. The staff members are very helpful and supportive, always ready to guide students at every step. Thanks Guys…", image: "/courses/mommin-150x150.jpg" },
-    { name: "Manisha Kumari", role: "New Delhi", text: "Highly recommend for the fellowship courses. I completed the fellowship in family medicine. It was a great learning experience. Very happy with the course content and faculty. Thank you team DMHCA", image: "/courses/manisha-kumari-150x150.jpg" },
+    {
+      name: "Ahsan Habib",
+      role: "Bangladesh",
+      text: "Hi I am Dr.Jakaria from Bangladesh. I have completed the fellowship on endocrinology course from here. Their educational system is very good.. thanks to DMHCA.",
+      image: "/courses/Ahsan-Habib-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Pragya Rajbhandari",
+      role: "Jaipur",
+      text: "My journey through the Pediatric Neurology Fellowship Program at your institute has been an incredibly rewarding experience. I've gained valuable clinical knowledge, hands-on training, and deepened my understanding of neurological conditions in children. Thank you for everything!",
+      image: "/courses/Pragya-150x150.jpg",
+      rating: 4.5,
+    },
+    {
+      name: "Shahjad Khan",
+      role: "Lucknow",
+      text: "I recently completed the Fellowship in Diabetology at DMHCA, and it has been a transformative journey in my medical career. The program is well-structured, combining updated theoretical modules with excellent hands-on clinical training.",
+      image: "/courses/sahjad-khan-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Rahul Jain",
+      role: "Mumbai",
+      text: "Very genuine and trustworthy platform for doing fellowship in various courses. Admin team and consultation team are very helpful, specially my guide from consultation team Mr Akshay Suryavanshi is very polite, cooperative and kind person. Thanks to DMHCA",
+      image: "/courses/rahul-jain-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Moomin Ahmad Mir",
+      role: "Kashmir",
+      text: "I am truly grateful to Delhi Medical Health Care Academy for providing me the opportunity to pursue a Fellowship in Critical Care. The admission process was extremely smooth and hassle-free. The staff members are very helpful and supportive, always ready to guide students at every step. Thanks Guys…",
+      image: "/courses/mommin-150x150.jpg",
+      rating: 4,
+    },
+    {
+      name: "Manisha Kumari",
+      role: "New Delhi",
+      text: "Highly recommend for the fellowship courses. I completed the fellowship in family medicine. It was a great learning experience. Very happy with the course content and faculty. Thank you team DMHCA",
+      image: "/courses/manisha-kumari-150x150.jpg",
+      rating: 5,
+    },
+    // Add new reviews below in the same format
+  {
+  name: "Dr. Mutharasan Kanniah",
+  role: "Internal Medical Specialist, Dammam, KSA",
+  text: "I highly appreciate Mr. Mahender, DMHCA Coordinator, for his excellent guidance throughout my Fellowship in Internal Medicine. His prompt support, professionalism, and ability to explain concepts clearly made my learning journey smooth and valuable. Thank you, DMHCA, for such dedicated support.",
+  rating: 5,
+},
+{
+  name: "Dr. Feroz Ahmad",
+  role: "Neurology Fellowship, India",
+  text: "DMHCA has a dedicated and supportive team that makes learning smooth and enjoyable. Ashwani Mishra guided me throughout my Neurology Fellowship and made every step easy. I truly appreciate the team's commitment and support.",
+  rating: 4,
+},
+{
+  name: "Sheikh Shozib",
+  role: "Bangladesh",
+  text: "I'm pursuing a Fellowship in Clinical Neurology with DMHCA. The system is well organized, the staff are friendly and supportive, and the lectures are clear, up-to-date, and easy to understand. Looking forward to a great learning journey.",
+  rating: 5,
+},
+{
+  name: "Pragya Rajbhandari",
+  role: "Pediatric Neurology Fellowship",
+  text: "My Pediatric Neurology Fellowship at DMHCA was a rewarding experience. The faculty provided excellent guidance, hands-on training, and valuable clinical knowledge, helping me strengthen my skills and passion for pediatric neurology.",
+  rating: 5,
+},
+{
+  name: "Dr. Biplab Chatterjee",
+  role: "India",
+  text: "Very nicely managed professional institute. Got my due papers on time. Nice experience with DMHCA. Keep it up.",
+  rating: 4.5,
+},
+{
+  name: "Jyothsna Theegala",
+  role: "India",
+  text: "Completing the Certificate in Advanced ART from DMHCA was a transformative experience. Overall, it was a great learning experience. The best part is that it is very affordable, and the faculty are excellent.",
+  rating: 4,
+},
+{
+  name: "Abhishek Sharma",
+  role: "India",
+  text: "I had an excellent experience at DMHCA while pursuing PGD in Reproductive Medicine. I highly recommend the academy for its quality education and professional guidance. Special thanks to Loveleen Ji and Sajid Ji for their constant support throughout my admission journey.",
+  rating: 5,
+},
+{
+  name: "Devayanee Gunjate",
+  role: "India",
+  text: "DMHCA has a very good curriculum with regular and interactive online lectures. The 15-day hands-on training was highly informative and helped me gain practical knowledge. Overall, it was a valuable learning experience.",
+  rating: 5,
+},
+{
+  name: "Syed Mustafa Aaqib",
+  role: "India",
+  text: "I had a very good experience at the Cardiology Conclave at Virinchi. Miss Soniya was an excellent coordinator who ensured everything was well organized and supported participants throughout the event. Overall, it was a great learning experience.",
+  rating: 5,
+},
+
   ];
-  const displayedReviews = reviews.slice(reviewIndex, reviewIndex + 3);
-  const nextReviews = () => setReviewIndex((reviewIndex + 3) % reviews.length);
-  const prevReviews = () => setReviewIndex((reviewIndex - 3 + reviews.length) % reviews.length);
+  const displayedReviews = reviews.slice(reviewIndex, reviewIndex + reviewsPerPage);
+  const nextReviews = () => setReviewIndex((reviewIndex + reviewsPerPage) % reviews.length);
+  const prevReviews = () => setReviewIndex((reviewIndex - reviewsPerPage + reviews.length) % reviews.length);
 
   // Organization Schema for Homepage
   const organizationSchema = {
@@ -282,7 +383,7 @@ function Home() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <img src={slides[slide].blockImg} alt="DMHCA faculty" className="w-full h-auto object-cover object-center" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+                  <img src={slides[slide].blockImg} alt="DMHCA faculty" className="w-full h-auto object-cover object-top" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 </motion.div>
               ) : null}
@@ -297,7 +398,7 @@ function Home() {
               >
                 <div>
                   <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
-                  <p className="font-display text-xl sm:text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
+                  <p className="text-xl sm:text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
                   <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy">
                     <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-gold text-gold" />
                     <span className="ml-1 font-medium">4.8 / 5</span>
@@ -404,7 +505,7 @@ function Home() {
               >
                 <Link 
                   to="/top-medical-courses/" 
-                  search={{ cat: slug }}
+                  search={(() => { const ss = new URLSearchParams(location.search || ''); ss.set('cat', slug); return Object.fromEntries(ss.entries()); })()}
                   className={`group relative overflow-hidden rounded-2xl aspect-video md:aspect-square h-auto block bg-gradient-to-br ${specialtyColors[slug]}`}
                 >
                   {/* Background image with zoom effect */}
@@ -458,7 +559,6 @@ function Home() {
       <section className="bg-hero-light text-on-hero-light py-12">
         <div className="container-home">
         <div className="text-center mb-12">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule inline-block">Academic alliances</div>
           <h2 className="font-display text-3xl md:text-4xl text-navy-deep mt-3">Academic partners</h2>
           <p className="text-muted-foreground mt-2 max-w-2xl mx-auto text-sm">DMHCA programs are delivered in academic collaboration with internationally recognised universities and medical institutions.</p>
         </div>
@@ -503,7 +603,7 @@ function Home() {
           </div>
           <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
             <button onClick={prevReviews} className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
-            <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayedReviews.map((r) => (
                 <motion.div key={r.name} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl">
                   <div className="mb-3">
@@ -513,8 +613,20 @@ function Home() {
                     </div>
                   </div>
                   <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-gold/70" />
-                  <p className="text-xs sm:text-sm text-primary-foreground/90 mt-2 leading-relaxed flex-1">{r.text}</p>
-                  <div className="flex items-center gap-1 text-gold mt-3">{Array.from({length:5}).map((_,i)=><Star key={i} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-gold"/>)}</div>
+                  <p className="text-xs sm:text-sm text-primary-foreground/90 mt-2 leading-relaxed flex-1 min-h-[5.5rem] sm:min-h-[6.75rem] overflow-hidden">{r.text}</p>
+                  <div className="mt-4 flex items-center gap-1 border border-slate-700 px-2 py-1 w-fit">
+                    {(() => {
+                      const rating = Number(r.rating ?? 5);
+                      const full = Math.floor(rating);
+                      const hasHalf = rating - full >= 0.5;
+                      const empty = 5 - full - (hasHalf ? 1 : 0);
+                      const nodes = [];
+                      for (let i = 0; i < full; i++) nodes.push(<Star key={`full-${i}`} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-yellow-300 text-yellow-300" />);
+                      if (hasHalf) nodes.push(<StarHalf key={`half`} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-yellow-300 text-yellow-300" />);
+                      for (let i = 0; i < empty; i++) nodes.push(<Star key={`empty-${i}`} className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-primary-foreground/30" />);
+                      return nodes;
+                    })()}
+                  </div>
                 </motion.div>
               ))}
             </div>
