@@ -241,33 +241,33 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               <div className="space-y-3">
                 {course.modules.map((m: string, i: number) => (
                   <details key={m + i} className="group border border-slate-300 hover:border-blue-400 rounded-xl overflow-hidden transition-all bg-white hover:shadow-md">
-                    <summary className="cursor-pointer px-6 py-5 flex items-center justify-between font-semibold text-slate-900 hover:bg-blue-50/40 transition list-none">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold text-sm">
+                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 flex items-center justify-between font-semibold text-slate-900 hover:bg-blue-50/40 transition list-none">
+                      <div className="flex items-center gap-2 sm:gap-4">
+                        <div className="flex items-center justify-center w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold text-xs sm:text-sm">
                           {String(i + 1).padStart(2, "0")}
                         </div>
-                        <div className="text-base text-slate-900 font-semibold tracking-wide">{m.replace(/^Module \d+:\s*/, '')}</div>
+                        <div className="text-sm sm:text-base text-slate-900 font-semibold tracking-wide">{m.replace(/^Module \d+:\s*/, '')}</div>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full font-semibold">
+                      <div className="flex items-center gap-1 sm:gap-3">
+                        <span className="text-xs bg-slate-100 text-slate-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-semibold text-xs">
                           {Array.isArray(course.moduleDetails?.[i]) ? (course.moduleDetails[i] as string[]).length : '—'} lessons
                         </span>
-                        <svg className="w-5 h-5 text-slate-600 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 sm:w-5 h-4 sm:h-5 text-slate-600 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                         </svg>
                       </div>
                     </summary>
-                    <div className="px-6 pb-5 bg-blue-50/20 border-t border-slate-300">
+                    <div className="px-3 sm:px-6 pb-3 sm:pb-5 bg-blue-50/20 border-t border-slate-300">
                       {course.moduleDetails && course.moduleDetails[i]
                         ? Array.isArray(course.moduleDetails[i])
                           ? (
                             <ul className="space-y-2">
                               {(course.moduleDetails[i] as string[]).map((lesson, li) => (
-                                <li key={li} className="flex items-center gap-3 p-3.5 rounded-lg border border-slate-300 bg-white hover:bg-blue-50/30 transition">
-                                  <svg className="w-5 h-5 text-blue-700 flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
+                                <li key={li} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-lg border border-slate-300 bg-white hover:bg-blue-50/30 transition">
+                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-blue-700 flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                   </svg>
-                                  <span className="text-base text-slate-700 font-medium tracking-wide">{lesson}</span>
+                                  <span className="text-sm sm:text-base text-slate-700 font-medium tracking-wide">{lesson}</span>
                                 </li>
                               ))}
                             </ul>
