@@ -120,7 +120,7 @@ function About() {
 
                 <div className="flex items-center justify-center">
                   <div className="w-full max-w-md rounded-xl overflow-hidden border border-border">
-                    <img src="/herocertificatelarge.webp" alt="Students learning" className="w-full h-56 object-cover" />
+                    <img src="/heropgdiplomablock-v2.webp" alt="Students learning" className="w-full h-56 object-cover" />
                     <div className="p-4 bg-white">
                       <div className="flex items-center justify-between">
                         <div>

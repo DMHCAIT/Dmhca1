@@ -35,10 +35,16 @@ function ApplicationForm() {
       const courseParam = params.get("course");
       const programParam = params.get("program");
       
+      // Normalize program value: "Certificate" -> "Certificate Course"
+      let normalizedProgram = programParam ? decodeURIComponent(programParam) : "";
+      if (normalizedProgram === "Certificate") {
+        normalizedProgram = "Certificate Course";
+      }
+      
       setFormData((prev) => ({
         ...prev,
         course: courseParam ? decodeURIComponent(courseParam) : "",
-        program: programParam ? decodeURIComponent(programParam) : "",
+        program: normalizedProgram,
       }));
     }
   }, []);
@@ -117,14 +123,23 @@ function ApplicationForm() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-slate-50 to-white min-h-screen py-12">
+    <div className="bg-gradient-to-b from-slate-50 via-blue-50 to-white min-h-screen py-12">
       <div className="container-home">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <div className="bg-white shadow-lg rounded-2xl p-6 inline-block">
-              <h1 className="font-display text-3xl md:text-4xl text-navy-deep">Apply for a Course</h1>
-              <p className="mt-2 text-sm md:text-base text-slate-600">Fill out this short form and our admissions team will contact you.</p>
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-6 md:p-8">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center flex-shrink-0 mt-2">
+                  <svg className="w-6 h-6 text-slate-300" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="pt-1">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white">Apply for a Course</h1>
+                  <p className="text-slate-400 text-sm md:text-base mt-1">Complete this form and our admissions team will contact you shortly.</p>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -148,131 +163,202 @@ function ApplicationForm() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="bg-white rounded-xl shadow-md p-6 md:p-8 space-y-5 border border-slate-200"
+              className="bg-white rounded-2xl shadow-lg p-8 md:p-10 space-y-5 border border-slate-100"
             >
               {/* Error Message */}
               {error && (
-                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-                  <p className="text-red-800 font-medium">❌ {error}</p>
+                <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 flex items-start gap-3">
+                  <svg className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                  </svg>
+                  <p className="text-red-800 font-medium">{error}</p>
                 </div>
               )}
 
-              {/* Full Name and Email - Side by side */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* Section 1: Personal Information */}
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">1</div>
+                  <h2 className="text-base font-bold text-slate-900">Personal Information</h2>
+                </div>
+                
+                {/* Full Name and Email - Side by side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-slate-900 placeholder-slate-400"
+                      placeholder="Your full name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-slate-900 placeholder-slate-400"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </div>
+
+                {/* Phone and Qualification */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Phone Number <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-slate-900 placeholder-slate-400"
+                      placeholder="+91 XXXXX XXXXX"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Highest Qualification
+                    </label>
+                    <select
+                      name="qualification"
+                      value={formData.qualification}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-slate-900 bg-white"
+                    >
+                      <option value="">Select your qualification</option>
+                      <option value="MBBS">MBBS</option>
+                      <option value="BDS">BDS</option>
+                      <option value="MD/MS">MD/MS</option>
+                      <option value="DM">DM</option>
+                      <option value="MCh">MCh</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section 2: Professional Background */}
+              <div>
+                <div className="flex items-center gap-3 mb-4 pt-4">
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">2</div>
+                  <h2 className="text-base font-bold text-slate-900">Professional Background</h2>
+                </div>
+                
+                {/* Years of Experience */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Full Name *</label>
+                  <label className="block text-sm font-semibold text-slate-900 mb-2">
+                    Years of Experience
+                  </label>
                   <input
                     type="text"
-                    name="fullName"
-                    value={formData.fullName}
+                    name="experience"
+                    value={formData.experience}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
-                    placeholder="Your name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Email Address *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
-                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition text-slate-900 placeholder-slate-400"
+                    placeholder="e.g., 2 years"
                   />
                 </div>
               </div>
 
-              {/* Phone and Qualification */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Phone Number *</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
-                    placeholder="+91 XXXXX XXXXX"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Highest Qualification</label>
-                  <select
-                    name="qualification"
-                    value={formData.qualification}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900 bg-white"
-                  >
-                    <option value="">Select qualification</option>
-                    <option value="MBBS">MBBS</option>
-                    <option value="BDS">BDS</option>
-                    <option value="MD/MS">MD/MS</option>
-                    <option value="DM">DM</option>
-                    <option value="MCh">MCh</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Years of Experience */}
+              {/* Section 3: Program Interest */}
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">Years of Experience</label>
-                <input
-                  type="text"
-                  name="experience"
-                  value={formData.experience}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
-                  placeholder="e.g., 2 years"
-                />
+                <div className="flex items-center gap-3 mb-4 pt-4">
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">3</div>
+                  <h2 className="text-base font-bold text-slate-900">Program Interest</h2>
+                </div>
+                
+                {/* Program Type and Course of Interest */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <label className="block text-sm font-semibold text-slate-900">
+                        Program Type <span className="text-red-500">*</span>
+                      </label>
+                      {formData.program && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded">
+                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                          </svg>
+                          Pre-selected
+                        </span>
+                      )}
+                    </div>
+                    <select
+                      name="program"
+                      value={formData.program}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-slate-900 bg-white"
+                    >
+                      <option value="">Select a program</option>
+                      <option value="Fellowship">Fellowship</option>
+                      <option value="PG Diploma">PG Diploma</option>
+                      <option value="Certificate Course">Certificate Course</option>
+                    </select>
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <label className="block text-sm font-semibold text-slate-900">
+                        Course of Interest <span className="text-red-500">*</span>
+                      </label>
+                      {formData.course && (
+                        <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-semibold text-blue-700 bg-blue-100 rounded">
+                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                          </svg>
+                          Pre-filled
+                        </span>
+                      )}
+                    </div>
+                    <input
+                      type="text"
+                      name="course"
+                      value={formData.course}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition text-slate-900 placeholder-slate-400"
+                      placeholder="Enter your desired course"
+                    />
+                  </div>
+                </div>
               </div>
 
-              {/* Program Type and Course of Interest */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Program Type *</label>
-                  <select
-                    name="program"
-                    value={formData.program}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900 bg-white"
-                  >
-                    <option value="">Select a program</option>
-                    <option value="Fellowship">Fellowship</option>
-                    <option value="PG Diploma">PG Diploma</option>
-                    <option value="Certificate Course">Certificate Course</option>
-                  </select>
+              {/* Section 4: Additional Information */}
+              <div>
+                <div className="flex items-center gap-3 mb-4 pt-4">
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">4</div>
+                  <h2 className="text-base font-bold text-slate-900">Tell Us More</h2>
                 </div>
+                
+                {/* Message */}
                 <div>
-                  <label className="block text-sm font-semibold text-slate-900 mb-2">Course of Interest *</label>
-                  <input
-                    type="text"
-                    name="course"
-                    value={formData.course}
+                  <label className="block text-sm font-semibold text-slate-900 mb-2">
+                    Additional Message
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
-                    placeholder="Enter your desired course"
+                    rows={4}
+                    className="w-full px-4 py-3 border-2 border-slate-200 rounded-lg focus:outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition text-slate-900 placeholder-slate-400 resize-none"
+                    placeholder="Tell us about your professional goals and interest in this program..."
                   />
                 </div>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">Additional Message</label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={3}
-                  className="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-navy-deep/40 focus:border-transparent text-slate-900"
-                  placeholder="Tell us about your interest..."
-                />
               </div>
 
               {/* Submit Button */}
@@ -280,14 +366,17 @@ function ApplicationForm() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full px-6 py-3 bg-gradient-to-r from-navy-deep to-slate-800 hover:from-navy-deep/90 hover:to-slate-700 text-white font-bold rounded-lg transition shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full px-8 py-3 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-950 hover:to-slate-900 text-white font-bold text-base rounded-lg transition shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {loading ? "Submitting Application..." : "Submit Application"}
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                  </svg>
+                  {loading ? "Submitting..." : "Submit Application"}
                 </button>
               </div>
 
               <p className="text-xs text-slate-500 text-center">
-                * Required fields. We'll contact you within 24 hours.
+                <span className="text-red-500">*</span> Required fields
               </p>
             </form>
           )}
