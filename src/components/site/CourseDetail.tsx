@@ -181,52 +181,52 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             {/* LEFT SIDEBAR - COURSE DETAILS */}
             <aside className="lg:col-span-2 space-y-5 h-fit">
               {/* Course Details Card */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-4">
-                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Course Details</h3>
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5 space-y-4">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-tight sm:tracking-wider">Course Details</h3>
                 
-                <div className="space-y-3.5">
-                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-5 h-5 text-indigo-600" />
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2 sm:gap-3 pb-3 sm:pb-3.5 border-b border-slate-200 min-w-0">
+                    <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-600" />
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Duration</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-tight sm:tracking-wider break-words">Duration</div>
                       <div className="text-sm font-semibold text-slate-900">{course.meta?.Duration || (course.months ? `${course.months} months` : "—")}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center flex-shrink-0">
-                      <BookOpen className="w-5 h-5 text-blue-600" />
+                  <div className="flex items-start gap-2 sm:gap-3 pb-3 sm:pb-3.5 border-b border-slate-200 min-w-0">
+                    <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center flex-shrink-0">
+                      <BookOpen className="w-4 sm:w-5 h-4 sm:h-5 text-blue-600" />
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Lessons</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-tight sm:tracking-wider">Lessons</div>
                       <div className="text-sm font-semibold text-slate-900">{course.lessons ?? "—"}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center flex-shrink-0">
-                      <Globe className="w-5 h-5 text-green-600" />
+                  <div className="flex items-start gap-2 sm:gap-3 pb-3 sm:pb-3.5 border-b border-slate-200 min-w-0">
+                    <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center flex-shrink-0">
+                      <Globe className="w-4 sm:w-5 h-4 sm:h-5 text-green-600" />
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Language</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-tight sm:tracking-wider">Language</div>
                       <div className="text-sm font-semibold text-slate-900">{course.meta?.language || "English"}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center flex-shrink-0">
-                      <GraduationCap className="w-5 h-5 text-purple-600" />
+                  <div className="flex items-start gap-2 sm:gap-3 pb-3 sm:pb-3.5 border-b border-slate-200 min-w-0">
+                    <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center flex-shrink-0">
+                      <GraduationCap className="w-4 sm:w-5 h-4 sm:h-5 text-purple-600" />
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Type</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-tight sm:tracking-wider">Type</div>
                       <div className="text-sm font-semibold text-slate-900">{ptype}</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center flex-shrink-0">
-                      <FileCheck className="w-5 h-5 text-amber-600" />
+                  <div className="flex items-start gap-2 sm:gap-3 min-w-0">
+                    <div className="w-9 sm:w-10 h-9 sm:h-10 rounded-lg bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center flex-shrink-0">
+                      <FileCheck className="w-4 sm:w-5 h-4 sm:h-5 text-amber-600" />
                     </div>
-                    <div>
-                      <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Certificate</div>
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs text-slate-600 font-bold uppercase tracking-tight sm:tracking-wider">Certificate</div>
                       <div className="text-sm font-semibold text-slate-900">{course.meta?.certificate === "no" ? "No" : "Yes"}</div>
                     </div>
                   </div>
@@ -234,9 +234,9 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               </div>
               
               {/* Level Badge */}
-              <div className="bg-gradient-to-br from-navy-deep to-navy rounded-2xl p-5 text-white shadow-lg">
-                <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-2">Level</div>
-                <div className="text-2xl font-bold">{ptype === 'Certificate' ? 'Intermediate' : (ptype === 'PG Diploma' || ptype === 'Fellowship' ? 'Expert' : course.level)}</div>
+              <div className="bg-gradient-to-br from-navy-deep to-navy rounded-2xl p-4 sm:p-5 text-white shadow-lg">
+                <div className="text-xs font-bold uppercase tracking-tight sm:tracking-wider opacity-90 mb-2">Level</div>
+                <div className="text-xl sm:text-2xl font-bold">{ptype === 'Certificate' ? 'Intermediate' : (ptype === 'PG Diploma' || ptype === 'Fellowship' ? 'Expert' : course.level)}</div>
               </div>
             </aside>
 

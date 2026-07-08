@@ -582,39 +582,39 @@ export function CourseDetailNew({
               </div>
 
               {/* Course Details */}
-              <div className="pt-6 border-t border-border space-y-3">
-                <div className="flex items-center gap-3">
+              <div className="pt-6 border-t border-border space-y-2 sm:space-y-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <Clock className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">Duration</div>
-                  <div className="font-medium text-navy-deep ml-auto">
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Duration</div>
+                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
                     {course.meta?.Duration || (course.months ? `${course.months} months` : "—")}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <BookOpen className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">Lessons</div>
-                  <div className="font-medium text-navy-deep ml-auto">{course.lessons ?? "—"}</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Lessons</div>
+                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">{course.lessons ?? "—"}</div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <Globe className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">Language</div>
-                  <div className="font-medium text-navy-deep ml-auto">
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Language</div>
+                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
                     {course.meta?.language || "English"}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <GraduationCap className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">Program</div>
-                  <div className="font-medium text-navy-deep ml-auto">{ptype}</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Program</div>
+                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">{ptype}</div>
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <FileCheck className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground">Certificate</div>
-                  <div className="font-medium text-navy-deep ml-auto">
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Certificate</div>
+                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
                     {course.meta?.certificate === "no" ? "No" : "Yes"}
                   </div>
                 </div>
