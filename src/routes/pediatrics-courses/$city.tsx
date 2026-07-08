@@ -2,30 +2,34 @@ import React from "react";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import {
+  getCourseBySlug,
   getCoursesBySpecialty,
 } from "@/data/cityWiseCourses";
-import { courses } from "@/data/courses";
+import { courses, categories } from "@/data/courses";
 import { CourseCard } from "@/components/site/CourseCard";
 
-export const Route = createFileRoute("/cosmetology-courses/$city")({
-  component: CosmetologyCityPage,
+export const Route = createFileRoute("/pediatrics-courses/$city")({
+  component: PediatricsCityPage,
 });
 
-function CosmetologyCityPage() {
+function PediatricsCityPage() {
   const { city } = useParams({
-    from: "/cosmetology-courses/$city",
+    from: "/pediatrics-courses/$city",
   });
 
-  const specialty = "cosmetology";
-  const slug = `${specialty}-courses/${city}`;
+  const specialty = "pediatrics";
+  const slug = `pediatrics-courses/${city}`;
 
   const relatedCourses = getCoursesBySpecialty(specialty);
 
-  // Cosmetology courses are stored under dermatology category
-  const categorySlug = "dermatology";
-  const cityCourses = courses.filter((c) => c.categories.includes(categorySlug)).filter(
-    (c) => c.title.toLowerCase().includes("cosmetic") || c.title.toLowerCase().includes("aesthetic")
+  const categoryObj = categories.find(
+    (cat) =>
+      cat.name.toLowerCase() === specialty.toLowerCase() ||
+      cat.slug === specialty.toLowerCase().replace(/\s+/g, "-") ||
+      cat.name.toLowerCase().includes(specialty.toLowerCase().split(" ")[0])
   );
+  const categorySlug = categoryObj?.slug;
+  const cityCourses = categorySlug ? courses.filter((c) => c.categories.includes(categorySlug)) : [];
 
   return (
     <div className="bg-white min-h-screen">
@@ -37,7 +41,7 @@ function CosmetologyCityPage() {
               ← Back to all courses
             </Link>
             <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-              {specialty.charAt(0).toUpperCase() + specialty.slice(1)} Courses in{" "}
+              {specialty.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Courses in{" "}
               {city.charAt(0).toUpperCase() + city.slice(1)}
             </h1>
           </div>
@@ -52,8 +56,7 @@ function CosmetologyCityPage() {
             <p className="text-lg text-slate-700 leading-relaxed mb-4">
               {city.charAt(0).toUpperCase() + city.slice(1)} is home to some of India's best medical
               colleges, universities, and hospitals, making it an ideal location
-              for pursuing {specialty} specialization. Our comprehensive{" "}
-              {specialty} programs provide world-class education and practical
+              for pursuing pediatrics specialization. Our comprehensive pediatrics programs provide world-class education and practical
               training at DMHCA Institute.
             </p>
 
@@ -69,21 +72,24 @@ function CosmetologyCityPage() {
             )}
           </div>
 
-          {/* FAQs - unified short answers for city pages */}
+          {/* FAQs - collapsed behavior with short answers */}
           <div className="space-y-4">
             <CollapsibleFAQ
-              question={`Where to apply for ${specialty} courses in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
-              shortAnswer={`You can go with DMHCA Institute in ${city.charAt(0).toUpperCase() + city.slice(1)} for your ${specialty} course because of their medical experts.`}
+              question={`Where to apply for pediatrics courses in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
+              shortAnswer={`You can go with DMHCA Institute in ${city.charAt(0).toUpperCase() + city.slice(1)} for your pediatrics course because of their medical experts.`}
+              longAnswer={`DMHCA Institute offers premium pediatrics programs with expert faculty and practical training.`}
             />
 
             <CollapsibleFAQ
-              question={`What is the fees of ${specialty} course in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
-              shortAnswer={`The fees of ${specialty} courses in ${city.charAt(0).toUpperCase() + city.slice(1)} varies from ₹50,000 to ₹3,00,000. For latest prices, contact the DMHCA medical experts.`}
+              question={`What is the fees of pediatrics course in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
+              shortAnswer={`The fees of pediatrics courses in ${city.charAt(0).toUpperCase() + city.slice(1)} varies from ₹50,000 to ₹3,00,000. For latest prices, contact the DMHCA medical experts.`}
+              longAnswer={`Fees vary by program type and duration. Contact admissions for exact figures and payment plans.`}
             />
 
             <CollapsibleFAQ
-              question={`How to apply for ${specialty} course in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
+              question={`How to apply for pediatrics course in ${city.charAt(0).toUpperCase() + city.slice(1)}?`}
               shortAnswer={`Directly contact the DMHCA medical professionals at +91 9899711530 and they will guide you thoroughly.`}
+              longAnswer={`Visit our website, complete the application, upload required documents, and our admissions team will confirm enrollment.`}
             />
           </div>
 
@@ -91,7 +97,7 @@ function CosmetologyCityPage() {
           <div className="mt-16 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to start your journey?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto">
-              Enroll in our {specialty} program in {city.charAt(0).toUpperCase() + city.slice(1)} today and advance your medical career
+              Enroll in our pediatrics program in {city.charAt(0).toUpperCase() + city.slice(1)} today and advance your medical career
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -109,12 +115,10 @@ function CosmetologyCityPage() {
             </div>
           </div>
 
-          {/* Removed duplicate 'Courses in this City' section */}
-
           {/* Related Courses */}
           <div className="mt-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-8">
-              {specialty.charAt(0).toUpperCase() + specialty.slice(1)} Courses in Other Cities
+              {specialty.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} Courses in Other Cities
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {relatedCourses.slice(0, 6).map((relCourse) => (
@@ -124,7 +128,7 @@ function CosmetologyCityPage() {
                   className="group bg-white border border-slate-200 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 transition-all"
                 >
                   <h3 className="font-bold text-slate-900 group-hover:text-navy-deep transition mb-2">
-                    {specialty} in {relCourse.city}
+                    Pediatrics in {relCourse.city}
                   </h3>
                   <p className="text-sm text-slate-600 mb-3">{relCourse.description}</p>
                   <div className="text-xs font-semibold text-navy-deep">
@@ -140,7 +144,7 @@ function CosmetologyCityPage() {
   );
 }
 
-function CollapsibleFAQ({ question, shortAnswer }) {
+function CollapsibleFAQ({ question, shortAnswer, longAnswer }) {
   const [open, setOpen] = React.useState(false);
   return (
     <div className="border rounded-lg overflow-hidden bg-white hover:shadow-md transition-shadow">
@@ -148,7 +152,9 @@ function CollapsibleFAQ({ question, shortAnswer }) {
         onClick={() => setOpen((v) => !v)}
         className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition text-left"
       >
-        <div className="text-base font-bold text-slate-900">{question}</div>
+        <div>
+          <div className="text-base font-bold text-slate-900">{question}</div>
+        </div>
         <div className="text-slate-600 ml-4 text-xl">{open ? "−" : "+"}</div>
       </button>
       {open && (

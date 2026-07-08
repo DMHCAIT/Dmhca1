@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 // avoid Next.js dynamic import in this Vite app
 import { supabaseClient } from '@/lib/supabase';
-import { Plus, Edit2, Trash2, Eye, X, Upload, AlertCircle, ChevronUp, ChevronDown, Search } from 'lucide-react';
+import { Plus, Edit2, Trash2, Eye, X, Upload, AlertCircle, ChevronUp, ChevronDown, Search, RotateCw } from 'lucide-react';
 
 export const Route = createFileRoute('/admin/courses')({
   component: AdminCourses,
@@ -23,6 +23,18 @@ function AdminCourses() {
   const [stats, setStats] = useState({ total: 0, fellowships: 0, pgDiplomas: 0, certificates: 0 });
   const [categories, setCategories] = useState<string[]>([]);
   const [currentCourseId, setCurrentCourseId] = useState<string | null>(null);
+  const [editingMetaKey, setEditingMetaKey] = useState<string | null>(null);
+  const [editingMetaNewKey, setEditingMetaNewKey] = useState('');
+  const [editingMetaNewValue, setEditingMetaNewValue] = useState('');
+  const [editingLearnIdx, setEditingLearnIdx] = useState<number | null>(null);
+  const [editingLearnText, setEditingLearnText] = useState('');
+  const [editingModuleIdx, setEditingModuleIdx] = useState<number | null>(null);
+  const [editingModuleText, setEditingModuleText] = useState('');
+  const [editingSubModuleIdx, setEditingSubModuleIdx] = useState<{ moduleIdx: number; subIdx: number } | null>(null);
+  const [editingSubModuleText, setEditingSubModuleText] = useState('');
+  const [editingFaqIdx, setEditingFaqIdx] = useState<number | null>(null);
+  const [editingFaqQuestion, setEditingFaqQuestion] = useState('');
+  const [editingFaqAnswer, setEditingFaqAnswer] = useState('');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -30,7 +42,7 @@ function AdminCourses() {
     program: 'Certificate',
     category: '',
     priceINR: '',
-    weeks: '',
+    months: '',
     level: '',
     lessons: '',
     rating: '',
@@ -54,19 +66,6 @@ function AdminCourses() {
     metaValue: '',
   });
 
-  // Dynamically load ReactQuill in browser; fallback to a plain textarea
-  const [ReactQuill, setReactQuill] = useState<any>(null);
-
-  useEffect(() => {
-    let mounted = true;
-    if (typeof window !== 'undefined') {
-      import(/* @vite-ignore */ 'react-quill')
-        .then((mod) => { if (mounted) setReactQuill(mod.default || mod); })
-        .catch(() => { /* react-quill not installed or incompatible; ignore */ });
-    }
-    return () => { mounted = false; };
-  }, []);
-
   useEffect(() => {
     fetchCourses();
   }, []);
@@ -86,13 +85,18 @@ function AdminCourses() {
       if (error) throw error;
 
       const processedCourses = (data || []).map((course: any) => {
-        let courseData = course.data ? (typeof course.data === 'string' ? JSON.parse(course.data) : course.data) : {};
+        // Prioritize testimonials (fresh synced data from courses.tsx) over old data
+        let courseData = {};
         if (course.testimonials && typeof course.testimonials === 'string') {
           try {
             courseData = JSON.parse(course.testimonials);
           } catch (e) {
             console.warn('Could not parse testimonials for course', course.id);
           }
+        }
+        // Fallback to old data if testimonials empty
+        if (!courseData.title && course.data) {
+          courseData = typeof course.data === 'string' ? JSON.parse(course.data) : course.data;
         }
         return { ...course, data: courseData };
       });
@@ -150,18 +154,40 @@ function AdminCourses() {
 
   const handleEditCourse = (course: any) => {
     const courseData = course.data || {};
+    
+    // Determine months - prefer parsed data first
+    let monthsValue = '';
+    if (courseData.months) {
+      monthsValue = String(courseData.months);
+    } else if (course.duration_weeks) {
+      monthsValue = String(course.duration_weeks);
+    }
+    
+    // Determine level based on program type if not explicitly set
+    let levelValue = courseData.level || course.level || '';
+    const programType = courseData.program || course.program || 'Certificate';
+    
+    // If level is missing or seems wrong, auto-set based on program
+    if (!levelValue || levelValue === 'beginner') {
+      if (programType === 'Fellowship' || programType === 'PG Diploma') {
+        levelValue = 'expert';
+      } else if (programType === 'Certificate') {
+        levelValue = 'intermediate';
+      }
+    }
+    
     setCurrentCourseId(course.id);
     setFormData({
-      title: courseData.title || '',
-      slug: courseData.slug || '',
-      program: courseData.program || 'Certificate',
-      category: courseData.category || '',
-      priceINR: courseData.priceINR || '',
-      weeks: courseData.weeks ? String(courseData.weeks) : '',
-      level: courseData.level || '',
-      lessons: courseData.lessons ? String(courseData.lessons) : '',
-      rating: courseData.rating ? String(courseData.rating) : '',
-      reviewCount: courseData.reviewCount ? String(courseData.reviewCount) : '',
+      title: courseData.title || course.title || '',
+      slug: courseData.slug || course.slug || '',
+      program: programType,
+      category: courseData.category || course.category || '',
+      priceINR: courseData.priceINR || course.price || '',
+      months: monthsValue,
+      level: levelValue,
+      lessons: (courseData.lessons ? String(courseData.lessons) : '') || (course.lessons ? String(course.lessons) : ''),
+      rating: (courseData.rating ? String(courseData.rating) : '') || (course.rating ? String(course.rating) : ''),
+      reviewCount: (courseData.reviewCount ? String(courseData.reviewCount) : '') || (course.review_count ? String(course.review_count) : ''),
       overview: courseData.overview || '',
       heroDescription: courseData.heroDescription || '',
       learn: Array.isArray(courseData.learn) ? courseData.learn : [],
@@ -191,7 +217,7 @@ function AdminCourses() {
       program: 'Certificate',
       category: '',
       priceINR: '',
-      weeks: '',
+      months: '',
       level: '',
       lessons: '',
       rating: '',
@@ -230,7 +256,7 @@ function AdminCourses() {
         program: formData.program,
         category: formData.category,
         priceINR: parseFloat(formData.priceINR as any) || 0,
-        weeks: parseFloat(formData.weeks as any) || 0,
+        months: parseFloat(formData.months as any) || 0,
         level: formData.level,
         lessons: parseInt(formData.lessons as any) || 0,
         rating: parseFloat(formData.rating as any) || null,
@@ -253,7 +279,11 @@ function AdminCourses() {
           .update({ 
             testimonials: JSON.stringify(courseData),
             slug: formData.slug,
-            title: formData.title
+            title: formData.title,
+            category: formData.category,
+            price: parseFloat(formData.priceINR as any) || 0,
+            duration_weeks: parseFloat(formData.months as any) || 0,
+            categories: formData.category ? [formData.category] : []
           })
           .eq('id', currentCourseId)
           .select();
@@ -269,8 +299,9 @@ function AdminCourses() {
             slug: formData.slug,
             title: formData.title,
             category: formData.category,
+            categories: formData.category ? [formData.category] : [],
             price: parseFloat(formData.priceINR as any) || 0,
-            duration_weeks: parseFloat(formData.weeks as any) || 0
+            duration_weeks: parseFloat(formData.months as any) || 0
           }])
           .select();
 
@@ -375,13 +406,23 @@ function AdminCourses() {
             <h1 className="text-4xl font-bold mb-2">📚 All Courses</h1>
             <p className="text-gray-400">Browse all {stats.total} medical courses with complete details</p>
           </div>
-          <button
-            onClick={handleAddCourse}
-            className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition"
-          >
-            <Plus size={20} />
-            Add New Course
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => fetchCourses()}
+              className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition"
+              title="Reload fresh data from Supabase"
+            >
+              <RotateCw size={20} />
+              Refresh Data
+            </button>
+            <button
+              onClick={handleAddCourse}
+              className="flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition"
+            >
+              <Plus size={20} />
+              Add New Course
+            </button>
+          </div>
         </div>
 
         {/* Stats */}
@@ -704,11 +745,8 @@ function AdminCourses() {
                       <label className="block text-sm font-semibold mb-2 text-gray-300">Duration (Months)</label>
                       <input
                         type="number"
-                        value={formData.weeks ? Math.round((parseFloat(formData.weeks as any) / 4.33) * 10) / 10 : ''}
-                        onChange={(e) => {
-                          const months = e.target.value ? parseFloat(e.target.value) : 0;
-                          setFormData({ ...formData, weeks: String(Math.round(months * 4.33 * 10) / 10) });
-                        }}
+                        value={formData.months}
+                        onChange={(e) => setFormData({ ...formData, months: e.target.value })}
                         className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
                         placeholder="0"
                       />
@@ -738,6 +776,7 @@ function AdminCourses() {
                         <option value="beginner">Beginner</option>
                         <option value="intermediate">Intermediate</option>
                         <option value="advanced">Advanced</option>
+                        <option value="expert">Expert</option>
                       </select>
                     </div>
                   </div>
@@ -778,32 +817,22 @@ function AdminCourses() {
                   <h3 className="text-lg font-bold text-blue-300 mb-4">🖋️ Descriptions</h3>
                   <div className="mb-4">
                     <label className="block text-sm font-semibold mb-2 text-gray-300">Overview</label>
-                    {ReactQuill ? (
-                      // @ts-ignore
-                      <ReactQuill value={formData.overview} onChange={(v: any) => setFormData({ ...formData, overview: v })} />
-                    ) : (
-                      <textarea
-                        value={formData.overview}
-                        onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
-                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-                        rows={6}
-                      />
-                    )}
+                    <textarea
+                      value={formData.overview}
+                      onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                      rows={6}
+                    />
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold mb-2 text-gray-300">Hero Description</label>
-                    {ReactQuill ? (
-                      // @ts-ignore
-                      <ReactQuill value={formData.heroDescription} onChange={(v: any) => setFormData({ ...formData, heroDescription: v })} />
-                    ) : (
-                      <input
-                        type="text"
-                        value={formData.heroDescription}
-                        onChange={(e) => setFormData({ ...formData, heroDescription: e.target.value })}
-                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
-                      />
-                    )}
+                    <input
+                      type="text"
+                      value={formData.heroDescription}
+                      onChange={(e) => setFormData({ ...formData, heroDescription: e.target.value })}
+                      className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                    />
                   </div>
                 </div>
 
@@ -869,13 +898,60 @@ function AdminCourses() {
                   <div className="space-y-2">
                     {formData.learn.map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between bg-slate-700/50 p-2 rounded">
-                        <span className="text-gray-300">{item}</span>
-                        <button
-                          onClick={() => setFormData({ ...formData, learn: formData.learn.filter((_, i) => i !== idx) })}
-                          className="text-red-400 hover:text-red-300"
-                        >
-                          ✕
-                        </button>
+                        {editingLearnIdx === idx ? (
+                          <div className="flex gap-2 flex-1">
+                            <input
+                              type="text"
+                              value={editingLearnText}
+                              onChange={(e) => setEditingLearnText(e.target.value)}
+                              className="flex-1 px-2 py-1 bg-slate-600 border border-slate-500 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                            />
+                            <button
+                              onClick={() => {
+                                if (editingLearnText.trim()) {
+                                  const updatedLearn = [...formData.learn];
+                                  updatedLearn[idx] = editingLearnText.trim();
+                                  setFormData({ ...formData, learn: updatedLearn });
+                                  setEditingLearnIdx(null);
+                                  setEditingLearnText('');
+                                }
+                              }}
+                              className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold transition"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => {
+                                setEditingLearnIdx(null);
+                                setEditingLearnText('');
+                              }}
+                              className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold transition"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <span className="text-gray-300">{item}</span>
+                            <div className="flex gap-1">
+                              <button
+                                onClick={() => {
+                                  setEditingLearnIdx(idx);
+                                  setEditingLearnText(item);
+                                }}
+                                className="text-blue-400 hover:text-blue-300 text-xs px-2 py-1 rounded hover:bg-slate-600/50"
+                              >
+                                ✎ Edit
+                              </button>
+                              <button
+                                onClick={() => setFormData({ ...formData, learn: formData.learn.filter((_, i) => i !== idx) })}
+                                className="text-red-400 hover:text-red-300"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -927,19 +1003,66 @@ function AdminCourses() {
                       <div key={idx} className="bg-slate-700/50 p-4 rounded border border-slate-600">
                         {/* Module Header */}
                         <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-500">
-                          <span className="font-semibold text-blue-300">Module {idx + 1}: {module}</span>
-                          <button
-                            onClick={() => {
-                              setFormData({
-                                ...formData,
-                                modules: formData.modules.filter((_, i) => i !== idx),
-                                moduleDetails: formData.moduleDetails.filter((_, i) => i !== idx),
-                              });
-                            }}
-                            className="text-red-400 hover:text-red-300 text-lg"
-                          >
-                            ✕
-                          </button>
+                          {editingModuleIdx === idx ? (
+                            <div className="flex gap-2 flex-1">
+                              <input
+                                type="text"
+                                value={editingModuleText}
+                                onChange={(e) => setEditingModuleText(e.target.value)}
+                                className="flex-1 px-2 py-1 bg-slate-600 border border-slate-500 rounded text-white focus:outline-none focus:border-blue-400"
+                              />
+                              <button
+                                onClick={() => {
+                                  if (editingModuleText.trim()) {
+                                    const updatedModules = [...formData.modules];
+                                    updatedModules[idx] = editingModuleText.trim();
+                                    setFormData({ ...formData, modules: updatedModules });
+                                    setEditingModuleIdx(null);
+                                    setEditingModuleText('');
+                                  }
+                                }}
+                                className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold"
+                              >
+                                Save
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setEditingModuleIdx(null);
+                                  setEditingModuleText('');
+                                }}
+                                className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold"
+                              >
+                                Cancel
+                              </button>
+                            </div>
+                          ) : (
+                            <>
+                              <span className="font-semibold text-blue-300">Module {idx + 1}: {module}</span>
+                              <div className="flex gap-1">
+                                <button
+                                  onClick={() => {
+                                    setEditingModuleIdx(idx);
+                                    setEditingModuleText(module);
+                                  }}
+                                  className="text-blue-400 hover:text-blue-300 text-xs px-2 py-1 rounded hover:bg-slate-600/50"
+                                >
+                                  ✎ Edit
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setFormData({
+                                      ...formData,
+                                      modules: formData.modules.filter((_, i) => i !== idx),
+                                      moduleDetails: formData.moduleDetails.filter((_, i) => i !== idx),
+                                    });
+                                  }}
+                                  className="text-red-400 hover:text-red-300 text-lg"
+                                >
+                                  ✕
+                                </button>
+                              </div>
+                            </>
+                          )}
                         </div>
                         
                         {/* Sub-Modules Section */}
@@ -987,17 +1110,62 @@ function AdminCourses() {
                             {Array.isArray(formData.moduleDetails[idx]) && formData.moduleDetails[idx].length > 0 ? (
                               formData.moduleDetails[idx].map((submodule: string, sidx: number) => (
                                 <div key={sidx} className="flex items-center justify-between gap-2 bg-slate-800/50 p-2 rounded text-sm">
-                                  <span className="text-gray-300 flex-1 truncate">→ {submodule}</span>
-                                  <button
-                                    onClick={() => {
-                                      const newDetails = [...formData.moduleDetails];
-                                      newDetails[idx] = newDetails[idx].filter((_: string, i: number) => i !== sidx);
-                                      setFormData({ ...formData, moduleDetails: newDetails });
-                                    }}
-                                    className="text-red-400 hover:text-red-300 flex-shrink-0"
-                                  >
-                                    ✕
-                                  </button>
+                                  {editingSubModuleIdx?.moduleIdx === idx && editingSubModuleIdx?.subIdx === sidx ? (
+                                    <div className="flex gap-1 flex-1">
+                                      <input
+                                        type="text"
+                                        value={editingSubModuleText}
+                                        onChange={(e) => setEditingSubModuleText(e.target.value)}
+                                        className="flex-1 px-2 py-1 bg-slate-600 border border-slate-500 rounded text-white text-xs focus:outline-none focus:border-blue-400"
+                                      />
+                                      <button
+                                        onClick={() => {
+                                          if (editingSubModuleText.trim()) {
+                                            const newDetails = [...formData.moduleDetails];
+                                            newDetails[idx][sidx] = editingSubModuleText.trim();
+                                            setFormData({ ...formData, moduleDetails: newDetails });
+                                            setEditingSubModuleIdx(null);
+                                            setEditingSubModuleText('');
+                                          }
+                                        }}
+                                        className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold"
+                                      >
+                                        Save
+                                      </button>
+                                      <button
+                                        onClick={() => {
+                                          setEditingSubModuleIdx(null);
+                                          setEditingSubModuleText('');
+                                        }}
+                                        className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold"
+                                      >
+                                        Cancel
+                                      </button>
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <span className="text-gray-300 flex-1 truncate">→ {submodule}</span>
+                                      <button
+                                        onClick={() => {
+                                          setEditingSubModuleIdx({ moduleIdx: idx, subIdx: sidx });
+                                          setEditingSubModuleText(submodule);
+                                        }}
+                                        className="text-blue-400 hover:text-blue-300 text-xs px-1 py-0.5 rounded hover:bg-slate-700/50 flex-shrink-0"
+                                      >
+                                        ✎
+                                      </button>
+                                      <button
+                                        onClick={() => {
+                                          const newDetails = [...formData.moduleDetails];
+                                          newDetails[idx] = newDetails[idx].filter((_: string, i: number) => i !== sidx);
+                                          setFormData({ ...formData, moduleDetails: newDetails });
+                                        }}
+                                        className="text-red-400 hover:text-red-300 flex-shrink-0"
+                                      >
+                                        ✕
+                                      </button>
+                                    </>
+                                  )}
                                 </div>
                               ))
                             ) : (
@@ -1050,18 +1218,76 @@ function AdminCourses() {
                   <div className="space-y-2">
                     {formData.faqs.map((faq, idx) => (
                       <div key={idx} className="bg-slate-700/50 p-3 rounded border border-slate-600">
-                        <div className="flex items-start justify-between mb-1">
-                          <div className="flex-1">
-                            <div className="font-semibold text-yellow-300 text-sm mb-1">Q: {faq.q}</div>
-                            <div className="text-gray-300 text-sm">A: {faq.a}</div>
+                        {editingFaqIdx === idx ? (
+                          <div className="space-y-2">
+                            <input
+                              type="text"
+                              value={editingFaqQuestion}
+                              onChange={(e) => setEditingFaqQuestion(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-600 border border-slate-500 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 text-sm"
+                              placeholder="Question"
+                            />
+                            <textarea
+                              value={editingFaqAnswer}
+                              onChange={(e) => setEditingFaqAnswer(e.target.value)}
+                              className="w-full px-3 py-2 bg-slate-600 border border-slate-500 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 text-sm"
+                              placeholder="Answer"
+                              rows={2}
+                            />
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => {
+                                  if (editingFaqQuestion.trim() && editingFaqAnswer.trim()) {
+                                    const updatedFaqs = [...formData.faqs];
+                                    updatedFaqs[idx] = { q: editingFaqQuestion.trim(), a: editingFaqAnswer.trim() };
+                                    setFormData({ ...formData, faqs: updatedFaqs });
+                                    setEditingFaqIdx(null);
+                                    setEditingFaqQuestion('');
+                                    setEditingFaqAnswer('');
+                                  }
+                                }}
+                                className="flex-1 px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold"
+                              >
+                                Save
+                              </button>
+                              <button
+                                onClick={() => {
+                                  setEditingFaqIdx(null);
+                                  setEditingFaqQuestion('');
+                                  setEditingFaqAnswer('');
+                                }}
+                                className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold"
+                              >
+                                Cancel
+                              </button>
+                            </div>
                           </div>
-                          <button
-                            onClick={() => setFormData({ ...formData, faqs: formData.faqs.filter((_, i) => i !== idx) })}
-                            className="text-red-400 hover:text-red-300 ml-2"
-                          >
-                            ✕
-                          </button>
-                        </div>
+                        ) : (
+                          <div className="flex items-start justify-between mb-1">
+                            <div className="flex-1">
+                              <div className="font-semibold text-yellow-300 text-sm mb-1">Q: {faq.q}</div>
+                              <div className="text-gray-300 text-sm">A: {faq.a}</div>
+                            </div>
+                            <div className="flex gap-1 ml-2">
+                              <button
+                                onClick={() => {
+                                  setEditingFaqIdx(idx);
+                                  setEditingFaqQuestion(faq.q);
+                                  setEditingFaqAnswer(faq.a);
+                                }}
+                                className="text-blue-400 hover:text-blue-300 text-xs px-2 py-1 rounded hover:bg-slate-600/50"
+                              >
+                                ✎ Edit
+                              </button>
+                              <button
+                                onClick={() => setFormData({ ...formData, faqs: formData.faqs.filter((_, i) => i !== idx) })}
+                                className="text-red-400 hover:text-red-300"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -1107,17 +1333,78 @@ function AdminCourses() {
                   <div className="space-y-1">
                     {Object.entries(formData.meta).map(([key, value]) => (
                       <div key={key} className="flex items-center justify-between bg-slate-700/50 p-2 rounded">
-                        <span className="text-gray-300 text-sm"><strong>{key}:</strong> {String(value)}</span>
-                        <button
-                          onClick={() => {
-                            const newMeta = { ...formData.meta };
-                            delete newMeta[key];
-                            setFormData({ ...formData, meta: newMeta });
-                          }}
-                          className="text-red-400 hover:text-red-300"
-                        >
-                          ✕
-                        </button>
+                        {editingMetaKey === key ? (
+                          <div className="flex gap-2 flex-1">
+                            <input
+                              type="text"
+                              value={editingMetaNewKey}
+                              onChange={(e) => setEditingMetaNewKey(e.target.value)}
+                              className="flex-1 px-2 py-1 bg-slate-600 border border-slate-500 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 text-sm"
+                              placeholder="Key"
+                            />
+                            <input
+                              type="text"
+                              value={editingMetaNewValue}
+                              onChange={(e) => setEditingMetaNewValue(e.target.value)}
+                              className="flex-1 px-2 py-1 bg-slate-600 border border-slate-500 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 text-sm"
+                              placeholder="Value"
+                            />
+                            <button
+                              onClick={() => {
+                                if (editingMetaNewKey.trim() && editingMetaNewValue.trim()) {
+                                  const newMeta = { ...formData.meta };
+                                  if (editingMetaNewKey !== key) {
+                                    delete newMeta[key];
+                                  }
+                                  newMeta[editingMetaNewKey.trim()] = editingMetaNewValue.trim();
+                                  setFormData({ ...formData, meta: newMeta });
+                                  setEditingMetaKey(null);
+                                  setEditingMetaNewKey('');
+                                  setEditingMetaNewValue('');
+                                }
+                              }}
+                              className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold transition"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => {
+                                setEditingMetaKey(null);
+                                setEditingMetaNewKey('');
+                                setEditingMetaNewValue('');
+                              }}
+                              className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold transition"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <span className="text-gray-300 text-sm"><strong>{key}:</strong> {String(value)}</span>
+                            <div className="flex gap-1">
+                              <button
+                                onClick={() => {
+                                  setEditingMetaKey(key);
+                                  setEditingMetaNewKey(key);
+                                  setEditingMetaNewValue(String(value));
+                                }}
+                                className="text-blue-400 hover:text-blue-300 text-xs px-2 py-1 rounded hover:bg-slate-600/50"
+                              >
+                                ✎ Edit
+                              </button>
+                              <button
+                                onClick={() => {
+                                  const newMeta = { ...formData.meta };
+                                  delete newMeta[key];
+                                  setFormData({ ...formData, meta: newMeta });
+                                }}
+                                className="text-red-400 hover:text-red-300"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>

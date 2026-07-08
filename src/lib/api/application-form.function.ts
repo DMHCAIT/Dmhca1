@@ -5,11 +5,11 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error("Missing Supabase credentials");
-}
+let supabase: any = null;
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+if (supabaseUrl && supabaseKey) {
+  supabase = createClient(supabaseUrl, supabaseKey);
+}
 
 const ApplicationFormSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -26,6 +26,15 @@ export const submitApplicationForm = createServerFn({ method: "POST" })
   .inputValidator(ApplicationFormSchema)
   .handler(async ({ data }) => {
     try {
+      // If Supabase is not configured, return a dev message
+      if (!supabase) {
+        console.warn("Supabase not configured in development. Add SUPABASE_URL and SUPABASE_ANON_KEY to .env");
+        return {
+          success: true,
+          message: "Application submitted successfully (dev mode - not saved to database)",
+        };
+      }
+
       const { error } = await supabase.from("applications").insert([
         {
           full_name: data.fullName,

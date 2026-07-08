@@ -63,7 +63,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@400;500;600&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter+Tight:wght@400;500;600&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -86,10 +86,11 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  
   // Modal state: show popin until user closes with X (persisted)
   const [showPopin, setShowPopin] = useState(false);
 
-  // Determine popin visibility on mount (run only in browser)
+  // Load popin state from localStorage after hydration
   useEffect(() => {
     try {
       const closed = localStorage.getItem("dmhca_popin_closed");
@@ -100,14 +101,18 @@ function RootComponent() {
   }, []);
 
   // Cookie consent: null = not decided, "accept" or "deny"
-  const [cookieConsent, setCookieConsent] = useState<string | null>(() => {
-    try {
-      return localStorage.getItem("dmhca_cookie_consent");
-    } catch (e) {
-      return null;
-    }
-  });
+  // Initialize to null to avoid hydration mismatch (load from localStorage in useEffect)
+  const [cookieConsent, setCookieConsent] = useState<string | null>(null);
 
+  // Load cookie consent from localStorage after hydration
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("dmhca_cookie_consent");
+      if (saved) setCookieConsent(saved);
+    } catch (e) {}
+  }, []);
+
+  // Persist cookie consent to localStorage when it changes
   useEffect(() => {
     try {
       if (cookieConsent) localStorage.setItem("dmhca_cookie_consent", cookieConsent);

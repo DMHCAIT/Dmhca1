@@ -8,7 +8,7 @@ import CourseDetail from "@/components/site/CourseDetail";
 
 export const Route = createFileRoute("/courses/$slug")({
   loader: async ({ params }) => {
-    // Try to fetch from Supabase first
+    // Try to fetch from Supabase first (primary source)
     try {
       const { data, error } = await supabaseClient
         .from('courses')

@@ -56,9 +56,9 @@ import { Route as TopMedicalCoursesIndexRouteImport } from './routes/top-medical
 import { Route as SitemapIndexRouteImport } from './routes/sitemap.index'
 import { Route as SimpleEventIndexRouteImport } from './routes/simple-event.index'
 import { Route as RadiologyCoursesIndexRouteImport } from './routes/radiology-courses.index'
-import { Route as PaediatricsCoursesIndexRouteImport } from './routes/paediatrics-courses.index'
+import { Route as PaediatricsCoursesIndexRouteImport } from './routes/paediatrics-courses/index'
 import { Route as OncologyCoursesIndexRouteImport } from './routes/oncology-courses.index'
-import { Route as ObstetricsAndGynecologyCoursesIndexRouteImport } from './routes/obstetrics-and-gynecology-courses.index'
+import { Route as ObstetricsAndGynecologyCoursesIndexRouteImport } from './routes/obstetrics-and-gynecology-courses/index'
 import { Route as NeurologyCoursesIndexRouteImport } from './routes/neurology-courses.index'
 import { Route as InternalMedicineCoursesIndexRouteImport } from './routes/internal-medicine-courses.index'
 import { Route as EndocrinologyCoursesIndexRouteImport } from './routes/endocrinology-courses.index'
@@ -76,13 +76,22 @@ import { Route as Char91specialtyChar93CoursesChar91cityChar93RouteImport } from
 import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as SimpleEventSlugRouteImport } from './routes/simple-event.$slug'
 import { Route as RadiologyCoursesCityRouteImport } from './routes/radiology-courses/$city'
+import { Route as PediatricsCoursesCityRouteImport } from './routes/pediatrics-courses/$city'
+import { Route as PaediatricsCoursesCityRouteImport } from './routes/paediatrics-courses/$city'
+import { Route as OncologyCoursesCityRouteImport } from './routes/oncology-courses/$city'
+import { Route as ObstetricsAndGynecologyCoursesCityRouteImport } from './routes/obstetrics-and-gynecology-courses/$city'
+import { Route as ObsGynaeCoursesCityRouteImport } from './routes/obs-gynae-courses/$city'
 import { Route as EmergencyMedicineCoursesCityRouteImport } from './routes/emergency-medicine-courses/$city'
+import { Route as EmbryologyCoursesCityRouteImport } from './routes/embryology-courses/$city'
+import { Route as CriticalCareMedicineCoursesCityRouteImport } from './routes/critical-care-medicine-courses/$city'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as CourseCategorySlugRouteImport } from './routes/course-category.$slug'
 import { Route as CosmetologyCoursesCityRouteImport } from './routes/cosmetology-courses/$city'
+import { Route as ClinicalCardiologyCoursesCityRouteImport } from './routes/clinical-cardiology-courses/$city'
 import { Route as CardiologyCoursesCityRouteImport } from './routes/cardiology-courses/$city'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSyncCoursesRouteImport } from './routes/admin/sync-courses'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminPagesEditorRouteImport } from './routes/admin.pages-editor'
 import { Route as AdminPagesRouteImport } from './routes/admin.pages'
@@ -444,10 +453,47 @@ const RadiologyCoursesCityRoute = RadiologyCoursesCityRouteImport.update({
   path: '/radiology-courses/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PediatricsCoursesCityRoute = PediatricsCoursesCityRouteImport.update({
+  id: '/pediatrics-courses/$city',
+  path: '/pediatrics-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaediatricsCoursesCityRoute = PaediatricsCoursesCityRouteImport.update({
+  id: '/paediatrics-courses/$city',
+  path: '/paediatrics-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OncologyCoursesCityRoute = OncologyCoursesCityRouteImport.update({
+  id: '/oncology-courses/$city',
+  path: '/oncology-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ObstetricsAndGynecologyCoursesCityRoute =
+  ObstetricsAndGynecologyCoursesCityRouteImport.update({
+    id: '/obstetrics-and-gynecology-courses/$city',
+    path: '/obstetrics-and-gynecology-courses/$city',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ObsGynaeCoursesCityRoute = ObsGynaeCoursesCityRouteImport.update({
+  id: '/obs-gynae-courses/$city',
+  path: '/obs-gynae-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EmergencyMedicineCoursesCityRoute =
   EmergencyMedicineCoursesCityRouteImport.update({
     id: '/emergency-medicine-courses/$city',
     path: '/emergency-medicine-courses/$city',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const EmbryologyCoursesCityRoute = EmbryologyCoursesCityRouteImport.update({
+  id: '/embryology-courses/$city',
+  path: '/embryology-courses/$city',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriticalCareMedicineCoursesCityRoute =
+  CriticalCareMedicineCoursesCityRouteImport.update({
+    id: '/critical-care-medicine-courses/$city',
+    path: '/critical-care-medicine-courses/$city',
     getParentRoute: () => rootRouteImport,
   } as any)
 const CoursesSlugRoute = CoursesSlugRouteImport.update({
@@ -465,6 +511,12 @@ const CosmetologyCoursesCityRoute = CosmetologyCoursesCityRouteImport.update({
   path: '/cosmetology-courses/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClinicalCardiologyCoursesCityRoute =
+  ClinicalCardiologyCoursesCityRouteImport.update({
+    id: '/clinical-cardiology-courses/$city',
+    path: '/clinical-cardiology-courses/$city',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CardiologyCoursesCityRoute = CardiologyCoursesCityRouteImport.update({
   id: '/cardiology-courses/$city',
   path: '/cardiology-courses/$city',
@@ -478,6 +530,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 const AdminUsersRoute = AdminUsersRouteImport.update({
   id: '/users',
   path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSyncCoursesRoute = AdminSyncCoursesRouteImport.update({
+  id: '/sync-courses',
+  path: '/sync-courses',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
@@ -579,13 +636,22 @@ export interface FileRoutesByFullPath {
   '/admin/pages': typeof AdminPagesRoute
   '/admin/pages-editor': typeof AdminPagesEditorRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
+  '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/critical-care-medicine-courses/$city': typeof CriticalCareMedicineCoursesCityRoute
+  '/embryology-courses/$city': typeof EmbryologyCoursesCityRoute
   '/emergency-medicine-courses/$city': typeof EmergencyMedicineCoursesCityRoute
+  '/obs-gynae-courses/$city': typeof ObsGynaeCoursesCityRoute
+  '/obstetrics-and-gynecology-courses/$city': typeof ObstetricsAndGynecologyCoursesCityRoute
+  '/oncology-courses/$city': typeof OncologyCoursesCityRoute
+  '/paediatrics-courses/$city': typeof PaediatricsCoursesCityRoute
+  '/pediatrics-courses/$city': typeof PediatricsCoursesCityRoute
   '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
@@ -661,13 +727,22 @@ export interface FileRoutesByTo {
   '/admin/pages': typeof AdminPagesRoute
   '/admin/pages-editor': typeof AdminPagesEditorRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
+  '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/critical-care-medicine-courses/$city': typeof CriticalCareMedicineCoursesCityRoute
+  '/embryology-courses/$city': typeof EmbryologyCoursesCityRoute
   '/emergency-medicine-courses/$city': typeof EmergencyMedicineCoursesCityRoute
+  '/obs-gynae-courses/$city': typeof ObsGynaeCoursesCityRoute
+  '/obstetrics-and-gynecology-courses/$city': typeof ObstetricsAndGynecologyCoursesCityRoute
+  '/oncology-courses/$city': typeof OncologyCoursesCityRoute
+  '/paediatrics-courses/$city': typeof PaediatricsCoursesCityRoute
+  '/pediatrics-courses/$city': typeof PediatricsCoursesCityRoute
   '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
@@ -747,13 +822,22 @@ export interface FileRoutesById {
   '/admin/pages': typeof AdminPagesRoute
   '/admin/pages-editor': typeof AdminPagesEditorRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
+  '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
   '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
+  '/critical-care-medicine-courses/$city': typeof CriticalCareMedicineCoursesCityRoute
+  '/embryology-courses/$city': typeof EmbryologyCoursesCityRoute
   '/emergency-medicine-courses/$city': typeof EmergencyMedicineCoursesCityRoute
+  '/obs-gynae-courses/$city': typeof ObsGynaeCoursesCityRoute
+  '/obstetrics-and-gynecology-courses/$city': typeof ObstetricsAndGynecologyCoursesCityRoute
+  '/oncology-courses/$city': typeof OncologyCoursesCityRoute
+  '/paediatrics-courses/$city': typeof PaediatricsCoursesCityRoute
+  '/pediatrics-courses/$city': typeof PediatricsCoursesCityRoute
   '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
@@ -834,13 +918,22 @@ export interface FileRouteTypes {
     | '/admin/pages'
     | '/admin/pages-editor'
     | '/admin/settings'
+    | '/admin/sync-courses'
     | '/admin/users'
     | '/blog/$slug'
     | '/cardiology-courses/$city'
+    | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
     | '/course-category/$slug'
     | '/courses/$slug'
+    | '/critical-care-medicine-courses/$city'
+    | '/embryology-courses/$city'
     | '/emergency-medicine-courses/$city'
+    | '/obs-gynae-courses/$city'
+    | '/obstetrics-and-gynecology-courses/$city'
+    | '/oncology-courses/$city'
+    | '/paediatrics-courses/$city'
+    | '/pediatrics-courses/$city'
     | '/radiology-courses/$city'
     | '/simple-event/$slug'
     | '/sitemap/xml'
@@ -916,13 +1009,22 @@ export interface FileRouteTypes {
     | '/admin/pages'
     | '/admin/pages-editor'
     | '/admin/settings'
+    | '/admin/sync-courses'
     | '/admin/users'
     | '/blog/$slug'
     | '/cardiology-courses/$city'
+    | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
     | '/course-category/$slug'
     | '/courses/$slug'
+    | '/critical-care-medicine-courses/$city'
+    | '/embryology-courses/$city'
     | '/emergency-medicine-courses/$city'
+    | '/obs-gynae-courses/$city'
+    | '/obstetrics-and-gynecology-courses/$city'
+    | '/oncology-courses/$city'
+    | '/paediatrics-courses/$city'
+    | '/pediatrics-courses/$city'
     | '/radiology-courses/$city'
     | '/simple-event/$slug'
     | '/sitemap/xml'
@@ -1001,13 +1103,22 @@ export interface FileRouteTypes {
     | '/admin/pages'
     | '/admin/pages-editor'
     | '/admin/settings'
+    | '/admin/sync-courses'
     | '/admin/users'
     | '/blog/$slug'
     | '/cardiology-courses/$city'
+    | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
     | '/course-category/$slug'
     | '/courses/$slug'
+    | '/critical-care-medicine-courses/$city'
+    | '/embryology-courses/$city'
     | '/emergency-medicine-courses/$city'
+    | '/obs-gynae-courses/$city'
+    | '/obstetrics-and-gynecology-courses/$city'
+    | '/oncology-courses/$city'
+    | '/paediatrics-courses/$city'
+    | '/pediatrics-courses/$city'
     | '/radiology-courses/$city'
     | '/simple-event/$slug'
     | '/sitemap/xml'
@@ -1079,10 +1190,18 @@ export interface RootRouteChildren {
   TermConditionsRoute: typeof TermConditionsRoute
   TestPageRoute: typeof TestPageRoute
   CardiologyCoursesCityRoute: typeof CardiologyCoursesCityRoute
+  ClinicalCardiologyCoursesCityRoute: typeof ClinicalCardiologyCoursesCityRoute
   CosmetologyCoursesCityRoute: typeof CosmetologyCoursesCityRoute
   CourseCategorySlugRoute: typeof CourseCategorySlugRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
+  CriticalCareMedicineCoursesCityRoute: typeof CriticalCareMedicineCoursesCityRoute
+  EmbryologyCoursesCityRoute: typeof EmbryologyCoursesCityRoute
   EmergencyMedicineCoursesCityRoute: typeof EmergencyMedicineCoursesCityRoute
+  ObsGynaeCoursesCityRoute: typeof ObsGynaeCoursesCityRoute
+  ObstetricsAndGynecologyCoursesCityRoute: typeof ObstetricsAndGynecologyCoursesCityRoute
+  OncologyCoursesCityRoute: typeof OncologyCoursesCityRoute
+  PaediatricsCoursesCityRoute: typeof PaediatricsCoursesCityRoute
+  PediatricsCoursesCityRoute: typeof PediatricsCoursesCityRoute
   RadiologyCoursesCityRoute: typeof RadiologyCoursesCityRoute
   SitemapXmlRoute: typeof SitemapXmlRoute
   Char91specialtyChar93CoursesChar91cityChar93Route: typeof Char91specialtyChar93CoursesChar91cityChar93Route
@@ -1576,11 +1695,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RadiologyCoursesCityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pediatrics-courses/$city': {
+      id: '/pediatrics-courses/$city'
+      path: '/pediatrics-courses/$city'
+      fullPath: '/pediatrics-courses/$city'
+      preLoaderRoute: typeof PediatricsCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/paediatrics-courses/$city': {
+      id: '/paediatrics-courses/$city'
+      path: '/paediatrics-courses/$city'
+      fullPath: '/paediatrics-courses/$city'
+      preLoaderRoute: typeof PaediatricsCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oncology-courses/$city': {
+      id: '/oncology-courses/$city'
+      path: '/oncology-courses/$city'
+      fullPath: '/oncology-courses/$city'
+      preLoaderRoute: typeof OncologyCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obstetrics-and-gynecology-courses/$city': {
+      id: '/obstetrics-and-gynecology-courses/$city'
+      path: '/obstetrics-and-gynecology-courses/$city'
+      fullPath: '/obstetrics-and-gynecology-courses/$city'
+      preLoaderRoute: typeof ObstetricsAndGynecologyCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/obs-gynae-courses/$city': {
+      id: '/obs-gynae-courses/$city'
+      path: '/obs-gynae-courses/$city'
+      fullPath: '/obs-gynae-courses/$city'
+      preLoaderRoute: typeof ObsGynaeCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/emergency-medicine-courses/$city': {
       id: '/emergency-medicine-courses/$city'
       path: '/emergency-medicine-courses/$city'
       fullPath: '/emergency-medicine-courses/$city'
       preLoaderRoute: typeof EmergencyMedicineCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/embryology-courses/$city': {
+      id: '/embryology-courses/$city'
+      path: '/embryology-courses/$city'
+      fullPath: '/embryology-courses/$city'
+      preLoaderRoute: typeof EmbryologyCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/critical-care-medicine-courses/$city': {
+      id: '/critical-care-medicine-courses/$city'
+      path: '/critical-care-medicine-courses/$city'
+      fullPath: '/critical-care-medicine-courses/$city'
+      preLoaderRoute: typeof CriticalCareMedicineCoursesCityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/courses/$slug': {
@@ -1604,6 +1772,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CosmetologyCoursesCityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clinical-cardiology-courses/$city': {
+      id: '/clinical-cardiology-courses/$city'
+      path: '/clinical-cardiology-courses/$city'
+      fullPath: '/clinical-cardiology-courses/$city'
+      preLoaderRoute: typeof ClinicalCardiologyCoursesCityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/cardiology-courses/$city': {
       id: '/cardiology-courses/$city'
       path: '/cardiology-courses/$city'
@@ -1623,6 +1798,13 @@ declare module '@tanstack/react-router' {
       path: '/users'
       fullPath: '/admin/users'
       preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/sync-courses': {
+      id: '/admin/sync-courses'
+      path: '/sync-courses'
+      fullPath: '/admin/sync-courses'
+      preLoaderRoute: typeof AdminSyncCoursesRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/settings': {
@@ -1701,6 +1883,7 @@ interface AdminRouteChildren {
   AdminPagesRoute: typeof AdminPagesRoute
   AdminPagesEditorRoute: typeof AdminPagesEditorRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminSyncCoursesRoute: typeof AdminSyncCoursesRoute
   AdminUsersRoute: typeof AdminUsersRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -1715,6 +1898,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminPagesRoute: AdminPagesRoute,
   AdminPagesEditorRoute: AdminPagesEditorRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  AdminSyncCoursesRoute: AdminSyncCoursesRoute,
   AdminUsersRoute: AdminUsersRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
@@ -1793,10 +1977,19 @@ const rootRouteChildren: RootRouteChildren = {
   TermConditionsRoute: TermConditionsRoute,
   TestPageRoute: TestPageRoute,
   CardiologyCoursesCityRoute: CardiologyCoursesCityRoute,
+  ClinicalCardiologyCoursesCityRoute: ClinicalCardiologyCoursesCityRoute,
   CosmetologyCoursesCityRoute: CosmetologyCoursesCityRoute,
   CourseCategorySlugRoute: CourseCategorySlugRoute,
   CoursesSlugRoute: CoursesSlugRoute,
+  CriticalCareMedicineCoursesCityRoute: CriticalCareMedicineCoursesCityRoute,
+  EmbryologyCoursesCityRoute: EmbryologyCoursesCityRoute,
   EmergencyMedicineCoursesCityRoute: EmergencyMedicineCoursesCityRoute,
+  ObsGynaeCoursesCityRoute: ObsGynaeCoursesCityRoute,
+  ObstetricsAndGynecologyCoursesCityRoute:
+    ObstetricsAndGynecologyCoursesCityRoute,
+  OncologyCoursesCityRoute: OncologyCoursesCityRoute,
+  PaediatricsCoursesCityRoute: PaediatricsCoursesCityRoute,
+  PediatricsCoursesCityRoute: PediatricsCoursesCityRoute,
   RadiologyCoursesCityRoute: RadiologyCoursesCityRoute,
   SitemapXmlRoute: SitemapXmlRoute,
   Char91specialtyChar93CoursesChar91cityChar93Route:

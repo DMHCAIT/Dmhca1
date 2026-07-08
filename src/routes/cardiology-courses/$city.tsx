@@ -30,7 +30,7 @@ function CardiologyCityPage() {
           <p className="text-slate-600 mb-8">
             Sorry, we couldn't find {specialty} courses in {city}.
           </p>
-          <Link to="/city-wise-medical-courses" className="text-emerald-600 hover:text-emerald-700 font-bold">
+          <Link to="/city-wise-medical-courses" className="text-navy-deep hover:text-navy font-bold">
             ← Back to all courses
           </Link>
         </div>
@@ -58,10 +58,10 @@ function CardiologyCityPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 py-12">
+      <div className="bg-gradient-to-r from-navy-deep to-navy py-12">
         <div className="container-city">
           <div className="w-full">
-            <Link to="/city-wise-medical-courses" className="text-emerald-100 hover:text-white mb-4 inline-block">
+            <Link to="/city-wise-medical-courses" className="text-white hover:text-gold mb-4 inline-block">
               ← Back to all courses
             </Link>
             <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
@@ -153,11 +153,11 @@ function CardiologyCityPage() {
                   to={`/${relCourse.slug}/`}
                   className="group bg-white border border-slate-200 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 transition-all"
                 >
-                  <h3 className="font-bold text-slate-900 group-hover:text-emerald-600 transition mb-2">
+                  <h3 className="font-bold text-slate-900 group-hover:text-navy-deep transition mb-2">
                     {specialty} in {relCourse.city}
                   </h3>
                   <p className="text-sm text-slate-600 mb-3">{relCourse.description}</p>
-                  <div className="text-xs font-semibold text-emerald-600">
+                  <div className="text-xs font-semibold text-navy-deep">
                     Learn more →
                   </div>
                 </Link>

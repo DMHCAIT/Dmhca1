@@ -174,9 +174,6 @@ export const cityWiseCourses: CityWiseCourse[] = [
   { specialty: "Clinical Cardiology", city: "Kolkata", slug: "clinical-cardiology-courses/kolkata", description: "Kolkata offers excellent clinical cardiology courses with hands-on clinical experience in cardiac care.", fees: "₹50,000 to ₹3,00,000" },
   { specialty: "Clinical Cardiology", city: "Jaipur", slug: "clinical-cardiology-courses/jaipur", description: "Jaipur provides comprehensive clinical cardiology training with modern cardiac facilities.", fees: "₹50,000 to ₹3,00,000" },
   { specialty: "Clinical Cardiology", city: "Kerala", slug: "clinical-cardiology-courses/kerala", description: "Kerala offers quality clinical cardiology education with experienced faculty and access to leading cardiac hospitals.", fees: "₹50,000 to ₹3,00,000" },
-// Obstetrics and Gynaecology Courses
-  { specialty: "Obstetrics and Gynaecology", city: "Tamilnadu", slug: "obstetrics-and-gynaecology-courses/tamilnadu", description: "Tamilnadu offers comprehensive obstetrics and gynaecology courses with training in leading hospitals.", fees: "₹50,000 to ₹3,00,000" },
-  { specialty: "Obstetrics and Gynaecology", city: "Hyderabad", slug: "obstetrics-and-gynaecology-courses/hyderabad", description: "Hyderabad provides quality obstetrics and gynaecology training with exposure to advanced medical techniques.", fees: "₹50,000 to ₹3,00,000" },
 // Critical Care Medicine Courses
   { specialty: "Critical Care Medicine", city: "Lucknow", slug: "critical-care-medicine-courses/lucknow", description: "Lucknow offers comprehensive critical care medicine courses with training in leading intensive care units.", fees: "₹50,000 to ₹3,00,000" },
   { specialty: "Critical Care Medicine", city: "Kerala", slug: "critical-care-medicine-courses/kerala", description: "Kerala provides quality critical care medicine training with exposure to advanced life support techniques.", fees: "₹50,000 to ₹3,00,000" },
@@ -190,6 +187,9 @@ export const cityWiseCourses: CityWiseCourse[] = [
   { specialty: "Paediatrics", city: "Kolkata", slug: "paediatrics-courses/kolkata", description: "Kolkata offers quality paediatrics education with experienced faculty and access to leading children's hospitals.", fees: "₹50,000 to ₹3,00,000" },
   { specialty: "Paediatrics", city: "Kerala", slug: "paediatrics-courses/kerala", description: "Kerala provides comprehensive paediatrics training with exposure to advanced child healthcare techniques.", fees: "₹50,000 to ₹3,00,000" },
   { specialty: "Paediatrics", city: "Telangana", slug: "paediatrics-courses/telangana", description: "Telangana offers excellent paediatrics courses with hands-on clinical experience in child care.", fees: "₹50,000 to ₹3,00,000" },
+  // Obstetrics and Gynecology Courses - Only Tamilnadu and Hyderabad
+  { specialty: "Obstetrics and Gynecology", city: "Tamilnadu", slug: "obstetrics-and-gynecology-courses/tamilnadu", description: "Tamilnadu offers excellent obstetrics and gynecology courses with hands-on clinical experience in maternal care.", fees: "₹50,000 to ₹3,00,000" },
+  { specialty: "Obstetrics and Gynecology", city: "Hyderabad", slug: "obstetrics-and-gynecology-courses/hyderabad", description: "Hyderabad offers excellent obstetrics and gynecology courses with hands-on clinical experience in maternity care.", fees: "₹50,000 to ₹3,00,000" },
 ];
 
 export function getCoursesBySpecialty(specialty: string): CityWiseCourse[] {

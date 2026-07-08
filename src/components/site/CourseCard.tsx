@@ -77,7 +77,7 @@ export function CourseCard({ course }: { course: Course }) {
         <div className="absolute bottom-3 left-3 text-[10px] uppercase tracking-[0.2em] text-gold/60">{cat?.name}</div>
       </div>
       <div className="p-5">
-        <div className="font-display text-slate-900 text-lg leading-tight mb-2 line-clamp-2">{course.title}</div>
+        <div className="font-display text-slate-950 text-lg font-semibold leading-tight mb-2 line-clamp-2">{course.title}</div>
         {((course as any).heroDescription || course.overview) && (
           <p className="mt-0 text-[13px] text-slate-700 line-clamp-2 mb-3">{(course as any).heroDescription || course.overview}</p>
         )}
@@ -88,9 +88,9 @@ export function CourseCard({ course }: { course: Course }) {
                 <BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons
               </span>
             )}
-            {course.weeks != null && (
+            {course.months != null && (
               <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold">
-                <Clock className="w-3.5 h-3.5" /> {Math.round(course.weeks / 4.33)} months
+                <Clock className="w-3.5 h-3.5" /> {course.months} months
               </span>
             )}
             <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold"><Award className="w-3.5 h-3.5" /> {displayLevel}</span>

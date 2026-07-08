@@ -19,27 +19,8 @@ function EmergencyMedicineCityPage() {
 
   const specialty = "emergency medicine";
   const slug = `emergency-medicine-courses/${city}`;
-  const course = getCourseBySlug(slug);
 
-  if (!course) {
-    return (
-      <div className="bg-white min-h-screen flex items-center justify-center">
-        <div className="text-center max-w-md">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">404</h1>
-          <p className="text-slate-600 mb-8">
-            Sorry, we couldn't find {specialty} courses in {city}.
-          </p>
-          <Link to="/city-wise-medical-courses" className="text-emerald-600 hover:text-emerald-700 font-bold">
-            ← Back to all courses
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  const relatedCourses = getCoursesBySpecialty(specialty).filter(
-    (c) => c.slug !== slug
-  );
+  const relatedCourses = getCoursesBySpecialty(specialty);
 
   const categoryObj = categories.find(
     (cat) =>
@@ -53,10 +34,10 @@ function EmergencyMedicineCityPage() {
   return (
     <div className="bg-white min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 py-12">
+      <div className="bg-gradient-to-r from-navy-deep to-navy py-12">
         <div className="container-city">
           <div className="w-full">
-            <Link to="/city-wise-medical-courses" className="text-emerald-100 hover:text-white mb-4 inline-block">
+            <Link to="/city-wise-medical-courses" className="text-white hover:text-gold mb-4 inline-block">
               ← Back to all courses
             </Link>
             <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
@@ -79,12 +60,17 @@ function EmergencyMedicineCityPage() {
               {specialty} programs provide world-class education and practical
               training at DMHCA Institute.
             </p>
-            <Link
-              to="/top-medical-courses"
-              className="text-emerald-600 hover:text-emerald-700 font-bold"
-            >
-              Explore all {specialty} courses →
-            </Link>
+
+            {/* Inline course cards shown immediately under intro (replaces Explore link) */}
+            {cityCourses.length > 0 && (
+              <div className="mt-8">
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {cityCourses.slice(0, 6).map((c) => (
+                    <CourseCard key={c.slug} course={c} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* FAQs - unified short answers for city pages */}
@@ -141,11 +127,11 @@ function EmergencyMedicineCityPage() {
                   to={`/${relCourse.slug}/`}
                   className="group bg-white border border-slate-200 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 transition-all"
                 >
-                  <h3 className="font-bold text-slate-900 group-hover:text-emerald-600 transition mb-2">
+                  <h3 className="font-bold text-slate-900 group-hover:text-navy-deep transition mb-2">
                     {specialty} in {relCourse.city}
                   </h3>
                   <p className="text-sm text-slate-600 mb-3">{relCourse.description}</p>
-                  <div className="text-xs font-semibold text-emerald-600">
+                  <div className="text-xs font-semibold text-navy-deep">
                     Learn more →
                   </div>
                 </Link>

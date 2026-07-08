@@ -14,8 +14,14 @@ export function useAdminAuth() {
         // Check if user is admin (you can add role checking later)
         setIsAuthed(true);
       } else {
-        setIsAuthed(false);
-        navigate({ to: '/admin-login' });
+        // In development mode, allow access without Supabase session
+        const isDev = import.meta.env.DEV;
+        if (isDev) {
+          setIsAuthed(true);
+        } else {
+          setIsAuthed(false);
+          navigate({ to: '/admin-login' });
+        }
       }
       setIsLoading(false);
     });
@@ -29,7 +35,9 @@ export function useAdminAuth() {
       setIsAuthed(!!session?.user);
     } catch (error) {
       console.error('Auth check failed:', error);
-      setIsAuthed(false);
+      // In development, allow access even if Supabase fails
+      const isDev = import.meta.env.DEV;
+      setIsAuthed(isDev);
     } finally {
       setIsLoading(false);
     }

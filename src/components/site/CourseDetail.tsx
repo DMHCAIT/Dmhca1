@@ -45,7 +45,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
       "logo": "https://dmhca.in/logo.webp"
     },
     "image": course.image,
-    "duration": course.weeks ? `PT${course.weeks}W` : undefined,
+    "duration": course.months ? `PT${course.months}M` : undefined,
     "numberOfLessons": course.lessons || undefined,
     "educationLevel": course.level,
     "url": `https://dmhca.in/courses/${course.slug}`,
@@ -154,7 +154,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               <div className="flex items-center gap-2"><div className="flex items-center gap-1"><Star className="w-4 h-4 fill-yellow-500 text-yellow-500" /> <span className="font-semibold text-white">{course.rating}</span></div> <span className="text-slate-400">({course.reviewCount} reviews)</span></div>
             )}
             {course.lessons != null && <div className="flex items-center gap-2"><BookOpen className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.lessons} lessons</span></div>}
-            {course.weeks != null && <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{Math.round(course.weeks / 4.33)} months</span></div>}
+            {course.months != null && <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{course.months} months</span></div>}
             <div className="flex items-center gap-2"><Award className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{ptype}</span></div>
             <div className="flex items-center gap-2"><GraduationCap className="w-4 h-4 text-slate-400" /> <span className="font-medium text-slate-300">{ptype === 'Certificate' ? 'Intermediate' : (ptype === 'PG Diploma' || ptype === 'Fellowship' ? 'Expert' : course.level)}</span></div>
           </div>
@@ -191,7 +191,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                     </div>
                     <div>
                       <div className="text-xs text-slate-600 font-bold uppercase tracking-wider">Duration</div>
-                      <div className="text-sm font-semibold text-slate-900">{course.meta?.duration || (course.weeks ? `${Math.round(course.weeks / 4.33)} months` : "—")}</div>
+                      <div className="text-sm font-semibold text-slate-900">{course.meta?.Duration || (course.months ? `${course.months} months` : "—")}</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 pb-3.5 border-b border-slate-200">
@@ -234,7 +234,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               </div>
               
               {/* Level Badge */}
-              <div className="bg-gradient-to-br from-indigo-600 to-indigo-700 rounded-2xl p-5 text-white shadow-lg">
+              <div className="bg-gradient-to-br from-navy-deep to-navy rounded-2xl p-5 text-white shadow-lg">
                 <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-2">Level</div>
                 <div className="text-2xl font-bold">{ptype === 'Certificate' ? 'Intermediate' : (ptype === 'PG Diploma' || ptype === 'Fellowship' ? 'Expert' : course.level)}</div>
               </div>
@@ -244,7 +244,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             <div className="lg:col-span-7 space-y-8">
           <div id="overview" className="scroll-mt-24">
             <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-              <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
+              <div className="w-1 h-6 bg-gradient-to-b from-navy-deep to-navy"></div>
               Course Overview
             </h2>
             <div className="bg-white border border-slate-300 rounded-xl p-3 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -298,16 +298,16 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           {course.modules.length > 0 && (
             <div id="curriculum" className="scroll-mt-24">
               <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-                <div className="w-1 h-6 bg-gradient-to-b from-blue-600 to-blue-500"></div>
+                <div className="w-1 h-6 bg-gradient-to-b from-navy-deep to-navy"></div>
                 Curriculum
               </h2>
-              <p className="text-sm text-slate-600 mb-5">{course.modules.length} Sections · {course.lessons ?? "—"} Lessons · {course.weeks ? `${Math.round(course.weeks / 4.33)} Months` : "—"}</p>
+              <p className="text-sm text-slate-600 mb-5">{course.modules.length} Sections · {course.lessons ?? "—"} Lessons · {course.months ? `${course.months} Months` : "—"}</p>
               <div className="space-y-3">
                 {course.modules.map((m: string, i: number) => (
-                  <details key={m + i} className="group border border-slate-300 hover:border-blue-400 rounded-xl overflow-hidden transition-all bg-white hover:shadow-md">
-                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 flex items-center justify-between font-semibold text-slate-900 hover:bg-blue-50/40 transition list-none">
+                  <details key={m + i} className="group border border-slate-300 hover:border-navy-deep/40 rounded-xl overflow-hidden transition-all bg-white hover:shadow-md">
+                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 flex items-center justify-between font-semibold text-slate-900 hover:bg-navy-deep/5 transition list-none">
                       <div className="flex items-center gap-2 sm:gap-4">
-                        <div className="flex items-center justify-center w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold text-xs sm:text-sm">
+                        <div className="flex items-center justify-center w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-gradient-to-br from-navy-deep to-navy text-white font-bold text-xs sm:text-sm">
                           {String(i + 1).padStart(2, "0")}
                         </div>
                         <div className="text-sm sm:text-base text-slate-900 font-semibold tracking-wide">{m.replace(/^Module \d+:\s*/, '')}</div>
@@ -321,14 +321,14 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                         </svg>
                       </div>
                     </summary>
-                    <div className="px-3 sm:px-6 pb-3 sm:pb-5 bg-blue-50/20 border-t border-slate-300">
+                    <div className="px-3 sm:px-6 pb-3 sm:pb-5 bg-navy-deep/5 border-t border-slate-300">
                       {course.moduleDetails && course.moduleDetails[i]
                         ? Array.isArray(course.moduleDetails[i])
                           ? (
                             <ul className="space-y-2">
                               {(course.moduleDetails[i] as string[]).map((lesson, li) => (
-                                <li key={li} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-lg border border-slate-300 bg-white hover:bg-blue-50/30 transition">
-                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-blue-700 flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
+                                <li key={li} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-lg border border-slate-300 bg-white hover:bg-navy-deep/5 transition">
+                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-navy-deep flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                   </svg>
                                   <span className="text-sm sm:text-base text-slate-700 font-medium tracking-wide">{lesson}</span>
@@ -598,7 +598,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 {/* Pricing Card */}
                 <div className="bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all mb-6">
                   {/* Header */}
-                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 px-5 sm:px-6 py-4 text-white">
+                  <div className="bg-gradient-to-r from-navy-deep to-navy px-5 sm:px-6 py-4 text-white">
                     <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-1">Course Fee</div>
                     <div className="flex items-baseline gap-2 flex-wrap">
                       <div className="text-3xl sm:text-4xl font-black" style={{ letterSpacing: '0.02em' }}>{formatINR(course.priceINR).replace('.00', '')}</div>
@@ -619,7 +619,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                       <Link 
                         to="/apply"
                         search={{ program: course.program, course: getIBMCourseName(course.title) }}
-                        className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
+                        className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-navy-deep to-navy hover:from-navy hover:to-navy-deep text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
                       >
                         Add to Cart
                       </Link>

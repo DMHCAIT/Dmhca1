@@ -112,7 +112,28 @@ function Home() {
   }, []);
 
   const reviewsPerPage = screenSize < 640 ? 1 : screenSize < 1024 ? 2 : 3;
-  const featured = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
+  let featured = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
+  // Replace specific courses with requested alternatives in featured programs
+  const replacementMap = [
+    { find: /interventional cardiology/i, replaceWith: "Fellowship in Pediatrics" },
+    { find: /pediatric rheumatology/i, replaceWith: "PG Diploma in HIV Medicine" },
+    { find: /cardiothoracic surgery/i, replaceWith: "PG Diploma In Diabetology" },
+    { find: /cardio oncology/i, replaceWith: "Certificate in Child Health" },
+    { find: /abdominal imaging/i, replaceWith: "Fellowship in Clinical Hematology" },
+  ];
+  try {
+    for (const { find, replaceWith } of replacementMap) {
+      const idx = featured.findIndex(c => find.test(c.title));
+      if (idx !== -1) {
+        const replacement = courses.find(c => c.title.includes(replaceWith));
+        if (replacement) {
+          featured[idx] = replacement;
+        }
+      }
+    }
+  } catch (e) {
+    // silent fallback if courses data shape differs
+  }
   
   const reviews = [
     {
@@ -349,7 +370,7 @@ function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
                   >
-                    <Link to="/top-medical-courses/" search={(() => { const ss = new URLSearchParams(location.search || ''); ss.set('cat', s); return Object.fromEntries(ss.entries()); })()} className="text-white hover:text-gold transition">
+                    <Link to="/top-medical-courses" search={(() => { const ss = new URLSearchParams(location.search || ''); ss.set('cat', s); return Object.fromEntries(ss.entries()); })()} className="text-white hover:text-gold transition">
                       {categories.find(c => c.slug === s)?.name}
                     </Link>
                   </motion.div>
@@ -428,7 +449,7 @@ function Home() {
             { k: "120+", v: "Countries reached" },
           ].map((s) => (
             <div key={s.v}>
-              <div className="font-display text-3xl text-gold">{s.k}</div>
+              <div className="font-display text-3xl text-gold font-medium">{s.k}</div>
               <div className="text-xs uppercase tracking-[0.15em] text-primary-foreground/70 mt-1">{s.v}</div>
             </div>
           ))}
@@ -473,7 +494,7 @@ function Home() {
               'cardiology': 'from-red-900 to-red-700',
               'emergency': 'from-orange-900 to-orange-700',
               'orthopedics': 'from-amber-900 to-amber-700',
-              'medicine': 'from-green-900 to-green-700',
+              'medicine': 'from-navy-deep to-navy',
               'oncology': 'from-indigo-900 to-indigo-700',
             };
 
@@ -504,7 +525,7 @@ function Home() {
                 }}
               >
                 <Link 
-                  to="/top-medical-courses/" 
+                  to="/top-medical-courses" 
                   search={(() => { const ss = new URLSearchParams(location.search || ''); ss.set('cat', slug); return Object.fromEntries(ss.entries()); })()}
                   className={`group relative overflow-hidden rounded-2xl aspect-video md:aspect-square h-auto block bg-gradient-to-br ${specialtyColors[slug]}`}
                 >

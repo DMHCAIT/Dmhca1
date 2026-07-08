@@ -107,9 +107,9 @@ export function CourseDetailNew({
                 <BookOpen className="w-4 h-4 text-gold" /> {course.lessons} lessons
               </span>
             )}
-            {course.weeks != null && (
+            {course.months != null && (
               <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-gold" /> {Math.round(course.weeks / 4.33)} months
+                <Clock className="w-4 h-4 text-gold" /> {course.months} months
               </span>
             )}
             <span className="flex items-center gap-2">
@@ -183,7 +183,7 @@ export function CourseDetailNew({
             <div id="curriculum">
               <h2 className="font-display text-2xl text-navy-deep mb-2">Curriculum</h2>
               <div className="text-sm text-muted-foreground mb-6">
-                {course.modules.length} Modules · {course.lessons ?? "—"} Lessons · {course.weeks ? `${Math.round(course.weeks / 4.33)} Months` : "—"}
+                {course.modules.length} Modules · {course.lessons ?? "—"} Lessons · {course.months ? `${course.months} Months` : "—"}
               </div>
 
               <div className="border border-border rounded-lg overflow-hidden divide-y divide-border bg-card">
@@ -587,7 +587,7 @@ export function CourseDetailNew({
                   <Clock className="w-4 h-4 text-gold flex-shrink-0" />
                   <div className="text-xs uppercase tracking-widest text-muted-foreground">Duration</div>
                   <div className="font-medium text-navy-deep ml-auto">
-                    {course.meta?.duration || (course.weeks ? `${Math.round(course.weeks / 4.33)} months` : "—")}
+                    {course.meta?.Duration || (course.months ? `${course.months} months` : "—")}
                   </div>
                 </div>
 

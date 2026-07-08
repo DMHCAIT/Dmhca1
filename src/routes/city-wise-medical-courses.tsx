@@ -90,7 +90,7 @@ function CityWiseMedicalCourses() {
               <h2 className="text-4xl font-bold text-slate-900 mb-2">
                 📍 City-Wise Medical Courses
               </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-blue-500 rounded"></div>
+              <div className="w-16 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
               <p className="text-slate-600 mt-3">Explore specialized medical courses available in different cities across India</p>
             </div>
 
@@ -101,7 +101,7 @@ function CityWiseMedicalCourses() {
                     <h3 className="text-2xl font-bold text-slate-900 mb-2 capitalize">
                       {specialty} Courses by City
                     </h3>
-                    <div className="w-12 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded"></div>
+                    <div className="w-12 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
                   </div>
 
                   {/* Cities Grid */}
@@ -113,17 +113,17 @@ function CityWiseMedicalCourses() {
                         className="group bg-white border border-slate-200 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 transition-all duration-300"
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-bold text-slate-900 group-hover:text-emerald-600 transition">
+                          <h4 className="font-bold text-slate-900 group-hover:text-navy-deep transition">
                             {specialty} in {course.city}
                           </h4>
-                          <span className="text-slate-400 group-hover:text-emerald-600 transition">
+                          <span className="text-slate-400 group-hover:text-navy-deep transition">
                             →
                           </span>
                         </div>
                         <p className="text-sm text-slate-600 mb-3">
                           {course.description}
                         </p>
-                        <div className="text-xs font-semibold text-emerald-600">
+                        <div className="text-xs font-semibold text-navy-deep">
                           Learn more
                         </div>
                       </Link>
