@@ -118,9 +118,16 @@ function About() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center w-full">
                   <div className="w-full max-w-md rounded-xl overflow-hidden border border-border">
-                    <img src="/heropgdiplomablock-v2.webp" alt="Students learning" className="w-full h-56 object-cover" />
+                    <div className="w-full h-auto bg-gray-100">
+                      <img 
+                        src="/dmhca_about.webp" 
+                        alt="Healthcare professional - DMHCA" 
+                        className="w-full h-auto object-cover object-center min-h-56 sm:h-56 md:h-64 lg:h-72"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 448px"
+                      />
+                    </div>
                     <div className="p-4 bg-white">
                       <div className="flex items-center justify-between">
                         <div>

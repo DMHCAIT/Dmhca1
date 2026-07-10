@@ -28,6 +28,8 @@ function AdminCourses() {
   const [editingMetaNewValue, setEditingMetaNewValue] = useState('');
   const [editingLearnIdx, setEditingLearnIdx] = useState<number | null>(null);
   const [editingLearnText, setEditingLearnText] = useState('');
+  const [editingRequirementsIdx, setEditingRequirementsIdx] = useState<number | null>(null);
+  const [editingRequirementsText, setEditingRequirementsText] = useState('');
   const [editingModuleIdx, setEditingModuleIdx] = useState<number | null>(null);
   const [editingModuleText, setEditingModuleText] = useState('');
   const [editingSubModuleIdx, setEditingSubModuleIdx] = useState<{ moduleIdx: number; subIdx: number } | null>(null);
@@ -51,6 +53,8 @@ function AdminCourses() {
     heroDescription: '',
     learn: [] as string[],
     learnInput: '',
+    requirements: [] as string[],
+    requirementsInput: '',
     modules: [] as string[],
     moduleInput: '',
     moduleDetails: [] as string[][],
@@ -192,6 +196,8 @@ function AdminCourses() {
       heroDescription: courseData.heroDescription || '',
       learn: Array.isArray(courseData.learn) ? courseData.learn : [],
       learnInput: '',
+      requirements: Array.isArray(courseData.requirements) ? courseData.requirements : [],
+      requirementsInput: '',
       modules: Array.isArray(courseData.modules) ? courseData.modules : [],
       moduleInput: '',
       moduleDetails: Array.isArray(courseData.moduleDetails) ? courseData.moduleDetails : [],
@@ -226,6 +232,8 @@ function AdminCourses() {
       heroDescription: '',
       learn: [],
       learnInput: '',
+      requirements: [],
+      requirementsInput: '',
       modules: [],
       moduleInput: '',
       moduleDetails: [],
@@ -264,6 +272,7 @@ function AdminCourses() {
         overview: formData.overview,
         heroDescription: formData.heroDescription,
         learn: formData.learn.filter((item) => item.trim()),
+        requirements: formData.requirements.filter((item) => item.trim()),
         modules: formData.modules.filter((item) => item.trim()),
         moduleDetails: formData.moduleDetails.map((m) => m.filter((item) => item.trim())),
         faqs: formData.faqs.filter((faq) => faq.q && faq.a),
@@ -611,6 +620,21 @@ function AdminCourses() {
                       </div>
                     )}
 
+                    {/* Requirements */}
+                    {course.data?.requirements && course.data.requirements.length > 0 && (
+                      <div>
+                        <h4 className="text-lg font-semibold text-blue-300 mb-2">📋 Requirements</h4>
+                        <ul className="space-y-2">
+                          {course.data.requirements.map((item: string, idx: number) => (
+                            <li key={idx} className="flex gap-2 text-gray-300">
+                              <span className="text-yellow-400">•</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
                     {/* Modules */}
                     {course.data?.modules && course.data.modules.length > 0 && (
                       <div>
@@ -945,6 +969,103 @@ function AdminCourses() {
                               </button>
                               <button
                                 onClick={() => setFormData({ ...formData, learn: formData.learn.filter((_, i) => i !== idx) })}
+                                className="text-red-400 hover:text-red-300"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* SECTION 6.5: Requirements */}
+                <div className="border-b border-slate-600 pb-4">
+                  <h3 className="text-lg font-bold text-blue-300 mb-4">📋 Requirements</h3>
+                  <div className="mb-3 flex gap-2">
+                    <input
+                      type="text"
+                      value={formData.requirementsInput}
+                      onChange={(e) => setFormData({ ...formData, requirementsInput: e.target.value })}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' && formData.requirementsInput.trim()) {
+                          setFormData({
+                            ...formData,
+                            requirements: [...formData.requirements, formData.requirementsInput.trim()],
+                            requirementsInput: '',
+                          });
+                        }
+                      }}
+                      className="flex-1 px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                      placeholder="Add requirement or prerequisite..."
+                    />
+                    <button
+                      onClick={() => {
+                        if (formData.requirementsInput.trim()) {
+                          setFormData({
+                            ...formData,
+                            requirements: [...formData.requirements, formData.requirementsInput.trim()],
+                            requirementsInput: '',
+                          });
+                        }
+                      }}
+                      className="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition"
+                    >
+                      Add
+                    </button>
+                  </div>
+                  <div className="space-y-2">
+                    {formData.requirements.map((item, idx) => (
+                      <div key={idx} className="flex items-center justify-between bg-slate-700/50 p-2 rounded">
+                        {editingRequirementsIdx === idx ? (
+                          <div className="flex gap-2 flex-1">
+                            <input
+                              type="text"
+                              value={editingRequirementsText}
+                              onChange={(e) => setEditingRequirementsText(e.target.value)}
+                              className="flex-1 px-2 py-1 bg-slate-600 border border-slate-500 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-400"
+                            />
+                            <button
+                              onClick={() => {
+                                if (editingRequirementsText.trim()) {
+                                  const updatedRequirements = [...formData.requirements];
+                                  updatedRequirements[idx] = editingRequirementsText.trim();
+                                  setFormData({ ...formData, requirements: updatedRequirements });
+                                  setEditingRequirementsIdx(null);
+                                  setEditingRequirementsText('');
+                                }
+                              }}
+                              className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold transition"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => {
+                                setEditingRequirementsIdx(null);
+                                setEditingRequirementsText('');
+                              }}
+                              className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold transition"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <>
+                            <span className="text-gray-300">{item}</span>
+                            <div className="flex gap-1">
+                              <button
+                                onClick={() => {
+                                  setEditingRequirementsIdx(idx);
+                                  setEditingRequirementsText(item);
+                                }}
+                                className="text-blue-400 hover:text-blue-300 text-xs px-2 py-1 rounded hover:bg-slate-600/50"
+                              >
+                                ✎ Edit
+                              </button>
+                              <button
+                                onClick={() => setFormData({ ...formData, requirements: formData.requirements.filter((_, i) => i !== idx) })}
                                 className="text-red-400 hover:text-red-300"
                               >
                                 ✕

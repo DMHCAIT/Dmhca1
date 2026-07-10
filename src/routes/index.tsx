@@ -52,7 +52,7 @@ function Home() {
       id: 0,
       program: 'Certificate',
       theme: 'dark',
-        heroImg: '/herocertificateblock.webp',
+        heroImg: '/herocertificatelarge.webp',
         blockImg: '/herocertificateblock.webp',
       titleMain: 'Upskill clinically,',
       titleSub: 'fast and focused.',
