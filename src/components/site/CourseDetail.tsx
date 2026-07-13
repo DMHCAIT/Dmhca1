@@ -621,7 +621,13 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                         search={{ program: course.program, course: getIBMCourseName(course.title) }}
                         className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-navy-deep to-navy hover:from-navy hover:to-navy-deep text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
                       >
-                        Add to Cart
+                        Enroll now
+                      </Link>
+                      <Link 
+                        to="/contact-us"
+                        className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-navy-deep to-navy hover:from-navy hover:to-navy-deep text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
+                      >
+                        Talk to Counsellor
                       </Link>
                     </div>
                   </div>
