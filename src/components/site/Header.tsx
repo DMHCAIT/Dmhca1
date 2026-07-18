@@ -1,6 +1,9 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { supabaseClient } from "@/lib/supabase";
+import { SignupModal } from "./SignupModal";
+import { UserProfile } from "./UserProfile";
 
 const logo = "/logo.webp";
 const nav = [
@@ -12,6 +15,70 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userExists, setUserExists] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [signupModalOpen, setSignupModalOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userName, setUserName] = useState<string>("");
+  const navigate = useNavigate();
+
+  const checkAuthState = async () => {
+    try {
+      const { data: { user } } = await supabaseClient.auth.getUser();
+      if (user) {
+        setUserExists(true);
+        setIsLoggedIn(false);
+      } else {
+        setUserExists(false);
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.error("Error checking auth state:", error);
+    }
+  };
+
+  useEffect(() => {
+    const initAuthState = async () => {
+      try {
+        // Check if user has an active session
+        const { data: { session } } = await supabaseClient.auth.getSession();
+        
+        if (session?.user) {
+          // User is logged in
+          setIsLoggedIn(true);
+          setUserExists(true);
+          setUserEmail(session.user.email || "");
+          setUserName(session.user.user_metadata?.full_name || session.user.email || "");
+        } else {
+          // No active session, check if user exists by trying to get current user
+          const { data: { user } } = await supabaseClient.auth.getUser();
+          if (user) {
+            setUserExists(true);
+            setIsLoggedIn(false);
+          } else {
+            setUserExists(false);
+            setIsLoggedIn(false);
+          }
+        }
+      } catch (error) {
+        console.error("Error checking auth state:", error);
+        setIsLoggedIn(false);
+        setUserExists(false);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    initAuthState();
+
+    // Listen for auth state changes
+    const { data: { subscription } } = supabaseClient.auth.onAuthStateChange(() => {
+      initAuthState();
+    });
+
+    return () => subscription?.unsubscribe();
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 bg-background/98 hairline">
@@ -40,7 +107,28 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          <a href="https://lms.delhimedical.net/" target="_blank" rel="noopener noreferrer" className="text-base px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition">Log in</a>
+          {!loading && (
+            isLoggedIn ? (
+              // User is logged in - show user profile with dashboard
+              <UserProfile userEmail={userEmail} userName={userName} />
+            ) : userExists ? (
+              // Account exists but not logged in - show Login button
+              <button
+                onClick={() => navigate({ to: "/admin" })}
+                className="text-base px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+              >
+                Log in
+              </button>
+            ) : (
+              // No account - show Sign up button
+              <button
+                onClick={() => setSignupModalOpen(true)}
+                className="text-base px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+              >
+                Sign up
+              </button>
+            )
+          )}
         </div>
 
         <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -54,10 +142,48 @@ export function Header() {
             {nav.map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-1">{n.label}</Link>
             ))}
-            <a href="https://lms.delhimedical.net/" target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="mt-2 inline-block w-fit px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm">Log in</a>
+            {!loading && (
+              isLoggedIn ? (
+                // User is logged in - show user profile with dashboard
+                <div className="mt-2 pt-4 border-t border-border">
+                  <UserProfile userEmail={userEmail} userName={userName} />
+                </div>
+              ) : userExists ? (
+                // Account exists but not logged in - show Login button
+                <button
+                  onClick={() => {
+                    navigate({ to: "/admin" });
+                    setOpen(false);
+                  }}
+                  className="mt-2 inline-block w-fit px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+                >
+                  Log in
+                </button>
+              ) : (
+                // No account - show Sign up button
+                <button
+                  onClick={() => {
+                    setSignupModalOpen(true);
+                    setOpen(false);
+                  }}
+                  className="mt-2 inline-block w-fit px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+                >
+                  Sign up
+                </button>
+              )
+            )}
           </div>
         </div>
       )}
+
+      <SignupModal
+        isOpen={signupModalOpen}
+        onClose={() => setSignupModalOpen(false)}
+        onSignupSuccess={() => {
+          // Refresh auth state after signup
+          checkAuthState();
+        }}
+      />
     </header>
   );
 }

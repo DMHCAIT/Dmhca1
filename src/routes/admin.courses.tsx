@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 // avoid Next.js dynamic import in this Vite app
 import { supabaseClient } from '@/lib/supabase';
+import { invalidateCoursesCache } from '@/hooks/useCoursesData';
 import { Plus, Edit2, Trash2, Eye, X, Upload, AlertCircle, ChevronUp, ChevronDown, Search, RotateCw } from 'lucide-react';
 
 export const Route = createFileRoute('/admin/courses')({
@@ -322,6 +323,7 @@ function AdminCourses() {
       setShowAddModal(false);
       setCurrentCourseId(null);
       await fetchCourses();
+      invalidateCoursesCache();
       alert(currentCourseId ? 'Course updated successfully!' : 'Course added successfully!');
     } catch (error) {
       console.error('Error saving course:', error);
@@ -338,6 +340,7 @@ function AdminCourses() {
         .eq('id', courseId);
 
       if (error) throw error;
+      invalidateCoursesCache();
       await fetchCourses();
     } catch (error) {
       console.error('Error deleting course:', error);
@@ -396,8 +399,9 @@ function AdminCourses() {
         .eq('id', courseId);
 
       if (updateError) throw updateError;
+      invalidateCoursesCache();
+      invalidateCoursesCache();
       await fetchCourses();
-      alert('Image uploaded successfully!');
     } catch (error) {
       console.error('Error uploading image:', error);
       alert('Error uploading image: ' + (error as any)?.message || error);

@@ -1,9 +1,10 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { ArrowUpRight, Star, StarHalf, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 const heroImg = "/herofellowshiplarge.webp";
-import { categories, courses } from "@/data/courses";
+import { categories } from "@/data/courses";
+import { useCoursesData } from "@/hooks/useCoursesData";
 import { CourseCard } from "@/components/site/CourseCard";
 
 export const Route = createFileRoute("/")({
@@ -43,6 +44,10 @@ function Home() {
   const currentFmt = (() => {
     try { const p = new URLSearchParams(location.search || '').get('fmt'); return p; } catch (e) { return null; }
   })();
+  
+  // Fetch courses dynamically from Supabase
+  const { courses } = useCoursesData();
+  
   const [reviewIndex, setReviewIndex] = useState(0);
   const [slide, setSlide] = useState(0);
   const [screenSize, setScreenSize] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
@@ -112,30 +117,37 @@ function Home() {
   }, []);
 
   const reviewsPerPage = screenSize < 640 ? 1 : screenSize < 1024 ? 2 : 3;
-  let featured = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
-  // Replace specific courses with requested alternatives in featured programs
-  const replacementMap = [
-    { find: /interventional cardiology/i, replaceWith: "Fellowship in Pediatrics" },
-    { find: /pediatric rheumatology/i, replaceWith: "PG Diploma in HIV Medicine" },
-    { find: /cardiothoracic surgery/i, replaceWith: "PG Diploma In Diabetology" },
-    { find: /cardio oncology/i, replaceWith: "Certificate in Child Health" },
-    { find: /abdominal imaging/i, replaceWith: "Fellowship in Clinical Hematology" },
-  ];
-  try {
-    for (const { find, replaceWith } of replacementMap) {
-      const idx = featured.findIndex(c => find.test(c.title));
-      if (idx !== -1) {
-        const replacement = courses.find(c => c.title.includes(replaceWith));
-        if (replacement) {
-          featured[idx] = replacement;
+  
+  // Memoize featured courses computation to avoid recalculation on every render
+  const featured = useMemo(() => {
+    if (!courses || courses.length === 0) return [];
+    let result = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
+    // Replace specific courses with requested alternatives in featured programs
+    const replacementMap = [
+      { find: /interventional cardiology/i, replaceWith: "Fellowship in Pediatrics" },
+      { find: /pediatric rheumatology/i, replaceWith: "PG Diploma in HIV Medicine" },
+      { find: /cardiothoracic surgery/i, replaceWith: "PG Diploma In Diabetology" },
+      { find: /cardio oncology/i, replaceWith: "Certificate in Child Health" },
+      { find: /abdominal imaging/i, replaceWith: "Fellowship in Clinical Hematology" },
+    ];
+    try {
+      for (const { find, replaceWith } of replacementMap) {
+        const idx = result.findIndex(c => find.test(c.title));
+        if (idx !== -1) {
+          const replacement = courses.find(c => c.title.includes(replaceWith));
+          if (replacement) {
+            result[idx] = replacement;
+          }
         }
       }
+    } catch (e) {
+      // silent fallback if courses data shape differs
     }
-  } catch (e) {
-    // silent fallback if courses data shape differs
-  }
+    return result;
+  }, [courses]);
   
-  const reviews = [
+  // Memoize reviews array to prevent recreation on every render
+  const reviews = useMemo(() => [
     {
       name: "Ahsan Habib",
       role: "Bangladesh",
@@ -178,69 +190,67 @@ function Home() {
       image: "/courses/manisha-kumari-150x150.jpg",
       rating: 5,
     },
-    // Add new reviews below in the same format
-  {
-  name: "Dr. Mutharasan Kanniah",
-  role: "Internal Medical Specialist, Dammam, KSA",
-  text: "I highly appreciate Mr. Mahender, DMHCA Coordinator, for his excellent guidance throughout my Fellowship in Internal Medicine. His prompt support, professionalism, and ability to explain concepts clearly made my learning journey smooth and valuable. Thank you, DMHCA, for such dedicated support.",
-  rating: 5,
-},
-{
-  name: "Dr. Feroz Ahmad",
-  role: "Neurology Fellowship, India",
-  text: "DMHCA has a dedicated and supportive team that makes learning smooth and enjoyable. Ashwani Mishra guided me throughout my Neurology Fellowship and made every step easy. I truly appreciate the team's commitment and support.",
-  rating: 4,
-},
-{
-  name: "Sheikh Shozib",
-  role: "Bangladesh",
-  text: "I'm pursuing a Fellowship in Clinical Neurology with DMHCA. The system is well organized, the staff are friendly and supportive, and the lectures are clear, up-to-date, and easy to understand. Looking forward to a great learning journey.",
-  rating: 5,
-},
-{
-  name: "Pragya Rajbhandari",
-  role: "Pediatric Neurology Fellowship",
-  text: "My Pediatric Neurology Fellowship at DMHCA was a rewarding experience. The faculty provided excellent guidance, hands-on training, and valuable clinical knowledge, helping me strengthen my skills and passion for pediatric neurology.",
-  rating: 5,
-},
-{
-  name: "Dr. Biplab Chatterjee",
-  role: "India",
-  text: "Very nicely managed professional institute. Got my due papers on time. Nice experience with DMHCA. Keep it up.",
-  rating: 4.5,
-},
-{
-  name: "Jyothsna Theegala",
-  role: "India",
-  text: "Completing the Certificate in Advanced ART from DMHCA was a transformative experience. Overall, it was a great learning experience. The best part is that it is very affordable, and the faculty are excellent.",
-  rating: 4,
-},
-{
-  name: "Abhishek Sharma",
-  role: "India",
-  text: "I had an excellent experience at DMHCA while pursuing PGD in Reproductive Medicine. I highly recommend the academy for its quality education and professional guidance. Special thanks to Loveleen Ji and Sajid Ji for their constant support throughout my admission journey.",
-  rating: 5,
-},
-{
-  name: "Devayanee Gunjate",
-  role: "India",
-  text: "DMHCA has a very good curriculum with regular and interactive online lectures. The 15-day hands-on training was highly informative and helped me gain practical knowledge. Overall, it was a valuable learning experience.",
-  rating: 5,
-},
-{
-  name: "Syed Mustafa Aaqib",
-  role: "India",
-  text: "I had a very good experience at the Cardiology Conclave at Virinchi. Miss Soniya was an excellent coordinator who ensured everything was well organized and supported participants throughout the event. Overall, it was a great learning experience.",
-  rating: 5,
-},
-
-  ];
+    {
+      name: "Dr. Mutharasan Kanniah",
+      role: "Internal Medical Specialist, Dammam, KSA",
+      text: "I highly appreciate Mr. Mahender, DMHCA Coordinator, for his excellent guidance throughout my Fellowship in Internal Medicine. His prompt support, professionalism, and ability to explain concepts clearly made my learning journey smooth and valuable. Thank you, DMHCA, for such dedicated support.",
+      rating: 5,
+    },
+    {
+      name: "Dr. Feroz Ahmad",
+      role: "Neurology Fellowship, India",
+      text: "DMHCA has a dedicated and supportive team that makes learning smooth and enjoyable. Ashwani Mishra guided me throughout my Neurology Fellowship and made every step easy. I truly appreciate the team's commitment and support.",
+      rating: 4,
+    },
+    {
+      name: "Sheikh Shozib",
+      role: "Bangladesh",
+      text: "I'm pursuing a Fellowship in Clinical Neurology with DMHCA. The system is well organized, the staff are friendly and supportive, and the lectures are clear, up-to-date, and easy to understand. Looking forward to a great learning journey.",
+      rating: 5,
+    },
+    {
+      name: "Pragya Rajbhandari",
+      role: "Pediatric Neurology Fellowship",
+      text: "My Pediatric Neurology Fellowship at DMHCA was a rewarding experience. The faculty provided excellent guidance, hands-on training, and valuable clinical knowledge, helping me strengthen my skills and passion for pediatric neurology.",
+      rating: 5,
+    },
+    {
+      name: "Dr. Biplab Chatterjee",
+      role: "India",
+      text: "Very nicely managed professional institute. Got my due papers on time. Nice experience with DMHCA. Keep it up.",
+      rating: 4.5,
+    },
+    {
+      name: "Jyothsna Theegala",
+      role: "India",
+      text: "Completing the Certificate in Advanced ART from DMHCA was a transformative experience. Overall, it was a great learning experience. The best part is that it is very affordable, and the faculty are excellent.",
+      rating: 4,
+    },
+    {
+      name: "Abhishek Sharma",
+      role: "India",
+      text: "I had an excellent experience at DMHCA while pursuing PGD in Reproductive Medicine. I highly recommend the academy for its quality education and professional guidance. Special thanks to Loveleen Ji and Sajid Ji for their constant support throughout my admission journey.",
+      rating: 5,
+    },
+    {
+      name: "Devayanee Gunjate",
+      role: "India",
+      text: "DMHCA has a very good curriculum with regular and interactive online lectures. The 15-day hands-on training was highly informative and helped me gain practical knowledge. Overall, it was a valuable learning experience.",
+      rating: 5,
+    },
+    {
+      name: "Syed Mustafa Aaqib",
+      role: "India",
+      text: "I had a very good experience at the Cardiology Conclave at Virinchi. Miss Soniya was an excellent coordinator who ensured everything was well organized and supported participants throughout the event. Overall, it was a great learning experience.",
+      rating: 5,
+    },
+  ], []);
   const displayedReviews = reviews.slice(reviewIndex, reviewIndex + reviewsPerPage);
   const nextReviews = () => setReviewIndex((reviewIndex + reviewsPerPage) % reviews.length);
   const prevReviews = () => setReviewIndex((reviewIndex - reviewsPerPage + reviews.length) % reviews.length);
 
-  // Organization Schema for Homepage
-  const organizationSchema = {
+  // Memoize Organization Schema for Homepage
+  const organizationSchema = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "DMHCA",
@@ -257,7 +267,7 @@ function Home() {
       "contactType": "Customer Support",
       "email": "info@dmhca.in"
     }
-  };
+  }), []);
 
   return (
     <div>

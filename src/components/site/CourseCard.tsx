@@ -1,6 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { Clock, BookOpen, ArrowUpRight, Star, Award } from "lucide-react";
 import { type Course, formatINR, getCategory } from "@/data/courses";
+import { memo } from "react";
+
+// Accept both Course type and dynamic course data from Supabase
+type CourseData = Course & {
+  lessons?: number | null;
+  months?: number | null;
+  rating?: number | null;
+  reviewCount?: number | null;
+  heroDescription?: string;
+  [key: string]: any;
+};
 
 // Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
 const courseNameMapping: Record<string, string> = {
@@ -27,8 +38,9 @@ function getIBMCourseName(dmhcaTitle: string): string {
   return dmhcaTitle; // Return original if no pattern matches
 }
 
-export function CourseCard({ course }: { course: Course }) {
-  const cat = getCategory(course.categories[0]);
+function CourseCardComponent({ course }: { course: CourseData }) {
+  const categoryName = Array.isArray(course.categories) ? course.categories[0] : course.category;
+  const cat = getCategory(categoryName);
   const programType = course.program || course.meta?.skill_level || (course.title.toLowerCase().includes("fellowship") ? "Fellowship" : course.title.toLowerCase().includes("pg diploma") ? "PG Diploma" : "Certificate");
   // Normalize program type for badge (Certificate / PG Diploma / Fellowship)
   const programName = (() => {
@@ -103,3 +115,5 @@ export function CourseCard({ course }: { course: Course }) {
     </Link>
   );
 }
+
+export const CourseCard = memo(CourseCardComponent);

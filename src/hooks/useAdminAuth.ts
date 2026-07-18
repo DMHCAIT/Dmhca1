@@ -5,38 +5,40 @@ import { supabaseClient } from '@/lib/supabase';
 export function useAdminAuth() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const isDev = import.meta.env.DEV;
   const navigate = useNavigate();
 
   useEffect(() => {
     checkAuth();
     const { data } = supabaseClient.auth.onAuthStateChange((event, session) => {
       if (session?.user) {
-        // Check if user is admin (you can add role checking later)
+        setIsAuthed(true);
+      } else if (isDev) {
+        // In development mode, allow access without Supabase session
         setIsAuthed(true);
       } else {
-        // In development mode, allow access without Supabase session
-        const isDev = import.meta.env.DEV;
-        if (isDev) {
-          setIsAuthed(true);
-        } else {
-          setIsAuthed(false);
-          navigate({ to: '/admin-login' });
-        }
+        setIsAuthed(false);
       }
       setIsLoading(false);
     });
 
     return () => data.subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, isDev]);
 
   const checkAuth = async () => {
     try {
       const { data: { session } } = await supabaseClient.auth.getSession();
-      setIsAuthed(!!session?.user);
+      if (session?.user) {
+        setIsAuthed(true);
+      } else if (isDev) {
+        // In development, allow access even if Supabase fails
+        setIsAuthed(true);
+      } else {
+        setIsAuthed(false);
+      }
     } catch (error) {
       console.error('Auth check failed:', error);
       // In development, allow access even if Supabase fails
-      const isDev = import.meta.env.DEV;
       setIsAuthed(isDev);
     } finally {
       setIsLoading(false);

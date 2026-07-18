@@ -23,7 +23,7 @@ const ApplicationFormSchema = z.object({
 });
 
 export const submitApplicationForm = createServerFn({ method: "POST" })
-  .inputValidator(ApplicationFormSchema)
+  .validator(ApplicationFormSchema)
   .handler(async ({ data }) => {
     try {
       // If Supabase is not configured, return a dev message

@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as VerificationRouteImport } from './routes/verification'
 import { Route as TestPageRouteImport } from './routes/test-page'
 import { Route as TermConditionsRouteImport } from './routes/term-conditions'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -26,7 +28,6 @@ import { Route as ScopeOfCardiologyRouteImport } from './routes/scope-of-cardiol
 import { Route as RefundReturnsPolicyRouteImport } from './routes/refund-returns-policy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as LpProfileRouteImport } from './routes/lp-profile'
-import { Route as LoginRouteImport } from './routes/login'
 import { Route as HowToCrackNeetPgRouteImport } from './routes/how-to-crack-neet-pg'
 import { Route as HowToBecomeAnOncologistRouteImport } from './routes/how-to-become-an-oncologist'
 import { Route as HowToBecomeAnObstetricianGynecologistRouteImport } from './routes/how-to-become-an-obstetrician-gynecologist'
@@ -51,6 +52,7 @@ import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutDmhcaRouteImport } from './routes/about-dmhca'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as CertificateIdRouteImport } from './routes/$certificateId'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TopMedicalCoursesIndexRouteImport } from './routes/top-medical-courses.index'
 import { Route as SitemapIndexRouteImport } from './routes/sitemap.index'
@@ -72,6 +74,8 @@ import { Route as ClinicalCardiologyCoursesIndexRouteImport } from './routes/cli
 import { Route as CardiologyCoursesIndexRouteImport } from './routes/cardiology-courses.index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as VerifyCertificateIdRouteImport } from './routes/verify.$certificateId'
+import { Route as VerificationCertificateIdRouteImport } from './routes/verification.$certificateId'
 import { Route as Char91specialtyChar93CoursesChar91cityChar93RouteImport } from './routes/[specialty]-courses.[city]'
 import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as SimpleEventSlugRouteImport } from './routes/simple-event.$slug'
@@ -100,8 +104,19 @@ import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminEventsRouteImport } from './routes/admin.events'
 import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
 import { Route as AdminCommentsRouteImport } from './routes/admin.comments'
+import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
 import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
 
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VerificationRoute = VerificationRouteImport.update({
+  id: '/verification',
+  path: '/verification',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TestPageRoute = TestPageRouteImport.update({
   id: '/test-page',
   path: '/test-page',
@@ -186,11 +201,6 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const LpProfileRoute = LpProfileRouteImport.update({
   id: '/lp-profile',
   path: '/lp-profile',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowToCrackNeetPgRoute = HowToCrackNeetPgRouteImport.update({
@@ -320,6 +330,11 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CertificateIdRoute = CertificateIdRouteImport.update({
+  id: '/$certificateId',
+  path: '/$certificateId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -432,6 +447,17 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const VerifyCertificateIdRoute = VerifyCertificateIdRouteImport.update({
+  id: '/$certificateId',
+  path: '/$certificateId',
+  getParentRoute: () => VerifyRoute,
+} as any)
+const VerificationCertificateIdRoute =
+  VerificationCertificateIdRouteImport.update({
+    id: '/$certificateId',
+    path: '/$certificateId',
+    getParentRoute: () => VerificationRoute,
+  } as any)
 const Char91specialtyChar93CoursesChar91cityChar93Route =
   Char91specialtyChar93CoursesChar91cityChar93RouteImport.update({
     id: '/specialty-courses/city',
@@ -577,6 +603,11 @@ const AdminCommentsRoute = AdminCommentsRouteImport.update({
   path: '/comments',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCertificatesRoute = AdminCertificatesRouteImport.update({
+  id: '/certificates',
+  path: '/certificates',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
   id: '/applications',
   path: '/applications',
@@ -585,6 +616,7 @@ const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$certificateId': typeof CertificateIdRoute
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
   '/admin': typeof AdminRouteWithChildren
@@ -609,7 +641,6 @@ export interface FileRoutesByFullPath {
   '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
   '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
   '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
-  '/login': typeof LoginRoute
   '/lp-profile': typeof LpProfileRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
@@ -627,7 +658,10 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
+  '/verification': typeof VerificationRouteWithChildren
+  '/verify': typeof VerifyRouteWithChildren
   '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
@@ -656,6 +690,8 @@ export interface FileRoutesByFullPath {
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  '/verification/$certificateId': typeof VerificationCertificateIdRoute
+  '/verify/$certificateId': typeof VerifyCertificateIdRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/cardiology-courses/': typeof CardiologyCoursesIndexRoute
@@ -679,6 +715,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$certificateId': typeof CertificateIdRoute
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
   '/admin-login': typeof AdminLoginRoute
@@ -701,7 +738,6 @@ export interface FileRoutesByTo {
   '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
   '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
   '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
-  '/login': typeof LoginRoute
   '/lp-profile': typeof LpProfileRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
@@ -718,7 +754,10 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
+  '/verification': typeof VerificationRouteWithChildren
+  '/verify': typeof VerifyRouteWithChildren
   '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
@@ -747,6 +786,8 @@ export interface FileRoutesByTo {
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  '/verification/$certificateId': typeof VerificationCertificateIdRoute
+  '/verify/$certificateId': typeof VerifyCertificateIdRoute
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/cardiology-courses': typeof CardiologyCoursesIndexRoute
@@ -771,6 +812,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$certificateId': typeof CertificateIdRoute
   '/about': typeof AboutRoute
   '/about-dmhca': typeof AboutDmhcaRoute
   '/admin': typeof AdminRouteWithChildren
@@ -795,7 +837,6 @@ export interface FileRoutesById {
   '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
   '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
   '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
-  '/login': typeof LoginRoute
   '/lp-profile': typeof LpProfileRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
@@ -813,7 +854,10 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
+  '/verification': typeof VerificationRouteWithChildren
+  '/verify': typeof VerifyRouteWithChildren
   '/admin/applications': typeof AdminApplicationsRoute
+  '/admin/certificates': typeof AdminCertificatesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
@@ -842,6 +886,8 @@ export interface FileRoutesById {
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  '/verification/$certificateId': typeof VerificationCertificateIdRoute
+  '/verify/$certificateId': typeof VerifyCertificateIdRoute
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/cardiology-courses/': typeof CardiologyCoursesIndexRoute
@@ -867,6 +913,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/$certificateId'
     | '/about'
     | '/about-dmhca'
     | '/admin'
@@ -891,7 +938,6 @@ export interface FileRouteTypes {
     | '/how-to-become-an-obstetrician-gynecologist'
     | '/how-to-become-an-oncologist'
     | '/how-to-crack-neet-pg'
-    | '/login'
     | '/lp-profile'
     | '/privacy-policy'
     | '/refund-returns-policy'
@@ -909,7 +955,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
+    | '/verification'
+    | '/verify'
     | '/admin/applications'
+    | '/admin/certificates'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
@@ -938,6 +987,8 @@ export interface FileRouteTypes {
     | '/simple-event/$slug'
     | '/sitemap/xml'
     | '/specialty-courses/city'
+    | '/verification/$certificateId'
+    | '/verify/$certificateId'
     | '/admin/'
     | '/blog/'
     | '/cardiology-courses/'
@@ -961,6 +1012,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/$certificateId'
     | '/about'
     | '/about-dmhca'
     | '/admin-login'
@@ -983,7 +1035,6 @@ export interface FileRouteTypes {
     | '/how-to-become-an-obstetrician-gynecologist'
     | '/how-to-become-an-oncologist'
     | '/how-to-crack-neet-pg'
-    | '/login'
     | '/lp-profile'
     | '/privacy-policy'
     | '/refund-returns-policy'
@@ -1000,7 +1051,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
+    | '/verification'
+    | '/verify'
     | '/admin/applications'
+    | '/admin/certificates'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
@@ -1029,6 +1083,8 @@ export interface FileRouteTypes {
     | '/simple-event/$slug'
     | '/sitemap/xml'
     | '/specialty-courses/city'
+    | '/verification/$certificateId'
+    | '/verify/$certificateId'
     | '/admin'
     | '/blog'
     | '/cardiology-courses'
@@ -1052,6 +1108,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/$certificateId'
     | '/about'
     | '/about-dmhca'
     | '/admin'
@@ -1076,7 +1133,6 @@ export interface FileRouteTypes {
     | '/how-to-become-an-obstetrician-gynecologist'
     | '/how-to-become-an-oncologist'
     | '/how-to-crack-neet-pg'
-    | '/login'
     | '/lp-profile'
     | '/privacy-policy'
     | '/refund-returns-policy'
@@ -1094,7 +1150,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
+    | '/verification'
+    | '/verify'
     | '/admin/applications'
+    | '/admin/certificates'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
@@ -1123,6 +1182,8 @@ export interface FileRouteTypes {
     | '/simple-event/$slug'
     | '/sitemap/xml'
     | '/specialty-courses/city'
+    | '/verification/$certificateId'
+    | '/verify/$certificateId'
     | '/admin/'
     | '/blog/'
     | '/cardiology-courses/'
@@ -1147,6 +1208,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CertificateIdRoute: typeof CertificateIdRoute
   AboutRoute: typeof AboutRoute
   AboutDmhcaRoute: typeof AboutDmhcaRoute
   AdminRoute: typeof AdminRouteWithChildren
@@ -1171,7 +1233,6 @@ export interface RootRouteChildren {
   HowToBecomeAnObstetricianGynecologistRoute: typeof HowToBecomeAnObstetricianGynecologistRoute
   HowToBecomeAnOncologistRoute: typeof HowToBecomeAnOncologistRoute
   HowToCrackNeetPgRoute: typeof HowToCrackNeetPgRoute
-  LoginRoute: typeof LoginRoute
   LpProfileRoute: typeof LpProfileRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundReturnsPolicyRoute: typeof RefundReturnsPolicyRoute
@@ -1189,6 +1250,8 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermConditionsRoute: typeof TermConditionsRoute
   TestPageRoute: typeof TestPageRoute
+  VerificationRoute: typeof VerificationRouteWithChildren
+  VerifyRoute: typeof VerifyRouteWithChildren
   CardiologyCoursesCityRoute: typeof CardiologyCoursesCityRoute
   ClinicalCardiologyCoursesCityRoute: typeof ClinicalCardiologyCoursesCityRoute
   CosmetologyCoursesCityRoute: typeof CosmetologyCoursesCityRoute
@@ -1226,6 +1289,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/verification': {
+      id: '/verification'
+      path: '/verification'
+      fullPath: '/verification'
+      preLoaderRoute: typeof VerificationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/test-page': {
       id: '/test-page'
       path: '/test-page'
@@ -1343,13 +1420,6 @@ declare module '@tanstack/react-router' {
       path: '/lp-profile'
       fullPath: '/lp-profile'
       preLoaderRoute: typeof LpProfileRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-to-crack-neet-pg': {
@@ -1520,6 +1590,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$certificateId': {
+      id: '/$certificateId'
+      path: '/$certificateId'
+      fullPath: '/$certificateId'
+      preLoaderRoute: typeof CertificateIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -1666,6 +1743,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
+    }
+    '/verify/$certificateId': {
+      id: '/verify/$certificateId'
+      path: '/$certificateId'
+      fullPath: '/verify/$certificateId'
+      preLoaderRoute: typeof VerifyCertificateIdRouteImport
+      parentRoute: typeof VerifyRoute
+    }
+    '/verification/$certificateId': {
+      id: '/verification/$certificateId'
+      path: '/$certificateId'
+      fullPath: '/verification/$certificateId'
+      preLoaderRoute: typeof VerificationCertificateIdRouteImport
+      parentRoute: typeof VerificationRoute
     }
     '/specialty-courses/city': {
       id: '/specialty-courses/city'
@@ -1863,6 +1954,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCommentsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/certificates': {
+      id: '/admin/certificates'
+      path: '/certificates'
+      fullPath: '/admin/certificates'
+      preLoaderRoute: typeof AdminCertificatesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/applications': {
       id: '/admin/applications'
       path: '/applications'
@@ -1875,6 +1973,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminApplicationsRoute: typeof AdminApplicationsRoute
+  AdminCertificatesRoute: typeof AdminCertificatesRoute
   AdminCommentsRoute: typeof AdminCommentsRoute
   AdminCoursesRoute: typeof AdminCoursesRoute
   AdminEventsRoute: typeof AdminEventsRoute
@@ -1890,6 +1989,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminApplicationsRoute: AdminApplicationsRoute,
+  AdminCertificatesRoute: AdminCertificatesRoute,
   AdminCommentsRoute: AdminCommentsRoute,
   AdminCoursesRoute: AdminCoursesRoute,
   AdminEventsRoute: AdminEventsRoute,
@@ -1931,8 +2031,32 @@ const SimpleEventRouteWithChildren = SimpleEventRoute._addFileChildren(
   SimpleEventRouteChildren,
 )
 
+interface VerificationRouteChildren {
+  VerificationCertificateIdRoute: typeof VerificationCertificateIdRoute
+}
+
+const VerificationRouteChildren: VerificationRouteChildren = {
+  VerificationCertificateIdRoute: VerificationCertificateIdRoute,
+}
+
+const VerificationRouteWithChildren = VerificationRoute._addFileChildren(
+  VerificationRouteChildren,
+)
+
+interface VerifyRouteChildren {
+  VerifyCertificateIdRoute: typeof VerifyCertificateIdRoute
+}
+
+const VerifyRouteChildren: VerifyRouteChildren = {
+  VerifyCertificateIdRoute: VerifyCertificateIdRoute,
+}
+
+const VerifyRouteWithChildren =
+  VerifyRoute._addFileChildren(VerifyRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CertificateIdRoute: CertificateIdRoute,
   AboutRoute: AboutRoute,
   AboutDmhcaRoute: AboutDmhcaRoute,
   AdminRoute: AdminRouteWithChildren,
@@ -1958,7 +2082,6 @@ const rootRouteChildren: RootRouteChildren = {
     HowToBecomeAnObstetricianGynecologistRoute,
   HowToBecomeAnOncologistRoute: HowToBecomeAnOncologistRoute,
   HowToCrackNeetPgRoute: HowToCrackNeetPgRoute,
-  LoginRoute: LoginRoute,
   LpProfileRoute: LpProfileRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundReturnsPolicyRoute: RefundReturnsPolicyRoute,
@@ -1976,6 +2099,8 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermConditionsRoute: TermConditionsRoute,
   TestPageRoute: TestPageRoute,
+  VerificationRoute: VerificationRouteWithChildren,
+  VerifyRoute: VerifyRouteWithChildren,
   CardiologyCoursesCityRoute: CardiologyCoursesCityRoute,
   ClinicalCardiologyCoursesCityRoute: ClinicalCardiologyCoursesCityRoute,
   CosmetologyCoursesCityRoute: CosmetologyCoursesCityRoute,

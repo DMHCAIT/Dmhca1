@@ -8,11 +8,10 @@ import {
   Image,
   Settings,
   BookOpen,
-  Calendar,
   Users,
-  FileText,
   Menu,
   X,
+  Award,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -43,22 +42,29 @@ function AdminLayout() {
   }
 
   if (!isAuthed) {
-    return null;
+    // Redirect to admin login
+    navigate({ to: '/admin-login' });
+    return (
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-600">Redirecting to login...</p>
+        </div>
+      </div>
+    );
   }
 
   const handleLogout = async () => {
     await logout();
-    navigate({ to: '/admin-login' });
+    navigate({ to: '/admin' });
   };
 
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', href: '/admin', key: 'dashboard' },
     { icon: BookOpen, label: 'Courses', href: '/admin/courses', key: 'courses' },
-    { icon: Calendar, label: 'Events', href: '/admin/events', key: 'events' },
+    { icon: Award, label: 'Certificates', href: '/admin/certificates', key: 'certificates' },
     { icon: Users, label: 'Applications', href: '/admin/applications', key: 'applications' },
     { icon: MessageSquare, label: 'Event Comments', href: '/admin/comments', key: 'comments' },
     { icon: Mail, label: 'Contact Messages', href: '/admin/messages', key: 'messages' },
-    { icon: FileText, label: 'Page Editor', href: '/admin/pages-editor', key: 'pages-editor' },
     { icon: Image, label: 'Media Manager', href: '/admin/media', key: 'media' },
     { icon: Settings, label: 'Settings', href: '/admin/settings', key: 'settings' },
   ];
