@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, createFileRoute } from '@tanstack/react-router';
 import { getCourse } from '@/data/courses';
 import { saveCart } from '@/routes/api/save-cart';
+import { createApplicationFromCart } from '@/routes/api/create-application-from-cart';
 
 export const Route = createFileRoute('/cart')({
   component: CartPage,
@@ -10,6 +11,10 @@ export const Route = createFileRoute('/cart')({
 function CartPage() {
   const [items, setItems] = useState<any[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
+  const [showPhoneModal, setShowPhoneModal] = useState(false);
+  const [phone, setPhone] = useState('');
+  const [processingCheckout, setProcessingCheckout] = useState(false);
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   // Get userId from localStorage on mount
@@ -52,6 +57,74 @@ function CartPage() {
   function removeItem(slug: string) {
     setItems(prev => prev.filter(i => i.slug !== slug));
   }
+
+  const handleProceedCheckout = async () => {
+    try {
+      setError('');
+      
+      // Check if user is logged in
+      const isLoggedIn = typeof window !== 'undefined' ? localStorage.getItem('isLoggedIn') === 'true' : false;
+      if (!isLoggedIn) {
+        // Redirect to login
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('post_login_redirect', '/cart');
+          window.location.href = '/?auth=login';
+        }
+        return;
+      }
+
+      // Get user info from localStorage
+      const email = typeof window !== 'undefined' ? localStorage.getItem('email') : null;
+      const fullName = typeof window !== 'undefined' ? localStorage.getItem('full_name') : null;
+      const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
+
+      if (!email || !fullName) {
+        setError('User information not found. Please log in again.');
+        return;
+      }
+
+      // If no phone, show modal to ask for it
+      if (!phone.trim()) {
+        setShowPhoneModal(true);
+        return;
+      }
+
+      // Get first course from cart
+      if (items.length === 0) {
+        setError('Cart is empty');
+        return;
+      }
+
+      const firstCourse = items[0];
+      const courseName = firstCourse.title;
+
+      setProcessingCheckout(true);
+
+      // Create application
+      const result = await createApplicationFromCart({
+        data: {
+          email,
+          fullName,
+          phone: phone.trim(),
+          courseName,
+          userId: userId || undefined,
+        },
+      });
+
+      if (result.success && result.applicationId) {
+        // Calculate checkout total (Price + GST + Razorpay)
+        const checkoutTotal = Math.round(cartTotal + (cartTotal * 0.04));
+        
+        // Redirect to payment page
+        if (typeof window !== 'undefined') {
+          window.location.href = `/payment?applicationId=${result.applicationId}&amount=${checkoutTotal}`;
+        }
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to proceed to checkout');
+      setProcessingCheckout(false);
+    }
+  };
 
   const subtotal = items.reduce((s, it) => s + (Number(it.priceINR || 0) * (it.qty || 1)), 0);
 
@@ -103,14 +176,52 @@ function CartPage() {
             </div>
 
             <div className="mt-6 space-y-2">
-              <button onClick={() => {
-                if (typeof window !== 'undefined') {
-                  // Pass the checkout total (Price + GST + Razorpay) as amount
-                  window.location.href = `/apply?from=cart&amount=${Math.round(checkoutTotal)}`;
-                }
-              }} className="w-full px-4 py-3 bg-[#001f3f] text-white rounded font-semibold">Proceed to Checkout</button>
+              <button onClick={handleProceedCheckout} disabled={processingCheckout} className="w-full px-4 py-3 bg-[#001f3f] text-white rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
+                {processingCheckout ? 'Processing...' : 'Proceed to Checkout'}
+              </button>
             </div>
           </aside>
+        </div>
+      )}
+
+      {/* Phone Modal */}
+      {showPhoneModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
+            <h2 className="text-lg font-bold mb-4">Enter Your Phone Number</h2>
+            {error && (
+              <div className="bg-red-50 text-red-700 p-3 rounded mb-4 text-sm">
+                {error}
+              </div>
+            )}
+            <div className="space-y-4">
+              <input
+                type="tel"
+                placeholder="+91 XXXXXXXXXX"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setShowPhoneModal(false);
+                    setPhone('');
+                  }}
+                  className="flex-1 px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleProceedCheckout}
+                  disabled={!phone.trim() || processingCheckout}
+                  className="flex-1 px-4 py-2 bg-[#001f3f] text-white rounded-lg hover:bg-opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {processingCheckout ? 'Processing...' : 'Continue'}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
