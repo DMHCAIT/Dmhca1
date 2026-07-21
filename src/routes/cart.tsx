@@ -11,8 +11,6 @@ export const Route = createFileRoute('/cart')({
 function CartPage() {
   const [items, setItems] = useState<any[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
-  const [showPhoneModal, setShowPhoneModal] = useState(false);
-  const [phone, setPhone] = useState('');
   const [processingCheckout, setProcessingCheckout] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -77,15 +75,10 @@ function CartPage() {
       const email = typeof window !== 'undefined' ? localStorage.getItem('email') : null;
       const fullName = typeof window !== 'undefined' ? localStorage.getItem('full_name') : null;
       const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
+      const phone = typeof window !== 'undefined' ? localStorage.getItem('phone') || '' : '';
 
       if (!email || !fullName) {
         setError('User information not found. Please log in again.');
-        return;
-      }
-
-      // If no phone, show modal to ask for it
-      if (!phone.trim()) {
-        setShowPhoneModal(true);
         return;
       }
 
@@ -105,7 +98,7 @@ function CartPage() {
         data: {
           email,
           fullName,
-          phone: phone.trim(),
+          phone,
           courseName,
           userId: userId || undefined,
         },
@@ -181,47 +174,6 @@ function CartPage() {
               </button>
             </div>
           </aside>
-        </div>
-      )}
-
-      {/* Phone Modal */}
-      {showPhoneModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-            <h2 className="text-lg font-bold mb-4">Enter Your Phone Number</h2>
-            {error && (
-              <div className="bg-red-50 text-red-700 p-3 rounded mb-4 text-sm">
-                {error}
-              </div>
-            )}
-            <div className="space-y-4">
-              <input
-                type="tel"
-                placeholder="+91 XXXXXXXXXX"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <div className="flex gap-3">
-                <button
-                  onClick={() => {
-                    setShowPhoneModal(false);
-                    setPhone('');
-                  }}
-                  className="flex-1 px-4 py-2 border border-slate-300 rounded-lg hover:bg-slate-50 transition"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={handleProceedCheckout}
-                  disabled={!phone.trim() || processingCheckout}
-                  className="flex-1 px-4 py-2 bg-[#001f3f] text-white rounded-lg hover:bg-opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {processingCheckout ? 'Processing...' : 'Continue'}
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
       )}
     </div>

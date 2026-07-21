@@ -10,7 +10,7 @@ const supabase = createClient(
 const CreateApplicationSchema = z.object({
   email: z.string().email('Invalid email'),
   fullName: z.string().min(1, 'Full name required'),
-  phone: z.string().min(1, 'Phone required'),
+  phone: z.string().optional(),
   courseName: z.string().min(1, 'Course name required'),
   programName: z.string().optional(),
   userId: z.string().uuid().optional(),
