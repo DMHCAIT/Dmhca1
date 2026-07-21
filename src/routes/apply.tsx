@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseClient } from "@/lib/supabase";
+import { courses } from "@/data/courses";
+import { PaymentModal } from "@/components/PaymentModal";
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
@@ -27,6 +29,9 @@ function ApplicationForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [applicationData, setApplicationData] = useState<any>(null);
+  const [coursePrice, setCoursePrice] = useState(0);
 
   // Get course and program from query parameters
   useEffect(() => {
@@ -34,6 +39,7 @@ function ApplicationForm() {
       const params = new URLSearchParams(window.location.search);
       const courseParam = params.get("course");
       const programParam = params.get("program");
+      const fromParam = params.get("from");
       
       // Normalize program value: "Certificate" -> "Certificate Course"
       let normalizedProgram = programParam ? decodeURIComponent(programParam) : "";
@@ -46,6 +52,23 @@ function ApplicationForm() {
         course: courseParam ? decodeURIComponent(courseParam) : "",
         program: normalizedProgram,
       }));
+
+      // If coming from cart and no explicit course param, prefill from localStorage.cart
+      try {
+        if (!courseParam && fromParam === 'cart') {
+          const raw = localStorage.getItem('cart');
+          const parsed = raw ? JSON.parse(raw) : [];
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            // use first item to prefill program/course
+            const first = parsed[0];
+            const found = courses.find(c => c.slug === first.slug || c.title === first.title);
+            if (found) {
+              setFormData(prev => ({ ...prev, course: found.title, program: found.program || prev.program }));
+              setCoursePrice(found.priceINR || 0);
+            }
+          }
+        }
+      } catch (e) {}
     }
   }, []);
 
@@ -78,40 +101,75 @@ function ApplicationForm() {
         throw new Error("Phone number is required");
       }
 
-      // Save to database
-      const { error: dbError } = await supabaseClient
-        .from("applications")
-        .insert([
-          {
-            full_name: formData.fullName.trim(),
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            course_name: formData.course || null,
-            program_name: formData.program || null,
-            qualification: formData.qualification || null,
-            experience: formData.experience || null,
-            message: formData.message || null,
-            status: "new",
-          },
-        ]);
+      // Determine current user id (if logged in)
+      let currentUserId: string | null = null;
+      try {
+        const ls = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
+        if (ls) currentUserId = ls;
+        else {
+          const { data: authData } = await supabaseClient.auth.getUser();
+          if (authData?.user?.id) currentUserId = authData.user.id;
+        }
+      } catch (e) {
+        // ignore
+      }
 
-      if (dbError) throw dbError;
+      // Save to database - direct insert
+      console.log('[Apply] Attempting to save application', {
+        full_name: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        user_id: currentUserId,
+      });
 
-      setSubmitted(true);
-      // Reset form after successful submission
-      setTimeout(() => {
-        setFormData({
-          program: "",
-          course: "",
-          fullName: "",
-          email: "",
-          phone: "",
-          qualification: "",
-          experience: "",
-          message: "",
-        });
-        setSubmitted(false);
-      }, 5000);
+      // Build payload with only defined fields
+      const insertPayload: Record<string, any> = {
+        full_name: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        course_name: formData.course || null,
+        program_name: formData.program || null,
+        qualification: formData.qualification || null,
+        experience: formData.experience || null,
+        message: formData.message || null,
+        status: 'new',
+      };
+
+      // Only add user_id if authenticated
+      if (currentUserId) {
+        insertPayload.user_id = currentUserId;
+      }
+
+      const { data: insertedData, error: dbError } = await supabaseClient
+        .from('applications')
+        .insert([insertPayload])
+        .select();
+
+      console.log('[Apply] Insert result:', { insertedData, dbError });
+
+      if (dbError) {
+        const errorMsg = dbError?.message || JSON.stringify(dbError);
+        console.error('[Apply] Database error:', dbError);
+        setError(`Database Error: ${errorMsg}`);
+        return;
+      }
+
+      const appId = insertedData?.[0]?.id;
+
+      // Find course to get price
+      const course = courses.find(c => c.title === formData.course);
+      const price = course ? course.priceINR : 0;
+      
+      // Store application data and redirect to payment page with full amount (course + GST + Razorpay fee)
+      const gst = Math.round(price * 0.18);
+      const razorpayFee = Math.round(price * 0.04);
+      const totalAmount = price + gst + razorpayFee;
+      setApplicationData({ id: appId, ...formData, courseTitle: formData.course });
+      setCoursePrice(price);
+      // Redirect to payment page
+      if (typeof window !== 'undefined' && appId) {
+        window.location.href = `/payment?applicationId=${appId}&amount=${totalAmount}`;
+      }
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Failed to submit application"
@@ -382,6 +440,17 @@ function ApplicationForm() {
           )}
         </div>
       </div>
+
+      {/* Payment Modal */}
+      {applicationData && (
+        <PaymentModal
+          isOpen={showPaymentModal}
+          onClose={() => setShowPaymentModal(false)}
+          applicationData={applicationData}
+          amount={coursePrice}
+          courseName={applicationData.courseTitle}
+        />
+      )}
     </div>
   );
 }

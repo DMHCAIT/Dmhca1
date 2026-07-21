@@ -68,20 +68,29 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
     <div className="relative">
       <button
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="flex items-center gap-2 px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+        className="flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded-lg transition"
+        title="User Profile"
       >
-        <div className="flex flex-col items-start">
-          <span className="text-xs opacity-75">Profile</span>
-          <span className="text-sm font-medium">{enrollmentCount} enrolled</span>
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
+          <span className="text-sm font-bold text-white">
+            {(userName || userEmail)?.charAt(0).toUpperCase() || 'U'}
+          </span>
         </div>
         <ChevronDown className={`w-4 h-4 transition ${dropdownOpen ? "rotate-180" : ""}`} />
       </button>
 
       {dropdownOpen && (
         <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50 border border-border p-4">
-          <div className="mb-4 pb-4 border-b border-border">
-            <h3 className="font-semibold text-navy-deep">{userName || userEmail}</h3>
-            <p className="text-xs text-muted-foreground mt-1">{userEmail}</p>
+          <div className="mb-4 pb-4 border-b border-border flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
+              <span className="text-xl font-bold text-white">
+                {(userName || userEmail)?.charAt(0).toUpperCase() || 'U'}
+              </span>
+            </div>
+            <div>
+              <h3 className="font-semibold text-navy-deep">{userName || userEmail}</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">{userEmail}</p>
+            </div>
           </div>
 
           {loading ? (

@@ -1,8 +1,11 @@
 import React, { useState, useRef } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { CourseCard } from "./CourseCard";
+import { OTPLoginModal } from "../OTPLoginModal";
+import { SignupFlow } from "../SignupFlow";
 import { ArrowLeft, Star, BookOpen, Clock, Award, GraduationCap, Globe, FileCheck, ArrowUpRight } from "lucide-react";
 import { type Course } from "@/data/courses";
+import { saveCart } from "@/routes/api/save-cart";
 
 // Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
 const courseNameMapping: Record<string, string> = {
@@ -30,7 +33,61 @@ function getIBMCourseName(dmhcaTitle: string): string {
 }
 
 export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmount, totalPrice, formatINR, related }: { course: any; primaryCat: any; ptype: string; gstAmount: number; razorpayAmount: number; totalPrice: number; formatINR: (n:number)=>string; related: any[] }) {
+  const navigate = useNavigate();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [showSignupFlow, setShowSignupFlow] = useState(false);
+
+  const handleEnrollClick = () => {
+    // Check if user is logged in
+    if (typeof window !== 'undefined') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        // User is logged in, navigate to apply
+        navigate({
+          to: '/apply',
+          search: { program: course.program, course: getIBMCourseName(course.title) }
+        });
+      } else {
+        // User not logged in, show OTP modal
+        setShowOtpModal(true);
+      }
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setShowOtpModal(false);
+    // Add course to cart after successful login
+    if (typeof window !== 'undefined') {
+      const key = 'cart';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      const item = { slug: course.slug, title: course.title, priceINR: course.priceINR || course.price || 0, qty: 1 };
+      const found = existing.find((c: any) => c.slug === item.slug);
+      // Don't add if already in cart - limit to 1 per course
+      if (!found) {
+        existing.push(item);
+      }
+      localStorage.setItem(key, JSON.stringify(existing));
+      window.location.href = '/cart';
+    }
+  };
+
+  const handleSignupSuccess = () => {
+    setShowSignupFlow(false);
+    // Add course to cart after successful signup
+    if (typeof window !== 'undefined') {
+      const key = 'cart';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      const item = { slug: course.slug, title: course.title, priceINR: course.priceINR || course.price || 0, qty: 1 };
+      const found = existing.find((c: any) => c.slug === item.slug);
+      // Don't add if already in cart - limit to 1 per course
+      if (!found) {
+        existing.push(item);
+      }
+      localStorage.setItem(key, JSON.stringify(existing));
+      window.location.href = '/cart';
+    }
+  };
 
   // JSON-LD Schemas
   const courseSchema = {
@@ -616,13 +673,52 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                     
                     {/* CTAs */}
                     <div className="space-y-3">
-                      <Link 
-                        to="/apply"
-                        search={{ program: course.program, course: getIBMCourseName(course.title) }}
+                      <button
+                        onClick={() => {
+                          try {
+                            if (typeof window === 'undefined') return;
+                            
+                            // Check if user is logged in
+                            const token = localStorage.getItem('token');
+                            if (!token) {
+                              // Not authenticated - show signup modal on this page
+                              setShowSignupFlow(true);
+                              return;
+                            }
+                            
+                            // User is authenticated - add to cart
+                            const key = 'cart';
+                            const userId = localStorage.getItem('userId');
+                            const existing = JSON.parse(localStorage.getItem(key) || '[]');
+                            const item = { slug: course.slug, title: course.title, priceINR: course.priceINR || course.price || 0, qty: 1 };
+                            const found = existing.find((c: any) => c.slug === item.slug);
+                            
+                            if (found) {
+                              // Course already in cart - show alert
+                              alert('This course is already in your cart. You can only purchase one copy of each course.');
+                              return;
+                            }
+                            
+                            existing.push(item);
+                            localStorage.setItem(key, JSON.stringify(existing));
+                            
+                            // Save to database if user is logged in
+                            if (userId) {
+                              saveCart({ userId, cartItems: existing }).catch(err => {
+                                console.warn('Warning: Could not save cart to database:', err);
+                                // Continue even if database save fails
+                              });
+                            }
+                            
+                            window.location.href = '/cart';
+                          } catch (e) {
+                            console.error('Add to cart failed', e);
+                          }
+                        }}
                         className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-navy-deep to-navy hover:from-navy hover:to-navy-deep text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
                       >
-                        Enroll now
-                      </Link>
+                        Add to cart
+                      </button>
                       <Link 
                         to="/contact-us"
                         className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-navy-deep to-navy hover:from-navy hover:to-navy-deep text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
@@ -664,6 +760,27 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
         </div>
       </section>
 
+      {/* Signup Flow Modal */}
+      <SignupFlow 
+        isOpen={showSignupFlow} 
+        onClose={() => setShowSignupFlow(false)} 
+        onSuccess={handleSignupSuccess}
+        onSwitchToLogin={() => {
+          setShowSignupFlow(false);
+          setShowOtpModal(true);
+        }}
+      />
+
+      {/* OTP Login Modal */}
+      <OTPLoginModal 
+        isOpen={showOtpModal} 
+        onClose={() => setShowOtpModal(false)} 
+        onSuccess={handleLoginSuccess}
+        onSwitchToSignup={() => {
+          setShowOtpModal(false);
+          setShowSignupFlow(true);
+        }}
+      />
     </div>
   );
 }

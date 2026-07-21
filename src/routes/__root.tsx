@@ -8,6 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode, useState } from "react";
+import SignupFlow from "../components/SignupFlow";
 
 import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
@@ -87,18 +88,8 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   
-  // Modal state: show popin until user closes with X (persisted)
-  const [showPopin, setShowPopin] = useState(false);
 
-  // Load popin state from localStorage after hydration
-  useEffect(() => {
-    try {
-      const closed = localStorage.getItem("dmhca_popin_closed");
-      setShowPopin(closed !== "1");
-    } catch (e) {
-      setShowPopin(true);
-    }
-  }, []);
+  // Popin removed — no persistent modal shown on root
 
   // Cookie consent: null = not decided, "accept" or "deny"
   // Initialize to null to avoid hydration mismatch (load from localStorage in useEffect)
@@ -119,53 +110,62 @@ function RootComponent() {
     } catch (e) {}
   }, [cookieConsent]);
 
-  const closePopin = () => {
-    try { localStorage.setItem("dmhca_popin_closed", "1"); } catch (e) {}
-    setShowPopin(false);
-  };
+  function handleCookieConsent(choice: string) {
+    try { localStorage.setItem('dmhca_cookie_consent', choice); } catch (e) {}
+    setCookieConsent(choice);
+  }
+
+  // Show a root-level popin (SignupFlow) after 10s with blurred backdrop for 10s
+  const [showPopin, setShowPopin] = useState(false);
+  useEffect(() => {
+    try {
+      const closed = localStorage.getItem('dmhca_popin_closed');
+      if (closed === '1') return; // do not show again
+    } catch (e) {}
+
+    const openTimer = setTimeout(() => setShowPopin(true), 10000);
+    return () => clearTimeout(openTimer);
+  }, []);
+
+  useEffect(() => {
+    if (!showPopin) return;
+    const hideTimer = setTimeout(() => {
+      setShowPopin(false);
+      try { localStorage.setItem('dmhca_popin_closed', '1'); } catch (e) {}
+    }, 10000);
+    return () => clearTimeout(hideTimer);
+  }, [showPopin]);
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col">
+      <div className={`min-h-screen flex flex-col`}>
         <Header />
         <main className="flex-1"><Outlet /></main>
         <Footer />
 
-        {/* Persistent Popin Modal - shows until user clicks X */}
+        {/* Popin overlay */}
         {showPopin && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-3xl w-full mx-auto sm:mx-0 p-6 md:p-8 relative overflow-hidden border border-slate-100">
-              <button onClick={closePopin} aria-label="Close" className="absolute top-4 right-4 text-slate-600 hover:text-slate-900 text-2xl">✕</button>
-              <div className="flex flex-col gap-4">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-display text-on-hero-light mb-2">Need help finding a course?</h3>
-                  <p className="text-sm text-slate-600 mb-4">Call our admissions team at <a href="tel:+919899711530" className="text-on-hero-light font-semibold">+91 9899711530</a> or leave your details below and we'll contact you.</p>
-                </div>
-
-                <form className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input name="name" aria-label="Name" className="input-base" placeholder="Name" />
-                  <input name="mobile" aria-label="Mobile No" className="input-base" placeholder="Mobile No" />
-                  <input name="email" aria-label="Email" className="input-base sm:col-span-2" placeholder="Email" />
-                  <div className="sm:col-span-2 flex items-center gap-3">
-                    <button type="button" className="flex-1 bg-gradient-to-br from-navy-deep to-navy text-primary-foreground rounded-full py-3 font-semibold shadow-md">Submit</button>
-                    <button type="button" onClick={closePopin} className="px-4 py-2 border border-slate-200 rounded-md bg-white hover:bg-slate-50">Close</button>
-                  </div>
-                </form>
-              </div>
+          <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
+            <div className="relative z-10 w-full max-w-md mx-4">
+              <SignupFlow isOpen onClose={() => { setShowPopin(false); try { localStorage.setItem('dmhca_popin_closed','1') } catch(e){} }} />
             </div>
           </div>
         )}
 
         {/* Cookie banner fixed to bottom */}
         {cookieConsent === null && (
-          <div className="fixed left-0 right-0 bottom-0 z-40 bg-white border-t border-slate-200">
-            <div className="w-full bg-slate-50 px-4 md:px-8 py-3 flex items-center justify-between gap-4 rounded-none shadow-sm border-t border-slate-100">
-              <div className="flex-1 text-sm text-slate-700 max-w-4xl">
-                <div className="font-medium text-slate-900 mb-1">DMHCA uses cookies</div>
-                <div className="text-sm text-slate-600">DMHCA uses cookies to improve site performance, enhance user experience, and support the delivery of our online medical education services.</div>
+          <div className="fixed left-0 right-0 bottom-0 z-50 px-0">
+            <div className="w-full bg-white border-t border-gray-200 shadow-lg px-8 py-5 flex items-center justify-center">
+              <div className="max-w-6xl w-full flex items-center justify-between gap-6">
+                <div className="flex-1 text-sm text-slate-800">
+                <div className="font-semibold text-slate-900 mb-1">We respect your privacy</div>
+                <div className="text-sm text-slate-600 mb-2">We use cookies to personalise content, analyse traffic and improve your experience. By accepting, you agree to our use of cookies for analytics, personalization, and targeted content.</div>
+                <div className="text-xs text-slate-500">You can change your preference anytime from your browser settings. Read our <a href="/privacy-policy" className="text-navy-deep underline">Privacy Policy</a> for more information.</div>
               </div>
-                <div className="flex items-center gap-3 ml-4">
-                <button onClick={() => setCookieConsent("accept")} className="px-5 py-2 bg-gradient-to-br from-navy-deep to-navy text-primary-foreground rounded-full shadow-md">Accept</button>
-                <button onClick={() => setCookieConsent("deny")} className="px-4 py-2 border border-slate-200 rounded-full text-slate-700 bg-white">Deny</button>
+                <div className="flex items-center gap-3">
+                  <button onClick={() => handleCookieConsent("accept")} className="px-5 py-2 bg-navy-deep text-white">Accept</button>
+                  <button onClick={() => handleCookieConsent("deny")} className="px-5 py-2 border border-gray-300 text-slate-700 bg-white">Deny</button>
+                </div>
               </div>
             </div>
           </div>

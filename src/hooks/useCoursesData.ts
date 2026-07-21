@@ -50,17 +50,86 @@ export function useCoursesData() {
       const now = Date.now();
       const isCacheValid = coursesCache.data && (now - coursesCache.timestamp) < coursesCache.CACHE_DURATION;
 
+      // If cache is valid and not forcing refresh, return immediately
       if (isCacheValid && !forceRefresh) {
         setCourses(coursesCache.data!);
         setLoading(false);
         return coursesCache.data!;
       }
 
+      // If we have stale cache and not forcing refresh, return it immediately
+      // and refresh in background to avoid stalling the homepage
+      if (coursesCache.data && !forceRefresh) {
+        setCourses(coursesCache.data);
+        setLoading(false);
+        // Fire-and-forget refresh to update cache
+        (async () => {
+          try {
+            const { data: freshData, error: supabaseError } = await supabaseClient
+              .from('courses')
+              .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
+              .order('created_at', { ascending: false })
+              .limit(200);
+            if (!supabaseError && freshData) {
+              const processedCourses = (freshData || []).map((course: any) => {
+                let courseData = {};
+                if (course.testimonials && typeof course.testimonials === 'string') {
+                  try { courseData = JSON.parse(course.testimonials); } catch (e) {}
+                }
+                if (!courseData || Object.keys(courseData).length === 0) {
+                  if (course.data && typeof course.data === 'string') {
+                    try { courseData = JSON.parse(course.data); } catch (e) {}
+                  } else if (course.data) {
+                    courseData = course.data;
+                  }
+                }
+                const lessonsValue = (courseData as any).lessons || course.lessons;
+                const parsedLessons = lessonsValue ? Number(lessonsValue) : null;
+                return {
+                  ...course,
+                  id: course.id,
+                  slug: course.slug || (courseData as any).slug || '',
+                  title: course.title || (courseData as any).title || '',
+                  category: course.category || (courseData as any).category || '',
+                  categories: course.categories || [(courseData as any).category] || [],
+                  image: course.image_url || (courseData as any).image || '',
+                  program: (courseData as any).program || course.program || 'Certificate',
+                  priceINR: (courseData as any).priceINR || course.price || 0,
+                  months: (courseData as any).months || course.duration_weeks || 0,
+                  level: (courseData as any).level || '',
+                  lessons: parsedLessons,
+                  rating: (courseData as any).rating || course.rating || 0,
+                  reviewCount: (courseData as any).reviewCount || course.review_count || 0,
+                  overview: (courseData as any).overview || '',
+                  heroDescription: (courseData as any).heroDescription || '',
+                  learn: (courseData as any).learn || [],
+                  requirements: (courseData as any).requirements || [],
+                  modules: (courseData as any).modules || [],
+                  moduleDetails: (courseData as any).moduleDetails || [],
+                  faqs: (courseData as any).faqs || [],
+                  trainers: (courseData as any).trainers || [],
+                  reviews: (courseData as any).reviews || [],
+                  meta: (courseData as any).meta || {},
+                };
+              });
+              coursesCache.data = processedCourses;
+              coursesCache.timestamp = Date.now();
+              setCourses(processedCourses);
+            }
+          } catch (e) {
+            console.error('Background refresh failed', e);
+          }
+        })();
+        return coursesCache.data;
+      }
+
       setLoading(true);
+      // Only fetch the fields required for homepage listing to reduce payload
       const { data, error: supabaseError } = await supabaseClient
         .from('courses')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
+        .order('created_at', { ascending: false })
+        .limit(200);
 
       if (supabaseError) {
         throw new Error(supabaseError.message);

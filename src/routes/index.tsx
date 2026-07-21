@@ -1,4 +1,4 @@
-import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { ArrowUpRight, Star, StarHalf, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
@@ -6,6 +6,8 @@ const heroImg = "/herofellowshiplarge.webp";
 import { categories } from "@/data/courses";
 import { useCoursesData } from "@/hooks/useCoursesData";
 import { CourseCard } from "@/components/site/CourseCard";
+import { SignupFlow } from "@/components/SignupFlow";
+import { OTPLoginModal } from "@/components/OTPLoginModal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,9 +31,6 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: "https://dmhca.in/" },
-      { rel: "preload", as: "image", href: "/herofellowshiplarge.webp", imagesrcset: "/herofellowshiplarge.webp 1200w" },
-      { rel: "preload", as: "image", href: "/heropgdiplomalarge.webp", imagesrcset: "/heropgdiplomalarge.webp 1200w" },
-      { rel: "preload", as: "image", href: "/herocertificatelarge.webp", imagesrcset: "/herocertificatelarge.webp 1200w" },
       { rel: "prefetch", href: "/top-medical-courses" },
       { rel: "dns-prefetch", href: "https://cdn.jsdelivr.net" },
     ],
@@ -41,12 +40,28 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentFmt = (() => {
     try { const p = new URLSearchParams(location.search || '').get('fmt'); return p; } catch (e) { return null; }
   })();
   
   // Fetch courses dynamically from Supabase
-  const { courses } = useCoursesData();
+  const { courses, loading } = useCoursesData();
+  
+  // Auth modal states
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [signupEmail, setSignupEmail] = useState('');
+  
+  // Check if already logged in
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      setIsLoggedIn(loggedIn);
+    }
+  }, []);
   
   const [reviewIndex, setReviewIndex] = useState(0);
   const [slide, setSlide] = useState(0);
@@ -269,9 +284,42 @@ function Home() {
     }
   }), []);
 
+  const handleSignupSuccess = async (data) => {
+    setSignupEmail(data.email);
+    setShowSignupModal(false);
+    // Show OTP verification modal for signup completion
+    setShowOtpModal(true);
+  };
+
+  const handleLoginSuccess = (data) => {
+    setIsLoggedIn(true);
+    setShowLoginModal(false);
+    setShowOtpModal(false);
+    // Redirect to dashboard
+    setTimeout(() => {
+      navigate({ to: '/dashboard' });
+    }, 500);
+  };
+
   return (
     <div>
+      {/* Auth Modals */}
+      <SignupFlow 
+        isOpen={showSignupModal} 
+        onClose={() => setShowSignupModal(false)}
+        onSuccess={handleSignupSuccess}
+      />
+      <OTPLoginModal 
+        isOpen={showLoginModal || showOtpModal}
+        onClose={() => {
+          setShowLoginModal(false);
+          setShowOtpModal(false);
+        }}
+        onSuccess={handleLoginSuccess}
+      />
+
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      
       {/* Compact editorial hero (Asymmetric direction) */}
       <section className="site-hero" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
         {/* Decorative background elements */}
@@ -355,7 +403,7 @@ function Home() {
                 Explore Courses <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
               <div className="inline-flex items-center gap-2">
-                <Link to="/top-medical-courses" search={(() => { const s = new URLSearchParams(location.search || ''); s.set('fmt', slides[slide].program); return Object.fromEntries(s.entries()); })()} className="px-4 py-2 rounded-sm border border-border text-sm text-navy-deep hover:bg-gold/10 transition bg-navy-deep text-primary-foreground">
+                <Link to="/top-medical-courses" search={{ fmt: slides[slide].program }} className="px-4 py-2 rounded-sm border border-border text-sm text-navy-deep hover:bg-gold/10 transition bg-navy-deep text-primary-foreground">
                   {slides[slide].program}
                 </Link>
                   <div className="ml-2 inline-flex items-center gap-1">
@@ -380,7 +428,7 @@ function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
                   >
-                    <Link to="/top-medical-courses" search={(() => { const ss = new URLSearchParams(location.search || ''); ss.set('cat', s); return Object.fromEntries(ss.entries()); })()} className="text-white hover:text-gold transition">
+                    <Link to="/top-medical-courses" search={{ cat: s }} className="text-white hover:text-gold transition">
                       {categories.find(c => c.slug === s)?.name}
                     </Link>
                   </motion.div>
@@ -390,7 +438,7 @@ function Home() {
 
             {currentFmt ? (
               <div className="mt-4">
-                <Link to="/top-medical-courses" search={(() => { const s = new URLSearchParams(location.search || ''); if (currentFmt) s.set('fmt', currentFmt); return Object.fromEntries(s.entries()); })()} className="inline-block">
+                <Link to="/top-medical-courses" search={{ fmt: currentFmt }} className="inline-block">
                   <span className="inline-block bg-navy-deep text-primary-foreground px-3 py-1 rounded-full text-sm hover:opacity-95">Showing: {currentFmt}</span>
                 </Link>
               </div>
@@ -414,7 +462,7 @@ function Home() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   whileHover={{ scale: 1.02 }}
                 >
-                  <img src={slides[slide].blockImg} alt="DMHCA faculty" className="w-full h-auto object-cover object-top" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+                  <img loading="lazy" src={slides[slide].blockImg} alt="DMHCA faculty" className="w-full h-auto object-cover object-top" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 </motion.div>
               ) : null}
@@ -441,7 +489,7 @@ function Home() {
           {/* Mobile stacked image hidden on small screens per request */}
           <div className="col-span-12 hidden">
             <div className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep">
-              <img src={slides[slide].heroImg} alt="DMHCA faculty" className={`w-full h-auto object-cover object-center brightness-60`} onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+              <img loading="lazy" src={slides[slide].heroImg} alt="DMHCA faculty" className={`w-full h-auto object-cover object-center brightness-60`} onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
             </div>
           </div>
         </div>
@@ -476,6 +524,13 @@ function Home() {
           </div>
           <Link to="/top-medical-courses" className="text-sm text-navy-deep hover:text-gold">All categories →</Link>
         </div>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-44 rounded-2xl bg-card animate-pulse" />
+            ))}
+          </div>
+        ) : (
         <motion.div 
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
           initial="hidden"
@@ -541,6 +596,7 @@ function Home() {
                 >
                   {/* Background image with zoom effect */}
                   <motion.img 
+                    loading="lazy"
                     src={imageUrl} 
                     alt={category.name}
                     className="absolute inset-0 w-full h-full object-cover group-hover:brightness-110 transition-all duration-500"
@@ -567,6 +623,7 @@ function Home() {
             );
           })}
         </motion.div>
+        )}
         </div>
       </section>
 
@@ -580,9 +637,15 @@ function Home() {
           </div>
           <Link to="/top-medical-courses" className="text-sm text-on-hero-dark/90 hover:text-gold">View all courses →</Link>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featured.map((c) => <CourseCard key={c.slug} course={c} />)}
-        </div>
+        {loading ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-64 rounded-md bg-card animate-pulse" />)}
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featured.map((c) => <CourseCard key={c.slug} course={c} />)}
+          </div>
+        )}
         </div>
       </section>
 
@@ -635,7 +698,12 @@ function Home() {
           <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
             <button onClick={prevReviews} className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
             <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {displayedReviews.map((r) => (
+              {loading && (
+                Array.from({ length: reviewsPerPage }).map((_, i) => (
+                  <div key={i} className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl animate-pulse min-h-[6rem]" />
+                ))
+              )}
+              {!loading && displayedReviews.map((r) => (
                 <motion.div key={r.name} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl">
                   <div className="mb-3">
                     <div>

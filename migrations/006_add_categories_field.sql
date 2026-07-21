@@ -1,5 +1,3 @@
--- Add categories field to courses table
--- This column stores an array of category slugs for better filtering
 
 DO $$
 BEGIN
@@ -16,7 +14,13 @@ EXCEPTION WHEN others THEN
   NULL;
 END $$;
 
--- Create index on categories for better query performance
-CREATE INDEX IF NOT EXISTS idx_courses_categories ON courses USING GIN (categories);
+DO $$
+BEGIN
+  BEGIN
+    CREATE INDEX IF NOT EXISTS idx_courses_categories ON courses USING GIN (categories);
+  EXCEPTION WHEN others THEN
+    RAISE NOTICE 'Could not create GIN index on courses.categories: %', SQLERRM;
+  END;
+END$$;
 
 COMMIT;
