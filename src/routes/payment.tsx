@@ -16,6 +16,7 @@ function PaymentPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [showRazorpayFee, setShowRazorpayFee] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -192,8 +193,14 @@ function PaymentPage() {
                     <div className="grid grid-cols-2 gap-2 text-sm text-slate-600">
                       <div>Course Fee</div><div className="text-right">{formatINR(subtotal)}</div>
                       <div>GST (18%)</div><div className="text-right">{formatINR(gst)}</div>
-                      <div>Razorpay Fee (4%)</div><div className="text-right">{formatINR(razorpayFee)}</div>
-                      <div className="col-span-2 border-t mt-2 pt-2 flex justify-between font-bold">Total <div>{formatINR(total)}</div></div>
+                      {showRazorpayFee && (
+                        <>
+                          <div>Razorpay Fee (4%)</div><div className="text-right">{formatINR(razorpayFee)}</div>
+                        </>
+                      )}
+                      <div className="col-span-2 border-t mt-2 pt-2 flex justify-between font-bold">
+                        Total <div>{formatINR(showRazorpayFee ? total : subtotal + gst)}</div>
+                      </div>
                     </div>
                   </div>
 
@@ -209,7 +216,10 @@ function PaymentPage() {
               <div className="sticky top-6">
                 <h3 className="text-lg font-semibold mb-4">Pay Now</h3>
                 <div className="space-y-3">
-                  <button type="button" onClick={handleRazorpayUPI} onKeyDown={(e) => e.key === 'Enter' && handleRazorpayUPI()} tabIndex={0} aria-label="Pay with UPI/Card" data-test="pay-upi-card" className="w-full px-4 py-3 bg-[#001f3f] text-white rounded-md font-semibold z-50">Pay with UPI/Card</button>
+                  <button type="button" onClick={() => {
+                    setShowRazorpayFee(true);
+                    handleRazorpayUPI();
+                  }} onKeyDown={(e) => e.key === 'Enter' && handleRazorpayUPI()} tabIndex={0} aria-label="Pay with UPI/Card" data-test="pay-upi-card" className="w-full px-4 py-3 bg-[#001f3f] text-white rounded-md font-semibold z-50">Pay with UPI/Card</button>
                   <button type="button" onClick={() => {
                     const loanUrl = import.meta.env.VITE_LOAN_PARTNER_URL || process.env.VITE_LOAN_PARTNER_URL;
                     const q = new URLSearchParams({ applicationId: String(application?.id || ''), amount: String(total), name: application?.full_name || '', email: application?.email || '' }).toString();

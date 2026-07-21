@@ -28,6 +28,7 @@ function ApplicationForm() {
 
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [applicationData, setApplicationData] = useState<any>(null);
@@ -179,10 +180,13 @@ function ApplicationForm() {
       }
       
       setApplicationData({ id: appId, ...formData, courseTitle: formData.course });
-      // Redirect to payment page
-      if (typeof window !== 'undefined' && appId) {
-        window.location.href = `/payment?applicationId=${appId}&amount=${totalAmount}`;
-      }
+      setProcessing(true);
+      // Redirect to payment page after a brief delay
+      setTimeout(() => {
+        if (typeof window !== 'undefined' && appId) {
+          window.location.href = `/payment?applicationId=${appId}&amount=${totalAmount}`;
+        }
+      }, 1500);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Failed to submit application"
@@ -230,6 +234,14 @@ function ApplicationForm() {
               <p className="text-sm text-emerald-700">
                 Redirecting in 5 seconds...
               </p>
+            </div>
+          ) : processing ? (
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-slate-100 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
+                <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">Processing Application</h2>
+              <p className="text-slate-600">Redirecting to payment page...</p>
             </div>
           ) : (
             <form
