@@ -61,7 +61,8 @@ function CartPage() {
 
   const gst = subtotal * GST_RATE;
   const razorpayFee = subtotal * RAZORPAY_RATE;
-  const total = subtotal + gst + razorpayFee;
+  const cartTotal = subtotal + gst; // Cart shows only Price + GST
+  const checkoutTotal = subtotal + gst + razorpayFee; // Full amount for checkout
 
   return (
     <div className="container-x py-10">
@@ -96,16 +97,16 @@ function CartPage() {
           <aside className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm">
             <h3 className="text-lg font-bold mb-4">Order Summary</h3>
             <div className="text-sm text-slate-600 mb-4">Price <span className="float-right">₹ {subtotal.toLocaleString('en-IN')}</span></div>
-            <div className="text-sm text-slate-600 mb-2">GST (18%) <span className="float-right">₹ {Math.round(gst).toLocaleString('en-IN')}</span></div>
-            <div className="text-sm text-slate-600 mb-4">Razorpay Fee (4%) <span className="float-right">₹ {Math.round(razorpayFee).toLocaleString('en-IN')}</span></div>
+            <div className="text-sm text-slate-600 mb-4">GST (18%) <span className="float-right">₹ {Math.round(gst).toLocaleString('en-IN')}</span></div>
             <div className="border-t border-slate-200 pt-4 mt-4">
-              <div className="text-base text-slate-800 font-bold">Total <span className="float-right">₹ {Math.round(total).toLocaleString('en-IN')}</span></div>
+              <div className="text-base text-slate-800 font-bold">Total <span className="float-right">₹ {Math.round(cartTotal).toLocaleString('en-IN')}</span></div>
             </div>
 
             <div className="mt-6 space-y-2">
               <button onClick={() => {
                 if (typeof window !== 'undefined') {
-                  window.location.href = '/apply?from=cart';
+                  // Pass the checkout total (Price + GST + Razorpay) as amount
+                  window.location.href = `/apply?from=cart&amount=${Math.round(checkoutTotal)}`;
                 }
               }} className="w-full px-4 py-3 bg-[#001f3f] text-white rounded font-semibold">Proceed to Checkout</button>
             </div>

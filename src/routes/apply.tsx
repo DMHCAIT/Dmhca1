@@ -32,6 +32,7 @@ function ApplicationForm() {
   const [showPaymentModal, setShowPaymentModal] = useState(false);
   const [applicationData, setApplicationData] = useState<any>(null);
   const [coursePrice, setCoursePrice] = useState(0);
+  const [checkoutAmount, setCheckoutAmount] = useState<number | null>(null);
 
   // Get course and program from query parameters
   useEffect(() => {
@@ -40,6 +41,12 @@ function ApplicationForm() {
       const courseParam = params.get("course");
       const programParam = params.get("program");
       const fromParam = params.get("from");
+      const amountParam = params.get("amount");
+      
+      // Store amount from URL if coming from cart
+      if (amountParam) {
+        setCheckoutAmount(Number(amountParam));
+      }
       
       // Normalize program value: "Certificate" -> "Certificate Course"
       let normalizedProgram = programParam ? decodeURIComponent(programParam) : "";
@@ -156,16 +163,22 @@ function ApplicationForm() {
 
       const appId = insertedData?.[0]?.id;
 
-      // Find course to get price
-      const course = courses.find(c => c.title === formData.course);
-      const price = course ? course.priceINR : 0;
+      // Determine the amount to use for checkout
+      let totalAmount: number;
       
-      // Store application data and redirect to payment page with full amount (course + GST + Razorpay fee)
-      const gst = Math.round(price * 0.18);
-      const razorpayFee = Math.round(price * 0.04);
-      const totalAmount = price + gst + razorpayFee;
+      if (checkoutAmount) {
+        // Use the amount passed from cart
+        totalAmount = checkoutAmount;
+      } else {
+        // Calculate amount if not coming from cart
+        const course = courses.find(c => c.title === formData.course);
+        const price = course ? course.priceINR : 0;
+        const gst = Math.round(price * 0.18);
+        const razorpayFee = Math.round(price * 0.04);
+        totalAmount = price + gst + razorpayFee;
+      }
+      
       setApplicationData({ id: appId, ...formData, courseTitle: formData.course });
-      setCoursePrice(price);
       // Redirect to payment page
       if (typeof window !== 'undefined' && appId) {
         window.location.href = `/payment?applicationId=${appId}&amount=${totalAmount}`;
