@@ -13,6 +13,7 @@ export const Route = createFileRoute('/payment')({
 function PaymentPage() {
   const [application, setApplication] = useState<any>(null);
   const [amount, setAmount] = useState<number>(0);
+  const [basePrice, setBasePrice] = useState<number>(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
@@ -23,7 +24,12 @@ function PaymentPage() {
     const params = new URLSearchParams(window.location.search);
     const appId = params.get('applicationId');
     const amt = params.get('amount');
+    const basePriceParam = params.get('basePrice');
+    
     if (amt) setAmount(Number(amt));
+    if (basePriceParam) {
+      setBasePrice(Number(basePriceParam));
+    }
     if (appId) {
       (async () => {
         try {
@@ -158,8 +164,8 @@ function PaymentPage() {
   };
 
   const formatINR = (n:number) => '₹' + Math.round(n).toLocaleString('en-IN');
-  // Derive subtotal, gst and razorpay from provided total `amount`
-  const subtotal = Math.round(amount / (1 + 0.18 + 0.04)) || 0;
+  // Use basePrice if available, otherwise derive from amount
+  const subtotal = basePrice > 0 ? basePrice : Math.round(amount / (1 + 0.18 + 0.04)) || 0;
   const gst = Math.round(subtotal * 0.18) || 0;
   const razorpayFee = Math.round(subtotal * 0.04) || 0;
   const total = subtotal + gst + razorpayFee || 0;

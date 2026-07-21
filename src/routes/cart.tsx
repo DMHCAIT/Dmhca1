@@ -108,9 +108,9 @@ function CartPage() {
         // Calculate checkout total (Price + GST + Razorpay)
         const checkoutTotal = Math.round(cartTotal + (cartTotal * 0.04));
         
-        // Redirect to payment page
+        // Redirect to payment page with basePrice parameter
         if (typeof window !== 'undefined') {
-          window.location.href = `/payment?applicationId=${result.applicationId}&amount=${checkoutTotal}`;
+          window.location.href = `/payment?applicationId=${result.applicationId}&amount=${checkoutTotal}&basePrice=${subtotal}`;
         }
       }
     } catch (err) {
