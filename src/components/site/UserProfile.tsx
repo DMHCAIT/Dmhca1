@@ -49,10 +49,24 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
 
   const handleLogout = async () => {
     try {
+      // Clear all authentication data from localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('email');
+        localStorage.removeItem('full_name');
+        localStorage.removeItem('interests');
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('hasSignedUp');
+        sessionStorage.removeItem('signupData');
+      }
+      
       await supabaseClient.auth.signOut();
       window.location.href = "/";
     } catch (error) {
       console.error("Error signing out:", error);
+      // Still redirect even if signOut fails
+      window.location.href = "/";
     }
   };
 

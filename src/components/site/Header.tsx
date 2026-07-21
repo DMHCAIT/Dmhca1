@@ -144,10 +144,14 @@ export function Header() {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('email');
+    localStorage.removeItem('full_name');
+    localStorage.removeItem('interests');
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('hasSignedUp'); // Clear signup flag on logout
+    sessionStorage.removeItem('signupData');
     setIsLoggedIn(false);
     setHasSignedUp(false);
+    setFullName('');
     navigate({ to: '/' });
   };
 

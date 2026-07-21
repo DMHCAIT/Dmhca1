@@ -712,12 +712,12 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                             
                             window.location.href = '/cart';
                           } catch (e) {
-                            console.error('Add to cart failed', e);
+                            console.error('Add to study failed', e);
                           }
                         }}
                         className="w-full inline-flex justify-center items-center px-5 py-3 bg-gradient-to-r from-navy-deep to-navy hover:from-navy hover:to-navy-deep text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
                       >
-                        Add to cart
+                        Add to study
                       </button>
                       <Link 
                         to="/contact-us"
