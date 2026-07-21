@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { supabaseClient } from '@/lib/supabase';
+import { courses as staticCourses } from '@/data/courses';
 
 export interface CourseData {
   id: string;
@@ -36,6 +37,45 @@ const coursesCache = {
 };
 
 /**
+ * Merge static course data with Supabase data
+ * Static data provides lessons, months, and other details
+ * Supabase data can override with updates
+ */
+function mergeWithStaticData(supabaseCourse: any): CourseData {
+  // Find matching static course by title or slug
+  const staticCourse = staticCourses.find(
+    (c) => c.slug === supabaseCourse.slug || c.title === supabaseCourse.title
+  ) as any;
+
+  return {
+    id: supabaseCourse.id,
+    slug: supabaseCourse.slug || staticCourse?.slug || '',
+    title: supabaseCourse.title || staticCourse?.title || '',
+    category: supabaseCourse.category || staticCourse?.categories?.[0] || '',
+    categories: supabaseCourse.categories || staticCourse?.categories || [],
+    image: supabaseCourse.image_url || staticCourse?.image || '',
+    program: supabaseCourse.program || staticCourse?.program || 'Certificate',
+    priceINR: supabaseCourse.price || staticCourse?.priceINR || 0,
+    // Use static data for lessons and months as Supabase doesn't always have these
+    lessons: staticCourse?.lessons || null,
+    months: staticCourse?.months || 0,
+    level: supabaseCourse.level || staticCourse?.level || '',
+    rating: supabaseCourse.rating || staticCourse?.rating || null,
+    reviewCount: supabaseCourse.review_count || staticCourse?.reviewCount || 0,
+    overview: staticCourse?.overview || '',
+    heroDescription: staticCourse?.heroDescription || '',
+    learn: staticCourse?.learn || [],
+    requirements: staticCourse?.requirements || [],
+    modules: staticCourse?.modules || [],
+    moduleDetails: staticCourse?.moduleDetails,
+    faqs: staticCourse?.faqs || [],
+    trainers: staticCourse?.trainers,
+    reviews: staticCourse?.reviews,
+    meta: staticCourse?.meta || {},
+  };
+}
+
+/**
  * Hook to fetch courses from Supabase with intelligent caching
  * Falls back to static data if Supabase is unavailable
  */
@@ -70,48 +110,8 @@ export function useCoursesData() {
               .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
               .order('created_at', { ascending: false })
               .limit(200);
-            if (!supabaseError && freshData) {
-              const processedCourses = (freshData || []).map((course: any) => {
-                let courseData = {};
-                if (course.testimonials && typeof course.testimonials === 'string') {
-                  try { courseData = JSON.parse(course.testimonials); } catch (e) {}
-                }
-                if (!courseData || Object.keys(courseData).length === 0) {
-                  if (course.data && typeof course.data === 'string') {
-                    try { courseData = JSON.parse(course.data); } catch (e) {}
-                  } else if (course.data) {
-                    courseData = course.data;
-                  }
-                }
-                const lessonsValue = (courseData as any).lessons || course.lessons;
-                const parsedLessons = lessonsValue ? Number(lessonsValue) : null;
-                return {
-                  ...course,
-                  id: course.id,
-                  slug: course.slug || (courseData as any).slug || '',
-                  title: course.title || (courseData as any).title || '',
-                  category: course.category || (courseData as any).category || '',
-                  categories: course.categories || [(courseData as any).category] || [],
-                  image: course.image_url || (courseData as any).image || '',
-                  program: (courseData as any).program || course.program || 'Certificate',
-                  priceINR: (courseData as any).priceINR || course.price || 0,
-                  months: (courseData as any).months || course.duration_weeks || 0,
-                  level: (courseData as any).level || '',
-                  lessons: parsedLessons,
-                  rating: (courseData as any).rating || course.rating || 0,
-                  reviewCount: (courseData as any).reviewCount || course.review_count || 0,
-                  overview: (courseData as any).overview || '',
-                  heroDescription: (courseData as any).heroDescription || '',
-                  learn: (courseData as any).learn || [],
-                  requirements: (courseData as any).requirements || [],
-                  modules: (courseData as any).modules || [],
-                  moduleDetails: (courseData as any).moduleDetails || [],
-                  faqs: (courseData as any).faqs || [],
-                  trainers: (courseData as any).trainers || [],
-                  reviews: (courseData as any).reviews || [],
-                  meta: (courseData as any).meta || {},
-                };
-              });
+            if (!supabaseError && freshData && Array.isArray(freshData)) {
+              const processedCourses = freshData.map(mergeWithStaticData);
               coursesCache.data = processedCourses;
               coursesCache.timestamp = Date.now();
               setCourses(processedCourses);
@@ -135,61 +135,40 @@ export function useCoursesData() {
         throw new Error(supabaseError.message);
       }
 
-      const processedCourses = (data || []).map((course: any) => {
-        let courseData = {};
-
-        // Parse testimonials (fresh data from admin panel updates)
-        if (course.testimonials && typeof course.testimonials === 'string') {
-          try {
-            courseData = JSON.parse(course.testimonials);
-          } catch (e) {
-            console.warn(`Could not parse testimonials for course ${course.id}`);
-          }
-        }
-
-        // Fallback to data field if testimonials empty
-        if (!courseData || Object.keys(courseData).length === 0) {
-          if (course.data && typeof course.data === 'string') {
-            try {
-              courseData = JSON.parse(course.data);
-            } catch (e) {
-              console.warn(`Could not parse data for course ${course.id}`);
-            }
-          } else if (course.data) {
-            courseData = course.data;
-          }
-        }
-
-        const lessonsValue = (courseData as any).lessons || course.lessons;
-        const parsedLessons = lessonsValue ? Number(lessonsValue) : null;
-
-        return {
-          ...course,
-          id: course.id,
-          slug: course.slug || (courseData as any).slug || '',
-          title: course.title || (courseData as any).title || '',
-          category: course.category || (courseData as any).category || '',
-          categories: course.categories || [(courseData as any).category] || [],
-          image: course.image_url || (courseData as any).image || '',
-          program: (courseData as any).program || course.program || 'Certificate',
-          priceINR: (courseData as any).priceINR || course.price || 0,
-          months: (courseData as any).months || course.duration_weeks || 0,
-          level: (courseData as any).level || '',
-          lessons: parsedLessons,
-          rating: (courseData as any).rating || course.rating || 0,
-          reviewCount: (courseData as any).reviewCount || course.review_count || 0,
-          overview: (courseData as any).overview || '',
-          heroDescription: (courseData as any).heroDescription || '',
-          learn: (courseData as any).learn || [],
-          requirements: (courseData as any).requirements || [],
-          modules: (courseData as any).modules || [],
-          moduleDetails: (courseData as any).moduleDetails || [],
-          faqs: (courseData as any).faqs || [],
-          trainers: (courseData as any).trainers || [],
-          reviews: (courseData as any).reviews || [],
-          meta: (courseData as any).meta || {},
-        };
-      });
+      // If Supabase returns data, merge with static data; otherwise fall back to static data
+      let processedCourses: CourseData[];
+      
+      if (data && Array.isArray(data) && data.length > 0) {
+        processedCourses = data.map(mergeWithStaticData);
+      } else {
+        // Fall back to static courses data
+        console.warn('No courses from Supabase, using static data');
+        processedCourses = (staticCourses as any[]).map((course) => ({
+          id: course.slug,
+          slug: course.slug,
+          title: course.title,
+          category: course.categories?.[0] || '',
+          categories: course.categories || [],
+          image: course.image || '',
+          program: course.program || 'Certificate',
+          priceINR: course.priceINR || 0,
+          lessons: course.lessons || null,
+          months: course.months || 0,
+          level: course.level || '',
+          rating: course.rating || null,
+          reviewCount: course.reviewCount || 0,
+          overview: course.overview || '',
+          heroDescription: course.heroDescription || '',
+          learn: course.learn || [],
+          requirements: course.requirements || [],
+          modules: course.modules || [],
+          moduleDetails: course.moduleDetails,
+          faqs: course.faqs || [],
+          trainers: course.trainers,
+          reviews: course.reviews,
+          meta: course.meta || {},
+        }));
+      }
 
       // Update cache
       coursesCache.data = processedCourses;
@@ -203,8 +182,37 @@ export function useCoursesData() {
       console.error(errorMsg);
       setError(errorMsg);
       
-      // If Supabase fails, try to use cached data
-      if (coursesCache.data) {
+      // Fall back to static courses data if Supabase fails
+      if (!coursesCache.data) {
+        const staticCoursesData: CourseData[] = (staticCourses as any[]).map((course) => ({
+          id: course.slug,
+          slug: course.slug,
+          title: course.title,
+          category: course.categories?.[0] || '',
+          categories: course.categories || [],
+          image: course.image || '',
+          program: course.program || 'Certificate',
+          priceINR: course.priceINR || 0,
+          lessons: course.lessons || null,
+          months: course.months || 0,
+          level: course.level || '',
+          rating: course.rating || null,
+          reviewCount: course.reviewCount || 0,
+          overview: course.overview || '',
+          heroDescription: course.heroDescription || '',
+          learn: course.learn || [],
+          requirements: course.requirements || [],
+          modules: course.modules || [],
+          moduleDetails: course.moduleDetails,
+          faqs: course.faqs || [],
+          trainers: course.trainers,
+          reviews: course.reviews,
+          meta: course.meta || {},
+        }));
+        coursesCache.data = staticCoursesData;
+        coursesCache.timestamp = Date.now();
+        setCourses(staticCoursesData);
+      } else if (coursesCache.data) {
         setCourses(coursesCache.data);
       }
       
