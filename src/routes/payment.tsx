@@ -84,8 +84,8 @@ function PaymentPage() {
       const studentName = application.full_name || '';
       const studentEmail = application.email || '';
 
-      const sendAmount = amount && amount > 0 ? amount : total;
-      const numericAmount = Number(sendAmount || 0);
+      // Always use the calculated total (which accounts for basePrice if available)
+      const numericAmount = Number(total || 0);
 
       console.log('[Payment] Creating Razorpay order with:', {
         amount: numericAmount,
