@@ -23,7 +23,7 @@ export function Footer() {
             Accessible online medical education, accredited certificates, and advanced fellowships — delivered by faculty from leading institutions worldwide.
           </p>
           <div className="mt-4 md:mt-6 space-y-1.5 md:space-y-2 text-xs md:text-sm text-primary-foreground/80">
-            <div className="flex items-center gap-2"><Phone className="w-3 h-3 md:w-4 md:h-4 text-gold flex-shrink-0" /> <span>+91 70420 11441</span></div>
+            <div className="flex items-center gap-2"><Phone className="w-3 h-3 md:w-4 md:h-4 text-gold flex-shrink-0" /> <span>+91 9899711530</span></div>
             <div className="flex items-center gap-2"><Mail className="w-3 h-3 md:w-4 md:h-4 text-gold flex-shrink-0" /> <span>info@dmhca.in</span></div>
             <div className="flex items-start gap-2"><MapPin className="w-3 h-3 md:w-4 md:h-4 text-gold mt-0.5 flex-shrink-0" /> <span>New Delhi, India</span></div>
           </div>
