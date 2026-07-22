@@ -53,6 +53,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "7VDMum1M_bzr1C1UZ2zwIAJ8V1F1pxLDk0qOzO_xAGQ" },
       { title: "DMHCA - Top Institute For Medical Courses" },
       { name: "description", content: "Accredited online medical fellowships, PG diplomas, and certificate programs across 10+ specialties." },
       { property: "og:title", content: "DMHCA - Top Institute For Medical Courses" },
