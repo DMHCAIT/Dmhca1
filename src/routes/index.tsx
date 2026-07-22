@@ -469,16 +469,16 @@ function Home() {
               
               {/* Floating stat card */}
               <motion.div 
-                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white dark:bg-slate-900 p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
+                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 whileHover={{ y: -5 }}
               >
                 <div>
-                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy dark:text-white mb-1 stat-label">Active Learners</p>
-                  <p className="text-xl sm:text-2xl text-navy dark:text-white font-bold stat-number">42,000<span className="text-gold">+</span></p>
-                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy dark:text-slate-100">
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
+                  <p className="text-xl sm:text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
+                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy dark:text-gray-600">
                     <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-gold text-gold" />
                     <span className="ml-1 font-medium">4.8 / 5</span>
                   </div>
