@@ -114,7 +114,7 @@ function BlogPost() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       {/* Hero Section */}
       <section className="site-hero relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/10 to-blue-600/10"></div>
@@ -271,15 +271,15 @@ function BlogPost() {
             {/* FAQs Section */}
             <section className="mt-12">
               <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-8">Frequently Asked Questions</h2>
                 <div className="space-y-4">
                   {faqs.map((faq, index) => (
-                    <div key={index} className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-indigo-300 transition">
+                    <div key={index} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-slate-500 transition">
                       <button
                         onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                        className="w-full flex items-center justify-between p-6 hover:bg-indigo-50 transition text-left"
+                        className="w-full flex items-center justify-between p-6 hover:bg-indigo-50 dark:hover:bg-slate-700 transition text-left"
                       >
-                        <h3 className="font-semibold text-gray-800 pr-4 text-lg">{faq.question}</h3>
+                        <h3 className="font-semibold text-gray-800 dark:text-slate-100 pr-4 text-lg">{faq.question}</h3>
                         <ChevronDown
                           size={20}
                           className={`flex-shrink-0 text-indigo-600 transition-transform ${
@@ -288,8 +288,8 @@ function BlogPost() {
                         />
                       </button>
                       {expandedFaq === index && (
-                        <div className="px-6 py-6 bg-indigo-50 border-t border-gray-200">
-                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                        <div className="px-6 py-6 bg-indigo-50 dark:bg-slate-700 border-t border-gray-200 dark:border-slate-600">
+                          <p className="text-gray-700 dark:text-slate-300 leading-relaxed">{faq.answer}</p>
                         </div>
                       )}
                     </div>
@@ -301,18 +301,18 @@ function BlogPost() {
             {/* Comments Section */}
             <section className="mt-12">
               <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Share Your Thoughts</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-8">Share Your Thoughts</h2>
                 
                 {/* Comment Form */}
-                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-indigo-50 to-blue-50 p-8 rounded-xl border border-indigo-200">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-6">Leave a Comment</h3>
+                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-slate-800 dark:to-slate-800 p-8 rounded-xl border border-indigo-200 dark:border-slate-700">
+                  <h3 className="text-lg font-semibold text-gray-800 dark:text-slate-100 mb-6">Leave a Comment</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <input
                       type="text"
                       placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                      className="px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 dark:focus:ring-indigo-500 focus:border-transparent"
                       required
                     />
                     <input
@@ -320,7 +320,7 @@ function BlogPost() {
                       placeholder="Your Email"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                      className="px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 dark:focus:ring-indigo-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -328,13 +328,13 @@ function BlogPost() {
                     placeholder="Share your thoughts, questions, or experiences..."
                     value={formData.comment}
                     onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent mb-4"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600 dark:focus:ring-indigo-500 focus:border-transparent mb-4"
                     rows={4}
                     required
                   ></textarea>
                   <button
                     type="submit"
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg transition shadow-md hover:shadow-lg"
+                    className="bg-indigo-600 dark:bg-indigo-700 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white dark:text-white font-semibold px-8 py-3 rounded-lg transition shadow-md hover:shadow-lg"
                   >
                     Post Comment
                   </button>
@@ -343,17 +343,17 @@ function BlogPost() {
                 {/* Comments Display */}
                 {comments.length > 0 && (
                   <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-800">Comments ({comments.length})</h3>
+                    <h3 className="text-xl font-semibold text-gray-800 dark:text-slate-100">Comments ({comments.length})</h3>
                     {comments.map((comment, index) => (
-                      <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 hover:border-indigo-300 transition">
+                      <div key={index} className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-gray-200 dark:border-slate-700 hover:border-indigo-300 dark:hover:border-slate-500 transition">
                         <div className="flex items-start justify-between mb-4">
                           <div>
-                            <p className="font-semibold text-gray-900">{comment.name}</p>
-                            <p className="text-sm text-gray-600">{comment.email}</p>
+                            <p className="font-semibold text-gray-900 dark:text-slate-100">{comment.name}</p>
+                            <p className="text-sm text-gray-600 dark:text-slate-400">{comment.email}</p>
                           </div>
-                          <p className="text-sm text-gray-500 whitespace-nowrap">{comment.date}</p>
+                          <p className="text-sm text-gray-500 dark:text-slate-400 whitespace-nowrap">{comment.date}</p>
                         </div>
-                        <p className="text-gray-700 leading-relaxed">{comment.text}</p>
+                        <p className="text-gray-700 dark:text-slate-300 leading-relaxed">{comment.text}</p>
                       </div>
                     ))}
                   </div>
@@ -393,9 +393,9 @@ function BlogPost() {
               </div>
 
               {/* Related Info Box */}
-              <div className="bg-indigo-50 rounded-xl p-6 border border-indigo-200">
-                <h4 className="font-semibold text-gray-900 mb-4">💡 Pro Tip</h4>
-                <p className="text-sm text-gray-700">Radiology is one of the highest-paying medical specialties with exceptional career prospects. The specialty combines clinical importance, technological advancement, and excellent income potential, making it an ideal choice for ambitious physicians.</p>
+              <div className="bg-indigo-50 dark:bg-slate-800 rounded-xl p-6 border border-indigo-200 dark:border-slate-700">
+                <h4 className="font-semibold text-gray-900 dark:text-slate-100 mb-4">💡 Pro Tip</h4>
+                <p className="text-sm text-gray-700 dark:text-slate-300">Radiology is one of the highest-paying medical specialties with exceptional career prospects. The specialty combines clinical importance, technological advancement, and excellent income potential, making it an ideal choice for ambitious physicians.</p>
               </div>
             </div>
           </div>

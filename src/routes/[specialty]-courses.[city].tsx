@@ -35,9 +35,9 @@ function CityWiseCoursePage() {
 
   if (filteredCourses.length === 0) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-slate-900">
         <div className="text-center max-w-md">
-          <h1 className="text-4xl font-bold text-slate-900 mb-4">404</h1>
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4">404</h1>
           <p className="text-slate-600 mb-8">
             Sorry, we couldn't find {specialtyFormatted} courses in {cityFormatted}.
           </p>
@@ -53,7 +53,7 @@ function CityWiseCoursePage() {
   }
 
   return (
-    <div>
+    <div className="dark:bg-slate-900">
       {/* Hero Section - Matching Specialty Pages */}
       <section className="site-hero">
         <div className="container-x">
@@ -126,9 +126,9 @@ function FAQsSection({
   ];
 
   return (
-    <section className="py-16 bg-slate-50">
+    <section className="py-16 bg-slate-50 dark:bg-slate-800">
       <div className="container-x max-w-3xl">
-        <h2 className="font-display text-3xl text-navy-deep mb-8">
+        <h2 className="font-display text-3xl text-navy-deep dark:text-slate-100 mb-8">
           Frequently Asked Questions
         </h2>
         <div className="space-y-4">
@@ -151,18 +151,18 @@ function FAQItem({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border rounded-lg overflow-hidden bg-white hover:shadow-md transition-shadow">
+    <div className="border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden bg-white dark:bg-slate-800 hover:shadow-md dark:hover:shadow-lg transition-shadow">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition text-left"
+        className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50 dark:hover:bg-slate-700 transition text-left"
       >
-        <span className="text-base font-bold text-slate-900">{question}</span>
-        <span className="text-slate-600 flex-shrink-0 ml-4 text-xl">
+        <span className="text-base font-bold text-slate-900 dark:text-slate-100">{question}</span>
+        <span className="text-slate-600 dark:text-slate-400 flex-shrink-0 ml-4 text-xl">
           {open ? "−" : "+"}
         </span>
       </button>
       {open && (
-        <div className="px-6 py-4 bg-slate-50 text-slate-700 text-sm leading-relaxed border-t border-slate-200">
+        <div className="px-6 py-4 bg-slate-50 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-sm leading-relaxed border-t border-slate-200 dark:border-slate-600">
           {answer}
         </div>
       )}

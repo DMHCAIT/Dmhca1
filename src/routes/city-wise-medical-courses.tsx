@@ -39,15 +39,15 @@ function CityWiseMedicalCourses() {
   }, []);
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white dark:bg-slate-900 min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 py-12">
+      <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 py-12">
         <div className="container-home">
           <div className="max-w-4xl mx-auto">
             <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
               List of Medical Courses City Wise
             </h1>
-            <p className="text-lg text-slate-300">
+            <p className="text-lg text-slate-300 dark:text-slate-400">
               Explore medical specialization courses available across different
               cities in India. Find the perfect course location for your medical
               career.
@@ -60,24 +60,24 @@ function CityWiseMedicalCourses() {
       <div className="container-home py-16">
         <div className="max-w-6xl mx-auto">
           {/* Table of Contents */}
-          <div className="bg-slate-50 rounded-lg p-8 mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">What's on This Page</h2>
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-8 mb-12 border border-slate-200 dark:border-slate-700">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">What's on This Page</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">City-Wise Courses</h3>
-                <p className="text-sm text-slate-600">
+                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">City-Wise Courses</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
                   Medical courses grouped by specialty across different Indian cities
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Course Categories</h3>
-                <p className="text-sm text-slate-600">
+                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">Course Categories</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
                   Browse by medical specialty: Cardiology, Radiology, Surgery, and more
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 mb-2">Events & Webinars</h3>
-                <p className="text-sm text-slate-600">
+                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">Events & Webinars</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
                   Upcoming workshops, seminars, and educational events from DMHCA
                 </p>
               </div>
@@ -87,18 +87,18 @@ function CityWiseMedicalCourses() {
           {/* Section 1: Specialty Sections (City-Wise) */}
           <section className="mb-20">
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-slate-900 mb-2">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                 📍 City-Wise Medical Courses
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
-              <p className="text-slate-600 mt-3">Explore specialized medical courses available in different cities across India</p>
+              <p className="text-slate-600 dark:text-slate-400 mt-3">Explore specialized medical courses available in different cities across India</p>
             </div>
 
             <div className="space-y-16">
               {specialties.map((specialty) => (
                 <div key={specialty} className="scroll-mt-32">
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-2 capitalize">
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2 capitalize">
                       {specialty} Courses by City
                     </h3>
                     <div className="w-12 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
@@ -110,20 +110,20 @@ function CityWiseMedicalCourses() {
                       <Link
                         key={course.slug}
                         to={`/${course.slug}/`}
-                        className="group bg-white border border-slate-200 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 transition-all duration-300"
+                        className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-500 transition-all duration-300"
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-bold text-slate-900 group-hover:text-navy-deep transition">
+                          <h4 className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-navy-deep dark:group-hover:text-slate-50 transition">
                             {specialty} in {course.city}
                           </h4>
-                          <span className="text-slate-400 group-hover:text-navy-deep transition">
+                          <span className="text-slate-400 dark:text-slate-500 group-hover:text-navy-deep dark:group-hover:text-slate-300 transition">
                             →
                           </span>
                         </div>
-                        <p className="text-sm text-slate-600 mb-3">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
                           {course.description}
                         </p>
-                        <div className="text-xs font-semibold text-navy-deep">
+                        <div className="text-xs font-semibold text-navy-deep dark:text-slate-200">
                           Learn more
                         </div>
                       </Link>
@@ -135,13 +135,13 @@ function CityWiseMedicalCourses() {
           </section>
 
           {/* Section 2: Course Categories */}
-          <section className="mb-20 pt-12 border-t border-slate-200">
+          <section className="mb-20 pt-12 border-t border-slate-200 dark:border-slate-700">
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-slate-900 mb-2">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                 📚 Course Categories
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded"></div>
-              <p className="text-slate-600 mt-3">Browse medical specializations with {courses.length} professional courses available</p>
+              <p className="text-slate-600 dark:text-slate-400 mt-3">Browse medical specializations with {courses.length} professional courses available</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -149,19 +149,19 @@ function CityWiseMedicalCourses() {
                 <Link
                   key={category.slug}
                   to={`/top-medical-courses#${category.slug}`}
-                  className="group bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-300"
+                  className="group bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-400 transition-all duration-300"
                 >
-                  <h3 className="font-bold text-lg text-slate-900 group-hover:text-blue-600 transition mb-2">
+                  <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition mb-2">
                     {category.name}
                   </h3>
-                  <p className="text-sm text-slate-600 mb-4">
+                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
                     {category.tagline}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-slate-600">
+                    <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">
                       {category.courseCount} course{category.courseCount !== 1 ? 's' : ''}
                     </span>
-                    <span className="text-blue-600 group-hover:translate-x-1 transition">
+                    <span className="text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition">
                       →
                     </span>
                   </div>
@@ -171,13 +171,13 @@ function CityWiseMedicalCourses() {
           </section>
 
           {/* Section 3: Events & Webinars */}
-          <section className="mb-20 pt-12 border-t border-slate-200">
+          <section className="mb-20 pt-12 border-t border-slate-200 dark:border-slate-700">
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-slate-900 mb-2">
+              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
                 🎓 Events & Webinars
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded"></div>
-              <p className="text-slate-600 mt-3">Join our upcoming workshops, seminars, and educational events</p>
+              <p className="text-slate-600 dark:text-slate-400 mt-3">Join our upcoming workshops, seminars, and educational events</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -185,7 +185,7 @@ function CityWiseMedicalCourses() {
                 <Link
                   key={event.id}
                   to={`/events/${event.slug}`}
-                  className="group bg-white border border-slate-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
+                  className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
                 >
                   <div className="h-40 bg-slate-200 overflow-hidden">
                     <img
@@ -195,7 +195,7 @@ function CityWiseMedicalCourses() {
                     />
                   </div>
                   <div className="p-4">
-                    <h3 className="font-bold text-slate-900 group-hover:text-purple-600 transition mb-2 line-clamp-2">
+                    <h3 className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition mb-2 line-clamp-2">
                       {event.title}
                     </h3>
                     <div className="space-y-2 text-sm text-slate-600">

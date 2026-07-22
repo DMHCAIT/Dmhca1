@@ -10,14 +10,14 @@ function EventsIndexPage() {
   const events = getAllEvents();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background dark:bg-slate-900">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-navy-deep to-navy py-16">
+      <div className="bg-gradient-to-r from-navy-deep to-navy dark:from-slate-800 dark:to-slate-900 py-16">
         <div className="container-x">
           <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">
             Events & Webinars
           </h1>
-          <p className="text-lg text-blue-100 max-w-2xl">
+          <p className="text-lg text-blue-100 dark:text-slate-300 max-w-2xl">
             Join us for insightful events, webinars, and workshops featuring expert speakers from across the medical field.
           </p>
         </div>
@@ -30,7 +30,7 @@ function EventsIndexPage() {
             <Link
               key={event.id}
               to={`/simple-event/${event.slug}`}
-              className="group overflow-hidden rounded-lg border border-border bg-card hover:border-navy-deep transition-all duration-300 hover:shadow-lg"
+              className="group overflow-hidden rounded-lg border border-border dark:border-slate-700 bg-card dark:bg-slate-800 hover:border-navy-deep dark:hover:border-slate-500 transition-all duration-300 hover:shadow-lg"
             >
               <div className="aspect-video overflow-hidden bg-muted">
                 <img
@@ -43,13 +43,13 @@ function EventsIndexPage() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-display font-semibold text-lg text-foreground mb-2 group-hover:text-navy-deep transition line-clamp-2">
+                <h3 className="font-display font-semibold text-lg text-foreground dark:text-slate-100 mb-2 group-hover:text-navy-deep dark:group-hover:text-slate-50 transition line-clamp-2">
                   {event.title}
                 </h3>
-                <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                <p className="text-sm text-muted-foreground dark:text-slate-400 mb-4 line-clamp-2">
                   {event.shortDescription}
                 </p>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-4 text-sm text-muted-foreground dark:text-slate-400">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
                     <span>{event.date}</span>

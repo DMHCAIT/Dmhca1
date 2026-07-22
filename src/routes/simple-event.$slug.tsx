@@ -32,7 +32,7 @@ function EventDetailPage() {
   const relatedEvents = allEvents.filter((e) => e.id !== event.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background dark:bg-slate-900">
       {/* Breadcrumb */}
       <div className="bg-background border-b border-border/30">
         <div className="container-x py-3 text-sm">

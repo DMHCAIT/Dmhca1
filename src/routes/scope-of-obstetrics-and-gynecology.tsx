@@ -114,7 +114,7 @@ function BlogPost() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       {/* Hero Section */}
       <section className="site-hero relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-pink-600/10 to-rose-600/10"></div>
@@ -271,10 +271,10 @@ function BlogPost() {
             {/* FAQs Section */}
             <section className="mt-12">
               <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-8">Frequently Asked Questions</h2>
                 <div className="space-y-4">
                   {faqs.map((faq, index) => (
-                    <div key={index} className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-pink-300 transition">
+                    <div key={index} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-pink-300 dark:hover:border-slate-500 transition">
                       <button
                         onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
                         className="w-full flex items-center justify-between p-6 hover:bg-pink-50 transition text-left"
@@ -304,7 +304,7 @@ function BlogPost() {
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">Share Your Thoughts</h2>
                 
                 {/* Comment Form */}
-                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-pink-50 to-rose-50 p-8 rounded-xl border border-pink-200">
+                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-pink-50 to-rose-50 dark:from-slate-800 dark:to-slate-800 p-8 rounded-xl border border-pink-200 dark:border-slate-700">
                   <h3 className="text-lg font-semibold text-gray-800 mb-6">Leave a Comment</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <input
@@ -312,7 +312,7 @@ function BlogPost() {
                       placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent"
+                      className="px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 dark:focus:ring-pink-500 focus:border-transparent"
                       required
                     />
                     <input
@@ -320,7 +320,7 @@ function BlogPost() {
                       placeholder="Your Email"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent"
+                      className="px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 dark:focus:ring-pink-500 focus:border-transparent"
                       required
                     />
                   </div>
@@ -328,7 +328,7 @@ function BlogPost() {
                     placeholder="Share your thoughts, questions, or experiences..."
                     value={formData.comment}
                     onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 focus:border-transparent mb-4"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 dark:focus:ring-pink-500 focus:border-transparent mb-4"
                     rows={4}
                     required
                   ></textarea>

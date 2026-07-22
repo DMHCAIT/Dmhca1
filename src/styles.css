@@ -66,6 +66,34 @@
   --ring: var(--navy);
 }
 
+/* Dark mode colors */
+.dark {
+  --navy-deep: oklch(0.35 0.08 260);
+  --navy: oklch(0.45 0.10 260);
+  --gold: oklch(0.85 0.14 75);
+  --ink: oklch(0.92 0.02 250);
+
+  --background: oklch(0.15 0.02 260);
+  --foreground: oklch(0.92 0.02 250);
+  --card: oklch(0.22 0.025 260);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.22 0.025 260);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.35 0.08 260);
+  --primary-foreground: oklch(0.92 0.02 250);
+  --secondary: oklch(0.25 0.015 260);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.30 0.02 260);
+  --muted-foreground: oklch(0.60 0.015 260);
+  --accent: oklch(0.28 0.015 260);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.65 0.22 27);
+  --destructive-foreground: oklch(0.15 0.02 260);
+  --border: oklch(0.30 0.02 260);
+  --input: oklch(0.25 0.015 260);
+  --ring: var(--navy);
+}
+
 @layer base {
   * { border-color: var(--color-border); }
   html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -75,14 +103,72 @@
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
     font-size: 16px; /* increased slightly for better readability */
+    transition: background-color 200ms ease, color 200ms ease;
   }
   img {
     max-width: 100%;
     height: auto;
     display: block;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: 0; font-weight: 500; }
+  h1, h2, h3, h4 { 
+    font-family: var(--font-display); 
+    letter-spacing: 0; 
+    font-weight: 500;
+    color: inherit;
+  }
+  
+  /* Ensure all text elements in dark mode use the correct foreground color */
+  .dark h1, .dark h2, .dark h3, .dark h4,
+  .dark p, .dark span, .dark div, .dark label,
+  .dark button, .dark a {
+    color: var(--foreground);
+  }
 }
+
+/* Override text colors in dark mode - convert dark text to light text */
+.dark .text-slate-950 { color: oklch(0.92 0.02 250) !important; }
+.dark .text-slate-900 { color: oklch(0.92 0.02 250) !important; }
+.dark .text-slate-800 { color: oklch(0.85 0.02 250) !important; }
+.dark .text-slate-700 { color: oklch(0.78 0.02 250) !important; }
+.dark .text-gray-900 { color: oklch(0.92 0.02 250) !important; }
+.dark .text-gray-800 { color: oklch(0.85 0.02 250) !important; }
+.dark .text-gray-700 { color: oklch(0.78 0.02 250) !important; }
+.dark .text-black { color: oklch(0.92 0.02 250) !important; }
+.dark .text-slate-600 { color: oklch(0.65 0.02 250) !important; }
+.dark .text-gray-600 { color: oklch(0.65 0.02 250) !important; }
+.dark .text-navy { color: white !important; }
+.dark .stat-label { color: white !important; }
+.dark .stat-number { color: white !important; }
+.dark .stat-card { background-color: oklch(0.22 0.025 260) !important; }
+.dark .text-white { color: white !important; }
+.dark .text-slate-100 { color: oklch(0.95 0.01 250) !important; }
+
+/* Override background colors in dark mode */
+.dark .bg-white { @apply dark:bg-slate-900; }
+.dark .bg-gray-50 { @apply dark:bg-slate-800; }
+.dark .bg-gray-100 { @apply dark:bg-slate-800; }
+.dark .bg-gray-200 { @apply dark:bg-slate-700; }
+.dark .bg-blue-50 { @apply dark:bg-slate-900; }
+.dark .bg-red-50 { @apply dark:bg-slate-900; }
+.dark .bg-green-50 { @apply dark:bg-slate-900; }
+.dark .bg-indigo-50 { @apply dark:bg-slate-900; }
+
+/* Override border colors in dark mode */
+.dark .border-gray-200 { @apply dark:border-slate-700; }
+.dark .border-gray-300 { @apply dark:border-slate-700; }
+.dark .border-slate-200 { @apply dark:border-slate-700; }
+.dark .border-slate-300 { @apply dark:border-slate-700; }
+.dark .border-blue-200 { @apply dark:border-slate-700; }
+
+/* Override placeholder colors */
+.dark .placeholder-gray-400 { @apply dark:placeholder-slate-500; }
+.dark .placeholder-gray-500 { @apply dark:placeholder-slate-500; }
+
+/* Override status badge backgrounds */
+.dark .bg-blue-100 { @apply dark:bg-blue-900/30; }
+.dark .bg-green-100 { @apply dark:bg-green-900/30; }
+.dark .bg-red-100 { @apply dark:bg-red-900/30; }
+.dark .bg-yellow-100 { @apply dark:bg-yellow-900/30; }
 
 @utility container-x {
   margin-inline: auto;

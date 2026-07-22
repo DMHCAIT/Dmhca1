@@ -57,19 +57,19 @@ function BlogsListing() {
       </section>
 
       {/* Blogs Grid */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-slate-900">
         <div className="container-x">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
             {blogsList.map((blog) => (
               <Link
                 key={blog.slug}
                 to={`/${blog.slug}`}
-                className="flex items-center justify-between p-4 border border-slate-200 rounded-lg hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-navy-deep/40 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition group"
               >
                 <div>
-                  <div className="text-lg font-semibold text-navy-deep group-hover:text-navy">{blog.title}</div>
+                  <div className="text-lg font-semibold text-navy-deep dark:text-slate-100 group-hover:text-navy dark:group-hover:text-slate-50">{blog.title}</div>
                 </div>
-                <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-navy-deep transition" />
+                <ChevronRight className="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-navy-deep dark:group-hover:text-slate-300 transition" />
               </Link>
             ))}
           </div>

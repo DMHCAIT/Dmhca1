@@ -231,15 +231,15 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
         </div>
       </nav>
 
-      <section className="bg-gradient-to-b from-slate-50 to-white min-h-screen">
+      <section className="bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950 min-h-screen">
         <div className="container-x py-10 lg:py-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             
             {/* LEFT SIDEBAR - COURSE DETAILS */}
             <aside className="lg:col-span-2 space-y-5 h-fit">
               {/* Course Details Card */}
-              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5 space-y-4">
-                <h3 className="text-xs sm:text-sm font-bold text-slate-900 uppercase tracking-tight sm:tracking-wider">Course Details</h3>
+              <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 sm:p-5 space-y-4">
+                <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-tight sm:tracking-wider">Course Details</h3>
                 
                 <div className="space-y-3">
                   <div className="flex items-start gap-2 sm:gap-3 pb-3 sm:pb-3.5 border-b border-slate-200 min-w-0">
@@ -247,8 +247,8 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                       <Clock className="w-4 sm:w-5 h-4 sm:h-5 text-indigo-600" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <div className="text-xs text-slate-600 font-bold uppercase tracking-tight sm:tracking-wider break-words">Duration</div>
-                      <div className="text-sm font-semibold text-slate-900">{course.meta?.Duration || (course.months ? `${course.months} months` : "—")}</div>
+                      <div className="text-xs text-slate-600 dark:text-slate-400 font-bold uppercase tracking-tight sm:tracking-wider break-words">Duration</div>
+                      <div className="text-sm font-semibold text-slate-900 dark:text-slate-100">{course.meta?.Duration || (course.months ? `${course.months} months` : "—")}</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-2 sm:gap-3 pb-3 sm:pb-3.5 border-b border-slate-200 min-w-0">
@@ -300,32 +300,32 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             {/* MAIN CONTENT */}
             <div className="lg:col-span-7 space-y-8">
           <div id="overview" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
               <div className="w-1 h-6 bg-gradient-to-b from-navy-deep to-navy"></div>
               Course Overview
             </h2>
-            <div className="bg-white border border-slate-300 rounded-xl p-3 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
-              <p className="text-slate-700 leading-relaxed text-sm sm:text-base font-medium tracking-wide">{course.overview}</p>
+            <div className="bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl p-3 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+              <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-sm sm:text-base font-medium tracking-wide">{course.overview}</p>
             </div>
           </div>
 
           {/* What you'll learn */}
           {course.learn.length > 0 && (
             <div id="learn" className="scroll-mt-24">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-emerald-600 to-emerald-500"></div>
                 What You'll Learn
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
                 {course.learn.map((o: string, idx: number) => (
-                  <div key={idx} className="border border-slate-300 rounded-xl p-3 sm:p-5 bg-white hover:border-emerald-300 hover:shadow-md transition-all">
+                  <div key={idx} className="border border-slate-300 dark:border-slate-700 rounded-xl p-3 sm:p-5 bg-white dark:bg-slate-900 hover:border-emerald-300 hover:shadow-md transition-all">
                     <div className="flex gap-2 sm:gap-3">
-                      <div className="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <svg className="w-3 sm:w-4 h-3 sm:h-4 text-emerald-700" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 sm:w-4 h-3 sm:h-4 text-emerald-700 dark:text-emerald-300" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                         </svg>
                       </div>
-                      <p className="text-slate-700 text-sm sm:text-base font-medium tracking-wide">{o}</p>
+                      <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base font-medium tracking-wide">{o}</p>
                     </div>
                   </div>
                 ))}
@@ -336,13 +336,13 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           {/* Requirements */}
           {course.requirements && course.requirements.length > 0 && (
             <div id="requirements" className="scroll-mt-24">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-orange-600 to-orange-500"></div>
                 Requirements
               </h2>
               <div className="flex flex-wrap gap-2 sm:gap-3">
                 {course.requirements.map((r: string, idx: number) => (
-                  <span key={idx} className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-orange-50 to-orange-100/50 border border-orange-200 text-slate-700 text-xs sm:text-base font-semibold rounded-full hover:shadow-md transition-all hover:border-orange-300">
+                  <span key={idx} className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-gradient-to-r from-orange-50 to-orange-100/50 dark:from-orange-950 dark:to-orange-900/50 border border-orange-200 dark:border-orange-800 text-slate-700 dark:text-slate-300 text-xs sm:text-base font-semibold rounded-full hover:shadow-md transition-all hover:border-orange-300">
                     <div className="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-orange-600"></div>
                     {r}
                   </span>
@@ -354,23 +354,23 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           {/* CURRICULUM SECTION */}
           {course.modules.length > 0 && (
             <div id="curriculum" className="scroll-mt-24">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-navy-deep to-navy"></div>
                 Curriculum
               </h2>
-              <p className="text-sm text-slate-600 mb-5">{course.modules.length} Sections · {course.lessons ?? "—"} Lessons · {course.months ? `${course.months} Months` : "—"}</p>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-5">{course.modules.length} Sections · {course.lessons ?? "—"} Lessons · {course.months ? `${course.months} Months` : "—"}</p>
               <div className="space-y-3">
                 {course.modules.map((m: string, i: number) => (
-                  <details key={m + i} className="group border border-slate-300 hover:border-navy-deep/40 rounded-xl overflow-hidden transition-all bg-white hover:shadow-md">
-                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 flex items-center justify-between font-semibold text-slate-900 hover:bg-navy-deep/5 transition list-none">
+                  <details key={m + i} className="group border border-slate-300 dark:border-slate-700 hover:border-navy-deep/40 rounded-xl overflow-hidden transition-all bg-white dark:bg-slate-900 hover:shadow-md">
+                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 flex items-center justify-between font-semibold text-slate-900 dark:text-slate-100 hover:bg-navy-deep/5 dark:hover:bg-slate-800 transition list-none">
                       <div className="flex items-center gap-2 sm:gap-4">
                         <div className="flex items-center justify-center w-8 sm:w-9 h-8 sm:h-9 rounded-full bg-gradient-to-br from-navy-deep to-navy text-white font-bold text-xs sm:text-sm">
                           {String(i + 1).padStart(2, "0")}
                         </div>
-                        <div className="text-sm sm:text-base text-slate-900 font-semibold tracking-wide">{m.replace(/^Module \d+:\s*/, '')}</div>
+                        <div className="text-sm sm:text-base text-slate-900 dark:text-slate-200 font-semibold tracking-wide">{m.replace(/^Module \d+:\s*/, '')}</div>
                       </div>
                       <div className="flex items-center gap-1 sm:gap-3">
-                        <span className="text-xs bg-slate-100 text-slate-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-semibold text-xs">
+                        <span className="text-xs bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full font-semibold text-xs">
                           {Array.isArray(course.moduleDetails?.[i]) ? (course.moduleDetails[i] as string[]).length : '—'} lessons
                         </span>
                         <svg className="w-4 sm:w-5 h-4 sm:h-5 text-slate-600 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -378,23 +378,23 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                         </svg>
                       </div>
                     </summary>
-                    <div className="px-3 sm:px-6 pb-3 sm:pb-5 bg-navy-deep/5 border-t border-slate-300">
+                    <div className="px-3 sm:px-6 pb-3 sm:pb-5 bg-navy-deep/5 dark:bg-slate-800/30 border-t border-slate-300 dark:border-slate-700">
                       {course.moduleDetails && course.moduleDetails[i]
                         ? Array.isArray(course.moduleDetails[i])
                           ? (
                             <ul className="space-y-2">
                               {(course.moduleDetails[i] as string[]).map((lesson, li) => (
-                                <li key={li} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-lg border border-slate-300 bg-white hover:bg-navy-deep/5 transition">
-                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-navy-deep flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
+                                <li key={li} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-navy-deep/5 transition">
+                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-navy-deep dark:text-blue-400 flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                   </svg>
-                                  <span className="text-sm sm:text-base text-slate-700 font-medium tracking-wide">{lesson}</span>
+                                  <span className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium tracking-wide">{lesson}</span>
                                 </li>
                               ))}
                             </ul>
                           )
-                          : <div className="text-base text-slate-700 font-medium">{course.moduleDetails[i]}</div>
-                        : <div className="text-base text-slate-600 font-medium">Module details will be provided during enrollment.</div>}
+                          : <div className="text-base text-slate-700 dark:text-slate-300 font-medium">{course.moduleDetails[i]}</div>
+                        : <div className="text-base text-slate-600 dark:text-slate-400 font-medium">Module details will be provided during enrollment.</div>}
                     </div>
                   </details>
                 ))}
@@ -404,21 +404,21 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
 
           {/* INSTRUCTORS SECTION */}
           <div id="instructor" className="scroll-mt-24">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
               <div className="w-1 h-6 bg-gradient-to-b from-teal-600 to-teal-500"></div>
               Instructor
             </h2>
             <div className="grid sm:grid-cols-2 gap-3 sm:gap-5">
               {(course.trainers && course.trainers.length > 0 ? course.trainers : [{ name: "DMHCA Faculty", title: "Expert Faculty", bio: "Experienced clinicians and educators." }]).map((trainer: any, idx: number) => (
-                <div key={idx} className="border border-slate-300 rounded-xl p-3 sm:p-6 bg-white hover:border-teal-300 hover:shadow-lg transition-all">
+                <div key={idx} className="border border-slate-300 dark:border-slate-700 rounded-xl p-3 sm:p-6 bg-white dark:bg-slate-900 hover:border-teal-300 hover:shadow-lg transition-all">
                   <div className="flex gap-2 sm:gap-4">
-                    <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-2 sm:border-3 border-slate-200 bg-slate-100">
+                    <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden border-2 sm:border-3 border-slate-200 dark:border-slate-400 bg-slate-100 dark:bg-white/20">
                       <img src={trainer.image || "/logo.webp"} alt={trainer.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-slate-900 text-sm sm:text-base tracking-wide">{trainer.name}</div>
-                      {trainer.title && <div className="text-xs sm:text-sm text-teal-700 font-semibold mt-1 tracking-wide">{trainer.title}</div>}
-                      {trainer.bio && <div className="text-xs sm:text-sm text-slate-700 mt-2 sm:mt-2.5 leading-relaxed font-medium">{trainer.bio}</div>}
+                      <div className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base tracking-wide">{trainer.name}</div>
+                      {trainer.title && <div className="text-xs sm:text-sm text-teal-700 dark:text-teal-400 font-semibold mt-1 tracking-wide">{trainer.title}</div>}
+                      {trainer.bio && <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-2 sm:mt-2.5 leading-relaxed font-medium">{trainer.bio}</div>}
                     </div>
                   </div>
                 </div>
@@ -428,20 +428,20 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
 
           {course.faqs.length > 0 && (
             <div id="faqs" className="scroll-mt-24">
-              <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
                 Frequently Asked Questions
               </h2>
-              <div className="border border-slate-300 rounded-xl overflow-hidden bg-white shadow-sm divide-y divide-slate-300">
+              <div className="border border-slate-300 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-900 shadow-sm divide-y divide-slate-300 dark:divide-slate-700">
                 {course.faqs.map((f: { q: string; a: string }, i: number) => (
                   <details key={i} className="group" open={i === 0}>
-                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 font-bold text-sm sm:text-base text-slate-900 hover:bg-indigo-50/40 transition flex items-center justify-between list-none tracking-wide">
+                    <summary className="cursor-pointer px-3 sm:px-6 py-3 sm:py-5 font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 hover:bg-indigo-50/40 dark:hover:bg-indigo-950/20 transition flex items-center justify-between list-none tracking-wide">
                       <span>{f.q}</span>
-                      <svg className="w-4 sm:w-5 h-4 sm:h-5 text-slate-700 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 sm:w-5 h-4 sm:h-5 text-slate-700 dark:text-slate-400 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                       </svg>
                     </summary>
-                    <div className="px-3 sm:px-6 py-3 sm:py-5 bg-indigo-50/20 text-sm sm:text-base text-slate-700 leading-relaxed font-medium border-t border-slate-300 tracking-wide">{f.a}</div>
+                    <div className="px-3 sm:px-6 py-3 sm:py-5 bg-indigo-50/20 dark:bg-indigo-950/10 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-medium border-t border-slate-300 dark:border-slate-700 tracking-wide">{f.a}</div>
                   </details>
                 ))}
               </div>
@@ -532,42 +532,42 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
 
             return (
               <div id="reviews" className="scroll-mt-24">
-                <h2 className="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
                   <div className="w-1 h-6 bg-gradient-to-b from-rose-600 to-rose-500"></div>
                   Student Reviews
                 </h2>
                 <div className="space-y-4">
                   {localReviews.map((r: any, i: number) => (
-                    <div key={r.id || i} className="p-3 sm:p-5 border border-slate-300 rounded-xl bg-white hover:shadow-lg transition-all">
+                    <div key={r.id || i} className="p-3 sm:p-5 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 hover:shadow-lg transition-all">
                       <div className="flex items-start gap-2 sm:gap-4">
-                        <div className="w-10 sm:w-14 h-10 sm:h-14 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden border-2 border-slate-300 flex-shrink-0">
+                        <div className="w-10 sm:w-14 h-10 sm:h-14 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-slate-300 dark:border-slate-700 flex-shrink-0">
                           <img src={r.studentImage || '/reviews/default-avatar.svg'} alt={r.studentName} className="w-9 sm:w-13 h-9 sm:h-13 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).src = '/reviews/default-avatar.svg'; }} />
                         </div>
                         <div className="flex-1">
                           <div className="flex items-center justify-between gap-2 flex-wrap">
                             <div>
-                              <div className="font-bold text-sm sm:text-base text-slate-900 tracking-wide">{r.studentName}</div>
-                              <div className="text-xs sm:text-sm text-slate-600 mt-0.5 sm:mt-1 font-semibold">{r.title ? r.title + ' · ' : ''}<span className="text-rose-700 font-bold">{r.rating} ★</span></div>
+                              <div className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 tracking-wide">{r.studentName}</div>
+                              <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5 sm:mt-1 font-semibold">{r.title ? r.title + ' · ' : ''}<span className="text-rose-700 dark:text-rose-400 font-bold">{r.rating} ★</span></div>
                             </div>
                           </div>
-                          <div className="mt-2 sm:mt-3 text-sm sm:text-base text-slate-700 leading-relaxed font-medium tracking-wide">{r.comment}</div>
+                          <div className="mt-2 sm:mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-medium tracking-wide">{r.comment}</div>
                           {r.adminReply && (
-                            <div className="mt-3 sm:mt-4 p-2 sm:p-4 border border-slate-300 rounded-lg bg-slate-50 text-xs sm:text-sm">
-                              <div className="text-xs text-slate-600 font-bold uppercase mb-1 sm:mb-2 tracking-wider">Admin Reply</div>
-                              <div className="text-sm sm:text-base text-slate-700 font-medium tracking-wide">{r.adminReply}</div>
+                            <div className="mt-3 sm:mt-4 p-2 sm:p-4 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm">
+                              <div className="text-xs text-slate-600 dark:text-slate-400 font-bold uppercase mb-1 sm:mb-2 tracking-wider">Admin Reply</div>
+                              <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium tracking-wide">{r.adminReply}</div>
                             </div>
                           )}
                         </div>
-                        <button type="button" onClick={() => handleAdminReply(i)} className="text-xs px-2 sm:px-3 py-1 sm:py-2 border border-slate-300 rounded-lg text-slate-700 hover:bg-slate-900 hover:text-white transition flex-shrink-0 font-semibold tracking-wide">Reply</button>
+                        <button type="button" onClick={() => handleAdminReply(i)} className="text-xs px-2 sm:px-3 py-1 sm:py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-900 hover:text-white dark:hover:bg-slate-700 transition flex-shrink-0 font-semibold tracking-wide">Reply</button>
                       </div>
                     </div>
                   ))}
 
-                  <div className="p-3 sm:p-6 border border-dashed border-slate-400 rounded-xl bg-slate-50">
-                    <div className="text-xs sm:text-sm text-slate-700 font-bold text-center mb-3 sm:mb-4 tracking-wide">Have feedback? Add a review below:</div>
+                  <div className="p-3 sm:p-6 border border-dashed border-slate-400 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800">
+                    <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-bold text-center mb-3 sm:mb-4 tracking-wide">Have feedback? Add a review below:</div>
                     <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
-                      <input ref={nameRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-lg bg-white text-sm sm:text-base text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" placeholder="Your name" />
-                      <select ref={titleRef} defaultValue="Practical" className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-lg bg-white text-sm sm:text-base text-slate-900 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
+                      <input ref={nameRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" placeholder="Your name" />
+                      <select ref={titleRef} defaultValue="Practical" className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
                         <option value="Practical">Practical</option>
                         <option value="Learned">Learned</option>
                         <option value="Well structured">Well structured</option>
@@ -575,17 +575,17 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                         <option value="Concise modules">Concise modules</option>
                         <option value="Excellent content">Excellent content</option>
                       </select>
-                      <textarea ref={textRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded-lg bg-white text-sm sm:text-base text-slate-900 placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" rows={3} placeholder="Your review" />
+                      <textarea ref={textRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" rows={3} placeholder="Your review" />
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center">
-                        <label className="text-sm sm:text-base text-slate-700 font-bold tracking-wide">Rating:</label>
-                        <select ref={ratingRef} defaultValue="5" className="px-2 sm:px-3 py-2 sm:py-2.5 border border-slate-300 rounded-lg bg-white text-sm sm:text-base font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
+                        <label className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-bold tracking-wide">Rating:</label>
+                        <select ref={ratingRef} defaultValue="5" className="px-2 sm:px-3 py-2 sm:py-2.5 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
                           <option value="5">5 ★</option>
                           <option value="4">4 ★</option>
                           <option value="3">3 ★</option>
                           <option value="2">2 ★</option>
                           <option value="1">1 ★</option>
                         </select>
-                        <button type="submit" className="w-full sm:w-auto sm:ml-auto px-4 sm:px-6 py-2 sm:py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-sm sm:text-base font-bold transition tracking-wide">Submit Review</button>
+                        <button type="submit" className="w-full sm:w-auto sm:ml-auto px-4 sm:px-6 py-2 sm:py-3 bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 text-white rounded-lg text-sm sm:text-base font-bold transition tracking-wide">Submit Review</button>
                       </div>
                     </form>
                   </div>
@@ -653,7 +653,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 </div>
 
                 {/* Pricing Card */}
-                <div className="bg-gradient-to-br from-white to-slate-50 border-2 border-slate-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all mb-6">
+                <div className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 border-2 border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all mb-6">
                   {/* Header */}
                   <div className="bg-gradient-to-r from-navy-deep to-navy px-5 sm:px-6 py-4 text-white">
                     <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-1">Course Fee</div>
@@ -665,8 +665,8 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                   
                   {/* Content */}
                   <div className="p-5 sm:p-6 space-y-4">
-                    <div className="text-sm text-slate-600 font-semibold">
-                      Total: <span className="text-slate-900 font-bold" style={{ letterSpacing: '0.02em' }}>
+                    <div className="text-sm text-slate-600 dark:text-slate-300 font-semibold">
+                      Total: <span className="text-slate-900 dark:text-slate-100 font-bold" style={{ letterSpacing: '0.02em' }}>
                         ₹ {Math.floor(totalPrice).toLocaleString('en-IN')}
                       </span>
                     </div>
@@ -731,22 +731,22 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
 
                 {/* Related Courses */}
                 {related.length > 0 && (
-                  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6">
-                    <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wider mb-4">Recommended Courses</h4>
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 sm:p-6">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">Recommended Courses</h4>
                     <div className="space-y-4">
                       {related.slice(0, 3).map((r: any) => (
                         <Link 
                           key={r.slug}
                           to="/courses/$slug"
                           params={{ slug: r.slug }}
-                          className="flex gap-3 p-3 rounded-lg hover:bg-slate-50 transition group"
+                          className="flex gap-3 p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition group"
                         >
-                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200 border border-slate-300">
+                          <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700">
                             <img src={r.image} alt={r.title} className="w-full h-full object-cover" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <div className="text-sm font-semibold text-slate-900 group-hover:text-blue-600 transition line-clamp-2">{r.title}</div>
-                            <div className="text-xs text-slate-600 mt-1">{r.lessons || 0} lessons</div>
+                            <div className="text-sm font-semibold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 transition line-clamp-2">{r.title}</div>
+                            <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">{r.lessons || 0} lessons</div>
                           </div>
                           <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition flex-shrink-0" />
                         </Link>

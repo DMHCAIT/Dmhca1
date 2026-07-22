@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode, useState } from "react";
 import SignupFlow from "../components/SignupFlow";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
@@ -136,41 +137,43 @@ function RootComponent() {
     return () => clearTimeout(hideTimer);
   }, [showPopin]);
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className={`min-h-screen flex flex-col`}>
-        <Header />
-        <main className="flex-1"><Outlet /></main>
-        <Footer />
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <div className={`min-h-screen flex flex-col`}>
+          <Header />
+          <main className="flex-1"><Outlet /></main>
+          <Footer />
 
-        {/* Popin overlay */}
-        {showPopin && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center">
-            <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
-            <div className="relative z-10 w-full max-w-md mx-4">
-              <SignupFlow isOpen onClose={() => { setShowPopin(false); try { localStorage.setItem('dmhca_popin_closed','1') } catch(e){} }} />
-            </div>
-          </div>
-        )}
-
-        {/* Cookie banner fixed to bottom */}
-        {cookieConsent === null && (
-          <div className="fixed left-0 right-0 bottom-0 z-50 px-0">
-            <div className="w-full bg-white border-t border-gray-200 shadow-lg px-8 py-5 flex items-center justify-center">
-              <div className="max-w-6xl w-full flex items-center justify-between gap-6">
-                <div className="flex-1 text-sm text-slate-800">
-                <div className="font-semibold text-slate-900 mb-1">We respect your privacy</div>
-                <div className="text-sm text-slate-600 mb-2">We use cookies to personalise content, analyse traffic and improve your experience. By accepting, you agree to our use of cookies for analytics, personalization, and targeted content.</div>
-                <div className="text-xs text-slate-500">You can change your preference anytime from your browser settings. Read our <a href="/privacy-policy" className="text-navy-deep underline">Privacy Policy</a> for more information.</div>
+          {/* Popin overlay */}
+          {showPopin && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
+              <div className="relative z-10 w-full max-w-md mx-4">
+                <SignupFlow isOpen onClose={() => { setShowPopin(false); try { localStorage.setItem('dmhca_popin_closed','1') } catch(e){} }} />
               </div>
-                <div className="flex items-center gap-3">
-                  <button onClick={() => handleCookieConsent("accept")} className="px-5 py-2 bg-navy-deep text-white">Accept</button>
-                  <button onClick={() => handleCookieConsent("deny")} className="px-5 py-2 border border-gray-300 text-slate-700 bg-white">Deny</button>
+            </div>
+          )}
+
+          {/* Cookie banner fixed to bottom */}
+          {cookieConsent === null && (
+            <div className="fixed left-0 right-0 bottom-0 z-50 px-0">
+              <div className="w-full bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 shadow-lg px-8 py-5 flex items-center justify-center">
+                <div className="max-w-6xl w-full flex items-center justify-between gap-6">
+                  <div className="flex-1 text-sm text-slate-800 dark:text-slate-200">
+                  <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">We respect your privacy</div>
+                  <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">We use cookies to personalise content, analyse traffic and improve your experience. By accepting, you agree to our use of cookies for analytics, personalization, and targeted content.</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-500">You can change your preference anytime from your browser settings. Read our <a href="/privacy-policy" className="text-navy-deep dark:text-gold underline">Privacy Policy</a> for more information.</div>
+                </div>
+                  <div className="flex items-center gap-3">
+                    <button onClick={() => handleCookieConsent("accept")} className="px-5 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white">Accept</button>
+                    <button onClick={() => handleCookieConsent("deny")} className="px-5 py-2 border border-gray-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900">Deny</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-    </QueryClientProvider>
+          )}
+        </div>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }

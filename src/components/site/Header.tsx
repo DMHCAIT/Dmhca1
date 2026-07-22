@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { SignupFlow } from "@/components/SignupFlow";
 import { OTPLoginModal } from "@/components/OTPLoginModal";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { syncLocalCartToServer, loadServerCartToLocal } from '@/lib/cart-sync';
 
 const logo = "/logo.webp";
@@ -21,9 +22,14 @@ export function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [fullName, setFullName] = useState('');
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
 
   // Check if user is already logged in or has signed up
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -156,7 +162,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-background/98 hairline">
+    <header className="sticky top-0 z-40 bg-background dark:bg-slate-950 dark:border-b dark:border-slate-800 border-b border-border/50 hairline">
       <div className="container-x flex items-center justify-between h-16">
         <Link to="/" className="flex items-center">
           <img
@@ -175,18 +181,19 @@ export function Header() {
 
         <nav className="hidden lg:flex items-center gap-7 text-base">
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} className="text-foreground/80 hover:text-navy-deep transition" activeProps={{ className: "text-navy-deep" }} activeOptions={{ exact: n.to === "/" }}>
+            <Link key={n.to} to={n.to} className="text-foreground/80 dark:text-slate-400 hover:text-navy-deep dark:hover:text-gold transition" activeProps={{ className: "text-navy-deep dark:text-gold" }} activeOptions={{ exact: n.to === "/" }}>
               {n.label}
             </Link>
           ))}
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 relative">
+          {mounted && <ThemeToggle />}
           {isLoggedIn ? (
             <>
               <button
                 onClick={() => { if (typeof window !== 'undefined') window.location.href = '/cart'; }}
-                className="p-2 text-navy-deep hover:bg-gray-100 rounded-lg transition"
+                className="p-2 text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
                 title="Shopping Cart"
               >
                 <ShoppingCart className="w-5 h-5" />
@@ -194,25 +201,25 @@ export function Header() {
               <div className="relative">
                 <button
                   onClick={() => setShowProfileMenu(!showProfileMenu)}
-                  className="w-10 h-10 rounded-full bg-navy-deep text-white flex items-center justify-center font-bold text-lg hover:bg-navy transition"
+                  className="w-10 h-10 rounded-full bg-navy-deep dark:bg-gold dark:text-slate-900 text-white flex items-center justify-center font-bold text-lg hover:bg-navy dark:hover:bg-yellow-500 transition"
                   title="User Profile Menu"
                 >
                   {fullName ? fullName.charAt(0).toUpperCase() : 'U'}
                 </button>
                 {showProfileMenu && (
-                  <div className="absolute right-0 mt-2 bg-white border border-border rounded-lg shadow-lg z-50">
+                  <div className="absolute right-0 mt-2 bg-white dark:bg-slate-900 border border-border dark:border-slate-700 rounded-lg shadow-lg z-50">
                     <button
                       onClick={() => {
                         navigate({ to: "/dashboard" });
                         setShowProfileMenu(false);
                       }}
-                      className="w-full text-left px-4 py-2 text-sm text-navy-deep hover:bg-gray-100 transition"
+                      className="w-full text-left px-4 py-2 text-sm text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 transition"
                     >
                       Dashboard
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100 transition border-t border-border"
+                      className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-slate-800 transition border-t border-border dark:border-slate-700"
                     >
                       Logout
                     </button>
@@ -224,7 +231,7 @@ export function Header() {
             <>
               <button
                 onClick={() => { if (typeof window !== 'undefined') window.location.href = '/cart'; }}
-                className="p-2 text-navy-deep hover:bg-gray-100 rounded-lg transition"
+                className="p-2 text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
                 title="Shopping Cart"
               >
                 <ShoppingCart className="w-5 h-5" />
@@ -234,7 +241,7 @@ export function Header() {
                   setShowLoginModal(true);
                   setShowSignupModal(false);
                 }}
-                className="text-base px-4 py-2 bg-navy-deep text-white rounded-sm hover:bg-navy transition"
+                className="text-base px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
                 >
                 Login
               </button>
@@ -243,7 +250,7 @@ export function Header() {
             <>
               <button
                 onClick={() => { if (typeof window !== 'undefined') window.location.href = '/cart'; }}
-                className="p-2 text-navy-deep hover:bg-gray-100 rounded-lg transition"
+                className="p-2 text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
                 title="Shopping Cart"
               >
                 <ShoppingCart className="w-5 h-5" />
@@ -253,7 +260,7 @@ export function Header() {
                   setShowSignupModal(true);
                   setShowLoginModal(false);
                 }}
-                className="text-base px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+                className="text-base px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-primary-foreground rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
               >
                 Sign Up
               </button>
@@ -264,21 +271,25 @@ export function Header() {
         <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
           {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
+        
+        <div className="lg:hidden p-2">
+          {mounted && <ThemeToggle />}
+        </div>
       </div>
 
       {open && (
         <div className="lg:hidden border-t border-border bg-background">
           <div className="container-x py-4 flex flex-col gap-3 text-base">
             {nav.map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-1">{n.label}</Link>
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-1 text-foreground dark:text-slate-300 hover:text-navy-deep dark:hover:text-gold">{n.label}</Link>
             ))}
-            <div className="mt-2 pt-4 border-t border-border flex gap-2 flex-wrap">
+            <div className="mt-2 pt-4 border-t border-border dark:border-slate-700 flex gap-2 flex-wrap">
               <button
                 onClick={() => {
                   if (typeof window !== 'undefined') window.location.href = '/cart';
                   setOpen(false);
                 }}
-                className="flex-1 px-4 py-2 bg-gray-100 text-navy-deep rounded-sm hover:bg-gray-200 transition flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-2 bg-gray-100 dark:bg-slate-800 text-navy-deep dark:text-gold rounded-sm hover:bg-gray-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2"
                 title="Shopping Cart"
               >
                 <ShoppingCart className="w-5 h-5" />
@@ -291,9 +302,9 @@ export function Header() {
                       navigate({ to: "/dashboard" });
                       setOpen(false);
                     }}
-                    className="flex-1 px-4 py-2 bg-navy-deep text-white rounded-sm hover:bg-navy transition flex items-center justify-center gap-2 font-semibold"
+                    className="flex-1 px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition flex items-center justify-center gap-2 font-semibold"
                   >
-                    <span className="w-8 h-8 rounded-full bg-white text-navy-deep flex items-center justify-center font-bold text-sm">
+                    <span className="w-8 h-8 rounded-full bg-white dark:bg-slate-900 dark:text-gold text-navy-deep flex items-center justify-center font-bold text-sm">
                       {fullName ? fullName.charAt(0).toUpperCase() : 'U'}
                     </span>
                     Dashboard
@@ -303,7 +314,7 @@ export function Header() {
                       handleLogout();
                       setOpen(false);
                     }}
-                    className="flex-1 px-4 py-2 bg-red-100 text-red-600 rounded-sm hover:bg-red-200 transition text-sm font-semibold"
+                    className="flex-1 px-4 py-2 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-sm hover:bg-red-200 dark:hover:bg-red-900 transition text-sm font-semibold"
                   >
                     Logout
                   </button>
@@ -315,7 +326,7 @@ export function Header() {
                     setShowSignupModal(false);
                     setOpen(false);
                   }}
-                  className="flex-1 px-4 py-2 bg-navy-deep text-white rounded-sm hover:bg-navy transition"
+                  className="flex-1 px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
                 >
                   Login
                 </button>
@@ -326,7 +337,7 @@ export function Header() {
                     setShowLoginModal(false);
                     setOpen(false);
                   }}
-                  className="flex-1 px-4 py-2 bg-navy-deep text-primary-foreground rounded-sm hover:bg-navy transition"
+                  className="flex-1 px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-primary-foreground rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
                 >
                   Sign Up
                 </button>

@@ -117,14 +117,14 @@ export function OTPLoginModal({ isOpen, onClose, onSuccess, onSwitchToSignup }) 
 
         <div className="mb-8 text-center">
           <img src={titleLogo} alt="DMHCA" className="h-12 w-auto mb-4 mx-auto" />
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Login to DMHCA</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">Login to DMHCA</h2>
           <p className="text-gray-600 text-sm">Enter your email and verification code to access your dashboard</p>
         </div>
 
         {step === 'email' && (
           <>
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">Email Address</label>
+              <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Email Address</label>
               <Input
                 type="email"
                 placeholder="your-email@example.com"
@@ -151,7 +151,7 @@ export function OTPLoginModal({ isOpen, onClose, onSuccess, onSwitchToSignup }) 
         {step === 'otp' && (
           <>
             <div className="mb-6">
-              <label className="block text-sm font-semibold text-gray-900 mb-3">Verification Code</label>
+              <label className="block text-sm font-semibold text-gray-900 dark:text-slate-100 mb-3">Verification Code</label>
               <p className="text-sm text-gray-600 mb-3">
                 Enter the 6-digit code sent to <span className="font-semibold">{email}</span>
               </p>

@@ -469,16 +469,16 @@ function Home() {
               
               {/* Floating stat card */}
               <motion.div 
-                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
+                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white dark:bg-slate-900 p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
                 whileHover={{ y: -5 }}
               >
                 <div>
-                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
-                  <p className="text-xl sm:text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
-                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy">
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy dark:text-white mb-1 stat-label">Active Learners</p>
+                  <p className="text-xl sm:text-2xl text-navy dark:text-white font-bold stat-number">42,000<span className="text-gold">+</span></p>
+                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy dark:text-slate-100">
                     <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-gold text-gold" />
                     <span className="ml-1 font-medium">4.8 / 5</span>
                   </div>
@@ -650,7 +650,7 @@ function Home() {
       </section>
 
       {/* University Partners / Academic Alliances */}
-      <section className="bg-hero-light text-on-hero-light py-12">
+      <section className="bg-hero-light dark:bg-white text-on-hero-light py-12">
         <div className="container-home">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl md:text-4xl text-navy-deep mt-3">Academic partners</h2>
@@ -669,8 +669,8 @@ function Home() {
                   'IBMP LOGO .webp',
                   'logo-srdu.webp',
                 ].map((file) => (
-                  <div key={file} className="rounded-xl bg-white/80 dark:bg-slate-800/60 p-3 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                    <div className="w-40 h-28 md:w-48 md:h-32 lg:w-56 lg:h-36 flex items-center justify-center bg-white rounded-lg">
+                  <div key={file} className="rounded-xl bg-white/80 dark:!bg-white p-3 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div className="w-40 h-28 md:w-48 md:h-32 lg:w-56 lg:h-36 flex items-center justify-center bg-white dark:!bg-white rounded-lg">
                       <img src={`/ACADEMIC PARTNERS/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
                     </div>
                   </div>
@@ -739,7 +739,7 @@ function Home() {
       </section>
 
       {/* Training partners - moving marquee */}
-      <section className="bg-white/60 py-8">
+      <section className="bg-white/60 dark:bg-white/95 py-8">
         <div className="container-home">
           <div className="text-center mb-6">
             <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule inline-block">Training partners</div>
@@ -766,7 +766,7 @@ function Home() {
                   const unique = Array.from(new Set(logos));
                   const sequence = unique.concat(unique); // duplicate for seamless loop
                   return sequence.map((file, idx) => (
-                    <div key={idx} className="flex-shrink-0 w-48 h-24 md:w-56 md:h-28 lg:w-64 lg:h-32 flex items-center justify-center bg-card rounded-lg p-3 shadow-sm">
+                    <div key={idx} className="flex-shrink-0 w-48 h-24 md:w-56 md:h-28 lg:w-64 lg:h-32 flex items-center justify-center bg-card dark:bg-white rounded-lg p-3 shadow-sm dark:shadow-md">
                       <img src={`/Training partners/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
                     </div>
                   ));

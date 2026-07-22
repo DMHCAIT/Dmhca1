@@ -154,7 +154,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Header */}
         <div className="mb-8 text-center">
           <img src={titleLogo} alt="DMHCA" className="h-12 w-auto mb-4 mx-auto" />
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">Create Your Account</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">Create Your Account</h2>
           <p className="text-gray-600 text-sm">Join DMHCA to access premium medical education</p>
         </div>
 
@@ -176,7 +176,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 1 && (
           <>
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">What's your name?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What's your name?</h3>
               <p className="text-sm text-gray-600">We'll use this to personalize your experience</p>
             </div>
             <Input
@@ -197,7 +197,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 2 && (
           <>
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">What's your email?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What's your email?</h3>
               <p className="text-sm text-gray-600">We'll send you a verification code</p>
             </div>
             <Input
@@ -218,7 +218,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 3 && (
           <>
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">What are your interests?</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What are your interests?</h3>
               <p className="text-sm text-gray-600">Select up to 3 specialties that interest you most</p>
             </div>
             <div className="grid grid-cols-2 gap-2 mb-4 max-h-48 overflow-y-auto">
@@ -246,7 +246,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 4 && (
           <>
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-1">Verify Your Email</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">Verify Your Email</h3>
               <p className="text-sm text-gray-600">
                 Enter the 6-digit code sent to <span className="font-semibold">{formData.email}</span>
               </p>

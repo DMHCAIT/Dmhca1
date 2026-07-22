@@ -36,7 +36,7 @@ function BlogPost() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <section className="site-hero relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
         <div className="container-home max-w-5xl relative z-10">
@@ -153,7 +153,7 @@ function BlogPost() {
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">FAQs</h2>
                 <div className="space-y-4">
                   {faqs.map((faq, index) => (
-                    <div key={index} className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-blue-300 transition">
+                    <div key={index} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-slate-500 transition">
                       <button onClick={() => setExpandedFaq(expandedFaq === index ? null : index)} className="w-full flex items-center justify-between p-6 hover:bg-blue-50 transition text-left">
                         <h3 className="font-semibold text-gray-800 pr-4 text-lg">{faq.question}</h3>
                         <ChevronDown size={20} className={`flex-shrink-0 text-blue-600 transition-transform ${expandedFaq === index ? 'transform rotate-180' : ''}`} />
