@@ -91,7 +91,7 @@ export const Route = createFileRoute('/privacy-policy')({
 
                 <section id="account" className="bg-white/90 dark:bg-slate-800/60 p-8 rounded-lg shadow border-l-4 border-gold">
                   <h3 className="text-xl font-semibold mb-2">Creating a User Account</h3>
-                  <p className="text-sm">When users create a user account on www.dmhca.in, they agree to protect the confidentiality of their username and password and assume sole responsibility for any activities conducted using their account. Users also consent to receive SMS and emails containing information about the colleges and courses they apply for and related updates.</p>
+                  <p className="text-sm">When users create a user account on dmhca.in, they agree to protect the confidentiality of their username and password and assume sole responsibility for any activities conducted using their account. Users also consent to receive SMS and emails containing information about the colleges and courses they apply for and related updates.</p>
                 </section>
 
                 <section id="collected" className="bg-white/90 dark:bg-slate-800/60 p-8 rounded-lg shadow border-l-4 border-gold">
