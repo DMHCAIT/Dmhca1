@@ -5,7 +5,9 @@ import { Loader } from 'lucide-react';
 import { Navigate } from '@tanstack/react-router';
 
 // This route handles direct certificate ID access at root level
+// Supports both:
 // - https://dmhca.in/[certificateId]
+// - https://verify.dmhca.in/[certificateId] (via subdomain routing)
 
 export const Route = createFileRoute('/$certificateId')({
   component: RootCertificateHandler,
