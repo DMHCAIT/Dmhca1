@@ -113,8 +113,13 @@ function RootComponent() {
   }, [cookieConsent]);
 
   function handleCookieConsent(choice: string) {
-    try { localStorage.setItem('dmhca_cookie_consent', choice); } catch (e) {}
     setCookieConsent(choice);
+    // Persist to localStorage after state update
+    setTimeout(() => {
+      try { localStorage.setItem('dmhca_cookie_consent', choice); } catch (e) {
+        console.error('Failed to save cookie consent:', e);
+      }
+    }, 0);
   }
 
   // Show a root-level popin (SignupFlow) after 10s with blurred backdrop for 10s

@@ -124,16 +124,30 @@ export function useCoursesData() {
       }
 
       setLoading(true);
-      // Only fetch the fields required for homepage listing to reduce payload
+      // Fetch only essential courses for faster initial render (reduced from 200)
       const { data, error: supabaseError } = await supabaseClient
         .from('courses')
         .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
         .order('created_at', { ascending: false })
-        .limit(200);
+        .limit(30); // Reduced for fast initial load
 
       if (supabaseError) {
         throw new Error(supabaseError.message);
       }
+
+      // Fetch remaining courses in background (non-blocking)
+      supabaseClient
+        .from('courses')
+        .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
+        .order('created_at', { ascending: false })
+        .limit(200)
+        .then(result => {
+          if (result.data) {
+            coursesCache.data = result.data.map(mergeWithStaticData);
+            coursesCache.timestamp = Date.now();
+          }
+        })
+        .catch(() => {}); // Fail silently, keep initial data
 
       // If Supabase returns data, merge with static data; otherwise fall back to static data
       let processedCourses: CourseData[];
