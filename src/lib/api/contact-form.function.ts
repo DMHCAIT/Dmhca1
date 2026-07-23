@@ -75,7 +75,7 @@ async function sendToTeleCRM(data: {
 }
 
 export const submitContactForm = createServerFn({ method: "POST" })
-  .inputValidator(ContactFormSchema)
+  .validator(ContactFormSchema)
   .handler(async ({ data }) => {
     try {
       // Save to database first
