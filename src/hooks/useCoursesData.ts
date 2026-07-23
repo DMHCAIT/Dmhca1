@@ -36,6 +36,22 @@ const coursesCache = {
   CACHE_DURATION: 5 * 60 * 1000, // 5 minutes
 };
 
+// Attempt to hydrate in-memory cache from sessionStorage for instant loads across reloads
+try {
+  if (typeof sessionStorage !== 'undefined') {
+    const raw = sessionStorage.getItem('dmhca_courses_cache');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed?.data && parsed?.timestamp) {
+        coursesCache.data = parsed.data;
+        coursesCache.timestamp = parsed.timestamp;
+      }
+    }
+  }
+} catch (e) {
+  // ignore storage errors
+}
+
 /**
  * Merge static course data with Supabase data
  * Static data provides lessons, months, and other details
@@ -187,6 +203,11 @@ export function useCoursesData() {
       // Update cache
       coursesCache.data = processedCourses;
       coursesCache.timestamp = now;
+      try {
+        if (typeof sessionStorage !== 'undefined') {
+          sessionStorage.setItem('dmhca_courses_cache', JSON.stringify({ data: processedCourses, timestamp: now }));
+        }
+      } catch (e) {}
 
       setCourses(processedCourses);
       setError(null);
