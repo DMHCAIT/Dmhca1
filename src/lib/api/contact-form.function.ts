@@ -20,7 +20,7 @@ const ContactFormSchema = z.object({
   email: z.string().email("Valid email is required"),
   phone: z.string().min(10, "Valid phone is required"),
   course: z.string().optional(),
-  message: z.string().min(10, "Message is required"),
+  message: z.string().min(3, "Message is required"),
 });
 
 // Send lead to TeleCRM API
