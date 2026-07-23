@@ -8,7 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode, useState } from "react";
-import SignupFlow from "../components/SignupFlow";
+import { SignupFlow } from "../components/SignupFlow";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 import appCss from "../styles.css?url";
@@ -155,7 +155,12 @@ function RootComponent() {
             <div className="fixed inset-0 z-50 flex items-center justify-center">
               <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
               <div className="relative z-10 w-full max-w-md mx-4">
-                <SignupFlow isOpen onClose={() => { setShowPopin(false); try { localStorage.setItem('dmhca_popin_closed','1') } catch(e){} }} />
+                <SignupFlow 
+                  isOpen={true}
+                  onClose={() => { setShowPopin(false); try { localStorage.setItem('dmhca_popin_closed','1') } catch(e){} }} 
+                  onSuccess={() => { setShowPopin(false); try { localStorage.setItem('dmhca_popin_closed','1') } catch(e){} }}
+                  onSwitchToLogin={() => { setShowPopin(false); }}
+                />
               </div>
             </div>
           )}

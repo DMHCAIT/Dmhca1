@@ -2,20 +2,18 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL;
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
-const telecrmToken = process.env.TELECRM_SYNC_TOKEN;
-const telecrmApiUrl = process.env.TELECRM_API_URL;
+// Don't validate env vars at module load time - do it in the function instead
+// This allows the code to load even if env vars aren't available yet
+const getSupabaseClient = () => {
+  const supabaseUrl = process.env.VITE_SUPABASE_URL;
+  const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error("Missing Supabase credentials");
-}
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error("Missing Supabase credentials");
+  }
 
-if (!telecrmToken || !telecrmApiUrl) {
-  console.warn("Missing TeleCRM configuration - lead will not be sent to TeleCRM");
-}
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+  return createClient(supabaseUrl, supabaseKey);
+};
 
 const ContactFormSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -78,6 +76,8 @@ export const submitContactForm = createServerFn({ method: "POST" })
   .validator(ContactFormSchema)
   .handler(async ({ data }) => {
     try {
+      const supabase = getSupabaseClient();
+      
       // Save to database first
       const { error } = await supabase.from("contact_messages").insert([
         {

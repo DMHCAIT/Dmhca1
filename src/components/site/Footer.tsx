@@ -36,7 +36,6 @@ export function Footer() {
             <li><Link to="/about-dmhca" className="hover:text-gold transition-colors">About us</Link></li>
             <li><Link to="/top-medical-courses" className="hover:text-gold transition-colors">Courses</Link></li>
             <li><Link to="/simple-event" className="hover:text-gold transition-colors">Events</Link></li>
-            <li><Link to="/sitemap/" className="hover:text-gold transition-colors">Sitemap</Link></li>
             <li><Link to="/contact-us" className="hover:text-gold transition-colors">Contact</Link></li>
           </ul>
         </div>
@@ -91,9 +90,8 @@ export function Footer() {
         <div className="container-x py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
           <div>© {new Date().getFullYear()} Delhi Medical Health Care Academy. All rights reserved.</div>
           <div className="flex gap-5">
-              <Link to="/privacy-policy/" className="hover:text-gold">Privacy</Link>
-              <Link to="/term-conditions/" className="hover:text-gold">Terms</Link>
-              <Link to="/refund-returns-policy/" className="hover:text-gold">Refund Policy</Link>
+              <a href="mailto:info@dmhca.in" className="hover:text-gold">Contact</a>
+              <a href="https://www.facebook.com/dmhca.in" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Social Media</a>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { SignupFlow } from "@/components/SignupFlow";
@@ -22,16 +22,11 @@ export function Header() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [fullName, setFullName] = useState('');
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const navigate = useNavigate();
-
-  // Check if user is already logged in or has signed up
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Load auth state from localStorage
       const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
       const signedUp = localStorage.getItem('hasSignedUp') === 'true';
       const name = localStorage.getItem('full_name') || '';
@@ -39,6 +34,24 @@ export function Header() {
       setHasSignedUp(signedUp);
       setFullName(name);
       console.log('Header mount - isLoggedIn:', loggedIn, 'hasSignedUp:', signedUp, 'fullName:', name);
+
+      // Check URL for auth param
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const auth = params.get('auth');
+        console.log('[Header] Auth param found on mount:', auth);
+        if (auth === 'signup') {
+          console.log('[Header] Setting showSignupModal to true');
+          setShowSignupModal(true);
+          setShowLoginModal(false);
+        } else if (auth === 'login') {
+          console.log('[Header] Setting showLoginModal to true');
+          setShowLoginModal(true);
+          setShowSignupModal(false);
+        }
+      } catch (e) {
+        console.error('[Header] Error parsing auth param:', e);
+      }
 
       // Listen for localStorage changes
       const handleStorageChange = () => {
@@ -57,27 +70,10 @@ export function Header() {
     }
   }, []);
 
-  // Open modal based on URL query param ?auth=signup or ?auth=login
+  // Debug log whenever modal state changes
   useEffect(() => {
-    try {
-      if (typeof window !== 'undefined') {
-        const params = new URLSearchParams(window.location.search);
-        const auth = params.get('auth');
-        if (auth === 'signup') {
-          setShowSignupModal(true);
-          setShowLoginModal(false);
-        } else if (auth === 'login') {
-          setShowLoginModal(true);
-          setShowSignupModal(false);
-        }
-      }
-    } catch (e) {}
-  }, []);
-
-  // Debug log whenever state changes
-  useEffect(() => {
-    console.log('Header state changed - isLoggedIn:', isLoggedIn, 'hasSignedUp:', hasSignedUp, 'fullName:', fullName);
-  }, [isLoggedIn, hasSignedUp, fullName]);
+    console.log('[Header] Modal state changed - showSignupModal:', showSignupModal, 'showLoginModal:', showLoginModal);
+  }, [showSignupModal, showLoginModal]);
 
   // Listen for requests to open auth modals via localStorage (popin trigger)
   useEffect(() => {
@@ -188,7 +184,7 @@ export function Header() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 relative">
-          {mounted && <ThemeToggle />}
+          <ThemeToggle />
           {isLoggedIn ? (
             <>
               <button
@@ -273,7 +269,7 @@ export function Header() {
         </button>
         
         <div className="lg:hidden p-2">
-          {mounted && <ThemeToggle />}
+          <ThemeToggle />
         </div>
       </div>
 
