@@ -31,6 +31,9 @@ async function sendToTeleCRM(data: {
   message: string;
   course?: string;
 }) {
+  const telecrmToken = process.env.TELECRM_SYNC_TOKEN;
+  const telecrmApiUrl = process.env.TELECRM_API_URL;
+
   if (!telecrmToken || !telecrmApiUrl) {
     console.warn("Skipping TeleCRM - missing configuration");
     return;
