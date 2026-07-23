@@ -78,10 +78,12 @@ function Contact() {
 
       // Call server function (saves to Supabase and sends to TeleCRM)
       const result = await submitContactForm({
-        name: formData.name.trim(),
-        email: formData.email.trim(),
-        phone: formData.phone.trim(),
-        message: formData.message.trim()
+        data: {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          message: formData.message.trim()
+        }
       });
 
       // Success
