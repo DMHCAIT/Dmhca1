@@ -284,14 +284,14 @@ function Home() {
     }
   }), []);
 
-  const handleSignupSuccess = async (data) => {
-    setSignupEmail(data.email);
+  const handleSignupSuccess = async (data: { email?: string } | any) => {
+    setSignupEmail(data?.email || '');
     setShowSignupModal(false);
     // Show OTP verification modal for signup completion
     setShowOtpModal(true);
   };
 
-  const handleLoginSuccess = (data) => {
+  const handleLoginSuccess = (data: { userId?: string } | any) => {
     setIsLoggedIn(true);
     setShowLoginModal(false);
     setShowOtpModal(false);
@@ -308,6 +308,7 @@ function Home() {
         isOpen={showSignupModal} 
         onClose={() => setShowSignupModal(false)}
         onSuccess={handleSignupSuccess}
+        onSwitchToLogin={() => { setShowSignupModal(false); setShowLoginModal(true); }}
       />
       <OTPLoginModal 
         isOpen={showLoginModal || showOtpModal}
@@ -316,6 +317,7 @@ function Home() {
           setShowOtpModal(false);
         }}
         onSuccess={handleLoginSuccess}
+        onSwitchToSignup={() => { setShowLoginModal(false); setShowSignupModal(true); }}
       />
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
@@ -643,7 +645,7 @@ function Home() {
           </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map((c) => <CourseCard key={c.slug} course={c} />)}
+            {featured.map((c) => <CourseCard key={c.slug} course={c as any} />)}
           </div>
         )}
         </div>
