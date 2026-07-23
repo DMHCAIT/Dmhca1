@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { supabaseClient } from "@/lib/supabase";
+import { submitContactForm } from "@/lib/api/contact-form.function";
 
 function Contact() {
   // Remove any trailing hash from URL (e.g., /contact-us/#) on mount
@@ -76,20 +76,13 @@ function Contact() {
         throw new Error('Message is required');
       }
 
-      // Save to database
-      const { error: dbError } = await supabaseClient
-        .from('contact_messages')
-        .insert([
-          {
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            message: formData.message.trim(),
-            status: 'new'
-          }
-        ]);
-
-      if (dbError) throw dbError;
+      // Call server function (saves to Supabase and sends to TeleCRM)
+      const result = await submitContactForm({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim()
+      });
 
       // Success
       setSubmitted(true);
