@@ -44,7 +44,7 @@ async function sendToTeleCRM(data: {
       name: data.name,
       email: data.email,
       phone: data.phone.replace(/\D/g, ""), // Remove non-digits
-      field_other: data.course ? `Course: ${data.course}` : undefined,
+      message: data.message,
     };
 
     const response = await fetch(
