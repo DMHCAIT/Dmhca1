@@ -384,13 +384,13 @@ function Home() {
                     <span className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-gold via-gold/50 to-transparent rounded-full" style={{ width: '100%' }} />
                   </motion.span>
                   <br />
-                  <motion.span className="italic font-normal text-gold" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.15 }}>
+                  <motion.span className="font-medium text-gold tracking-tight not-italic" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.15 }}>
                     {slides[slide].titleSub}
                   </motion.span>
                 </div>
               </h1>
 
-              <motion.p className="text-sm sm:text-base md:text-lg text-white max-w-full leading-relaxed" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
+              <motion.p className="text-sm sm:text-base md:text-lg text-white max-w-full leading-relaxed" style={{ wordSpacing: '0.18rem' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
                 {slides[slide].desc}
               </motion.p>
             </div>
@@ -503,7 +503,7 @@ function Home() {
       <section className="bg-hero-dark text-on-hero-dark">
         <div className="container-home py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { k: courses.length + "+", v: "Specialised programs" },
+            { k: "103+", v: "Specialised programs" },
             { k: "60+", v: "Faculty worldwide" },
             { k: categories.length.toString(), v: "Clinical specialties" },
             { k: "120+", v: "Countries reached" },
