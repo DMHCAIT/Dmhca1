@@ -30,6 +30,7 @@ async function sendToTeleCRM(data: {
   phone: string;
   message: string;
   course?: string;
+  website_url?: string;
 }) {
   const telecrmToken = process.env.TELECRM_SYNC_TOKEN;
   const telecrmApiUrl = process.env.TELECRM_API_URL;
@@ -52,6 +53,7 @@ async function sendToTeleCRM(data: {
           email: data.email,
           phone: cleanedPhone,
           message: data.message,
+          website_url: data.website_url,
         },
       },
       {
@@ -60,6 +62,7 @@ async function sendToTeleCRM(data: {
         email: data.email,
         phone: cleanedPhone,
         message: data.message,
+        website_url: data.website_url,
       },
       {
         // wrapped under 'lead'
@@ -68,6 +71,7 @@ async function sendToTeleCRM(data: {
           email: data.email,
           phone: cleanedPhone,
           message: data.message,
+          website_url: data.website_url,
         },
       },
     ];
@@ -147,6 +151,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
         phone: data.phone,
         message: data.message,
         course: data.course,
+        website_url: "https://www.dmhca.in/",
       });
 
       return { success: true };
