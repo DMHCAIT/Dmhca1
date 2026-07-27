@@ -90,10 +90,11 @@ export function Footer() {
       <div className="border-t border-primary-foreground/10">
         <div className="container-x py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
           <div>© {new Date().getFullYear()} Delhi Medical Health Care Academy. All rights reserved.</div>
-          <div className="flex gap-5">
-              <a href="mailto:info@dmhca.in" className="hover:text-gold">Contact</a>
-              <a href="https://www.facebook.com/dmhca.in" target="_blank" rel="noopener noreferrer" className="hover:text-gold">Social Media</a>
-          </div>
+            <div className="flex gap-5">
+              <Link to="/term-conditions" className="hover:text-gold">Terms &amp; Conditions</Link>
+              <Link to="/privacy-policy" className="hover:text-gold">Privacy Policy</Link>
+              <Link to="/refund-returns-policy" className="hover:text-gold">Refund Policy</Link>
+            </div>
         </div>
       </div>
     </footer>
