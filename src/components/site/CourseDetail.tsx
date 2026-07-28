@@ -405,7 +405,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                       <img src={trainer.image || "/logo.webp"} alt={trainer.name} className="w-full h-full object-contain" />
                     </div>
                     <div className="flex-1">
-                      <div className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base tracking-wide">{trainer.name}</div>
+                      <div className="font-bold text-slate-900 dark:text-slate-200 text-sm sm:text-base tracking-wide">{trainer.name}</div>
                       {trainer.title && <div className="text-xs sm:text-sm text-teal-700 dark:text-teal-400 font-semibold mt-1 tracking-wide">{trainer.title}</div>}
                       {trainer.bio && <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-2 sm:mt-2.5 leading-relaxed font-medium">{trainer.bio}</div>}
                     </div>
