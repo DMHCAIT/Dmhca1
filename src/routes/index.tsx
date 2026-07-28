@@ -60,6 +60,10 @@ function Home() {
     if (typeof window !== 'undefined') {
       const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
       setIsLoggedIn(loggedIn);
+      // Show signup popin immediately on home for new visitors
+      if (!loggedIn) {
+        setShowSignupModal(true);
+      }
     }
   }, []);
   
@@ -795,7 +799,7 @@ function Home() {
             <h2 className="font-display text-3xl md:text-4xl mt-3">Begin the next chapter of your medical career</h2>
           </div>
           <div className="flex md:justify-end gap-3 flex-wrap">
-            <Link to="/contact-us" className="px-5 py-3 bg-gold text-navy-deep text-sm rounded-sm hover:opacity-90">Talk to admissions</Link>
+            <Link to="/contact-us" className="px-5 py-3 bg-gold text-navy-deep text-sm rounded-sm hover:opacity-90">Talk to Counsellor</Link>
             <Link to="/top-medical-courses" className="px-5 py-3 border border-primary-foreground/30 text-sm rounded-sm hover:border-gold">Browse programs</Link>
           </div>
         </div>

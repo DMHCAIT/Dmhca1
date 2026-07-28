@@ -181,18 +181,8 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
       
       {/* Modern Hero Section */}
       <section className="relative overflow-visible bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 border-b border-slate-700">
-        <div className="absolute right-0 top-0 bottom-0 opacity-5 pointer-events-none flex items-center justify-end pr-4">
-          <img
-            src={course.heroImage || course.image}
-            alt=""
-            aria-hidden
-            className="w-auto h-auto max-w-[48%] lg:max-w-[40%] md:max-w-[46%] sm:max-w-[60%] xs:max-w-[80%] max-h-[420px] sm:max-h-[360px] xs:max-h-[240px] object-contain object-right"
-            referrerPolicy="no-referrer"
-            decoding="async"
-            loading="lazy"
-          />
-        </div>
-        <div className="relative container-x py-6 lg:py-8">
+        {/* hero image removed per request */}
+        <div className="relative container-x course-detail-wide py-6 lg:py-8">
           <Link to="/course-category/$slug" params={{ slug: primaryCat.slug }} className="inline-flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white mb-3 group">
             <ArrowLeft className="w-4 h-4 transition group-hover:-translate-x-1" /> {primaryCat.name}
           </Link>
@@ -227,7 +217,6 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
           <a href="#curriculum" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Curriculum</a>
           <a href="#instructor" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Instructor</a>
           <a href="#faqs" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">FAQs</a>
-          <a href="#reviews" className="py-4 font-medium text-slate-400 border-b-2 border-transparent hover:text-white hover:border-yellow-500 transition whitespace-nowrap">Reviews</a>
         </div>
       </nav>
 
@@ -235,8 +224,8 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
         <div className="container-x py-10 lg:py-14">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
             
-            {/* LEFT SIDEBAR - COURSE DETAILS */}
-            <aside className="lg:col-span-2 space-y-5 h-fit">
+            {/* LEFT SIDEBAR - COURSE DETAILS (static on large screens) */}
+            <aside className="lg:col-span-2 space-y-5 h-fit lg:sticky lg:top-32 lg:self-start">
               {/* Course Details Card */}
               <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-4 sm:p-5 space-y-4">
                 <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-tight sm:tracking-wider">Course Details</h3>
@@ -448,156 +437,12 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             </div>
           )}
 
-          {/* Student Reviews Section */}
-          {(() => {
-            // Local state for reviews with localStorage persistence per course slug
-            const [localReviews, setLocalReviews] = useState(() => {
-              try {
-                const key = `reviews:${course.slug}`;
-                const saved = window.localStorage.getItem(key);
-                if (saved) return JSON.parse(saved);
-              } catch (e) {}
-              // normalize existing course.reviews into student-style shape
-              try {
-                const src = course.reviews || [];
-                return src.map((r: any, i: number) => ({
-                  id: r.id || `r-${course.slug}-${i}`,
-                  studentName: r.studentName || r.author || r.name || 'Student',
-                  studentImage: r.studentImage || r.image || '',
-                  rating: r.rating || 5,
-                  title: r.title || (r.comment ? r.comment.split('.').slice(0,1)[0].slice(0,40) : ''),
-                  comment: r.comment || r.text || '',
-                  date: r.date || (r.createdAt ? r.createdAt.slice(0,10) : new Date().toISOString().slice(0,10)),
-                  verified: r.verified || false,
-                  helpful: r.helpful || 0,
-                  adminReply: (r.adminReply || r.reply || undefined),
-                }));
-              } catch (e) {
-                return course.reviews || [];
-              }
-            });
-
-            const nameRef = useRef<HTMLInputElement | null>(null);
-            const titleRef = useRef<HTMLSelectElement | null>(null);
-            const textRef = useRef<HTMLTextAreaElement | null>(null);
-            const ratingRef = useRef<HTMLSelectElement | null>(null);
-
-            function saveReviews(revs: any[]) {
-              try {
-                window.localStorage.setItem(`reviews:${course.slug}`, JSON.stringify(revs));
-              } catch (e) {}
-            }
-
-            function handleAdminReply(index: number) {
-              try {
-                const isAdmin = window.localStorage.getItem('isAdmin') === '1';
-                if (!isAdmin) {
-                  alert('Admin reply: enable admin mode by setting localStorage key isAdmin = 1');
-                  return;
-                }
-                const existing = localReviews[index] || {};
-                const reply = window.prompt('Enter admin reply for this review', existing.adminReply || '');
-                if (reply === null) return;
-                const updated = localReviews.map((r: any, i: number) => i === index ? { ...r, adminReply: reply } : r);
-                setLocalReviews(updated);
-                saveReviews(updated);
-              } catch (e) {}
-            }
-
-            function handleSubmit(e: React.FormEvent) {
-              e.preventDefault();
-              const name = nameRef.current?.value?.trim() || 'Anonymous';
-              const title = titleRef.current?.value?.trim() || 'Great course';
-              const comment = textRef.current?.value?.trim() || '';
-              const rating = parseInt(ratingRef.current?.value || '5', 10);
-              if (!comment) return;
-              const newReview = {
-                id: `r-${course.slug}-${Date.now()}`,
-                studentName: name,
-                studentImage: '',
-                rating,
-                title,
-                comment,
-                date: new Date().toISOString().slice(0,10),
-                verified: false,
-                helpful: 0,
-              };
-              const updated = [newReview, ...localReviews];
-              setLocalReviews(updated);
-              saveReviews(updated);
-              if (nameRef.current) nameRef.current.value = '';
-              if (titleRef.current) titleRef.current.value = 'Practical';
-              if (textRef.current) textRef.current.value = '';
-            }
-
-            return (
-              <div id="reviews" className="scroll-mt-24">
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
-                  <div className="w-1 h-6 bg-gradient-to-b from-rose-600 to-rose-500"></div>
-                  Student Reviews
-                </h2>
-                <div className="space-y-4">
-                  {localReviews.map((r: any, i: number) => (
-                    <div key={r.id || i} className="p-3 sm:p-5 border border-slate-300 dark:border-slate-700 rounded-xl bg-white dark:bg-slate-900 hover:shadow-lg transition-all">
-                      <div className="flex items-start gap-2 sm:gap-4">
-                        <div className="w-10 sm:w-14 h-10 sm:h-14 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-slate-300 dark:border-slate-700 flex-shrink-0">
-                          <img src={r.studentImage || '/reviews/default-avatar.svg'} alt={r.studentName} className="w-9 sm:w-13 h-9 sm:h-13 object-contain" onError={(e)=>{ (e.currentTarget as HTMLImageElement).src = '/reviews/default-avatar.svg'; }} />
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between gap-2 flex-wrap">
-                            <div>
-                              <div className="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 tracking-wide">{r.studentName}</div>
-                              <div className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-0.5 sm:mt-1 font-semibold">{r.title ? r.title + ' · ' : ''}<span className="text-rose-700 dark:text-rose-400 font-bold">{r.rating} ★</span></div>
-                            </div>
-                          </div>
-                          <div className="mt-2 sm:mt-3 text-sm sm:text-base text-slate-700 dark:text-slate-300 leading-relaxed font-medium tracking-wide">{r.comment}</div>
-                          {r.adminReply && (
-                            <div className="mt-3 sm:mt-4 p-2 sm:p-4 border border-slate-300 dark:border-slate-700 rounded-lg bg-slate-50 dark:bg-slate-800 text-xs sm:text-sm">
-                              <div className="text-xs text-slate-600 dark:text-slate-400 font-bold uppercase mb-1 sm:mb-2 tracking-wider">Admin Reply</div>
-                              <div className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium tracking-wide">{r.adminReply}</div>
-                            </div>
-                          )}
-                        </div>
-                        <button type="button" onClick={() => handleAdminReply(i)} className="text-xs px-2 sm:px-3 py-1 sm:py-2 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-900 hover:text-white dark:hover:bg-slate-700 transition flex-shrink-0 font-semibold tracking-wide">Reply</button>
-                      </div>
-                    </div>
-                  ))}
-
-                  <div className="p-3 sm:p-6 border border-dashed border-slate-400 dark:border-slate-600 rounded-xl bg-slate-50 dark:bg-slate-800">
-                    <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-bold text-center mb-3 sm:mb-4 tracking-wide">Have feedback? Add a review below:</div>
-                    <form onSubmit={handleSubmit} className="space-y-2 sm:space-y-3">
-                      <input ref={nameRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" placeholder="Your name" />
-                      <select ref={titleRef} defaultValue="Practical" className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
-                        <option value="Practical">Practical</option>
-                        <option value="Learned">Learned</option>
-                        <option value="Well structured">Well structured</option>
-                        <option value="Good pacing">Good pacing</option>
-                        <option value="Concise modules">Concise modules</option>
-                        <option value="Excellent content">Excellent content</option>
-                      </select>
-                      <textarea ref={textRef} className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent" rows={3} placeholder="Your review" />
-                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-center">
-                        <label className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-bold tracking-wide">Rating:</label>
-                        <select ref={ratingRef} defaultValue="5" className="px-2 sm:px-3 py-2 sm:py-2.5 border border-slate-300 dark:border-slate-700 rounded-lg bg-white dark:bg-slate-900 text-sm sm:text-base text-slate-900 dark:text-slate-100 font-semibold focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent">
-                          <option value="5">5 ★</option>
-                          <option value="4">4 ★</option>
-                          <option value="3">3 ★</option>
-                          <option value="2">2 ★</option>
-                          <option value="1">1 ★</option>
-                        </select>
-                        <button type="submit" className="w-full sm:w-auto sm:ml-auto px-4 sm:px-6 py-2 sm:py-3 bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 dark:hover:bg-slate-600 text-white rounded-lg text-sm sm:text-base font-bold transition tracking-wide">Submit Review</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            );
-          })()}
+          {/* Reviews removed per request */}
             </div>
 
             {/* RIGHT SIDEBAR - RELATED COURSES */}
             <aside className="lg:col-span-3">
-              <div className="sticky top-32">
+                <div className="lg:sticky lg:top-32">
                 {/* Video Card */}
                 <div className="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border border-slate-700 rounded-2xl overflow-hidden shadow-xl mb-6">
                   {/* Video Block */}

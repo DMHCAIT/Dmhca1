@@ -20,20 +20,32 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // Approved specialties to display in signup flow (order-preserved)
   const interests = [
-    'Gynaecology and Obstetrics',
-    'Gastroenterology',
-    'Nephrology',
-    'Pulmonology',
-    'Rehabilitation',
-    'Internal Medicine',
+    'All specialties',
     'Cardiology',
     'Radiology',
-    'Dermatology',
-    'Oncology',
+    'Medicine',
+    'Obs & Gynae',
+    'Emergency',
     'Orthopedics',
+    'Dermatology',
+    'General Surgery',
+    'Oncology',
+    'Endocrinology',
     'Neurology',
+    'Pediatrics',
+    'Reproductive',
+    'Pulmonary',
+    'Nutrition',
+    'Dental',
+    'Gastroenterology',
+    'Urology',
+    'Management',
   ];
+  const [page, setPage] = useState(0);
+  const pageSize = 8;
+  const maxPages = Math.ceil(interests.length / pageSize);
 
   const handleNext = () => {
     if (step === 1 && !formData.full_name.trim()) {
@@ -221,8 +233,8 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What are your interests?</h3>
               <p className="text-sm text-gray-600">Select up to 3 specialties that interest you most</p>
             </div>
-            <div className="grid grid-cols-2 gap-2 mb-4 max-h-48 overflow-y-auto">
-              {interests.map((interest) => (
+            <div className="grid grid-cols-2 gap-2 mb-4">
+              {interests.slice(page * pageSize, page * pageSize + pageSize).map((interest) => (
                 <button
                   key={interest}
                   onClick={() => toggleInterest(interest)}
@@ -235,6 +247,15 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                   {interest}
                 </button>
               ))}
+            </div>
+            <div className="mb-4">
+              <span
+                role="button"
+                onClick={() => setPage((p) => (p < maxPages - 1 ? p + 1 : 0))}
+                className="text-sm text-navy-deep dark:text-gold cursor-pointer select-none px-2 py-1 rounded-md"
+              >
+                {page < maxPages - 1 ? 'Show more' : 'Show less'}
+              </span>
             </div>
             <p className="text-xs text-gray-500 mb-4">
               Selected: {formData.interests.length}/3

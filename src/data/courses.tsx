@@ -6648,7 +6648,7 @@ faqs: [
     image: "/courses/Blue-Pink-Illustrative-Breast-Cancer-Awareness-Instagram-Post-2-410x290.webp",
     heroDescription: "Comprehensive Fellowship in Urology: Advanced Training in Diagnosis, Treatment, and Management of Urological Conditions",
     lessons: 35,
-    weeks: 50,
+    months: 50,
     level: "expert",
     priceINR: 140000,
     rating: null,
