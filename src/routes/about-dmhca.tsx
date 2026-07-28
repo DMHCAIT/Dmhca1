@@ -167,7 +167,7 @@ function About() {
                       <img src={`/Faculty_images/${file}`} alt={name} className="w-full h-full object-cover object-top" />
                     </div>
                     <div className="py-2 text-center bg-white/0">
-                      <div className="text-sm text-navy-deep font-medium">{name}</div>
+                      <div className="text-sm text-navy-deep dark:text-slate-100 font-medium">{name}</div>
                     </div>
                   </div>
                 );
