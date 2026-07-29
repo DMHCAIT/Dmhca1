@@ -1,9 +1,10 @@
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch, useLocation } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Menu, X, ShoppingCart } from "lucide-react";
 import { SignupFlow } from "@/components/SignupFlow";
 import { OTPLoginModal } from "@/components/OTPLoginModal";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ChatbotWidget } from "@/components/ChatbotWidget";
 import { syncLocalCartToServer, loadServerCartToLocal } from '@/lib/cart-sync';
 
 const logo = "/logo.webp";
@@ -23,6 +24,8 @@ export function Header() {
   const [fullName, setFullName] = useState('');
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -158,6 +161,7 @@ export function Header() {
   };
 
   return (
+    <>
     <header className="sticky top-0 z-40 bg-background dark:bg-slate-950 dark:border-b dark:border-slate-800 border-b border-border/50 hairline">
       <div className="container-x flex items-center justify-between h-16">
         <Link to="/" className="flex items-center">
@@ -362,5 +366,8 @@ export function Header() {
         }}
       />
     </header>
+
+    {!isAdminRoute && <ChatbotWidget />}
+    </>
   );
 }

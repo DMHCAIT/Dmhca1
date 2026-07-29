@@ -107,6 +107,7 @@ import { Route as AdminMediaRouteImport } from './routes/admin.media'
 import { Route as AdminEventsRouteImport } from './routes/admin.events'
 import { Route as AdminCoursesRouteImport } from './routes/admin.courses'
 import { Route as AdminCommentsRouteImport } from './routes/admin.comments'
+import { Route as AdminChatbotInquiriesRouteImport } from './routes/admin.chatbot-inquiries'
 import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
 import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
 
@@ -621,6 +622,11 @@ const AdminCommentsRoute = AdminCommentsRouteImport.update({
   path: '/comments',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminChatbotInquiriesRoute = AdminChatbotInquiriesRouteImport.update({
+  id: '/chatbot-inquiries',
+  path: '/chatbot-inquiries',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCertificatesRoute = AdminCertificatesRouteImport.update({
   id: '/certificates',
   path: '/certificates',
@@ -683,6 +689,7 @@ export interface FileRoutesByFullPath {
   '/verify': typeof VerifyRouteWithChildren
   '/admin/applications': typeof AdminApplicationsRoute
   '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/chatbot-inquiries': typeof AdminChatbotInquiriesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
@@ -782,6 +789,7 @@ export interface FileRoutesByTo {
   '/verify': typeof VerifyRouteWithChildren
   '/admin/applications': typeof AdminApplicationsRoute
   '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/chatbot-inquiries': typeof AdminChatbotInquiriesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
@@ -885,6 +893,7 @@ export interface FileRoutesById {
   '/verify': typeof VerifyRouteWithChildren
   '/admin/applications': typeof AdminApplicationsRoute
   '/admin/certificates': typeof AdminCertificatesRoute
+  '/admin/chatbot-inquiries': typeof AdminChatbotInquiriesRoute
   '/admin/comments': typeof AdminCommentsRoute
   '/admin/courses': typeof AdminCoursesRoute
   '/admin/events': typeof AdminEventsRoute
@@ -989,6 +998,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/admin/applications'
     | '/admin/certificates'
+    | '/admin/chatbot-inquiries'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
@@ -1088,6 +1098,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/admin/applications'
     | '/admin/certificates'
+    | '/admin/chatbot-inquiries'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
@@ -1190,6 +1201,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/admin/applications'
     | '/admin/certificates'
+    | '/admin/chatbot-inquiries'
     | '/admin/comments'
     | '/admin/courses'
     | '/admin/events'
@@ -2014,6 +2026,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCommentsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/chatbot-inquiries': {
+      id: '/admin/chatbot-inquiries'
+      path: '/chatbot-inquiries'
+      fullPath: '/admin/chatbot-inquiries'
+      preLoaderRoute: typeof AdminChatbotInquiriesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/certificates': {
       id: '/admin/certificates'
       path: '/certificates'
@@ -2034,6 +2053,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminApplicationsRoute: typeof AdminApplicationsRoute
   AdminCertificatesRoute: typeof AdminCertificatesRoute
+  AdminChatbotInquiriesRoute: typeof AdminChatbotInquiriesRoute
   AdminCommentsRoute: typeof AdminCommentsRoute
   AdminCoursesRoute: typeof AdminCoursesRoute
   AdminEventsRoute: typeof AdminEventsRoute
@@ -2050,6 +2070,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminApplicationsRoute: AdminApplicationsRoute,
   AdminCertificatesRoute: AdminCertificatesRoute,
+  AdminChatbotInquiriesRoute: AdminChatbotInquiriesRoute,
   AdminCommentsRoute: AdminCommentsRoute,
   AdminCoursesRoute: AdminCoursesRoute,
   AdminEventsRoute: AdminEventsRoute,
