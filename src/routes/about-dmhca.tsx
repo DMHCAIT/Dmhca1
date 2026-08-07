@@ -51,7 +51,7 @@ function About() {
       <section className="bg-white border-b border-border">
         <div className="container-x py-12 lg:py-16">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep mb-4">DMHCA — Delhi Medical Health Care Academy</h2>
+            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep dark:text-white mb-4">DMHCA — Delhi Medical Health Care Academy</h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-6">DMHCA, also known as the Delhi Medical Health Care Academy, is a prestigious institute that specializes in medical training courses. Our institute is dedicated to equipping students with the knowledge and skills necessary to provide compassionate, understanding, and effective healthcare to those in need.</p>
             <p className="text-base text-muted-foreground leading-relaxed">Our mission at DMHCA is to provide a transformative healthcare education experience. We believe that education is the key to the future and that healthcare is an essential field for the sustenance, maintenance, and existence of human beings. That is why we are committed to providing our trainees with the competence and skills necessary to ensure the well-being of the world's population with knowledge, conviction, and confidence.</p>
           </div>
@@ -62,7 +62,7 @@ function About() {
       <section className="py-12 lg:py-16">
         <div className="container-x">
           <div className="max-w-4xl mx-auto text-center mb-8">
-            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep mb-2">How it works?</h2>
+            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep dark:text-white mb-2">How it works?</h2>
             <p className="text-sm text-muted-foreground">Explore courses, enroll, and start learning — three simple steps to upskill.</p>
           </div>
 
@@ -153,7 +153,7 @@ function About() {
       <section className="bg-white py-10 lg:py-12">
         <div className="container-x">
           <div className="max-w-3xl mx-auto text-center mb-6">
-            <h2 className="font-display text-2xl lg:text-3xl text-navy-deep mb-1">Academic Leadership Members</h2>
+            <h2 className="font-display text-2xl lg:text-3xl text-navy-deep dark:text-white mb-1">Academic Leadership Members</h2>
             <p className="text-sm text-muted-foreground">Our faculty and leaders guiding academic excellence</p>
           </div>
 

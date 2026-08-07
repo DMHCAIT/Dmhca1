@@ -251,7 +251,7 @@ export function ChatbotWidget(): JSX.Element {
             {isLoading && (
               <div className="flex justify-start animate-in fade-in">
                 <div className="bg-gray-100 dark:bg-slate-700 rounded-2xl rounded-bl-none px-4 py-3 flex items-center gap-2 border border-gray-200 dark:border-slate-600">
-                  <Loader className="w-4 h-4 animate-spin text-navy-deep dark:text-cyan-400" />
+                  <Loader className="w-4 h-4 animate-spin text-navy-deep dark:text-white" />
                   <span className="text-sm text-gray-700 dark:text-gray-300">Processing...</span>
                 </div>
               </div>
@@ -271,7 +271,7 @@ export function ChatbotWidget(): JSX.Element {
                   <div className="relative">
                     {/* Search Box */}
                     <div className="flex items-center gap-2 mb-3 px-4 py-3 border-2 border-cyan-300 dark:border-cyan-500 rounded-xl bg-white dark:bg-slate-800 sticky top-0">
-                      <Search className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
+                      <Search className="w-4 h-4 text-cyan-500 dark:text-white" />
                       <input
                         type="text"
                         placeholder="Search country..."
@@ -299,7 +299,7 @@ export function ChatbotWidget(): JSX.Element {
                           <span className="flex-1 text-gray-900 dark:text-white font-medium group-hover:text-cyan-700 dark:group-hover:text-cyan-300">
                             {country.name}
                           </span>
-                          <span className="text-xs font-bold text-navy-deep dark:text-cyan-400">{country.dial}</span>
+                          <span className="text-xs font-bold text-navy-deep dark:text-white">{country.dial}</span>
                         </button>
                       ))}
                     </div>
@@ -316,7 +316,7 @@ export function ChatbotWidget(): JSX.Element {
                   {currentStep === 'mobile' && selectedCountry && (
                     <div className="flex items-center px-3 py-2 bg-white dark:bg-slate-700 rounded-lg border-2 border-cyan-400 dark:border-cyan-500 font-semibold whitespace-nowrap">
                       <span className="text-lg">{selectedCountry.flag}</span>
-                      <span className="ml-2 text-sm text-cyan-600 dark:text-cyan-400">{selectedCountry.dial}</span>
+                      <span className="ml-2 text-sm text-cyan-600 dark:text-white">{selectedCountry.dial}</span>
                     </div>
                   )}
                   <input

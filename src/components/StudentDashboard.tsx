@@ -101,7 +101,7 @@ export function StudentDashboard({ onLogout }) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 rounded-lg p-4 border-l-4 border-blue-600">
               <p className="text-sm text-gray-700 dark:text-slate-300 font-semibold">User ID</p>
-              <p className="text-lg font-bold text-blue-700 dark:text-blue-300 mt-2 font-mono">
+              <p className="text-lg font-bold text-blue-700 dark:text-white mt-2 font-mono">
                 {studentData?.userId?.substring(0, 12)}...
               </p>
             </div>
@@ -127,7 +127,7 @@ export function StudentDashboard({ onLogout }) {
               {studentData.interests.map((interest, idx) => (
                 <span
                   key={idx}
-                  className="px-4 py-2 bg-gradient-to-r from-blue-100 to-blue-50 dark:from-blue-900/40 dark:to-blue-800/40 text-blue-700 dark:text-blue-300 rounded-full font-semibold border border-blue-200 dark:border-blue-800 hover:shadow-md transition"
+                  className="px-4 py-2 bg-gradient-to-r from-blue-100 to-blue-50 dark:from-blue-900/40 dark:to-blue-800/40 text-blue-700 dark:text-white rounded-full font-semibold border border-blue-200 dark:border-blue-800 hover:shadow-md transition"
                 >
                   {interest}
                 </span>

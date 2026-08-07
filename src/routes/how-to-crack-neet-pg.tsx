@@ -109,13 +109,13 @@ function BlogPost() {
                 Quick Navigation
               </h3>
               <ul className="space-y-2">
-                <li><a href="#step-1" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 1: Understand the Exam</a></li>
-                <li><a href="#step-2" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 2: Plan Your Preparation</a></li>
-                <li><a href="#step-3" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 3: Gather Resources</a></li>
-                <li><a href="#step-4" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 4: Subject-wise Strategy</a></li>
-                <li><a href="#step-5" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 5: Mock Tests</a></li>
-                <li><a href="#step-6" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 6: Revision Strategy</a></li>
-                <li><a href="#step-7" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 text-sm">Step 7: Final Month Preparation</a></li>
+                <li><a href="#step-1" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 1: Understand the Exam</a></li>
+                <li><a href="#step-2" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 2: Plan Your Preparation</a></li>
+                <li><a href="#step-3" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 3: Gather Resources</a></li>
+                <li><a href="#step-4" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 4: Subject-wise Strategy</a></li>
+                <li><a href="#step-5" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 5: Mock Tests</a></li>
+                <li><a href="#step-6" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 6: Revision Strategy</a></li>
+                <li><a href="#step-7" className="text-blue-600 dark:text-white hover:text-blue-700 dark:hover:text-white text-sm">Step 7: Final Month Preparation</a></li>
               </ul>
             </div>
 
@@ -132,7 +132,7 @@ function BlogPost() {
               <div id="step-1" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">1</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">1</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Understand the Exam Pattern</h3>
@@ -162,7 +162,7 @@ function BlogPost() {
               <div id="step-2" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">2</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">2</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Create a Preparation Plan</h3>
@@ -192,7 +192,7 @@ function BlogPost() {
               <div id="step-3" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">3</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">3</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Gather Quality Study Resources</h3>
@@ -222,7 +222,7 @@ function BlogPost() {
               <div id="step-4" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">4</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">4</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Subject-wise Preparation Strategy</h3>
@@ -252,7 +252,7 @@ function BlogPost() {
               <div id="step-5" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">5</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">5</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Practice with Mock Tests</h3>
@@ -282,7 +282,7 @@ function BlogPost() {
               <div id="step-6" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">6</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">6</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Effective Revision Technique</h3>
@@ -312,7 +312,7 @@ function BlogPost() {
               <div id="step-7" className="bg-white dark:bg-slate-800 rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition dark:border-blue-500">
                 <div className="flex items-start gap-4">
                   <div className="bg-blue-100 dark:bg-slate-700 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 dark:text-blue-400 font-bold text-lg">7</span>
+                    <span className="text-blue-600 dark:text-white font-bold text-lg">7</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100 mb-3">Final Month Strategy</h3>
@@ -344,15 +344,15 @@ function BlogPost() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="bg-white dark:bg-slate-700 rounded-lg p-4">
                     <p className="text-gray-600 dark:text-slate-400 text-sm">Theory Phase</p>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">6 months</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-white">6 months</p>
                   </div>
                   <div className="bg-white dark:bg-slate-700 rounded-lg p-4">
                     <p className="text-gray-600 dark:text-slate-400 text-sm">Practice Phase</p>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">4 months</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-white">4 months</p>
                   </div>
                   <div className="bg-white dark:bg-slate-700 rounded-lg p-4">
                     <p className="text-gray-600 dark:text-slate-400 text-sm">Total Duration</p>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">10-12 months</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-white">10-12 months</p>
                   </div>
                 </div>
               </div>
@@ -415,7 +415,7 @@ function BlogPost() {
                         <h3 className="font-semibold text-gray-800 dark:text-slate-100 pr-4 text-lg">{faq.question}</h3>
                         <ChevronDown
                           size={20}
-                          className={`flex-shrink-0 text-blue-600 dark:text-blue-400 transition-transform ${
+                          className={`flex-shrink-0 text-blue-600 dark:text-white transition-transform ${
                             expandedFaq === index ? 'transform rotate-180' : ''
                           }`}
                         />
@@ -512,7 +512,7 @@ function BlogPost() {
                 <div className="space-y-4">
                   <div>
                     <p className="text-gray-600 dark:text-slate-400 text-sm">Reading Time</p>
-                    <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">{readingTime} min</p>
+                    <p className="text-2xl font-bold text-blue-600 dark:text-white">{readingTime} min</p>
                   </div>
                   <div className="border-t border-gray-200 dark:border-slate-700 pt-4">
                     <p className="text-gray-600 dark:text-slate-400 text-sm">Category</p>

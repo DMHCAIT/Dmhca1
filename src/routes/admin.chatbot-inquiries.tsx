@@ -131,7 +131,7 @@ function AdminChatbotInquiries() {
       case 'new':
         return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
       case 'reviewed':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200';
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-white';
       case 'contacted':
         return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
       case 'enrolled':
@@ -290,7 +290,7 @@ function AdminChatbotInquiries() {
                 <p className="text-xs font-semibold text-gray-600 dark:text-gray-400 mb-1 flex items-center gap-1">
                   <Mail className="w-3 h-3" /> EMAIL
                 </p>
-                <p className="text-sm font-medium text-blue-600 dark:text-blue-400 break-all">{selectedInquiry.email}</p>
+                <p className="text-sm font-medium text-blue-600 dark:text-white break-all">{selectedInquiry.email}</p>
               </div>
 
               <div className="bg-gray-50 dark:bg-slate-700 p-3 rounded-lg">

@@ -161,7 +161,7 @@ function CityWiseMedicalCourses() {
                     <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">
                       {category.courseCount} course{category.courseCount !== 1 ? 's' : ''}
                     </span>
-                    <span className="text-blue-600 dark:text-blue-400 group-hover:translate-x-1 transition">
+                    <span className="text-blue-600 dark:text-white group-hover:translate-x-1 transition">
                       →
                     </span>
                   </div>

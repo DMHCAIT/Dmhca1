@@ -64,8 +64,8 @@ function Sitemap() {
       {/* Hero Section */}
       <section className="site-hero">
         <div className="container-x">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">Navigation</div>
-          <h1 className="font-display text-4xl md:text-5xl text-navy-deep mt-3">Sitemap</h1>
+          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">Navigation</div>
+          <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">Sitemap</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
             Explore all medical programs, specialties, and resources available at DMHCA.
           </p>
@@ -77,7 +77,7 @@ function Sitemap() {
         <div className="container-x space-y-16">
           {/* Top Medical Courses - Specialty Pages */}
           <div>
-            <h2 className="font-display text-3xl text-navy-deep mb-8">Top Medical Courses</h2>
+            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">Top Medical Courses</h2>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
               {topMedicalCourses.map((specialty) => (
                 <Link
@@ -100,7 +100,7 @@ function Sitemap() {
 
           {/* Original List Of Medical Courses */}
           <div className="mt-12 pt-12 border-t border-slate-200">
-            <h2 className="font-display text-3xl text-navy-deep mb-8">List Of Medical Courses</h2>
+            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">List Of Medical Courses</h2>
             
             {/* Fellowships */}
             <div className="mb-12">
@@ -168,7 +168,7 @@ function Sitemap() {
 
            {/* List Of Medical Courses City Wise */}
           <div>
-            <h2 className="font-display text-3xl text-navy-deep mb-8">List of Medical Courses City Wise</h2>
+            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">List of Medical Courses City Wise</h2>
             
             {/* City-Wise Courses by Specialty */}
             <div className="space-y-12">
@@ -208,7 +208,7 @@ function Sitemap() {
 
           {/* Blogs Section */}
           <div>
-            <h2 className="font-display text-3xl text-navy-deep mb-8">Blogs</h2>
+            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">Blogs</h2>
             <div className="space-y-6">
               {/* Featured View All Blogs Card */}
               <Link
@@ -266,7 +266,7 @@ function Sitemap() {
 
           {/* Statistics */}
           <div className="bg-slate-50 rounded-xl p-8 border border-slate-200">
-            <h2 className="font-display text-2xl text-navy-deep mb-6">Program Overview</h2>
+            <h2 className="font-display text-2xl text-navy-deep dark:text-white mb-6">Program Overview</h2>
             <div className="grid gap-6 md:grid-cols-3">
               <div>
                 <div className="text-4xl font-black text-gold">{courses.length}+</div>

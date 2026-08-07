@@ -298,9 +298,31 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
             </div>
           </div>
 
+          {/* Academic partners (placed directly below Course Overview) */}
+          <section className="py-2">
+            <div id="academic-partners" className="scroll-mt-24 mt-2">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3 mt-1 flex items-center gap-3">
+                <div className="w-1 h-6 bg-gradient-to-b from-navy-deep to-navy"></div>
+                Academic partners
+              </h2>
+
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 sm:p-6 shadow-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 items-center">
+                  {[ 'ACTD-2.webp', 'btu_hero_logo.webp', 'duke logo.webp', 'IBMP LOGO .webp', 'logo-srdu.webp' ].map((file) => (
+                    <div key={file} className="rounded-lg bg-white/80 dark:!bg-white p-2 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
+                      <div className="w-32 h-20 md:w-36 md:h-24 lg:w-40 lg:h-28 flex items-center justify-center bg-white dark:!bg-white rounded-md">
+                        <img src={`/ACADEMIC PARTNERS/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* What you'll learn */}
           {course.learn.length > 0 && (
-            <div id="learn" className="scroll-mt-24">
+            <div id="learn" className="scroll-mt-24 mt-1">
               <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-4 flex items-center gap-3">
                 <div className="w-1 h-6 bg-gradient-to-b from-emerald-600 to-emerald-500"></div>
                 What You'll Learn
@@ -310,7 +332,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                   <div key={idx} className="border border-slate-300 dark:border-slate-700 rounded-xl p-3 sm:p-5 bg-white dark:bg-slate-900 hover:border-emerald-300 hover:shadow-md transition-all">
                     <div className="flex gap-2 sm:gap-3">
                       <div className="w-5 sm:w-6 h-5 sm:h-6 rounded-full bg-emerald-100 dark:bg-emerald-900 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <svg className="w-3 sm:w-4 h-3 sm:h-4 text-emerald-700 dark:text-emerald-300" fill="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-3 sm:w-4 h-3 sm:h-4 text-emerald-700 dark:text-white" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                         </svg>
                       </div>
@@ -321,7 +343,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
               </div>
             </div>
           )}
-
+ 
           {/* Requirements */}
           {course.requirements && course.requirements.length > 0 && (
             <div id="requirements" className="scroll-mt-24">
@@ -374,7 +396,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                             <ul className="space-y-2">
                               {(course.moduleDetails[i] as string[]).map((lesson, li) => (
                                 <li key={li} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 hover:bg-navy-deep/5 transition">
-                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-navy-deep dark:text-blue-400 flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
+                                  <svg className="w-4 sm:w-5 h-4 sm:h-5 text-navy-deep dark:text-white flex-shrink-0 font-bold" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                   </svg>
                                   <span className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium tracking-wide">{lesson}</span>
@@ -406,7 +428,7 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                     </div>
                     <div className="flex-1">
                       <div className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base tracking-wide">{trainer.name}</div>
-                      {trainer.title && <div className="text-xs sm:text-sm text-teal-700 dark:text-teal-400 font-semibold mt-1 tracking-wide">{trainer.title}</div>}
+                      {trainer.title && <div className="text-xs sm:text-sm text-teal-700 dark:text-white font-semibold mt-1 tracking-wide">{trainer.title}</div>}
                       {trainer.bio && <div className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 mt-2 sm:mt-2.5 leading-relaxed font-medium">{trainer.bio}</div>}
                     </div>
                   </div>

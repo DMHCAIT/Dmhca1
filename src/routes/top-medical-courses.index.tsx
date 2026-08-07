@@ -112,8 +112,8 @@ function AllCourses() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(allCoursesSchema) }} />
       <section className="site-hero">
         <div className="container-x">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">Catalogue</div>
-          <h1 className="font-display text-4xl md:text-5xl text-navy-deep mt-3">All programs.</h1>
+          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">Catalogue</div>
+          <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">All programs.</h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">Filter across {categories.length} specialties and three program formats — Certificate, PG Diploma, and Fellowship.</p>
         </div>
       </section>
