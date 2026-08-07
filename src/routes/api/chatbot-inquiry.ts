@@ -37,7 +37,6 @@ async function sendToTeleCRM(data: any) {
           email: data.email,
           phone: cleanedPhone,
           message: `Course Interest: ${data.course}`,
-          source: 'chatbot_widget',
           website_url: 'https://www.dmhca.in/',
         },
       },
@@ -47,7 +46,6 @@ async function sendToTeleCRM(data: any) {
         email: data.email,
         phone: cleanedPhone,
         message: `Course Interest: ${data.course}`,
-        source: 'chatbot_widget',
         website_url: 'https://www.dmhca.in/',
       },
       {
@@ -57,7 +55,6 @@ async function sendToTeleCRM(data: any) {
           email: data.email,
           phone: cleanedPhone,
           message: `Course Interest: ${data.course}`,
-          source: 'chatbot_widget',
           website_url: 'https://www.dmhca.in/',
         },
       },
@@ -66,7 +63,7 @@ async function sendToTeleCRM(data: any) {
     const normalizedApiUrl = telecrmApiUrl.replace(/\/$/, '');
     let baseUrl = normalizedApiUrl;
     if (/autoupdate\/v2/i.test(normalizedApiUrl) && telecrmEnterpriseId) {
-      baseUrl = `https://next.telecrm.in/enterprise/${telecrmEnterpriseId}/autoupdatelead`;
+      baseUrl = `https://next-api.telecrm.in/enterprise/${telecrmEnterpriseId}/autoupdatelead`;
     } else if (!/autoupdate|autoupdatelead|enterprise/i.test(normalizedApiUrl)) {
       baseUrl = `${normalizedApiUrl}/leads`;
     }
