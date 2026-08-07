@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, JSX } from 'react';
 import { X, Send, Sparkles, Loader, Search } from 'lucide-react';
 import { COUNTRIES } from '@/lib/countries';
 import { submitChatbotInquiry } from '@/routes/api/chatbot-inquiry';
@@ -37,18 +37,8 @@ export function ChatbotWidget(): JSX.Element {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Initialize greeting only once when widget opens
-  useEffect(() => {
-    if (isOpen && messages.length === 0) {
-      const greeting: Message = {
-        id: `${Date.now()}-greeting`,
-        text: "Hello! 👋 Welcome to DMHCA. I'm here to help you find the perfect medical course. What's your name?",
-        sender: 'bot',
-        timestamp: new Date(),
-      };
-      setMessages([greeting]);
-    }
-  }, [isOpen, messages.length]);
+  // Do not initialize greeting - let user type first
+  // Messages array will remain empty until user sends first message
 
   const addMessage = (text: string, sender: 'user' | 'bot'): void => {
     const newMessage: Message = {
@@ -88,13 +78,10 @@ export function ChatbotWidget(): JSX.Element {
   const handleStepFlow = (userInput: string): void => {
     switch (currentStep) {
       case 'greeting': {
-        if (userInput.length < 2) {
-          addMessage('Please enter a valid name (at least 2 characters)', 'bot');
-          return;
-        }
-        setFormData((prev) => ({ ...prev, name: userInput }));
-        setCurrentStep('email');
-        addMessage(`Nice to meet you, ${userInput}! 🎉 What's your email address?`, 'bot');
+        // Greet back with user's greeting, then ask for name
+        const userGreeting = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
+        addMessage(`${userGreeting}! 👋 Welcome to DMHCA. Thanks for reaching out. I'm here to help you find the perfect medical course. What's your full name?`, 'bot');
+        setCurrentStep('name');
         break;
       }
 
@@ -105,7 +92,7 @@ export function ChatbotWidget(): JSX.Element {
         }
         setFormData((prev) => ({ ...prev, name: userInput }));
         setCurrentStep('email');
-        addMessage('Great! Now what\'s your email address?', 'bot');
+        addMessage(`Nice to meet you, ${userInput}! 🎉 What's your email address?`, 'bot');
         break;
       }
 
@@ -172,24 +159,21 @@ export function ChatbotWidget(): JSX.Element {
   };
 
   const handleReset = (): void => {
-    setCurrentStep('name');
+    setCurrentStep('greeting');
     setFormData({ name: '', email: '', countryCode: '', mobile: '', course: '' });
     setInput('');
     setShowCountryPicker(false);
     setSelectedCountry(null);
     setCountrySearch('');
     
-    const greeting: Message = {
-      id: `${Date.now()}-reset-greeting`,
-      text: "Hello! 👋 Welcome to DMHCA. I'm here to help you find the perfect medical course. What's your name?",
-      sender: 'bot',
-      timestamp: new Date(),
-    };
-    setMessages([greeting]);
+    // Clear messages - start fresh, user types first
+    setMessages([]);
   };
 
   const getInputPlaceholder = (): string => {
     switch (currentStep) {
+      case 'greeting':
+        return 'Type hello or hi to get started...';
       case 'name':
         return 'Enter your full name...';
       case 'email':
