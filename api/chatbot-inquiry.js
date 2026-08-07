@@ -4,6 +4,99 @@ const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+// Send lead to TeleCRM API
+async function sendToTeleCRM(data) {
+  const telecrmToken = process.env.TELECRM_SYNC_TOKEN;
+  const telecrmApiUrl = process.env.TELECRM_API_URL;
+  const telecrmEnterpriseId = process.env.TELECRM_ENTERPRISE_ID;
+
+  if (!telecrmToken || !telecrmApiUrl) {
+    console.warn('Skipping TeleCRM - missing configuration');
+    return;
+  }
+
+  try {
+    const cleanedPhone = data.phone.replace(/\D/g, '');
+
+    // Prepare candidate payloads; prefer `fields` shape for this enterprise
+    const candidates = [
+      {
+        // wrapped under 'fields' (accepted by this workspace)
+        fields: {
+          name: data.name,
+          email: data.email,
+          phone: cleanedPhone,
+          message: `Course Interest: ${data.course}`,
+          source: 'chatbot_widget',
+          website_url: 'https://www.dmhca.in/',
+        },
+      },
+      {
+        // flat top-level fields
+        name: data.name,
+        email: data.email,
+        phone: cleanedPhone,
+        message: `Course Interest: ${data.course}`,
+        source: 'chatbot_widget',
+        website_url: 'https://www.dmhca.in/',
+      },
+      {
+        // wrapped under 'lead'
+        lead: {
+          name: data.name,
+          email: data.email,
+          phone: cleanedPhone,
+          message: `Course Interest: ${data.course}`,
+          source: 'chatbot_widget',
+          website_url: 'https://www.dmhca.in/',
+        },
+      },
+    ];
+
+    const normalizedApiUrl = telecrmApiUrl.replace(/\/$/, '');
+    let baseUrl = normalizedApiUrl;
+    if (/autoupdate\/v2/i.test(normalizedApiUrl) && telecrmEnterpriseId) {
+      baseUrl = `https://next-api.telecrm.in/enterprise/${telecrmEnterpriseId}/autoupdatelead`;
+    } else if (!/autoupdate|autoupdatelead|enterprise/i.test(normalizedApiUrl)) {
+      baseUrl = `${normalizedApiUrl}/leads`;
+    }
+
+    let sent = false;
+    for (const payload of candidates) {
+      try {
+        console.log('TeleCRM attempt URL:', baseUrl);
+        console.log('TeleCRM attempt payload:', payload);
+
+        const res = await fetch(baseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${telecrmToken}`,
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const text = await res.text();
+        console.log('TeleCRM attempt status:', res.status, 'body:', text);
+
+        if (res.ok) {
+          console.log('Chatbot lead successfully sent to TeleCRM with payload variant');
+          sent = true;
+          break;
+        }
+      } catch (err) {
+        console.error('Error sending TeleCRM attempt:', err);
+      }
+    }
+
+    if (!sent) {
+      console.error('All TeleCRM payload attempts failed. See logs above for details.');
+    }
+  } catch (err) {
+    console.error('Error sending lead to TeleCRM:', err);
+  }
+}
+
 export async function post(req) {
   try {
     const { name, email, mobile, course, timestamp } = await req.json();
@@ -57,6 +150,14 @@ export async function post(req) {
     }
 
     console.log('Inquiry saved successfully:', data);
+
+    // Fire-and-forget: send lead to TeleCRM (do not block main request)
+    sendToTeleCRM({
+      name: name.trim(),
+      email: email.trim().toLowerCase(),
+      phone: cleanPhone,
+      course: course.trim(),
+    });
 
     return new Response(JSON.stringify({
       success: true,
