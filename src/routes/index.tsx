@@ -525,10 +525,10 @@ function Home() {
         <div className="container-home">
         <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
           <div>
-            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">Specialties</div>
-            <h2 className="font-display text-3xl md:text-4xl text-navy-deep mt-3">Find your discipline</h2>
+            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">Specialties</div>
+            <h2 className="font-display text-3xl md:text-4xl text-navy-deep dark:text-white mt-3">Find your discipline</h2>
           </div>
-          <Link to="/top-medical-courses" className="text-sm text-navy-deep hover:text-gold">All categories →</Link>
+          <Link to="/top-medical-courses" className="text-sm text-navy-deep dark:text-white hover:text-gold">All categories →</Link>
         </div>
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -659,7 +659,7 @@ function Home() {
       <section className="bg-hero-light dark:bg-white text-on-hero-light py-12">
         <div className="container-home">
         <div className="text-center mb-12">
-          <h2 className="font-display text-3xl md:text-4xl text-navy-deep mt-3">Academic partners</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-navy-deep dark:text-white mt-3">Academic partners</h2>
           <p className="text-muted-foreground mt-2 max-w-2xl mx-auto text-sm">DMHCA programs are delivered in academic collaboration with internationally recognised universities and medical institutions.</p>
         </div>
         
@@ -745,11 +745,11 @@ function Home() {
       </section>
 
       {/* Training partners - moving marquee */}
-      <section className="bg-white/60 dark:bg-white/95 py-8">
+      <section className="bg-white/60 dark:bg-navy-deep/10 py-8">
         <div className="container-home">
           <div className="text-center mb-6">
-            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule inline-block">Training partners</div>
-            <h2 className="font-display text-2xl md:text-3xl text-navy-deep mt-2">Our training partners</h2>
+            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule inline-block">Training partners</div>
+            <h2 className="font-display text-2xl md:text-3xl text-navy-deep dark:text-white mt-2">Our training partners</h2>
           </div>
 
           <div className="overflow-hidden">
