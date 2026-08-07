@@ -15,13 +15,20 @@ const getSupabaseClient = () => {
 };
 
 // Send lead to TeleCRM API
-async function sendToTeleCRM(data: any) {
+async function sendToTeleCRM(data: {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+  course?: string;
+  website_url?: string;
+}) {
   const telecrmToken = process.env.TELECRM_SYNC_TOKEN;
   const telecrmApiUrl = process.env.TELECRM_API_URL;
   const telecrmEnterpriseId = process.env.TELECRM_ENTERPRISE_ID;
 
   if (!telecrmToken || !telecrmApiUrl) {
-    console.warn('[Chatbot] Skipping TeleCRM - missing configuration');
+    console.warn('Skipping TeleCRM - missing configuration');
     return;
   }
 
@@ -36,8 +43,8 @@ async function sendToTeleCRM(data: any) {
           name: data.name,
           email: data.email,
           phone: cleanedPhone,
-          message: `Course Interest: ${data.course}`,
-          website_url: 'https://www.dmhca.in/',
+          message: data.message,
+          website_url: data.website_url,
         },
       },
       {
@@ -45,8 +52,8 @@ async function sendToTeleCRM(data: any) {
         name: data.name,
         email: data.email,
         phone: cleanedPhone,
-        message: `Course Interest: ${data.course}`,
-        website_url: 'https://www.dmhca.in/',
+        message: data.message,
+        website_url: data.website_url,
       },
       {
         // wrapped under 'lead'
@@ -54,8 +61,8 @@ async function sendToTeleCRM(data: any) {
           name: data.name,
           email: data.email,
           phone: cleanedPhone,
-          message: `Course Interest: ${data.course}`,
-          website_url: 'https://www.dmhca.in/',
+          message: data.message,
+          website_url: data.website_url,
         },
       },
     ];
@@ -71,8 +78,8 @@ async function sendToTeleCRM(data: any) {
     let sent = false;
     for (const payload of candidates) {
       try {
-        console.log('[Chatbot] TeleCRM attempt URL:', baseUrl);
-        console.log('[Chatbot] TeleCRM attempt payload:', payload);
+        console.log('TeleCRM attempt URL:', baseUrl);
+        console.log('TeleCRM attempt payload:', payload);
 
         const res = await fetch(baseUrl, {
           method: 'POST',
@@ -84,23 +91,23 @@ async function sendToTeleCRM(data: any) {
         });
 
         const text = await res.text();
-        console.log('[Chatbot] TeleCRM attempt status:', res.status, 'body:', text);
+        console.log('TeleCRM attempt status:', res.status, 'body:', text);
 
         if (res.ok) {
-          console.log('[Chatbot] Lead successfully sent to TeleCRM with payload variant');
+          console.log('Lead successfully sent to TeleCRM with payload variant');
           sent = true;
           break;
         }
       } catch (err) {
-        console.error('[Chatbot] Error sending TeleCRM attempt:', err);
+        console.error('Error sending TeleCRM attempt:', err);
       }
     }
 
     if (!sent) {
-      console.error('[Chatbot] All TeleCRM payload attempts failed. See logs above for details.');
+      console.error('All TeleCRM payload attempts failed. See logs above for details.');
     }
   } catch (err) {
-    console.error('[Chatbot] Error sending lead to TeleCRM:', err);
+    console.error('Error sending lead to TeleCRM:', err);
   }
 }
 
@@ -165,11 +172,16 @@ export const submitChatbotInquiry = createServerFn({ method: 'POST' })
       console.log('[Chatbot Inquiry] Saved successfully:', data);
 
       // Fire-and-forget: send lead to TeleCRM (do not block main request)
+      // Build full phone with country code (e.g., "+91 9812345689")
+      const fullPhone = mobile.includes('+') ? mobile : `+91 ${mobile}`;
+      
       sendToTeleCRM({
         name: name.trim(),
         email: email.trim().toLowerCase(),
-        phone: cleanPhone,
+        phone: fullPhone,
+        message: `Course Interest: ${course.trim()}`,
         course: course.trim(),
+        website_url: 'https://www.dmhca.in/',
       });
 
       return {
