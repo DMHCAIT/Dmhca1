@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "source": "https://dmhca.in/top-medical-courses/",
+    "extractionDate": "2026-06-13",
+    "totalCourses": 75,
+    "version": "1.0"
+  },
+  "categories": [
+    "Cardiology",
+    "Dental",
+    "Dermatology",
+    "Emergency",
+    "Endocrinology",
+    "Gastroenterology",
+    "General Surgery",
+    "Management",
+    "Medicine",
+    "Neurology",
+    "Nutrition",
+    "Obs & Gynae",
+    "Oncology",
+    "Orthopedics",
+    "Pediatrics",
+    "Pulmonary",
+    "Radiology",
+    "Reproductive",
+    "Urology"
+  ],
+  "programs": [
+    "Certificate",
+    "PG Diploma",
+    "Fellowship"
+  ],
+  "levels": [
+    "beginner",
+    "intermediate",
+    "expert"
+  ],
+  "statistics": {
+    "byProgram": {
+      "Certificate": 12,
+      "PG Diploma": 12,
+      "Fellowship": 51
+    },
+    "byLevel": {
+      "beginner": 20,
+      "intermediate": 12,
+      "expert": 43
+    },
+    "byCategory": {
+      "Cardiology": 6,
+      "Dental": 2,
+      "Dermatology": 5,
+      "Emergency": 5,
+      "Endocrinology": 6,
+      "Gastroenterology": 2,
+      "General Surgery": 6,
+      "Management": 2,
+      "Medicine": 5,
+      "Neurology": 4,
+      "Nutrition": 2,
+      "Obs & Gynae": 12,
+      "Oncology": 4,
+      "Orthopedics": 3,
+      "Pediatrics": 5,
+      "Pulmonary": 2,
+      "Radiology": 5,
+      "Reproductive": 5,
+      "Urology": 2
+    },
+    "priceRange": {
+      "minimum": 15000,
+      "maximum": 195000,
+      "average": 113200,
+      "median": 120000,
+      "currency": "INR"
+    }
+  },
+  "instructor": {
+    "name": "DMHCA",
+    "fullName": "Delhi Medical Healthcare Academy",
+    "website": "https://dmhca.in",
+    "coursesCount": 75
+  },
+  "notes": {
+    "imageQuality": "HD quality (410x290px minimum)",
+    "dataVerification": "All URLs verified and accessible",
+    "lastUpdated": "2026-06-13",
+    "disclaimer": "Prices and course details extracted from website and may change. Please verify on official website for latest information."
+  }
+}
