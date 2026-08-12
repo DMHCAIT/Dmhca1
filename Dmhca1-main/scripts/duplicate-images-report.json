@@ -1,0 +1,55 @@
+{
+  "totalCourses": 75,
+  "uniqueImages": 68,
+  "duplicates": [
+    {
+      "img": "/courses/assd-410x290.webp",
+      "count": 2,
+      "indexes": [
+        0,
+        74
+      ]
+    },
+    {
+      "img": "/courses/Cardiac-Surgeons-410x290.webp",
+      "count": 2,
+      "indexes": [
+        2,
+        7
+      ]
+    },
+    {
+      "img": "/courses/21003304_cardio_onc_og-410x290.webp",
+      "count": 3,
+      "indexes": [
+        3,
+        6,
+        8
+      ]
+    },
+    {
+      "img": "/courses/Robotic--410x290.webp",
+      "count": 2,
+      "indexes": [
+        4,
+        49
+      ]
+    },
+    {
+      "img": "/courses/Lead-post-chandan-4-410x290.webp",
+      "count": 2,
+      "indexes": [
+        5,
+        50
+      ]
+    },
+    {
+      "img": "/courses/dermatopathology-410x290.webp",
+      "count": 2,
+      "indexes": [
+        13,
+        44
+      ]
+    }
+  ]
+}

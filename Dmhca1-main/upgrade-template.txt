@@ -1,0 +1,80 @@
+Professional Blog Upgrade Template
+
+Key Changes Required for Each File:
+1. Update imports to include: Clock, BookOpen, CheckCircle2
+2. Add readingTime = 8 (DONE)
+3. Replace hero section with enhanced version including metadata
+4. Add featured image with caption
+5. Create 3-col main + 1-col sidebar grid layout
+6. Add quick navigation sidebar
+7. Replace main content with professional step boxes
+8. Keep FAQs and comments sections (enhance styling)
+9. Add CTA section
+10. Add right sidebar with article info cards
+
+File-Specific Content Mapping:
+
+how-to-become-a-cosmetologist.tsx
+- Image: /blog-images/How-to-Become-a-Cosmetologist.webp
+- Title: How to Become a Cosmetologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD Dermatology + Fellowship path
+- CTA: Contact Us for Cosmetology Guidance
+
+how-to-become-a-diabetologist.tsx
+- Image: /blog-images/How-to-Become-a-Diabetologist.webp
+- Title: How to Become a Diabetologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD Internal Medicine + DM Endocrinology
+- CTA: Contact Us for Diabetology Guidance
+
+how-to-become-a-neurologist.tsx
+- Image: /blog-images/How-to-Become-a-Neurologist.webp
+- Title: How to Become a Neurologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD Neurology
+- CTA: Contact Us for Neurology Guidance
+
+how-to-become-an-embryologist.tsx
+- Image: /blog-images/How-to-Become-an-Embryologist.webp
+- Title: How to Become an Embryologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD/DM Reproductive Medicine
+- CTA: Contact Us for Embryology Guidance
+
+how-to-become-an-endocrinologist.tsx
+- Image: /blog-images/How-to-Become-an-Endocrinologist.webp
+- Title: How to Become an Endocrinologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD Internal Medicine + DM Endocrinology
+- CTA: Contact Us for Endocrinology Guidance
+
+how-to-become-an-oncologist.tsx
+- Image: /blog-images/How-to-Become-an-Oncologist.webp
+- Title: How to Become an Oncologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD + DM/MCh Oncology
+- CTA: Contact Us for Oncology Guidance
+
+how-to-become-a-pediatrician.tsx
+- Image: /blog-images/How-to-Become-a-Pediatrician.webp
+- Title: How to Become a Pediatrician
+- Category: Medical Career Guide
+- Navigation: Steps for MD Pediatrics
+- CTA: Contact Us for Pediatrics Guidance
+
+how-to-become-an-obstetrician-gynecologist.tsx
+- Image: /blog-images/How-to-Become-an-Obstetrician-Gynecologist.webp
+- Title: How to Become an Obstetrician-Gynecologist
+- Category: Medical Career Guide
+- Navigation: Steps for MD Obstetrics & Gynecology
+- CTA: Contact Us for OBG Guidance
+
+scope-of-* files (9 files)
+- Different structure: focus on career opportunities, earning potential, skills
+- Create step boxes with career opportunities instead of educational steps
+- Keep career-focused FAQs and comments
+
+how-to-crack-neet-pg.tsx & courses-after-mbbs-in-india.tsx
+- Special structure with table of contents or course types
+- May need modified layout approach
