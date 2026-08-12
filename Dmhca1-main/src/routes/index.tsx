@@ -1,0 +1,809 @@
+import { createFileRoute, Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { ArrowUpRight, Star, StarHalf, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+const heroImg = "/herofellowshiplarge.webp";
+import { categories } from "@/data/courses";
+import { useCoursesData } from "@/hooks/useCoursesData";
+import { CourseCard } from "@/components/site/CourseCard";
+import { SignupFlow } from "@/components/SignupFlow";
+import { OTPLoginModal } from "@/components/OTPLoginModal";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "DMHCA - Top Institute For Medical Courses | Accredited Online Fellowships" },
+      { name: "description", content: "Advance your medical career with accredited online fellowships and certificate programs across radiology, cardiology, gynaecology, dermatology, oncology and more." },
+      { name: "keywords", content: "medical courses, online fellowship, medical education, cardiology, radiology, gynecology, dermatology, PG diploma, certificate courses" },
+      { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=5.0" },
+      { name: "author", content: "DMHCA" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "DMHCA - Top Institute For Medical Courses | Accredited Online Fellowships" },
+      { property: "og:description", content: "Advance your medical career with accredited online fellowships and certificate programs across radiology, cardiology, gynaecology, dermatology, oncology and more." },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://dmhca.in/logo.webp" },
+      { property: "og:url", content: "https://dmhca.in/" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "DMHCA - Top Institute For Medical Courses" },
+      { name: "twitter:description", content: "Advance your medical career with accredited online fellowships and certificate programs" },
+      { name: "twitter:image", content: "https://dmhca.in/logo.webp" },
+      { name: "theme-color", content: "#1a2a4a" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://dmhca.in/" },
+      { rel: "prefetch", href: "/top-medical-courses" },
+      { rel: "dns-prefetch", href: "https://cdn.jsdelivr.net" },
+    ],
+  }),
+  component: Home,
+});
+
+function Home() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentFmt = (() => {
+    try { const p = new URLSearchParams(location.search || '').get('fmt'); return p; } catch (e) { return null; }
+  })();
+  
+  // Fetch courses dynamically from Supabase
+  const { courses, loading } = useCoursesData();
+  
+  // Auth modal states
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showOtpModal, setShowOtpModal] = useState(false);
+  const [signupEmail, setSignupEmail] = useState('');
+  
+  // Check if already logged in
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const loggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      setIsLoggedIn(loggedIn);
+      // Show signup popin immediately on home for new visitors
+      if (!loggedIn) {
+        setShowSignupModal(true);
+      }
+    }
+  }, []);
+  
+  const [reviewIndex, setReviewIndex] = useState(0);
+  const [slide, setSlide] = useState(0);
+  const [screenSize, setScreenSize] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+  // Slides order intentionally set to Certificate → PG Diploma → Fellowship
+  const slides = [
+    {
+      id: 0,
+      program: 'Certificate',
+      theme: 'dark',
+        heroImg: '/herocertificatelarge.webp',
+        blockImg: '/herocertificateblock.webp',
+      titleMain: 'Upskill clinically,',
+      titleSub: 'fast and focused.',
+      desc: 'Short certificate courses designed to build practical skills and clinical confidence for busy clinicians.'
+    },
+    {
+      id: 1,
+      program: 'PG Diploma',
+      theme: 'muted',
+        heroImg: '/heropgdiplomalarge.webp',
+        blockImg: '/heropgdiplomablock-v2.webp',
+      titleMain: 'Deep clinical training,',
+      titleSub: 'structured for practice.',
+      desc: 'Comprehensive PG Diploma programs blending theory and supervised clinical exposure over months.'
+    },
+    {
+      id: 2,
+      program: 'Fellowship',
+      theme: 'dark',
+        heroImg: '/herofellowshiplarge.webp',
+        blockImg: '/herofellowshipblock.webp',
+      titleMain: 'Medical mastery,',
+      titleSub: 'delivered with precision.',
+      desc: 'Develop your medical career with accessible online fellowships and hands-on training from leading universities.'
+    },
+  ];
+
+  const [isPaused, setIsPaused] = useState(false);
+  const [animDuration, setAnimDuration] = useState(0.6);
+  useEffect(() => {
+    if (isPaused) return;
+    console.log('starting slide interval, isPaused=', isPaused);
+    // Advance immediately once when autoplay starts
+    setSlide((s) => {
+      const next = (s + 1) % slides.length;
+      console.log('advancing slide (immediate)', s, '->', next);
+      return next;
+    });
+    const t = setInterval(() => {
+      setSlide((s) => {
+        const next = (s + 1) % slides.length;
+        console.log('advancing slide', s, '->', next);
+        return next;
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [isPaused]);
+
+  useEffect(() => {
+    console.log('slide state changed:', slide);
+  }, [slide]);
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const reviewsPerPage = screenSize < 640 ? 1 : screenSize < 1024 ? 2 : 3;
+  
+  // Memoize featured courses computation to avoid recalculation on every render
+  const featured = useMemo(() => {
+    if (!courses || courses.length === 0) return [];
+    let result = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
+    // Replace specific courses with requested alternatives in featured programs
+    const replacementMap = [
+      { find: /interventional cardiology/i, replaceWith: "Fellowship in Pediatrics" },
+      { find: /pediatric rheumatology/i, replaceWith: "PG Diploma in HIV Medicine" },
+      { find: /cardiothoracic surgery/i, replaceWith: "PG Diploma In Diabetology" },
+      { find: /cardio oncology/i, replaceWith: "Certificate in Child Health" },
+      { find: /abdominal imaging/i, replaceWith: "Fellowship in Clinical Hematology" },
+    ];
+    try {
+      for (const { find, replaceWith } of replacementMap) {
+        const idx = result.findIndex(c => find.test(c.title));
+        if (idx !== -1) {
+          const replacement = courses.find(c => c.title.includes(replaceWith));
+          if (replacement) {
+            result[idx] = replacement;
+          }
+        }
+      }
+    } catch (e) {
+      // silent fallback if courses data shape differs
+    }
+    return result;
+  }, [courses]);
+  
+  // Memoize reviews array to prevent recreation on every render
+  const reviews = useMemo(() => [
+    {
+      name: "Ahsan Habib",
+      role: "Bangladesh",
+      text: "Hi I am Dr.Jakaria from Bangladesh. I have completed the fellowship on endocrinology course from here. Their educational system is very good.. thanks to DMHCA.",
+      image: "/courses/Ahsan-Habib-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Pragya Rajbhandari",
+      role: "Jaipur",
+      text: "My journey through the Pediatric Neurology Fellowship Program at your institute has been an incredibly rewarding experience. I've gained valuable clinical knowledge, hands-on training, and deepened my understanding of neurological conditions in children. Thank you for everything!",
+      image: "/courses/Pragya-150x150.jpg",
+      rating: 4.5,
+    },
+    {
+      name: "Shahjad Khan",
+      role: "Lucknow",
+      text: "I recently completed the Fellowship in Diabetology at DMHCA, and it has been a transformative journey in my medical career. The program is well-structured, combining updated theoretical modules with excellent hands-on clinical training.",
+      image: "/courses/sahjad-khan-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Rahul Jain",
+      role: "Mumbai",
+      text: "Very genuine and trustworthy platform for doing fellowship in various courses. Admin team and consultation team are very helpful, specially my guide from consultation team Mr Akshay Suryavanshi is very polite, cooperative and kind person. Thanks to DMHCA",
+      image: "/courses/rahul-jain-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Moomin Ahmad Mir",
+      role: "Kashmir",
+      text: "I am truly grateful to Delhi Medical Health Care Academy for providing me the opportunity to pursue a Fellowship in Critical Care. The admission process was extremely smooth and hassle-free. The staff members are very helpful and supportive, always ready to guide students at every step. Thanks Guys…",
+      image: "/courses/mommin-150x150.jpg",
+      rating: 4,
+    },
+    {
+      name: "Manisha Kumari",
+      role: "New Delhi",
+      text: "Highly recommend for the fellowship courses. I completed the fellowship in family medicine. It was a great learning experience. Very happy with the course content and faculty. Thank you team DMHCA",
+      image: "/courses/manisha-kumari-150x150.jpg",
+      rating: 5,
+    },
+    {
+      name: "Dr. Mutharasan Kanniah",
+      role: "Internal Medical Specialist, Dammam, KSA",
+      text: "I highly appreciate Mr. Mahender, DMHCA Coordinator, for his excellent guidance throughout my Fellowship in Internal Medicine. His prompt support, professionalism, and ability to explain concepts clearly made my learning journey smooth and valuable. Thank you, DMHCA, for such dedicated support.",
+      rating: 5,
+    },
+    {
+      name: "Dr. Feroz Ahmad",
+      role: "Neurology Fellowship, India",
+      text: "DMHCA has a dedicated and supportive team that makes learning smooth and enjoyable. Ashwani Mishra guided me throughout my Neurology Fellowship and made every step easy. I truly appreciate the team's commitment and support.",
+      rating: 4,
+    },
+    {
+      name: "Sheikh Shozib",
+      role: "Bangladesh",
+      text: "I'm pursuing a Fellowship in Clinical Neurology with DMHCA. The system is well organized, the staff are friendly and supportive, and the lectures are clear, up-to-date, and easy to understand. Looking forward to a great learning journey.",
+      rating: 5,
+    },
+    {
+      name: "Pragya Rajbhandari",
+      role: "Pediatric Neurology Fellowship",
+      text: "My Pediatric Neurology Fellowship at DMHCA was a rewarding experience. The faculty provided excellent guidance, hands-on training, and valuable clinical knowledge, helping me strengthen my skills and passion for pediatric neurology.",
+      rating: 5,
+    },
+    {
+      name: "Dr. Biplab Chatterjee",
+      role: "India",
+      text: "Very nicely managed professional institute. Got my due papers on time. Nice experience with DMHCA. Keep it up.",
+      rating: 4.5,
+    },
+    {
+      name: "Jyothsna Theegala",
+      role: "India",
+      text: "Completing the Certificate in Advanced ART from DMHCA was a transformative experience. Overall, it was a great learning experience. The best part is that it is very affordable, and the faculty are excellent.",
+      rating: 4,
+    },
+    {
+      name: "Abhishek Sharma",
+      role: "India",
+      text: "I had an excellent experience at DMHCA while pursuing PGD in Reproductive Medicine. I highly recommend the academy for its quality education and professional guidance. Special thanks to Loveleen Ji and Sajid Ji for their constant support throughout my admission journey.",
+      rating: 5,
+    },
+    {
+      name: "Devayanee Gunjate",
+      role: "India",
+      text: "DMHCA has a very good curriculum with regular and interactive online lectures. The 15-day hands-on training was highly informative and helped me gain practical knowledge. Overall, it was a valuable learning experience.",
+      rating: 5,
+    },
+    {
+      name: "Syed Mustafa Aaqib",
+      role: "India",
+      text: "I had a very good experience at the Cardiology Conclave at Virinchi. Miss Soniya was an excellent coordinator who ensured everything was well organized and supported participants throughout the event. Overall, it was a great learning experience.",
+      rating: 5,
+    },
+  ], []);
+  const displayedReviews = reviews.slice(reviewIndex, reviewIndex + reviewsPerPage);
+  const nextReviews = () => setReviewIndex((reviewIndex + reviewsPerPage) % reviews.length);
+  const prevReviews = () => setReviewIndex((reviewIndex - reviewsPerPage + reviews.length) % reviews.length);
+
+  // Memoize Organization Schema for Homepage
+  const organizationSchema = useMemo(() => ({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "DMHCA",
+    "url": "https://dmhca.in",
+    "logo": "https://dmhca.in/logo.webp",
+    "description": "Top institute for accredited medical courses, fellowships and certificate programs",
+    "sameAs": [
+      "https://www.facebook.com/dmhca",
+      "https://twitter.com/dmhca",
+      "https://www.linkedin.com/company/dmhca"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "email": "info@dmhca.in"
+    }
+  }), []);
+
+  const handleSignupSuccess = async (data: { email?: string } | any) => {
+    setSignupEmail(data?.email || '');
+    setShowSignupModal(false);
+    // Show OTP verification modal for signup completion
+    setShowOtpModal(true);
+  };
+
+  const handleLoginSuccess = (data: { userId?: string } | any) => {
+    setIsLoggedIn(true);
+    setShowLoginModal(false);
+    setShowOtpModal(false);
+    // Redirect to dashboard
+    setTimeout(() => {
+      navigate({ to: '/dashboard' });
+    }, 500);
+  };
+
+  return (
+    <div>
+      {/* Auth Modals */}
+      <SignupFlow 
+        isOpen={showSignupModal} 
+        onClose={() => setShowSignupModal(false)}
+        onSuccess={handleSignupSuccess}
+        onSwitchToLogin={() => { setShowSignupModal(false); setShowLoginModal(true); }}
+      />
+      <OTPLoginModal 
+        isOpen={showLoginModal || showOtpModal}
+        onClose={() => {
+          setShowLoginModal(false);
+          setShowOtpModal(false);
+        }}
+        onSuccess={handleLoginSuccess}
+        onSwitchToSignup={() => { setShowLoginModal(false); setShowSignupModal(true); }}
+      />
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }} />
+      
+      {/* Compact editorial hero (Asymmetric direction) */}
+      <section className="site-hero" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(203, 163, 91, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(203, 163, 91, 0.08) 0%, transparent 50%)'}} />
+        {/* Mobile: use slide hero image as subtle background */}
+        <div
+          className="absolute inset-0 pointer-events-none sm:hidden"
+          style={{
+            backgroundImage: `url(${slides[slide].blockImg || slides[slide].heroImg})`,
+            opacity: 0.18,
+            backgroundPosition: 'center right',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+          }}
+        />
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+          {/* Sliding background images (translateX) */}
+          <motion.div className="absolute inset-0 z-0 overflow-hidden pointer-events-none" initial={false} animate={{ x: `-${slide * 100}%` }} transition={{ duration: animDuration, ease: 'easeInOut' }}>
+            <div className="flex h-full w-[300%]">
+              {slides.map((s, i) => (
+                  <div key={i} className="w-1/3 h-full flex-shrink-0 relative">
+                  <div
+                    className="absolute inset-0 bg-center bg-cover brightness-75"
+                    style={{ backgroundImage: `url(${s.heroImg || '/hero-fallback.webp'})` }}
+                    onError={(_e: any) => { console.error('background failed:', s.heroImg, 'index', i); }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent" />
+                  {s.program === 'Fellowship' && (
+                    <div className="absolute inset-0 bg-black/40" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        
+        <div className="container-home py-4 sm:py-6 md:py-8 lg:py-12 grid grid-cols-12 gap-3 sm:gap-4 md:gap-6 lg:gap-8 items-center relative z-10">
+          {/* Left: content */}
+          <motion.div 
+            className="col-span-12 sm:col-span-6 md:col-span-8 lg:col-span-8 space-y-3 sm:space-y-4 md:space-y-6 relative z-30"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            {/* Premium badge */}
+            <motion.div 
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/30 bg-gold/5 w-fit text-center sm:text-left"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <div className="w-2 h-2 rounded-full bg-gold animate-pulse flex-shrink-0" />
+              <span className="text-xs font-semibold text-gold uppercase tracking-wider">Excellence in Medical Education</span>
+            </motion.div>
+
+            <div className="space-y-2">
+              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.08] sm:leading-[1.05] tracking-tight max-w-full">
+                <div>
+                  <motion.span className="relative inline-block" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.1 }}>
+                    {slides[slide].titleMain}
+                    <span className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-gold via-gold/50 to-transparent rounded-full" style={{ width: '100%' }} />
+                  </motion.span>
+                  <br />
+                  <motion.span className="font-medium text-gold tracking-tight not-italic" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.15 }}>
+                    {slides[slide].titleSub}
+                  </motion.span>
+                </div>
+              </h1>
+
+              <motion.p className="text-sm sm:text-base md:text-lg text-white max-w-full leading-relaxed" style={{ wordSpacing: '0.18rem' }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.25, delay: 0.2 }}>
+                {slides[slide].desc}
+              </motion.p>
+            </div>
+
+            <motion.div 
+              className="flex flex-wrap gap-2.5"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              <Link to="/top-medical-courses" className="group inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-gold text-navy-deep text-sm font-medium hover:shadow-lg hover:shadow-gold/30 transition rounded-sm">
+                Explore Courses <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+              <div className="inline-flex items-center gap-2">
+                <Link to="/top-medical-courses" search={{ fmt: slides[slide].program }} className="px-4 py-2 rounded-sm border border-border text-sm text-navy-deep hover:bg-gold/10 transition bg-navy-deep text-primary-foreground">
+                  {slides[slide].program}
+                </Link>
+                  <div className="ml-2 inline-flex items-center gap-1">
+                  <button aria-label="Previous slide" onClick={() => { setAnimDuration(0); setSlide((slide - 1 + slides.length) % slides.length); setTimeout(()=>setAnimDuration(0.6), 50); }} className="p-2 rounded-sm border border-border text-sm">‹</button>
+                  <button aria-label="Next slide" onClick={() => { setAnimDuration(0); setSlide((slide + 1) % slides.length); setTimeout(()=>setAnimDuration(0.6), 50); }} className="p-2 rounded-sm border border-border text-sm">›</button>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              className="pt-1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <p className="text-xs text-gold/70 uppercase tracking-widest mb-2 font-semibold hidden sm:block">Trending specialties</p>
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-medium hidden sm:flex">
+                {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map((s, i) => (
+                  <motion.div 
+                    key={s}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
+                  >
+                    <Link to="/top-medical-courses" search={{ cat: s }} className="text-white hover:text-gold transition">
+                      {categories.find(c => c.slug === s)?.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {currentFmt ? (
+              <div className="mt-4">
+                <Link to="/top-medical-courses" search={{ fmt: currentFmt }} className="inline-block">
+                  <span className="inline-block bg-navy-deep text-primary-foreground px-3 py-1 rounded-full text-sm hover:opacity-95">Showing: {currentFmt}</span>
+                </Link>
+              </div>
+            ) : null}
+          </motion.div>
+
+          {/* Right: portrait + stat card */}
+          <motion.div 
+            className="col-span-5 sm:col-span-6 md:col-span-4 lg:col-span-4 relative hidden sm:block"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="relative w-full h-auto z-20">
+              {/* Block Image - All Screen Sizes */}
+              {slides[slide].blockImg ? (
+                <motion.div 
+                  className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep border-2 border-gold"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  whileHover={{ scale: 1.02 }}
+                >
+                  <img loading="lazy" src={slides[slide].blockImg} alt="DMHCA faculty" className="w-full h-auto object-cover object-top" onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                </motion.div>
+              ) : null}
+              
+              {/* Floating stat card */}
+              <motion.div 
+                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                whileHover={{ y: -5 }}
+              >
+                <div>
+                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">Active Learners</p>
+                  <p className="text-xl sm:text-2xl text-navy font-bold stat-number">42,000<span className="text-gold">+</span></p>
+                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy dark:text-gray-600">
+                    <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-gold text-gold" />
+                    <span className="ml-1 font-medium">4.8 / 5</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+          {/* Mobile stacked image hidden on small screens per request */}
+          <div className="col-span-12 hidden">
+            <div className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep">
+              <img loading="lazy" src={slides[slide].heroImg} alt="DMHCA faculty" className={`w-full h-auto object-cover object-center brightness-60`} onError={(e: any) => { e.currentTarget.src = '/hero-fallback.webp' }} />
+            </div>
+          </div>
+        </div>
+        
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+      </section>
+
+      {/* Stats bar */}
+      <section className="bg-hero-dark text-on-hero-dark">
+        <div className="container-home py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {[
+            { k: "103+", v: "Specialised programs" },
+            { k: "60+", v: "Faculty worldwide" },
+            { k: categories.length.toString(), v: "Clinical specialties" },
+            { k: "120+", v: "Countries reached" },
+          ].map((s) => (
+            <div key={s.v}>
+              <div className="font-display text-3xl text-gold font-medium">{s.k}</div>
+              <div className="text-xs uppercase tracking-[0.15em] text-primary-foreground/70 mt-1">{s.v}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Specialties - Large Image Cards */}
+      <section className="bg-hero-light text-on-hero-light py-8">
+        <div className="container-home">
+        <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
+          <div>
+            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">Specialties</div>
+            <h2 className="font-display text-3xl md:text-4xl text-navy-deep dark:text-white mt-3">Find your discipline</h2>
+          </div>
+          <Link to="/top-medical-courses" className="text-sm text-navy-deep dark:text-white hover:text-gold">All categories →</Link>
+        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="h-44 rounded-2xl bg-card animate-pulse" />
+            ))}
+          </div>
+        ) : (
+        <motion.div 
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.12,
+                delayChildren: 0.1,
+              },
+            },
+          }}
+        >
+          {["radiology", "dermatology", "endocrinology", "cardiology", "emergency", "orthopedics", "medicine", "oncology"].map((slug) => {
+            const category = categories.find(c => c.slug === slug);
+            if (!category) return null;
+            
+            // Specialty-specific colors as fallback + medical images
+            const specialtyColors: {[key: string]: string} = {
+              'radiology': 'from-blue-900 to-blue-700',
+              'dermatology': 'from-pink-900 to-pink-700',
+              'endocrinology': 'from-purple-900 to-purple-700',
+              'cardiology': 'from-red-900 to-red-700',
+              'emergency': 'from-orange-900 to-orange-700',
+              'orthopedics': 'from-amber-900 to-amber-700',
+              'medicine': 'from-navy-deep to-navy',
+              'oncology': 'from-indigo-900 to-indigo-700',
+            };
+
+            // Working medical images from Unsplash
+              const specialtyImages: {[key: string]: string} = {
+              'radiology': '/courses/Radiology.webp',
+              'dermatology': '/courses/Dermatology.webp',
+              'endocrinology': '/courses/Endocrinology.webp',
+              'cardiology': '/courses/cardiology.webp',
+              'emergency': '/courses/emergency.webp',
+              'orthopedics': '/courses/orthopedics.webp',
+              'medicine': '/courses/medicine.webp',
+              'oncology': '/courses/oncology.webp',
+            };
+            
+            const imageUrl = specialtyImages[slug] || '/courses/default.webp';
+            
+            return (
+              <motion.div
+                key={slug}
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: { type: "spring", stiffness: 100, damping: 20 }
+                  },
+                }}
+              >
+                <Link 
+                  to="/top-medical-courses" 
+                  search={(() => { const ss = new URLSearchParams(location.search || ''); ss.set('cat', slug); return Object.fromEntries(ss.entries()); })()}
+                  className={`group relative overflow-hidden rounded-2xl aspect-video md:aspect-square h-auto block bg-gradient-to-br ${specialtyColors[slug]}`}
+                >
+                  {/* Background image with zoom effect */}
+                  <motion.img 
+                    loading="lazy"
+                    src={imageUrl} 
+                    alt={category.name}
+                    className="absolute inset-0 w-full h-full object-cover group-hover:brightness-110 transition-all duration-500"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.6 }}
+                  />
+                  
+                  {/* Dark gradient overlay - only at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/80 transition-all duration-300" />
+                  
+                  {/* Content - bottom left */}
+                  <motion.div 
+                    className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <h3 className="font-display text-lg md:text-2xl text-white leading-tight group-hover:text-gold transition">
+                      {category.name}
+                    </h3>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+        )}
+        </div>
+      </section>
+
+      {/* Featured / Top Rated */}
+      <section className="bg-hero-dark text-on-hero-dark py-12">
+        <div className="container-home">
+        <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
+          <div>
+            <div className="text-xs uppercase tracking-[0.25em] text-on-hero-dark/80 gold-rule">Top rated</div>
+            <h2 className="font-display text-3xl md:text-4xl text-on-hero-dark mt-3">Featured programs</h2>
+          </div>
+          <Link to="/top-medical-courses" className="text-sm text-on-hero-dark/90 hover:text-gold">View all courses →</Link>
+        </div>
+        {loading ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-64 rounded-md bg-card animate-pulse" />)}
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featured.map((c) => <CourseCard key={c.slug} course={c as any} />)}
+          </div>
+        )}
+        </div>
+      </section>
+
+      {/* University Partners / Academic Alliances */}
+      <section className="bg-hero-light dark:bg-white text-on-hero-light py-12">
+        <div className="container-home">
+        <div className="text-center mb-12">
+          <h2 className="font-display text-3xl md:text-4xl text-navy-deep dark:text-white mt-3">Academic partners</h2>
+          <p className="text-muted-foreground mt-2 max-w-2xl mx-auto text-sm">DMHCA programs are delivered in academic collaboration with internationally recognised universities and medical institutions.</p>
+        </div>
+        
+        {/* Academic partners — styled horizontal carousel */}
+        <div className="mb-16">
+          <div className="relative">
+            <div className="mx-auto max-w-6xl py-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-3 items-center">
+                {[
+                  'ACTD-2.webp',
+                  'btu_hero_logo.webp',
+                  'duke logo.webp',
+                  'IBMP LOGO .webp',
+                  'logo-srdu.webp',
+                ].map((file) => (
+                  <div key={file} className="rounded-xl bg-white/80 dark:!bg-white p-3 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                    <div className="w-40 h-28 md:w-48 md:h-32 lg:w-56 lg:h-36 flex items-center justify-center bg-white dark:!bg-white rounded-lg">
+                      <img src={`/ACADEMIC PARTNERS/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <style>{`
+              .partners-carousel { background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2)); border-radius: 12px; }
+              .scrollbar-hide::-webkit-scrollbar { display: none; }
+              .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      {/* Google Reviews / Alumni Voices */}
+      <section className="site-hero">
+        <div className="container-x py-8">
+          <div className="mb-6">
+            <div className="text-xs uppercase tracking-[0.25em] text-primary-foreground gold-rule">Alumni voices</div>
+            <h2 className="font-display text-3xl md:text-4xl text-primary-foreground mt-3">Loved by Doctors Worldwide</h2>
+            <p className="text-primary-foreground/85 mt-2 text-sm">2,100+ verified reviews from practicing physicians</p>
+          </div>
+          <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+            <button onClick={prevReviews} className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
+            <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {loading && (
+                Array.from({ length: reviewsPerPage }).map((_, i) => (
+                  <div key={i} className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl animate-pulse min-h-[6rem]" />
+                ))
+              )}
+              {!loading && displayedReviews.map((r) => (
+                <motion.div key={r.name} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.4 }} className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl">
+                  <div className="mb-3">
+                    <div>
+                      <div className="text-sm font-medium text-primary-foreground">{r.name}</div>
+                      <div className="text-xs text-primary-foreground/80">{r.role}</div>
+                    </div>
+                  </div>
+                  <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-gold/70" />
+                  <p className="text-xs sm:text-sm text-primary-foreground/90 mt-2 leading-relaxed flex-1 min-h-[5.5rem] sm:min-h-[6.75rem] overflow-hidden">{r.text}</p>
+                  <div className="mt-4 flex items-center gap-1 border border-slate-700 px-2 py-1 w-fit">
+                    {(() => {
+                      const rating = Number(r.rating ?? 5);
+                      const full = Math.floor(rating);
+                      const hasHalf = rating - full >= 0.5;
+                      const empty = 5 - full - (hasHalf ? 1 : 0);
+                      const nodes = [];
+                      for (let i = 0; i < full; i++) nodes.push(<Star key={`full-${i}`} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-yellow-300 text-yellow-300" />);
+                      if (hasHalf) nodes.push(<StarHalf key={`half`} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-yellow-300 text-yellow-300" />);
+                      for (let i = 0; i < empty; i++) nodes.push(<Star key={`empty-${i}`} className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-primary-foreground/30" />);
+                      return nodes;
+                    })()}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <button onClick={nextReviews} className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Next reviews"><ChevronRight className="w-5 h-5 text-primary-foreground" /></button>
+          </div>
+          <div className="flex sm:hidden justify-center gap-2">
+            <button onClick={prevReviews} className="p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Previous reviews"><ChevronLeft className="w-5 h-5 text-primary-foreground" /></button>
+            <button onClick={nextReviews} className="p-2 rounded-md border border-border hover:bg-secondary transition-colors" aria-label="Next reviews"><ChevronRight className="w-5 h-5 text-primary-foreground" /></button>
+          </div>
+        </div>
+      </section>
+
+      {/* Training partners - moving marquee */}
+      <section className="bg-white/60 dark:bg-navy-deep/10 py-8">
+        <div className="container-home">
+          <div className="text-center mb-6">
+            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule inline-block">Training partners</div>
+            <h2 className="font-display text-2xl md:text-3xl text-navy-deep dark:text-white mt-2">Our training partners</h2>
+          </div>
+
+          <div className="overflow-hidden">
+            <div className="marquee">
+              <div className="marquee__inner flex gap-8 items-center">
+                {(() => {
+                  const logos = [
+                    '1678526353_7823551bcf91d278e567.webp',
+                    // 'aig-logo-white.webp', (removed)
+                    'images (1).webp',
+                    'images.webp',
+                    'KIMS_Main_Logo_Col-01.webp',
+                    'Logo-medicover.webp',
+                    'logo.webp',
+                    'Noora-Logo-01.webp',
+                    'skinfinity-skin-hair-laser-and-aesthetic-clinic-noida-625ce89ba1d3f.webp',
+                    'Untitled-design.webp',
+                    'VPH_New-Logo-1024x462.webp',
+                  ];
+                  const unique = Array.from(new Set(logos));
+                  const sequence = unique.concat(unique); // duplicate for seamless loop
+                  return sequence.map((file, idx) => (
+                    <div key={idx} className="flex-shrink-0 w-48 h-24 md:w-56 md:h-28 lg:w-64 lg:h-32 flex items-center justify-center bg-card dark:bg-white rounded-lg p-3 shadow-sm dark:shadow-md">
+                      <img src={`/Training partners/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
+                    </div>
+                  ));
+                })()}
+              </div>
+            </div>
+            <style>{`
+              .marquee { --gap: 2rem; }
+              .marquee__inner { display: flex; gap: var(--gap); width: max-content; animation: marquee-left 18s linear infinite; }
+              @keyframes marquee-left {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+              }
+            `}</style>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="container-x py-12">
+        <div className="rounded-md bg-navy-deep text-primary-foreground p-10 md:p-14 grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <div className="text-xs uppercase tracking-[0.25em] text-gold">Admissions open</div>
+            <h2 className="font-display text-3xl md:text-4xl mt-3">Begin the next chapter of your medical career</h2>
+          </div>
+          <div className="flex md:justify-end gap-3 flex-wrap">
+            <Link to="/contact-us" className="px-5 py-3 bg-gold text-navy-deep text-sm rounded-sm hover:opacity-90">Talk to Counsellor</Link>
+            <Link to="/top-medical-courses" className="px-5 py-3 border border-primary-foreground/30 text-sm rounded-sm hover:border-gold">Browse programs</Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
