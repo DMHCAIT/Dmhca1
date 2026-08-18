@@ -1,512 +1,274 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, ChevronDown, Clock, BookOpen, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/scope-of-diabetology")({
   head: () => ({
     meta: [
-      { title: "Scope of Diabetology - DMHCA" },
-      { name: "description", content: "Comprehensive guide to the scope, career opportunities, and specializations in diabetology." },
+      { title: "Scope of Diabetology in India — DMHCA" },
+      { name: "description", content: "Career opportunities and specializations in diabetes management." },
     ],
   }),
-  component: BlogPost,
+  component: BlogContent,
 });
 
-function BlogPost() {
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [comments, setComments] = useState<Array<{name: string; email: string; text: string; date: string}>>([]);
-  const [formData, setFormData] = useState({ name: '', email: '', comment: '' });
-  const readingTime = 8;
-
-  const faqs = [
-    {
-      question: "What is the scope of diabetology in India?",
-      answer: "Diabetology has exceptional scope in India as diabetes prevalence is among the highest globally. Diabetologists can work in hospitals, clinics, research centers, and private practice with excellent job security and earning potential."
-    },
-    {
-      question: "What are the career opportunities after MD in Internal Medicine with Diabetology focus?",
-      answer: "Diabetologists can work in diabetes care centers, endocrinology clinics, hospitals, engage in research on diabetes management, teach in medical colleges, establish diabetes prevention programs, conduct public health initiatives, and offer telemedicine services."
-    },
-    {
-      question: "What specializations are available in diabetology?",
-      answer: "Popular specializations include Type 1 Diabetes Management, Type 2 Diabetes and Obesity, Gestational Diabetes, Pediatric Diabetes, Diabetic Complications Management, and Preventive Diabetology focusing on lifestyle modification programs."
-    },
-    {
-      question: "What is the salary potential for diabetologists?",
-      answer: "Hospital-based diabetologists earn 12-25 lakhs annually, while private practitioners typically earn 25-45 lakhs annually. Those with diabetes prevention programs and corporate contracts earn 45+ lakhs annually."
-    },
-    {
-      question: "Is diabetology a good specialty to pursue?",
-      answer: "Yes, diabetology offers excellent career prospects due to high disease prevalence. It combines clinical practice, preventive medicine, and research opportunities with consistent patient flow and good earning potential."
-    },
-    {
-      question: "What skills are required for success in diabetology?",
-      answer: "Essential skills include strong metabolic knowledge, expertise in diabetes management protocols, understanding of newer medications, counseling and lifestyle coaching abilities, research aptitude, and excellent communication for patient education."
-    }
-  ];
-
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.comment) {
-      setComments([...comments, {
-        name: formData.name,
-        email: formData.email,
-        text: formData.comment,
-        date: new Date().toLocaleDateString()
-      }]);
-      setFormData({ name: '', email: '', comment: '' });
-    }
-  };
-
+function BlogContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <section className="site-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10 to-orange-600/10"></div>
-        <div className="container-home max-w-5xl relative z-10">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition">
-            <ArrowLeft size={20} />
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700"></div>
+        <div className="relative container-x py-4 sm:py-6 md:py-8">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-2 transition text-xs sm:text-sm">
+            <ArrowLeft className="w-4 h-4" />
             Back to Blogs
           </Link>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Scope of Diabetology</h1>
-          <p className="text-white/90 text-xl mb-6 max-w-2xl">Career opportunities and specializations in diabetes management</p>
-          
-          {/* Article Meta */}
-          <div className="flex flex-wrap items-center gap-6 text-white/80">
-            <div className="flex items-center gap-2">
-              <Clock size={18} />
-              <span>{readingTime} min read</span>
+          <div className="max-w-3xl">
+            <div className="inline-block px-3 sm:px-4 py-1 bg-emerald-500/20 border border-emerald-300/50 rounded-full text-emerald-200 text-xs font-semibold mb-2">
+              Medical Career Guide • 2025 Edition
             </div>
-            <div className="flex items-center gap-2">
-              <BookOpen size={18} />
-              <span>Medical Career Guide</span>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
+              Scope of Diabetology
+            </h1>
+            <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
+              Explore career opportunities in diabetes management.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mt-3 pt-3 border-t border-white/20">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Clock className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Read Time</div>
+                <div className="font-bold text-sm sm:text-lg">8 min</div>
+              </div>
             </div>
-            <div className="text-sm text-white/70">Updated: June 2025</div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Users className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Career Paths</div>
+                <div className="font-bold text-sm sm:text-lg">7+</div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Job Market</div>
+                <div className="font-bold text-sm sm:text-lg">Excellent</div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
+                <div className="font-bold text-sm sm:text-lg">Stable</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 py-12">
-        {/* Featured Image */}
-        <div className="mb-12">
-          <div className="rounded-2xl overflow-hidden shadow-2xl">
-            <img 
-              src="/blog-images/Scope-of-Diabetology.webp"
-              alt="Scope of Diabetology"
-              className="w-full h-auto object-cover"
-            />
+      <section className="py-2 sm:py-3 md:py-4 bg-white dark:bg-slate-800 px-4 sm:px-0">
+        <div className="container-x flex justify-center">
+          <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
+            <img src="/blog-images/Scope-of-Diabetology.webp" alt="Scope of Diabetology" className="w-full h-auto aspect-[992/496] object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
-          <p className="text-center text-gray-600 text-sm mt-4">Explore career opportunities in diabetes management</p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {/* Quick Navigation */}
-            <div className="bg-amber-50 rounded-xl p-6 mb-12 border border-amber-200">
-              <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                <BookOpen size={20} className="text-amber-600" />
-                Quick Navigation
-              </h3>
-              <ul className="space-y-2">
-                <li><a href="#career-overview" className="text-amber-600 hover:text-amber-700 text-sm">Career Overview in Diabetology</a></li>
-                <li><a href="#patient-care" className="text-amber-600 hover:text-amber-700 text-sm">Patient Care and Management</a></li>
-                <li><a href="#prevention" className="text-amber-600 hover:text-amber-700 text-sm">Prevention and Education</a></li>
-                <li><a href="#research" className="text-amber-600 hover:text-amber-700 text-sm">Research and Innovation</a></li>
-                <li><a href="#specializations" className="text-amber-600 hover:text-amber-700 text-sm">Specialization Areas</a></li>
-                <li><a href="#earning-potential" className="text-amber-600 hover:text-amber-700 text-sm">Earning Potential</a></li>
-                <li><a href="#public-health" className="text-amber-600 hover:text-amber-700 text-sm">Public Health Scope</a></li>
-              </ul>
+      <section className="py-8 sm:py-12 md:py-16 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm px-4 sm:px-0">
+        <div className="container-x max-w-4xl">
+          <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
+            <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/30 dark:via-teal-900/30 dark:to-cyan-900/30 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-emerald-200 dark:border-emerald-800/50 not-prose">
+              <h2 className="text-xl sm:text-2xl font-bold text-emerald-900 dark:text-emerald-200 mb-4">Quick Navigation</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                {[
+                  { label: "Career Overview in Diabetology", href: "#career-overview" },
+                  { label: "Patient Care and Management", href: "#patient-care" },
+                  { label: "Prevention and Education", href: "#prevention" },
+                  { label: "Research and Innovation", href: "#research" },
+                  { label: "Specialization Areas", href: "#specializations" },
+                  { label: "Earning Potential", href: "#earning-potential" },
+                  { label: "Public Health Scope", href: "#public-health" },
+                ].map((item) => (
+                  <a key={item.href} href={item.href} className="text-sm sm:text-base text-emerald-900 dark:text-emerald-200 hover:text-emerald-600 dark:hover:text-emerald-300 font-medium">
+                    • {item.label}
+                  </a>
+                ))}
+              </div>
             </div>
 
-            {/* Main Article Content */}
-            <article className="space-y-8">
-              <section>
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">Understanding the Scope of Diabetology</h2>
-                <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Diabetology is one of the most important specialties with enormous scope. With over 77 million diabetics in India, the demand for qualified diabetologists is consistently high across all healthcare settings.
-                </p>
-              </section>
+            <div id="career-overview" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-emerald-200 dark:border-emerald-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-300 dark:border-emerald-700 rounded-full text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 1
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 dark:text-emerald-100 mb-3 sm:mb-4">Career Overview in Diabetology</h2>
+              <p className="text-emerald-900 dark:text-emerald-100 text-sm sm:text-base leading-relaxed">
+                Diabetologists specialize in diagnosing and managing diabetes and metabolic disorders. They provide comprehensive care including lifestyle modification, medication management, complication prevention, and patient education.
+              </p>
+            </div>
 
-              {/* Point 1 */}
-              <div id="career-overview" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">1</span>
+            <div id="patient-care" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-teal-50 to-cyan-50 dark:from-teal-900/20 dark:to-cyan-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-teal-200 dark:border-teal-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-teal-100 dark:bg-teal-900/30 border border-teal-300 dark:border-teal-700 rounded-full text-teal-700 dark:text-teal-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 2
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-900 dark:text-teal-100 mb-3 sm:mb-4">Patient Care and Management</h2>
+              <div className="space-y-3 text-teal-900 dark:text-teal-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3"><span className="text-teal-600 dark:text-teal-400 font-bold">•</span><div><strong>Outpatient Clinics:</strong> Manage diabetes patients in specialized diabetes clinics</div></div>
+                <div className="flex items-start gap-3"><span className="text-teal-600 dark:text-teal-400 font-bold">•</span><div><strong>Hospital Practice:</strong> Manage hospitalized diabetic patients and emergencies</div></div>
+                <div className="flex items-start gap-3"><span className="text-teal-600 dark:text-teal-400 font-bold">•</span><div><strong>Private Practice:</strong> Establish own diabetes care center</div></div>
+              </div>
+            </div>
+
+            <div id="prevention" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-cyan-50 to-sky-50 dark:from-cyan-900/20 dark:to-sky-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-cyan-200 dark:border-cyan-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-cyan-100 dark:bg-cyan-900/30 border border-cyan-300 dark:border-cyan-700 rounded-full text-cyan-700 dark:text-cyan-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 3
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-900 dark:text-cyan-100 mb-3 sm:mb-4">Prevention and Education</h2>
+              <div className="space-y-3 text-cyan-900 dark:text-cyan-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Develop diabetes prevention programs for at-risk populations</div></div>
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Conduct lifestyle modification and dietary counseling</div></div>
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Provide patient education on self-management</div></div>
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Prevent or delay diabetes complications</div></div>
+              </div>
+            </div>
+
+            <div id="research" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-emerald-50 to-cyan-50 dark:from-emerald-900/20 dark:to-cyan-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-emerald-200 dark:border-emerald-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-300 dark:border-emerald-700 rounded-full text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 4
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 dark:text-emerald-100 mb-3 sm:mb-4">Research and Innovation</h2>
+              <div className="space-y-3 text-emerald-900 dark:text-emerald-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Conduct clinical research on new diabetes treatments</div></div>
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Participate in international diabetes research</div></div>
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Develop innovative management protocols</div></div>
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Publish in peer-reviewed journals</div></div>
+              </div>
+            </div>
+
+            <div id="specializations" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-teal-50 to-emerald-50 dark:from-teal-900/20 dark:to-emerald-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-teal-200 dark:border-teal-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-teal-100 dark:bg-teal-900/30 border border-teal-300 dark:border-teal-700 rounded-full text-teal-700 dark:text-teal-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 5
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-900 dark:text-teal-100 mb-3 sm:mb-4">Specialization Areas</h2>
+              <p className="text-teal-900 dark:text-teal-100 text-sm sm:text-base leading-relaxed mb-3">
+                Diabetologists can specialize in various areas:
+              </p>
+              <div className="space-y-3 text-teal-900 dark:text-teal-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3"><span className="text-teal-600 dark:text-teal-400 font-bold">•</span><div><strong>Type 1 Diabetes Specialist</strong> - Insulin management and immunology</div></div>
+                <div className="flex items-start gap-3"><span className="text-teal-600 dark:text-teal-400 font-bold">•</span><div><strong>Type 2 Diabetes and Obesity</strong> - Metabolic management</div></div>
+                <div className="flex items-start gap-3"><span className="text-teal-600 dark:text-teal-400 font-bold">•</span><div><strong>Gestational Diabetes Specialist</strong> - Pregnancy and diabetes</div></div>
+              </div>
+            </div>
+
+            <div id="earning-potential" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-cyan-50 to-emerald-50 dark:from-cyan-900/20 dark:to-emerald-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-cyan-200 dark:border-cyan-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-cyan-100 dark:bg-cyan-900/30 border border-cyan-300 dark:border-cyan-700 rounded-full text-cyan-700 dark:text-cyan-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 6
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-cyan-900 dark:text-cyan-100 mb-3 sm:mb-4">Earning Potential</h2>
+              <div className="space-y-3 text-cyan-900 dark:text-cyan-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Hospital diabetologists: 12-25 lakhs annually</div></div>
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Specialized diabetes clinics: 20-40 lakhs annually</div></div>
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Private practitioners: 25-45 lakhs annually</div></div>
+                <div className="flex items-start gap-3"><span className="text-cyan-600 dark:text-cyan-400 font-bold">•</span><div>Corporate/research positions: 40+ lakhs annually</div></div>
+              </div>
+            </div>
+
+            <div id="public-health" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-emerald-200 dark:border-emerald-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-emerald-100 dark:bg-emerald-900/30 border border-emerald-300 dark:border-emerald-700 rounded-full text-emerald-700 dark:text-emerald-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 7
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-emerald-900 dark:text-emerald-100 mb-3 sm:mb-4">Public Health Scope</h2>
+              <p className="text-emerald-900 dark:text-emerald-100 text-sm sm:text-base leading-relaxed mb-3">
+                Significant opportunities in public health and preventive medicine:
+              </p>
+              <div className="space-y-3 text-emerald-900 dark:text-emerald-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Lead national diabetes screening programs</div></div>
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Develop community health initiatives</div></div>
+                <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400 font-bold">•</span><div>Work in diabetes health policy and guidelines</div></div>
+              </div>
+            </div>
+
+            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">Diabetology Scope Overview</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"><p className="text-xs uppercase tracking-wide text-red-700 dark:text-red-300 font-bold">Job Demand</p><p className="text-xl sm:text-2xl font-bold text-red-900 dark:text-red-100 mt-2">Very High</p></div>
+                <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-lg"><p className="text-xs uppercase tracking-wide text-orange-700 dark:text-orange-300 font-bold">Disease Prevalence</p><p className="text-xl sm:text-2xl font-bold text-orange-900 dark:text-orange-100 mt-2">Rising</p></div>
+                <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg"><p className="text-xs uppercase tracking-wide text-emerald-700 dark:text-emerald-300 font-bold">Growth Trajectory</p><p className="text-xl sm:text-2xl font-bold text-emerald-900 dark:text-emerald-100 mt-2">Stable</p></div>
+              </div>
+            </div>
+
+            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">Key Tips for Excelling in Diabetology</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {[
+                  "Master latest diabetes management protocols",
+                  "Develop strong patient counseling skills",
+                  "Stay updated with new medications and treatments",
+                  "Focus on complication prevention strategies",
+                  "Engage in research on diabetes management",
+                  "Build expertise in preventive programs",
+                ].map((tip, idx) => (
+                  <div key={idx} className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg">
+                    <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ {tip}</p>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Career Overview in Diabetology</h3>
-                    <p className="text-gray-700 mb-4">Diabetologists specialize in diagnosing and managing diabetes and metabolic disorders. They provide comprehensive care including lifestyle modification, medication management, complication prevention, and patient education.</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-4 sm:space-y-6">
+                {[
+                  { q: "What is the scope of diabetology in India?", a: "Diabetology has exceptional scope in India as diabetes prevalence is among the highest globally. Diabetologists can work in hospitals, clinics, research centers, and private practice with excellent job security and earning potential." },
+                  { q: "What are the career opportunities after MD in Internal Medicine with Diabetology focus?", a: "Diabetologists can work in diabetes care centers, endocrinology clinics, hospitals, engage in research on diabetes management, teach in medical colleges, establish diabetes prevention programs, conduct public health initiatives, and offer telemedicine services." },
+                  { q: "What specializations are available in diabetology?", a: "Popular specializations include Type 1 Diabetes Management, Type 2 Diabetes and Obesity, Gestational Diabetes, Pediatric Diabetes, Diabetic Complications Management, and Preventive Diabetology focusing on lifestyle modification programs." },
+                  { q: "What is the salary potential for diabetologists?", a: "Hospital-based diabetologists earn 12-25 lakhs annually, while private practitioners typically earn 25-45 lakhs annually. Those with diabetes prevention programs and corporate contracts earn 45+ lakhs annually." },
+                  { q: "Is diabetology a good specialty to pursue?", a: "Yes, diabetology offers excellent career prospects due to high disease prevalence. It combines clinical practice, preventive medicine, and research opportunities with consistent patient flow and good earning potential." },
+                  { q: "What skills are required for success in diabetology?", a: "Essential skills include strong metabolic knowledge, expertise in diabetes management protocols, understanding of newer medications, counseling and lifestyle coaching abilities, research aptitude, and excellent communication for patient education." },
+                ].map((faq, idx) => (
+                  <div key={idx} className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                    <details className="group">
+                      <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                        <span className="flex-1 text-left pr-4">{faq.q}</span>
+                        <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                        </span>
+                      </summary>
+                      <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">{faq.a}</p>
+                    </details>
                   </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-4 sm:space-y-6 mb-12 not-prose">
+              <div className="flex flex-col gap-2 sm:gap-3 text-sm sm:text-base px-4 py-3 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
+                <div className="flex items-center justify-between gap-4"><span className="font-semibold text-slate-700 dark:text-slate-300">Reading Time</span><span className="text-slate-900 dark:text-slate-100">8 min</span></div>
+                <div className="flex items-center justify-between gap-4"><span className="font-semibold text-slate-700 dark:text-slate-300">Category</span><span className="text-slate-900 dark:text-slate-100">Specialty Guide</span></div>
+                <div className="flex items-center justify-between gap-4"><span className="font-semibold text-slate-700 dark:text-slate-300">Last Updated</span><span className="text-slate-900 dark:text-slate-100">June 2025</span></div>
+              </div>
+            </div>
+
+            <div className="mt-20 p-10 bg-gradient-to-r from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700 rounded-2xl border border-emerald-400/20 dark:border-emerald-500/30 shadow-lg not-prose">
+              <div className="flex items-start gap-6">
+                <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Diabetology Programs</h3>
+                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover specialized diabetology and metabolic disorder training programs for your medical career.</p>
+                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-emerald-600 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
+                    Explore Programs →
+                  </Link>
                 </div>
               </div>
+            </div>
 
-              {/* Point 2 */}
-              <div id="patient-care" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">2</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Patient Care and Management</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span><strong>Outpatient Clinics:</strong> Manage diabetes patients in specialized diabetes clinics</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span><strong>Hospital Practice:</strong> Manage hospitalized diabetic patients and emergencies</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span><strong>Private Practice:</strong> Establish own diabetes care center</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Point 3 */}
-              <div id="prevention" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">3</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Prevention and Education</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Develop diabetes prevention programs for at-risk populations</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Conduct lifestyle modification and dietary counseling</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Provide patient education on self-management</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Prevent or delay diabetes complications</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Point 4 */}
-              <div id="research" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">4</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Research and Innovation</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Conduct clinical research on new diabetes treatments</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Participate in international diabetes research</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Develop innovative management protocols</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Publish in peer-reviewed journals</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Point 5 */}
-              <div id="specializations" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">5</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Specialization Areas</h3>
-                    <p className="text-gray-700 mb-4">Diabetologists can specialize in various areas:</p>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span><strong>Type 1 Diabetes Specialist</strong> - Insulin management and immunology</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span><strong>Type 2 Diabetes and Obesity</strong> - Metabolic management</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span><strong>Gestational Diabetes Specialist</strong> - Pregnancy and diabetes</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Point 6 */}
-              <div id="earning-potential" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">6</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Earning Potential</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Hospital diabetologists: 12-25 lakhs annually</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Specialized diabetes clinics: 20-40 lakhs annually</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Private practitioners: 25-45 lakhs annually</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Corporate/research positions: 40+ lakhs annually</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Point 7 */}
-              <div id="public-health" className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-amber-600 font-bold text-lg">7</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Public Health Scope</h3>
-                    <p className="text-gray-700 mb-4">Significant opportunities in public health and preventive medicine:</p>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span>Lead national diabetes screening programs</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span>Develop community health initiatives</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span>Work in diabetes health policy and guidelines</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Scope Summary Box */}
-              <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-8 border border-amber-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Diabetology Scope Overview</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">Job Demand</p>
-                    <p className="text-2xl font-bold text-amber-600">Very High</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">Disease Prevalence</p>
-                    <p className="text-2xl font-bold text-amber-600">Rising</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">Growth Trajectory</p>
-                    <p className="text-2xl font-bold text-amber-600">Stable</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Key Tips Section */}
-              <section className="bg-white rounded-xl p-8 border border-green-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Tips for Excelling in Diabetology</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Master latest diabetes management protocols</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Develop strong patient counseling skills</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Stay updated with new medications and treatments</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Focus on complication prevention strategies</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Engage in research on diabetes management</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Build expertise in preventive programs</p>
-                  </div>
-                </div>
-              </section>
-            </article>
-
-            {/* FAQs Section */}
-            <section className="mt-12">
-              <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-                <div className="space-y-4">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-amber-300 transition">
-                      <button
-                        onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                        className="w-full flex items-center justify-between p-6 hover:bg-amber-50 transition text-left"
-                      >
-                        <h3 className="font-semibold text-gray-800 pr-4 text-lg">{faq.question}</h3>
-                        <ChevronDown
-                          size={20}
-                          className={`flex-shrink-0 text-amber-600 transition-transform ${
-                            expandedFaq === index ? 'transform rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                      {expandedFaq === index && (
-                        <div className="px-6 py-6 bg-amber-50 border-t border-gray-200">
-                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Comments Section */}
-            <section className="mt-12">
-              <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Share Your Thoughts</h2>
-                
-                {/* Comment Form */}
-                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-amber-50 to-orange-50 p-8 rounded-xl border border-amber-200">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-6">Leave a Comment</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent"
-                      required
-                    />
-                  </div>
-                  <textarea
-                    placeholder="Share your thoughts, questions, or experiences..."
-                    value={formData.comment}
-                    onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-600 focus:border-transparent mb-4"
-                    rows={4}
-                    required
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 rounded-lg transition shadow-md hover:shadow-lg"
-                  >
-                    Post Comment
-                  </button>
-                </form>
-
-                {/* Comments Display */}
-                {comments.length > 0 && (
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-800">Comments ({comments.length})</h3>
-                    {comments.map((comment, index) => (
-                      <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 hover:border-amber-300 transition">
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <p className="font-semibold text-gray-900">{comment.name}</p>
-                            <p className="text-sm text-gray-600">{comment.email}</p>
-                          </div>
-                          <p className="text-sm text-gray-500 whitespace-nowrap">{comment.date}</p>
-                        </div>
-                        <p className="text-gray-700 leading-relaxed">{comment.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="mt-12 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl p-8 md:p-12 text-white">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Pursue Your Diabetology Career</h3>
-              <p className="text-white/90 mb-6 text-lg">Ready to specialize in diabetes management? Get expert guidance from our specialists.</p>
-              <Link to="/contact-us" className="inline-block bg-white text-amber-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition">
-                Get Expert Guidance
-              </Link>
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              {/* Article Info Card */}
-              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 mb-6">
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-gray-600 text-sm">Reading Time</p>
-                    <p className="text-2xl font-bold text-amber-600">{readingTime} min</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-600 text-sm">Category</p>
-                    <p className="text-lg font-semibold text-gray-800">Specialty Guide</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-600 text-sm">Last Updated</p>
-                    <p className="text-lg font-semibold text-gray-800">June 2025</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Related Info Box */}
-              <div className="bg-amber-50 rounded-xl p-6 border border-amber-200">
-                <h4 className="font-semibold text-gray-900 mb-4">💡 Pro Tip</h4>
-                <p className="text-sm text-gray-700">Diabetology is recession-proof. With diabetes prevalence expected to reach 100 million in India by 2030, career opportunities will only increase exponentially.</p>
-              </div>
+            <div className="mt-8 p-4 sm:p-6 rounded-lg border border-emerald-200 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 not-prose">
+              <p className="text-emerald-900 dark:text-emerald-200 font-semibold text-sm sm:text-base">💡 Pro Tip</p>
+              <p className="text-emerald-800 dark:text-emerald-300 mt-2 text-sm sm:text-base">Diabetology is recession-proof. With diabetes prevalence expected to reach 100 million in India by 2030, career opportunities will only increase exponentially.</p>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

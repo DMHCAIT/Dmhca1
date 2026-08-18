@@ -1,406 +1,510 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, ChevronDown, Clock, BookOpen, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/scope-of-oncology")({
   head: () => ({
     meta: [
-      { title: "Career Scope in Oncology - DMHCA" },
-      { name: "description", content: "Explore the career scope and opportunities in Oncology medical specialty in India and globally." },
+      { title: "Scope of Oncology in India — DMHCA" },
+      { name: "description", content: "Career prospects and opportunities in oncology and cancer specialization." },
     ],
   }),
-  component: BlogPost,
+  component: BlogContent,
 });
 
-function BlogPost() {
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [comments, setComments] = useState<Array<{name: string; email: string; text: string; date: string}>>([]);
-  const [formData, setFormData] = useState({ name: '', email: '', comment: '' });
-  const readingTime = 8;
-
-  const faqs = [
-    {
-      question: "What is the scope of oncology in India?",
-      answer: "Oncology is rapidly expanding in India with increasing cancer incidence, improved healthcare infrastructure, and growing private sector investment. There are excellent opportunities in cancer centers, hospitals, research institutions, and private practice. India is becoming a hub for oncology professionals with international recognition."
-    },
-    {
-      question: "What are the different subspecialties in oncology?",
-      answer: "Oncology includes Medical Oncology (chemotherapy and systemic therapy), Surgical Oncology (cancer surgery), Radiation Oncology (radiotherapy), Hematology-Oncology (blood cancers), Pediatric Oncology (children's cancers), and Palliative Medicine. Each subspecialty offers distinct career paths and specialization opportunities."
-    },
-    {
-      question: "What is the career progression in oncology?",
-      answer: "Career progression includes positions as resident, senior resident, assistant consultant, consultant, and senior consultant/chief of department. Many oncologists establish cancer centers, lead research teams, pursue academic roles as professors, or develop specialized treatment protocols and clinical trials."
-    },
-    {
-      question: "Are there research opportunities in oncology?",
-      answer: "India has significant research opportunities in cancer biology, immunotherapy, targeted therapy, and precision medicine. Many institutions offer fellowship in clinical research, MD with research focus, and opportunities to collaborate with international research organizations and pharmaceutical companies."
-    },
-    {
-      question: "What is the earning potential for oncologists?",
-      answer: "Oncologists have high earning potential with government positions offering 10-15 lakhs annually plus allowances. Private sector consultants earn 20-40 lakhs annually, while those in private cancer centers or with established practice can earn 30-50+ lakhs, making it one of the highest-paying medical specialties."
-    },
-    {
-      question: "Can oncologists work internationally?",
-      answer: "Yes, Indian oncologists can work internationally in developed countries like USA, Canada, UK, and Australia. However, they need to qualify country-specific licensing exams and complete additional training. Many international cancer centers actively recruit experienced Indian oncologists due to their expertise."
-    }
-  ];
-
-  const titles = [
-    "Cancer Treatment and Patient Management",
-    "Hospital and Cancer Center Employment",
-    "Private Practice and Entrepreneurship",
-    "Subspecialization Opportunities",
-    "Research and Clinical Trials",
-    "Academic and Teaching Roles",
-    "Global Opportunities and International Practice"
-  ];
-
-  const content = [
-    [
-      "Diagnose and manage various types of cancers including solid tumors and hematologic malignancies",
-      "Develop personalized treatment plans combining chemotherapy, targeted therapy, and immunotherapy",
-      "Perform cancer screening programs and early detection initiatives in communities",
-      "Provide comprehensive supportive care and manage treatment-related complications"
-    ],
-    [
-      "Work as oncologist in government cancer institutes and hospitals with stable employment",
-      "Lead oncology departments managing multidisciplinary teams and cancer programs",
-      "Participate in tumor boards and collaborative cancer management decisions",
-      "Access to advanced technology, research opportunities, and continuous professional development"
-    ],
-    [
-      "Establish private cancer clinics and diagnostic centers offering personalized care",
-      "Build profitable practice through consultation fees, chemotherapy administration, and procedures",
-      "Develop patient-centric services including counseling, support groups, and holistic care",
-      "Achieve entrepreneurial success by creating specialized cancer treatment centers"
-    ],
-    [
-      "Pursue Medical Oncology specialization for chemotherapy and systemic cancer treatment expertise",
-      "Focus on Surgical Oncology learning specialized cancer surgical techniques and approaches",
-      "Specialize in Radiation Oncology managing radiotherapy treatment planning and delivery",
-      "Develop expertise in specific cancer types like breast cancer, lung cancer, or gastrointestinal cancers"
-    ],
-    [
-      "Participate in clinical trials investigating new cancer drugs and treatment protocols",
-      "Conduct translational research bridging laboratory discoveries and patient care",
-      "Contribute to epidemiological studies understanding cancer patterns and prevention",
-      "Collaborate with pharmaceutical companies in drug development and validation studies"
-    ],
-    [
-      "Secure positions as faculty in medical colleges teaching oncology to future doctors",
-      "Lead research teams investigating novel treatment approaches and cancer biology",
-      "Publish research findings in high-impact journals advancing oncology knowledge",
-      "Mentor junior oncologists and contribute to specialty development through academic excellence"
-    ],
-    [
-      "Work in cancer centers across USA, Canada, Australia, and European countries",
-      "Access cutting-edge technology and treatment modalities in developed healthcare systems",
-      "Participate in international research collaborations and clinical trials",
-      "Build global professional network and pursue continuing education from leading cancer institutes"
-    ]
-  ];
-
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.comment) {
-      setComments([...comments, {
-        name: formData.name,
-        email: formData.email,
-        text: formData.comment,
-        date: new Date().toLocaleDateString()
-      }]);
-      setFormData({ name: '', email: '', comment: '' });
-    }
-  };
-
+function BlogContent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       {/* Hero Section */}
       <section className="site-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-amber-600/10 to-orange-600/10"></div>
-        <div className="container-home max-w-5xl relative z-10">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition">
-            <ArrowLeft size={20} />
+        <div className="absolute inset-0 bg-gradient-to-b from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700"></div>
+        <div className="relative container-x py-4 sm:py-6 md:py-8">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-2 transition text-xs sm:text-sm">
+            <ArrowLeft className="w-4 h-4" />
             Back to Blogs
           </Link>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">Scope of Oncology</h1>
-          <p className="text-white/90 text-xl mb-6 max-w-2xl">Career opportunities and advancement in oncology medical specialty</p>
+          <div className="max-w-3xl">
+            <div className="inline-block px-3 sm:px-4 py-1 bg-red-500/20 border border-red-300/50 rounded-full text-red-200 text-xs font-semibold mb-2">
+              Medical Specialty Guide • 2025 Edition
+            </div>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
+              Scope of Oncology: Career Opportunities & Specializations
+            </h1>
+            <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
+              Explore the rapidly advancing field of cancer medicine. Master modern treatment modalities, develop specialized expertise, and build a fulfilling career with exceptional earning potential.
+            </p>
+          </div>
           
-          {/* Article Meta */}
-          <div className="flex flex-wrap items-center gap-6 text-white/80">
-            <div className="flex items-center gap-2">
-              <Clock size={18} />
-              <span>{readingTime} min read</span>
+          {/* Key Metrics */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mt-3 pt-3 border-t border-white/20">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Clock className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Read Time</div>
+                <div className="font-bold text-sm sm:text-lg">8 min</div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <BookOpen size={18} />
-              <span>Medical Specialty Guide</span>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Users className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Career Paths</div>
+                <div className="font-bold text-sm sm:text-lg">7+</div>
+              </div>
             </div>
-            <div className="text-sm text-white/70">Updated: June 2025</div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Job Market</div>
+                <div className="font-bold text-sm sm:text-lg">Excellent</div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
+                <div className="font-bold text-sm sm:text-lg">Rapid</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 py-12">
-        {/* Featured Image */}
-        <div className="mb-12">
-          <div className="rounded-2xl overflow-hidden shadow-2xl">
-            <img 
-              src="/blog-images/Scope-of-Oncology.webp"
-              alt="Scope of Oncology"
-              className="w-full h-auto object-cover"
-            />
+      {/* Featured Image */}
+      <section className="py-4 sm:py-6 md:py-8 bg-white dark:bg-slate-800 px-4 sm:px-0">
+        <div className="container-x flex justify-center">
+          <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
+            <img src="/blog-images/Scope-of-Oncology.webp" alt="Scope of Oncology" className="w-full h-auto aspect-[992/496] object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
-          <p className="text-center text-gray-600 text-sm mt-4">Comprehensive overview of career opportunities and specialization in oncology</p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {/* Quick Navigation */}
-            <div className="bg-amber-50 rounded-xl p-6 mb-12 border border-amber-200">
-              <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                <BookOpen size={20} className="text-amber-600" />
-                Quick Navigation
-              </h3>
-              <ul className="space-y-2">
-                <li><a href="#scope-1" className="text-amber-600 hover:text-amber-700 text-sm">Cancer Treatment and Patient Management</a></li>
-                <li><a href="#scope-2" className="text-amber-600 hover:text-amber-700 text-sm">Hospital and Cancer Center Employment</a></li>
-                <li><a href="#scope-3" className="text-amber-600 hover:text-amber-700 text-sm">Private Practice and Entrepreneurship</a></li>
-                <li><a href="#scope-4" className="text-amber-600 hover:text-amber-700 text-sm">Subspecialization Opportunities</a></li>
-                <li><a href="#scope-5" className="text-amber-600 hover:text-amber-700 text-sm">Research and Clinical Trials</a></li>
-                <li><a href="#scope-6" className="text-amber-600 hover:text-amber-700 text-sm">Academic and Teaching Roles</a></li>
-                <li><a href="#scope-7" className="text-amber-600 hover:text-amber-700 text-sm">Global Opportunities and International Practice</a></li>
-              </ul>
+      {/* Main Content */}
+      <section className="py-8 sm:py-12 md:py-16 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm px-4 sm:px-0">
+        <div className="container-x max-w-4xl">
+          <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
+            
+            {/* Quick Summary */}
+            <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-red-50 via-rose-50 to-pink-50 dark:from-red-900/30 dark:via-rose-900/30 dark:to-pink-900/30 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-red-200 dark:border-red-800/50 not-prose">
+              <h2 className="text-xl sm:text-2xl font-bold text-red-900 dark:text-red-200 mb-4">Career Scope in Oncology</h2>
+              <p className="text-sm sm:text-base text-red-800 dark:text-red-300 mb-6 leading-relaxed">
+                Oncology is a rapidly advancing medical specialty with tremendous career potential. As cancer incidence rises and treatment options expand, demand for qualified oncologists continues to grow. The specialty offers multiple pathways with exceptional earning potential and opportunities for innovation.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 text-xl">✓</span>
+                  <span className="text-red-900 dark:text-red-200">7 major career pathways</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 text-xl">✓</span>
+                  <span className="text-red-900 dark:text-red-200">Subspecialization options</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 text-xl">✓</span>
+                  <span className="text-red-900 dark:text-red-200">Research opportunities</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 text-xl">✓</span>
+                  <span className="text-red-900 dark:text-red-200">Highest earning potential</span>
+                </div>
+              </div>
             </div>
 
-            {/* Main Article Content */}
-            <article className="space-y-8">
-              <section>
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">Career Scope in Oncology</h2>
-                <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Oncology is a rapidly advancing medical specialty with tremendous career potential in India and globally. As cancer incidence continues to rise and treatment options expand, the demand for qualified oncologists has never been higher. This specialty offers multiple pathways for career development, from clinical practice to research and leadership roles. With increasing investment in healthcare infrastructure and emerging technologies like immunotherapy and precision medicine, oncology presents an exciting career landscape for aspiring physicians.
-                </p>
-              </section>
-
-              {/* Scope Sections */}
-              {titles.map((title, index) => (
-                <div key={index} id={`scope-${index + 1}`} className="bg-white rounded-xl p-8 border-l-4 border-amber-600 shadow-md hover:shadow-lg transition">
-                  <div className="flex items-start gap-4">
-                    <div className="bg-amber-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                      <span className="text-amber-600 font-bold text-lg">{index + 1}</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-3">{title}</h3>
-                      <ul className="space-y-2 text-gray-700">
-                        {content[index].map((item, itemIdx) => (
-                          <li key={itemIdx} className="flex items-start gap-3">
-                            <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              ))}
-
-              {/* Duration Summary Box */}
-              <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-8 border border-amber-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Career Timeline</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">12 to MBBS</p>
-                    <p className="text-2xl font-bold text-amber-600">5.5 years</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">MBBS to MD Oncology</p>
-                    <p className="text-2xl font-bold text-amber-600">3-4 years</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">Total Duration</p>
-                    <p className="text-2xl font-bold text-amber-600">8.5-9.5 years</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Key Tips Section */}
-              <section className="bg-white rounded-xl p-8 border border-green-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Tips for Success</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Develop strong fundamentals in cancer pathology and biology</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Stay updated with latest cancer treatment protocols and guidelines</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Gain hands-on experience in cancer diagnostics and treatment</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Engage in research to advance cancer treatment knowledge</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Develop compassion and emotional intelligence for patient care</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Pursue fellowships and additional training in specialized cancers</p>
-                  </div>
-                </div>
-              </section>
-            </article>
-
-            {/* FAQs Section */}
-            <section className="mt-12">
-              <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-8">Frequently Asked Questions</h2>
-                <div className="space-y-4">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-gray-200 dark:border-slate-700 hover:border-red-300 dark:hover:border-slate-500 transition">
-                      <button
-                        onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                        className="w-full flex items-center justify-between p-6 hover:bg-amber-50 transition text-left"
-                      >
-                        <h3 className="font-semibold text-gray-800 pr-4 text-lg">{faq.question}</h3>
-                        <ChevronDown
-                          size={20}
-                          className={`flex-shrink-0 text-amber-600 transition-transform ${
-                            expandedFaq === index ? 'transform rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                      {expandedFaq === index && (
-                        <div className="px-6 py-6 bg-amber-50 border-t border-gray-200">
-                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Comments Section */}
-            <section className="mt-12">
-              <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Share Your Thoughts</h2>
-                
-                {/* Comment Form */}
-                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-red-50 to-pink-50 dark:from-slate-800 dark:to-slate-800 p-8 rounded-xl border border-red-200 dark:border-slate-700">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-6">Leave a Comment</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 dark:focus:ring-red-500 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 dark:focus:ring-red-500 focus:border-transparent"
-                      required
-                    />
-                  </div>
-                  <textarea
-                    placeholder="Share your thoughts, questions, or experiences..."
-                    value={formData.comment}
-                    onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-slate-100 dark:placeholder-slate-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 dark:focus:ring-red-500 focus:border-transparent mb-4"
-                    rows={4}
-                    required
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 rounded-lg transition shadow-md hover:shadow-lg"
+            {/* Table of Contents */}
+            <div className="mb-12 sm:mb-14 md:mb-16 p-4 sm:p-6 md:p-8 bg-slate-100 dark:bg-slate-700/50 rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-200 dark:border-slate-600 not-prose">
+              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6">Table of Contents</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+                {[
+                  { num: 1, title: "Cancer Treatment" },
+                  { num: 2, title: "Hospital Employment" },
+                  { num: 3, title: "Private Practice" },
+                  { num: 4, title: "Subspecialization" },
+                  { num: 5, title: "Research & Trials" },
+                  { num: 6, title: "Academic Roles" },
+                  { num: 7, title: "Global Opportunities" },
+                ].map((item) => (
+                  <a
+                    key={item.num}
+                    href={`#section-${item.num}`}
+                    className="p-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition group"
                   >
-                    Post Comment
-                  </button>
-                </form>
-
-                {/* Comments Display */}
-                {comments.length > 0 && (
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-800">Comments ({comments.length})</h3>
-                    {comments.map((comment, index) => (
-                      <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 hover:border-amber-300 transition">
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <p className="font-semibold text-gray-900">{comment.name}</p>
-                            <p className="text-sm text-gray-600">{comment.email}</p>
-                          </div>
-                          <p className="text-sm text-gray-500 whitespace-nowrap">{comment.date}</p>
-                        </div>
-                        <p className="text-gray-700 leading-relaxed">{comment.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                    <div className="flex items-start gap-2 sm:gap-3">
+                      <span className="inline-block px-2 sm:px-2.5 py-1 bg-red-600 text-white text-xs font-bold rounded flex-shrink-0">
+                        {item.num}
+                      </span>
+                      <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 group-hover:text-red-600 dark:group-hover:text-red-400 line-clamp-2">
+                        {item.title}
+                      </span>
+                    </div>
+                  </a>
+                ))}
               </div>
-            </section>
+            </div>
 
-            {/* CTA Section */}
-            <section className="mt-12 bg-gradient-to-r from-amber-600 to-orange-600 rounded-xl p-8 md:p-12 text-white">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Build Your Oncology Career</h3>
-              <p className="text-white/90 mb-6 text-lg">Ready to pursue oncology as your specialty? Our career advisors can guide you through the pathway and help you make informed decisions.</p>
-              <Link to="/contact-us" className="inline-block bg-white text-amber-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition">
-                Contact Us for Guidance
-              </Link>
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              {/* Article Info Card */}
-              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 mb-6">
-                <div className="space-y-4">
+            {/* Sections 1-7 */}
+            {/* Section 1 */}
+            <div id="section-1" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-red-200 dark:border-red-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-full text-red-700 dark:text-red-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 1
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-900 dark:text-red-100 mb-3 sm:mb-4">Cancer Treatment and Patient Management</h2>
+              <div className="space-y-3 text-red-900 dark:text-red-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
                   <div>
-                    <p className="text-gray-600 text-sm">Reading Time</p>
-                    <p className="text-2xl font-bold text-amber-600">{readingTime} min</p>
+                    <p className="font-semibold">Diagnosis and Treatment Planning</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Diagnose and manage various types of cancers including solid tumors and hematologic malignancies</p>
                   </div>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-600 text-sm">Category</p>
-                    <p className="text-lg font-semibold text-gray-800">Medical Career</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Comprehensive Treatment Approach</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Develop personalized treatment plans combining chemotherapy, targeted therapy, and immunotherapy</p>
                   </div>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-600 text-sm">Last Updated</p>
-                    <p className="text-lg font-semibold text-gray-800">June 2025</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Patient Care and Supportive Services</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Provide comprehensive supportive care and manage treatment-related complications</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Cancer Prevention and Screening</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Perform cancer screening programs and early detection initiatives</p>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Related Info Box */}
-              <div className="bg-amber-50 rounded-xl p-6 border border-amber-200">
-                <h4 className="font-semibold text-gray-900 mb-4">💡 Pro Tip</h4>
-                <p className="text-sm text-gray-700">Oncology offers excellent work satisfaction and high earning potential. The specialty is growing rapidly in India with numerous opportunities for both clinical practice and research advancement.</p>
+            {/* Section 2 */}
+            <div id="section-2" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-rose-200 dark:border-rose-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-rose-100 dark:bg-rose-900/30 border border-rose-300 dark:border-rose-700 rounded-full text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 2
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-900 dark:text-rose-100 mb-3 sm:mb-4">Hospital and Cancer Center Employment</h2>
+              <div className="space-y-3 text-rose-900 dark:text-rose-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Government Hospital Positions</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Work in government hospitals and medical college oncology departments</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Cancer Center Leadership</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Lead oncology departments and manage cancer treatment services</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Corporate Hospital Opportunities</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Work in corporate cancer centers with advanced treatment facilities</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Modern Treatment Facilities</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Access state-of-the-art equipment and latest cancer treatment technologies</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 3 */}
+            <div id="section-3" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-pink-50 to-red-50 dark:from-pink-900/20 dark:to-red-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-pink-200 dark:border-pink-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-pink-100 dark:bg-pink-900/30 border border-pink-300 dark:border-pink-700 rounded-full text-pink-700 dark:text-pink-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 3
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-900 dark:text-pink-100 mb-3 sm:mb-4">Private Practice and Entrepreneurship</h2>
+              <div className="space-y-3 text-pink-900 dark:text-pink-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Independent Oncology Practice</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Establish independent oncology clinics and cancer treatment centers</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Patient Consultation Services</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Provide specialized oncology consultations and second opinions</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Patient Relationship Building</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Build patient base through quality care and reputation</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">High Income Potential</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Private oncology practice offers exceptional earning potential</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 4 */}
+            <div id="section-4" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-red-200 dark:border-red-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-full text-red-700 dark:text-red-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 4
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-900 dark:text-red-100 mb-3 sm:mb-4">Subspecialization Opportunities</h2>
+              <div className="space-y-3 text-red-900 dark:text-red-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Medical Oncology</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Specialize in chemotherapy and systemic cancer treatment</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Surgical Oncology</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Pursue surgical oncology for cancer surgery specialization</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Organ-Specific Oncology</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Focus on breast oncology, lung cancer, or other organ-specific cancers</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Specialist Consultant Roles</p>
+                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">Develop expertise in specific cancer types and treatment protocols</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 5 */}
+            <div id="section-5" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-rose-50 to-red-50 dark:from-rose-900/20 dark:to-red-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-rose-200 dark:border-rose-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-rose-100 dark:bg-rose-900/30 border border-rose-300 dark:border-rose-700 rounded-full text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 5
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-900 dark:text-rose-100 mb-3 sm:mb-4">Research and Clinical Trials</h2>
+              <div className="space-y-3 text-rose-900 dark:text-rose-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Clinical Trial Participation</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Conduct and participate in cancer clinical trials and research studies</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Drug Development</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Participate in cancer drug development and novel therapy research</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Research Publishing</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Publish research in prestigious oncology journals advancing cancer care</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Innovation and Discovery</p>
+                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">Contribute to innovation in cancer treatment and research</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 6 */}
+            <div id="section-6" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-pink-200 dark:border-pink-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-pink-100 dark:bg-pink-900/30 border border-pink-300 dark:border-pink-700 rounded-full text-pink-700 dark:text-pink-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 6
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-900 dark:text-pink-100 mb-3 sm:mb-4">Academic and Teaching Roles</h2>
+              <div className="space-y-3 text-pink-900 dark:text-pink-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Medical College Faculty</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Pursue academic career as faculty in medical colleges and universities</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Student and Resident Training</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Train medical students and oncology residents in cancer management</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Leadership Opportunities</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Lead oncology departments as professors and academic leaders</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Knowledge Dissemination</p>
+                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">Share expertise and mentor next generation of oncologists</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Section 7 */}
+            <div id="section-7" className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-orange-200 dark:border-orange-800 not-prose">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-orange-100 dark:bg-orange-900/30 border border-orange-300 dark:border-orange-700 rounded-full text-orange-700 dark:text-orange-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+                SECTION 7
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-900 dark:text-orange-100 mb-3 sm:mb-4">Global Opportunities and International Practice</h2>
+              <div className="space-y-3 text-orange-900 dark:text-orange-100 text-sm sm:text-base">
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">International Practice Opportunities</p>
+                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">Work in oncology hospitals and cancer centers globally</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Advanced Technology Access</p>
+                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">Access cutting-edge cancer treatment technology internationally</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Fellowship Training</p>
+                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">Pursue fellowships and advanced training internationally</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Global Network</p>
+                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">Build international oncology network and professional connections</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Career Timeline */}
+            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">Career Timeline</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="p-4 bg-gradient-to-br from-red-100 to-rose-100 dark:from-red-900/30 dark:to-rose-900/30 border border-red-200 dark:border-red-700 rounded-lg">
+                  <p className="text-xs sm:text-sm text-red-700 dark:text-red-300 font-semibold mb-1">12 to MBBS</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-red-900 dark:text-red-100">5.5 years</p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-rose-100 to-pink-100 dark:from-rose-900/30 dark:to-pink-900/30 border border-rose-200 dark:border-rose-700 rounded-lg">
+                  <p className="text-xs sm:text-sm text-rose-700 dark:text-rose-300 font-semibold mb-1">MBBS to MD Oncology</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-rose-900 dark:text-rose-100">3-4 years</p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-pink-100 to-red-100 dark:from-pink-900/30 dark:to-red-900/30 border border-pink-200 dark:border-pink-700 rounded-lg">
+                  <p className="text-xs sm:text-sm text-pink-700 dark:text-pink-300 font-semibold mb-1">Total Duration</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-pink-900 dark:text-pink-100">8.5-9.5 years</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Key Tips Section */}
+            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">Key Tips for Success</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {[
+                  { title: "Cancer Biology Foundation", desc: "Develop strong fundamentals in cancer pathology and biology" },
+                  { title: "Stay Updated", desc: "Stay updated with latest cancer treatment protocols and guidelines" },
+                  { title: "Hands-on Experience", desc: "Gain hands-on experience in cancer diagnostics and treatment" },
+                  { title: "Research Engagement", desc: "Engage in research to advance cancer treatment knowledge" },
+                  { title: "Develop Compassion", desc: "Develop compassion and emotional intelligence for patient care" },
+                  { title: "Pursue Fellowships", desc: "Pursue fellowships and additional training in specialized cancers" },
+                ].map((tip, i) => (
+                  <div key={i} className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-lg">
+                    <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">✓ {tip.title}</p>
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">{tip.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-20 p-10 bg-gradient-to-r from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700 rounded-2xl border border-red-400/20 dark:border-red-500/30 shadow-lg not-prose">
+              <div className="flex items-start gap-6">
+                <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Ready to Pursue Oncology?</h3>
+                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">
+                    Explore comprehensive oncology programs and build a rewarding career in cancer medicine.
+                  </p>
+                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-red-600 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
+                    Explore Programs →
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="py-12 sm:py-16 md:py-20 bg-white dark:bg-slate-800 px-4 sm:px-0">
+        <div className="container-x max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3 sm:mb-4">Frequently Asked Questions</h2>
+          <p className="text-slate-600 dark:text-slate-400 mb-8 text-sm sm:text-base">Get answers to common questions about oncology career opportunities.</p>
+          
+          <div className="space-y-4 sm:space-y-6">
+            {[
+              { q: "What is the scope of oncology in India?", a: "Oncology is rapidly expanding in India with increasing cancer incidence, improved healthcare infrastructure, and growing private sector investment. There are excellent opportunities in cancer centers, hospitals, research institutions, and private practice. India is becoming a hub for oncology professionals." },
+              { q: "What are the different subspecialties in oncology?", a: "Oncology includes Medical Oncology, Surgical Oncology, Radiation Oncology, Hematology-Oncology, and Pediatric Oncology. Each subspecialty offers distinct career paths and specialization opportunities with excellent earning potential." },
+              { q: "What is the career progression in oncology?", a: "Career progression includes positions as resident, senior resident, assistant consultant, consultant, and senior consultant. Many oncologists establish cancer centers, lead research teams, pursue academic roles, or develop specialized treatment protocols." },
+              { q: "Are there research opportunities in oncology?", a: "Yes, India has significant research opportunities in cancer biology, immunotherapy, targeted therapy, and precision medicine. Many institutions offer fellowships in clinical research and opportunities to collaborate with pharmaceutical companies." },
+              { q: "What is the earning potential for oncologists?", a: "Oncologists have high earning potential with government positions offering 10-15 lakhs annually. Private sector consultants earn 20-40 lakhs, while those in private centers can earn 30-50+ lakhs, making it one of the highest-paying specialties." },
+              { q: "Can oncologists work internationally?", a: "Yes, Indian oncologists can work in USA, Canada, UK, and Australia after qualifying relevant exams. Many international cancer centers actively recruit experienced Indian oncologists due to their expertise." }
+            ].map((faq, idx) => (
+              <div key={idx} className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                <details className="group">
+                  <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                    <span className="flex-1 text-left pr-4">{faq.q}</span>
+                    <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                  </summary>
+                  <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">{faq.a}</p>
+                </details>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 border-2 border-red-200 dark:border-red-800 rounded-lg sm:rounded-xl">
+            <h3 className="text-lg sm:text-xl font-bold text-red-900 dark:text-red-200 mb-2">Need Expert Guidance?</h3>
+            <p className="text-sm sm:text-base text-red-800 dark:text-red-300 mb-4">
+              Our oncology experts can help you navigate your specialty career path and make informed decisions.
+            </p>
+            <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
+              Contact Our Experts →
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -217,7 +217,7 @@ function Sitemap() {
               >
                 <div>
                   <div className="text-xl font-bold text-navy-deep group-hover:text-navy">📚 View All Blogs</div>
-                  <div className="text-sm text-muted-foreground mt-1">Explore all 22 medical articles on specializations, career guidance & education</div>
+                  <div className="text-sm text-muted-foreground mt-1">Explore all 23 medical articles on specializations, career guidance & education</div>
                 </div>
                 <ChevronRight className="w-6 h-6 text-gold group-hover:text-navy-deep transition flex-shrink-0" />
               </Link>
@@ -225,6 +225,7 @@ function Sitemap() {
               {/* Blog Cards Grid */}
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
                 {[
+                  { to: "/ayush-hybrid-programs", title: "AYUSH Hybrid Programs", category: "Career Path" },
                   { to: "/how-to-crack-neet-pg", title: "How to Crack NEET PG", category: "Exam Prep" },
                   { to: "/courses-after-mbbs-in-india", title: "Courses After MBBS", category: "Pathways" },
                   { to: "/scope-of-radiology", title: "Scope of Radiology", category: "Specialty" },

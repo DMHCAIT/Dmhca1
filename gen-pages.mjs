@@ -1,11 +1,55 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import fs from 'fs';
+
+const specialties = [
+  { route: 'how-to-become-a-radiologist', title: 'How to Become a Radiologist', image: 'How-to-Become-a-Radiologist.webp', color: 'indigo', duration: '9.5-10.5 years' },
+  { route: 'how-to-become-a-cardiologist', title: 'How to Become a Cardiologist', image: 'How-to-Become-a-Cardiologist.webp', color: 'rose', duration: '12-13 years' },
+  { route: 'how-to-become-a-cosmetologist', title: 'How to Become a Cosmetologist', image: 'How-to-Become-a-Cosmetologist.webp', color: 'amber', duration: '8.5-9.5 years' },
+  { route: 'how-to-become-an-oncologist', title: 'How to Become an Oncologist', image: 'How-to-Become-an-Oncologist.webp', color: 'red', duration: '12-13 years' },
+  { route: 'how-to-become-a-neurologist', title: 'How to Become a Neurologist', image: 'How-to-Become-a-Neurologist.webp', color: 'violet', duration: '12-13 years' },
+  { route: 'how-to-become-a-diabetologist', title: 'How to Become a Diabetologist', image: 'How-to-Become-a-Diabetologist.webp', color: 'emerald', duration: '12-13 years' },
+  { route: 'how-to-become-an-endocrinologist', title: 'How to Become an Endocrinologist', image: 'How-to-Become-an-Endocrinologist.webp', color: 'indigo', duration: '12-13 years' },
+  { route: 'how-to-become-an-embryologist', title: 'How to Become an Embryologist', image: 'How-to-Become-an-Embryologist.webp', color: 'cyan', duration: '10.5-11 years' },
+  { route: 'how-to-become-a-pediatrician', title: 'How to Become a Pediatrician', image: 'How-to-Become-a-Pediatrician.webp', color: 'sky', duration: '12-13 years' },
+  { route: 'how-to-become-an-obstetrician-gynecologist', title: 'How to Become an Obstetrician-Gynecologist', image: 'How-to-Become-an-Obstetrician-Gynecologist.webp', color: 'pink', duration: '9.5-10 years' },
+];
+
+const colorGradients = {
+  indigo: 'from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700',
+  rose: 'from-rose-600/95 to-red-600/95 dark:from-rose-700 dark:to-red-700',
+  amber: 'from-amber-600/95 to-orange-600/95 dark:from-amber-700 dark:to-orange-700',
+  red: 'from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700',
+  violet: 'from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700',
+  emerald: 'from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700',
+  cyan: 'from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700',
+  sky: 'from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700',
+  pink: 'from-pink-600/95 to-rose-600/95 dark:from-pink-700 dark:to-rose-700',
+};
+
+const buttonColors = {
+  indigo: 'from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700',
+  rose: 'from-rose-600/95 to-red-600/95 dark:from-rose-700 dark:to-red-700',
+  amber: 'from-amber-600/95 to-orange-600/95 dark:from-amber-700 dark:to-orange-700',
+  red: 'from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700',
+  violet: 'from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700',
+  emerald: 'from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700',
+  cyan: 'from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700',
+  sky: 'from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700',
+  pink: 'from-pink-600/95 to-rose-600/95 dark:from-pink-700 dark:to-rose-700',
+};
+
+function generatePageContent(specialty) {
+  const gradient = colorGradients[specialty.color];
+  const buttonGradient = buttonColors[specialty.color];
+  const specialtyName = specialty.title.replace('How to Become a ', '').replace('How to Become an ', '');
+  
+  return `import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/how-to-become-a-pediatrician")({
+export const Route = createFileRoute("/${specialty.route}")({
   head: () => ({
     meta: [
-      { title: "How to Become a Pediatrician — DMHCA" },
-      { name: "description", content: "Step-by-step guide to becoming a pediatrician in India." },
+      { title: "${specialty.title} — DMHCA" },
+      { name: "description", content: "Step-by-step guide to becoming a ${specialtyName.toLowerCase()} in India." },
     ],
   }),
   component: BlogContent,
@@ -15,7 +59,7 @@ function BlogContent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <section className="site-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700"></div>
+        <div className="absolute inset-0 bg-gradient-to-b ${gradient}"></div>
         <div className="relative container-x py-4 sm:py-6 md:py-8">
           <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-2 transition text-xs sm:text-sm">
             <ArrowLeft className="w-4 h-4" />
@@ -26,10 +70,10 @@ function BlogContent() {
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              How to Become a Pediatrician
+              ${specialty.title}
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Complete pathway to becoming a pediatrician in India
+              Complete pathway to becoming a ${specialtyName.toLowerCase()} in India
             </p>
           </div>
 
@@ -52,7 +96,7 @@ function BlogContent() {
               <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
                 <div className="text-xs sm:text-sm text-white/70">Duration</div>
-                <div className="font-bold text-sm sm:text-lg">12-13 years</div>
+                <div className="font-bold text-sm sm:text-lg">${specialty.duration}</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
@@ -66,10 +110,10 @@ function BlogContent() {
         </div>
       </section>
 
-      <section className="py-2 sm:py-3 md:py-4 bg-white dark:bg-slate-800 px-4 sm:px-0">
+      <section className="py-4 sm:py-6 md:py-8 bg-white dark:bg-slate-800 px-4 sm:px-0">
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
-            <img src="/blog-images/How-to-Become-a-Pediatrician.webp" alt="How to Become a Pediatrician" className="w-full h-auto aspect-[992/496] object-cover" />
+            <img src="/blog-images/${specialty.image}" alt="${specialty.title}" className="w-full h-auto aspect-[992/496] object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
         </div>
@@ -79,13 +123,13 @@ function BlogContent() {
         <div className="container-x max-w-4xl">
           <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
             <div className="mb-12 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Path to Pediatrician</h2>
-              <p className="text-slate-700 dark:text-slate-300 mb-8 text-sm sm:text-base">Becoming a pediatrician in India requires a systematic approach combining academic excellence, competitive entrance exams, and clinical experience. This guide outlines the complete pathway to help you navigate your journey into this rewarding medical specialty.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Path to ${specialtyName}</h2>
+              <p className="text-slate-700 dark:text-slate-300 mb-8 text-sm sm:text-base">Becoming a ${specialtyName.toLowerCase()} in India requires a systematic approach combining academic excellence, competitive entrance exams, and clinical experience. This guide outlines the complete pathway to help you navigate your journey into this rewarding medical specialty.</p>
               
               <div className="space-y-6">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">1</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">1</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Foundation & Preparation</h3>
@@ -94,7 +138,7 @@ function BlogContent() {
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">2</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">2</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">NEET-UG & MBBS Admission</h3>
@@ -103,7 +147,7 @@ function BlogContent() {
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">3</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">3</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Complete MBBS Program</h3>
@@ -112,7 +156,7 @@ function BlogContent() {
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">4</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">4</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Clinical Internship</h3>
@@ -121,7 +165,7 @@ function BlogContent() {
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">5</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">5</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">NEET-PG Preparation & Exam</h3>
@@ -130,7 +174,7 @@ function BlogContent() {
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">6</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">6</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Postgraduate Specialization</h3>
@@ -139,7 +183,7 @@ function BlogContent() {
                 </div>
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 text-white font-bold">7</div>
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br ${buttonGradient} text-white font-bold">7</div>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Establish Practice & Career</h3>
@@ -151,8 +195,8 @@ function BlogContent() {
 
             <div className="mb-12 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Duration Timeline</h2>
-              <div className="bg-gradient-to-r from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 rounded-lg p-6 text-white">
-                <p className="text-sm sm:text-base">Total Duration: <span className="font-bold text-lg">12-13 years</span></p>
+              <div className="bg-gradient-to-r ${buttonGradient} rounded-lg p-6 text-white">
+                <p className="text-sm sm:text-base">Total Duration: <span className="font-bold text-lg">${specialty.duration}</span></p>
                 <p className="text-sm sm:text-base text-white/80 mt-2">This includes 12th to MBBS, internship, NEET-PG preparation, and postgraduate specialization training.</p>
               </div>
             </div>
@@ -175,12 +219,12 @@ function BlogContent() {
                 <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
                   <details className="group">
                     <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
-                      <span className="flex-1 text-left pr-4">What is the total time required to become a pediatrician?</span>
+                      <span className="flex-1 text-left pr-4">What is the total time required to become a ${specialtyName.toLowerCase()}?</span>
                       <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
                       </span>
                     </summary>
-                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Total duration is approximately 12-13 years. This includes 12th completion, 5.5-year MBBS program, 1-year internship, NEET-PG preparation, and 3-year postgraduate specialization training.</p>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Total duration is approximately ${specialty.duration}. This includes 12th completion, 5.5-year MBBS program, 1-year internship, NEET-PG preparation, and 3-year postgraduate specialization training.</p>
                   </details>
                 </div>
                 <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
@@ -241,11 +285,11 @@ function BlogContent() {
               </div>
             </div>
 
-            <div className="mt-20 p-10 bg-gradient-to-r from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700 rounded-2xl border border-white/20 dark:border-white/30 shadow-lg not-prose">
+            <div className="mt-20 p-10 bg-gradient-to-r ${buttonGradient} rounded-2xl border border-white/20 dark:border-white/30 shadow-lg not-prose">
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Pediatrician Programs</h3>
+                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore ${specialtyName} Programs</h3>
                   <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover comprehensive training programs and specialization courses for your medical career advancement.</p>
                   <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-slate-900 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
                     Explore Programs →
@@ -259,3 +303,14 @@ function BlogContent() {
     </div>
   );
 }
+`;
+}
+
+specialties.forEach(specialty => {
+  const filePath = `src/routes/${specialty.route}.tsx`;
+  const content = generatePageContent(specialty);
+  fs.writeFileSync(filePath, content, 'utf-8');
+  console.log(`✓ Generated ${filePath}`);
+});
+
+console.log('\n✅ All 10 "how to become" specialty pages generated successfully!');

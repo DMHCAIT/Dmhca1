@@ -164,6 +164,12 @@ export function Header() {
     <>
     <header className="sticky top-0 z-40 bg-background dark:bg-slate-950 dark:border-b dark:border-slate-800 border-b border-border/50 hairline">
       <div className="container-x flex items-center justify-between h-16">
+        {/* Mobile Menu Button - Left */}
+        <button className="lg:hidden p-2 order-first" onClick={() => setOpen(!open)} aria-label="Menu">
+          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+
+        {/* Logo */}
         <Link to="/" className="flex items-center">
           <img
             src={logo}
@@ -179,6 +185,7 @@ export function Header() {
           />
         </Link>
 
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-7 text-base">
           {nav.map((n) => (
             <Link key={n.to} to={n.to} className="text-foreground/80 dark:text-slate-400 hover:text-navy-deep dark:hover:text-gold transition" activeProps={{ className: "text-navy-deep dark:text-gold" }} activeOptions={{ exact: n.to === "/" }}>
@@ -187,6 +194,7 @@ export function Header() {
           ))}
         </nav>
 
+        {/* Desktop Right-Side Elements */}
         <div className="hidden lg:flex items-center gap-3 relative">
           <ThemeToggle />
           {isLoggedIn ? (
@@ -268,31 +276,28 @@ export function Header() {
           )}
         </div>
 
-        <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
-          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
-        
-        <div className="lg:hidden p-2">
+        {/* Mobile Theme Toggle - Right */}
+        <div className="lg:hidden p-2 order-last">
           <ThemeToggle />
         </div>
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-background">
-          <div className="container-x py-4 flex flex-col gap-3 text-base">
+        <div className="lg:hidden border-t border-border bg-background overflow-y-auto max-h-screen">
+          <div className="container-x py-3 flex flex-col gap-2 text-sm md:text-base">
             {nav.map((n) => (
-              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-1 text-foreground dark:text-slate-300 hover:text-navy-deep dark:hover:text-gold">{n.label}</Link>
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="py-2 px-2 text-foreground dark:text-slate-300 hover:text-navy-deep dark:hover:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition">{n.label}</Link>
             ))}
-            <div className="mt-2 pt-4 border-t border-border dark:border-slate-700 flex gap-2 flex-wrap">
+            <div className="mt-3 pt-3 border-t border-border dark:border-slate-700 flex gap-2 flex-col sm:flex-row">
               <button
                 onClick={() => {
                   if (typeof window !== 'undefined') window.location.href = '/cart';
                   setOpen(false);
                 }}
-                className="flex-1 px-4 py-2 bg-gray-100 dark:bg-slate-800 text-navy-deep dark:text-gold rounded-sm hover:bg-gray-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2"
+                className="flex-1 px-3 py-2 text-sm md:text-base bg-gray-100 dark:bg-slate-800 text-navy-deep dark:text-gold rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2"
                 title="Shopping Cart"
               >
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCart className="w-4 md:w-5 h-4 md:h-5" />
                 Cart
               </button>
               {isLoggedIn ? (
@@ -302,9 +307,9 @@ export function Header() {
                       navigate({ to: "/dashboard" });
                       setOpen(false);
                     }}
-                    className="flex-1 px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition flex items-center justify-center gap-2 font-semibold"
+                    className="flex-1 px-3 py-2 text-sm md:text-base bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-lg hover:bg-navy dark:hover:bg-yellow-500 transition flex items-center justify-center gap-2 font-semibold"
                   >
-                    <span className="w-8 h-8 rounded-full bg-white dark:bg-slate-900 dark:text-gold text-navy-deep flex items-center justify-center font-bold text-sm">
+                    <span className="w-6 md:w-8 h-6 md:h-8 rounded-full bg-white dark:bg-slate-900 dark:text-gold text-navy-deep flex items-center justify-center font-bold text-xs md:text-sm">
                       {fullName ? fullName.charAt(0).toUpperCase() : 'U'}
                     </span>
                     Dashboard
@@ -314,7 +319,7 @@ export function Header() {
                       handleLogout();
                       setOpen(false);
                     }}
-                    className="flex-1 px-4 py-2 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-sm hover:bg-red-200 dark:hover:bg-red-900 transition text-sm font-semibold"
+                    className="flex-1 px-3 py-2 text-sm md:text-base bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-lg hover:bg-red-200 dark:hover:bg-red-900 transition font-semibold"
                   >
                     Logout
                   </button>
@@ -326,7 +331,7 @@ export function Header() {
                     setShowSignupModal(false);
                     setOpen(false);
                   }}
-                  className="flex-1 px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
+                  className="flex-1 px-3 py-2 text-sm md:text-base bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-lg hover:bg-navy dark:hover:bg-yellow-500 transition font-semibold"
                 >
                   Login
                 </button>
@@ -337,7 +342,7 @@ export function Header() {
                     setShowLoginModal(false);
                     setOpen(false);
                   }}
-                  className="flex-1 px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-primary-foreground rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
+                  className="flex-1 px-3 py-2 text-sm md:text-base bg-navy-deep dark:bg-gold dark:text-slate-900 text-primary-foreground rounded-lg hover:bg-navy dark:hover:bg-yellow-500 transition font-semibold"
                 >
                   Sign Up
                 </button>

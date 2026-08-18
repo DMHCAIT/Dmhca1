@@ -15,6 +15,7 @@ export const Route = createFileRoute("/blog/")({
 });
 
 const blogsList = [
+  { title: "AYUSH Hybrid Programs for Modern Medical Practice", slug: "ayush-hybrid-programs" },
   { title: "How to Crack NEET PG", slug: "how-to-crack-neet-pg" },
   { title: "Courses After MBBS In India", slug: "courses-after-mbbs-in-india" },
   { title: "Scope of Radiology", slug: "scope-of-radiology" },

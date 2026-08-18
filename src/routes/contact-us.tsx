@@ -304,7 +304,5 @@ function Contact() {
   );
 }
 
-export default Contact;
-
 // Register route so file-based router picks up /contact-us
 export const Route = createFileRoute('/contact-us')({ component: Contact })

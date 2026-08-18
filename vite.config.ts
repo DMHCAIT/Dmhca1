@@ -4,7 +4,7 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
     router: {
-      routeFileIgnorePattern: '.*\\/api\\/.*',
+      routeFileIgnorePattern: '.*api.*',
     },
   },
   resolve: {

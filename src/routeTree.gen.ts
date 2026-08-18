@@ -17,7 +17,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as ApplyRouteImport } from './routes/apply'
-import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AyushHybridProgramsRouteImport } from './routes/ayush-hybrid-programs'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CityWiseMedicalCoursesRouteImport } from './routes/city-wise-medical-courses'
 import { Route as ContactRedirectRouteImport } from './routes/contact-redirect'
@@ -41,7 +41,6 @@ import { Route as LpProfileRouteImport } from './routes/lp-profile'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundReturnsPolicyRouteImport } from './routes/refund-returns-policy'
-import { Route as ScopeOfCardiologyRouteImport } from './routes/scope-of-cardiology'
 import { Route as ScopeOfCosmetologyRouteImport } from './routes/scope-of-cosmetology'
 import { Route as ScopeOfDiabetologyRouteImport } from './routes/scope-of-diabetology'
 import { Route as ScopeOfEchocardiographyRouteImport } from './routes/scope-of-echocardiography'
@@ -72,7 +71,6 @@ import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSyncCoursesRouteImport } from './routes/admin/sync-courses'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CardiologyCoursesIndexRouteImport } from './routes/cardiology-courses.index'
 import { Route as CardiologyCoursesCityRouteImport } from './routes/cardiology-courses/$city'
 import { Route as ClinicalCardiologyCoursesIndexRouteImport } from './routes/clinical-cardiology-courses.index'
@@ -151,9 +149,9 @@ const ApplyRoute = ApplyRouteImport.update({
   path: '/apply',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const AyushHybridProgramsRoute = AyushHybridProgramsRouteImport.update({
+  id: '/ayush-hybrid-programs',
+  path: '/ayush-hybrid-programs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -276,11 +274,6 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const RefundReturnsPolicyRoute = RefundReturnsPolicyRouteImport.update({
   id: '/refund-returns-policy',
   path: '/refund-returns-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfCardiologyRoute = ScopeOfCardiologyRouteImport.update({
-  id: '/scope-of-cardiology',
-  path: '/scope-of-cardiology',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScopeOfCosmetologyRoute = ScopeOfCosmetologyRouteImport.update({
@@ -430,14 +423,9 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   getParentRoute: () => AdminRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => BlogRoute,
-} as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const CardiologyCoursesIndexRoute = CardiologyCoursesIndexRouteImport.update({
   id: '/cardiology-courses/',
@@ -647,7 +635,7 @@ export interface FileRoutesByFullPath {
   '/admin-login': typeof AdminLoginRoute
   '/admission': typeof AdmissionRoute
   '/apply': typeof ApplyRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/ayush-hybrid-programs': typeof AyushHybridProgramsRoute
   '/cart': typeof CartRoute
   '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
@@ -671,7 +659,6 @@ export interface FileRoutesByFullPath {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
   '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
   '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
   '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
@@ -700,7 +687,6 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
@@ -749,6 +735,7 @@ export interface FileRoutesByTo {
   '/admin-login': typeof AdminLoginRoute
   '/admission': typeof AdmissionRoute
   '/apply': typeof ApplyRoute
+  '/ayush-hybrid-programs': typeof AyushHybridProgramsRoute
   '/cart': typeof CartRoute
   '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
@@ -772,7 +759,6 @@ export interface FileRoutesByTo {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
   '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
   '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
   '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
@@ -800,7 +786,6 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
@@ -851,7 +836,7 @@ export interface FileRoutesById {
   '/admin-login': typeof AdminLoginRoute
   '/admission': typeof AdmissionRoute
   '/apply': typeof ApplyRoute
-  '/blog': typeof BlogRouteWithChildren
+  '/ayush-hybrid-programs': typeof AyushHybridProgramsRoute
   '/cart': typeof CartRoute
   '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
@@ -875,7 +860,6 @@ export interface FileRoutesById {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
   '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
   '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
   '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
@@ -904,7 +888,6 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
-  '/blog/$slug': typeof BlogSlugRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
@@ -956,7 +939,7 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/admission'
     | '/apply'
-    | '/blog'
+    | '/ayush-hybrid-programs'
     | '/cart'
     | '/city-wise-medical-courses'
     | '/contact-redirect'
@@ -980,7 +963,6 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/scope-of-cardiology'
     | '/scope-of-cosmetology'
     | '/scope-of-diabetology'
     | '/scope-of-echocardiography'
@@ -1009,7 +991,6 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/sync-courses'
     | '/admin/users'
-    | '/blog/$slug'
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
@@ -1058,6 +1039,7 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/admission'
     | '/apply'
+    | '/ayush-hybrid-programs'
     | '/cart'
     | '/city-wise-medical-courses'
     | '/contact-redirect'
@@ -1081,7 +1063,6 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/scope-of-cardiology'
     | '/scope-of-cosmetology'
     | '/scope-of-diabetology'
     | '/scope-of-echocardiography'
@@ -1109,7 +1090,6 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/sync-courses'
     | '/admin/users'
-    | '/blog/$slug'
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
@@ -1159,7 +1139,7 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/admission'
     | '/apply'
-    | '/blog'
+    | '/ayush-hybrid-programs'
     | '/cart'
     | '/city-wise-medical-courses'
     | '/contact-redirect'
@@ -1183,7 +1163,6 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/scope-of-cardiology'
     | '/scope-of-cosmetology'
     | '/scope-of-diabetology'
     | '/scope-of-echocardiography'
@@ -1212,7 +1191,6 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/sync-courses'
     | '/admin/users'
-    | '/blog/$slug'
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
@@ -1263,7 +1241,7 @@ export interface RootRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdmissionRoute: typeof AdmissionRoute
   ApplyRoute: typeof ApplyRoute
-  BlogRoute: typeof BlogRouteWithChildren
+  AyushHybridProgramsRoute: typeof AyushHybridProgramsRoute
   CartRoute: typeof CartRoute
   CityWiseMedicalCoursesRoute: typeof CityWiseMedicalCoursesRoute
   ContactRedirectRoute: typeof ContactRedirectRoute
@@ -1287,7 +1265,6 @@ export interface RootRouteChildren {
   PaymentRoute: typeof PaymentRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundReturnsPolicyRoute: typeof RefundReturnsPolicyRoute
-  ScopeOfCardiologyRoute: typeof ScopeOfCardiologyRoute
   ScopeOfCosmetologyRoute: typeof ScopeOfCosmetologyRoute
   ScopeOfDiabetologyRoute: typeof ScopeOfDiabetologyRoute
   ScopeOfEchocardiographyRoute: typeof ScopeOfEchocardiographyRoute
@@ -1319,6 +1296,7 @@ export interface RootRouteChildren {
   RadiologyCoursesCityRoute: typeof RadiologyCoursesCityRoute
   SitemapXmlRoute: typeof SitemapXmlRoute
   Char91specialtyChar93CoursesChar91cityChar93Route: typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  BlogIndexRoute: typeof BlogIndexRoute
   CardiologyCoursesIndexRoute: typeof CardiologyCoursesIndexRoute
   ClinicalCardiologyCoursesIndexRoute: typeof ClinicalCardiologyCoursesIndexRoute
   ClinicalEmbryologyCoursesIndexRoute: typeof ClinicalEmbryologyCoursesIndexRoute
@@ -1396,11 +1374,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
+    '/ayush-hybrid-programs': {
+      id: '/ayush-hybrid-programs'
+      path: '/ayush-hybrid-programs'
+      fullPath: '/ayush-hybrid-programs'
+      preLoaderRoute: typeof AyushHybridProgramsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -1562,13 +1540,6 @@ declare module '@tanstack/react-router' {
       path: '/refund-returns-policy'
       fullPath: '/refund-returns-policy'
       preLoaderRoute: typeof RefundReturnsPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-cardiology': {
-      id: '/scope-of-cardiology'
-      path: '/scope-of-cardiology'
-      fullPath: '/scope-of-cardiology'
-      preLoaderRoute: typeof ScopeOfCardiologyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/scope-of-cosmetology': {
@@ -1776,17 +1747,10 @@ declare module '@tanstack/react-router' {
     }
     '/blog/': {
       id: '/blog/'
-      path: '/'
+      path: '/blog'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof BlogRoute
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/cardiology-courses/': {
       id: '/cardiology-courses/'
@@ -2086,18 +2050,6 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-  BlogIndexRoute: typeof BlogIndexRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-  BlogIndexRoute: BlogIndexRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 interface SimpleEventRouteChildren {
   SimpleEventSlugRoute: typeof SimpleEventSlugRoute
   SimpleEventIndexRoute: typeof SimpleEventIndexRoute
@@ -2144,7 +2096,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdmissionRoute: AdmissionRoute,
   ApplyRoute: ApplyRoute,
-  BlogRoute: BlogRouteWithChildren,
+  AyushHybridProgramsRoute: AyushHybridProgramsRoute,
   CartRoute: CartRoute,
   CityWiseMedicalCoursesRoute: CityWiseMedicalCoursesRoute,
   ContactRedirectRoute: ContactRedirectRoute,
@@ -2169,7 +2121,6 @@ const rootRouteChildren: RootRouteChildren = {
   PaymentRoute: PaymentRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundReturnsPolicyRoute: RefundReturnsPolicyRoute,
-  ScopeOfCardiologyRoute: ScopeOfCardiologyRoute,
   ScopeOfCosmetologyRoute: ScopeOfCosmetologyRoute,
   ScopeOfDiabetologyRoute: ScopeOfDiabetologyRoute,
   ScopeOfEchocardiographyRoute: ScopeOfEchocardiographyRoute,
@@ -2203,6 +2154,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapXmlRoute: SitemapXmlRoute,
   Char91specialtyChar93CoursesChar91cityChar93Route:
     Char91specialtyChar93CoursesChar91cityChar93Route,
+  BlogIndexRoute: BlogIndexRoute,
   CardiologyCoursesIndexRoute: CardiologyCoursesIndexRoute,
   ClinicalCardiologyCoursesIndexRoute: ClinicalCardiologyCoursesIndexRoute,
   ClinicalEmbryologyCoursesIndexRoute: ClinicalEmbryologyCoursesIndexRoute,

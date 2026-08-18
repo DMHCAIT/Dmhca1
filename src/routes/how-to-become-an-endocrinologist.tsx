@@ -1,511 +1,261 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, ChevronDown, Clock, BookOpen, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
 export const Route = createFileRoute("/how-to-become-an-endocrinologist")({
   head: () => ({
     meta: [
-      { title: "How to Become an Endocrinologist - DMHCA" },
-      { name: "description", content: "Step-by-step guide to becoming an endocrinologist in India." },
+      { title: "How to Become an Endocrinologist — DMHCA" },
+      { name: "description", content: "Step-by-step guide to becoming a endocrinologist in India." },
     ],
   }),
-  component: BlogPost,
+  component: BlogContent,
 });
 
-function BlogPost() {
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [comments, setComments] = useState<Array<{name: string; email: string; text: string; date: string}>>([]);
-  const [formData, setFormData] = useState({ name: '', email: '', comment: '' });
-  const readingTime = 8;
-
-  const faqs = [
-    {
-      question: "What is an endocrinologist and what do they treat?",
-      answer: "An endocrinologist is a medical specialist who diagnoses and treats disorders of the endocrine system, including diabetes, thyroid diseases, hormonal imbalances, obesity, and metabolic disorders. They manage complex cases requiring specialized hormonal therapy."
-    },
-    {
-      question: "What are the eligibility criteria to become an endocrinologist?",
-      answer: "Complete 12th with Physics, Chemistry, Biology, qualify NEET-UG for MBBS, complete 5.5 years of MBBS, one year of internship, then pursue MD in Internal Medicine followed by DM in Endocrinology specialization."
-    },
-    {
-      question: "How long does it take to become an endocrinologist?",
-      answer: "Total time is 12-13 years: 5.5 years for MBBS, one year of internship, 3 years for MD in Internal Medicine, and 3 years for DM in Endocrinology. Some competitive exams may extend training by a year."
-    },
-    {
-      question: "Is endocrinology a competitive specialty?",
-      answer: "Endocrinology is highly competitive. You need to score in the top 1-2% in NEET-PG for MD Internal Medicine and top 5-10% in DM entrance for DM Endocrinology seats in top institutes. Dedication and consistent preparation are essential."
-    },
-    {
-      question: "What skills are essential for endocrinology?",
-      answer: "Strong knowledge of biochemistry, pharmacology, and internal medicine fundamentals. Excellent diagnostic and clinical reasoning skills, proficiency with imaging and laboratory tests, patient management expertise, and up-to-date knowledge of hormonal therapies and metabolic disorders."
-    },
-    {
-      question: "What career options exist after becoming an endocrinologist?",
-      answer: "Work in hospitals, private practice, corporate clinics, establish endocrinology centers, pursue teaching in medical colleges, contribute to research programs, work internationally, specialize further in diabetes management or obesity medicine, or join pharmaceutical companies as consultants."
-    }
-  ];
-
-  const handleCommentSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.comment) {
-      setComments([...comments, {
-        name: formData.name,
-        email: formData.email,
-        text: formData.comment,
-        date: new Date().toLocaleDateString()
-      }]);
-      setFormData({ name: '', email: '', comment: '' });
-    }
-  };
-
+function BlogContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
-      {/* Hero Section */}
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <section className="site-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10"></div>
-        <div className="container-home max-w-5xl relative z-10">
-          <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-8 transition">
-            <ArrowLeft size={20} />
+        <div className="absolute inset-0 bg-gradient-to-b from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700"></div>
+        <div className="relative container-x py-4 sm:py-6 md:py-8">
+          <Link to="/blog" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-2 transition text-xs sm:text-sm">
+            <ArrowLeft className="w-4 h-4" />
             Back to Blogs
           </Link>
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">How to Become an Endocrinologist</h1>
-          <p className="text-white/90 text-xl mb-6 max-w-2xl">Step-by-step guide to becoming an endocrinologist in India</p>
-          
-          {/* Article Meta */}
-          <div className="flex flex-wrap items-center gap-6 text-white/80">
-            <div className="flex items-center gap-2">
-              <Clock size={18} />
-              <span>{readingTime} min read</span>
+          <div className="max-w-3xl">
+            <div className="inline-block px-3 sm:px-4 py-1 bg-white/20 border border-white/30 rounded-full text-white text-xs font-semibold mb-2">
+              Medical Career Guide • 2025 Edition
             </div>
-            <div className="flex items-center gap-2">
-              <BookOpen size={18} />
-              <span>Medical Career Guide</span>
+            <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
+              How to Become an Endocrinologist
+            </h1>
+            <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
+              Complete pathway to becoming a endocrinologist in India
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mt-3 pt-3 border-t border-white/20">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Clock className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Read Time</div>
+                <div className="font-bold text-sm sm:text-lg">8 min</div>
+              </div>
             </div>
-            <div className="text-sm text-white/70">Updated: June 2025</div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Users className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Steps</div>
+                <div className="font-bold text-sm sm:text-lg">7</div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Duration</div>
+                <div className="font-bold text-sm sm:text-lg">12-13 years</div>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
+              <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
+              <div>
+                <div className="text-xs sm:text-sm text-white/70">Job Market</div>
+                <div className="font-bold text-sm sm:text-lg">Excellent</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="max-w-5xl mx-auto px-4 py-12">
-        {/* Featured Image */}
-        <div className="mb-12">
-          <div className="rounded-2xl overflow-hidden shadow-2xl">
-            <img 
-              src="/blog-images/How-to-Become-an-Endocrinologist.webp"
-              alt="How to Become an Endocrinologist"
-              className="w-full h-auto object-cover"
-            />
+      <section className="py-2 sm:py-3 md:py-4 bg-white dark:bg-slate-800 px-4 sm:px-0">
+        <div className="container-x flex justify-center">
+          <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
+            <img src="/blog-images/How-to-Become-an-Endocrinologist.webp" alt="How to Become an Endocrinologist" className="w-full h-auto aspect-[992/496] object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
           </div>
-          <p className="text-center text-gray-600 text-sm mt-4">Comprehensive guide to pursuing endocrinology as a medical specialty in India</p>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {/* Quick Navigation */}
-            <div className="bg-blue-50 rounded-xl p-6 mb-12 border border-blue-200">
-              <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                <BookOpen size={20} className="text-blue-600" />
-                Quick Navigation
-              </h3>
-              <ul className="space-y-2">
-                <li><a href="#step-1" className="text-blue-600 hover:text-blue-700 text-sm">Step 1: Complete 12th Standard</a></li>
-                <li><a href="#step-2" className="text-blue-600 hover:text-blue-700 text-sm">Step 2: Get into Medical College</a></li>
-                <li><a href="#step-3" className="text-blue-600 hover:text-blue-700 text-sm">Step 3: Complete MBBS and Internship</a></li>
-                <li><a href="#step-4" className="text-blue-600 hover:text-blue-700 text-sm">Step 4: Prepare for NEET-PG</a></li>
-                <li><a href="#step-5" className="text-blue-600 hover:text-blue-700 text-sm">Step 5: Complete MD Internal Medicine</a></li>
-                <li><a href="#step-6" className="text-blue-600 hover:text-blue-700 text-sm">Step 6: Pursue DM in Endocrinology</a></li>
-                <li><a href="#step-7" className="text-blue-600 hover:text-blue-700 text-sm">Step 7: Advanced Practice (Optional)</a></li>
-              </ul>
+      <section className="py-8 sm:py-12 md:py-16 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm px-4 sm:px-0">
+        <div className="container-x max-w-4xl">
+          <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
+            <div className="mb-12 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Path to Endocrinologist</h2>
+              <p className="text-slate-700 dark:text-slate-300 mb-8 text-sm sm:text-base">Becoming a endocrinologist in India requires a systematic approach combining academic excellence, competitive entrance exams, and clinical experience. This guide outlines the complete pathway to help you navigate your journey into this rewarding medical specialty.</p>
+              
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">1</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Foundation & Preparation</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Complete 12th standard with Science (Physics, Chemistry, Biology). This is the foundation for your medical career. Strong academic performance is essential to clear competitive entrance exams.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">2</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">NEET-UG & MBBS Admission</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Appear for NEET-UG entrance examination and secure admission to a recognized medical college. Score well to get into premier institutions that offer quality medical education.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">3</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Complete MBBS Program</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Study comprehensive 4.5 years of medical curriculum covering all major subjects. Develop strong fundamentals in anatomy, physiology, pathology, and pharmacology during your MBBS journey.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">4</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Clinical Internship</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Complete 1-year mandatory clinical internship with rotations across various departments. Gain practical clinical experience and exposure to your specialty during internship postings.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">5</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">NEET-PG Preparation & Exam</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Dedicate 10-14 months for intensive NEET-PG preparation. Score well in this competitive examination to secure your specialty seat in a reputable institute.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">6</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Postgraduate Specialization</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Complete 3-year MD/MS in your chosen specialty. Undergo intensive training, gain hands-on experience, and develop expertise in specialty-specific knowledge and skills.</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 text-white font-bold">7</div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">Establish Practice & Career</h3>
+                    <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300">Start your professional career in hospitals, diagnostic centers, or private practice. Optionally pursue super-specialty fellowships for advanced expertise and better career prospects.</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Main Article Content */}
-            <article className="space-y-8">
-              <section>
-                <h2 className="text-4xl font-bold text-gray-900 mb-6">Path to Becoming an Endocrinologist</h2>
-                <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                  Becoming an endocrinologist in India requires a systematic approach combining rigorous medical education, competitive entrance exams, and specialized training in metabolic and hormonal disorders. This guide outlines the complete pathway to help you navigate your journey into this highly rewarding medical specialty.
-                </p>
-              </section>
+            <div className="mb-12 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Duration Timeline</h2>
+              <div className="bg-gradient-to-r from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 rounded-lg p-6 text-white">
+                <p className="text-sm sm:text-base">Total Duration: <span className="font-bold text-lg">12-13 years</span></p>
+                <p className="text-sm sm:text-base text-white/80 mt-2">This includes 12th to MBBS, internship, NEET-PG preparation, and postgraduate specialization training.</p>
+              </div>
+            </div>
 
-              {/* Step 1 */}
-              <div id="step-1" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">1</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Complete 12th Standard</h3>
-                    <p className="text-gray-700 mb-4">You must complete 12th with Science (Physics, Chemistry, Biology) from a recognized board. A strong foundation in these subjects is essential for medical studies, particularly in chemistry and biology.</p>
-                  </div>
+            <div className="mb-12 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Key Tips for Success</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"><p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ Excel in academic subjects early</p></div>
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"><p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ Develop interest during clinical rotations</p></div>
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"><p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ Score well in NEET-PG for seat selection</p></div>
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"><p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ Stay updated with latest advancements</p></div>
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"><p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ Build strong clinical skills and acumen</p></div>
+                <div className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"><p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">✓ Consider super-specialty for better prospects</p></div>
+              </div>
+            </div>
+
+            <div className="mb-12 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-4">
+                <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                  <details className="group">
+                    <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <span className="flex-1 text-left pr-4">What is the total time required to become a endocrinologist?</span>
+                      <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </span>
+                    </summary>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Total duration is approximately 12-13 years. This includes 12th completion, 5.5-year MBBS program, 1-year internship, NEET-PG preparation, and 3-year postgraduate specialization training.</p>
+                  </details>
+                </div>
+                <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                  <details className="group">
+                    <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <span className="flex-1 text-left pr-4">How competitive is NEET-PG for this specialty?</span>
+                      <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </span>
+                    </summary>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Competition level varies based on specialty popularity and available seats. Generally, specialties with high demand require top 1-5% ranking in NEET-PG. Focus on consistent preparation and strong fundamentals to secure your preferred seat.</p>
+                  </details>
+                </div>
+                <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                  <details className="group">
+                    <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <span className="flex-1 text-left pr-4">What are the career prospects after completing the specialization?</span>
+                      <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </span>
+                    </summary>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Excellent career prospects! You can work in government hospitals, private practices, diagnostic centers, teaching institutions, research organizations, and international opportunities. Many specialists establish their own clinics or super-specialty centers.</p>
+                  </details>
+                </div>
+                <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                  <details className="group">
+                    <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <span className="flex-1 text-left pr-4">What are the financial requirements for this medical career?</span>
+                      <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </span>
+                    </summary>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Government medical colleges charge nominal MBBS fees (₹0-25 lakhs), while private institutions charge ₹15-50 lakhs. Postgraduate fees vary: government colleges charge minimal fees, while private institutions charge ₹10-30 lakhs for specialization. Various scholarships and educational loans are available.</p>
+                  </details>
+                </div>
+                <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                  <details className="group">
+                    <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <span className="flex-1 text-left pr-4">Can I practice this specialty internationally?</span>
+                      <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </span>
+                    </summary>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Yes, Indian specialists can practice internationally! You may need additional qualifications or exams like FRCR (UK), ABR (USA), or equivalent certifications in your target country. Many Indian specialists work successfully in developed nations and contribute to global healthcare.</p>
+                  </details>
+                </div>
+                <div className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition">
+                  <details className="group">
+                    <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <span className="flex-1 text-left pr-4">What skills are essential to succeed in this field?</span>
+                      <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
+                      </span>
+                    </summary>
+                    <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">Essential skills include strong academic foundation, excellent clinical acumen, attention to detail, effective communication, problem-solving abilities, continuous learning mindset, empathy for patients, and hands-on procedural skills. Time management and stress handling are equally important for success in medical practice.</p>
+                  </details>
                 </div>
               </div>
+            </div>
 
-              {/* Step 2 */}
-              <div id="step-2" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">2</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Get into Medical College (NEET-UG)</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span><strong>NEET-UG Exam:</strong> Appear for National Eligibility cum Entrance Test</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span><strong>Good Rank:</strong> Secure top 500-600 all India for government medical college</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span><strong>MBBS Admission:</strong> Get admitted for 5.5 years of MBBS course</span>
-                      </li>
-                    </ul>
-                  </div>
+            <div className="mt-20 p-10 bg-gradient-to-r from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700 rounded-2xl border border-white/20 dark:border-white/30 shadow-lg not-prose">
+              <div className="flex items-start gap-6">
+                <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Endocrinologist Programs</h3>
+                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover comprehensive training programs and specialization courses for your medical career advancement.</p>
+                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-slate-900 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
+                    Explore Programs →
+                  </Link>
                 </div>
-              </div>
-
-              {/* Step 3 */}
-              <div id="step-3" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">3</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Complete MBBS and Internship</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Study 4.5 years of MBBS coursework with focus on biochemistry</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Complete 1-year mandatory clinical internship with medicine rotation</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Register with Medical Council after graduation</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 4 */}
-              <div id="step-4" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">4</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Prepare for NEET-PG</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Dedicate 10-12 months for intensive NEET-PG preparation</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Study from internal medicine textbooks and endocrinology resources</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Take multiple mock tests to assess preparation level</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Join reputable coaching institutes for expert guidance</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 5 */}
-              <div id="step-5" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">5</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Complete MD in Internal Medicine (3 years)</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Clear NEET-PG and secure MD Internal Medicine seat</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Undergo 3-year intensive training in general internal medicine</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Build strong foundation in clinical diagnosis and management</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Complete thesis submission and final examination</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 6 */}
-              <div id="step-6" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">6</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Pursue DM in Endocrinology (3 years)</h3>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Prepare for DM entrance examination in endocrinology</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Get admitted to government or private medical college for DM</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Undergo 3-year specialized training in endocrinology</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-green-600 flex-shrink-0 mt-1" />
-                        <span>Complete research thesis on endocrinology topics</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Step 7 */}
-              <div id="step-7" className="bg-white rounded-xl p-8 border-l-4 border-blue-600 shadow-md hover:shadow-lg transition">
-                <div className="flex items-start gap-4">
-                  <div className="bg-blue-100 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                    <span className="text-blue-600 font-bold text-lg">7</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">Advanced Practice (Optional)</h3>
-                    <p className="text-gray-700 mb-4">After DM, you can pursue further specialization to advance your career:</p>
-                    <ul className="space-y-2 text-gray-700">
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span><strong>Fellowship in Diabetes</strong> - Specialize in diabetes management and research</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span><strong>Fellowship in Obesity Medicine</strong> - Focus on metabolic and obesity disorders</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <CheckCircle2 size={20} className="text-purple-600 flex-shrink-0 mt-1" />
-                        <span><strong>International Research Programs</strong> - Pursue advanced research in endocrinology globally</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              {/* Duration Summary Box */}
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8 border border-blue-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Duration Summary</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">12 to MBBS</p>
-                    <p className="text-2xl font-bold text-blue-600">5.5 years</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">MBBS to DM Endocrinology</p>
-                    <p className="text-2xl font-bold text-blue-600">6 years</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-4">
-                    <p className="text-gray-600 text-sm">Total Duration</p>
-                    <p className="text-2xl font-bold text-blue-600">12-13 years</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Key Tips Section */}
-              <section className="bg-white rounded-xl p-8 border border-green-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Tips for Success</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Develop strong interest in endocrinology during MBBS</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Excel in internal medicine training before DM</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Master biochemistry and pharmacology fundamentals</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Join competitive coaching institutes for DM prep</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Stay updated with latest endocrinology research</p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="bg-green-100 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
-                      <CheckCircle2 size={16} className="text-green-600" />
-                    </div>
-                    <p className="text-gray-700">Build strong clinical acumen in diabetes management</p>
-                  </div>
-                </div>
-              </section>
-            </article>
-
-            {/* FAQs Section */}
-            <section className="mt-12">
-              <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
-                <div className="space-y-4">
-                  {faqs.map((faq, index) => (
-                    <div key={index} className="bg-white rounded-xl overflow-hidden border border-gray-200 hover:border-blue-300 transition">
-                      <button
-                        onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                        className="w-full flex items-center justify-between p-6 hover:bg-blue-50 transition text-left"
-                      >
-                        <h3 className="font-semibold text-gray-800 pr-4 text-lg">{faq.question}</h3>
-                        <ChevronDown
-                          size={20}
-                          className={`flex-shrink-0 text-blue-600 transition-transform ${
-                            expandedFaq === index ? 'transform rotate-180' : ''
-                          }`}
-                        />
-                      </button>
-                      {expandedFaq === index && (
-                        <div className="px-6 py-6 bg-blue-50 border-t border-gray-200">
-                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
-
-            {/* Comments Section */}
-            <section className="mt-12">
-              <div className="border-t-2 border-gray-200 pt-12">
-                <h2 className="text-3xl font-bold text-gray-900 mb-8">Share Your Thoughts</h2>
-                
-                {/* Comment Form */}
-                <form onSubmit={handleCommentSubmit} className="mb-10 bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-xl border border-blue-200">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-6">Leave a Comment</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                      required
-                    />
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                      required
-                    />
-                  </div>
-                  <textarea
-                    placeholder="Share your thoughts, questions, or experiences..."
-                    value={formData.comment}
-                    onChange={(e) => setFormData({...formData, comment: e.target.value})}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent mb-4"
-                    rows={4}
-                    required
-                  ></textarea>
-                  <button
-                    type="submit"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition shadow-md hover:shadow-lg"
-                  >
-                    Post Comment
-                  </button>
-                </form>
-
-                {/* Comments Display */}
-                {comments.length > 0 && (
-                  <div className="space-y-4">
-                    <h3 className="text-xl font-semibold text-gray-800">Comments ({comments.length})</h3>
-                    {comments.map((comment, index) => (
-                      <div key={index} className="bg-white p-6 rounded-xl border border-gray-200 hover:border-blue-300 transition">
-                        <div className="flex items-start justify-between mb-4">
-                          <div>
-                            <p className="font-semibold text-gray-900">{comment.name}</p>
-                            <p className="text-sm text-gray-600">{comment.email}</p>
-                          </div>
-                          <p className="text-sm text-gray-500 whitespace-nowrap">{comment.date}</p>
-                        </div>
-                        <p className="text-gray-700 leading-relaxed">{comment.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 md:p-12 text-white">
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Get Expert Guidance</h3>
-              <p className="text-white/90 mb-6 text-lg">Need personalized guidance on pursuing endocrinology? Our experts can help you plan your career path.</p>
-              <Link to="/contact-us" className="inline-block bg-white text-blue-600 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition">
-                Contact Us for Guidance
-              </Link>
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              {/* Article Info Card */}
-              <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 mb-6">
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-gray-600 text-sm">Reading Time</p>
-                    <p className="text-2xl font-bold text-blue-600">{readingTime} min</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-600 text-sm">Category</p>
-                    <p className="text-lg font-semibold text-gray-800">Medical Career</p>
-                  </div>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-600 text-sm">Last Updated</p>
-                    <p className="text-lg font-semibold text-gray-800">June 2025</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Related Info Box */}
-              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                <h4 className="font-semibold text-gray-900 mb-4">💡 Pro Tip</h4>
-                <p className="text-sm text-gray-700">Endocrinology demands strong fundamentals in internal medicine. Build a solid clinical foundation before specializing in hormonal and metabolic disorders.</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }
