@@ -495,9 +495,9 @@ function BlogContent() {
           </div>
 
           <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 border-2 border-purple-200 dark:border-purple-800 rounded-lg sm:rounded-xl">
-            <h3 className="text-lg sm:text-xl font-bold text-purple-900 dark:text-purple-200 mb-2">Need Expert Guidance?</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-purple-900 dark:text-purple-200 mb-2">Still have questions?</h3>
             <p className="text-sm sm:text-base text-purple-800 dark:text-purple-300 mb-4">
-              Our neurology experts can help you navigate your specialty career path and make informed decisions.
+              Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your neurology specialization career journey.
             </p>
             <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
               Contact Our Experts →

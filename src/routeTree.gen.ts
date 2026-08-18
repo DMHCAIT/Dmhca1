@@ -41,6 +41,7 @@ import { Route as LpProfileRouteImport } from './routes/lp-profile'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundReturnsPolicyRouteImport } from './routes/refund-returns-policy'
+import { Route as ScopeOfCardiologyRouteImport } from './routes/scope-of-cardiology'
 import { Route as ScopeOfCosmetologyRouteImport } from './routes/scope-of-cosmetology'
 import { Route as ScopeOfDiabetologyRouteImport } from './routes/scope-of-diabetology'
 import { Route as ScopeOfEchocardiographyRouteImport } from './routes/scope-of-echocardiography'
@@ -49,7 +50,6 @@ import { Route as ScopeOfNeurologyRouteImport } from './routes/scope-of-neurolog
 import { Route as ScopeOfObstetricsAndGynecologyRouteImport } from './routes/scope-of-obstetrics-and-gynecology'
 import { Route as ScopeOfOncologyRouteImport } from './routes/scope-of-oncology'
 import { Route as ScopeOfPaediatricsRouteImport } from './routes/scope-of-paediatrics'
-import { Route as ScopeOfRadiologyRouteImport } from './routes/scope-of-radiology'
 import { Route as SimpleEventRouteImport } from './routes/simple-event'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermConditionsRouteImport } from './routes/term-conditions'
@@ -276,6 +276,11 @@ const RefundReturnsPolicyRoute = RefundReturnsPolicyRouteImport.update({
   path: '/refund-returns-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScopeOfCardiologyRoute = ScopeOfCardiologyRouteImport.update({
+  id: '/scope-of-cardiology',
+  path: '/scope-of-cardiology',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ScopeOfCosmetologyRoute = ScopeOfCosmetologyRouteImport.update({
   id: '/scope-of-cosmetology',
   path: '/scope-of-cosmetology',
@@ -315,11 +320,6 @@ const ScopeOfOncologyRoute = ScopeOfOncologyRouteImport.update({
 const ScopeOfPaediatricsRoute = ScopeOfPaediatricsRouteImport.update({
   id: '/scope-of-paediatrics',
   path: '/scope-of-paediatrics',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfRadiologyRoute = ScopeOfRadiologyRouteImport.update({
-  id: '/scope-of-radiology',
-  path: '/scope-of-radiology',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SimpleEventRoute = SimpleEventRouteImport.update({
@@ -659,6 +659,7 @@ export interface FileRoutesByFullPath {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
+  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
   '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
   '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
   '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
@@ -667,7 +668,6 @@ export interface FileRoutesByFullPath {
   '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
   '/scope-of-oncology': typeof ScopeOfOncologyRoute
   '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
-  '/scope-of-radiology': typeof ScopeOfRadiologyRoute
   '/simple-event': typeof SimpleEventRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
@@ -759,6 +759,7 @@ export interface FileRoutesByTo {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
+  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
   '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
   '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
   '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
@@ -767,7 +768,6 @@ export interface FileRoutesByTo {
   '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
   '/scope-of-oncology': typeof ScopeOfOncologyRoute
   '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
-  '/scope-of-radiology': typeof ScopeOfRadiologyRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
@@ -860,6 +860,7 @@ export interface FileRoutesById {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
+  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
   '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
   '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
   '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
@@ -868,7 +869,6 @@ export interface FileRoutesById {
   '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
   '/scope-of-oncology': typeof ScopeOfOncologyRoute
   '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
-  '/scope-of-radiology': typeof ScopeOfRadiologyRoute
   '/simple-event': typeof SimpleEventRouteWithChildren
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
@@ -963,6 +963,7 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
+    | '/scope-of-cardiology'
     | '/scope-of-cosmetology'
     | '/scope-of-diabetology'
     | '/scope-of-echocardiography'
@@ -971,7 +972,6 @@ export interface FileRouteTypes {
     | '/scope-of-obstetrics-and-gynecology'
     | '/scope-of-oncology'
     | '/scope-of-paediatrics'
-    | '/scope-of-radiology'
     | '/simple-event'
     | '/sitemap.xml'
     | '/term-conditions'
@@ -1063,6 +1063,7 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
+    | '/scope-of-cardiology'
     | '/scope-of-cosmetology'
     | '/scope-of-diabetology'
     | '/scope-of-echocardiography'
@@ -1071,7 +1072,6 @@ export interface FileRouteTypes {
     | '/scope-of-obstetrics-and-gynecology'
     | '/scope-of-oncology'
     | '/scope-of-paediatrics'
-    | '/scope-of-radiology'
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
@@ -1163,6 +1163,7 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
+    | '/scope-of-cardiology'
     | '/scope-of-cosmetology'
     | '/scope-of-diabetology'
     | '/scope-of-echocardiography'
@@ -1171,7 +1172,6 @@ export interface FileRouteTypes {
     | '/scope-of-obstetrics-and-gynecology'
     | '/scope-of-oncology'
     | '/scope-of-paediatrics'
-    | '/scope-of-radiology'
     | '/simple-event'
     | '/sitemap.xml'
     | '/term-conditions'
@@ -1265,6 +1265,7 @@ export interface RootRouteChildren {
   PaymentRoute: typeof PaymentRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundReturnsPolicyRoute: typeof RefundReturnsPolicyRoute
+  ScopeOfCardiologyRoute: typeof ScopeOfCardiologyRoute
   ScopeOfCosmetologyRoute: typeof ScopeOfCosmetologyRoute
   ScopeOfDiabetologyRoute: typeof ScopeOfDiabetologyRoute
   ScopeOfEchocardiographyRoute: typeof ScopeOfEchocardiographyRoute
@@ -1273,7 +1274,6 @@ export interface RootRouteChildren {
   ScopeOfObstetricsAndGynecologyRoute: typeof ScopeOfObstetricsAndGynecologyRoute
   ScopeOfOncologyRoute: typeof ScopeOfOncologyRoute
   ScopeOfPaediatricsRoute: typeof ScopeOfPaediatricsRoute
-  ScopeOfRadiologyRoute: typeof ScopeOfRadiologyRoute
   SimpleEventRoute: typeof SimpleEventRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermConditionsRoute: typeof TermConditionsRoute
@@ -1542,6 +1542,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RefundReturnsPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scope-of-cardiology': {
+      id: '/scope-of-cardiology'
+      path: '/scope-of-cardiology'
+      fullPath: '/scope-of-cardiology'
+      preLoaderRoute: typeof ScopeOfCardiologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/scope-of-cosmetology': {
       id: '/scope-of-cosmetology'
       path: '/scope-of-cosmetology'
@@ -1596,13 +1603,6 @@ declare module '@tanstack/react-router' {
       path: '/scope-of-paediatrics'
       fullPath: '/scope-of-paediatrics'
       preLoaderRoute: typeof ScopeOfPaediatricsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-radiology': {
-      id: '/scope-of-radiology'
-      path: '/scope-of-radiology'
-      fullPath: '/scope-of-radiology'
-      preLoaderRoute: typeof ScopeOfRadiologyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/simple-event': {
@@ -2121,6 +2121,7 @@ const rootRouteChildren: RootRouteChildren = {
   PaymentRoute: PaymentRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundReturnsPolicyRoute: RefundReturnsPolicyRoute,
+  ScopeOfCardiologyRoute: ScopeOfCardiologyRoute,
   ScopeOfCosmetologyRoute: ScopeOfCosmetologyRoute,
   ScopeOfDiabetologyRoute: ScopeOfDiabetologyRoute,
   ScopeOfEchocardiographyRoute: ScopeOfEchocardiographyRoute,
@@ -2129,7 +2130,6 @@ const rootRouteChildren: RootRouteChildren = {
   ScopeOfObstetricsAndGynecologyRoute: ScopeOfObstetricsAndGynecologyRoute,
   ScopeOfOncologyRoute: ScopeOfOncologyRoute,
   ScopeOfPaediatricsRoute: ScopeOfPaediatricsRoute,
-  ScopeOfRadiologyRoute: ScopeOfRadiologyRoute,
   SimpleEventRoute: SimpleEventRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermConditionsRoute: TermConditionsRoute,

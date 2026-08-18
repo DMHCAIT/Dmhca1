@@ -249,22 +249,14 @@ function BlogContent() {
               </div>
             </div>
 
-            <div className="mt-20 p-10 bg-gradient-to-r from-blue-600/95 to-cyan-600/95 dark:from-blue-700 dark:to-cyan-700 rounded-2xl border border-blue-400/20 dark:border-blue-500/30 shadow-lg not-prose">
-              <div className="flex items-start gap-6">
-                <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Echocardiography Programs</h3>
-                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover specialized echocardiography and cardiac imaging training programs for your medical career.</p>
-                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-blue-600 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
-                    Explore Programs →
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 p-4 sm:p-6 rounded-lg border border-amber-200 dark:border-amber-700 bg-amber-50 dark:bg-amber-900/20 not-prose">
-              <p className="text-amber-900 dark:text-amber-200 font-semibold text-sm sm:text-base">💡 Pro Tip</p>
-              <p className="text-amber-800 dark:text-amber-300 mt-2 text-sm sm:text-base">Echocardiography is one of the most accessible high-income specialties. With increasing demand and advancing technology, it offers excellent growth potential throughout your career.</p>
+            <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 border-2 border-cyan-200 dark:border-cyan-800 rounded-lg sm:rounded-xl">
+              <h3 className="text-lg sm:text-xl font-bold text-cyan-900 dark:text-cyan-200 mb-2">Still have questions?</h3>
+              <p className="text-sm sm:text-base text-cyan-800 dark:text-cyan-300 mb-4">
+                Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your echocardiography specialization career journey.
+              </p>
+              <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-cyan-600 hover:bg-cyan-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
+                Contact Our Experts →
+              </Link>
             </div>
           </div>
         </div>

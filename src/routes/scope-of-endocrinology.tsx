@@ -246,22 +246,14 @@ function BlogContent() {
               </div>
             </div>
 
-            <div className="mt-20 p-10 bg-gradient-to-r from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700 rounded-2xl border border-violet-400/20 dark:border-violet-500/30 shadow-lg not-prose">
-              <div className="flex items-start gap-6">
-                <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Endocrinology Programs</h3>
-                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover specialized endocrinology and metabolic disorder training programs for your medical career.</p>
-                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-violet-600 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
-                    Explore Programs →
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 p-4 sm:p-6 rounded-lg border border-violet-200 dark:border-violet-700 bg-violet-50 dark:bg-violet-900/20 not-prose">
-              <p className="text-violet-900 dark:text-violet-200 font-semibold text-sm sm:text-base">💡 Pro Tip</p>
-              <p className="text-violet-800 dark:text-violet-300 mt-2 text-sm sm:text-base">Endocrinology is a high-impact specialty with strong clinical complexity, excellent reimbursement potential, and growing demand driven by thyroid disorders, diabetes, and metabolic syndrome.</p>
+            <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/20 dark:to-indigo-900/20 border-2 border-violet-200 dark:border-violet-800 rounded-lg sm:rounded-xl">
+              <h3 className="text-lg sm:text-xl font-bold text-violet-900 dark:text-violet-200 mb-2">Still have questions?</h3>
+              <p className="text-sm sm:text-base text-violet-800 dark:text-violet-300 mb-4">
+                Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your endocrinology specialization career journey.
+              </p>
+              <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
+                Contact Our Experts →
+              </Link>
             </div>
           </div>
         </div>

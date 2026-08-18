@@ -581,7 +581,15 @@ function AYUSHContent() {
               </div>
             </div>
 
-
+            <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 border-2 border-indigo-200 dark:border-indigo-800 rounded-lg sm:rounded-xl">
+              <h3 className="text-lg sm:text-xl font-bold text-indigo-900 dark:text-indigo-200 mb-2">Still have questions?</h3>
+              <p className="text-sm sm:text-base text-indigo-800 dark:text-indigo-300 mb-4">
+                Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your AYUSH hybrid programs journey.
+              </p>
+              <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
+                Contact Our Experts →
+              </Link>
+            </div>
 
           </div>
         </div>

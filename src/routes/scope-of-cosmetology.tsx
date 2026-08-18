@@ -523,9 +523,9 @@ function BlogContent() {
           </div>
 
           <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-2 border-amber-200 dark:border-amber-800 rounded-lg sm:rounded-xl">
-            <h3 className="text-lg sm:text-xl font-bold text-amber-900 dark:text-amber-200 mb-2">Need Expert Guidance?</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-amber-900 dark:text-amber-200 mb-2">Still have questions?</h3>
             <p className="text-sm sm:text-base text-amber-800 dark:text-amber-300 mb-4">
-              Our cosmetology experts can help you navigate your aesthetic medicine career path and make informed decisions.
+              Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your cosmetology specialization career journey.
             </p>
             <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
               Contact Our Experts →

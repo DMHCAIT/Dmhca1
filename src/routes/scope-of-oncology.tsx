@@ -495,9 +495,9 @@ function BlogContent() {
           </div>
 
           <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-red-50 to-rose-50 dark:from-red-900/20 dark:to-rose-900/20 border-2 border-red-200 dark:border-red-800 rounded-lg sm:rounded-xl">
-            <h3 className="text-lg sm:text-xl font-bold text-red-900 dark:text-red-200 mb-2">Need Expert Guidance?</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-red-900 dark:text-red-200 mb-2">Still have questions?</h3>
             <p className="text-sm sm:text-base text-red-800 dark:text-red-300 mb-4">
-              Our oncology experts can help you navigate your specialty career path and make informed decisions.
+              Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your oncology specialization career journey.
             </p>
             <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
               Contact Our Experts →

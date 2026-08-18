@@ -241,14 +241,14 @@ function BlogContent() {
               </div>
             </div>
 
-            <div className="mt-20 p-10 bg-gradient-to-r from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700 rounded-2xl border border-white/20 dark:border-white/30 shadow-lg not-prose">
+            <div className="mt-20 p-10 bg-gradient-to-r from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700 rounded-2xl border border-cyan-400/20 dark:border-cyan-500/30 shadow-lg not-prose">
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Embryologist Programs</h3>
-                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover comprehensive training programs and specialization courses for your medical career advancement.</p>
-                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-slate-900 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
-                    Explore Programs →
+                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Still have questions?</h3>
+                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your embryology specialization career journey.</p>
+                  <Link to="/contact-us" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-slate-900 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
+                    Contact Our Experts →
                   </Link>
                 </div>
               </div>

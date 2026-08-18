@@ -249,22 +249,14 @@ function BlogContent() {
               </div>
             </div>
 
-            <div className="mt-20 p-10 bg-gradient-to-r from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700 rounded-2xl border border-emerald-400/20 dark:border-emerald-500/30 shadow-lg not-prose">
-              <div className="flex items-start gap-6">
-                <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
-                <div>
-                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">Explore Diabetology Programs</h3>
-                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">Discover specialized diabetology and metabolic disorder training programs for your medical career.</p>
-                  <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-emerald-600 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105">
-                    Explore Programs →
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 p-4 sm:p-6 rounded-lg border border-emerald-200 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20 not-prose">
-              <p className="text-emerald-900 dark:text-emerald-200 font-semibold text-sm sm:text-base">💡 Pro Tip</p>
-              <p className="text-emerald-800 dark:text-emerald-300 mt-2 text-sm sm:text-base">Diabetology is recession-proof. With diabetes prevalence expected to reach 100 million in India by 2030, career opportunities will only increase exponentially.</p>
+            <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border-2 border-emerald-200 dark:border-emerald-800 rounded-lg sm:rounded-xl">
+              <h3 className="text-lg sm:text-xl font-bold text-emerald-900 dark:text-emerald-200 mb-2">Still have questions?</h3>
+              <p className="text-sm sm:text-base text-emerald-800 dark:text-emerald-300 mb-4">
+                Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your diabetology specialization career journey.
+              </p>
+              <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
+                Contact Our Experts →
+              </Link>
             </div>
           </div>
         </div>

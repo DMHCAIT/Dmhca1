@@ -523,12 +523,12 @@ function BlogContent() {
             ))}
           </div>
 
-          <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 border-2 border-rose-200 dark:border-rose-800 rounded-lg sm:rounded-xl">
-            <h3 className="text-lg sm:text-xl font-bold text-rose-900 dark:text-rose-200 mb-2">Need Expert Guidance?</h3>
-            <p className="text-sm sm:text-base text-rose-800 dark:text-rose-300 mb-4">
-              Our OB-GYN experts can help you navigate your specialty career path and make informed decisions.
+          <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 border-2 border-pink-200 dark:border-pink-800 rounded-lg sm:rounded-xl">
+            <h3 className="text-lg sm:text-xl font-bold text-pink-900 dark:text-pink-200 mb-2">Still have questions?</h3>
+            <p className="text-sm sm:text-base text-pink-800 dark:text-pink-300 mb-4">
+              Don't hesitate to reach out to our expert counselors who can provide personalized guidance for your obstetrics and gynecology specialization career journey.
             </p>
-            <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
+            <Link to="/contact-us" className="inline-flex items-center gap-2 px-6 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg transition text-sm sm:text-base">
               Contact Our Experts →
             </Link>
           </div>
