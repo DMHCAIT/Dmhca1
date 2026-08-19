@@ -63,22 +63,22 @@ export function Footer() {
             <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Follow</div>
             <div className="flex items-center gap-2 md:gap-3 mt-2 md:mt-3">
               <a href="https://www.facebook.com/dmhca.in" target="_blank" rel="noopener noreferrer" className="group">
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#1877F2] flex items-center justify-center shadow-sm transition-transform transform group-hover:-translate-y-0.5">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#1877F2] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
                   <Facebook className="w-3 h-3 md:w-4 md:h-4 text-white" />
                 </div>
               </a>
               <a href="https://www.youtube.com/@dmhca" target="_blank" rel="noopener noreferrer" className="group">
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#FF0000] flex items-center justify-center shadow-sm transition-transform transform group-hover:-translate-y-0.5">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#FF0000] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
                   <Youtube className="w-3 h-3 md:w-4 md:h-4 text-white" />
                 </div>
               </a>
               <a href="https://www.instagram.com/dmhca_official/" target="_blank" rel="noopener noreferrer" className="group">
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center shadow-sm transition-transform transform group-hover:-translate-y-0.5">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
                   <Instagram className="w-3 h-3 md:w-4 md:h-4 text-white" />
                 </div>
               </a>
               <a href="https://www.linkedin.com/company/dmhca/" target="_blank" rel="noopener noreferrer" className="group">
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0A66C2] flex items-center justify-center shadow-sm transition-transform transform group-hover:-translate-y-0.5">
+                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0A66C2] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
                   <Linkedin className="w-3 h-3 md:w-4 md:h-4 text-white" />
                 </div>
               </a>
