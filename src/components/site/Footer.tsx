@@ -92,6 +92,7 @@ export function Footer() {
           <div>© {new Date().getFullYear()} Delhi Medical Health Care Academy. All rights reserved.</div>
             <div className="flex gap-5">
               <Link to="/term-conditions" className="hover:text-gold">Terms &amp; Conditions</Link>
+              <Link to="/disclaimer" className="hover:text-gold">Disclaimer</Link>
               <Link to="/privacy-policy" className="hover:text-gold">Privacy Policy</Link>
               <Link to="/refund-returns-policy" className="hover:text-gold">Refund Policy</Link>
             </div>

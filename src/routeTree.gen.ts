@@ -24,6 +24,7 @@ import { Route as ContactRedirectRouteImport } from './routes/contact-redirect'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
 import { Route as CoursesAfterMbbsInIndiaRouteImport } from './routes/courses-after-mbbs-in-india'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as FellowshipRouteImport } from './routes/fellowship'
 import { Route as HowToBecomeACardiologistRouteImport } from './routes/how-to-become-a-cardiologist'
@@ -182,6 +183,11 @@ const CoursesAfterMbbsInIndiaRoute = CoursesAfterMbbsInIndiaRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisclaimerRoute = DisclaimerRouteImport.update({
+  id: '/disclaimer',
+  path: '/disclaimer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FacultyRoute = FacultyRouteImport.update({
@@ -642,6 +648,7 @@ export interface FileRoutesByFullPath {
   '/contact-us': typeof ContactUsRoute
   '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/dashboard': typeof DashboardRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
   '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
@@ -742,6 +749,7 @@ export interface FileRoutesByTo {
   '/contact-us': typeof ContactUsRoute
   '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/dashboard': typeof DashboardRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
   '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
@@ -843,6 +851,7 @@ export interface FileRoutesById {
   '/contact-us': typeof ContactUsRoute
   '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/dashboard': typeof DashboardRoute
+  '/disclaimer': typeof DisclaimerRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
   '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
@@ -946,6 +955,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/courses-after-mbbs-in-india'
     | '/dashboard'
+    | '/disclaimer'
     | '/faculty'
     | '/fellowship'
     | '/how-to-become-a-cardiologist'
@@ -1046,6 +1056,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/courses-after-mbbs-in-india'
     | '/dashboard'
+    | '/disclaimer'
     | '/faculty'
     | '/fellowship'
     | '/how-to-become-a-cardiologist'
@@ -1146,6 +1157,7 @@ export interface FileRouteTypes {
     | '/contact-us'
     | '/courses-after-mbbs-in-india'
     | '/dashboard'
+    | '/disclaimer'
     | '/faculty'
     | '/fellowship'
     | '/how-to-become-a-cardiologist'
@@ -1248,6 +1260,7 @@ export interface RootRouteChildren {
   ContactUsRoute: typeof ContactUsRoute
   CoursesAfterMbbsInIndiaRoute: typeof CoursesAfterMbbsInIndiaRoute
   DashboardRoute: typeof DashboardRoute
+  DisclaimerRoute: typeof DisclaimerRoute
   FacultyRoute: typeof FacultyRoute
   FellowshipRoute: typeof FellowshipRoute
   HowToBecomeACardiologistRoute: typeof HowToBecomeACardiologistRoute
@@ -1421,6 +1434,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disclaimer': {
+      id: '/disclaimer'
+      path: '/disclaimer'
+      fullPath: '/disclaimer'
+      preLoaderRoute: typeof DisclaimerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faculty': {
@@ -2103,6 +2123,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactUsRoute: ContactUsRoute,
   CoursesAfterMbbsInIndiaRoute: CoursesAfterMbbsInIndiaRoute,
   DashboardRoute: DashboardRoute,
+  DisclaimerRoute: DisclaimerRoute,
   FacultyRoute: FacultyRoute,
   FellowshipRoute: FellowshipRoute,
   HowToBecomeACardiologistRoute: HowToBecomeACardiologistRoute,

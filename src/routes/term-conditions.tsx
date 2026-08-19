@@ -43,14 +43,10 @@ function TermConditions() {
     <main className="py-16 bg-gray-50 dark:bg-slate-900 min-h-screen">
       <div className="container-x">
         <div className="max-w-5xl mx-auto">
-          <div className="mb-8 flex items-center justify-between gap-4">
+          <div className="mb-8">
             <div>
               <h1 className="text-4xl font-extrabold">Terms &amp; Conditions</h1>
-              <p className="mt-2 text-sm text-muted-foreground">We’re on a mission to deliver engaging, curated courses at a reasonable price.</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <a href="/" className="text-sm hover:text-gold">Home</a>
-              <button onClick={() => window.print()} className="px-4 py-2 bg-navy-deep text-white rounded-md text-sm">Print</button>
+              <p className="mt-2 text-sm text-muted-foreground">We're on a mission to deliver engaging, curated courses at a reasonable price.</p>
             </div>
           </div>
 
