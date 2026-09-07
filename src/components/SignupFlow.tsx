@@ -152,31 +152,31 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 md:p-4">
+      <div className="bg-white rounded-xl p-4 md:p-8 max-w-lg w-full shadow-2xl relative max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+          className="absolute top-2 md:top-4 right-2 md:right-4 p-1 md:p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
           aria-label="Close"
         >
-          <X className="h-6 w-6 text-gray-600 hover:text-gray-900" />
+          <X className="h-5 md:h-6 w-5 md:w-6 text-gray-600 hover:text-gray-900" />
         </button>
 
         {/* Header */}
-        <div className="mb-8 text-center">
-          <img src={titleLogo} alt="DMHCA" className="h-12 w-auto mb-4 mx-auto" />
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">Create Your Account</h2>
-          <p className="text-gray-600 text-sm">Join DMHCA to access premium medical education</p>
+        <div className="mb-4 md:mb-8 text-center">
+          <img src={titleLogo} alt="DMHCA" className="h-8 md:h-12 w-auto mb-2 md:mb-4 mx-auto" />
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-100 mb-1 md:mb-2">Create Your Account</h2>
+          <p className="text-gray-600 text-xs md:text-sm">Join DMHCA to access premium medical education</p>
         </div>
 
         {/* Progress bar */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-navy-deep">Step {step === 4 ? 4 : step} of 4</span>
-            <div className="text-sm text-gray-500">{step === 1 && 'Your Information'}{step === 2 && 'Email Verification'}{step === 3 && 'Your Interests'}{step === 4 && 'Verify OTP'}</div>
+        <div className="mb-4 md:mb-8">
+          <div className="flex items-center justify-between mb-2 md:mb-3">
+            <span className="text-xs md:text-sm font-semibold text-navy-deep">Step {step === 4 ? 4 : step} of 4</span>
+            <div className="text-xs md:text-sm text-gray-500">{step === 1 && 'Your Information'}{step === 2 && 'Email Verification'}{step === 3 && 'Your Interests'}{step === 4 && 'Verify OTP'}</div>
           </div>
-          <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 md:h-2 bg-gray-200 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-navy-deep to-blue-600 rounded-full transition-all duration-300"
               style={{ width: `${(Math.min(step, 4) / 4) * 100}%` }}
@@ -187,9 +187,9 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Step 1: Name */}
         {step === 1 && (
           <>
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What's your name?</h3>
-              <p className="text-sm text-gray-600">We'll use this to personalize your experience</p>
+            <div className="mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">What's your name?</h3>
+              <p className="text-xs md:text-sm text-gray-600">We'll use this to personalize your experience</p>
             </div>
             <Input
               type="text"
@@ -199,7 +199,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                 setFormData((prev) => ({ ...prev, full_name: e.target.value }));
                 setError('');
               }}
-              className="mb-4"
+              className="mb-3 md:mb-4"
               autoFocus
             />
           </>
@@ -208,9 +208,9 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Step 2: Email */}
         {step === 2 && (
           <>
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What's your email?</h3>
-              <p className="text-sm text-gray-600">We'll send you a verification code</p>
+            <div className="mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">What's your email?</h3>
+              <p className="text-xs md:text-sm text-gray-600">We'll send you a verification code</p>
             </div>
             <Input
               type="email"
@@ -220,7 +220,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                 setFormData((prev) => ({ ...prev, email: e.target.value }));
                 setError('');
               }}
-              className="mb-4"
+              className="mb-3 md:mb-4"
               autoFocus
             />
           </>
@@ -229,16 +229,16 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Step 3: Interests */}
         {step === 3 && (
           <>
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">What are your interests?</h3>
-              <p className="text-sm text-gray-600">Select up to 3 specialties that interest you most</p>
+            <div className="mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">What are your interests?</h3>
+              <p className="text-xs md:text-sm text-gray-600">Select up to 3 specialties that interest you most</p>
             </div>
-            <div className="grid grid-cols-2 gap-2 mb-4">
+            <div className="grid grid-cols-2 gap-1.5 md:gap-2 mb-3 md:mb-4">
               {interests.slice(page * pageSize, page * pageSize + pageSize).map((interest) => (
                 <button
                   key={interest}
                   onClick={() => toggleInterest(interest)}
-                  className={`px-3 py-2 rounded-full text-sm font-medium transition-all ${
+                  className={`px-2 md:px-3 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all ${
                     formData.interests.includes(interest)
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -248,16 +248,16 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                 </button>
               ))}
             </div>
-            <div className="mb-4">
+            <div className="mb-3 md:mb-4">
               <span
                 role="button"
                 onClick={() => setPage((p) => (p < maxPages - 1 ? p + 1 : 0))}
-                className="text-sm text-navy-deep dark:text-gold cursor-pointer select-none px-2 py-1 rounded-md"
+                className="text-xs md:text-sm text-navy-deep dark:text-gold cursor-pointer select-none px-2 py-1 rounded-md"
               >
                 {page < maxPages - 1 ? 'Show more' : 'Show less'}
               </span>
             </div>
-            <p className="text-xs text-gray-500 mb-4">
+            <p className="text-xs text-gray-500 mb-3 md:mb-4">
               Selected: {formData.interests.length}/3
             </p>
           </>
@@ -266,9 +266,9 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Step 4: OTP Verification */}
         {step === 4 && (
           <>
-            <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-slate-100 mb-1">Verify Your Email</h3>
-              <p className="text-sm text-gray-600">
+            <div className="mb-4 md:mb-6">
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">Verify Your Email</h3>
+              <p className="text-xs md:text-sm text-gray-600">
                 Enter the 6-digit code sent to <span className="font-semibold">{formData.email}</span>
               </p>
             </div>
@@ -280,7 +280,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                 setOtp(e.target.value.replace(/\D/g, '').slice(0, 6));
                 setError('');
               }}
-              className="mb-4 text-center text-2xl tracking-widest font-mono"
+              className="mb-3 md:mb-4 text-center text-xl md:text-2xl tracking-widest font-mono"
               maxLength={6}
               autoFocus
             />
@@ -288,17 +288,17 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
           </>
         )}
 
-        {error && <p className="text-red-600 text-sm mb-4 p-3 bg-red-50 rounded-lg text-center">{error}</p>}
+        {error && <p className="text-red-600 text-xs md:text-sm mb-3 md:mb-4 p-2 md:p-3 bg-red-50 rounded-lg text-center">{error}</p>}
 
         {/* Buttons */}
-        <div className="flex gap-3 mt-6">
+        <div className="flex gap-2 md:gap-3 mt-4 md:mt-6">
           <Button
             onClick={handleBack}
             variant="outline"
             disabled={step === 1 || loading}
-            className="flex-1"
+            className="flex-1 text-xs md:text-sm"
           >
-            <ChevronLeft className="h-4 w-4 mr-1" />
+            <ChevronLeft className="h-3 md:h-4 w-3 md:w-4 mr-1" />
             Back
           </Button>
 
@@ -306,35 +306,35 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
             <Button
               onClick={handleNext}
               disabled={loading}
-              className="flex-1 bg-navy-deep hover:bg-navy"
+              className="flex-1 bg-navy-deep hover:bg-navy text-xs md:text-sm"
             >
               Next
-              <ChevronRight className="h-4 w-4 ml-1" />
+              <ChevronRight className="h-3 md:h-4 w-3 md:w-4 ml-1" />
             </Button>
           ) : step === 3 ? (
             <Button
               onClick={handleSubmit}
               disabled={loading}
-              className="flex-1 bg-navy-deep hover:bg-navy"
+              className="flex-1 bg-navy-deep hover:bg-navy text-xs md:text-sm"
             >
-              {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {loading ? <Loader2 className="mr-2 h-3 md:h-4 w-3 md:w-4 animate-spin" /> : null}
               Send OTP
             </Button>
           ) : (
             <Button
               onClick={handleVerifyOTP}
               disabled={loading || otp.length !== 6}
-              className="flex-1 bg-navy-deep hover:bg-navy"
+              className="flex-1 bg-navy-deep hover:bg-navy text-xs md:text-sm"
             >
-              {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {loading ? <Loader2 className="mr-2 h-3 md:h-4 w-3 md:w-4 animate-spin" /> : null}
               Verify & Create Account
             </Button>
           )}
         </div>
 
         {/* Already have account link */}
-        <div className="text-center border-t pt-4">
-          <p className="text-sm text-gray-600">
+        <div className="text-center border-t pt-3 md:pt-4 mt-3 md:mt-4">
+          <p className="text-xs md:text-sm text-gray-600">
             Already have an account?{' '}
             <button
               onClick={onSwitchToLogin}

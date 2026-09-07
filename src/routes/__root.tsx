@@ -189,16 +189,16 @@ function RootComponent() {
           {/* Cookie banner fixed to bottom */}
           {cookieConsent === null && (
             <div className="fixed left-0 right-0 bottom-0 z-50 px-0">
-              <div className="w-full bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 shadow-lg px-8 py-5 flex items-center justify-center">
-                <div className="max-w-6xl w-full flex items-center justify-between gap-6">
-                  <div className="flex-1 text-sm text-slate-800 dark:text-slate-200">
-                  <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1">We respect your privacy</div>
-                  <div className="text-sm text-slate-600 dark:text-slate-400 mb-2">We use cookies to personalise content, analyse traffic and improve your experience. By accepting, you agree to our use of cookies for analytics, personalization, and targeted content.</div>
-                  <div className="text-xs text-slate-500 dark:text-slate-500">You can change your preference anytime from your browser settings. Read our <a href="/privacy-policy" className="text-navy-deep dark:text-gold underline">Privacy Policy</a> for more information.</div>
+              <div className="w-full bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 shadow-lg px-3 md:px-8 py-2 md:py-5 flex items-center justify-center">
+                <div className="max-w-6xl w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-6">
+                  <div className="flex-1 text-xs md:text-sm text-slate-800 dark:text-slate-200">
+                  <div className="font-semibold text-slate-900 dark:text-slate-100 mb-1 text-sm md:text-base">We respect your privacy</div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-400 mb-1 md:mb-2 line-clamp-2 md:line-clamp-none">We use cookies to personalise content, analyse traffic and improve your experience. By accepting, you agree to our use of cookies for analytics, personalization, and targeted content.</div>
+                  <div className="text-xs text-slate-500 dark:text-slate-500 hidden md:block">You can change your preference anytime from your browser settings. Read our <a href="/privacy-policy" className="text-navy-deep dark:text-gold underline">Privacy Policy</a> for more information.</div>
                 </div>
-                  <div className="flex items-center gap-3">
-                    <button onClick={() => handleCookieConsent("accept")} className="px-5 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white">Accept</button>
-                    <button onClick={() => handleCookieConsent("deny")} className="px-5 py-2 border border-gray-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900">Deny</button>
+                  <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                    <button onClick={() => handleCookieConsent("accept")} className="px-3 md:px-5 py-1.5 md:py-2 text-xs md:text-sm bg-navy-deep dark:bg-gold dark:text-slate-900 text-white whitespace-nowrap">Accept</button>
+                    <button onClick={() => handleCookieConsent("deny")} className="px-3 md:px-5 py-1.5 md:py-2 text-xs md:text-sm border border-gray-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 whitespace-nowrap">Deny</button>
                   </div>
                 </div>
               </div>
