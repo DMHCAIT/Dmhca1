@@ -189,8 +189,8 @@ export function ChatbotWidget(): JSX.Element {
 
   return (
     <div
-      className={`fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-40 transition-all duration-300 ease-out ${
-        isOpen ? 'w-[calc(100vw-2rem)] sm:w-96 h-[70vh] sm:h-[32rem] max-w-96' : 'w-14 sm:w-16 h-14 sm:h-16'
+      className={`fixed right-4 sm:right-6 z-50 transition-all duration-300 ease-out ${
+        isOpen ? 'bottom-4 sm:bottom-6 w-[calc(100vw-2rem)] sm:w-96 h-[70vh] sm:h-[32rem] max-w-96' : 'bottom-8 sm:bottom-10 w-14 sm:w-16 h-14 sm:h-16'
       }`}
     >
       {isOpen ? (

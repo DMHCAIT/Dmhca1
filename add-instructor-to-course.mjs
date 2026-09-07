@@ -37,7 +37,6 @@ async function addInstructorToCourse() {
       name: "Dr. Bhuvaneshwari",
       title: "Cosmetologist/Dermatologist",
       specialization: "Cosmetic Dermatology",
-      bio: "Expert cosmetologist and dermatologist with extensive experience in aesthetic medicine and cosmetic procedures.",
       image: "/Faculty_images/Dr Bhuvaneshwari.webp",
       qualifications: [
         "MBBS",

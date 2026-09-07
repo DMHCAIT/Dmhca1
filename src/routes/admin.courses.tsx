@@ -283,11 +283,35 @@ function AdminCourses() {
       };
 
       if (currentCourseId) {
-        // Editing existing course
+        // Editing existing course - preserve trainers from existing data
+        const { data: existingCourse, error: fetchError } = await supabaseClient
+          .from('courses')
+          .select('*')
+          .eq('id', currentCourseId)
+          .single();
+
+        let existingTrainers: any[] = [];
+        if (existingCourse && !fetchError) {
+          try {
+            const existingData = existingCourse.testimonials ? JSON.parse(existingCourse.testimonials) : {};
+            existingTrainers = Array.isArray(existingData.trainers) ? existingData.trainers : [];
+          } catch (e) {
+            console.warn('Could not parse existing trainers');
+          }
+        }
+
+        // Merge with existing trainers if formData.trainers is empty
+        const finalTrainers = formData.trainers && formData.trainers.length > 0 ? formData.trainers : existingTrainers;
+
+        const updatedCourseData = {
+          ...courseData,
+          trainers: finalTrainers
+        };
+
         const { data: updateData, error } = await supabaseClient
           .from('courses')
           .update({ 
-            testimonials: JSON.stringify(courseData),
+            testimonials: JSON.stringify(updatedCourseData),
             slug: formData.slug,
             title: formData.title,
             category: formData.category,

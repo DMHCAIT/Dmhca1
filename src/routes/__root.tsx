@@ -14,6 +14,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { ContactStrip } from "@/components/site/ContactStrip";
 
 function NotFoundComponent() {
   return (
@@ -203,6 +204,9 @@ function RootComponent() {
               </div>
             </div>
           )}
+
+          {/* Contact Strip - Fixed to bottom */}
+          <ContactStrip />
         </div>
       </QueryClientProvider>
     </ThemeProvider>
