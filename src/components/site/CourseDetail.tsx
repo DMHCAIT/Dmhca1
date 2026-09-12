@@ -306,11 +306,11 @@ export function CourseDetail({ course, primaryCat, ptype, gstAmount, razorpayAmo
                 Academic partners
               </h2>
 
-              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 sm:p-6 shadow-sm">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 items-center">
-                  {[ 'ACTD-2.webp', 'btu_hero_logo.webp', 'duke logo.webp', 'IBMP LOGO .webp', 'logo-srdu.webp' ].map((file) => (
-                    <div key={file} className="rounded-lg bg-white/80 dark:!bg-white p-2 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200">
-                      <div className="w-32 h-20 md:w-36 md:h-24 lg:w-40 lg:h-28 flex items-center justify-center bg-white dark:!bg-white rounded-md">
+              <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 sm:p-6 shadow-sm">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 items-center justify-items-center">
+                  {[ 'btu_hero_logo.webp', 'duke logo.webp', 'IBMP LOGO .webp', 'logo-srdu.webp' ].map((file) => (
+                    <div key={file} className="rounded-lg bg-white/80 dark:!bg-white p-3 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 w-full">
+                      <div className="w-28 h-20 md:w-32 md:h-24 flex items-center justify-center bg-white dark:!bg-white rounded-md">
                         <img src={`/ACADEMIC PARTNERS/${file}`} alt={file} className="max-w-full max-h-full object-contain" />
                       </div>
                     </div>

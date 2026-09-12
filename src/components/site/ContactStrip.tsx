@@ -5,8 +5,8 @@ export function ContactStrip() {
   const [activeWhatsApp, setActiveWhatsApp] = useState(0);
 
   const whatsappNumbers = [
-    { number: "+91 9281887047", display: "+91 9281  887047" },
-    { number: "+91 9281887057", display: "+91 9281  887057" },
+    { number: "+91 8121678996", display: "+91 81216 78996" },
+    { number: "+91 8121678993", display: "+91 81216 78993" },
   ];
 
   // Rotate WhatsApp numbers every 5 seconds

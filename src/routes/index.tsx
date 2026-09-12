@@ -667,9 +667,8 @@ function Home() {
         <div className="mb-16">
           <div className="relative">
             <div className="mx-auto max-w-6xl py-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-3 items-center">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-3 items-center">
                 {[
-                  'ACTD-2.webp',
                   'btu_hero_logo.webp',
                   'duke logo.webp',
                   'IBMP LOGO .webp',
@@ -757,7 +756,6 @@ function Home() {
               <div className="marquee__inner flex gap-8 items-center">
                 {(() => {
                   const logos = [
-                    '1678526353_7823551bcf91d278e567.webp',
                     // 'aig-logo-white.webp', (removed)
                     'images (1).webp',
                     'images.webp',
