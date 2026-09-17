@@ -1,19 +1,19 @@
-import { createServerFn } from '@tanstack/react-start';
-import { z } from 'zod';
-import nodemailer from 'nodemailer';
-import { randomInt } from 'crypto';
-import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
+import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
+import nodemailer from "nodemailer";
+import { randomInt } from "crypto";
+import crypto from "crypto";
+import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  process.env.VITE_SUPABASE_URL || "",
+  process.env.SUPABASE_SERVICE_ROLE_KEY || "",
 );
 
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT || 587),
-  secure: process.env.SMTP_SECURE === 'true',
+  secure: process.env.SMTP_SECURE === "true",
   auth:
     process.env.SMTP_USER && process.env.SMTP_PASS
       ? {
@@ -24,47 +24,47 @@ const transporter = nodemailer.createTransport({
 });
 
 const SendOTPSchema = z.object({
-  email: z.string().email('Invalid email'),
+  email: z.string().email("Invalid email"),
   fullName: z.string().optional(),
   interests: z.array(z.string()).optional(),
-  mode: z.enum(['signup', 'login']).default('login'),
+  mode: z.enum(["signup", "login"]).default("login"),
 });
 
-export const sendOTP = createServerFn({ method: 'POST' })
+export const sendOTP = createServerFn({ method: "POST" })
   .validator(SendOTPSchema)
   .handler(async ({ data: { email, fullName, interests, mode } }) => {
     try {
       // Check if user exists
       const { data: existingUser, error: lookupError } = await supabase
-        .from('users')
-        .select('id, full_name')
-        .eq('email', email)
+        .from("users")
+        .select("id, full_name")
+        .eq("email", email)
         .single();
 
       // Validation based on mode
-      if (mode === 'signup' && existingUser) {
-        throw new Error('Already have an account? Please login instead');
+      if (mode === "signup" && existingUser) {
+        throw new Error("Already have an account? Please login instead");
       }
-      if (mode === 'login' && !existingUser) {
-        throw new Error('No account found. Please signup first');
+      if (mode === "login" && !existingUser) {
+        throw new Error("No account found. Please signup first");
       }
 
       // Determine display name
-      let displayName = fullName || existingUser?.full_name || '';
+      let displayName = fullName || existingUser?.full_name || "";
 
       // If signup mode and fullName provided, create user with full_name
-      if (mode === 'signup' && fullName) {
+      if (mode === "signup" && fullName) {
         const { data: newUser, error: createError } = await supabase
-          .from('users')
+          .from("users")
           .insert({
             email,
             full_name: fullName,
             created_at: new Date().toISOString(),
           })
-          .select('full_name')
+          .select("full_name")
           .single();
 
-        if (createError && createError.code !== '23505') {
+        if (createError && createError.code !== "23505") {
           throw new Error(`Failed to store signup data: ${createError.message}`);
         }
 
@@ -73,11 +73,11 @@ export const sendOTP = createServerFn({ method: 'POST' })
         console.log(`✓ User created: ${email} with name: ${displayName}`);
       }
 
-      console.log(`📧 Email greeting will be: Hello ${displayName || 'there'},`);
+      console.log(`📧 Email greeting will be: Hello ${displayName || "there"},`);
 
       // Generate OTP
       const otp = String(randomInt(100000, 999999));
-      const otpHash = crypto.createHash('sha256').update(otp).digest('hex');
+      const otpHash = crypto.createHash("sha256").update(otp).digest("hex");
       const expiresAt = new Date(Date.now() + 15 * 60 * 1000).toISOString(); // 15 minutes validity
 
       console.log(`OTP Generated for ${email}:`);
@@ -87,7 +87,7 @@ export const sendOTP = createServerFn({ method: 'POST' })
       console.log(`  Valid for: 15 minutes`);
 
       // Store OTP in Supabase
-      const { error: dbError } = await supabase.from('otp_tokens').insert({
+      const { error: dbError } = await supabase.from("otp_tokens").insert({
         email,
         otp_hash: otpHash,
         expires_at: expiresAt,
@@ -99,11 +99,11 @@ export const sendOTP = createServerFn({ method: 'POST' })
       // Send OTP email
       await transporter.sendMail({
         from: {
-          name: 'DMHCA',
-          address: process.env.SMTP_USER || 'noreply@dmhca.in'
+          name: "DMHCA",
+          address: process.env.SMTP_USER || "noreply@dmhca.in",
         },
         to: email,
-        subject: 'Your DMHCA Login OTP - Secure Access',
+        subject: "Your DMHCA Login OTP - Secure Access",
         html: `
           <!DOCTYPE html>
           <html>
@@ -162,7 +162,7 @@ export const sendOTP = createServerFn({ method: 'POST' })
                       <p>DMHCA - Fellowship, PG Diploma & Advanced Medical Courses</p>
                   </div>
                   <div class="content">
-                      <p style="margin-top: 0; font-size: 15px;">Hello ${displayName || 'there'},</p>
+                      <p style="margin-top: 0; font-size: 15px;">Hello ${displayName || "there"},</p>
                       <p style="color: #555;">Thank you for logging into your DMHCA account. Please use the verification code below to complete your login securely.</p>
                       
                       <div class="otp-section">
@@ -199,12 +199,9 @@ export const sendOTP = createServerFn({ method: 'POST' })
         `,
       });
 
-      return { success: true, message: 'OTP sent successfully' };
+      return { success: true, message: "OTP sent successfully" };
     } catch (error) {
-      console.error('Send OTP error:', error);
-      throw new Error(error instanceof Error ? error.message : 'Failed to send OTP');
+      console.error("Send OTP error:", error);
+      throw new Error(error instanceof Error ? error.message : "Failed to send OTP");
     }
   });
-
-
-

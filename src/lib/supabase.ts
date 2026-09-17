@@ -1,13 +1,14 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from "@supabase/supabase-js";
 
 // For browser: use VITE_-prefixed variables
 // For server: use non-prefixed variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || process.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
+const supabaseAnonKey =
+  import.meta.env.VITE_SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing SUPABASE_URL or SUPABASE_ANON_KEY');
+  throw new Error("Missing SUPABASE_URL or SUPABASE_ANON_KEY");
 }
 
 // Client-side Supabase client (anon key only)
@@ -38,12 +39,12 @@ export interface ContactMessage {
   course?: string;
   created_at: string;
   updated_at: string;
-  status: 'new' | 'reviewed' | 'responded';
+  status: "new" | "reviewed" | "responded";
 }
 
 export interface AdminUser {
   id: string;
   email: string;
-  role: 'admin' | 'moderator';
+  role: "admin" | "moderator";
   created_at: string;
 }

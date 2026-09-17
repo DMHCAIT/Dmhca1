@@ -1,12 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { Settings as SettingsIcon } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { Settings as SettingsIcon } from "lucide-react";
 
-export const Route = createFileRoute('/admin/settings')({
+export const Route = createFileRoute("/admin/settings")({
   head: () => ({
-    meta: [
-      { title: 'Settings — Admin' },
-      { name: 'description', content: 'Admin panel settings' },
-    ],
+    meta: [{ title: "Settings — Admin" }, { name: "description", content: "Admin panel settings" }],
   }),
   component: AdminSettings,
 });

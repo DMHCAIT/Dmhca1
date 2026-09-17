@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { LogOut, BookOpen, Award, Users } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { LogOut, BookOpen, Award, Users } from "lucide-react";
 
 export function StudentDashboard({ onLogout }) {
   const [studentData, setStudentData] = useState(null);
@@ -8,12 +8,12 @@ export function StudentDashboard({ onLogout }) {
 
   useEffect(() => {
     // Fetch student data from localStorage or API
-    if (typeof window !== 'undefined') {
-      const email = localStorage.getItem('email');
-      const userId = localStorage.getItem('userId');
-      const fullName = localStorage.getItem('full_name');
-      const interests = localStorage.getItem('interests');
-      const signupData = sessionStorage.getItem('signupData');
+    if (typeof window !== "undefined") {
+      const email = localStorage.getItem("email");
+      const userId = localStorage.getItem("userId");
+      const fullName = localStorage.getItem("full_name");
+      const interests = localStorage.getItem("interests");
+      const signupData = sessionStorage.getItem("signupData");
 
       let data = { email, userId, full_name: fullName };
       if (interests) {
@@ -28,7 +28,7 @@ export function StudentDashboard({ onLogout }) {
           const parsed = JSON.parse(signupData);
           data = { ...data, ...parsed };
         } catch (e) {
-          console.error('Failed to parse signup data:', e);
+          console.error("Failed to parse signup data:", e);
         }
       }
       setStudentData(data);
@@ -37,15 +37,15 @@ export function StudentDashboard({ onLogout }) {
   }, []);
 
   const handleLogout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('email');
-      localStorage.removeItem('full_name');
-      localStorage.removeItem('interests');
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('hasSignedUp');
-      sessionStorage.removeItem('signupData');
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("email");
+      localStorage.removeItem("full_name");
+      localStorage.removeItem("interests");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("hasSignedUp");
+      sessionStorage.removeItem("signupData");
     }
     onLogout?.();
   };
@@ -64,9 +64,11 @@ export function StudentDashboard({ onLogout }) {
       <div className="bg-white dark:bg-slate-900 shadow-sm border-b border-gray-200 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100">Welcome Back! 👋</h1>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-slate-100">
+              Welcome Back! 👋
+            </h1>
             <p className="text-gray-600 dark:text-slate-400 mt-2 text-lg">
-              {studentData?.full_name ? `Hi, ${studentData.full_name}` : 'Student Dashboard'}
+              {studentData?.full_name ? `Hi, ${studentData.full_name}` : "Student Dashboard"}
             </p>
           </div>
           <Button
@@ -86,12 +88,12 @@ export function StudentDashboard({ onLogout }) {
           <div className="flex items-center gap-6 mb-8">
             <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
               <span className="text-4xl font-bold text-white">
-                {studentData?.full_name?.charAt(0).toUpperCase() || 'S'}
+                {studentData?.full_name?.charAt(0).toUpperCase() || "S"}
               </span>
             </div>
             <div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100">
-                {studentData?.full_name || 'Student'}
+                {studentData?.full_name || "Student"}
               </h2>
               <p className="text-gray-600 dark:text-slate-400 text-lg mt-1">{studentData?.email}</p>
             </div>
@@ -106,11 +108,17 @@ export function StudentDashboard({ onLogout }) {
               </p>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 rounded-lg p-4 border-l-4 border-green-600">
-              <p className="text-sm text-gray-700 dark:text-slate-300 font-semibold">Account Status</p>
-              <p className="text-lg font-bold text-green-600 dark:text-green-300 mt-2">✓ Verified</p>
+              <p className="text-sm text-gray-700 dark:text-slate-300 font-semibold">
+                Account Status
+              </p>
+              <p className="text-lg font-bold text-green-600 dark:text-green-300 mt-2">
+                ✓ Verified
+              </p>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 rounded-lg p-4 border-l-4 border-purple-600">
-              <p className="text-sm text-gray-700 dark:text-slate-300 font-semibold">Member Since</p>
+              <p className="text-sm text-gray-700 dark:text-slate-300 font-semibold">
+                Member Since
+              </p>
               <p className="text-lg font-bold text-purple-700 dark:text-purple-300 mt-2">Today</p>
             </div>
           </div>
@@ -140,13 +148,16 @@ export function StudentDashboard({ onLogout }) {
         <div className="bg-white dark:bg-slate-900 rounded-xl shadow-md p-8 mb-8 border border-gray-100 dark:border-slate-700">
           <div className="flex items-center gap-3 mb-6">
             <BookOpen className="h-7 w-7 text-blue-600" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100">Explore Courses</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-slate-100">
+              Explore Courses
+            </h3>
           </div>
           <p className="text-gray-600 dark:text-slate-400 text-lg mb-6">
-            Browse our comprehensive range of medical courses and start your learning journey with DMHCA.
+            Browse our comprehensive range of medical courses and start your learning journey with
+            DMHCA.
           </p>
           <Button
-            onClick={() => (window.location.href = '/top-medical-courses')}
+            onClick={() => (window.location.href = "/top-medical-courses")}
             className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold py-3 text-lg shadow-md transition-transform transform hover:-translate-y-0.5"
             aria-label="Browse all courses"
           >

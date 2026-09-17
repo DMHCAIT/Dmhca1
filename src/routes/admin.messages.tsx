@@ -1,14 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Trash2, Calendar, Mail, Phone, CheckCircle2 } from 'lucide-react';
-import type { ContactMessage } from '@/lib/supabase';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { Trash2, Calendar, Mail, Phone, CheckCircle2 } from "lucide-react";
+import type { ContactMessage } from "@/lib/supabase";
 
-export const Route = createFileRoute('/admin/messages')({
+export const Route = createFileRoute("/admin/messages")({
   head: () => ({
     meta: [
-      { title: 'Contact Messages — Admin' },
-      { name: 'description', content: 'Manage contact form submissions' },
+      { title: "Contact Messages — Admin" },
+      { name: "description", content: "Manage contact form submissions" },
     ],
   }),
   component: AdminMessages,
@@ -19,7 +19,7 @@ function AdminMessages() {
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
-  const [filter, setFilter] = useState<'all' | 'new' | 'reviewed' | 'responded'>('all');
+  const [filter, setFilter] = useState<"all" | "new" | "reviewed" | "responded">("all");
 
   useEffect(() => {
     loadMessages();
@@ -28,12 +28,12 @@ function AdminMessages() {
   const loadMessages = async () => {
     try {
       let query = supabaseClient
-        .from('contact_messages')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("contact_messages")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-      if (filter !== 'all') {
-        query = query.eq('status', filter);
+      if (filter !== "all") {
+        query = query.eq("status", filter);
       }
 
       const { data, error } = await query;
@@ -41,7 +41,7 @@ function AdminMessages() {
       if (error) throw error;
       setMessages(data || []);
     } catch (error) {
-      console.error('Error loading messages:', error);
+      console.error("Error loading messages:", error);
     } finally {
       setLoading(false);
     }
@@ -53,52 +53,49 @@ function AdminMessages() {
   }, [filter]);
 
   const deleteMessage = async (id: string) => {
-    if (!confirm('Delete this message?')) return;
+    if (!confirm("Delete this message?")) return;
 
     setDeleting(id);
     try {
-      const { error } = await supabaseClient
-        .from('contact_messages')
-        .delete()
-        .eq('id', id);
+      const { error } = await supabaseClient.from("contact_messages").delete().eq("id", id);
 
       if (error) throw error;
       setMessages(messages.filter((m) => m.id !== id));
     } catch (error) {
-      alert('Error deleting message: ' + (error as any).message);
+      alert("Error deleting message: " + (error as any).message);
     } finally {
       setDeleting(null);
     }
   };
 
-  const updateStatus = async (id: string, status: ContactMessage['status']) => {
+  const updateStatus = async (id: string, status: ContactMessage["status"]) => {
     setUpdating(id);
     try {
       const { error } = await supabaseClient
-        .from('contact_messages')
+        .from("contact_messages")
         .update({ status, updated_at: new Date().toISOString() })
-        .eq('id', id);
+        .eq("id", id);
 
       if (error) throw error;
 
       setMessages(messages.map((m) => (m.id === id ? { ...m, status } : m)));
     } catch (error) {
-      alert('Error updating status: ' + (error as any).message);
+      alert("Error updating status: " + (error as any).message);
     } finally {
       setUpdating(null);
     }
   };
 
-  const getStatusColor = (status: ContactMessage['status']) => {
+  const getStatusColor = (status: ContactMessage["status"]) => {
     switch (status) {
-      case 'new':
-        return 'bg-blue-100 text-blue-800';
-      case 'reviewed':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'responded':
-        return 'bg-green-100 text-green-800';
+      case "new":
+        return "bg-blue-100 text-blue-800";
+      case "reviewed":
+        return "bg-yellow-100 text-yellow-800";
+      case "responded":
+        return "bg-green-100 text-green-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -123,14 +120,14 @@ function AdminMessages() {
       </div>
 
       <div className="flex gap-2 flex-wrap">
-        {(['all', 'new', 'reviewed', 'responded'] as const).map((f) => (
+        {(["all", "new", "reviewed", "responded"] as const).map((f) => (
           <button
             key={f}
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-lg font-medium transition ${
               filter === f
-                ? 'bg-gold text-navy-deep'
-                : 'bg-white text-gray-700 border border-gray-300 hover:border-gold'
+                ? "bg-gold text-navy-deep"
+                : "bg-white text-gray-700 border border-gray-300 hover:border-gold"
             }`}
           >
             {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -145,12 +142,17 @@ function AdminMessages() {
       ) : (
         <div className="space-y-4">
           {messages.map((message) => (
-            <div key={message.id} className="bg-white rounded-lg shadow p-6 hover:shadow-md transition">
+            <div
+              key={message.id}
+              className="bg-white rounded-lg shadow p-6 hover:shadow-md transition"
+            >
               <div className="flex justify-between items-start mb-3">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1">
                     <h3 className="font-semibold text-navy-deep">{message.name}</h3>
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${getStatusColor(message.status)}`}>
+                    <span
+                      className={`text-xs px-2 py-1 rounded-full font-medium ${getStatusColor(message.status)}`}
+                    >
                       {message.status}
                     </span>
                   </div>
@@ -181,20 +183,22 @@ function AdminMessages() {
 
               <div className="mb-4 p-3 bg-gray-50 rounded-lg">
                 <p className="text-gray-700">{message.message}</p>
-                {message.course && <p className="text-sm text-gray-600 mt-2">Course: {message.course}</p>}
+                {message.course && (
+                  <p className="text-sm text-gray-600 mt-2">Course: {message.course}</p>
+                )}
               </div>
 
               <div className="flex gap-2">
                 <button
-                  onClick={() => updateStatus(message.id, 'reviewed')}
-                  disabled={updating === message.id || message.status === 'reviewed'}
+                  onClick={() => updateStatus(message.id, "reviewed")}
+                  disabled={updating === message.id || message.status === "reviewed"}
                   className="px-3 py-1 text-sm bg-yellow-100 text-yellow-800 rounded hover:bg-yellow-200 transition disabled:opacity-50"
                 >
                   Mark Reviewed
                 </button>
                 <button
-                  onClick={() => updateStatus(message.id, 'responded')}
-                  disabled={updating === message.id || message.status === 'responded'}
+                  onClick={() => updateStatus(message.id, "responded")}
+                  disabled={updating === message.id || message.status === "responded"}
                   className="px-3 py-1 text-sm bg-green-100 text-green-800 rounded hover:bg-green-200 transition disabled:opacity-50 flex items-center gap-1"
                 >
                   <CheckCircle2 className="w-4 h-4" />

@@ -8,11 +8,32 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const staticPaths = ["/", "/top-medical-courses", "/fellowship", "/faculty", "/about", "/blog", "/contact-us", "/login"];
+        const staticPaths = [
+          "/",
+          "/top-medical-courses",
+          "/fellowship",
+          "/faculty",
+          "/about",
+          "/blog",
+          "/contact-us",
+          "/login",
+        ];
         const entries: { path: string; changefreq?: string; priority?: string }[] = [
-          ...staticPaths.map((p) => ({ path: p, changefreq: "weekly", priority: p === "/" ? "1.0" : "0.8" })),
-          ...categories.map((c) => ({ path: `/course-category/${c.slug}`, changefreq: "weekly", priority: "0.7" })),
-          ...courses.map((c) => ({ path: `/courses/${c.slug}`, changefreq: "monthly", priority: "0.6" })),
+          ...staticPaths.map((p) => ({
+            path: p,
+            changefreq: "weekly",
+            priority: p === "/" ? "1.0" : "0.8",
+          })),
+          ...categories.map((c) => ({
+            path: `/course-category/${c.slug}`,
+            changefreq: "weekly",
+            priority: "0.7",
+          })),
+          ...courses.map((c) => ({
+            path: `/courses/${c.slug}`,
+            changefreq: "monthly",
+            priority: "0.6",
+          })),
         ];
         const urls = entries.map(
           (e) =>

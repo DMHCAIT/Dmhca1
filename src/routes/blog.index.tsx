@@ -7,7 +7,8 @@ export const Route = createFileRoute("/blog/")({
       { title: "Medical Blogs — DMHCA" },
       {
         name: "description",
-        content: "Explore comprehensive medical blogs covering career guidance, specializations, courses, and educational resources.",
+        content:
+          "Explore comprehensive medical blogs covering career guidance, specializations, courses, and educational resources.",
       },
     ],
   }),
@@ -36,7 +37,10 @@ const blogsList = [
   { title: "How to Become an Endocrinologist", slug: "how-to-become-an-endocrinologist" },
   { title: "How to Become an Embryologist", slug: "how-to-become-an-embryologist" },
   { title: "How to Become a Pediatrician", slug: "how-to-become-a-pediatrician" },
-  { title: "How to Become an Obstetrician-Gynecologist", slug: "how-to-become-an-obstetrician-gynecologist" },
+  {
+    title: "How to Become an Obstetrician-Gynecologist",
+    slug: "how-to-become-an-obstetrician-gynecologist",
+  },
 ];
 
 function BlogsListing() {
@@ -45,13 +49,17 @@ function BlogsListing() {
       {/* Hero Section */}
       <section className="site-hero">
         <div className="container-x">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">Resources</div>
+          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">
+            Resources
+          </div>
           <h1 className="font-display text-4xl md:text-5xl text-navy-deep mt-3">Medical Blogs</h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-            Explore comprehensive articles on medical specializations, career guidance, and educational resources.
+            Explore comprehensive articles on medical specializations, career guidance, and
+            educational resources.
           </p>
           <div className="mt-6 text-sm text-muted-foreground">
-            <span className="font-semibold text-navy-deep">{blogsList.length}</span> articles available
+            <span className="font-semibold text-navy-deep">{blogsList.length}</span> articles
+            available
           </div>
         </div>
       </section>
@@ -67,7 +75,9 @@ function BlogsListing() {
                 className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-navy-deep/40 dark:hover:border-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition group"
               >
                 <div>
-                  <div className="text-lg font-semibold text-navy-deep dark:text-slate-100 group-hover:text-navy dark:group-hover:text-slate-50">{blog.title}</div>
+                  <div className="text-lg font-semibold text-navy-deep dark:text-slate-100 group-hover:text-navy dark:group-hover:text-slate-50">
+                    {blog.title}
+                  </div>
                 </div>
                 <ChevronRight className="w-5 h-5 text-slate-400 dark:text-slate-500 group-hover:text-navy-deep dark:group-hover:text-slate-300 transition" />
               </Link>

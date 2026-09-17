@@ -26,16 +26,8 @@
     "Reproductive",
     "Urology"
   ],
-  "programs": [
-    "Certificate",
-    "PG Diploma",
-    "Fellowship"
-  ],
-  "levels": [
-    "beginner",
-    "intermediate",
-    "expert"
-  ],
+  "programs": ["Certificate", "PG Diploma", "Fellowship"],
+  "levels": ["beginner", "intermediate", "expert"],
   "statistics": {
     "byProgram": {
       "Certificate": 12,

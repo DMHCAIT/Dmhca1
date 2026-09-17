@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { MessageSquare, Mail, FileText, TrendingUp, BookOpen, Users } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { MessageSquare, Mail, FileText, TrendingUp, BookOpen, Users } from "lucide-react";
 
-export const Route = createFileRoute('/admin/')({
+export const Route = createFileRoute("/admin/")({
   head: () => ({
     meta: [
-      { title: 'Dashboard — Admin' },
-      { name: 'description', content: 'Admin Dashboard Overview' },
+      { title: "Dashboard — Admin" },
+      { name: "description", content: "Admin Dashboard Overview" },
     ],
   }),
   component: AdminDashboard,
@@ -32,26 +32,26 @@ function AdminDashboard() {
     try {
       // Fetch comments count
       const { count: commentCount } = await supabaseClient
-        .from('event_comments')
-        .select('id', { count: 'exact', head: true });
+        .from("event_comments")
+        .select("id", { count: "exact", head: true });
 
       // Fetch contact messages
       const { count: messageCount, data: messages } = await supabaseClient
-        .from('contact_messages')
-        .select('id, status', { count: 'exact' });
+        .from("contact_messages")
+        .select("id, status", { count: "exact" });
 
       // Fetch applications
       const { count: applicationCount, data: applications } = await supabaseClient
-        .from('applications')
-        .select('id, status', { count: 'exact' });
+        .from("applications")
+        .select("id, status", { count: "exact" });
 
       // Fetch courses
       const { count: courseCount } = await supabaseClient
-        .from('courses')
-        .select('id', { count: 'exact', head: true });
+        .from("courses")
+        .select("id", { count: "exact", head: true });
 
-      const pendingMessages = messages?.filter((m) => m.status === 'new').length || 0;
-      const newApplications = applications?.filter((a) => a.status === 'new').length || 0;
+      const pendingMessages = messages?.filter((m) => m.status === "new").length || 0;
+      const newApplications = applications?.filter((a) => a.status === "new").length || 0;
 
       setStats({
         commentCount: commentCount || 0,
@@ -62,7 +62,7 @@ function AdminDashboard() {
         courseCount: courseCount || 0,
       });
     } catch (error) {
-      console.error('Error loading stats:', error);
+      console.error("Error loading stats:", error);
     } finally {
       setLoading(false);
     }
@@ -136,12 +136,7 @@ function AdminDashboard() {
           value={stats.commentCount}
           subtitle="Comments received"
         />
-        <StatCard
-          icon={TrendingUp}
-          title="Active"
-          value="3"
-          subtitle="Admin tools available"
-        />
+        <StatCard icon={TrendingUp} title="Active" value="3" subtitle="Admin tools available" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

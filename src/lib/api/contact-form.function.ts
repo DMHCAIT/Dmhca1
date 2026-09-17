@@ -125,7 +125,7 @@ export const submitContactForm = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     try {
       const supabase = getSupabaseClient();
-      
+
       // Save to database first
       const { error } = await supabase.from("contact_messages").insert([
         {
@@ -160,4 +160,3 @@ export const submitContactForm = createServerFn({ method: "POST" })
       throw err;
     }
   });
-

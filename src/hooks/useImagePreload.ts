@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Hook for optimized image preloading
@@ -19,7 +19,7 @@ export function useImagePreload(imageUrls: string[]) {
       const img = new Image();
       img.src = imageUrls[0];
       img.onload = () => {
-        setLoadedImages(prev => new Set([...prev, imageUrls[0]]));
+        setLoadedImages((prev) => new Set([...prev, imageUrls[0]]));
       };
     }
 
@@ -27,14 +27,14 @@ export function useImagePreload(imageUrls: string[]) {
     const timeoutId = setTimeout(() => {
       imageUrls.forEach((url, index) => {
         if (index === 0) return; // Skip first, already loaded
-        
+
         const img = new Image();
         img.src = url;
         img.onload = () => {
-          setLoadedImages(prev => new Set([...prev, url]));
+          setLoadedImages((prev) => new Set([...prev, url]));
         };
         img.onerror = () => {
-          setLoadedImages(prev => new Set([...prev, url])); // Mark as processed even if failed
+          setLoadedImages((prev) => new Set([...prev, url])); // Mark as processed even if failed
         };
       });
       setIsLoading(false);

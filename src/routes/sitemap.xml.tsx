@@ -11,7 +11,7 @@ export const Route = createFileRoute("/sitemap/xml")({
 
 function Sitemap() {
   const baseUrl = "https://dmhca.in";
-  
+
   const urls = [
     // Homepage
     {
@@ -59,7 +59,7 @@ ${urls
     <lastmod>${url.lastmod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
-  </url>`
+  </url>`,
   )
   .join("\n")}
 </urlset>`;

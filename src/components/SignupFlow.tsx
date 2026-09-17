@@ -1,47 +1,47 @@
-import React, { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Loader2, ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { sendOTP } from '@/routes/api/send-otp';
-import { verifyOTP } from '@/routes/api/verify-otp';
-import { saveSignup } from '@/routes/api/save-signup';
-import { saveLogin } from '@/routes/api/save-login';
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Loader2, ChevronLeft, ChevronRight, X } from "lucide-react";
+import { sendOTP } from "@/routes/api/send-otp";
+import { verifyOTP } from "@/routes/api/verify-otp";
+import { saveSignup } from "@/routes/api/save-signup";
+import { saveLogin } from "@/routes/api/save-login";
 
-const titleLogo = '/titlelogo.webp';
+const titleLogo = "/titlelogo.webp";
 
 export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
   const [step, setStep] = useState(1); // 1 | 2 | 3 | 4 (OTP verification)
   const [formData, setFormData] = useState({
-    full_name: '',
-    email: '',
+    full_name: "",
+    email: "",
     interests: [],
   });
-  const [otp, setOtp] = useState('');
+  const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Approved specialties to display in signup flow (order-preserved)
   const interests = [
-    'All specialties',
-    'Cardiology',
-    'Radiology',
-    'Medicine',
-    'Obs & Gynae',
-    'Emergency',
-    'Orthopedics',
-    'Dermatology',
-    'General Surgery',
-    'Oncology',
-    'Endocrinology',
-    'Neurology',
-    'Pediatrics',
-    'Reproductive',
-    'Pulmonary',
-    'Nutrition',
-    'Dental',
-    'Gastroenterology',
-    'Urology',
-    'Management',
+    "All specialties",
+    "Cardiology",
+    "Radiology",
+    "Medicine",
+    "Obs & Gynae",
+    "Emergency",
+    "Orthopedics",
+    "Dermatology",
+    "General Surgery",
+    "Oncology",
+    "Endocrinology",
+    "Neurology",
+    "Pediatrics",
+    "Reproductive",
+    "Pulmonary",
+    "Nutrition",
+    "Dental",
+    "Gastroenterology",
+    "Urology",
+    "Management",
   ];
   const [page, setPage] = useState(0);
   const pageSize = 8;
@@ -49,24 +49,24 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
 
   const handleNext = () => {
     if (step === 1 && !formData.full_name.trim()) {
-      setError('Please enter your full name');
+      setError("Please enter your full name");
       return;
     }
     if (step === 2 && !formData.email.trim()) {
-      setError('Please enter your email');
+      setError("Please enter your email");
       return;
     }
     if (step === 3 && formData.interests.length === 0) {
-      setError('Please select at least one interest');
+      setError("Please select at least one interest");
       return;
     }
-    setError('');
+    setError("");
     setStep(step + 1);
   };
 
   const handleBack = () => {
-    setError('');
-    setOtp('');
+    setError("");
+    setOtp("");
     setStep(step - 1);
   };
 
@@ -80,36 +80,43 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
   };
 
   const handleSubmit = async () => {
-    setError('');
+    setError("");
     setLoading(true);
     try {
       // Send OTP to email using server function with signup mode
-      await sendOTP({ data: { email: formData.email, fullName: formData.full_name, interests: formData.interests, mode: 'signup' } });
+      await sendOTP({
+        data: {
+          email: formData.email,
+          fullName: formData.full_name,
+          interests: formData.interests,
+          mode: "signup",
+        },
+      });
 
       // Move to OTP verification step instead of closing
       setStep(4);
-      setOtp('');
+      setOtp("");
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send OTP');
+      setError(err instanceof Error ? err.message : "Failed to send OTP");
     } finally {
       setLoading(false);
     }
   };
 
   const handleVerifyOTP = async () => {
-    setError('');
+    setError("");
     setLoading(true);
     try {
       const data = await verifyOTP({ data: { email: formData.email, otp } });
 
       // Store authentication in localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userId', data.userId);
-        localStorage.setItem('email', formData.email);
-        localStorage.setItem('full_name', formData.full_name);
-        localStorage.setItem('interests', JSON.stringify(formData.interests));
-        localStorage.setItem('isLoggedIn', 'true');
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("email", formData.email);
+        localStorage.setItem("full_name", formData.full_name);
+        localStorage.setItem("interests", JSON.stringify(formData.interests));
+        localStorage.setItem("isLoggedIn", "true");
       }
 
       // Save signup data to database
@@ -119,31 +126,31 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
             email: formData.email,
             fullName: formData.full_name,
             interests: formData.interests,
-          }
+          },
         });
       } catch (signupError) {
-        console.warn('Warning: Could not save signup to database:', signupError);
+        console.warn("Warning: Could not save signup to database:", signupError);
       }
 
       // Save login data to database
       try {
-        await saveLogin({ 
+        await saveLogin({
           data: {
             userId: data.userId,
             email: formData.email,
             fullName: formData.full_name,
             token: data.token,
-          }
+          },
         });
       } catch (loginError) {
-        console.warn('Warning: Could not save login to database:', loginError);
+        console.warn("Warning: Could not save login to database:", loginError);
       }
 
       // Call onSuccess AFTER verification completes
       onSuccess(data);
       onClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to verify OTP');
+      setError(err instanceof Error ? err.message : "Failed to verify OTP");
     } finally {
       setLoading(false);
     }
@@ -166,15 +173,26 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Header */}
         <div className="mb-4 md:mb-8 text-center">
           <img src={titleLogo} alt="DMHCA" className="h-8 md:h-12 w-auto mb-2 md:mb-4 mx-auto" />
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-100 mb-1 md:mb-2">Create Your Account</h2>
-          <p className="text-gray-600 text-xs md:text-sm">Join DMHCA to access premium medical education</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-slate-100 mb-1 md:mb-2">
+            Create Your Account
+          </h2>
+          <p className="text-gray-600 text-xs md:text-sm">
+            Join DMHCA to access premium medical education
+          </p>
         </div>
 
         {/* Progress bar */}
         <div className="mb-4 md:mb-8">
           <div className="flex items-center justify-between mb-2 md:mb-3">
-            <span className="text-xs md:text-sm font-semibold text-navy-deep">Step {step === 4 ? 4 : step} of 4</span>
-            <div className="text-xs md:text-sm text-gray-500">{step === 1 && 'Your Information'}{step === 2 && 'Email Verification'}{step === 3 && 'Your Interests'}{step === 4 && 'Verify OTP'}</div>
+            <span className="text-xs md:text-sm font-semibold text-navy-deep">
+              Step {step === 4 ? 4 : step} of 4
+            </span>
+            <div className="text-xs md:text-sm text-gray-500">
+              {step === 1 && "Your Information"}
+              {step === 2 && "Email Verification"}
+              {step === 3 && "Your Interests"}
+              {step === 4 && "Verify OTP"}
+            </div>
           </div>
           <div className="w-full h-1.5 md:h-2 bg-gray-200 rounded-full overflow-hidden">
             <div
@@ -188,8 +206,12 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 1 && (
           <>
             <div className="mb-4 md:mb-6">
-              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">What's your name?</h3>
-              <p className="text-xs md:text-sm text-gray-600">We'll use this to personalize your experience</p>
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">
+                What's your name?
+              </h3>
+              <p className="text-xs md:text-sm text-gray-600">
+                We'll use this to personalize your experience
+              </p>
             </div>
             <Input
               type="text"
@@ -197,7 +219,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
               value={formData.full_name}
               onChange={(e) => {
                 setFormData((prev) => ({ ...prev, full_name: e.target.value }));
-                setError('');
+                setError("");
               }}
               className="mb-3 md:mb-4"
               autoFocus
@@ -209,7 +231,9 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 2 && (
           <>
             <div className="mb-4 md:mb-6">
-              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">What's your email?</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">
+                What's your email?
+              </h3>
               <p className="text-xs md:text-sm text-gray-600">We'll send you a verification code</p>
             </div>
             <Input
@@ -218,7 +242,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
               value={formData.email}
               onChange={(e) => {
                 setFormData((prev) => ({ ...prev, email: e.target.value }));
-                setError('');
+                setError("");
               }}
               className="mb-3 md:mb-4"
               autoFocus
@@ -230,8 +254,12 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 3 && (
           <>
             <div className="mb-4 md:mb-6">
-              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">What are your interests?</h3>
-              <p className="text-xs md:text-sm text-gray-600">Select up to 3 specialties that interest you most</p>
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">
+                What are your interests?
+              </h3>
+              <p className="text-xs md:text-sm text-gray-600">
+                Select up to 3 specialties that interest you most
+              </p>
             </div>
             <div className="grid grid-cols-2 gap-1.5 md:gap-2 mb-3 md:mb-4">
               {interests.slice(page * pageSize, page * pageSize + pageSize).map((interest) => (
@@ -240,8 +268,8 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                   onClick={() => toggleInterest(interest)}
                   className={`px-2 md:px-3 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all ${
                     formData.interests.includes(interest)
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      ? "bg-blue-600 text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
                 >
                   {interest}
@@ -254,7 +282,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
                 onClick={() => setPage((p) => (p < maxPages - 1 ? p + 1 : 0))}
                 className="text-xs md:text-sm text-navy-deep dark:text-gold cursor-pointer select-none px-2 py-1 rounded-md"
               >
-                {page < maxPages - 1 ? 'Show more' : 'Show less'}
+                {page < maxPages - 1 ? "Show more" : "Show less"}
               </span>
             </div>
             <p className="text-xs text-gray-500 mb-3 md:mb-4">
@@ -267,9 +295,12 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {step === 4 && (
           <>
             <div className="mb-4 md:mb-6">
-              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">Verify Your Email</h3>
+              <h3 className="text-base md:text-lg font-semibold text-gray-900 dark:text-slate-100 mb-0.5 md:mb-1">
+                Verify Your Email
+              </h3>
               <p className="text-xs md:text-sm text-gray-600">
-                Enter the 6-digit code sent to <span className="font-semibold">{formData.email}</span>
+                Enter the 6-digit code sent to{" "}
+                <span className="font-semibold">{formData.email}</span>
               </p>
             </div>
             <Input
@@ -277,8 +308,8 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
               placeholder="000000"
               value={otp}
               onChange={(e) => {
-                setOtp(e.target.value.replace(/\D/g, '').slice(0, 6));
-                setError('');
+                setOtp(e.target.value.replace(/\D/g, "").slice(0, 6));
+                setError("");
               }}
               className="mb-3 md:mb-4 text-center text-xl md:text-2xl tracking-widest font-mono"
               maxLength={6}
@@ -288,7 +319,11 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
           </>
         )}
 
-        {error && <p className="text-red-600 text-xs md:text-sm mb-3 md:mb-4 p-2 md:p-3 bg-red-50 rounded-lg text-center">{error}</p>}
+        {error && (
+          <p className="text-red-600 text-xs md:text-sm mb-3 md:mb-4 p-2 md:p-3 bg-red-50 rounded-lg text-center">
+            {error}
+          </p>
+        )}
 
         {/* Buttons */}
         <div className="flex gap-2 md:gap-3 mt-4 md:mt-6">
@@ -335,7 +370,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Already have account link */}
         <div className="text-center border-t pt-3 md:pt-4 mt-3 md:mt-4">
           <p className="text-xs md:text-sm text-gray-600">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <button
               onClick={onSwitchToLogin}
               className="text-navy-deep font-semibold hover:underline"

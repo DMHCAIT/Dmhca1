@@ -1,6 +1,6 @@
-import { useEffect, useState, useCallback } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { courses as staticCourses } from '@/data/courses';
+import { useEffect, useState, useCallback } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { courses as staticCourses } from "@/data/courses";
 
 export interface CourseData {
   id: string;
@@ -38,8 +38,8 @@ const coursesCache = {
 
 // Attempt to hydrate in-memory cache from sessionStorage for instant loads across reloads
 try {
-  if (typeof sessionStorage !== 'undefined') {
-    const raw = sessionStorage.getItem('dmhca_courses_cache');
+  if (typeof sessionStorage !== "undefined") {
+    const raw = sessionStorage.getItem("dmhca_courses_cache");
     if (raw) {
       const parsed = JSON.parse(raw);
       if (parsed?.data && parsed?.timestamp) {
@@ -60,26 +60,26 @@ try {
 function mergeWithStaticData(supabaseCourse: any): CourseData {
   // Find matching static course by title or slug
   const staticCourse = staticCourses.find(
-    (c) => c.slug === supabaseCourse.slug || c.title === supabaseCourse.title
+    (c) => c.slug === supabaseCourse.slug || c.title === supabaseCourse.title,
   ) as any;
 
   return {
     id: supabaseCourse.id,
-    slug: supabaseCourse.slug || staticCourse?.slug || '',
-    title: supabaseCourse.title || staticCourse?.title || '',
-    category: supabaseCourse.category || staticCourse?.categories?.[0] || '',
+    slug: supabaseCourse.slug || staticCourse?.slug || "",
+    title: supabaseCourse.title || staticCourse?.title || "",
+    category: supabaseCourse.category || staticCourse?.categories?.[0] || "",
     categories: supabaseCourse.categories || staticCourse?.categories || [],
-    image: supabaseCourse.image_url || staticCourse?.image || '',
-    program: supabaseCourse.program || staticCourse?.program || 'Certificate',
+    image: supabaseCourse.image_url || staticCourse?.image || "",
+    program: supabaseCourse.program || staticCourse?.program || "Certificate",
     priceINR: supabaseCourse.price || staticCourse?.priceINR || 0,
     // Use static data for lessons and months as Supabase doesn't always have these
     lessons: staticCourse?.lessons || null,
     months: staticCourse?.months || 0,
-    level: supabaseCourse.level || staticCourse?.level || '',
+    level: supabaseCourse.level || staticCourse?.level || "",
     rating: supabaseCourse.rating || staticCourse?.rating || null,
     reviewCount: supabaseCourse.review_count || staticCourse?.reviewCount || 0,
-    overview: staticCourse?.overview || '',
-    heroDescription: staticCourse?.heroDescription || '',
+    overview: staticCourse?.overview || "",
+    heroDescription: staticCourse?.heroDescription || "",
     learn: staticCourse?.learn || [],
     requirements: staticCourse?.requirements || [],
     modules: staticCourse?.modules || [],
@@ -104,7 +104,8 @@ export function useCoursesData() {
     try {
       // Check cache validity
       const now = Date.now();
-      const isCacheValid = coursesCache.data && (now - coursesCache.timestamp) < coursesCache.CACHE_DURATION;
+      const isCacheValid =
+        coursesCache.data && now - coursesCache.timestamp < coursesCache.CACHE_DURATION;
 
       // If cache is valid and not forcing refresh, return immediately
       if (isCacheValid && !forceRefresh) {
@@ -122,9 +123,11 @@ export function useCoursesData() {
         (async () => {
           try {
             const { data: freshData, error: supabaseError } = await supabaseClient
-              .from('courses')
-              .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
-              .order('created_at', { ascending: false })
+              .from("courses")
+              .select(
+                "id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at",
+              )
+              .order("created_at", { ascending: false })
               .limit(200);
             if (!supabaseError && freshData && Array.isArray(freshData)) {
               const processedCourses = freshData.map(mergeWithStaticData);
@@ -133,7 +136,7 @@ export function useCoursesData() {
               setCourses(processedCourses);
             }
           } catch (e) {
-            console.error('Background refresh failed', e);
+            console.error("Background refresh failed", e);
           }
         })();
         return coursesCache.data;
@@ -142,9 +145,11 @@ export function useCoursesData() {
       setLoading(true);
       // Fetch only essential courses for faster initial render (reduced from 200)
       const { data, error: supabaseError } = await supabaseClient
-        .from('courses')
-        .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
-        .order('created_at', { ascending: false })
+        .from("courses")
+        .select(
+          "id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at",
+        )
+        .order("created_at", { ascending: false })
         .limit(30); // Reduced for fast initial load
 
       if (supabaseError) {
@@ -153,11 +158,13 @@ export function useCoursesData() {
 
       // Fetch remaining courses in background (non-blocking)
       supabaseClient
-        .from('courses')
-        .select('id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at')
-        .order('created_at', { ascending: false })
+        .from("courses")
+        .select(
+          "id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at",
+        )
+        .order("created_at", { ascending: false })
         .limit(200)
-        .then(result => {
+        .then((result) => {
           if (result.data) {
             coursesCache.data = result.data.map(mergeWithStaticData);
             coursesCache.timestamp = Date.now();
@@ -167,28 +174,28 @@ export function useCoursesData() {
 
       // If Supabase returns data, merge with static data; otherwise fall back to static data
       let processedCourses: CourseData[];
-      
+
       if (data && Array.isArray(data) && data.length > 0) {
         processedCourses = data.map(mergeWithStaticData);
       } else {
         // Fall back to static courses data
-        console.warn('No courses from Supabase, using static data');
+        console.warn("No courses from Supabase, using static data");
         processedCourses = (staticCourses as any[]).map((course) => ({
           id: course.slug,
           slug: course.slug,
           title: course.title,
-          category: course.categories?.[0] || '',
+          category: course.categories?.[0] || "",
           categories: course.categories || [],
-          image: course.image || '',
-          program: course.program || 'Certificate',
+          image: course.image || "",
+          program: course.program || "Certificate",
           priceINR: course.priceINR || 0,
           lessons: course.lessons || null,
           months: course.months || 0,
-          level: course.level || '',
+          level: course.level || "",
           rating: course.rating || null,
           reviewCount: course.reviewCount || 0,
-          overview: course.overview || '',
-          heroDescription: course.heroDescription || '',
+          overview: course.overview || "",
+          heroDescription: course.heroDescription || "",
           learn: course.learn || [],
           requirements: course.requirements || [],
           modules: course.modules || [],
@@ -204,8 +211,11 @@ export function useCoursesData() {
       coursesCache.data = processedCourses;
       coursesCache.timestamp = now;
       try {
-        if (typeof sessionStorage !== 'undefined') {
-          sessionStorage.setItem('dmhca_courses_cache', JSON.stringify({ data: processedCourses, timestamp: now }));
+        if (typeof sessionStorage !== "undefined") {
+          sessionStorage.setItem(
+            "dmhca_courses_cache",
+            JSON.stringify({ data: processedCourses, timestamp: now }),
+          );
         }
       } catch (e) {}
 
@@ -216,25 +226,25 @@ export function useCoursesData() {
       const errorMsg = `Failed to fetch courses: ${(err as any)?.message || err}`;
       console.error(errorMsg);
       setError(errorMsg);
-      
+
       // Fall back to static courses data if Supabase fails
       if (!coursesCache.data) {
         const staticCoursesData: CourseData[] = (staticCourses as any[]).map((course) => ({
           id: course.slug,
           slug: course.slug,
           title: course.title,
-          category: course.categories?.[0] || '',
+          category: course.categories?.[0] || "",
           categories: course.categories || [],
-          image: course.image || '',
-          program: course.program || 'Certificate',
+          image: course.image || "",
+          program: course.program || "Certificate",
           priceINR: course.priceINR || 0,
           lessons: course.lessons || null,
           months: course.months || 0,
-          level: course.level || '',
+          level: course.level || "",
           rating: course.rating || null,
           reviewCount: course.reviewCount || 0,
-          overview: course.overview || '',
-          heroDescription: course.heroDescription || '',
+          overview: course.overview || "",
+          heroDescription: course.heroDescription || "",
           learn: course.learn || [],
           requirements: course.requirements || [],
           modules: course.modules || [],
@@ -250,7 +260,7 @@ export function useCoursesData() {
       } else if (coursesCache.data) {
         setCourses(coursesCache.data);
       }
-      
+
       setLoading(false);
       return coursesCache.data || [];
     } finally {
@@ -266,21 +276,30 @@ export function useCoursesData() {
     return await fetchCourses(true);
   }, [fetchCourses]);
 
-  const getCourseBySlug = useCallback((slug: string): CourseData | undefined => {
-    return courses.find((c) => c.slug === slug);
-  }, [courses]);
+  const getCourseBySlug = useCallback(
+    (slug: string): CourseData | undefined => {
+      return courses.find((c) => c.slug === slug);
+    },
+    [courses],
+  );
 
-  const getCoursesByCategory = useCallback((category: string): CourseData[] => {
-    if (!category) return courses;
-    return courses.filter((c) => {
-      const courseCategories = Array.isArray(c.categories) ? c.categories : [c.category];
-      return courseCategories.some((cat) => cat?.toLowerCase() === category.toLowerCase());
-    });
-  }, [courses]);
+  const getCoursesByCategory = useCallback(
+    (category: string): CourseData[] => {
+      if (!category) return courses;
+      return courses.filter((c) => {
+        const courseCategories = Array.isArray(c.categories) ? c.categories : [c.category];
+        return courseCategories.some((cat) => cat?.toLowerCase() === category.toLowerCase());
+      });
+    },
+    [courses],
+  );
 
-  const getCoursesByProgram = useCallback((program: string): CourseData[] => {
-    return courses.filter((c) => c.program?.toLowerCase() === program.toLowerCase());
-  }, [courses]);
+  const getCoursesByProgram = useCallback(
+    (program: string): CourseData[] => {
+      return courses.filter((c) => c.program?.toLowerCase() === program.toLowerCase());
+    },
+    [courses],
+  );
 
   return {
     courses,

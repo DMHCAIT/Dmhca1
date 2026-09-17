@@ -1,14 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Trash2, Calendar, Mail } from 'lucide-react';
-import type { EventComment } from '@/lib/supabase';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { Trash2, Calendar, Mail } from "lucide-react";
+import type { EventComment } from "@/lib/supabase";
 
-export const Route = createFileRoute('/admin/comments')({
+export const Route = createFileRoute("/admin/comments")({
   head: () => ({
     meta: [
-      { title: 'Event Comments — Admin' },
-      { name: 'description', content: 'Manage event comments' },
+      { title: "Event Comments — Admin" },
+      { name: "description", content: "Manage event comments" },
     ],
   }),
   component: AdminComments,
@@ -26,33 +26,30 @@ function AdminComments() {
   const loadComments = async () => {
     try {
       const { data, error } = await supabaseClient
-        .from('event_comments')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("event_comments")
+        .select("*")
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       setComments(data || []);
     } catch (error) {
-      console.error('Error loading comments:', error);
+      console.error("Error loading comments:", error);
     } finally {
       setLoading(false);
     }
   };
 
   const deleteComment = async (id: string) => {
-    if (!confirm('Delete this comment?')) return;
+    if (!confirm("Delete this comment?")) return;
 
     setDeleting(id);
     try {
-      const { error } = await supabaseClient
-        .from('event_comments')
-        .delete()
-        .eq('id', id);
+      const { error } = await supabaseClient.from("event_comments").delete().eq("id", id);
 
       if (error) throw error;
       setComments(comments.filter((c) => c.id !== id));
     } catch (error) {
-      alert('Error deleting comment: ' + (error as any).message);
+      alert("Error deleting comment: " + (error as any).message);
     } finally {
       setDeleting(null);
     }
@@ -83,7 +80,10 @@ function AdminComments() {
       ) : (
         <div className="space-y-4">
           {comments.map((comment) => (
-            <div key={comment.id} className="bg-white rounded-lg shadow p-6 hover:shadow-md transition">
+            <div
+              key={comment.id}
+              className="bg-white rounded-lg shadow p-6 hover:shadow-md transition"
+            >
               <div className="flex justify-between items-start mb-3">
                 <div className="flex-1">
                   <h3 className="font-semibold text-navy-deep">{comment.name}</h3>

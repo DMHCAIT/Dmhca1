@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Trash2, CheckCircle2, Eye, Filter } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { Trash2, CheckCircle2, Eye, Filter } from "lucide-react";
 
-export const Route = createFileRoute('/admin/applications')({
+export const Route = createFileRoute("/admin/applications")({
   head: () => ({
     meta: [
-      { title: 'Applications — Admin' },
-      { name: 'description', content: 'Manage course applications' },
+      { title: "Applications — Admin" },
+      { name: "description", content: "Manage course applications" },
     ],
   }),
   component: AdminApplications,
@@ -23,7 +23,7 @@ interface Application {
   qualification: string;
   experience: string;
   message: string;
-  status: 'new' | 'reviewed' | 'contacted' | 'enrolled' | 'rejected';
+  status: "new" | "reviewed" | "contacted" | "enrolled" | "rejected";
   notes: string;
   created_at: string;
   updated_at: string;
@@ -32,10 +32,12 @@ interface Application {
 function AdminApplications() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'new' | 'reviewed' | 'contacted' | 'enrolled' | 'rejected'>('all');
+  const [filter, setFilter] = useState<
+    "all" | "new" | "reviewed" | "contacted" | "enrolled" | "rejected"
+  >("all");
   const [selectedApp, setSelectedApp] = useState<Application | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
-  const [notes, setNotes] = useState('');
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     loadApplications();
@@ -45,12 +47,12 @@ function AdminApplications() {
     try {
       setLoading(true);
       let query = supabaseClient
-        .from('applications')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("applications")
+        .select("*")
+        .order("created_at", { ascending: false });
 
-      if (filter !== 'all') {
-        query = query.eq('status', filter);
+      if (filter !== "all") {
+        query = query.eq("status", filter);
       }
 
       const { data, error } = await query;
@@ -58,7 +60,7 @@ function AdminApplications() {
       if (error) throw error;
       setApplications(data || []);
     } catch (error) {
-      console.error('Error loading applications:', error);
+      console.error("Error loading applications:", error);
     } finally {
       setLoading(false);
     }
@@ -69,25 +71,25 @@ function AdminApplications() {
     loadApplications();
   }, [filter]);
 
-  const updateStatus = async (id: string, newStatus: Application['status']) => {
+  const updateStatus = async (id: string, newStatus: Application["status"]) => {
     setUpdating(id);
     try {
       const { error } = await supabaseClient
-        .from('applications')
+        .from("applications")
         .update({ status: newStatus, updated_at: new Date().toISOString() })
-        .eq('id', id);
+        .eq("id", id);
 
       if (error) throw error;
 
       setApplications(
-        applications.map((app) => (app.id === id ? { ...app, status: newStatus } : app))
+        applications.map((app) => (app.id === id ? { ...app, status: newStatus } : app)),
       );
 
       if (selectedApp?.id === id) {
         setSelectedApp({ ...selectedApp, status: newStatus });
       }
     } catch (error) {
-      alert('Error updating status: ' + (error as any).message);
+      alert("Error updating status: " + (error as any).message);
     } finally {
       setUpdating(null);
     }
@@ -97,55 +99,53 @@ function AdminApplications() {
     setUpdating(id);
     try {
       const { error } = await supabaseClient
-        .from('applications')
+        .from("applications")
         .update({ notes, updated_at: new Date().toISOString() })
-        .eq('id', id);
+        .eq("id", id);
 
       if (error) throw error;
 
-      setApplications(
-        applications.map((app) => (app.id === id ? { ...app, notes } : app))
-      );
+      setApplications(applications.map((app) => (app.id === id ? { ...app, notes } : app)));
 
       if (selectedApp?.id === id) {
         setSelectedApp({ ...selectedApp, notes });
       }
-      alert('✅ Notes saved!');
+      alert("✅ Notes saved!");
     } catch (error) {
-      alert('Error saving notes: ' + (error as any).message);
+      alert("Error saving notes: " + (error as any).message);
     } finally {
       setUpdating(null);
     }
   };
 
   const deleteApplication = async (id: string) => {
-    if (!confirm('Delete this application?')) return;
+    if (!confirm("Delete this application?")) return;
 
     try {
-      const { error } = await supabaseClient.from('applications').delete().eq('id', id);
+      const { error } = await supabaseClient.from("applications").delete().eq("id", id);
 
       if (error) throw error;
       setApplications(applications.filter((app) => app.id !== id));
       if (selectedApp?.id === id) setSelectedApp(null);
     } catch (error) {
-      alert('Error deleting: ' + (error as any).message);
+      alert("Error deleting: " + (error as any).message);
     }
   };
 
-  const getStatusColor = (status: Application['status']) => {
+  const getStatusColor = (status: Application["status"]) => {
     switch (status) {
-      case 'new':
-        return 'bg-red-100 text-red-800';
-      case 'reviewed':
-        return 'bg-blue-100 text-blue-800';
-      case 'contacted':
-        return 'bg-yellow-100 text-yellow-800';
-      case 'enrolled':
-        return 'bg-green-100 text-green-800';
-      case 'rejected':
-        return 'bg-gray-100 text-gray-800';
+      case "new":
+        return "bg-red-100 text-red-800";
+      case "reviewed":
+        return "bg-blue-100 text-blue-800";
+      case "contacted":
+        return "bg-yellow-100 text-yellow-800";
+      case "enrolled":
+        return "bg-green-100 text-green-800";
+      case "rejected":
+        return "bg-gray-100 text-gray-800";
       default:
-        return 'bg-gray-100 text-gray-800';
+        return "bg-gray-100 text-gray-800";
     }
   };
 
@@ -169,14 +169,14 @@ function AdminApplications() {
 
       {/* Filter */}
       <div className="mb-6 flex gap-2 flex-wrap">
-        {['all', 'new', 'reviewed', 'contacted', 'enrolled', 'rejected'].map((status) => (
+        {["all", "new", "reviewed", "contacted", "enrolled", "rejected"].map((status) => (
           <button
             key={status}
             onClick={() => setFilter(status as any)}
             className={`px-4 py-2 rounded-lg font-medium transition ${
               filter === status
-                ? 'bg-gold text-navy-deep'
-                : 'bg-white text-gray-700 border border-gray-300 hover:border-gold'
+                ? "bg-gold text-navy-deep"
+                : "bg-white text-gray-700 border border-gray-300 hover:border-gold"
             }`}
           >
             {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -199,10 +199,12 @@ function AdminApplications() {
                     key={app.id}
                     onClick={() => {
                       setSelectedApp(app);
-                      setNotes(app.notes || '');
+                      setNotes(app.notes || "");
                     }}
                     className={`p-4 cursor-pointer hover:bg-gray-50 transition ${
-                      selectedApp?.id === app.id ? 'bg-gold bg-opacity-10 border-l-4 border-gold' : ''
+                      selectedApp?.id === app.id
+                        ? "bg-gold bg-opacity-10 border-l-4 border-gold"
+                        : ""
                     }`}
                   >
                     <div className="flex justify-between items-start mb-2">
@@ -211,7 +213,9 @@ function AdminApplications() {
                         <p className="text-sm text-gray-600">{app.email}</p>
                         <p className="text-sm text-gray-600">{app.phone}</p>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(app.status)}`}>
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-semibold ${getStatusColor(app.status)}`}
+                      >
                         {app.status}
                       </span>
                     </div>
@@ -224,7 +228,8 @@ function AdminApplications() {
                       </p>
                     )}
                     <p className="text-xs text-gray-500 mt-2">
-                      {new Date(app.created_at).toLocaleDateString()} • {new Date(app.created_at).toLocaleTimeString()}
+                      {new Date(app.created_at).toLocaleDateString()} •{" "}
+                      {new Date(app.created_at).toLocaleTimeString()}
                     </p>
                   </div>
                 ))}
@@ -243,7 +248,9 @@ function AdminApplications() {
               <label className="block text-sm font-semibold mb-2">Status</label>
               <select
                 value={selectedApp.status}
-                onChange={(e) => updateStatus(selectedApp.id, e.target.value as Application['status'])}
+                onChange={(e) =>
+                  updateStatus(selectedApp.id, e.target.value as Application["status"])
+                }
                 disabled={updating === selectedApp.id}
                 className="w-full border rounded-lg px-3 py-2 text-sm focus:border-gold focus:outline-none"
               >

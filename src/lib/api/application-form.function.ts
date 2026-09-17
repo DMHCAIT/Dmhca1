@@ -28,7 +28,9 @@ export const submitApplicationForm = createServerFn({ method: "POST" })
     try {
       // If Supabase is not configured, return a dev message
       if (!supabase) {
-        console.warn("Supabase not configured in development. Add SUPABASE_URL and SUPABASE_ANON_KEY to .env");
+        console.warn(
+          "Supabase not configured in development. Add SUPABASE_URL and SUPABASE_ANON_KEY to .env",
+        );
         return {
           success: true,
           message: "Application submitted successfully (dev mode - not saved to database)",
@@ -57,7 +59,8 @@ export const submitApplicationForm = createServerFn({ method: "POST" })
 
       return {
         success: true,
-        message: "Thank you for your application! Our admissions team will review your details and contact you soon.",
+        message:
+          "Thank you for your application! Our admissions team will review your details and contact you soon.",
       };
     } catch (err) {
       console.error("Error in submitApplicationForm:", err);

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { supabaseClient } from '@/lib/supabase';
+import { useEffect, useState } from "react";
+import { useNavigate } from "@tanstack/react-router";
+import { supabaseClient } from "@/lib/supabase";
 
 export function useAdminAuth() {
   const [isAuthed, setIsAuthed] = useState(false);
@@ -27,7 +27,9 @@ export function useAdminAuth() {
 
   const checkAuth = async () => {
     try {
-      const { data: { session } } = await supabaseClient.auth.getSession();
+      const {
+        data: { session },
+      } = await supabaseClient.auth.getSession();
       if (session?.user) {
         setIsAuthed(true);
       } else if (isDev) {
@@ -37,7 +39,7 @@ export function useAdminAuth() {
         setIsAuthed(false);
       }
     } catch (error) {
-      console.error('Auth check failed:', error);
+      console.error("Auth check failed:", error);
       // In development, allow access even if Supabase fails
       setIsAuthed(isDev);
     } finally {

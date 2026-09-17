@@ -18,7 +18,8 @@ function EventsIndexPage() {
             Events & Webinars
           </h1>
           <p className="text-lg text-blue-100 dark:text-slate-300 max-w-2xl">
-            Join us for insightful events, webinars, and workshops featuring expert speakers from across the medical field.
+            Join us for insightful events, webinars, and workshops featuring expert speakers from
+            across the medical field.
           </p>
         </div>
       </div>

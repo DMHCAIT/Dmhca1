@@ -7,8 +7,8 @@ import { PaymentModal } from "@/components/PaymentModal";
 export const Route = createFileRoute("/apply")({
   head: () => ({
     meta: [
-      { title: 'Apply for a Course — DMHCA' },
-      { name: 'description', content: 'Apply for medical courses at DMHCA' },
+      { title: "Apply for a Course — DMHCA" },
+      { name: "description", content: "Apply for medical courses at DMHCA" },
     ],
   }),
   component: ApplicationForm,
@@ -37,24 +37,24 @@ function ApplicationForm() {
 
   // Get course and program from query parameters
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const courseParam = params.get("course");
       const programParam = params.get("program");
       const fromParam = params.get("from");
       const amountParam = params.get("amount");
-      
+
       // Store amount from URL if coming from cart
       if (amountParam) {
         setCheckoutAmount(Number(amountParam));
       }
-      
+
       // Normalize program value: "Certificate" -> "Certificate Course"
       let normalizedProgram = programParam ? decodeURIComponent(programParam) : "";
       if (normalizedProgram === "Certificate") {
         normalizedProgram = "Certificate Course";
       }
-      
+
       setFormData((prev) => ({
         ...prev,
         course: courseParam ? decodeURIComponent(courseParam) : "",
@@ -63,15 +63,19 @@ function ApplicationForm() {
 
       // If coming from cart and no explicit course param, prefill from localStorage.cart
       try {
-        if (!courseParam && fromParam === 'cart') {
-          const raw = localStorage.getItem('cart');
+        if (!courseParam && fromParam === "cart") {
+          const raw = localStorage.getItem("cart");
           const parsed = raw ? JSON.parse(raw) : [];
           if (Array.isArray(parsed) && parsed.length > 0) {
             // use first item to prefill program/course
             const first = parsed[0];
-            const found = courses.find(c => c.slug === first.slug || c.title === first.title);
+            const found = courses.find((c) => c.slug === first.slug || c.title === first.title);
             if (found) {
-              setFormData(prev => ({ ...prev, course: found.title, program: found.program || prev.program }));
+              setFormData((prev) => ({
+                ...prev,
+                course: found.title,
+                program: found.program || prev.program,
+              }));
               setCoursePrice(found.priceINR || 0);
             }
           }
@@ -81,9 +85,7 @@ function ApplicationForm() {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -112,7 +114,7 @@ function ApplicationForm() {
       // Determine current user id (if logged in)
       let currentUserId: string | null = null;
       try {
-        const ls = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
+        const ls = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
         if (ls) currentUserId = ls;
         else {
           const { data: authData } = await supabaseClient.auth.getUser();
@@ -123,7 +125,7 @@ function ApplicationForm() {
       }
 
       // Save to database - direct insert
-      console.log('[Apply] Attempting to save application', {
+      console.log("[Apply] Attempting to save application", {
         full_name: formData.fullName.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim(),
@@ -140,7 +142,7 @@ function ApplicationForm() {
         qualification: formData.qualification || null,
         experience: formData.experience || null,
         message: formData.message || null,
-        status: 'new',
+        status: "new",
       };
 
       // Only add user_id if authenticated
@@ -149,15 +151,15 @@ function ApplicationForm() {
       }
 
       const { data: insertedData, error: dbError } = await supabaseClient
-        .from('applications')
+        .from("applications")
         .insert([insertPayload])
         .select();
 
-      console.log('[Apply] Insert result:', { insertedData, dbError });
+      console.log("[Apply] Insert result:", { insertedData, dbError });
 
       if (dbError) {
         const errorMsg = dbError?.message || JSON.stringify(dbError);
-        console.error('[Apply] Database error:', dbError);
+        console.error("[Apply] Database error:", dbError);
         setError(`Database Error: ${errorMsg}`);
         return;
       }
@@ -166,31 +168,29 @@ function ApplicationForm() {
 
       // Determine the amount to use for checkout
       let totalAmount: number;
-      
+
       if (checkoutAmount) {
         // Use the amount passed from cart
         totalAmount = checkoutAmount;
       } else {
         // Calculate amount if not coming from cart
-        const course = courses.find(c => c.title === formData.course);
+        const course = courses.find((c) => c.title === formData.course);
         const price = course ? course.priceINR : 0;
         const gst = Math.round(price * 0.18);
         const razorpayFee = Math.round(price * 0.04);
         totalAmount = price + gst + razorpayFee;
       }
-      
+
       setApplicationData({ id: appId, ...formData, courseTitle: formData.course });
       setProcessing(true);
       // Redirect to payment page after a brief delay
       setTimeout(() => {
-        if (typeof window !== 'undefined' && appId) {
+        if (typeof window !== "undefined" && appId) {
           window.location.href = `/payment?applicationId=${appId}&amount=${totalAmount}`;
         }
       }, 1500);
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to submit application"
-      );
+      setError(err instanceof Error ? err.message : "Failed to submit application");
       console.error("Error submitting form:", err);
     } finally {
       setLoading(false);
@@ -212,7 +212,9 @@ function ApplicationForm() {
                 </div>
                 <div className="pt-1">
                   <h1 className="text-3xl md:text-4xl font-bold text-white">Apply for a Course</h1>
-                  <p className="text-slate-400 text-sm md:text-base mt-1">Complete this form and our admissions team will contact you shortly.</p>
+                  <p className="text-slate-400 text-sm md:text-base mt-1">
+                    Complete this form and our admissions team will contact you shortly.
+                  </p>
                 </div>
               </div>
             </div>
@@ -229,11 +231,10 @@ function ApplicationForm() {
                 Application Submitted Successfully!
               </h2>
               <p className="text-emerald-800 mb-4">
-                Thank you for your application. Our admissions team will review your details and contact you soon at the provided contact information.
+                Thank you for your application. Our admissions team will review your details and
+                contact you soon at the provided contact information.
               </p>
-              <p className="text-sm text-emerald-700">
-                Redirecting in 5 seconds...
-              </p>
+              <p className="text-sm text-emerald-700">Redirecting in 5 seconds...</p>
             </div>
           ) : processing ? (
             <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-slate-100 text-center">
@@ -251,7 +252,11 @@ function ApplicationForm() {
               {/* Error Message */}
               {error && (
                 <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 flex items-start gap-3">
-                  <svg className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
                   </svg>
                   <p className="text-red-800 font-medium">{error}</p>
@@ -261,10 +266,12 @@ function ApplicationForm() {
               {/* Section 1: Personal Information */}
               <div>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">1</div>
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">
+                    1
+                  </div>
                   <h2 className="text-base font-bold text-slate-900">Personal Information</h2>
                 </div>
-                
+
                 {/* Full Name and Email - Side by side */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
@@ -338,10 +345,12 @@ function ApplicationForm() {
               {/* Section 2: Professional Background */}
               <div>
                 <div className="flex items-center gap-3 mb-4 pt-4">
-                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">2</div>
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">
+                    2
+                  </div>
                   <h2 className="text-base font-bold text-slate-900">Professional Background</h2>
                 </div>
-                
+
                 {/* Years of Experience */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">
@@ -361,10 +370,12 @@ function ApplicationForm() {
               {/* Section 3: Program Interest */}
               <div>
                 <div className="flex items-center gap-3 mb-4 pt-4">
-                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">3</div>
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">
+                    3
+                  </div>
                   <h2 className="text-base font-bold text-slate-900">Program Interest</h2>
                 </div>
-                
+
                 {/* Program Type and Course of Interest */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <div>
@@ -424,10 +435,12 @@ function ApplicationForm() {
               {/* Section 4: Additional Information */}
               <div>
                 <div className="flex items-center gap-3 mb-4 pt-4">
-                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">4</div>
+                  <div className="w-7 h-7 bg-slate-200 rounded flex items-center justify-center text-slate-600 font-semibold text-xs">
+                    4
+                  </div>
                   <h2 className="text-base font-bold text-slate-900">Tell Us More</h2>
                 </div>
-                
+
                 {/* Message */}
                 <div>
                   <label className="block text-sm font-semibold text-slate-900 mb-2">

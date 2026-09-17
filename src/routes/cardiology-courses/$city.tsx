@@ -1,10 +1,7 @@
 import React from "react";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import {
-  getCourseBySlug,
-  getCoursesBySpecialty,
-} from "@/data/cityWiseCourses";
+import { getCourseBySlug, getCoursesBySpecialty } from "@/data/cityWiseCourses";
 import { courses } from "@/data/courses";
 import { CourseCard } from "@/components/site/CourseCard";
 import { categories } from "@/data/courses";
@@ -30,7 +27,10 @@ function CardiologyCityPage() {
           <p className="text-slate-600 mb-8">
             Sorry, we couldn't find {specialty} courses in {city}.
           </p>
-          <Link to="/city-wise-medical-courses" className="text-navy-deep hover:text-navy font-bold">
+          <Link
+            to="/city-wise-medical-courses"
+            className="text-navy-deep hover:text-navy font-bold"
+          >
             ← Back to all courses
           </Link>
         </div>
@@ -38,16 +38,14 @@ function CardiologyCityPage() {
     );
   }
 
-  const relatedCourses = getCoursesBySpecialty(specialty).filter(
-    (c) => c.slug !== slug
-  );
+  const relatedCourses = getCoursesBySpecialty(specialty).filter((c) => c.slug !== slug);
 
   // Determine category slug for this specialty (best-effort)
   const categoryObj = categories.find(
     (cat) =>
       cat.name.toLowerCase() === specialty.toLowerCase() ||
       cat.slug === specialty.toLowerCase().replace(/\s+/g, "-") ||
-      cat.name.toLowerCase().includes(specialty.toLowerCase().split(" ")[0])
+      cat.name.toLowerCase().includes(specialty.toLowerCase().split(" ")[0]),
   );
   const categorySlug = categoryObj?.slug;
 
@@ -61,7 +59,10 @@ function CardiologyCityPage() {
       <div className="bg-gradient-to-r from-navy-deep to-navy py-12">
         <div className="container-city">
           <div className="w-full">
-            <Link to="/city-wise-medical-courses" className="text-white hover:text-gold mb-4 inline-block">
+            <Link
+              to="/city-wise-medical-courses"
+              className="text-white hover:text-gold mb-4 inline-block"
+            >
               ← Back to all courses
             </Link>
             <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
@@ -79,9 +80,9 @@ function CardiologyCityPage() {
           <div className="mb-12">
             <p className="text-lg text-slate-700 leading-relaxed mb-4">
               {city.charAt(0).toUpperCase() + city.slice(1)} is home to some of India's best medical
-              colleges, universities, and hospitals, making it an ideal location
-              for pursuing {specialty} specialization. Our comprehensive {specialty} programs provide world-class education and practical
-              training at DMHCA Institute.
+              colleges, universities, and hospitals, making it an ideal location for pursuing{" "}
+              {specialty} specialization. Our comprehensive {specialty} programs provide world-class
+              education and practical training at DMHCA Institute.
             </p>
 
             {/* Inline course cards shown immediately under intro (replaces Explore link) */}
@@ -121,7 +122,8 @@ function CardiologyCityPage() {
           <div className="mt-16 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to start your journey?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto">
-              Enroll in our {specialty} program in {city.charAt(0).toUpperCase() + city.slice(1)} today and advance your medical career
+              Enroll in our {specialty} program in {city.charAt(0).toUpperCase() + city.slice(1)}{" "}
+              today and advance your medical career
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -157,9 +159,7 @@ function CardiologyCityPage() {
                     {specialty} in {relCourse.city}
                   </h3>
                   <p className="text-sm text-slate-600 mb-3">{relCourse.description}</p>
-                  <div className="text-xs font-semibold text-navy-deep">
-                    Learn more →
-                  </div>
+                  <div className="text-xs font-semibold text-navy-deep">Learn more →</div>
                 </Link>
               ))}
             </div>

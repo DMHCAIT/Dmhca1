@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef, JSX } from 'react';
-import { X, Send, Sparkles, Loader, Search } from 'lucide-react';
-import { COUNTRIES } from '@/lib/countries';
-import { submitChatbotInquiry } from '@/routes/api/chatbot-inquiry';
+import { useState, useEffect, useRef, JSX } from "react";
+import { X, Send, Sparkles, Loader, Search } from "lucide-react";
+import { COUNTRIES } from "@/lib/countries";
+import { submitChatbotInquiry } from "@/routes/api/chatbot-inquiry";
 
-type Step = 'greeting' | 'name' | 'email' | 'countryCode' | 'mobile' | 'course' | 'submitted';
+type Step = "greeting" | "name" | "email" | "countryCode" | "mobile" | "course" | "submitted";
 
 interface FormData {
   name: string;
@@ -16,31 +16,37 @@ interface FormData {
 interface Message {
   id: string;
   text: string;
-  sender: 'user' | 'bot';
+  sender: "user" | "bot";
   timestamp: Date;
 }
 
 export function ChatbotWidget(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentStep, setCurrentStep] = useState<Step>('greeting');
+  const [currentStep, setCurrentStep] = useState<Step>("greeting");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
-  const [formData, setFormData] = useState<FormData>({ name: '', email: '', countryCode: '', mobile: '', course: '' });
+  const [input, setInput] = useState("");
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    countryCode: "",
+    mobile: "",
+    course: "",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [showCountryPicker, setShowCountryPicker] = useState(false);
-  const [countrySearch, setCountrySearch] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState<typeof COUNTRIES[0] | null>(null);
+  const [countrySearch, setCountrySearch] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState<(typeof COUNTRIES)[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Scroll to latest message
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   // Do not initialize greeting - let user type first
   // Messages array will remain empty until user sends first message
 
-  const addMessage = (text: string, sender: 'user' | 'bot'): void => {
+  const addMessage = (text: string, sender: "user" | "bot"): void => {
     const newMessage: Message = {
       id: `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
       text,
@@ -54,21 +60,21 @@ export function ChatbotWidget(): JSX.Element {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleCountrySelect = (country: typeof COUNTRIES[0]): void => {
+  const handleCountrySelect = (country: (typeof COUNTRIES)[0]): void => {
     setSelectedCountry(country);
     setFormData((prev) => ({ ...prev, countryCode: country.dial }));
     setShowCountryPicker(false);
-    addMessage(`Selected: ${country.flag} ${country.name} (${country.dial})`, 'user');
-    addMessage(`Great! Now enter your phone number.`, 'bot');
-    setCurrentStep('mobile');
+    addMessage(`Selected: ${country.flag} ${country.name} (${country.dial})`, "user");
+    addMessage(`Great! Now enter your phone number.`, "bot");
+    setCurrentStep("mobile");
   };
 
   const handleSendMessage = (): void => {
     if (!input.trim()) return;
 
-    addMessage(input, 'user');
+    addMessage(input, "user");
     const userInput = input.trim();
-    setInput('');
+    setInput("");
 
     setTimeout(() => {
       handleStepFlow(userInput);
@@ -77,47 +83,53 @@ export function ChatbotWidget(): JSX.Element {
 
   const handleStepFlow = (userInput: string): void => {
     switch (currentStep) {
-      case 'greeting': {
+      case "greeting": {
         // Greet back with user's greeting, then ask for name
         const userGreeting = userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase();
-        addMessage(`${userGreeting}! 👋 Welcome to DMHCA. Thanks for reaching out. I'm here to help you find the perfect medical course. What's your full name?`, 'bot');
-        setCurrentStep('name');
+        addMessage(
+          `${userGreeting}! 👋 Welcome to DMHCA. Thanks for reaching out. I'm here to help you find the perfect medical course. What's your full name?`,
+          "bot",
+        );
+        setCurrentStep("name");
         break;
       }
 
-      case 'name': {
+      case "name": {
         if (userInput.length < 2) {
-          addMessage('Please enter a valid name (at least 2 characters)', 'bot');
+          addMessage("Please enter a valid name (at least 2 characters)", "bot");
           return;
         }
         setFormData((prev) => ({ ...prev, name: userInput }));
-        setCurrentStep('email');
-        addMessage(`Nice to meet you, ${userInput}! 🎉 What's your email address?`, 'bot');
+        setCurrentStep("email");
+        addMessage(`Nice to meet you, ${userInput}! 🎉 What's your email address?`, "bot");
         break;
       }
 
-      case 'email': {
+      case "email": {
         if (!isValidEmail(userInput)) {
-          addMessage('Please enter a valid email address', 'bot');
+          addMessage("Please enter a valid email address", "bot");
           return;
         }
         setFormData((prev) => ({ ...prev, email: userInput }));
-        setCurrentStep('countryCode');
+        setCurrentStep("countryCode");
         setShowCountryPicker(true);
-        addMessage('Perfect! Let\'s get your country and phone number. Search for your country:', 'bot');
+        addMessage(
+          "Perfect! Let's get your country and phone number. Search for your country:",
+          "bot",
+        );
         break;
       }
 
-      case 'mobile': {
-        const digitsOnly = userInput.replace(/\D/g, '');
+      case "mobile": {
+        const digitsOnly = userInput.replace(/\D/g, "");
         setFormData((prev) => ({ ...prev, mobile: digitsOnly }));
-        setCurrentStep('course');
-        addMessage('Thanks! Which course are you interested in?', 'bot');
+        setCurrentStep("course");
+        addMessage("Thanks! Which course are you interested in?", "bot");
         break;
       }
 
-      case 'course': {
-        chooseCourse(userInput, false);  // Message already added by handleSendMessage
+      case "course": {
+        chooseCourse(userInput, false); // Message already added by handleSendMessage
         break;
       }
 
@@ -128,9 +140,9 @@ export function ChatbotWidget(): JSX.Element {
 
   const chooseCourse = (course: string, addUserMessage: boolean = true): void => {
     if (addUserMessage) {
-      addMessage(course, 'user');
+      addMessage(course, "user");
     }
-    
+
     const finalData = {
       name: formData.name,
       email: formData.email,
@@ -140,57 +152,65 @@ export function ChatbotWidget(): JSX.Element {
     };
 
     setFormData((prev) => ({ ...prev, course }));
-    setCurrentStep('submitted');
+    setCurrentStep("submitted");
     setIsLoading(true);
 
     submitChatbotInquiry({ data: finalData })
       .then((result: any) => {
-        console.log('[Chatbot] Submission result:', result);
+        console.log("[Chatbot] Submission result:", result);
         if (!result.success) {
-          console.error('[Chatbot] Submission failed:', result.message);
+          console.error("[Chatbot] Submission failed:", result.message);
         }
-        addMessage('Thank you for contacting us. Our support team will get back to you shortly.', 'bot');
+        addMessage(
+          "Thank you for contacting us. Our support team will get back to you shortly.",
+          "bot",
+        );
       })
       .catch((err) => {
-        console.error('[Chatbot] Submission error:', err);
-        addMessage('Thank you for contacting us. Our support team will get back to you shortly.', 'bot');
+        console.error("[Chatbot] Submission error:", err);
+        addMessage(
+          "Thank you for contacting us. Our support team will get back to you shortly.",
+          "bot",
+        );
       })
       .finally(() => setIsLoading(false));
   };
 
   const handleReset = (): void => {
-    setCurrentStep('greeting');
-    setFormData({ name: '', email: '', countryCode: '', mobile: '', course: '' });
-    setInput('');
+    setCurrentStep("greeting");
+    setFormData({ name: "", email: "", countryCode: "", mobile: "", course: "" });
+    setInput("");
     setShowCountryPicker(false);
     setSelectedCountry(null);
-    setCountrySearch('');
-    
+    setCountrySearch("");
+
     // Clear messages - start fresh, user types first
     setMessages([]);
   };
 
   const getInputPlaceholder = (): string => {
     switch (currentStep) {
-      case 'greeting':
-        return 'Type hello or hi to get started...';
-      case 'name':
-        return 'Enter your full name...';
-      case 'email':
-        return 'Enter your email address...';
-      case 'mobile':
-        return 'Enter your phone number...';
-      case 'course':
-        return 'Select or type a course...';
+      case "greeting":
+        return "Type hello or hi to get started...";
+      case "name":
+        return "Enter your full name...";
+      case "email":
+        return "Enter your email address...";
+      case "mobile":
+        return "Enter your phone number...";
+      case "course":
+        return "Select or type a course...";
       default:
-        return 'Type your answer...';
+        return "Type your answer...";
     }
   };
 
   return (
     <div
       className={`fixed right-4 sm:right-6 z-50 transition-all duration-300 ease-out ${
-        isOpen ? 'bottom-4 sm:bottom-6 w-[calc(100vw-2rem)] sm:w-96 h-[70vh] sm:h-[32rem] max-w-96' : 'bottom-8 sm:bottom-10 w-14 sm:w-16 h-14 sm:h-16'
+        isOpen
+          ? "bottom-4 sm:bottom-6 w-[calc(100vw-2rem)] sm:w-96 h-[70vh] sm:h-[32rem] max-w-96"
+          : "bottom-8 sm:bottom-10 w-14 sm:w-16 h-14 sm:h-16"
       }`}
     >
       {isOpen ? (
@@ -216,15 +236,18 @@ export function ChatbotWidget(): JSX.Element {
           {/* Messages Area */}
           <div
             className="flex-1 overflow-y-auto p-2 sm:p-4 bg-gradient-to-b from-gray-50 to-white dark:from-slate-900 dark:to-slate-800 space-y-2 sm:space-y-3 scrollbar-hide [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar]:hidden"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {messages.map((msg) => (
-              <div key={msg.id} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'} animate-in fade-in slide-in-from-bottom-2`}>
+              <div
+                key={msg.id}
+                className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} animate-in fade-in slide-in-from-bottom-2`}
+              >
                 <div
                   className={`max-w-[70%] sm:max-w-xs px-3 sm:px-4 py-2 sm:py-3 rounded-2xl text-xs sm:text-sm whitespace-pre-wrap leading-relaxed font-medium transition-all ${
-                    msg.sender === 'user'
-                      ? 'bg-navy-deep dark:bg-gradient-to-br dark:from-cyan-500 dark:to-teal-500 text-white rounded-br-none shadow-md'
-                      : 'bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-gray-100 rounded-bl-none border border-gray-200 dark:border-slate-600'
+                    msg.sender === "user"
+                      ? "bg-navy-deep dark:bg-gradient-to-br dark:from-cyan-500 dark:to-teal-500 text-white rounded-br-none shadow-md"
+                      : "bg-gray-100 dark:bg-slate-700 text-gray-900 dark:text-gray-100 rounded-bl-none border border-gray-200 dark:border-slate-600"
                   }`}
                 >
                   {msg.text}
@@ -236,7 +259,9 @@ export function ChatbotWidget(): JSX.Element {
               <div className="flex justify-start animate-in fade-in">
                 <div className="bg-gray-100 dark:bg-slate-700 rounded-2xl rounded-bl-none px-3 sm:px-4 py-2 sm:py-3 flex items-center gap-2 border border-gray-200 dark:border-slate-600">
                   <Loader className="w-3 sm:w-4 h-3 sm:h-4 animate-spin text-navy-deep dark:text-white" />
-                  <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">Processing...</span>
+                  <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                    Processing...
+                  </span>
                 </div>
               </div>
             )}
@@ -245,12 +270,12 @@ export function ChatbotWidget(): JSX.Element {
           </div>
 
           {/* Input Area */}
-          {currentStep !== 'submitted' ? (
+          {currentStep !== "submitted" ? (
             <>
-              {currentStep === 'countryCode' && showCountryPicker ? (
+              {currentStep === "countryCode" && showCountryPicker ? (
                 <div
                   className="border-t border-gray-200 dark:border-slate-700 p-2 sm:p-3 bg-white dark:bg-slate-900 max-h-60 sm:max-h-80 overflow-y-auto scrollbar-hide [&::-webkit-scrollbar]:w-0 [&::-webkit-scrollbar]:hidden"
-                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                  style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
                   <div className="relative">
                     {/* Search Box */}
@@ -272,7 +297,7 @@ export function ChatbotWidget(): JSX.Element {
                         (c) =>
                           c.name.toLowerCase().includes(countrySearch) ||
                           c.dial.includes(countrySearch) ||
-                          c.code.toLowerCase().includes(countrySearch)
+                          c.code.toLowerCase().includes(countrySearch),
                       ).map((country) => (
                         <button
                           key={country.code}
@@ -283,7 +308,9 @@ export function ChatbotWidget(): JSX.Element {
                           <span className="flex-1 text-gray-900 dark:text-white font-medium group-hover:text-cyan-700 dark:group-hover:text-cyan-300 truncate">
                             {country.name}
                           </span>
-                          <span className="text-xs font-bold text-navy-deep dark:text-white flex-shrink-0">{country.dial}</span>
+                          <span className="text-xs font-bold text-navy-deep dark:text-white flex-shrink-0">
+                            {country.dial}
+                          </span>
                         </button>
                       ))}
                     </div>
@@ -292,35 +319,37 @@ export function ChatbotWidget(): JSX.Element {
               ) : (
                 <div
                   className={`border-t border-gray-200 dark:border-slate-700 p-2 sm:p-3 flex gap-2 ${
-                    currentStep === 'mobile'
-                      ? 'bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-slate-800 dark:to-slate-800'
-                      : 'bg-white dark:bg-slate-900'
+                    currentStep === "mobile"
+                      ? "bg-gradient-to-r from-cyan-50 to-teal-50 dark:from-slate-800 dark:to-slate-800"
+                      : "bg-white dark:bg-slate-900"
                   }`}
                 >
-                  {currentStep === 'mobile' && selectedCountry && (
+                  {currentStep === "mobile" && selectedCountry && (
                     <div className="flex items-center px-2 sm:px-3 py-1.5 sm:py-2 bg-white dark:bg-slate-700 rounded-lg border-2 border-cyan-400 dark:border-cyan-500 font-semibold whitespace-nowrap flex-shrink-0">
                       <span className="text-base sm:text-lg">{selectedCountry.flag}</span>
-                      <span className="ml-1 sm:ml-2 text-xs sm:text-sm text-cyan-600 dark:text-white">{selectedCountry.dial}</span>
+                      <span className="ml-1 sm:ml-2 text-xs sm:text-sm text-cyan-600 dark:text-white">
+                        {selectedCountry.dial}
+                      </span>
                     </div>
                   )}
                   <input
-                    type={currentStep === 'mobile' ? 'tel' : 'text'}
+                    type={currentStep === "mobile" ? "tel" : "text"}
                     value={input}
                     onChange={(e) => {
-                      if (currentStep === 'mobile') {
-                        setInput(e.target.value.replace(/\D/g, ''));
+                      if (currentStep === "mobile") {
+                        setInput(e.target.value.replace(/\D/g, ""));
                       } else {
                         setInput(e.target.value);
                       }
                     }}
-                    onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage()}
+                    onKeyPress={(e) => e.key === "Enter" && !isLoading && handleSendMessage()}
                     placeholder={getInputPlaceholder()}
                     disabled={isLoading}
-                    maxLength={currentStep === 'mobile' ? (selectedCountry?.length || 10) : 200}
+                    maxLength={currentStep === "mobile" ? selectedCountry?.length || 10 : 200}
                     className={`flex-1 px-2 sm:px-4 py-1.5 sm:py-2.5 border-2 rounded-lg sm:rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 transition disabled:opacity-50 font-medium ${
-                      currentStep === 'mobile'
-                        ? 'border-cyan-400 dark:border-cyan-500 bg-white dark:bg-slate-800 dark:text-white focus:ring-cyan-400 dark:focus:ring-cyan-500'
-                        : 'border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-white focus:ring-navy-deep dark:focus:ring-cyan-400 focus:border-navy-deep dark:focus:border-cyan-400'
+                      currentStep === "mobile"
+                        ? "border-cyan-400 dark:border-cyan-500 bg-white dark:bg-slate-800 dark:text-white focus:ring-cyan-400 dark:focus:ring-cyan-500"
+                        : "border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 dark:text-white focus:ring-navy-deep dark:focus:ring-cyan-400 focus:border-navy-deep dark:focus:border-cyan-400"
                     }`}
                   />
                   <button
@@ -335,29 +364,29 @@ export function ChatbotWidget(): JSX.Element {
               )}
 
               {/* Course selection quick buttons */}
-              {currentStep === 'course' && !showCountryPicker && !isLoading && (
+              {currentStep === "course" && !showCountryPicker && !isLoading && (
                 <div className="px-2 sm:px-3 py-2 border-t border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 space-y-1 sm:space-y-2 max-h-40 overflow-y-auto">
                   <div className="flex gap-1 sm:gap-2 flex-wrap">
                     <button
-                      onClick={() => chooseCourse('Fellowship in Pain Management')}
+                      onClick={() => chooseCourse("Fellowship in Pain Management")}
                       className="px-2 sm:px-3 py-1 bg-cyan-600 text-white rounded-full text-xs sm:text-sm hover:bg-cyan-700 active:scale-95 transition"
                     >
                       Pain Management
                     </button>
                     <button
-                      onClick={() => chooseCourse('Fellowship in Dermatology')}
+                      onClick={() => chooseCourse("Fellowship in Dermatology")}
                       className="px-2 sm:px-3 py-1 bg-cyan-600 text-white rounded-full text-xs sm:text-sm hover:bg-cyan-700 active:scale-95 transition"
                     >
                       Dermatology
                     </button>
                     <button
-                      onClick={() => chooseCourse('Fellowship in Emergency Medicine')}
+                      onClick={() => chooseCourse("Fellowship in Emergency Medicine")}
                       className="px-2 sm:px-3 py-1 bg-cyan-600 text-white rounded-full text-xs sm:text-sm hover:bg-cyan-700 active:scale-95 transition"
                     >
                       Emergency
                     </button>
                     <button
-                      onClick={() => chooseCourse('Fellowship in Clinical Cardiology')}
+                      onClick={() => chooseCourse("Fellowship in Clinical Cardiology")}
                       className="px-2 sm:px-3 py-1 bg-cyan-600 text-white rounded-full text-xs sm:text-sm hover:bg-cyan-700 active:scale-95 transition"
                     >
                       Cardiology

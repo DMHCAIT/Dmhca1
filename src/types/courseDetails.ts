@@ -73,28 +73,28 @@ export interface CourseDetails {
   title: string;
   shortDescription?: string;
   longDescription?: string;
-  
+
   // Overview Section
   overview: CourseOverview;
-  
+
   // What You Will Learn Section
   learningOutcomes: LearningOutcome[];
-  
+
   // Requirements
   prerequisites?: CourseRequirement[];
-  
+
   // Curriculum Section
   curriculum: CurriculumModule[];
-  
+
   // Instructors Section
   instructors: Instructor[];
-  
+
   // FAQs Section
   faqs: FAQItem[];
-  
+
   // Reviews Section
   reviews?: CourseReview[];
-  
+
   // Meta Information
   meta?: {
     duration?: string;

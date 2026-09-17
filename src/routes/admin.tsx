@@ -1,5 +1,5 @@
-import { createFileRoute, Outlet, Link, useNavigate } from '@tanstack/react-router';
-import { useAdminAuth, logout } from '@/hooks/useAdminAuth';
+import { createFileRoute, Outlet, Link, useNavigate } from "@tanstack/react-router";
+import { useAdminAuth, logout } from "@/hooks/useAdminAuth";
 import {
   LayoutDashboard,
   LogOut,
@@ -13,14 +13,14 @@ import {
   Menu,
   X,
   Award,
-} from 'lucide-react';
-import { useState } from 'react';
+} from "lucide-react";
+import { useState } from "react";
 
-export const Route = createFileRoute('/admin')({
+export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: 'Admin Panel — DMHCA' },
-      { name: 'description', content: 'DMHCA Admin Dashboard' },
+      { title: "Admin Panel — DMHCA" },
+      { name: "description", content: "DMHCA Admin Dashboard" },
     ],
   }),
   component: AdminLayout,
@@ -44,7 +44,7 @@ function AdminLayout() {
 
   if (!isAuthed) {
     // Redirect to admin login
-    navigate({ to: '/admin-login' });
+    navigate({ to: "/admin-login" });
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
@@ -56,19 +56,24 @@ function AdminLayout() {
 
   const handleLogout = async () => {
     await logout();
-    navigate({ to: '/admin' });
+    navigate({ to: "/admin" });
   };
 
   const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '/admin', key: 'dashboard' },
-    { icon: BookOpen, label: 'Courses', href: '/admin/courses', key: 'courses' },
-    { icon: Award, label: 'Certificates', href: '/admin/certificates', key: 'certificates' },
-    { icon: Users, label: 'Applications', href: '/admin/applications', key: 'applications' },
-    { icon: MessageCircle, label: 'Chatbot Inquiries', href: '/admin/chatbot-inquiries', key: 'chatbot-inquiries' },
-    { icon: MessageSquare, label: 'Event Comments', href: '/admin/comments', key: 'comments' },
-    { icon: Mail, label: 'Contact Messages', href: '/admin/messages', key: 'messages' },
-    { icon: Image, label: 'Media Manager', href: '/admin/media', key: 'media' },
-    { icon: Settings, label: 'Settings', href: '/admin/settings', key: 'settings' },
+    { icon: LayoutDashboard, label: "Dashboard", href: "/admin", key: "dashboard" },
+    { icon: BookOpen, label: "Courses", href: "/admin/courses", key: "courses" },
+    { icon: Award, label: "Certificates", href: "/admin/certificates", key: "certificates" },
+    { icon: Users, label: "Applications", href: "/admin/applications", key: "applications" },
+    {
+      icon: MessageCircle,
+      label: "Chatbot Inquiries",
+      href: "/admin/chatbot-inquiries",
+      key: "chatbot-inquiries",
+    },
+    { icon: MessageSquare, label: "Event Comments", href: "/admin/comments", key: "comments" },
+    { icon: Mail, label: "Contact Messages", href: "/admin/messages", key: "messages" },
+    { icon: Image, label: "Media Manager", href: "/admin/media", key: "media" },
+    { icon: Settings, label: "Settings", href: "/admin/settings", key: "settings" },
   ];
 
   return (
@@ -76,7 +81,7 @@ function AdminLayout() {
       {/* Sidebar */}
       <div
         className={`${
-          sidebarOpen ? 'w-64' : 'w-20'
+          sidebarOpen ? "w-64" : "w-20"
         } bg-navy-deep text-white transition-all duration-300 flex flex-col shadow-lg`}
       >
         {/* Header */}
@@ -102,7 +107,7 @@ function AdminLayout() {
               key={item.key}
               to={item.href}
               className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-blue-900 hover:text-gold transition text-sm font-medium"
-              activeProps={{ className: 'bg-gold text-navy-deep' }}
+              activeProps={{ className: "bg-gold text-navy-deep" }}
             >
               <item.icon size={20} className="flex-shrink-0" />
               {sidebarOpen && <span className="truncate">{item.label}</span>}

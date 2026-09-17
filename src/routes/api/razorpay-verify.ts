@@ -1,19 +1,19 @@
-import { createServerFn } from '@tanstack/react-start';
-import { z } from 'zod';
-import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
-import nodemailer from 'nodemailer';
+import { createServerFn } from "@tanstack/react-start";
+import { z } from "zod";
+import crypto from "crypto";
+import { createClient } from "@supabase/supabase-js";
+import nodemailer from "nodemailer";
 
 const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  process.env.VITE_SUPABASE_URL || "",
+  process.env.SUPABASE_SERVICE_ROLE_KEY || "",
 );
 
 // Email transporter
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT || 587),
-  secure: process.env.SMTP_SECURE === 'true',
+  secure: process.env.SMTP_SECURE === "true",
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -237,7 +237,9 @@ function generateEnrollmentEmailTemplate(studentName: string, courseName: string
                 </div>
               </div>
 
-              ${amount ? `
+              ${
+                amount
+                  ? `
               <div class="payment-section">
                 <h3>💳 Payment Details</h3>
                 <div class="payment-row">
@@ -253,7 +255,9 @@ function generateEnrollmentEmailTemplate(studentName: string, courseName: string
                   <span class="payment-value">✓ Completed</span>
                 </div>
               </div>
-              ` : ''}
+              `
+                  : ""
+              }
 
               <div class="next-steps">
                 <h4>📋 Next Steps:</h4>
@@ -305,28 +309,28 @@ function generateEnrollmentEmailTemplate(studentName: string, courseName: string
 // Helper function to escape HTML
 function escapeHtml(text: string): string {
   const map: { [key: string]: string } = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#039;',
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
   };
   return text.replace(/[&<>"']/g, (m) => map[m]);
 }
 
 // Zod schema for verification input
 const VerifyPaymentSchema = z.object({
-  razorpay_order_id: z.string().min(1, 'Order ID is required'),
-  razorpay_payment_id: z.string().min(1, 'Payment ID is required'),
-  razorpay_signature: z.string().min(1, 'Signature is required'),
+  razorpay_order_id: z.string().min(1, "Order ID is required"),
+  razorpay_payment_id: z.string().min(1, "Payment ID is required"),
+  razorpay_signature: z.string().min(1, "Signature is required"),
   enrollmentId: z.union([z.string(), z.number(), z.null()]).optional(),
   studentEmail: z.string().email(),
-  courseName: z.string().min(1, 'Course name is required'),
+  courseName: z.string().min(1, "Course name is required"),
   studentName: z.string().optional(),
   amount: z.number().optional(),
 });
 
-export const verifyRazorpayPayment = createServerFn({ method: 'POST' })
+export const verifyRazorpayPayment = createServerFn({ method: "POST" })
   .validator(VerifyPaymentSchema)
   .handler(async ({ data }) => {
     const {
@@ -340,148 +344,155 @@ export const verifyRazorpayPayment = createServerFn({ method: 'POST' })
       amount,
     } = data;
 
-    console.log('[Verify Payment] Verifying:', { razorpay_order_id, razorpay_payment_id, enrollmentId });
+    console.log("[Verify Payment] Verifying:", {
+      razorpay_order_id,
+      razorpay_payment_id,
+      enrollmentId,
+    });
 
     try {
       if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-        throw new Error('Missing payment details');
+        throw new Error("Missing payment details");
       }
 
       // Verify signature
-      const keySecret = process.env.RAZORPAY_KEY_SECRET || '';
-      const hmac = crypto.createHmac('sha256', keySecret);
-      hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
-      const generated = hmac.digest('hex');
+      const keySecret = process.env.RAZORPAY_KEY_SECRET || "";
+      const hmac = crypto.createHmac("sha256", keySecret);
+      hmac.update(razorpay_order_id + "|" + razorpay_payment_id);
+      const generated = hmac.digest("hex");
 
       if (generated !== razorpay_signature) {
-        throw new Error('Signature verification failed');
+        throw new Error("Signature verification failed");
       }
 
-      console.log('[Verify Payment] Signature verified');
+      console.log("[Verify Payment] Signature verified");
 
       // Update payment record
       const { error: updateError } = await supabase
-        .from('payments')
+        .from("payments")
         .update({
           razorpay_payment_id,
           razorpay_signature,
-          status: 'completed',
+          status: "completed",
           updated_at: new Date().toISOString(),
         })
-        .eq('razorpay_order_id', razorpay_order_id);
+        .eq("razorpay_order_id", razorpay_order_id);
 
       if (updateError) throw new Error(`Update error: ${updateError.message}`);
 
-      console.log('[Verify Payment] Payment record updated');
+      console.log("[Verify Payment] Payment record updated");
 
       // Fetch payment record to get enrollment details
       const { data: payment, error: fetchError } = await supabase
-        .from('payments')
-        .select('id, enrollment_id, student_name, student_email, course_name')
-        .eq('razorpay_order_id', razorpay_order_id)
+        .from("payments")
+        .select("id, enrollment_id, student_name, student_email, course_name")
+        .eq("razorpay_order_id", razorpay_order_id)
         .single();
 
       if (fetchError) {
-        console.error('[Verify Payment] Failed to fetch payment record:', fetchError);
+        console.error("[Verify Payment] Failed to fetch payment record:", fetchError);
         throw new Error(`Failed to fetch payment: ${fetchError.message}`);
       }
 
       if (!payment) {
-        throw new Error('Payment record not found');
+        throw new Error("Payment record not found");
       }
 
-      console.log('[Verify Payment] Payment fetched:', payment);
+      console.log("[Verify Payment] Payment fetched:", payment);
 
       // Mark enrollment as active or create new one
       if (payment.enrollment_id) {
         // Enrollment already exists, activate it
         const { error: activateError } = await supabase
-          .from('enrollments')
-          .update({ status: 'active', updated_at: new Date().toISOString() })
-          .eq('id', payment.enrollment_id);
+          .from("enrollments")
+          .update({ status: "active", updated_at: new Date().toISOString() })
+          .eq("id", payment.enrollment_id);
 
         if (activateError) {
-          console.error('[Verify Payment] Failed to activate enrollment:', activateError);
+          console.error("[Verify Payment] Failed to activate enrollment:", activateError);
           throw new Error(`Failed to activate enrollment: ${activateError.message}`);
         }
 
-        console.log('[Verify Payment] Enrollment activated:', payment.enrollment_id);
+        console.log("[Verify Payment] Enrollment activated:", payment.enrollment_id);
       } else {
         // No enrollment yet — create one using stored student info
         const { data: newEnroll, error: enrollErr } = await supabase
-          .from('enrollments')
+          .from("enrollments")
           .insert({
             user_id: null,
             course_id: null,
             course_name: payment.course_name || courseName,
-            student_name: payment.student_name || studentName || 'Student',
+            student_name: payment.student_name || studentName || "Student",
             student_email: payment.student_email || studentEmail,
-            payment_method: 'razorpay',
-            status: 'active',
+            payment_method: "razorpay",
+            status: "active",
           })
           .select()
           .single();
 
         if (enrollErr) {
-          console.error('[Verify Payment] Failed to create enrollment:', enrollErr);
+          console.error("[Verify Payment] Failed to create enrollment:", enrollErr);
           throw new Error(`Failed to create enrollment: ${enrollErr.message}`);
         }
 
         // Associate payment with new enrollment
         const { error: linkError } = await supabase
-          .from('payments')
+          .from("payments")
           .update({ enrollment_id: newEnroll.id })
-          .eq('id', payment.id);
+          .eq("id", payment.id);
 
         if (linkError) {
-          console.error('[Verify Payment] Failed to link enrollment:', linkError);
+          console.error("[Verify Payment] Failed to link enrollment:", linkError);
           throw new Error(`Failed to link enrollment: ${linkError.message}`);
         }
 
-        console.log('[Verify Payment] Enrollment created and activated:', newEnroll.id);
+        console.log("[Verify Payment] Enrollment created and activated:", newEnroll.id);
       }
 
       // Send email
       try {
         const finalEmail = payment.student_email || studentEmail;
-        if (!finalEmail || finalEmail === 'unknown@example.com') {
-          console.warn('[Verify Payment] No valid email to send confirmation');
+        if (!finalEmail || finalEmail === "unknown@example.com") {
+          console.warn("[Verify Payment] No valid email to send confirmation");
         } else {
           const emailContent = generateEnrollmentEmailTemplate(
-            payment.student_name || studentName || 'Student',
+            payment.student_name || studentName || "Student",
             payment.course_name || courseName,
-            String(amount || '')
+            String(amount || ""),
           );
 
           try {
             await transporter.sendMail({
               from: {
-                name: 'DMHCA',
-                address: process.env.SMTP_FROM || process.env.SMTP_USER || 'noreply@dmhca.in',
+                name: "DMHCA",
+                address: process.env.SMTP_FROM || process.env.SMTP_USER || "noreply@dmhca.in",
               },
               to: finalEmail,
               subject: `🎉 Enrollment Confirmed - ${payment.course_name || courseName} | DMHCA`,
               html: emailContent,
-              replyTo: 'support@dmhca.in',
+              replyTo: "support@dmhca.in",
             });
 
-            console.log('[Verify Payment] ✅ Email sent successfully to:', finalEmail);
+            console.log("[Verify Payment] ✅ Email sent successfully to:", finalEmail);
           } catch (smtpErr) {
-            console.error('[Verify Payment] SMTP Error:', smtpErr instanceof Error ? smtpErr.message : smtpErr);
+            console.error(
+              "[Verify Payment] SMTP Error:",
+              smtpErr instanceof Error ? smtpErr.message : smtpErr,
+            );
             // Don't fail verification if email fails - still mark as successful
           }
         }
       } catch (emailErr) {
-        console.error('[Verify Payment] Email template error:', emailErr);
+        console.error("[Verify Payment] Email template error:", emailErr);
         // Don't fail if email fails
       }
 
       return {
         ok: true,
-        message: 'Payment verified and enrollment activated',
+        message: "Payment verified and enrollment activated",
       };
     } catch (err) {
-      console.error('[Verify Payment] Error:', err);
+      console.error("[Verify Payment] Error:", err);
       throw err;
     }
   });

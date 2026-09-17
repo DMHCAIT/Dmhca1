@@ -1,48 +1,46 @@
 import React, { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { 
-  ArrowLeft, 
-  Star, 
-  BookOpen, 
-  Clock, 
-  Award, 
-  GraduationCap, 
-  Globe, 
-  FileCheck, 
+import {
+  ArrowLeft,
+  Star,
+  BookOpen,
+  Clock,
+  Award,
+  GraduationCap,
+  Globe,
+  FileCheck,
   ChevronDown,
   CheckCircle2,
   Users,
   ThumbsUp,
-  Send
+  Send,
 } from "lucide-react";
 import { type Course } from "@/data/courses";
 
-export function CourseDetailNew({ 
-  course, 
-  primaryCat, 
-  ptype, 
-  gstAmount, 
+export function CourseDetailNew({
+  course,
+  primaryCat,
+  ptype,
+  gstAmount,
   razorpayAmount,
-  totalPrice, 
-  formatINR, 
-  related 
-}: { 
-  course: Course; 
-  primaryCat: any; 
-  ptype: string; 
-  gstAmount: number; 
+  totalPrice,
+  formatINR,
+  related,
+}: {
+  course: Course;
+  primaryCat: any;
+  ptype: string;
+  gstAmount: number;
   razorpayAmount: number;
-  totalPrice: number; 
-  formatINR: (n:number)=>string; 
-  related: Course[] 
+  totalPrice: number;
+  formatINR: (n: number) => string;
+  related: Course[];
 }) {
   const [expandedModules, setExpandedModules] = useState<number[]>([0]);
 
   const toggleModule = (index: number) => {
-    setExpandedModules(prev =>
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
+    setExpandedModules((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     );
   };
 
@@ -51,7 +49,7 @@ export function CourseDetailNew({
     name: "",
     rating: 5,
     title: "",
-    comment: ""
+    comment: "",
   });
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -73,9 +71,9 @@ export function CourseDetailNew({
         {/* hero background image and overlay removed per request */}
         <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/95 via-blue-900/90 to-navy-deep/85" />
         <div className="relative container-x course-detail-wide py-6 lg:py-8">
-          <Link 
-            to="/course-category/$slug" 
-            params={{ slug: primaryCat.slug }} 
+          <Link
+            to="/course-category/$slug"
+            params={{ slug: primaryCat.slug }}
             className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.22em] text-gold hover:opacity-80"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> {primaryCat.name}
@@ -84,127 +82,148 @@ export function CourseDetailNew({
           {/* Reviews Section */}
           <div id="reviews">
             <h2 className="font-display text-2xl text-navy-deep mb-6">Student Reviews</h2>
-            
-            {/* Reviews Summary */}
-            {course.reviews && course.reviews.length > 0 && (() => {
-              const reviews = course.reviews!;
-              const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-              return (
-              <div className="mb-8">
-                {/* Average Rating */}
-                <div className="mb-8 p-6 bg-gradient-to-br from-gold/5 to-blue-900/5 rounded-lg border border-gold/20">
-                  <div className="flex items-start gap-6">
-                    <div className="flex flex-col items-center">
-                      <div className="text-4xl font-bold text-navy-deep">
-                        {avgRating.toFixed(1)}
-                      </div>
-                      <div className="flex gap-1 mt-2">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${
-                              i < Math.round(avgRating)
-                                ? "fill-gold text-gold"
-                                : "text-muted-foreground"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <div className="text-xs text-muted-foreground mt-2">
-                        Based on {reviews.length} reviews
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      {[5, 4, 3, 2, 1].map((rating) => {
-                        const count = reviews.filter((r) => r.rating === rating).length;
-                        const percentage = (count / reviews.length) * 100;
-                        return (
-                          <div key={rating} className="flex items-center gap-3 mb-2">
-                            <div className="w-12 text-sm text-muted-foreground">{rating} star</div>
-                            <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-gold transition-all"
-                                style={{ width: `${percentage}%` }}
-                              />
-                            </div>
-                            <div className="w-8 text-right text-sm text-muted-foreground">{count}</div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
 
-                {/* Individual Reviews */}
-                <div className="space-y-4 mb-8">
-                  {reviews.map((review, idx) => (
-                    <div key={idx} className="border border-border rounded-lg p-5 bg-card hover:border-gold/30 transition">
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex items-start gap-3 flex-1">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-blue-900/10 flex items-center justify-center flex-shrink-0 border border-gold/20 overflow-hidden">
-                            {review.studentImage ? (
-                              <img 
-                                src={review.studentImage} 
-                                alt={review.studentName} 
-                                className="w-full h-full object-cover"
-                              />
-                            ) : (
-                              <Users className="w-6 h-6 text-gold/40" />
-                            )}
+            {/* Reviews Summary */}
+            {course.reviews &&
+              course.reviews.length > 0 &&
+              (() => {
+                const reviews = course.reviews!;
+                const avgRating = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
+                return (
+                  <div className="mb-8">
+                    {/* Average Rating */}
+                    <div className="mb-8 p-6 bg-gradient-to-br from-gold/5 to-blue-900/5 rounded-lg border border-gold/20">
+                      <div className="flex items-start gap-6">
+                        <div className="flex flex-col items-center">
+                          <div className="text-4xl font-bold text-navy-deep">
+                            {avgRating.toFixed(1)}
                           </div>
-                          <div>
-                            <div className="flex items-center gap-2">
-                              <h4 className="font-medium text-navy-deep">{review.studentName}</h4>
-                              {review.verified && (
-                                <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded flex items-center gap-1">
-                                  <CheckCircle2 className="w-3 h-3" />
-                                  Verified
-                                </span>
-                              )}
-                            </div>
-                            <div className="flex items-center gap-2 mt-1">
-                              <div className="flex gap-1">
-                                {[...Array(5)].map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className={`w-3 h-3 ${
-                                      i < review.rating ? "fill-gold text-gold" : "text-muted-foreground"
-                                    }`}
-                                  />
-                                ))}
-                              </div>
-                              <span className="text-xs text-muted-foreground">{review.date}</span>
-                            </div>
+                          <div className="flex gap-1 mt-2">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-4 h-4 ${
+                                  i < Math.round(avgRating)
+                                    ? "fill-gold text-gold"
+                                    : "text-muted-foreground"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                          <div className="text-xs text-muted-foreground mt-2">
+                            Based on {reviews.length} reviews
                           </div>
                         </div>
-                      </div>
-                      <div className="mb-3">
-                        <h5 className="font-medium text-navy-deep">{review.title}</h5>
-                        <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{review.comment}</p>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-navy-deep transition">
-                          <ThumbsUp className="w-4 h-4" />
-                          Helpful {review.helpful && review.helpful > 0 && `(${review.helpful})`}
-                        </button>
+                        <div className="flex-1">
+                          {[5, 4, 3, 2, 1].map((rating) => {
+                            const count = reviews.filter((r) => r.rating === rating).length;
+                            const percentage = (count / reviews.length) * 100;
+                            return (
+                              <div key={rating} className="flex items-center gap-3 mb-2">
+                                <div className="w-12 text-sm text-muted-foreground">
+                                  {rating} star
+                                </div>
+                                <div className="flex-1 h-2 bg-secondary rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full bg-gold transition-all"
+                                    style={{ width: `${percentage}%` }}
+                                  />
+                                </div>
+                                <div className="w-8 text-right text-sm text-muted-foreground">
+                                  {count}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
-                  ))}
+
+                    {/* Individual Reviews */}
+                    <div className="space-y-4 mb-8">
+                      {reviews.map((review, idx) => (
+                        <div
+                          key={idx}
+                          className="border border-border rounded-lg p-5 bg-card hover:border-gold/30 transition"
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-start gap-3 flex-1">
+                              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gold/10 to-blue-900/10 flex items-center justify-center flex-shrink-0 border border-gold/20 overflow-hidden">
+                                {review.studentImage ? (
+                                  <img
+                                    src={review.studentImage}
+                                    alt={review.studentName}
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <Users className="w-6 h-6 text-gold/40" />
+                                )}
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <h4 className="font-medium text-navy-deep">
+                                    {review.studentName}
+                                  </h4>
+                                  {review.verified && (
+                                    <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded flex items-center gap-1">
+                                      <CheckCircle2 className="w-3 h-3" />
+                                      Verified
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-2 mt-1">
+                                  <div className="flex gap-1">
+                                    {[...Array(5)].map((_, i) => (
+                                      <Star
+                                        key={i}
+                                        className={`w-3 h-3 ${
+                                          i < review.rating
+                                            ? "fill-gold text-gold"
+                                            : "text-muted-foreground"
+                                        }`}
+                                      />
+                                    ))}
+                                  </div>
+                                  <span className="text-xs text-muted-foreground">
+                                    {review.date}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="mb-3">
+                            <h5 className="font-medium text-navy-deep">{review.title}</h5>
+                            <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
+                              {review.comment}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-navy-deep transition">
+                              <ThumbsUp className="w-4 h-4" />
+                              Helpful{" "}
+                              {review.helpful && review.helpful > 0 && `(${review.helpful})`}
+                            </button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })()}
+
+            {!course.reviews ||
+              (course.reviews.length === 0 && (
+                <div className="mb-8 p-6 bg-secondary/30 rounded-lg border border-border">
+                  <p className="text-muted-foreground">
+                    No reviews yet. Be the first to review this course!
+                  </p>
                 </div>
-              </div>
-              );
-            })()}
-            
-            {!course.reviews || course.reviews.length === 0 && (
-              <div className="mb-8 p-6 bg-secondary/30 rounded-lg border border-border">
-                <p className="text-muted-foreground">No reviews yet. Be the first to review this course!</p>
-              </div>
-            )}
+              ))}
 
             {/* Review Form */}
             <div className="bg-secondary/10 rounded-lg border border-border p-6">
               <h3 className="font-display text-lg text-navy-deep mb-4">Write Your Review</h3>
-              
+
               {submitSuccess && (
                 <div className="mb-4 p-4 bg-green-100 text-green-700 rounded-lg text-sm flex items-center gap-2">
                   <CheckCircle2 className="w-5 h-5" />
@@ -215,9 +234,7 @@ export function CourseDetailNew({
               <form onSubmit={handleReviewSubmit} className="space-y-4">
                 {/* Name */}
                 <div>
-                  <label className="block text-sm font-medium text-navy-deep mb-1">
-                    Your Name
-                  </label>
+                  <label className="block text-sm font-medium text-navy-deep mb-1">Your Name</label>
                   <input
                     type="text"
                     value={reviewForm.name}
@@ -230,9 +247,7 @@ export function CourseDetailNew({
 
                 {/* Rating */}
                 <div>
-                  <label className="block text-sm font-medium text-navy-deep mb-2">
-                    Rating
-                  </label>
+                  <label className="block text-sm font-medium text-navy-deep mb-2">Rating</label>
                   <div className="flex gap-2">
                     {[1, 2, 3, 4, 5].map((rating) => (
                       <button
@@ -298,10 +313,12 @@ export function CourseDetailNew({
           {/* FAQs Section */}
           {course.faqs && course.faqs.length > 0 && (
             <div id="faqs">
-              <h2 className="font-display text-2xl text-navy-deep mb-6">Frequently Asked Questions</h2>
+              <h2 className="font-display text-2xl text-navy-deep mb-6">
+                Frequently Asked Questions
+              </h2>
               <div className="space-y-3">
                 {course.faqs.map((faq: { q: string; a: string }, idx: number) => (
-                  <details 
+                  <details
                     key={idx}
                     className="group border border-border rounded-lg overflow-hidden bg-card hover:border-gold/30 transition"
                     open={idx === 0}
@@ -325,13 +342,13 @@ export function CourseDetailNew({
           <div className="sticky top-32 bg-card border border-border rounded-lg overflow-hidden">
             {/* Course Image */}
             <div className="aspect-[5/3] bg-navy-deep relative overflow-hidden">
-              <img 
-                src={course.image} 
-                srcSet={`${course.image} 1x, ${course.image.replace(/(\.\w+)$/, '-2x$1')} 2x`}
+              <img
+                src={course.image}
+                srcSet={`${course.image} 1x, ${course.image.replace(/(\.\w+)$/, "-2x$1")} 2x`}
                 alt={`${course.title} - Sidebar Image`}
-                referrerPolicy="no-referrer" 
+                referrerPolicy="no-referrer"
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover" 
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
 
@@ -339,7 +356,9 @@ export function CourseDetailNew({
             <div className="p-6">
               {/* Price Section */}
               <div className="space-y-3 mb-6 pb-6 border-b border-border">
-                <div className="text-xs uppercase tracking-widest text-muted-foreground">Course Price</div>
+                <div className="text-xs uppercase tracking-widest text-muted-foreground">
+                  Course Price
+                </div>
                 <div className="flex items-baseline gap-2">
                   <div className="text-3xl font-semibold text-navy-deep">
                     {formatINR(course.priceINR)}
@@ -353,14 +372,14 @@ export function CourseDetailNew({
 
               {/* Action Buttons */}
               <div className="space-y-2 mb-6">
-                <Link 
-                  to="/contact-us" 
+                <Link
+                  to="/contact-us"
                   className="w-full inline-flex justify-center items-center px-5 py-3 bg-navy-deep text-primary-foreground text-sm font-medium rounded hover:bg-navy transition"
                 >
                   Apply Now
                 </Link>
-                <a 
-                  href="tel:+917042011441" 
+                <a
+                  href="tel:+917042011441"
                   className="w-full inline-flex justify-center items-center px-5 py-3 border border-border text-navy-deep text-sm font-medium rounded hover:border-navy-deep hover:bg-secondary/20 transition"
                 >
                   Book Demo Class
@@ -371,7 +390,9 @@ export function CourseDetailNew({
               <div className="pt-6 border-t border-border space-y-2 sm:space-y-3">
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <Clock className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Duration</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">
+                    Duration
+                  </div>
                   <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
                     {course.meta?.Duration || (course.months ? `${course.months} months` : "—")}
                   </div>
@@ -379,13 +400,19 @@ export function CourseDetailNew({
 
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <BookOpen className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Lessons</div>
-                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">{course.lessons ?? "—"}</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">
+                    Lessons
+                  </div>
+                  <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
+                    {course.lessons ?? "—"}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <Globe className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Language</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">
+                    Language
+                  </div>
                   <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
                     {course.meta?.language || "English"}
                   </div>
@@ -393,13 +420,17 @@ export function CourseDetailNew({
 
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <GraduationCap className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Program</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">
+                    Program
+                  </div>
                   <div className="font-medium text-navy-deep ml-auto flex-shrink-0">{ptype}</div>
                 </div>
 
                 <div className="flex items-center gap-2 sm:gap-3 min-w-0">
                   <FileCheck className="w-4 h-4 text-gold flex-shrink-0" />
-                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">Certificate</div>
+                  <div className="text-xs uppercase tracking-tight sm:tracking-wide text-muted-foreground min-w-0 truncate">
+                    Certificate
+                  </div>
                   <div className="font-medium text-navy-deep ml-auto flex-shrink-0">
                     {course.meta?.certificate === "no" ? "No" : "Yes"}
                   </div>
@@ -414,7 +445,9 @@ export function CourseDetailNew({
       {related && related.length > 0 && (
         <section className="bg-secondary/40 border-t border-border">
           <div className="container-x py-16">
-            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep mb-3">Related programs</div>
+            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep mb-3">
+              Related programs
+            </div>
             <h2 className="font-display text-3xl text-navy-deep mb-8">Related Courses</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {related.map((r) => (

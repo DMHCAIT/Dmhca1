@@ -28,7 +28,7 @@ function SyncCoursesPage() {
     <div className="min-h-screen bg-slate-50 p-8">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Sync Courses to Supabase</h1>
-        
+
         <div className="bg-white rounded-lg p-6 shadow-sm border border-slate-200">
           <p className="text-slate-700 mb-4">
             Click the button below to sync all courses from your local data to Supabase database.

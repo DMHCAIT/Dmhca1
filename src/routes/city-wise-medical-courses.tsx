@@ -1,10 +1,7 @@
 import React, { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import {
-  cityWiseCourses,
-  getAllSpecialties,
-} from "@/data/cityWiseCourses";
+import { cityWiseCourses, getAllSpecialties } from "@/data/cityWiseCourses";
 import { categories, courses } from "@/data/courses";
 import { events } from "@/data/events";
 
@@ -19,9 +16,7 @@ function CityWiseMedicalCourses() {
   const coursesBySpecialty = useMemo(() => {
     const grouped: Record<string, typeof cityWiseCourses> = {};
     specialties.forEach((specialty) => {
-      grouped[specialty] = cityWiseCourses.filter(
-        (course) => course.specialty === specialty
-      );
+      grouped[specialty] = cityWiseCourses.filter((course) => course.specialty === specialty);
     });
     return grouped;
   }, [specialties]);
@@ -31,9 +26,7 @@ function CityWiseMedicalCourses() {
     return categories
       .map((category) => ({
         ...category,
-        courseCount: courses.filter((c) =>
-          c.categories.includes(category.slug)
-        ).length,
+        courseCount: courses.filter((c) => c.categories.includes(category.slug)).length,
       }))
       .filter((c) => c.courseCount > 0);
   }, []);
@@ -48,9 +41,8 @@ function CityWiseMedicalCourses() {
               List of Medical Courses City Wise
             </h1>
             <p className="text-lg text-slate-300 dark:text-slate-400">
-              Explore medical specialization courses available across different
-              cities in India. Find the perfect course location for your medical
-              career.
+              Explore medical specialization courses available across different cities in India.
+              Find the perfect course location for your medical career.
             </p>
           </div>
         </div>
@@ -61,22 +53,30 @@ function CityWiseMedicalCourses() {
         <div className="max-w-6xl mx-auto">
           {/* Table of Contents */}
           <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-8 mb-12 border border-slate-200 dark:border-slate-700">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">What's on This Page</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
+              What's on This Page
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">City-Wise Courses</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">
+                  City-Wise Courses
+                </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   Medical courses grouped by specialty across different Indian cities
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">Course Categories</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">
+                  Course Categories
+                </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   Browse by medical specialty: Cardiology, Radiology, Surgery, and more
                 </p>
               </div>
               <div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">Events & Webinars</h3>
+                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">
+                  Events & Webinars
+                </h3>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   Upcoming workshops, seminars, and educational events from DMHCA
                 </p>
@@ -91,7 +91,9 @@ function CityWiseMedicalCourses() {
                 📍 City-Wise Medical Courses
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
-              <p className="text-slate-600 dark:text-slate-400 mt-3">Explore specialized medical courses available in different cities across India</p>
+              <p className="text-slate-600 dark:text-slate-400 mt-3">
+                Explore specialized medical courses available in different cities across India
+              </p>
             </div>
 
             <div className="space-y-16">
@@ -141,7 +143,9 @@ function CityWiseMedicalCourses() {
                 📚 Course Categories
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded"></div>
-              <p className="text-slate-600 dark:text-slate-400 mt-3">Browse medical specializations with {courses.length} professional courses available</p>
+              <p className="text-slate-600 dark:text-slate-400 mt-3">
+                Browse medical specializations with {courses.length} professional courses available
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -159,7 +163,7 @@ function CityWiseMedicalCourses() {
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">
-                      {category.courseCount} course{category.courseCount !== 1 ? 's' : ''}
+                      {category.courseCount} course{category.courseCount !== 1 ? "s" : ""}
                     </span>
                     <span className="text-blue-600 dark:text-white group-hover:translate-x-1 transition">
                       →
@@ -177,7 +181,9 @@ function CityWiseMedicalCourses() {
                 🎓 Events & Webinars
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded"></div>
-              <p className="text-slate-600 dark:text-slate-400 mt-3">Join our upcoming workshops, seminars, and educational events</p>
+              <p className="text-slate-600 dark:text-slate-400 mt-3">
+                Join our upcoming workshops, seminars, and educational events
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -211,9 +217,7 @@ function CityWiseMedicalCourses() {
                     <p className="text-sm text-slate-600 mt-3 mb-3 line-clamp-2">
                       {event.shortDescription}
                     </p>
-                    <div className="text-xs font-semibold text-purple-600">
-                      View details →
-                    </div>
+                    <div className="text-xs font-semibold text-purple-600">View details →</div>
                   </div>
                 </Link>
               ))}
@@ -234,9 +238,9 @@ function CityWiseMedicalCourses() {
           <div className="mt-20 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to Enroll?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto">
-              Contact our admission team to learn more about your preferred
-              course and city location. We're here to guide you through every
-              step of your medical education journey.
+              Contact our admission team to learn more about your preferred course and city
+              location. We're here to guide you through every step of your medical education
+              journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

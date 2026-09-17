@@ -27,9 +27,7 @@ function CityWiseCoursePage() {
 
   const filteredCourses = useMemo(() => {
     return courses.filter((c) =>
-      c.categories.some((cat) =>
-        cat.toLowerCase().includes(specialty?.toLowerCase() || "")
-      )
+      c.categories.some((cat) => cat.toLowerCase().includes(specialty?.toLowerCase() || "")),
     );
   }, [specialty]);
 
@@ -72,7 +70,8 @@ function CityWiseCoursePage() {
             {specialtyFormatted} Courses in {cityFormatted}
           </h1>
           <p className="mt-4 text-lg text-primary-foreground/90 max-w-2xl">
-            {cityFormatted} is home to some of India's best medical colleges and hospitals. Explore {specialtyFormatted.toLowerCase()} courses and certifications with world-class training.
+            {cityFormatted} is home to some of India's best medical colleges and hospitals. Explore{" "}
+            {specialtyFormatted.toLowerCase()} courses and certifications with world-class training.
           </p>
           <div className="mt-6 text-sm text-primary-foreground/80">
             <span className="font-semibold">{filteredCourses.length}</span> courses available
@@ -99,13 +98,7 @@ function CityWiseCoursePage() {
   );
 }
 
-function FAQsSection({
-  specialty,
-  city,
-}: {
-  specialty: string;
-  city: string;
-}) {
+function FAQsSection({ specialty, city }: { specialty: string; city: string }) {
   const faqs = [
     {
       question: `Where to apply for ${specialty} courses in ${city}?`,
@@ -141,13 +134,7 @@ function FAQsSection({
   );
 }
 
-function FAQItem({
-  question,
-  answer,
-}: {
-  question: string;
-  answer: string;
-}) {
+function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
 
   return (

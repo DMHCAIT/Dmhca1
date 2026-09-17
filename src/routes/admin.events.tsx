@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { Plus, Edit2, Trash2 } from "lucide-react";
 
-export const Route = createFileRoute('/admin/events')({
+export const Route = createFileRoute("/admin/events")({
   component: EventsManagement,
 });
 
@@ -23,15 +23,15 @@ function EventsManagement() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    description: '',
-    short_description: '',
-    date_time: '',
+    title: "",
+    slug: "",
+    description: "",
+    short_description: "",
+    date_time: "",
     duration_hours: 0,
-    location: '',
-    event_type: 'webinar',
-    speaker_name: '',
+    location: "",
+    event_type: "webinar",
+    speaker_name: "",
     capacity: 0,
   });
 
@@ -42,12 +42,15 @@ function EventsManagement() {
   const fetchEvents = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabaseClient.from('events').select('*').order('date_time', { ascending: false });
+      const { data, error } = await supabaseClient
+        .from("events")
+        .select("*")
+        .order("date_time", { ascending: false });
 
       if (error) throw error;
       setEvents(data || []);
     } catch (error) {
-      console.error('Error fetching events:', error);
+      console.error("Error fetching events:", error);
     } finally {
       setLoading(false);
     }
@@ -57,16 +60,16 @@ function EventsManagement() {
     try {
       if (editingId) {
         const { error } = await supabaseClient
-          .from('events')
+          .from("events")
           .update({
             ...formData,
             updated_at: new Date().toISOString(),
           })
-          .eq('id', editingId);
+          .eq("id", editingId);
 
         if (error) throw error;
       } else {
-        const { error } = await supabaseClient.from('events').insert([
+        const { error } = await supabaseClient.from("events").insert([
           {
             ...formData,
             created_at: new Date().toISOString(),
@@ -80,35 +83,35 @@ function EventsManagement() {
       setShowForm(false);
       setEditingId(null);
       setFormData({
-        title: '',
-        slug: '',
-        description: '',
-        short_description: '',
-        date_time: '',
+        title: "",
+        slug: "",
+        description: "",
+        short_description: "",
+        date_time: "",
         duration_hours: 0,
-        location: '',
-        event_type: 'webinar',
-        speaker_name: '',
+        location: "",
+        event_type: "webinar",
+        speaker_name: "",
         capacity: 0,
       });
       fetchEvents();
     } catch (error) {
-      console.error('Error saving event:', error);
-      alert('Error saving event');
+      console.error("Error saving event:", error);
+      alert("Error saving event");
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this event?')) return;
+    if (!confirm("Are you sure you want to delete this event?")) return;
 
     try {
-      const { error } = await supabaseClient.from('events').delete().eq('id', id);
+      const { error } = await supabaseClient.from("events").delete().eq("id", id);
 
       if (error) throw error;
       fetchEvents();
     } catch (error) {
-      console.error('Error deleting event:', error);
-      alert('Error deleting event');
+      console.error("Error deleting event:", error);
+      alert("Error deleting event");
     }
   };
 
@@ -116,13 +119,13 @@ function EventsManagement() {
     setFormData({
       title: event.title,
       slug: event.slug,
-      description: '',
-      short_description: '',
+      description: "",
+      short_description: "",
       date_time: event.date_time,
       duration_hours: 0,
       location: event.location,
       event_type: event.event_type as any,
-      speaker_name: '',
+      speaker_name: "",
       capacity: 0,
     });
     setEditingId(event.id);
@@ -141,13 +144,13 @@ function EventsManagement() {
           className="flex items-center gap-2 px-4 py-2 bg-gold text-navy-deep rounded-lg font-semibold hover:bg-yellow-400 transition"
         >
           <Plus size={20} />
-          {showForm ? 'Cancel' : 'Add Event'}
+          {showForm ? "Cancel" : "Add Event"}
         </button>
       </div>
 
       {showForm && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-bold mb-4">{editingId ? 'Edit Event' : 'Add New Event'}</h2>
+          <h2 className="text-xl font-bold mb-4">{editingId ? "Edit Event" : "Add New Event"}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input
               type="text"
@@ -204,7 +207,9 @@ function EventsManagement() {
               type="number"
               placeholder="Duration (hours)"
               value={formData.duration_hours}
-              onChange={(e) => setFormData({ ...formData, duration_hours: parseFloat(e.target.value) })}
+              onChange={(e) =>
+                setFormData({ ...formData, duration_hours: parseFloat(e.target.value) })
+              }
               className="border rounded-lg px-4 py-2"
             />
             <textarea
@@ -226,7 +231,7 @@ function EventsManagement() {
             onClick={handleSave}
             className="mt-4 px-6 py-2 bg-navy-deep text-white rounded-lg font-semibold hover:bg-blue-900 transition"
           >
-            {editingId ? 'Update Event' : 'Create Event'}
+            {editingId ? "Update Event" : "Create Event"}
           </button>
         </div>
       )}
@@ -234,7 +239,9 @@ function EventsManagement() {
       {loading ? (
         <div className="text-center py-12">Loading events...</div>
       ) : events.length === 0 ? (
-        <div className="text-center py-12 text-gray-600">No events found. Create one to get started!</div>
+        <div className="text-center py-12 text-gray-600">
+          No events found. Create one to get started!
+        </div>
       ) : (
         <div className="overflow-x-auto bg-white rounded-lg shadow">
           <table className="w-full">
@@ -256,10 +263,12 @@ function EventsManagement() {
                   <td className="px-6 py-4">{new Date(event.date_time).toLocaleDateString()}</td>
                   <td className="px-6 py-4">{event.location}</td>
                   <td className="px-6 py-4">
-                    <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                      event.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                    }`}>
-                      {event.is_active ? 'Active' : 'Inactive'}
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                        event.is_active ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"
+                      }`}
+                    >
+                      {event.is_active ? "Active" : "Inactive"}
                     </span>
                   </td>
                   <td className="px-6 py-4 flex justify-center gap-2">

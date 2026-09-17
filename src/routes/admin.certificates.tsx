@@ -1,9 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Plus, Edit2, Trash2, X, AlertCircle, ChevronUp, ChevronDown, Search, RotateCw, Download } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import {
+  Plus,
+  Edit2,
+  Trash2,
+  X,
+  AlertCircle,
+  ChevronUp,
+  ChevronDown,
+  Search,
+  RotateCw,
+  Download,
+} from "lucide-react";
 
-export const Route = createFileRoute('/admin/certificates')({
+export const Route = createFileRoute("/admin/certificates")({
   component: AdminCertificates,
 });
 
@@ -11,7 +22,7 @@ function AdminCertificates() {
   const [certificates, setCertificates] = useState<any[]>([]);
   const [filteredCertificates, setFilteredCertificates] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -19,12 +30,12 @@ function AdminCertificates() {
   const [expandedCert, setExpandedCert] = useState<string | null>(null);
 
   const [formData, setFormData] = useState({
-    certificate_id: '',
-    full_name: '',
-    qualification: '',
-    mode: 'Online' as 'Online' | 'Blended' | 'Hybrid',
-    month_year: '',
-    status: 'Active' as 'Active' | 'Inactive',
+    certificate_id: "",
+    full_name: "",
+    qualification: "",
+    mode: "Online" as "Online" | "Blended" | "Hybrid",
+    month_year: "",
+    status: "Active" as "Active" | "Inactive",
   });
 
   useEffect(() => {
@@ -39,15 +50,15 @@ function AdminCertificates() {
     try {
       setLoading(true);
       const { data, error } = await supabaseClient
-        .from('certificates')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("certificates")
+        .select("*")
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
       setCertificates(data || []);
     } catch (error) {
-      console.error('Error fetching certificates:', error);
-      alert('Error fetching certificates: ' + (error as any)?.message);
+      console.error("Error fetching certificates:", error);
+      alert("Error fetching certificates: " + (error as any)?.message);
     } finally {
       setLoading(false);
     }
@@ -59,8 +70,8 @@ function AdminCertificates() {
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter((cert) => {
-        const name = (cert.full_name || '').toLowerCase();
-        const certId = (cert.certificate_id || '').toLowerCase();
+        const name = (cert.full_name || "").toLowerCase();
+        const certId = (cert.certificate_id || "").toLowerCase();
         return name.includes(term) || certId.includes(term);
       });
     }
@@ -77,11 +88,11 @@ function AdminCertificates() {
     setEditingId(null);
     setFormData({
       certificate_id: generateCertificateId(),
-      full_name: '',
-      qualification: '',
-      mode: 'Online',
-      month_year: '',
-      status: 'Active',
+      full_name: "",
+      qualification: "",
+      mode: "Online",
+      month_year: "",
+      status: "Active",
     });
     setShowModal(true);
   };
@@ -101,70 +112,78 @@ function AdminCertificates() {
 
   const handleSaveCertificate = async () => {
     try {
-      if (!formData.certificate_id || !formData.full_name || !formData.qualification || !formData.month_year) {
-        alert('Please fill in all required fields');
+      if (
+        !formData.certificate_id ||
+        !formData.full_name ||
+        !formData.qualification ||
+        !formData.month_year
+      ) {
+        alert("Please fill in all required fields");
         return;
       }
 
       if (editingId) {
         const { error } = await supabaseClient
-          .from('certificates')
+          .from("certificates")
           .update(formData)
-          .eq('id', editingId)
+          .eq("id", editingId)
           .select();
 
         if (error) throw error;
-        alert('Certificate updated successfully!');
+        alert("Certificate updated successfully!");
       } else {
-        const { error } = await supabaseClient
-          .from('certificates')
-          .insert([formData])
-          .select();
+        const { error } = await supabaseClient.from("certificates").insert([formData]).select();
 
         if (error) throw error;
-        alert('Certificate added successfully!');
+        alert("Certificate added successfully!");
       }
 
       setShowModal(false);
       setEditingId(null);
       await fetchCertificates();
     } catch (error) {
-      console.error('Error saving certificate:', error);
-      alert('Error saving certificate: ' + (error as any)?.message);
+      console.error("Error saving certificate:", error);
+      alert("Error saving certificate: " + (error as any)?.message);
     }
   };
 
   const handleDeleteCertificate = async (id: string) => {
     try {
       setShowDeleteConfirm(false);
-      const { error } = await supabaseClient
-        .from('certificates')
-        .delete()
-        .eq('id', id);
+      const { error } = await supabaseClient.from("certificates").delete().eq("id", id);
 
       if (error) throw error;
       await fetchCertificates();
-      alert('Certificate deleted successfully!');
+      alert("Certificate deleted successfully!");
     } catch (error) {
-      console.error('Error deleting certificate:', error);
-      alert('Error deleting certificate: ' + error);
+      console.error("Error deleting certificate:", error);
+      alert("Error deleting certificate: " + error);
     }
   };
 
   const exportToCSV = () => {
-    const headers = ['Certificate ID', 'Full Name', 'Qualification', 'Mode', 'Month & Year', 'Status'];
+    const headers = [
+      "Certificate ID",
+      "Full Name",
+      "Qualification",
+      "Mode",
+      "Month & Year",
+      "Status",
+    ];
     const csvContent = [
-      headers.join(','),
+      headers.join(","),
       ...filteredCertificates.map((c) =>
-        [c.certificate_id, c.full_name, c.qualification, c.mode, c.month_year, c.status].map((v) => `"${v}"`).join(',')
+        [c.certificate_id, c.full_name, c.qualification, c.mode, c.month_year, c.status]
+          .map((v) => `"${v}"`)
+          .join(","),
       ),
-    ].join('\n');
+    ].join("\n");
 
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `certificates-${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `certificates-${new Date().toISOString().split("T")[0]}.csv`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -213,18 +232,24 @@ function AdminCertificates() {
             <div className="text-sm text-gray-300">Total Certificates</div>
           </div>
           <div className="p-4 bg-green-500/20 rounded-lg border border-green-500/50">
-            <div className="text-3xl font-bold text-green-300">{certificates.filter((c) => c.status === 'Active').length}</div>
+            <div className="text-3xl font-bold text-green-300">
+              {certificates.filter((c) => c.status === "Active").length}
+            </div>
             <div className="text-sm text-gray-300">Active</div>
           </div>
           <div className="p-4 bg-red-500/20 rounded-lg border border-red-500/50">
-            <div className="text-3xl font-bold text-red-300">{certificates.filter((c) => c.status === 'Inactive').length}</div>
+            <div className="text-3xl font-bold text-red-300">
+              {certificates.filter((c) => c.status === "Inactive").length}
+            </div>
             <div className="text-sm text-gray-300">Inactive</div>
           </div>
         </div>
 
         {/* Search */}
         <div className="mb-8">
-          <label className="block text-sm font-semibold mb-2 text-gray-300">Search Certificates</label>
+          <label className="block text-sm font-semibold mb-2 text-gray-300">
+            Search Certificates
+          </label>
           <div className="relative">
             <Search className="absolute left-3 top-3 text-gray-400" size={20} />
             <input
@@ -264,20 +289,14 @@ function AdminCertificates() {
                       <div>
                         <h3 className="text-xl font-bold text-white mb-2">{cert.full_name}</h3>
                         <div className="flex flex-wrap gap-3 text-sm text-gray-300">
-                          <span className="flex items-center gap-1">
-                            🎓 {cert.qualification}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            📋 {cert.certificate_id}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            📅 {cert.month_year}
-                          </span>
+                          <span className="flex items-center gap-1">🎓 {cert.qualification}</span>
+                          <span className="flex items-center gap-1">📋 {cert.certificate_id}</span>
+                          <span className="flex items-center gap-1">📅 {cert.month_year}</span>
                           <span
                             className={`px-2 py-1 rounded text-xs font-semibold ${
-                              cert.status === 'Active'
-                                ? 'bg-green-500/30 text-green-300 border border-green-500/50'
-                                : 'bg-red-500/30 text-red-300 border border-red-500/50'
+                              cert.status === "Active"
+                                ? "bg-green-500/30 text-green-300 border border-green-500/50"
+                                : "bg-red-500/30 text-red-300 border border-red-500/50"
                             }`}
                           >
                             {cert.status}
@@ -320,7 +339,9 @@ function AdminCertificates() {
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <div className="text-sm text-gray-400 mb-1">Certificate ID</div>
-                        <div className="text-lg font-semibold text-blue-300">{cert.certificate_id}</div>
+                        <div className="text-lg font-semibold text-blue-300">
+                          {cert.certificate_id}
+                        </div>
                       </div>
                       <div>
                         <div className="text-sm text-gray-400 mb-1">Mode</div>
@@ -328,11 +349,15 @@ function AdminCertificates() {
                       </div>
                       <div>
                         <div className="text-sm text-gray-400 mb-1">Month & Year</div>
-                        <div className="text-lg font-semibold text-yellow-300">{cert.month_year}</div>
+                        <div className="text-lg font-semibold text-yellow-300">
+                          {cert.month_year}
+                        </div>
                       </div>
                       <div>
                         <div className="text-sm text-gray-400 mb-1">Status</div>
-                        <div className={`text-lg font-semibold ${cert.status === 'Active' ? 'text-green-300' : 'text-red-300'}`}>
+                        <div
+                          className={`text-lg font-semibold ${cert.status === "Active" ? "text-green-300" : "text-red-300"}`}
+                        >
                           {cert.status}
                         </div>
                       </div>
@@ -362,7 +387,7 @@ function AdminCertificates() {
             <div className="bg-slate-800 w-full max-w-2xl rounded-lg border border-slate-600">
               <div className="p-6 border-b border-slate-600 flex items-center justify-between">
                 <h2 className="text-2xl font-bold text-white">
-                  {editingId ? 'Edit Certificate' : 'Add New Certificate'}
+                  {editingId ? "Edit Certificate" : "Add New Certificate"}
                 </h2>
                 <button
                   onClick={() => setShowModal(false)}
@@ -374,7 +399,9 @@ function AdminCertificates() {
 
               <div className="p-6 space-y-6">
                 <div>
-                  <label className="block text-sm font-semibold mb-2 text-gray-300">Certificate ID *</label>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Certificate ID *
+                  </label>
                   <input
                     type="text"
                     value={formData.certificate_id}
@@ -385,7 +412,9 @@ function AdminCertificates() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold mb-2 text-gray-300">Full Name *</label>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Full Name *
+                  </label>
                   <input
                     type="text"
                     value={formData.full_name}
@@ -396,7 +425,9 @@ function AdminCertificates() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold mb-2 text-gray-300">Awarded Qualification *</label>
+                  <label className="block text-sm font-semibold mb-2 text-gray-300">
+                    Awarded Qualification *
+                  </label>
                   <input
                     type="text"
                     value={formData.qualification}
@@ -421,7 +452,9 @@ function AdminCertificates() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-300">Month & Year *</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
+                      Month & Year *
+                    </label>
                     <input
                       type="text"
                       value={formData.month_year}
@@ -449,7 +482,7 @@ function AdminCertificates() {
                     onClick={handleSaveCertificate}
                     className="flex-1 px-6 py-3 bg-green-600 hover:bg-green-700 rounded-lg font-semibold transition"
                   >
-                    {editingId ? 'Update Certificate' : 'Add Certificate'}
+                    {editingId ? "Update Certificate" : "Add Certificate"}
                   </button>
                   <button
                     onClick={() => setShowModal(false)}
@@ -468,7 +501,9 @@ function AdminCertificates() {
           <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
             <div className="bg-slate-800 rounded-lg border border-slate-600 p-6 max-w-sm">
               <h3 className="text-lg font-bold text-white mb-4">Delete Certificate?</h3>
-              <p className="text-gray-300 mb-6">Are you sure you want to delete this certificate? This action cannot be undone.</p>
+              <p className="text-gray-300 mb-6">
+                Are you sure you want to delete this certificate? This action cannot be undone.
+              </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => handleDeleteCertificate(deleteConfirmId!)}

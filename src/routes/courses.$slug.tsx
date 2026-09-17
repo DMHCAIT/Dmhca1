@@ -1,6 +1,16 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Clock, BookOpen, Award, CheckCircle2, ArrowLeft, ChevronDown, Star, GraduationCap, Globe } from "lucide-react";
+import {
+  Clock,
+  BookOpen,
+  Award,
+  CheckCircle2,
+  ArrowLeft,
+  ChevronDown,
+  Star,
+  GraduationCap,
+  Globe,
+} from "lucide-react";
 import { getCourse, getCategory, relatedCourses, formatINR, type Course } from "@/data/courses";
 import { supabaseClient } from "@/lib/supabase";
 import { CourseCard } from "@/components/site/CourseCard";
@@ -11,28 +21,28 @@ export const Route = createFileRoute("/courses/$slug")({
     // Try to fetch from Supabase first (primary source)
     try {
       const { data, error } = await supabaseClient
-        .from('courses')
-        .select('*')
-        .ilike('slug', params.slug)
+        .from("courses")
+        .select("*")
+        .ilike("slug", params.slug)
         .single();
 
       if (data && !error) {
         // Parse course data from testimonials column
         let courseData: any = {};
-        if (data.testimonials && typeof data.testimonials === 'string') {
+        if (data.testimonials && typeof data.testimonials === "string") {
           try {
             courseData = JSON.parse(data.testimonials);
           } catch (e) {
-            console.warn('Could not parse testimonials for course', data.id);
+            console.warn("Could not parse testimonials for course", data.id);
           }
         }
-        
+
         if (courseData.title) {
           return { course: courseData, slug: params.slug, fromDb: true };
         }
       }
     } catch (e) {
-      console.warn('Error fetching course from DB, falling back to local data', e);
+      console.warn("Error fetching course from DB, falling back to local data", e);
     }
 
     // Fallback to local data
@@ -44,31 +54,40 @@ export const Route = createFileRoute("/courses/$slug")({
     meta: loaderData
       ? [
           { title: `${loaderData.course.title} — DMHCA` },
-          { name: "description", content: loaderData.course.overview?.slice(0, 160) || '' },
+          { name: "description", content: loaderData.course.overview?.slice(0, 160) || "" },
           { property: "og:title", content: loaderData.course.title },
-          { property: "og:description", content: loaderData.course.overview?.slice(0, 200) || '' },
+          { property: "og:description", content: loaderData.course.overview?.slice(0, 200) || "" },
           { property: "og:type", content: "website" },
           { property: "og:image", content: loaderData.course.image || loaderData.course.heroImage },
           { property: "og:image:width", content: "1200" },
           { property: "og:image:height", content: "630" },
           { name: "twitter:card", content: "summary_large_image" },
           { name: "twitter:title", content: loaderData.course.title },
-          { name: "twitter:description", content: loaderData.course.overview?.slice(0, 160) || '' },
-          { name: "twitter:image", content: loaderData.course.image || loaderData.course.heroImage },
+          { name: "twitter:description", content: loaderData.course.overview?.slice(0, 160) || "" },
+          {
+            name: "twitter:image",
+            content: loaderData.course.image || loaderData.course.heroImage,
+          },
           { name: "canonical", content: `https://dmhca.in/courses/${loaderData.slug}` },
         ]
       : [],
     links: loaderData
       ? [
           { rel: "canonical", href: `https://dmhca.in/courses/${loaderData.slug}` },
-          { rel: "preload", as: "image", href: loaderData.course.image || loaderData.course.heroImage },
+          {
+            rel: "preload",
+            as: "image",
+            href: loaderData.course.image || loaderData.course.heroImage,
+          },
         ]
       : [],
   }),
   notFoundComponent: () => (
     <div className="container-x py-24 text-center">
       <h1 className="font-display text-3xl text-navy-deep">Course not found</h1>
-      <Link to="/top-medical-courses" className="text-navy-deep underline mt-4 inline-block">Back to all courses</Link>
+      <Link to="/top-medical-courses" className="text-navy-deep underline mt-4 inline-block">
+        Back to all courses
+      </Link>
     </div>
   ),
   component: CoursePage,
@@ -98,24 +117,24 @@ function CoursePage() {
       try {
         setLoading(true);
         const { data, error } = await supabaseClient
-          .from('courses')
-          .select('*')
-          .ilike('slug', slug)
+          .from("courses")
+          .select("*")
+          .ilike("slug", slug)
           .single();
 
         if (data && !error) {
           let courseData: any = {};
-          if (data.testimonials && typeof data.testimonials === 'string') {
+          if (data.testimonials && typeof data.testimonials === "string") {
             try {
               courseData = JSON.parse(data.testimonials);
               setCourseData(courseData);
             } catch (e) {
-              console.warn('Could not parse testimonials');
+              console.warn("Could not parse testimonials");
             }
           }
         }
       } catch (e) {
-        console.warn('Error fetching latest course data');
+        console.warn("Error fetching latest course data");
       } finally {
         setLoading(false);
       }
@@ -144,10 +163,13 @@ function CoursePage() {
       primaryCat = getCategory(finalCourse.categories[0]);
     } catch (e) {
       // Category not found in local data, use a default
-      primaryCat = { name: finalCourse.category || 'Medical Courses', slug: finalCourse.category?.toLowerCase().replace(/\s+/g, '-') || 'general' };
+      primaryCat = {
+        name: finalCourse.category || "Medical Courses",
+        slug: finalCourse.category?.toLowerCase().replace(/\s+/g, "-") || "general",
+      };
     }
   } else {
-    primaryCat = { name: 'Medical Courses', slug: 'general' };
+    primaryCat = { name: "Medical Courses", slug: "general" };
   }
 
   // Get related courses from local data
@@ -172,7 +194,18 @@ function CoursePage() {
     );
   }
 
-  return <CourseDetail course={finalCourse} primaryCat={primaryCat} ptype={ptype} gstAmount={gstAmount} razorpayAmount={razorpayAmount} totalPrice={totalPrice} formatINR={formatINR} related={related} />;
+  return (
+    <CourseDetail
+      course={finalCourse}
+      primaryCat={primaryCat}
+      ptype={ptype}
+      gstAmount={gstAmount}
+      razorpayAmount={razorpayAmount}
+      totalPrice={totalPrice}
+      formatINR={formatINR}
+      related={related}
+    />
+  );
 }
 
 function ModuleRow({ index, title }: { index: number; title: string }) {
@@ -188,9 +221,14 @@ function FaqRow({ q, a, defaultOpen }: { q: string; a: string; defaultOpen?: boo
   const [open, setOpen] = useState(!!defaultOpen);
   return (
     <div>
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between gap-4 text-left p-5 hover:bg-secondary/40 transition">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between gap-4 text-left p-5 hover:bg-secondary/40 transition"
+      >
         <span className="font-medium text-navy-deep text-sm">{q}</span>
-        <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform flex-shrink-0 ${open ? "rotate-180" : ""}`} />
+        <ChevronDown
+          className={`w-4 h-4 text-muted-foreground transition-transform flex-shrink-0 ${open ? "rotate-180" : ""}`}
+        />
       </button>
       {open && <div className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">{a}</div>}
     </div>

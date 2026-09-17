@@ -1,38 +1,38 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Loader2, Check } from 'lucide-react';
-import { OTPLoginModal } from './OTPLoginModal';
-import { StudentProfileForm } from './StudentProfileForm';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Check } from "lucide-react";
+import { OTPLoginModal } from "./OTPLoginModal";
+import { StudentProfileForm } from "./StudentProfileForm";
 
 export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
-  const [step, setStep] = useState('login'); // login | profile | payment | success
+  const [step, setStep] = useState("login"); // login | profile | payment | success
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [enrollmentData, setEnrollmentData] = useState({
-    userId: typeof window !== 'undefined' ? localStorage.getItem('userId') : null,
+    userId: typeof window !== "undefined" ? localStorage.getItem("userId") : null,
     enrollmentId: null,
-    token: typeof window !== 'undefined' ? localStorage.getItem('token') : null,
+    token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
   });
 
   const handleLoginSuccess = (data) => {
     setEnrollmentData((prev) => ({ ...prev, userId: data.userId, token: data.token }));
-    setStep('profile');
+    setStep("profile");
   };
 
   const handleProfileSkip = () => {
-    setStep('payment');
+    setStep("payment");
   };
 
   const handlePaymentMethodSelect = async (method) => {
-    setError('');
+    setError("");
     setLoading(true);
     try {
       // Create enrollment
-      const enrollRes = await fetch('/api/enroll', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const enrollRes = await fetch("/api/enroll", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           courseId,
           userId: enrollmentData.userId,
@@ -40,13 +40,13 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
         }),
       });
       const enrollData = await enrollRes.json();
-      if (!enrollRes.ok) throw new Error(enrollData.error || 'Failed to create enrollment');
+      if (!enrollRes.ok) throw new Error(enrollData.error || "Failed to create enrollment");
 
       setEnrollmentData((prev) => ({ ...prev, enrollmentId: enrollData.enrollment.id }));
 
-      if (method === 'razorpay') {
+      if (method === "razorpay") {
         handleRazorpayPayment(enrollData.enrollment.id);
-      } else if (method === 'loan') {
+      } else if (method === "loan") {
         handleLoanRedirect(enrollData.enrollment.id);
       }
     } catch (err) {
@@ -59,9 +59,9 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
   const handleRazorpayPayment = async (enrollmentId) => {
     try {
       // Create Razorpay order
-      const orderRes = await fetch('/api/razorpay-create-order', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const orderRes = await fetch("/api/razorpay-create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           amount,
           enrollmentId,
@@ -69,15 +69,15 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
         }),
       });
       const orderData = await orderRes.json();
-      if (!orderRes.ok) throw new Error(orderData.error || 'Failed to create order');
+      if (!orderRes.ok) throw new Error(orderData.error || "Failed to create order");
 
       // Load Razorpay script dynamically
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => {
         // Initialize Razorpay checkout
         const options = {
-          key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'YOUR_RAZORPAY_KEY_ID',
+          key: import.meta.env.VITE_RAZORPAY_KEY_ID || "YOUR_RAZORPAY_KEY_ID",
           order_id: orderData.order.id,
           amount: orderData.order.amount,
           currency: orderData.order.currency,
@@ -85,7 +85,7 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
             await verifyPayment(response);
           },
           prefill: {
-            email: localStorage.getItem('email') || enrollmentData.userId,
+            email: localStorage.getItem("email") || enrollmentData.userId,
           },
         };
 
@@ -93,7 +93,7 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
         razor.open();
       };
       script.onerror = () => {
-        throw new Error('Failed to load Razorpay script');
+        throw new Error("Failed to load Razorpay script");
       };
       document.head.appendChild(script);
     } catch (err) {
@@ -103,9 +103,9 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
 
   const verifyPayment = async (response) => {
     try {
-      const verifyRes = await fetch('/api/razorpay-verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const verifyRes = await fetch("/api/razorpay-verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           razorpay_order_id: response.razorpay_order_id,
           razorpay_payment_id: response.razorpay_payment_id,
@@ -113,8 +113,8 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
         }),
       });
       const data = await verifyRes.json();
-      if (!verifyRes.ok) throw new Error(data.error || 'Payment verification failed');
-      setStep('success');
+      if (!verifyRes.ok) throw new Error(data.error || "Payment verification failed");
+      setStep("success");
     } catch (err) {
       setError(err.message);
     }
@@ -122,9 +122,9 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
 
   const handleLoanRedirect = async (enrollmentId) => {
     try {
-      const loanRes = await fetch('/api/loan-redirect', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const loanRes = await fetch("/api/loan-redirect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           amount,
           courseId,
@@ -133,9 +133,9 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
         }),
       });
       const loanData = await loanRes.json();
-      if (!loanRes.ok) throw new Error(loanData.error || 'Failed to redirect to loan partner');
-      window.open(loanData.url, '_blank');
-      setStep('success');
+      if (!loanRes.ok) throw new Error(loanData.error || "Failed to redirect to loan partner");
+      window.open(loanData.url, "_blank");
+      setStep("success");
     } catch (err) {
       setError(err.message);
     }
@@ -146,7 +146,7 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
       <div className="bg-white rounded-lg p-6 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4">Enroll in {courseName}</h2>
 
-        {step === 'login' && (
+        {step === "login" && (
           <>
             <p className="text-gray-600 mb-4">Step 1 of 3: Sign In to continue</p>
             <Button onClick={() => setShowOtpModal(true)} className="w-full mb-3">
@@ -155,7 +155,7 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
           </>
         )}
 
-        {step === 'profile' && (
+        {step === "profile" && (
           <>
             <p className="text-gray-600 mb-4">Step 2 of 3: Complete your profile (optional)</p>
             <Button onClick={() => setShowProfileModal(true)} className="w-full mb-3">
@@ -167,12 +167,12 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
           </>
         )}
 
-        {step === 'payment' && (
+        {step === "payment" && (
           <>
             <p className="text-gray-600 mb-4">Step 3 of 3: Choose Payment Method</p>
             <p className="text-lg font-bold mb-4">Amount: ₹{amount}</p>
             <Button
-              onClick={() => handlePaymentMethodSelect('razorpay')}
+              onClick={() => handlePaymentMethodSelect("razorpay")}
               disabled={loading}
               className="w-full mb-3"
             >
@@ -180,7 +180,7 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
               Pay Now with Razorpay
             </Button>
             <Button
-              onClick={() => handlePaymentMethodSelect('loan')}
+              onClick={() => handlePaymentMethodSelect("loan")}
               disabled={loading}
               variant="outline"
               className="w-full"
@@ -190,12 +190,14 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
           </>
         )}
 
-        {step === 'success' && (
+        {step === "success" && (
           <>
             <div className="text-center py-6">
               <Check className="h-12 w-12 text-green-600 mx-auto mb-4" />
               <h3 className="text-xl font-bold mb-2">Enrollment Successful!</h3>
-              <p className="text-gray-600 mb-4">Check your email for confirmation. You can now access the course.</p>
+              <p className="text-gray-600 mb-4">
+                Check your email for confirmation. You can now access the course.
+              </p>
               <Button onClick={onClose} className="w-full">
                 Go to Dashboard
               </Button>
@@ -205,7 +207,11 @@ export function EnrollmentFlow({ courseId, courseName, amount, onClose }) {
 
         {error && <p className="text-red-600 text-sm mt-4 text-center">{error}</p>}
 
-        <OTPLoginModal isOpen={showOtpModal} onClose={() => setShowOtpModal(false)} onSuccess={handleLoginSuccess} />
+        <OTPLoginModal
+          isOpen={showOtpModal}
+          onClose={() => setShowOtpModal(false)}
+          onSuccess={handleLoginSuccess}
+        />
         <StudentProfileForm
           isOpen={showProfileModal}
           onClose={() => setShowProfileModal(false)}

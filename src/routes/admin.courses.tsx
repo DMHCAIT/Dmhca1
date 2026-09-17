@@ -1,11 +1,23 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 // avoid Next.js dynamic import in this Vite app
-import { supabaseClient } from '@/lib/supabase';
-import { invalidateCoursesCache } from '@/hooks/useCoursesData';
-import { Plus, Edit2, Trash2, Eye, X, Upload, AlertCircle, ChevronUp, ChevronDown, Search, RotateCw } from 'lucide-react';
+import { supabaseClient } from "@/lib/supabase";
+import { invalidateCoursesCache } from "@/hooks/useCoursesData";
+import {
+  Plus,
+  Edit2,
+  Trash2,
+  Eye,
+  X,
+  Upload,
+  AlertCircle,
+  ChevronUp,
+  ChevronDown,
+  Search,
+  RotateCw,
+} from "lucide-react";
 
-export const Route = createFileRoute('/admin/courses')({
+export const Route = createFileRoute("/admin/courses")({
   component: AdminCourses,
 });
 
@@ -13,8 +25,8 @@ function AdminCourses() {
   const [courses, setCourses] = useState<any[]>([]);
   const [filteredCourses, setFilteredCourses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [expandedCourse, setExpandedCourse] = useState<string | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -25,50 +37,53 @@ function AdminCourses() {
   const [categories, setCategories] = useState<string[]>([]);
   const [currentCourseId, setCurrentCourseId] = useState<string | null>(null);
   const [editingMetaKey, setEditingMetaKey] = useState<string | null>(null);
-  const [editingMetaNewKey, setEditingMetaNewKey] = useState('');
-  const [editingMetaNewValue, setEditingMetaNewValue] = useState('');
+  const [editingMetaNewKey, setEditingMetaNewKey] = useState("");
+  const [editingMetaNewValue, setEditingMetaNewValue] = useState("");
   const [editingLearnIdx, setEditingLearnIdx] = useState<number | null>(null);
-  const [editingLearnText, setEditingLearnText] = useState('');
+  const [editingLearnText, setEditingLearnText] = useState("");
   const [editingRequirementsIdx, setEditingRequirementsIdx] = useState<number | null>(null);
-  const [editingRequirementsText, setEditingRequirementsText] = useState('');
+  const [editingRequirementsText, setEditingRequirementsText] = useState("");
   const [editingModuleIdx, setEditingModuleIdx] = useState<number | null>(null);
-  const [editingModuleText, setEditingModuleText] = useState('');
-  const [editingSubModuleIdx, setEditingSubModuleIdx] = useState<{ moduleIdx: number; subIdx: number } | null>(null);
-  const [editingSubModuleText, setEditingSubModuleText] = useState('');
+  const [editingModuleText, setEditingModuleText] = useState("");
+  const [editingSubModuleIdx, setEditingSubModuleIdx] = useState<{
+    moduleIdx: number;
+    subIdx: number;
+  } | null>(null);
+  const [editingSubModuleText, setEditingSubModuleText] = useState("");
   const [editingFaqIdx, setEditingFaqIdx] = useState<number | null>(null);
-  const [editingFaqQuestion, setEditingFaqQuestion] = useState('');
-  const [editingFaqAnswer, setEditingFaqAnswer] = useState('');
+  const [editingFaqQuestion, setEditingFaqQuestion] = useState("");
+  const [editingFaqAnswer, setEditingFaqAnswer] = useState("");
 
   const [formData, setFormData] = useState({
-    title: '',
-    slug: '',
-    program: 'Certificate',
-    category: '',
-    priceINR: '',
-    months: '',
-    level: '',
-    lessons: '',
-    rating: '',
-    reviewCount: '',
-    overview: '',
-    heroDescription: '',
+    title: "",
+    slug: "",
+    program: "Certificate",
+    category: "",
+    priceINR: "",
+    months: "",
+    level: "",
+    lessons: "",
+    rating: "",
+    reviewCount: "",
+    overview: "",
+    heroDescription: "",
     learn: [] as string[],
-    learnInput: '',
+    learnInput: "",
     requirements: [] as string[],
-    requirementsInput: '',
+    requirementsInput: "",
     modules: [] as string[],
-    moduleInput: '',
+    moduleInput: "",
     moduleDetails: [] as string[][],
-    moduleDetailInput: '',
+    moduleDetailInput: "",
     selectedModuleIndex: 0,
     faqs: [] as any[],
-    faqQuestion: '',
-    faqAnswer: '',
+    faqQuestion: "",
+    faqAnswer: "",
     trainers: [] as any[],
     reviews: [] as any[],
     meta: {} as any,
-    metaKey: '',
-    metaValue: '',
+    metaKey: "",
+    metaValue: "",
   });
 
   useEffect(() => {
@@ -83,25 +98,25 @@ function AdminCourses() {
     try {
       setLoading(true);
       const { data, error } = await supabaseClient
-        .from('courses')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("courses")
+        .select("*")
+        .order("created_at", { ascending: false });
 
       if (error) throw error;
 
       const processedCourses = (data || []).map((course: any) => {
         // Prioritize testimonials (fresh synced data from courses.tsx) over old data
         let courseData = {};
-        if (course.testimonials && typeof course.testimonials === 'string') {
+        if (course.testimonials && typeof course.testimonials === "string") {
           try {
             courseData = JSON.parse(course.testimonials);
           } catch (e) {
-            console.warn('Could not parse testimonials for course', course.id);
+            console.warn("Could not parse testimonials for course", course.id);
           }
         }
         // Fallback to old data if testimonials empty
         if (!courseData.title && course.data) {
-          courseData = typeof course.data === 'string' ? JSON.parse(course.data) : course.data;
+          courseData = typeof course.data === "string" ? JSON.parse(course.data) : course.data;
         }
         return { ...course, data: courseData };
       });
@@ -109,9 +124,15 @@ function AdminCourses() {
       setCourses(processedCourses);
 
       // Calculate stats
-      const fellowships = processedCourses.filter((c: any) => c.data?.program === 'Fellowship').length;
-      const pgDiplomas = processedCourses.filter((c: any) => c.data?.program === 'PG Diploma').length;
-      const certificates = processedCourses.filter((c: any) => c.data?.program === 'Certificate').length;
+      const fellowships = processedCourses.filter(
+        (c: any) => c.data?.program === "Fellowship",
+      ).length;
+      const pgDiplomas = processedCourses.filter(
+        (c: any) => c.data?.program === "PG Diploma",
+      ).length;
+      const certificates = processedCourses.filter(
+        (c: any) => c.data?.program === "Certificate",
+      ).length;
 
       setStats({
         total: processedCourses.length,
@@ -122,11 +143,11 @@ function AdminCourses() {
 
       // Extract unique categories
       const uniqueCategories = Array.from(
-        new Set(processedCourses.map((c: any) => c.data?.category || c.category).filter(Boolean))
+        new Set(processedCourses.map((c: any) => c.data?.category || c.category).filter(Boolean)),
       ) as string[];
       setCategories(uniqueCategories.sort());
     } catch (error) {
-      console.error('Error fetching courses:', error);
+      console.error("Error fetching courses:", error);
     } finally {
       setLoading(false);
     }
@@ -138,9 +159,9 @@ function AdminCourses() {
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter((course: any) => {
-        const title = (course.data?.title || course.title || '').toLowerCase();
-        const slug = (course.data?.slug || course.slug || '').toLowerCase();
-        const description = (course.data?.overview || '').toLowerCase();
+        const title = (course.data?.title || course.title || "").toLowerCase();
+        const slug = (course.data?.slug || course.slug || "").toLowerCase();
+        const description = (course.data?.overview || "").toLowerCase();
         return title.includes(term) || slug.includes(term) || description.includes(term);
       });
     }
@@ -159,59 +180,65 @@ function AdminCourses() {
 
   const handleEditCourse = (course: any) => {
     const courseData = course.data || {};
-    
+
     // Determine months - prefer parsed data first
-    let monthsValue = '';
+    let monthsValue = "";
     if (courseData.months) {
       monthsValue = String(courseData.months);
     } else if (course.duration_weeks) {
       monthsValue = String(course.duration_weeks);
     }
-    
+
     // Determine level based on program type if not explicitly set
-    let levelValue = courseData.level || course.level || '';
-    const programType = courseData.program || course.program || 'Certificate';
-    
+    let levelValue = courseData.level || course.level || "";
+    const programType = courseData.program || course.program || "Certificate";
+
     // If level is missing or seems wrong, auto-set based on program
-    if (!levelValue || levelValue === 'beginner') {
-      if (programType === 'Fellowship' || programType === 'PG Diploma') {
-        levelValue = 'expert';
-      } else if (programType === 'Certificate') {
-        levelValue = 'intermediate';
+    if (!levelValue || levelValue === "beginner") {
+      if (programType === "Fellowship" || programType === "PG Diploma") {
+        levelValue = "expert";
+      } else if (programType === "Certificate") {
+        levelValue = "intermediate";
       }
     }
-    
+
     setCurrentCourseId(course.id);
     setFormData({
-      title: courseData.title || course.title || '',
-      slug: courseData.slug || course.slug || '',
+      title: courseData.title || course.title || "",
+      slug: courseData.slug || course.slug || "",
       program: programType,
-      category: courseData.category || course.category || '',
-      priceINR: courseData.priceINR || course.price || '',
+      category: courseData.category || course.category || "",
+      priceINR: courseData.priceINR || course.price || "",
       months: monthsValue,
       level: levelValue,
-      lessons: (courseData.lessons ? String(courseData.lessons) : '') || (course.lessons ? String(course.lessons) : ''),
-      rating: (courseData.rating ? String(courseData.rating) : '') || (course.rating ? String(course.rating) : ''),
-      reviewCount: (courseData.reviewCount ? String(courseData.reviewCount) : '') || (course.review_count ? String(course.review_count) : ''),
-      overview: courseData.overview || '',
-      heroDescription: courseData.heroDescription || '',
+      lessons:
+        (courseData.lessons ? String(courseData.lessons) : "") ||
+        (course.lessons ? String(course.lessons) : ""),
+      rating:
+        (courseData.rating ? String(courseData.rating) : "") ||
+        (course.rating ? String(course.rating) : ""),
+      reviewCount:
+        (courseData.reviewCount ? String(courseData.reviewCount) : "") ||
+        (course.review_count ? String(course.review_count) : ""),
+      overview: courseData.overview || "",
+      heroDescription: courseData.heroDescription || "",
       learn: Array.isArray(courseData.learn) ? courseData.learn : [],
-      learnInput: '',
+      learnInput: "",
       requirements: Array.isArray(courseData.requirements) ? courseData.requirements : [],
-      requirementsInput: '',
+      requirementsInput: "",
       modules: Array.isArray(courseData.modules) ? courseData.modules : [],
-      moduleInput: '',
+      moduleInput: "",
       moduleDetails: Array.isArray(courseData.moduleDetails) ? courseData.moduleDetails : [],
-      moduleDetailInput: '',
+      moduleDetailInput: "",
       selectedModuleIndex: 0,
       faqs: Array.isArray(courseData.faqs) ? courseData.faqs : [],
-      faqQuestion: '',
-      faqAnswer: '',
+      faqQuestion: "",
+      faqAnswer: "",
       trainers: Array.isArray(courseData.trainers) ? courseData.trainers : [],
       reviews: Array.isArray(courseData.reviews) ? courseData.reviews : [],
       meta: courseData.meta || {},
-      metaKey: '',
-      metaValue: '',
+      metaKey: "",
+      metaValue: "",
     });
     setShowEditModal(true);
   };
@@ -219,35 +246,35 @@ function AdminCourses() {
   const handleAddCourse = () => {
     setCurrentCourseId(null);
     setFormData({
-      title: '',
-      slug: '',
-      program: 'Certificate',
-      category: '',
-      priceINR: '',
-      months: '',
-      level: '',
-      lessons: '',
-      rating: '',
-      reviewCount: '',
-      overview: '',
-      heroDescription: '',
+      title: "",
+      slug: "",
+      program: "Certificate",
+      category: "",
+      priceINR: "",
+      months: "",
+      level: "",
+      lessons: "",
+      rating: "",
+      reviewCount: "",
+      overview: "",
+      heroDescription: "",
       learn: [],
-      learnInput: '',
+      learnInput: "",
       requirements: [],
-      requirementsInput: '',
+      requirementsInput: "",
       modules: [],
-      moduleInput: '',
+      moduleInput: "",
       moduleDetails: [],
-      moduleDetailInput: '',
+      moduleDetailInput: "",
       selectedModuleIndex: 0,
       faqs: [],
-      faqQuestion: '',
-      faqAnswer: '',
+      faqQuestion: "",
+      faqAnswer: "",
       trainers: [],
       reviews: [],
       meta: {},
-      metaKey: '',
-      metaValue: '',
+      metaKey: "",
+      metaValue: "",
     });
     setShowAddModal(true);
   };
@@ -255,7 +282,7 @@ function AdminCourses() {
   const handleSaveCourse = async () => {
     try {
       if (!formData.title || !formData.slug) {
-        alert('Title and Slug are required');
+        alert("Title and Slug are required");
         return;
       }
 
@@ -285,61 +312,66 @@ function AdminCourses() {
       if (currentCourseId) {
         // Editing existing course - preserve trainers from existing data
         const { data: existingCourse, error: fetchError } = await supabaseClient
-          .from('courses')
-          .select('*')
-          .eq('id', currentCourseId)
+          .from("courses")
+          .select("*")
+          .eq("id", currentCourseId)
           .single();
 
         let existingTrainers: any[] = [];
         if (existingCourse && !fetchError) {
           try {
-            const existingData = existingCourse.testimonials ? JSON.parse(existingCourse.testimonials) : {};
+            const existingData = existingCourse.testimonials
+              ? JSON.parse(existingCourse.testimonials)
+              : {};
             existingTrainers = Array.isArray(existingData.trainers) ? existingData.trainers : [];
           } catch (e) {
-            console.warn('Could not parse existing trainers');
+            console.warn("Could not parse existing trainers");
           }
         }
 
         // Merge with existing trainers if formData.trainers is empty
-        const finalTrainers = formData.trainers && formData.trainers.length > 0 ? formData.trainers : existingTrainers;
+        const finalTrainers =
+          formData.trainers && formData.trainers.length > 0 ? formData.trainers : existingTrainers;
 
         const updatedCourseData = {
           ...courseData,
-          trainers: finalTrainers
+          trainers: finalTrainers,
         };
 
         const { data: updateData, error } = await supabaseClient
-          .from('courses')
-          .update({ 
+          .from("courses")
+          .update({
             testimonials: JSON.stringify(updatedCourseData),
             slug: formData.slug,
             title: formData.title,
             category: formData.category,
             price: parseFloat(formData.priceINR as any) || 0,
             duration_weeks: parseFloat(formData.months as any) || 0,
-            categories: formData.category ? [formData.category] : []
+            categories: formData.category ? [formData.category] : [],
           })
-          .eq('id', currentCourseId)
+          .eq("id", currentCourseId)
           .select();
 
-        console.log('Supabase update response:', { updateData, error });
+        console.log("Supabase update response:", { updateData, error });
         if (error) throw error;
       } else {
         // Adding new course
         const { data: insertData, error } = await supabaseClient
-          .from('courses')
-          .insert([{ 
-            testimonials: JSON.stringify(courseData),
-            slug: formData.slug,
-            title: formData.title,
-            category: formData.category,
-            categories: formData.category ? [formData.category] : [],
-            price: parseFloat(formData.priceINR as any) || 0,
-            duration_weeks: parseFloat(formData.months as any) || 0
-          }])
+          .from("courses")
+          .insert([
+            {
+              testimonials: JSON.stringify(courseData),
+              slug: formData.slug,
+              title: formData.title,
+              category: formData.category,
+              categories: formData.category ? [formData.category] : [],
+              price: parseFloat(formData.priceINR as any) || 0,
+              duration_weeks: parseFloat(formData.months as any) || 0,
+            },
+          ])
           .select();
 
-        console.log('Supabase insert response:', { insertData, error });
+        console.log("Supabase insert response:", { insertData, error });
         if (error) throw error;
       }
 
@@ -348,27 +380,24 @@ function AdminCourses() {
       setCurrentCourseId(null);
       await fetchCourses();
       invalidateCoursesCache();
-      alert(currentCourseId ? 'Course updated successfully!' : 'Course added successfully!');
+      alert(currentCourseId ? "Course updated successfully!" : "Course added successfully!");
     } catch (error) {
-      console.error('Error saving course:', error);
-      alert('Error saving course: ' + (error as any)?.message || error);
+      console.error("Error saving course:", error);
+      alert("Error saving course: " + (error as any)?.message || error);
     }
   };
 
   const handleDeleteCourse = async (courseId: string) => {
     try {
       setShowDeleteConfirm(false);
-      const { error } = await supabaseClient
-        .from('courses')
-        .delete()
-        .eq('id', courseId);
+      const { error } = await supabaseClient.from("courses").delete().eq("id", courseId);
 
       if (error) throw error;
       invalidateCoursesCache();
       await fetchCourses();
     } catch (error) {
-      console.error('Error deleting course:', error);
-      alert('Error deleting course: ' + error);
+      console.error("Error deleting course:", error);
+      alert("Error deleting course: " + error);
     }
   };
 
@@ -378,57 +407,57 @@ function AdminCourses() {
 
     try {
       setUploadingImage(true);
-      const ext = file.name.split('.').pop();
+      const ext = file.name.split(".").pop();
       const fileName = `${courseId}-${Date.now()}.${ext}`;
 
       const { error: uploadError } = await supabaseClient.storage
-        .from('course-images')
+        .from("course-images")
         .upload(fileName, file, { upsert: true });
 
       if (uploadError) throw uploadError;
 
       const { data: publicUrlData } = supabaseClient.storage
-        .from('course-images')
+        .from("course-images")
         .getPublicUrl(fileName);
       const publicUrl = publicUrlData.publicUrl;
 
       // Fetch the current course to preserve all its data
       const { data: courseRecord, error: fetchError } = await supabaseClient
-        .from('courses')
-        .select('*')
-        .eq('id', courseId)
+        .from("courses")
+        .select("*")
+        .eq("id", courseId)
         .single();
 
       if (fetchError) throw fetchError;
 
       // Parse existing course data and add image URL
       let courseData = {};
-      if (courseRecord.testimonials && typeof courseRecord.testimonials === 'string') {
+      if (courseRecord.testimonials && typeof courseRecord.testimonials === "string") {
         try {
           courseData = JSON.parse(courseRecord.testimonials);
         } catch (e) {
-          console.warn('Could not parse testimonials');
+          console.warn("Could not parse testimonials");
         }
       }
-      
+
       const updatedData = { ...courseData, image: publicUrl, image_url: publicUrl };
 
       // Update with both image_url field and the data in testimonials
       const { error: updateError } = await supabaseClient
-        .from('courses')
-        .update({ 
+        .from("courses")
+        .update({
           image_url: publicUrl,
-          testimonials: JSON.stringify(updatedData)
+          testimonials: JSON.stringify(updatedData),
         })
-        .eq('id', courseId);
+        .eq("id", courseId);
 
       if (updateError) throw updateError;
       invalidateCoursesCache();
       invalidateCoursesCache();
       await fetchCourses();
     } catch (error) {
-      console.error('Error uploading image:', error);
-      alert('Error uploading image: ' + (error as any)?.message || error);
+      console.error("Error uploading image:", error);
+      alert("Error uploading image: " + (error as any)?.message || error);
     } finally {
       setUploadingImage(false);
     }
@@ -441,7 +470,9 @@ function AdminCourses() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h1 className="text-4xl font-bold mb-2">📚 All Courses</h1>
-            <p className="text-gray-400">Browse all {stats.total} medical courses with complete details</p>
+            <p className="text-gray-400">
+              Browse all {stats.total} medical courses with complete details
+            </p>
           </div>
           <div className="flex gap-3">
             <button
@@ -498,7 +529,9 @@ function AdminCourses() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-semibold mb-2 text-gray-300">Filter by Category</label>
+            <label className="block text-sm font-semibold mb-2 text-gray-300">
+              Filter by Category
+            </label>
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -536,11 +569,15 @@ function AdminCourses() {
                 <div className="p-6">
                   <div className="flex items-start justify-between gap-4 mb-4">
                     <button
-                      onClick={() => setExpandedCourse(expandedCourse === course.id ? null : course.id)}
+                      onClick={() =>
+                        setExpandedCourse(expandedCourse === course.id ? null : course.id)
+                      }
                       className="flex-1 text-left hover:bg-slate-600/50 transition rounded py-2 px-2"
                     >
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-2">{course.data?.title || course.title}</h3>
+                        <h3 className="text-xl font-bold text-white mb-2">
+                          {course.data?.title || course.title}
+                        </h3>
                         <div className="flex flex-wrap gap-2 mb-2">
                           {course.data?.categories?.map((cat: string) => (
                             <span
@@ -563,17 +600,17 @@ function AdminCourses() {
                             </span>
                           )}
                           {course.data?.level && (
-                            <span className="flex items-center gap-1">
-                              📊 {course.data.level}
-                            </span>
+                            <span className="flex items-center gap-1">📊 {course.data.level}</span>
                           )}
-                          {typeof course.data?.weeks !== 'undefined' && (
+                          {typeof course.data?.weeks !== "undefined" && (
                             <span className="flex items-center gap-1">
                               ⏱️ {Math.round((course.data.weeks / 4.33) * 10) / 10} months
                             </span>
                           )}
                           {course.data?.heroDescription && (
-                            <span className="w-full text-sm text-gray-400 mt-2">{course.data.heroDescription}</span>
+                            <span className="w-full text-sm text-gray-400 mt-2">
+                              {course.data.heroDescription}
+                            </span>
                           )}
                           {course.data?.lessons && (
                             <span className="flex items-center gap-1">
@@ -593,7 +630,10 @@ function AdminCourses() {
                       >
                         <Edit2 size={18} />
                       </button>
-                      <label className="p-2 bg-purple-600 hover:bg-purple-700 rounded transition cursor-pointer" title="Upload image">
+                      <label
+                        className="p-2 bg-purple-600 hover:bg-purple-700 rounded transition cursor-pointer"
+                        title="Upload image"
+                      >
                         <Upload size={18} />
                         <input
                           type="file"
@@ -636,7 +676,9 @@ function AdminCourses() {
                     {/* Learning Outcomes */}
                     {course.data?.learn && course.data.learn.length > 0 && (
                       <div>
-                        <h4 className="text-lg font-semibold text-blue-300 mb-2">✅ What You'll Learn</h4>
+                        <h4 className="text-lg font-semibold text-blue-300 mb-2">
+                          ✅ What You'll Learn
+                        </h4>
                         <ul className="space-y-2">
                           {course.data.learn.map((item: string, idx: number) => (
                             <li key={idx} className="flex gap-2 text-gray-300">
@@ -651,7 +693,9 @@ function AdminCourses() {
                     {/* Requirements */}
                     {course.data?.requirements && course.data.requirements.length > 0 && (
                       <div>
-                        <h4 className="text-lg font-semibold text-blue-300 mb-2">📋 Requirements</h4>
+                        <h4 className="text-lg font-semibold text-blue-300 mb-2">
+                          📋 Requirements
+                        </h4>
                         <ul className="space-y-2">
                           {course.data.requirements.map((item: string, idx: number) => (
                             <li key={idx} className="flex gap-2 text-gray-300">
@@ -669,8 +713,13 @@ function AdminCourses() {
                         <h4 className="text-lg font-semibold text-blue-300 mb-2">📚 Modules</h4>
                         <div className="space-y-2">
                           {course.data.modules.map((module: string, idx: number) => (
-                            <div key={idx} className="bg-slate-700/50 p-3 rounded border border-slate-600">
-                              <div className="font-semibold text-blue-200">Module {idx + 1}: {module}</div>
+                            <div
+                              key={idx}
+                              className="bg-slate-700/50 p-3 rounded border border-slate-600"
+                            >
+                              <div className="font-semibold text-blue-200">
+                                Module {idx + 1}: {module}
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -680,11 +729,18 @@ function AdminCourses() {
                     {/* FAQs */}
                     {course.data?.faqs && course.data.faqs.length > 0 && (
                       <div>
-                        <h4 className="text-lg font-semibold text-blue-300 mb-2">❓ FAQs ({course.data.faqs.length})</h4>
+                        <h4 className="text-lg font-semibold text-blue-300 mb-2">
+                          ❓ FAQs ({course.data.faqs.length})
+                        </h4>
                         <div className="space-y-2">
                           {course.data.faqs.map((faq: any, idx: number) => (
-                            <div key={idx} className="bg-slate-700/50 p-3 rounded border border-slate-600">
-                              <div className="font-semibold text-yellow-300 text-sm mb-1">Q: {faq.q}</div>
+                            <div
+                              key={idx}
+                              className="bg-slate-700/50 p-3 rounded border border-slate-600"
+                            >
+                              <div className="font-semibold text-yellow-300 text-sm mb-1">
+                                Q: {faq.q}
+                              </div>
                               <div className="text-gray-300 text-sm">A: {faq.a}</div>
                             </div>
                           ))}
@@ -709,7 +765,7 @@ function AdminCourses() {
             <div className="bg-slate-800 w-full max-w-4xl mx-auto my-8 rounded-lg border border-slate-600">
               <div className="p-6 border-b border-slate-600 flex items-center justify-between sticky top-0 bg-slate-800">
                 <h2 className="text-2xl font-bold text-white">
-                  {showEditModal ? 'Edit Course' : 'Add New Course'}
+                  {showEditModal ? "Edit Course" : "Add New Course"}
                 </h2>
                 <button
                   onClick={() => {
@@ -727,9 +783,11 @@ function AdminCourses() {
                 {/* SECTION 1: Basic Information */}
                 <div className="border-b border-slate-600 pb-4">
                   <h3 className="text-lg font-bold text-blue-300 mb-4">📝 Basic Information</h3>
-                  
+
                   <div className="mb-4">
-                    <label className="block text-sm font-semibold mb-2 text-gray-300">Course Title *</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
+                      Course Title *
+                    </label>
                     <input
                       type="text"
                       value={formData.title}
@@ -752,7 +810,9 @@ function AdminCourses() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Program Type</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Program Type
+                      </label>
                       <select
                         value={formData.program}
                         onChange={(e) => setFormData({ ...formData, program: e.target.value })}
@@ -765,7 +825,9 @@ function AdminCourses() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Category</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Category
+                      </label>
                       <input
                         type="text"
                         value={formData.category}
@@ -780,10 +842,12 @@ function AdminCourses() {
                 {/* SECTION 2: Pricing & Duration */}
                 <div className="border-b border-slate-600 pb-4">
                   <h3 className="text-lg font-bold text-blue-300 mb-4">💰 Pricing & Duration</h3>
-                  
+
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Price (₹)</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Price (₹)
+                      </label>
                       <input
                         type="number"
                         value={formData.priceINR}
@@ -794,7 +858,9 @@ function AdminCourses() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Duration (Months)</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Duration (Months)
+                      </label>
                       <input
                         type="number"
                         value={formData.months}
@@ -807,7 +873,9 @@ function AdminCourses() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Lessons</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Lessons
+                      </label>
                       <input
                         type="number"
                         value={formData.lessons}
@@ -818,7 +886,9 @@ function AdminCourses() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Level</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Level
+                      </label>
                       <select
                         value={formData.level}
                         onChange={(e) => setFormData({ ...formData, level: e.target.value })}
@@ -837,10 +907,12 @@ function AdminCourses() {
                 {/* SECTION 3: Ratings & Reviews */}
                 <div className="border-b border-slate-600 pb-4">
                   <h3 className="text-lg font-bold text-blue-300 mb-4">⭐ Ratings & Reviews</h3>
-                  
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Rating (0-5)</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Rating (0-5)
+                      </label>
                       <input
                         type="number"
                         min="0"
@@ -853,7 +925,9 @@ function AdminCourses() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-300">Review Count</label>
+                      <label className="block text-sm font-semibold mb-2 text-gray-300">
+                        Review Count
+                      </label>
                       <input
                         type="number"
                         value={formData.reviewCount}
@@ -868,7 +942,9 @@ function AdminCourses() {
                 <div className="border-b border-slate-600 pb-4">
                   <h3 className="text-lg font-bold text-blue-300 mb-4">🖋️ Descriptions</h3>
                   <div className="mb-4">
-                    <label className="block text-sm font-semibold mb-2 text-gray-300">Overview</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
+                      Overview
+                    </label>
                     <textarea
                       value={formData.overview}
                       onChange={(e) => setFormData({ ...formData, overview: e.target.value })}
@@ -878,11 +954,15 @@ function AdminCourses() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-gray-300">Hero Description</label>
+                    <label className="block text-sm font-semibold mb-2 text-gray-300">
+                      Hero Description
+                    </label>
                     <input
                       type="text"
                       value={formData.heroDescription}
-                      onChange={(e) => setFormData({ ...formData, heroDescription: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, heroDescription: e.target.value })
+                      }
                       className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
                     />
                   </div>
@@ -921,11 +1001,11 @@ function AdminCourses() {
                       value={formData.learnInput}
                       onChange={(e) => setFormData({ ...formData, learnInput: e.target.value })}
                       onKeyPress={(e) => {
-                        if (e.key === 'Enter' && formData.learnInput.trim()) {
+                        if (e.key === "Enter" && formData.learnInput.trim()) {
                           setFormData({
                             ...formData,
                             learn: [...formData.learn, formData.learnInput.trim()],
-                            learnInput: '',
+                            learnInput: "",
                           });
                         }
                       }}
@@ -938,7 +1018,7 @@ function AdminCourses() {
                           setFormData({
                             ...formData,
                             learn: [...formData.learn, formData.learnInput.trim()],
-                            learnInput: '',
+                            learnInput: "",
                           });
                         }
                       }}
@@ -949,7 +1029,10 @@ function AdminCourses() {
                   </div>
                   <div className="space-y-2">
                     {formData.learn.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between bg-slate-700/50 p-2 rounded">
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between bg-slate-700/50 p-2 rounded"
+                      >
                         {editingLearnIdx === idx ? (
                           <div className="flex gap-2 flex-1">
                             <input
@@ -965,7 +1048,7 @@ function AdminCourses() {
                                   updatedLearn[idx] = editingLearnText.trim();
                                   setFormData({ ...formData, learn: updatedLearn });
                                   setEditingLearnIdx(null);
-                                  setEditingLearnText('');
+                                  setEditingLearnText("");
                                 }
                               }}
                               className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold transition"
@@ -975,7 +1058,7 @@ function AdminCourses() {
                             <button
                               onClick={() => {
                                 setEditingLearnIdx(null);
-                                setEditingLearnText('');
+                                setEditingLearnText("");
                               }}
                               className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold transition"
                             >
@@ -996,7 +1079,12 @@ function AdminCourses() {
                                 ✎ Edit
                               </button>
                               <button
-                                onClick={() => setFormData({ ...formData, learn: formData.learn.filter((_, i) => i !== idx) })}
+                                onClick={() =>
+                                  setFormData({
+                                    ...formData,
+                                    learn: formData.learn.filter((_, i) => i !== idx),
+                                  })
+                                }
                                 className="text-red-400 hover:text-red-300"
                               >
                                 ✕
@@ -1016,13 +1104,18 @@ function AdminCourses() {
                     <input
                       type="text"
                       value={formData.requirementsInput}
-                      onChange={(e) => setFormData({ ...formData, requirementsInput: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, requirementsInput: e.target.value })
+                      }
                       onKeyPress={(e) => {
-                        if (e.key === 'Enter' && formData.requirementsInput.trim()) {
+                        if (e.key === "Enter" && formData.requirementsInput.trim()) {
                           setFormData({
                             ...formData,
-                            requirements: [...formData.requirements, formData.requirementsInput.trim()],
-                            requirementsInput: '',
+                            requirements: [
+                              ...formData.requirements,
+                              formData.requirementsInput.trim(),
+                            ],
+                            requirementsInput: "",
                           });
                         }
                       }}
@@ -1034,8 +1127,11 @@ function AdminCourses() {
                         if (formData.requirementsInput.trim()) {
                           setFormData({
                             ...formData,
-                            requirements: [...formData.requirements, formData.requirementsInput.trim()],
-                            requirementsInput: '',
+                            requirements: [
+                              ...formData.requirements,
+                              formData.requirementsInput.trim(),
+                            ],
+                            requirementsInput: "",
                           });
                         }
                       }}
@@ -1046,7 +1142,10 @@ function AdminCourses() {
                   </div>
                   <div className="space-y-2">
                     {formData.requirements.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between bg-slate-700/50 p-2 rounded">
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between bg-slate-700/50 p-2 rounded"
+                      >
                         {editingRequirementsIdx === idx ? (
                           <div className="flex gap-2 flex-1">
                             <input
@@ -1062,7 +1161,7 @@ function AdminCourses() {
                                   updatedRequirements[idx] = editingRequirementsText.trim();
                                   setFormData({ ...formData, requirements: updatedRequirements });
                                   setEditingRequirementsIdx(null);
-                                  setEditingRequirementsText('');
+                                  setEditingRequirementsText("");
                                 }
                               }}
                               className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold transition"
@@ -1072,7 +1171,7 @@ function AdminCourses() {
                             <button
                               onClick={() => {
                                 setEditingRequirementsIdx(null);
-                                setEditingRequirementsText('');
+                                setEditingRequirementsText("");
                               }}
                               className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold transition"
                             >
@@ -1093,7 +1192,12 @@ function AdminCourses() {
                                 ✎ Edit
                               </button>
                               <button
-                                onClick={() => setFormData({ ...formData, requirements: formData.requirements.filter((_, i) => i !== idx) })}
+                                onClick={() =>
+                                  setFormData({
+                                    ...formData,
+                                    requirements: formData.requirements.filter((_, i) => i !== idx),
+                                  })
+                                }
                                 className="text-red-400 hover:text-red-300"
                               >
                                 ✕
@@ -1115,14 +1219,14 @@ function AdminCourses() {
                       value={formData.moduleInput}
                       onChange={(e) => setFormData({ ...formData, moduleInput: e.target.value })}
                       onKeyPress={(e) => {
-                        if (e.key === 'Enter' && formData.moduleInput.trim()) {
+                        if (e.key === "Enter" && formData.moduleInput.trim()) {
                           const newModules = [...formData.modules, formData.moduleInput.trim()];
                           const newDetails = [...formData.moduleDetails, []];
                           setFormData({
                             ...formData,
                             modules: newModules,
                             moduleDetails: newDetails,
-                            moduleInput: '',
+                            moduleInput: "",
                           });
                         }
                       }}
@@ -1138,7 +1242,7 @@ function AdminCourses() {
                             ...formData,
                             modules: newModules,
                             moduleDetails: newDetails,
-                            moduleInput: '',
+                            moduleInput: "",
                           });
                         }
                       }}
@@ -1149,7 +1253,10 @@ function AdminCourses() {
                   </div>
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {formData.modules.map((module, idx) => (
-                      <div key={idx} className="bg-slate-700/50 p-4 rounded border border-slate-600">
+                      <div
+                        key={idx}
+                        className="bg-slate-700/50 p-4 rounded border border-slate-600"
+                      >
                         {/* Module Header */}
                         <div className="flex items-center justify-between mb-3 pb-2 border-b border-slate-500">
                           {editingModuleIdx === idx ? (
@@ -1167,7 +1274,7 @@ function AdminCourses() {
                                     updatedModules[idx] = editingModuleText.trim();
                                     setFormData({ ...formData, modules: updatedModules });
                                     setEditingModuleIdx(null);
-                                    setEditingModuleText('');
+                                    setEditingModuleText("");
                                   }
                                 }}
                                 className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold"
@@ -1177,7 +1284,7 @@ function AdminCourses() {
                               <button
                                 onClick={() => {
                                   setEditingModuleIdx(null);
-                                  setEditingModuleText('');
+                                  setEditingModuleText("");
                                 }}
                                 className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold"
                               >
@@ -1186,7 +1293,9 @@ function AdminCourses() {
                             </div>
                           ) : (
                             <>
-                              <span className="font-semibold text-blue-300">Module {idx + 1}: {module}</span>
+                              <span className="font-semibold text-blue-300">
+                                Module {idx + 1}: {module}
+                              </span>
                               <div className="flex gap-1">
                                 <button
                                   onClick={() => {
@@ -1202,7 +1311,9 @@ function AdminCourses() {
                                     setFormData({
                                       ...formData,
                                       modules: formData.modules.filter((_, i) => i !== idx),
-                                      moduleDetails: formData.moduleDetails.filter((_, i) => i !== idx),
+                                      moduleDetails: formData.moduleDetails.filter(
+                                        (_, i) => i !== idx,
+                                      ),
                                     });
                                   }}
                                   className="text-red-400 hover:text-red-300 text-lg"
@@ -1213,24 +1324,26 @@ function AdminCourses() {
                             </>
                           )}
                         </div>
-                        
+
                         {/* Sub-Modules Section */}
                         <div className="pl-2">
-                          <label className="text-xs uppercase font-bold text-gray-400 mb-2 block">Sub-Modules ({formData.moduleDetails[idx]?.length || 0})</label>
-                          
+                          <label className="text-xs uppercase font-bold text-gray-400 mb-2 block">
+                            Sub-Modules ({formData.moduleDetails[idx]?.length || 0})
+                          </label>
+
                           {/* Add Sub-Module */}
                           <div className="flex gap-2 mb-3">
                             <input
                               type="text"
                               placeholder="Add sub-module..."
                               onKeyPress={(e) => {
-                                if (e.key === 'Enter') {
+                                if (e.key === "Enter") {
                                   const input = e.currentTarget.value.trim();
                                   if (input) {
                                     const newDetails = [...formData.moduleDetails];
                                     if (!Array.isArray(newDetails[idx])) newDetails[idx] = [];
                                     newDetails[idx].push(input);
-                                    e.currentTarget.value = '';
+                                    e.currentTarget.value = "";
                                     setFormData({ ...formData, moduleDetails: newDetails });
                                   }
                                 }
@@ -1239,12 +1352,16 @@ function AdminCourses() {
                             />
                             <button
                               onClick={() => {
-                                const input = (event?.currentTarget?.previousElementSibling as HTMLInputElement)?.value.trim();
+                                const input = (
+                                  event?.currentTarget?.previousElementSibling as HTMLInputElement
+                                )?.value.trim();
                                 if (input) {
                                   const newDetails = [...formData.moduleDetails];
                                   if (!Array.isArray(newDetails[idx])) newDetails[idx] = [];
                                   newDetails[idx].push(input);
-                                  (event?.currentTarget?.previousElementSibling as HTMLInputElement).value = '';
+                                  (
+                                    event?.currentTarget?.previousElementSibling as HTMLInputElement
+                                  ).value = "";
                                   setFormData({ ...formData, moduleDetails: newDetails });
                                 }
                               }}
@@ -1253,13 +1370,18 @@ function AdminCourses() {
                               Add
                             </button>
                           </div>
-                          
+
                           {/* List of Sub-Modules */}
                           <div className="space-y-1 max-h-32 overflow-y-auto">
-                            {Array.isArray(formData.moduleDetails[idx]) && formData.moduleDetails[idx].length > 0 ? (
+                            {Array.isArray(formData.moduleDetails[idx]) &&
+                            formData.moduleDetails[idx].length > 0 ? (
                               formData.moduleDetails[idx].map((submodule: string, sidx: number) => (
-                                <div key={sidx} className="flex items-center justify-between gap-2 bg-slate-800/50 p-2 rounded text-sm">
-                                  {editingSubModuleIdx?.moduleIdx === idx && editingSubModuleIdx?.subIdx === sidx ? (
+                                <div
+                                  key={sidx}
+                                  className="flex items-center justify-between gap-2 bg-slate-800/50 p-2 rounded text-sm"
+                                >
+                                  {editingSubModuleIdx?.moduleIdx === idx &&
+                                  editingSubModuleIdx?.subIdx === sidx ? (
                                     <div className="flex gap-1 flex-1">
                                       <input
                                         type="text"
@@ -1274,7 +1396,7 @@ function AdminCourses() {
                                             newDetails[idx][sidx] = editingSubModuleText.trim();
                                             setFormData({ ...formData, moduleDetails: newDetails });
                                             setEditingSubModuleIdx(null);
-                                            setEditingSubModuleText('');
+                                            setEditingSubModuleText("");
                                           }
                                         }}
                                         className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold"
@@ -1284,7 +1406,7 @@ function AdminCourses() {
                                       <button
                                         onClick={() => {
                                           setEditingSubModuleIdx(null);
-                                          setEditingSubModuleText('');
+                                          setEditingSubModuleText("");
                                         }}
                                         className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold"
                                       >
@@ -1293,7 +1415,9 @@ function AdminCourses() {
                                     </div>
                                   ) : (
                                     <>
-                                      <span className="text-gray-300 flex-1 truncate">→ {submodule}</span>
+                                      <span className="text-gray-300 flex-1 truncate">
+                                        → {submodule}
+                                      </span>
                                       <button
                                         onClick={() => {
                                           setEditingSubModuleIdx({ moduleIdx: idx, subIdx: sidx });
@@ -1306,7 +1430,9 @@ function AdminCourses() {
                                       <button
                                         onClick={() => {
                                           const newDetails = [...formData.moduleDetails];
-                                          newDetails[idx] = newDetails[idx].filter((_: string, i: number) => i !== sidx);
+                                          newDetails[idx] = newDetails[idx].filter(
+                                            (_: string, i: number) => i !== sidx,
+                                          );
                                           setFormData({ ...formData, moduleDetails: newDetails });
                                         }}
                                         className="text-red-400 hover:text-red-300 flex-shrink-0"
@@ -1318,7 +1444,9 @@ function AdminCourses() {
                                 </div>
                               ))
                             ) : (
-                              <div className="text-gray-500 text-sm italic py-2">No sub-modules added</div>
+                              <div className="text-gray-500 text-sm italic py-2">
+                                No sub-modules added
+                              </div>
                             )}
                           </div>
                         </div>
@@ -1326,7 +1454,9 @@ function AdminCourses() {
                     ))}
                   </div>
                   {formData.modules.length === 0 && (
-                    <div className="text-gray-400 text-sm italic py-4 text-center">No modules added yet</div>
+                    <div className="text-gray-400 text-sm italic py-4 text-center">
+                      No modules added yet
+                    </div>
                   )}
                 </div>
 
@@ -1353,9 +1483,12 @@ function AdminCourses() {
                         if (formData.faqQuestion.trim() && formData.faqAnswer.trim()) {
                           setFormData({
                             ...formData,
-                            faqs: [...formData.faqs, { q: formData.faqQuestion.trim(), a: formData.faqAnswer.trim() }],
-                            faqQuestion: '',
-                            faqAnswer: '',
+                            faqs: [
+                              ...formData.faqs,
+                              { q: formData.faqQuestion.trim(), a: formData.faqAnswer.trim() },
+                            ],
+                            faqQuestion: "",
+                            faqAnswer: "",
                           });
                         }
                       }}
@@ -1366,7 +1499,10 @@ function AdminCourses() {
                   </div>
                   <div className="space-y-2">
                     {formData.faqs.map((faq, idx) => (
-                      <div key={idx} className="bg-slate-700/50 p-3 rounded border border-slate-600">
+                      <div
+                        key={idx}
+                        className="bg-slate-700/50 p-3 rounded border border-slate-600"
+                      >
                         {editingFaqIdx === idx ? (
                           <div className="space-y-2">
                             <input
@@ -1388,11 +1524,14 @@ function AdminCourses() {
                                 onClick={() => {
                                   if (editingFaqQuestion.trim() && editingFaqAnswer.trim()) {
                                     const updatedFaqs = [...formData.faqs];
-                                    updatedFaqs[idx] = { q: editingFaqQuestion.trim(), a: editingFaqAnswer.trim() };
+                                    updatedFaqs[idx] = {
+                                      q: editingFaqQuestion.trim(),
+                                      a: editingFaqAnswer.trim(),
+                                    };
                                     setFormData({ ...formData, faqs: updatedFaqs });
                                     setEditingFaqIdx(null);
-                                    setEditingFaqQuestion('');
-                                    setEditingFaqAnswer('');
+                                    setEditingFaqQuestion("");
+                                    setEditingFaqAnswer("");
                                   }
                                 }}
                                 className="flex-1 px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold"
@@ -1402,8 +1541,8 @@ function AdminCourses() {
                               <button
                                 onClick={() => {
                                   setEditingFaqIdx(null);
-                                  setEditingFaqQuestion('');
-                                  setEditingFaqAnswer('');
+                                  setEditingFaqQuestion("");
+                                  setEditingFaqAnswer("");
                                 }}
                                 className="flex-1 px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold"
                               >
@@ -1414,7 +1553,9 @@ function AdminCourses() {
                         ) : (
                           <div className="flex items-start justify-between mb-1">
                             <div className="flex-1">
-                              <div className="font-semibold text-yellow-300 text-sm mb-1">Q: {faq.q}</div>
+                              <div className="font-semibold text-yellow-300 text-sm mb-1">
+                                Q: {faq.q}
+                              </div>
                               <div className="text-gray-300 text-sm">A: {faq.a}</div>
                             </div>
                             <div className="flex gap-1 ml-2">
@@ -1429,7 +1570,12 @@ function AdminCourses() {
                                 ✎ Edit
                               </button>
                               <button
-                                onClick={() => setFormData({ ...formData, faqs: formData.faqs.filter((_, i) => i !== idx) })}
+                                onClick={() =>
+                                  setFormData({
+                                    ...formData,
+                                    faqs: formData.faqs.filter((_, i) => i !== idx),
+                                  })
+                                }
                                 className="text-red-400 hover:text-red-300"
                               >
                                 ✕
@@ -1469,8 +1615,8 @@ function AdminCourses() {
                               ...formData.meta,
                               [formData.metaKey.trim()]: formData.metaValue.trim(),
                             },
-                            metaKey: '',
-                            metaValue: '',
+                            metaKey: "",
+                            metaValue: "",
                           });
                         }
                       }}
@@ -1481,7 +1627,10 @@ function AdminCourses() {
                   </div>
                   <div className="space-y-1">
                     {Object.entries(formData.meta).map(([key, value]) => (
-                      <div key={key} className="flex items-center justify-between bg-slate-700/50 p-2 rounded">
+                      <div
+                        key={key}
+                        className="flex items-center justify-between bg-slate-700/50 p-2 rounded"
+                      >
                         {editingMetaKey === key ? (
                           <div className="flex gap-2 flex-1">
                             <input
@@ -1508,8 +1657,8 @@ function AdminCourses() {
                                   newMeta[editingMetaNewKey.trim()] = editingMetaNewValue.trim();
                                   setFormData({ ...formData, meta: newMeta });
                                   setEditingMetaKey(null);
-                                  setEditingMetaNewKey('');
-                                  setEditingMetaNewValue('');
+                                  setEditingMetaNewKey("");
+                                  setEditingMetaNewValue("");
                                 }
                               }}
                               className="px-2 py-1 bg-blue-600 hover:bg-blue-700 rounded text-white text-xs font-semibold transition"
@@ -1519,8 +1668,8 @@ function AdminCourses() {
                             <button
                               onClick={() => {
                                 setEditingMetaKey(null);
-                                setEditingMetaNewKey('');
-                                setEditingMetaNewValue('');
+                                setEditingMetaNewKey("");
+                                setEditingMetaNewValue("");
                               }}
                               className="px-2 py-1 bg-gray-600 hover:bg-gray-700 rounded text-white text-xs font-semibold transition"
                             >
@@ -1529,7 +1678,9 @@ function AdminCourses() {
                           </div>
                         ) : (
                           <>
-                            <span className="text-gray-300 text-sm"><strong>{key}:</strong> {String(value)}</span>
+                            <span className="text-gray-300 text-sm">
+                              <strong>{key}:</strong> {String(value)}
+                            </span>
                             <div className="flex gap-1">
                               <button
                                 onClick={() => {
@@ -1575,7 +1726,7 @@ function AdminCourses() {
                     onClick={handleSaveCourse}
                     className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition"
                   >
-                    {showEditModal ? 'Update Course' : 'Add Course'}
+                    {showEditModal ? "Update Course" : "Add Course"}
                   </button>
                 </div>
               </div>

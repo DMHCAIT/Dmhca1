@@ -37,9 +37,7 @@ function AdmissionForm() {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -85,9 +83,7 @@ function AdmissionForm() {
         }, 3000);
       }
     } catch (err) {
-      setError(
-        err instanceof Error ? err.message : "Failed to submit application"
-      );
+      setError(err instanceof Error ? err.message : "Failed to submit application");
       console.error("Error submitting form:", err);
     } finally {
       setLoading(false);
@@ -117,19 +113,13 @@ function AdmissionForm() {
 
           {submitted ? (
             <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-8 text-center">
-              <h2 className="text-2xl font-bold text-emerald-900 mb-2">
-                Application Submitted!
-              </h2>
+              <h2 className="text-2xl font-bold text-emerald-900 mb-2">Application Submitted!</h2>
               <p className="text-emerald-800">
-                Thank you for your application. Our team will review it and
-                contact you soon.
+                Thank you for your application. Our team will review it and contact you soon.
               </p>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="bg-white rounded-xl shadow-md p-8 space-y-6"
-            >
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-md p-8 space-y-6">
               {/* Full Name */}
               <div>
                 <label className="block text-sm font-semibold text-slate-900 mb-2">
@@ -271,9 +261,7 @@ function AdmissionForm() {
                 {loading ? "Submitting..." : "Submit Application"}
               </button>
 
-              <p className="text-xs text-slate-500 text-center">
-                * Required fields
-              </p>
+              <p className="text-xs text-slate-500 text-center">* Required fields</p>
             </form>
           )}
         </div>

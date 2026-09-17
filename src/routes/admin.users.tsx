@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Trash2, Eye } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { Trash2, Eye } from "lucide-react";
 
-export const Route = createFileRoute('/admin/users')({
+export const Route = createFileRoute("/admin/users")({
   component: UsersManagement,
 });
 
@@ -20,7 +20,7 @@ interface User {
 function UsersManagement() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'signups' | 'enrollments'>('signups');
+  const [activeTab, setActiveTab] = useState<"signups" | "enrollments">("signups");
 
   useEffect(() => {
     fetchUsers();
@@ -29,33 +29,33 @@ function UsersManagement() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      if (activeTab === 'signups') {
+      if (activeTab === "signups") {
         const { data, error } = await supabaseClient
-          .from('user_signups')
-          .select('*')
-          .order('created_at', { ascending: false });
+          .from("user_signups")
+          .select("*")
+          .order("created_at", { ascending: false });
 
         if (error) throw error;
         setUsers(data || []);
       } else {
         const { data, error } = await supabaseClient
-          .from('course_enrollments')
-          .select('*')
-          .order('enrollment_date', { ascending: false });
+          .from("course_enrollments")
+          .select("*")
+          .order("enrollment_date", { ascending: false });
 
         if (error) throw error;
         setUsers(
           data?.map((e) => ({
             id: e.id,
-            name: e.user_name || 'Unknown',
+            name: e.user_name || "Unknown",
             email: e.user_email,
             status: e.status,
             created_at: e.enrollment_date,
-          })) || []
+          })) || [],
         );
       }
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error("Error fetching users:", error);
     } finally {
       setLoading(false);
     }
@@ -64,30 +64,30 @@ function UsersManagement() {
   const handleStatusChange = async (userId: string, newStatus: string) => {
     try {
       const { error } = await supabaseClient
-        .from(activeTab === 'signups' ? 'user_signups' : 'course_enrollments')
+        .from(activeTab === "signups" ? "user_signups" : "course_enrollments")
         .update({ status: newStatus })
-        .eq('id', userId);
+        .eq("id", userId);
 
       if (error) throw error;
       fetchUsers();
     } catch (error) {
-      console.error('Error updating status:', error);
+      console.error("Error updating status:", error);
     }
   };
 
   const handleDelete = async (userId: string) => {
-    if (!confirm('Delete this user?')) return;
+    if (!confirm("Delete this user?")) return;
 
     try {
       const { error } = await supabaseClient
-        .from(activeTab === 'signups' ? 'user_signups' : 'course_enrollments')
+        .from(activeTab === "signups" ? "user_signups" : "course_enrollments")
         .delete()
-        .eq('id', userId);
+        .eq("id", userId);
 
       if (error) throw error;
       fetchUsers();
     } catch (error) {
-      console.error('Error deleting user:', error);
+      console.error("Error deleting user:", error);
     }
   };
 
@@ -98,22 +98,22 @@ function UsersManagement() {
         <div className="flex gap-4">
           <button
             onClick={() => {
-              setActiveTab('signups');
+              setActiveTab("signups");
               fetchUsers();
             }}
             className={`px-4 py-2 rounded-lg font-semibold transition ${
-              activeTab === 'signups' ? 'bg-gold text-navy-deep' : 'bg-gray-300 text-gray-700'
+              activeTab === "signups" ? "bg-gold text-navy-deep" : "bg-gray-300 text-gray-700"
             }`}
           >
             Signups
           </button>
           <button
             onClick={() => {
-              setActiveTab('enrollments');
+              setActiveTab("enrollments");
               fetchUsers();
             }}
             className={`px-4 py-2 rounded-lg font-semibold transition ${
-              activeTab === 'enrollments' ? 'bg-gold text-navy-deep' : 'bg-gray-300 text-gray-700'
+              activeTab === "enrollments" ? "bg-gold text-navy-deep" : "bg-gray-300 text-gray-700"
             }`}
           >
             Enrollments
@@ -132,8 +132,12 @@ function UsersManagement() {
               <tr>
                 <th className="px-6 py-3 text-left font-semibold">Name</th>
                 <th className="px-6 py-3 text-left font-semibold">Email</th>
-                {activeTab === 'signups' && <th className="px-6 py-3 text-left font-semibold">Phone</th>}
-                {activeTab === 'signups' && <th className="px-6 py-3 text-left font-semibold">Course</th>}
+                {activeTab === "signups" && (
+                  <th className="px-6 py-3 text-left font-semibold">Phone</th>
+                )}
+                {activeTab === "signups" && (
+                  <th className="px-6 py-3 text-left font-semibold">Course</th>
+                )}
                 <th className="px-6 py-3 text-left font-semibold">Status</th>
                 <th className="px-6 py-3 text-left font-semibold">Date</th>
                 <th className="px-6 py-3 text-center font-semibold">Actions</th>
@@ -144,23 +148,27 @@ function UsersManagement() {
                 <tr key={user.id} className="border-b hover:bg-gray-50">
                   <td className="px-6 py-4 font-medium">{user.name}</td>
                   <td className="px-6 py-4">{user.email}</td>
-                  {activeTab === 'signups' && <td className="px-6 py-4">{(user as any).phone || '-'}</td>}
-                  {activeTab === 'signups' && <td className="px-6 py-4">{(user as any).course_interested || '-'}</td>}
+                  {activeTab === "signups" && (
+                    <td className="px-6 py-4">{(user as any).phone || "-"}</td>
+                  )}
+                  {activeTab === "signups" && (
+                    <td className="px-6 py-4">{(user as any).course_interested || "-"}</td>
+                  )}
                   <td className="px-6 py-4">
                     <select
                       value={user.status}
                       onChange={(e) => handleStatusChange(user.id, e.target.value)}
                       className={`px-3 py-1 rounded font-semibold border-0 cursor-pointer ${
-                        user.status === 'new'
-                          ? 'bg-blue-100 text-blue-800'
-                          : user.status === 'contacted'
-                            ? 'bg-yellow-100 text-yellow-800'
-                            : user.status === 'enrolled' || user.status === 'active'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-gray-100 text-gray-800'
+                        user.status === "new"
+                          ? "bg-blue-100 text-blue-800"
+                          : user.status === "contacted"
+                            ? "bg-yellow-100 text-yellow-800"
+                            : user.status === "enrolled" || user.status === "active"
+                              ? "bg-green-100 text-green-800"
+                              : "bg-gray-100 text-gray-800"
                       }`}
                     >
-                      {activeTab === 'signups' ? (
+                      {activeTab === "signups" ? (
                         <>
                           <option value="new">New</option>
                           <option value="contacted">Contacted</option>

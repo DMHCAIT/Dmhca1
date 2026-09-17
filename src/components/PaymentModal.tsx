@@ -1,45 +1,51 @@
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Loader2, Check, X } from 'lucide-react';
-import { createEnrollment } from '@/routes/api/enroll';
-import { createRazorpayOrder } from '@/routes/api/razorpay-create-order';
-import { verifyRazorpayPayment } from '@/routes/api/razorpay-verify';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Loader2, Check, X } from "lucide-react";
+import { createEnrollment } from "@/routes/api/enroll";
+import { createRazorpayOrder } from "@/routes/api/razorpay-create-order";
+import { verifyRazorpayPayment } from "@/routes/api/razorpay-verify";
 
 export function PaymentModal({ isOpen, onClose, applicationData, amount, courseName }) {
-  const [step, setStep] = useState('payment'); // payment | success | error
+  const [step, setStep] = useState("payment"); // payment | success | error
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   if (!isOpen) return null;
 
   const handleRazorpayPayment = async () => {
     setLoading(true);
-    setError('');
+    setError("");
     try {
       // Re-validate data fresh in this handler
-      const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
-      
-      const courseTitle = (applicationData?.courseTitle || courseName || 'Course').trim() || 'Course';
-      const studentName = (applicationData?.fullName || 'Student').trim() || 'Student';
-      const studentEmail = (applicationData?.email || '').trim();
+      const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
 
-      console.log('[Razorpay] Handler called with:', { userId, courseTitle, studentName, studentEmail });
+      const courseTitle =
+        (applicationData?.courseTitle || courseName || "Course").trim() || "Course";
+      const studentName = (applicationData?.fullName || "Student").trim() || "Student";
+      const studentEmail = (applicationData?.email || "").trim();
+
+      console.log("[Razorpay] Handler called with:", {
+        userId,
+        courseTitle,
+        studentName,
+        studentEmail,
+      });
 
       // Use validated data from props
       if (!courseTitle) {
-        throw new Error('courseName is required');
+        throw new Error("courseName is required");
       }
       if (!studentName) {
-        throw new Error('studentName is required');
+        throw new Error("studentName is required");
       }
       if (!studentEmail) {
-        throw new Error('studentEmail is required');
+        throw new Error("studentEmail is required");
       }
       if (!userId) {
-        throw new Error('userId not found - please login again');
+        throw new Error("userId not found - please login again");
       }
 
-      console.log('Step 1: Creating enrollment with validated data:', {
+      console.log("Step 1: Creating enrollment with validated data:", {
         courseTitle,
         studentName,
         studentEmail,
@@ -47,35 +53,35 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
       });
 
       const enrollData = await createEnrollment({
-        courseId: applicationData?.id || '',
+        courseId: applicationData?.id || "",
         courseName: courseTitle,
         userId: userId,
-        paymentMethod: 'razorpay',
+        paymentMethod: "razorpay",
         studentName: studentName,
         studentEmail: studentEmail,
       });
 
       if (!enrollData || !enrollData.enrollment?.id) {
-        throw new Error('Failed to create enrollment');
+        throw new Error("Failed to create enrollment");
       }
 
-      console.log('Step 2: Creating Razorpay order...');
+      console.log("Step 2: Creating Razorpay order...");
       const orderData = await createRazorpayOrder({
         amount,
         enrollmentId: enrollData.enrollment.id,
         userId: userId,
         courseName: courseTitle,
-        currency: 'INR',
+        currency: "INR",
       });
 
       if (!orderData || !orderData.order?.id) {
-        throw new Error('Failed to create order');
+        throw new Error("Failed to create order");
       }
 
-      console.log('Step 3: Opening Razorpay checkout...');
+      console.log("Step 3: Opening Razorpay checkout...");
       // Load Razorpay script dynamically
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
       script.onload = () => {
         const options = {
           key: import.meta.env.VITE_RAZORPAY_KEY_ID,
@@ -83,7 +89,13 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
           amount: orderData.order.amount,
           currency: orderData.order.currency,
           handler: async (response) => {
-            await verifyPayment(response, enrollData.enrollment.id, studentEmail, courseTitle, studentName);
+            await verifyPayment(
+              response,
+              enrollData.enrollment.id,
+              studentEmail,
+              courseTitle,
+              studentName,
+            );
           },
           prefill: {
             name: studentName,
@@ -96,27 +108,36 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
           const razor = new (window as any).Razorpay(options);
           razor.open();
         } catch (razorErr) {
-          setError('Failed to open payment gateway: ' + (razorErr instanceof Error ? razorErr.message : 'Unknown error'));
-          setStep('error');
+          setError(
+            "Failed to open payment gateway: " +
+              (razorErr instanceof Error ? razorErr.message : "Unknown error"),
+          );
+          setStep("error");
         }
       };
       script.onerror = () => {
-        setError('Failed to load Razorpay script');
-        setStep('error');
+        setError("Failed to load Razorpay script");
+        setStep("error");
       };
       document.head.appendChild(script);
     } catch (err) {
-      console.error('Payment error:', err);
-      setError(err instanceof Error ? err.message : 'Payment failed');
-      setStep('error');
+      console.error("Payment error:", err);
+      setError(err instanceof Error ? err.message : "Payment failed");
+      setStep("error");
     } finally {
       setLoading(false);
     }
   };
 
-  const verifyPayment = async (response: any, enrollmentId: string, studentEmail: string, courseTitle: string, studentName: string) => {
+  const verifyPayment = async (
+    response: any,
+    enrollmentId: string,
+    studentEmail: string,
+    courseTitle: string,
+    studentName: string,
+  ) => {
     try {
-      console.log('Step 4: Verifying payment with:', { studentEmail, courseTitle, studentName });
+      console.log("Step 4: Verifying payment with:", { studentEmail, courseTitle, studentName });
 
       await verifyRazorpayPayment({
         razorpay_order_id: response.razorpay_order_id,
@@ -128,48 +149,54 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
         studentName: studentName,
       });
 
-      console.log('Payment verified successfully!');
-      setStep('success');
+      console.log("Payment verified successfully!");
+      setStep("success");
     } catch (err) {
-      console.error('Verification error:', err);
-      setError(err instanceof Error ? err.message : 'Verification failed');
-      setStep('error');
+      console.error("Verification error:", err);
+      setError(err instanceof Error ? err.message : "Verification failed");
+      setStep("error");
     }
   };
 
   const handleLoanRedirect = async () => {
     setLoading(true);
-    setError('');
+    setError("");
     try {
       // Re-validate data fresh in this handler
-      const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
-      
-      const courseTitle = (applicationData?.courseTitle || courseName || 'Course').trim() || 'Course';
-      const studentName = (applicationData?.fullName || 'Student').trim() || 'Student';
-      const studentEmail = (applicationData?.email || '').trim();
+      const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
 
-      console.log('[Loan] Handler called with:', { userId, courseTitle, studentName, studentEmail });
+      const courseTitle =
+        (applicationData?.courseTitle || courseName || "Course").trim() || "Course";
+      const studentName = (applicationData?.fullName || "Student").trim() || "Student";
+      const studentEmail = (applicationData?.email || "").trim();
+
+      console.log("[Loan] Handler called with:", {
+        userId,
+        courseTitle,
+        studentName,
+        studentEmail,
+      });
 
       // Validate all required fields
       if (!courseTitle) {
-        throw new Error('courseName is required');
+        throw new Error("courseName is required");
       }
       if (!studentName) {
-        throw new Error('studentName is required');
+        throw new Error("studentName is required");
       }
       if (!studentEmail) {
-        throw new Error('studentEmail is required');
+        throw new Error("studentEmail is required");
       }
       if (!userId) {
-        throw new Error('userId not found - please login again');
+        throw new Error("userId not found - please login again");
       }
 
-      console.log('Creating loan enrollment with validated data...');
+      console.log("Creating loan enrollment with validated data...");
       const enrollData = await createEnrollment({
-        courseId: applicationData?.id || '',
+        courseId: applicationData?.id || "",
         courseName: courseTitle,
         userId: userId,
-        paymentMethod: 'loan',
+        paymentMethod: "loan",
         studentName: studentName,
         studentEmail: studentEmail,
       });
@@ -177,18 +204,18 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
       const loanUrl = import.meta.env.VITE_LOAN_PARTNER_URL;
 
       if (!loanUrl) {
-        throw new Error('Loan partner URL not configured');
+        throw new Error("Loan partner URL not configured");
       }
 
       const redirectUrl = `${loanUrl}?enrollment_id=${enrollData.enrollment.id}&student_name=${encodeURIComponent(studentName)}&student_email=${encodeURIComponent(studentEmail)}&course=${encodeURIComponent(courseTitle)}&amount=${amount}`;
 
-      console.log('Redirecting to loan partner...');
-      window.open(redirectUrl, '_blank');
-      setStep('success');
+      console.log("Redirecting to loan partner...");
+      window.open(redirectUrl, "_blank");
+      setStep("success");
     } catch (err) {
-      console.error('Loan error:', err);
-      setError(err instanceof Error ? err.message : 'Loan redirection failed');
-      setStep('error');
+      console.error("Loan error:", err);
+      setError(err instanceof Error ? err.message : "Loan redirection failed");
+      setStep("error");
     } finally {
       setLoading(false);
     }
@@ -204,14 +231,15 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
           </button>
         </div>
 
-        {step === 'payment' && (
+        {step === "payment" && (
           <>
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
               <p className="text-sm text-slate-700 mb-2">
-                <span className="font-semibold">Course:</span> {courseName || applicationData?.courseTitle}
+                <span className="font-semibold">Course:</span>{" "}
+                {courseName || applicationData?.courseTitle}
               </p>
               <p className="text-lg font-bold text-slate-900">
-                Amount: ₹{amount?.toLocaleString('en-IN')}
+                Amount: ₹{amount?.toLocaleString("en-IN")}
               </p>
             </div>
 
@@ -240,19 +268,22 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
                 <X className="h-5 w-5 text-red-600 mt-0.5 flex-shrink-0" />
                 <div className="text-sm text-red-700">
                   <p className="font-semibold mb-1">Error:</p>
-                  <p className="break-words">{typeof error === 'string' ? error : JSON.stringify(error)}</p>
+                  <p className="break-words">
+                    {typeof error === "string" ? error : JSON.stringify(error)}
+                  </p>
                 </div>
               </div>
             )}
           </>
         )}
 
-        {step === 'success' && (
+        {step === "success" && (
           <div className="text-center py-6">
             <Check className="h-12 w-12 text-green-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-2">Payment Initiated!</h3>
             <p className="text-gray-600 mb-4">
-              Your enrollment has been created. You will receive a confirmation email shortly with course access details.
+              Your enrollment has been created. You will receive a confirmation email shortly with
+              course access details.
             </p>
             <button
               onClick={onClose}
@@ -263,7 +294,7 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
           </div>
         )}
 
-        {step === 'error' && (
+        {step === "error" && (
           <div className="text-center py-6">
             <X className="h-12 w-12 text-red-600 mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-2 text-red-700">Payment Failed</h3>
@@ -271,8 +302,8 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
             <div className="space-y-2">
               <button
                 onClick={() => {
-                  setStep('payment');
-                  setError('');
+                  setStep("payment");
+                  setError("");
                 }}
                 className="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition"
               >

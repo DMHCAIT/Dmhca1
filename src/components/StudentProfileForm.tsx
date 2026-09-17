@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import React, { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 export function StudentProfileForm({ isOpen, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
-    full_name: '',
-    phone_number: '',
-    date_of_birth: '',
-    qualification: '',
-    specialization: '',
-    experience_years: '',
-    address: '',
-    city: '',
-    state: '',
-    postal_code: '',
+    full_name: "",
+    phone_number: "",
+    date_of_birth: "",
+    qualification: "",
+    specialization: "",
+    experience_years: "",
+    address: "",
+    city: "",
+    state: "",
+    postal_code: "",
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,16 +25,16 @@ export function StudentProfileForm({ isOpen, onClose, onSuccess }) {
   };
 
   const handleSubmit = async () => {
-    setError('');
+    setError("");
     setLoading(true);
     try {
-      const userId = typeof window !== 'undefined' ? localStorage.getItem('userId') : null;
-      if (!userId) throw new Error('User not authenticated');
+      const userId = typeof window !== "undefined" ? localStorage.getItem("userId") : null;
+      if (!userId) throw new Error("User not authenticated");
 
       // TODO: Save to Supabase via API endpoint
       // For now, just save locally
-      if (typeof window !== 'undefined') {
-        localStorage.setItem('studentProfile', JSON.stringify(formData));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("studentProfile", JSON.stringify(formData));
       }
       onSuccess(formData);
       onClose();
@@ -90,18 +90,8 @@ export function StudentProfileForm({ isOpen, onClose, onSuccess }) {
             value={formData.experience_years}
             onChange={handleChange}
           />
-          <Input
-            name="city"
-            placeholder="City"
-            value={formData.city}
-            onChange={handleChange}
-          />
-          <Input
-            name="state"
-            placeholder="State"
-            value={formData.state}
-            onChange={handleChange}
-          />
+          <Input name="city" placeholder="City" value={formData.city} onChange={handleChange} />
+          <Input name="state" placeholder="State" value={formData.state} onChange={handleChange} />
           <Input
             name="postal_code"
             placeholder="Postal Code"

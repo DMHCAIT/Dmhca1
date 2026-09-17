@@ -1,13 +1,28 @@
 import { createFileRoute, useNavigate, useLocation, Outlet } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabaseClient } from "@/lib/supabase";
-import { Search, Shield, Award, Stethoscope, MapPin, Calendar, User, CheckCircle2, AlertTriangle, X } from "lucide-react";
+import {
+  Search,
+  Shield,
+  Award,
+  Stethoscope,
+  MapPin,
+  Calendar,
+  User,
+  CheckCircle2,
+  AlertTriangle,
+  X,
+} from "lucide-react";
 
 export const Route = createFileRoute("/verification")({
   head: () => ({
     meta: [
       { title: "Certificate Verification — DMHCA" },
-      { name: "description", content: "Verify DMHCA medical professional certifications and credentials. Official verification portal." },
+      {
+        name: "description",
+        content:
+          "Verify DMHCA medical professional certifications and credentials. Official verification portal.",
+      },
     ],
   }),
   component: VerifyPage,
@@ -41,9 +56,7 @@ function VerifyPage() {
       const { data, error } = await supabaseClient
         .from("certificates")
         .select("*")
-        .or(
-          `full_name.ilike.%${searchLower}%,certificate_id.ilike.%${searchLower}%`
-        )
+        .or(`full_name.ilike.%${searchLower}%,certificate_id.ilike.%${searchLower}%`)
         .eq("status", "Active");
 
       if (error) throw error;
@@ -81,7 +94,8 @@ function VerifyPage() {
             Delhi Medical Health Care Academy
           </p>
           <p className="text-blue-200 max-w-3xl mx-auto">
-            Verify the authenticity of medical professional certifications. Trusted by healthcare institutions, employers, and regulatory bodies.
+            Verify the authenticity of medical professional certifications. Trusted by healthcare
+            institutions, employers, and regulatory bodies.
           </p>
         </div>
       </div>
@@ -93,7 +107,7 @@ function VerifyPage() {
             <Stethoscope className="w-6 h-6 text-blue-600" />
             <h2 className="text-2xl font-bold text-slate-900">Search Medical Professional</h2>
           </div>
-          
+
           <form onSubmit={handleSearch} className="space-y-4">
             <div className="relative">
               <Search className="absolute left-4 top-4 text-gray-400 w-5 h-5" />
@@ -137,7 +151,10 @@ function VerifyPage() {
                     </p>
                     <ul className="text-sm text-gray-700 space-y-1 list-disc list-inside">
                       <li>Verify spelling of name or certificate ID</li>
-                      <li>Check if certificate has been issued recently (may take 24-48 hours to appear)</li>
+                      <li>
+                        Check if certificate has been issued recently (may take 24-48 hours to
+                        appear)
+                      </li>
                       <li>Confirm the certificate holder's status is active</li>
                     </ul>
                   </div>
@@ -146,7 +163,7 @@ function VerifyPage() {
             ) : (
               <div>
                 <div className="text-white font-semibold text-lg mb-4">
-                  Found {results.length} Active Certificate{results.length !== 1 ? 's' : ''}
+                  Found {results.length} Active Certificate{results.length !== 1 ? "s" : ""}
                 </div>
                 {results.map((cert) => (
                   <div
@@ -154,7 +171,7 @@ function VerifyPage() {
                     className="bg-white/95 backdrop-blur rounded-2xl border-2 border-blue-200 overflow-hidden mb-4 hover:shadow-xl transition transform hover:scale-105 cursor-pointer"
                   >
                     {/* Card Header */}
-                    <div 
+                    <div
                       onClick={() => setExpandedId(expandedId === cert.id ? null : cert.id)}
                       className="bg-gradient-to-r from-blue-600 to-cyan-600 p-6 text-white cursor-pointer"
                     >
@@ -165,7 +182,9 @@ function VerifyPage() {
                           </div>
                           <div>
                             <h3 className="text-2xl font-bold">{cert.full_name}</h3>
-                            <p className="text-blue-100 font-mono text-sm mt-1">{cert.certificate_id}</p>
+                            <p className="text-blue-100 font-mono text-sm mt-1">
+                              {cert.certificate_id}
+                            </p>
                           </div>
                         </div>
                         <div className="bg-white/20 px-3 py-2 rounded-lg flex items-center gap-2">
@@ -181,15 +200,21 @@ function VerifyPage() {
                         <div className="flex gap-4">
                           <Award className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                           <div>
-                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">Qualification</p>
-                            <p className="text-gray-900 font-semibold text-lg mt-1">{cert.qualification}</p>
+                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                              Qualification
+                            </p>
+                            <p className="text-gray-900 font-semibold text-lg mt-1">
+                              {cert.qualification}
+                            </p>
                           </div>
                         </div>
 
                         <div className="flex gap-4">
                           <Stethoscope className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                           <div>
-                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">Training Mode</p>
+                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                              Training Mode
+                            </p>
                             <p className="text-gray-900 font-semibold text-lg mt-1">{cert.mode}</p>
                           </div>
                         </div>
@@ -197,15 +222,21 @@ function VerifyPage() {
                         <div className="flex gap-4">
                           <Calendar className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                           <div>
-                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">Award Date</p>
-                            <p className="text-gray-900 font-semibold text-lg mt-1">{cert.month_year}</p>
+                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                              Award Date
+                            </p>
+                            <p className="text-gray-900 font-semibold text-lg mt-1">
+                              {cert.month_year}
+                            </p>
                           </div>
                         </div>
 
                         <div className="flex gap-4">
                           <MapPin className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
                           <div>
-                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">Issuer</p>
+                            <p className="text-gray-600 text-sm font-semibold uppercase tracking-wide">
+                              Issuer
+                            </p>
                             <p className="text-gray-900 font-semibold text-lg mt-1">DMHCA</p>
                           </div>
                         </div>
@@ -239,19 +270,27 @@ function VerifyPage() {
               </h3>
               <ol className="space-y-3 text-gray-700">
                 <li className="flex gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">1</span>
+                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">
+                    1
+                  </span>
                   <span>Enter professional name or certificate ID</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">2</span>
+                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">
+                    2
+                  </span>
                   <span>System searches DMHCA database</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">3</span>
+                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">
+                    3
+                  </span>
                   <span>View credential verification results</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">4</span>
+                  <span className="flex items-center justify-center w-6 h-6 bg-blue-600 text-white rounded-full text-sm font-bold flex-shrink-0">
+                    4
+                  </span>
                   <span>Share or reference for official records</span>
                 </li>
               </ol>
@@ -292,9 +331,11 @@ function VerifyPage() {
             Legal Disclaimer
           </h3>
           <p className="text-gray-700 leading-relaxed text-sm">
-            This verification portal provides official DMHCA certification status for information purposes. While we maintain accurate records, 
-            this service should not be the sole basis for employment, enrollment, or regulatory decisions. Always request original certificates 
-            or official documentation from the certificate holder. DMHCA assumes no liability for decisions based solely on this online verification.
+            This verification portal provides official DMHCA certification status for information
+            purposes. While we maintain accurate records, this service should not be the sole basis
+            for employment, enrollment, or regulatory decisions. Always request original
+            certificates or official documentation from the certificate holder. DMHCA assumes no
+            liability for decisions based solely on this online verification.
           </p>
         </div>
       </div>
@@ -302,7 +343,15 @@ function VerifyPage() {
       {/* Footer Info */}
       <div className="relative border-t border-blue-500/30 mt-16 py-8 px-4">
         <div className="max-w-5xl mx-auto text-center text-blue-100 text-sm">
-          <p>Need help? Contact: <a href="mailto:verification@dmhca.in" className="text-cyan-400 hover:text-cyan-300 underline">verification@dmhca.in</a></p>
+          <p>
+            Need help? Contact:{" "}
+            <a
+              href="mailto:verification@dmhca.in"
+              className="text-cyan-400 hover:text-cyan-300 underline"
+            >
+              verification@dmhca.in
+            </a>
+          </p>
         </div>
       </div>
     </div>

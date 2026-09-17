@@ -29,17 +29,11 @@ function SpecialtyCourses() {
     return getCategory(categorySlug);
   }, []);
 
-  const fellowships = useMemo(
-    () => filteredCourses.filter((c) => c.program === "Fellowship"),
-    []
-  );
-  const pgDiplomas = useMemo(
-    () => filteredCourses.filter((c) => c.program === "PG Diploma"),
-    []
-  );
+  const fellowships = useMemo(() => filteredCourses.filter((c) => c.program === "Fellowship"), []);
+  const pgDiplomas = useMemo(() => filteredCourses.filter((c) => c.program === "PG Diploma"), []);
   const certificates = useMemo(
     () => filteredCourses.filter((c) => (c.program || "Certificate") === "Certificate"),
-    []
+    [],
   );
 
   return (
@@ -53,13 +47,19 @@ function SpecialtyCourses() {
             <ArrowLeft className="w-4 h-4" />
             Back to Sitemap
           </Link>
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">Specialization</div>
-          <h1 className="font-display text-4xl md:text-5xl text-navy-deep mt-3">{displayName} Courses</h1>
+          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep gold-rule">
+            Specialization
+          </div>
+          <h1 className="font-display text-4xl md:text-5xl text-navy-deep mt-3">
+            {displayName} Courses
+          </h1>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-            {category?.tagline || `Explore all ${displayName.toLowerCase()} programs offered at DMHCA.`}
+            {category?.tagline ||
+              `Explore all ${displayName.toLowerCase()} programs offered at DMHCA.`}
           </p>
           <div className="mt-6 text-sm text-muted-foreground">
-            <span className="font-semibold text-navy-deep">{filteredCourses.length}</span> courses available
+            <span className="font-semibold text-navy-deep">{filteredCourses.length}</span> courses
+            available
           </div>
         </div>
       </section>
@@ -70,7 +70,9 @@ function SpecialtyCourses() {
             <div className="mb-16">
               <div className="mb-8">
                 <h2 className="font-display text-3xl text-navy-deep mb-2">Fellowships</h2>
-                <p className="text-muted-foreground">Advanced specialization programs ({fellowships.length})</p>
+                <p className="text-muted-foreground">
+                  Advanced specialization programs ({fellowships.length})
+                </p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {fellowships.map((course) => (
@@ -84,7 +86,9 @@ function SpecialtyCourses() {
             <div className="mb-16">
               <div className="mb-8">
                 <h2 className="font-display text-3xl text-navy-deep mb-2">PG Diplomas</h2>
-                <p className="text-muted-foreground">Postgraduate diploma programs ({pgDiplomas.length})</p>
+                <p className="text-muted-foreground">
+                  Postgraduate diploma programs ({pgDiplomas.length})
+                </p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {pgDiplomas.map((course) => (
@@ -98,7 +102,9 @@ function SpecialtyCourses() {
             <div className="mb-16">
               <div className="mb-8">
                 <h2 className="font-display text-3xl text-navy-deep mb-2">Certificates</h2>
-                <p className="text-muted-foreground">Professional certification programs ({certificates.length})</p>
+                <p className="text-muted-foreground">
+                  Professional certification programs ({certificates.length})
+                </p>
               </div>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 {certificates.map((course) => (
@@ -114,7 +120,10 @@ function SpecialtyCourses() {
               <p className="text-muted-foreground mb-6">
                 We don't currently have courses in {displayName.toLowerCase()}.
               </p>
-              <Link to="/top-medical-courses" className="inline-flex items-center justify-center px-5 py-2.5 bg-navy-deep text-primary-foreground rounded-lg hover:bg-navy-deep/90 transition">
+              <Link
+                to="/top-medical-courses"
+                className="inline-flex items-center justify-center px-5 py-2.5 bg-navy-deep text-primary-foreground rounded-lg hover:bg-navy-deep/90 transition"
+              >
                 View All Courses
               </Link>
             </div>

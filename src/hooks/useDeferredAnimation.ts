@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Hook to defer heavy animations until after initial paint
@@ -9,10 +9,13 @@ export function useDeferredAnimation() {
 
   useEffect(() => {
     // Use requestIdleCallback if available, otherwise use timeout
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      const id = requestIdleCallback(() => {
-        setIsAnimationReady(true);
-      }, { timeout: 1000 });
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      const id = requestIdleCallback(
+        () => {
+          setIsAnimationReady(true);
+        },
+        { timeout: 1000 },
+      );
       return () => cancelIdleCallback(id);
     } else {
       const timeoutId = setTimeout(() => {

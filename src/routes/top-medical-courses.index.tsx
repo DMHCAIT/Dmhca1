@@ -1,14 +1,18 @@
 import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
 import { categories, type Course, courses } from "@/data/courses";
-import { fetchCoursesFromSupabase } from '@/lib/courses-remote';
+import { fetchCoursesFromSupabase } from "@/lib/courses-remote";
 import { CourseCard } from "@/components/site/CourseCard";
 
 export const Route = createFileRoute("/top-medical-courses/")({
   head: () => ({
     meta: [
       { title: "All Courses — DMHCA" },
-      { name: "description", content: "Browse fellowships, PG diplomas, and certificate courses across every medical specialty." },
+      {
+        name: "description",
+        content:
+          "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
+      },
     ],
   }),
   component: AllCourses,
@@ -20,26 +24,25 @@ function programType(c: Course) {
 
 function AllCourses() {
   const location = useLocation();
-  const searchParams = useMemo(() => new URLSearchParams(location.search || ''), [location.search]);
+  const searchParams = useMemo(() => new URLSearchParams(location.search || ""), [location.search]);
   const cat = useMemo(() => {
     try {
-      const p = searchParams.get('cat');
+      const p = searchParams.get("cat");
       if (p) {
         const slug = p.toLowerCase();
-        if (categories.some(c => c.slug === slug)) return slug;
+        if (categories.some((c) => c.slug === slug)) return slug;
       }
     } catch (e) {}
-    return 'all';
+    return "all";
   }, [searchParams]);
   const [fmt, setFmt] = useState<string>("all");
   const [remoteCourses, setRemoteCourses] = useState<Course[] | null>(null);
   // Initialize fmt from URL (so external links like ?fmt=Fellowship work)
   useEffect(() => {
     try {
-      const p = new URLSearchParams(location.search || '').get('fmt');
-      setFmt(p || 'all');
+      const p = new URLSearchParams(location.search || "").get("fmt");
+      setFmt(p || "all");
     } catch (e) {}
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   // Load courses from Supabase (fallback to static file if unavailable)
@@ -48,73 +51,99 @@ function AllCourses() {
     (async () => {
       try {
         const remote = await fetchCoursesFromSupabase();
-        if (mounted && remote && Array.isArray(remote) && remote.length > 0) setRemoteCourses(remote as Course[]);
+        if (mounted && remote && Array.isArray(remote) && remote.length > 0)
+          setRemoteCourses(remote as Course[]);
       } catch (e) {
-        console.warn('Failed to load remote courses', e);
+        console.warn("Failed to load remote courses", e);
       }
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, []);
   const [q, setQ] = useState<string>(() => {
     try {
       const params = new URLSearchParams(window.location.search);
-      return params.get('q') || '';
-    } catch (e) { return ''; }
+      return params.get("q") || "";
+    } catch (e) {
+      return "";
+    }
   });
 
   // Keep URL syncronization on mount (no-op if already present)
-  useEffect(() => { updateUrl({ cat, q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */ }, []);
+  useEffect(() => {
+    updateUrl({ cat, q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
+  }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
   function updateUrl(params: { cat?: string; fmt?: string; q?: string }) {
     const u = new URL(window.location.href);
     const s = u.searchParams;
     if (params.cat !== undefined) {
-      if (params.cat === 'all' || !params.cat) s.delete('cat'); else s.set('cat', params.cat);
+      if (params.cat === "all" || !params.cat) s.delete("cat");
+      else s.set("cat", params.cat);
     }
     if (params.fmt !== undefined) {
-      if (params.fmt === 'all' || !params.fmt) s.delete('fmt'); else s.set('fmt', params.fmt);
+      if (params.fmt === "all" || !params.fmt) s.delete("fmt");
+      else s.set("fmt", params.fmt);
     }
     if (params.q !== undefined) {
-      if (!params.q) s.delete('q'); else s.set('q', params.q);
+      if (!params.q) s.delete("q");
+      else s.set("q", params.q);
     }
-    const newUrl = u.pathname + (s.toString() ? `?${s.toString()}` : '');
-    window.history.replaceState({}, '', newUrl);
+    const newUrl = u.pathname + (s.toString() ? `?${s.toString()}` : "");
+    window.history.replaceState({}, "", newUrl);
   }
 
   const allSource = remoteCourses || (courses as Course[]);
-  const filtered = useMemo(() => allSource.filter((c) =>
-    (cat === "all" || (c.categories || []).includes(cat)) &&
-    (fmt === "all" || programType(c) === fmt) &&
-    (q.trim() === "" || (c.title || '').toLowerCase().includes(q.toLowerCase()))
-  ), [cat, fmt, q, remoteCourses]);
+  const filtered = useMemo(
+    () =>
+      allSource.filter(
+        (c) =>
+          (cat === "all" || (c.categories || []).includes(cat)) &&
+          (fmt === "all" || programType(c) === fmt) &&
+          (q.trim() === "" || (c.title || "").toLowerCase().includes(q.toLowerCase())),
+      ),
+    [cat, fmt, q, remoteCourses],
+  );
 
   // CollectionPage Schema for all courses
   const allCoursesSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "All Medical Courses",
-    "description": "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
-    "url": "https://dmhca.in/top-medical-courses",
-    "mainEntity": {
+    name: "All Medical Courses",
+    description:
+      "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
+    url: "https://dmhca.in/top-medical-courses",
+    mainEntity: {
       "@type": "ItemList",
-      "itemListElement": filtered.slice(0, 50).map((course, idx) => ({
+      itemListElement: filtered.slice(0, 50).map((course, idx) => ({
         "@type": "ListItem",
-        "position": idx + 1,
-        "url": `https://dmhca.in/courses/${course.slug}`,
-        "name": course.title
-      }))
-    }
+        position: idx + 1,
+        url: `https://dmhca.in/courses/${course.slug}`,
+        name: course.title,
+      })),
+    },
   };
 
   return (
     <div>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(allCoursesSchema) }} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(allCoursesSchema) }}
+      />
       <section className="site-hero">
         <div className="container-x">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">Catalogue</div>
-          <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">All programs.</h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">Filter across {categories.length} specialties and three program formats — Certificate, PG Diploma, and Fellowship.</p>
+          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">
+            Catalogue
+          </div>
+          <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">
+            All programs.
+          </h1>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Filter across {categories.length} specialties and three program formats — Certificate,
+            PG Diploma, and Fellowship.
+          </p>
         </div>
       </section>
 
@@ -129,10 +158,13 @@ function AllCourses() {
               className="w-full px-4 py-2.5 border border-border rounded-sm bg-background text-sm focus:outline-none focus:border-navy-deep"
             />
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mr-1">Format</span>
-                {["all", "Certificate", "PG Diploma", "Fellowship"].map((f) => {
-                const s = new URLSearchParams(location.search || '');
-                if (f === 'all') s.delete('fmt'); else s.set('fmt', f);
+              <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mr-1">
+                Format
+              </span>
+              {["all", "Certificate", "PG Diploma", "Fellowship"].map((f) => {
+                const s = new URLSearchParams(location.search || "");
+                if (f === "all") s.delete("fmt");
+                else s.set("fmt", f);
                 const searchObj = Object.fromEntries(s.entries());
                 return (
                   <Link
@@ -149,29 +181,48 @@ function AllCourses() {
           </div>
 
           <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-2.5">Specialty</div>
+            <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-2.5">
+              Specialty
+            </div>
             <div className="flex flex-wrap gap-2">
               <button
-                onClick={() => { updateUrl({ cat: 'all' }); }}
+                onClick={() => {
+                  updateUrl({ cat: "all" });
+                }}
                 className={`text-xs px-3 py-1.5 rounded-sm border transition ${cat === "all" ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
-              >All specialties</button>
+              >
+                All specialties
+              </button>
               {categories.map((c) => (
                 <button
                   key={c.slug}
-                  onClick={() => { updateUrl({ cat: c.slug }); }}
+                  onClick={() => {
+                    updateUrl({ cat: c.slug });
+                  }}
                   className={`text-xs px-3 py-1.5 rounded-sm border transition ${cat === c.slug ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
-                >{c.name}</button>
+                >
+                  {c.name}
+                </button>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="text-xs text-muted-foreground mb-5">{filtered.length} program{filtered.length === 1 ? "" : "s"}</div>
+        <div className="text-xs text-muted-foreground mb-5">
+          {filtered.length} program{filtered.length === 1 ? "" : "s"}
+        </div>
         {filtered.length === 0 ? (
-          <div className="py-20 text-center text-muted-foreground">No courses match — try clearing filters. <Link to="/top-medical-courses" className="text-navy-deep underline">Reset</Link></div>
+          <div className="py-20 text-center text-muted-foreground">
+            No courses match — try clearing filters.{" "}
+            <Link to="/top-medical-courses" className="text-navy-deep underline">
+              Reset
+            </Link>
+          </div>
         ) : (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((c) => <CourseCard key={c.slug} course={c} />)}
+            {filtered.map((c) => (
+              <CourseCard key={c.slug} course={c} />
+            ))}
           </div>
         )}
       </section>

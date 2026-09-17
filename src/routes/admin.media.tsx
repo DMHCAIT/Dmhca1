@@ -1,20 +1,20 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useRef, useState } from 'react';
-import { uploadFile, listFiles, deleteFile, getPublicUrl } from '@/lib/storage';
-import { Trash2, Upload, Image as ImageIcon, Video, File } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+import { uploadFile, listFiles, deleteFile, getPublicUrl } from "@/lib/storage";
+import { Trash2, Upload, Image as ImageIcon, Video, File } from "lucide-react";
 
-export const Route = createFileRoute('/admin/media')({
+export const Route = createFileRoute("/admin/media")({
   head: () => ({
     meta: [
-      { title: 'Media Manager — Admin' },
-      { name: 'description', content: 'Manage images and videos' },
+      { title: "Media Manager — Admin" },
+      { name: "description", content: "Manage images and videos" },
     ],
   }),
   component: AdminMedia,
 });
 
 function AdminMedia() {
-  const [tab, setTab] = useState<'images' | 'videos'>('images');
+  const [tab, setTab] = useState<"images" | "videos">("images");
   const [files, setFiles] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -29,9 +29,9 @@ function AdminMedia() {
     setLoading(true);
     try {
       const fileList = await listFiles(tab);
-      setFiles(fileList.filter((f) => !f.name.startsWith('.')));
+      setFiles(fileList.filter((f) => !f.name.startsWith(".")));
     } catch (error) {
-      console.error('Error loading files:', error);
+      console.error("Error loading files:", error);
     } finally {
       setLoading(false);
     }
@@ -45,28 +45,28 @@ function AdminMedia() {
     try {
       const result = await uploadFile(file, {
         bucket: tab,
-        folder: new Date().toISOString().split('T')[0],
+        folder: new Date().toISOString().split("T")[0],
       });
 
-      alert('File uploaded successfully!');
+      alert("File uploaded successfully!");
       loadFiles();
     } catch (error) {
-      alert('Error uploading file: ' + (error as any).message);
+      alert("Error uploading file: " + (error as any).message);
     } finally {
       setUploading(false);
-      if (fileInputRef.current) fileInputRef.current.value = '';
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
   const handleDelete = async (fileName: string) => {
-    if (!confirm('Delete this file?')) return;
+    if (!confirm("Delete this file?")) return;
 
     setDeleting(fileName);
     try {
       await deleteFile(tab, fileName);
       setFiles(files.filter((f) => f.name !== fileName));
     } catch (error) {
-      alert('Error deleting file: ' + (error as any).message);
+      alert("Error deleting file: " + (error as any).message);
     } finally {
       setDeleting(null);
     }
@@ -82,22 +82,22 @@ function AdminMedia() {
       {/* Tabs */}
       <div className="flex gap-2 border-b border-gray-200">
         <button
-          onClick={() => setTab('images')}
+          onClick={() => setTab("images")}
           className={`px-4 py-2 font-medium border-b-2 transition ${
-            tab === 'images'
-              ? 'border-gold text-gold'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+            tab === "images"
+              ? "border-gold text-gold"
+              : "border-transparent text-gray-600 hover:text-gray-900"
           }`}
         >
           <ImageIcon className="w-4 h-4 inline mr-2" />
           Images
         </button>
         <button
-          onClick={() => setTab('videos')}
+          onClick={() => setTab("videos")}
           className={`px-4 py-2 font-medium border-b-2 transition ${
-            tab === 'videos'
-              ? 'border-gold text-gold'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+            tab === "videos"
+              ? "border-gold text-gold"
+              : "border-transparent text-gray-600 hover:text-gray-900"
           }`}
         >
           <Video className="w-4 h-4 inline mr-2" />
@@ -114,13 +114,13 @@ function AdminMedia() {
           <Upload className="w-12 h-12 text-gray-400 mx-auto mb-2" />
           <p className="text-gray-600 font-medium">Click to upload or drag and drop</p>
           <p className="text-sm text-gray-500 mt-1">
-            {tab === 'images' ? 'PNG, JPG, WebP up to 50MB' : 'MP4, WebM up to 100MB'}
+            {tab === "images" ? "PNG, JPG, WebP up to 50MB" : "MP4, WebM up to 100MB"}
           </p>
           <input
             ref={fileInputRef}
             type="file"
             onChange={handleFileSelect}
-            accept={tab === 'images' ? 'image/*' : 'video/*'}
+            accept={tab === "images" ? "image/*" : "video/*"}
             disabled={uploading}
             className="hidden"
           />
@@ -150,7 +150,7 @@ function AdminMedia() {
                 className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition"
               >
                 <div className="bg-gray-100 aspect-video flex items-center justify-center relative group">
-                  {tab === 'images' ? (
+                  {tab === "images" ? (
                     <img
                       src={getPublicUrl(tab, file.name)}
                       alt={file.name}

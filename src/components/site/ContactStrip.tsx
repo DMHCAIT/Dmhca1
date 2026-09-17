@@ -20,10 +20,7 @@ export function ContactStrip() {
   const handleWhatsAppClick = (number: string) => {
     const phoneNumber = number.replace(/\D/g, "");
     const message = "Hello, I'm interested in your courses";
-    window.open(
-      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   return (
@@ -35,7 +32,11 @@ export function ContactStrip() {
             to="/contact-us"
             className="flex items-center gap-3 px-2 md:px-6 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700/50 transition-colors group whitespace-nowrap focus-visible:outline-none"
           >
-            <img src="/contact.png" alt="Contact Us" className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 filter brightness-0 saturate-100 sepia-[.5] hue-rotate-[30deg] dark:brightness-100" />
+            <img
+              src="/contact.png"
+              alt="Contact Us"
+              className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 filter brightness-0 saturate-100 sepia-[.5] hue-rotate-[30deg] dark:brightness-100"
+            />
             <div className="hidden md:block">
               <div className="text-base md:text-lg font-medium text-slate-900 dark:text-white">
                 Contact Us
@@ -48,12 +49,14 @@ export function ContactStrip() {
 
           {/* WhatsApp Section */}
           <button
-            onClick={() =>
-              handleWhatsAppClick(whatsappNumbers[activeWhatsApp].number)
-            }
+            onClick={() => handleWhatsAppClick(whatsappNumbers[activeWhatsApp].number)}
             className="flex items-center gap-3 px-2 md:px-6 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700/50 transition-colors group cursor-pointer whitespace-nowrap focus-visible:outline-none"
           >
-            <img src="/whatsapp.png" alt="WhatsApp" className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0" />
+            <img
+              src="/whatsapp.png"
+              alt="WhatsApp"
+              className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0"
+            />
             <div className="hidden md:block text-left">
               <div className="text-base md:text-lg font-medium text-slate-900 dark:text-white">
                 {whatsappNumbers[activeWhatsApp].display}
@@ -69,7 +72,11 @@ export function ContactStrip() {
             href="tel:+919281887047"
             className="flex items-center gap-3 px-2 md:px-6 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700/50 transition-colors group whitespace-nowrap focus-visible:outline-none"
           >
-            <img src="/international-call.png" alt="International Calling" className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 filter brightness-0 saturate-100 sepia-[.5] hue-rotate-[30deg] dark:brightness-100" />
+            <img
+              src="/international-call.png"
+              alt="International Calling"
+              className="w-7 h-7 md:w-9 md:h-9 flex-shrink-0 filter brightness-0 saturate-100 sepia-[.5] hue-rotate-[30deg] dark:brightness-100"
+            />
             <div className="hidden md:block text-left">
               <div className="text-base md:text-lg font-medium text-slate-900 dark:text-white">
                 +91 92 81887047

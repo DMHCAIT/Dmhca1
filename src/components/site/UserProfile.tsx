@@ -50,17 +50,17 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
   const handleLogout = async () => {
     try {
       // Clear all authentication data from localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('token');
-        localStorage.removeItem('userId');
-        localStorage.removeItem('email');
-        localStorage.removeItem('full_name');
-        localStorage.removeItem('interests');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('hasSignedUp');
-        sessionStorage.removeItem('signupData');
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        localStorage.removeItem("email");
+        localStorage.removeItem("full_name");
+        localStorage.removeItem("interests");
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("hasSignedUp");
+        sessionStorage.removeItem("signupData");
       }
-      
+
       await supabaseClient.auth.signOut();
       window.location.href = "/";
     } catch (error) {
@@ -72,11 +72,10 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
 
   const completedCount = enrollments.filter((e) => e.status === "completed").length;
   const activeCount = enrollments.filter((e) => e.status === "active").length;
-  const avgProgress = enrollments.length > 0
-    ? Math.round(
-        enrollments.reduce((sum, e) => sum + e.progress, 0) / enrollments.length
-      )
-    : 0;
+  const avgProgress =
+    enrollments.length > 0
+      ? Math.round(enrollments.reduce((sum, e) => sum + e.progress, 0) / enrollments.length)
+      : 0;
 
   return (
     <div className="relative">
@@ -87,7 +86,7 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
       >
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
           <span className="text-sm font-bold text-white">
-            {(userName || userEmail)?.charAt(0).toUpperCase() || 'U'}
+            {(userName || userEmail)?.charAt(0).toUpperCase() || "U"}
           </span>
         </div>
         <ChevronDown className={`w-4 h-4 transition ${dropdownOpen ? "rotate-180" : ""}`} />
@@ -98,7 +97,7 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
           <div className="mb-4 pb-4 border-b border-border flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-md">
               <span className="text-xl font-bold text-white">
-                {(userName || userEmail)?.charAt(0).toUpperCase() || 'U'}
+                {(userName || userEmail)?.charAt(0).toUpperCase() || "U"}
               </span>
             </div>
             <div>
@@ -148,8 +147,8 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
                               enrollment.status === "completed"
                                 ? "bg-green-100 text-green-700"
                                 : enrollment.status === "active"
-                                ? "bg-blue-100 text-blue-700"
-                                : "bg-gray-100 text-gray-700"
+                                  ? "bg-blue-100 text-blue-700"
+                                  : "bg-gray-100 text-gray-700"
                             }`}
                           >
                             {enrollment.status}
@@ -185,10 +184,7 @@ export function UserProfile({ userEmail, userName }: UserProfileProps) {
       )}
 
       {dropdownOpen && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setDropdownOpen(false)}
-        />
+        <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} />
       )}
     </div>
   );

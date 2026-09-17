@@ -1,9 +1,7 @@
 import React from "react";
 import { createFileRoute, useParams } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
-import {
-  getCoursesBySpecialty,
-} from "@/data/cityWiseCourses";
+import { getCoursesBySpecialty } from "@/data/cityWiseCourses";
 import { courses } from "@/data/courses";
 import { CourseCard } from "@/components/site/CourseCard";
 
@@ -20,9 +18,7 @@ function OncologyCityPage() {
   const relatedCourses = getCoursesBySpecialty(specialty);
 
   // Filter courses by oncology category
-  const cityCourses = courses.filter(
-    (c) => c.categories.includes("oncology")
-  );
+  const cityCourses = courses.filter((c) => c.categories.includes("oncology"));
 
   return (
     <div className="bg-white min-h-screen">
@@ -30,12 +26,14 @@ function OncologyCityPage() {
       <div className="bg-gradient-to-r from-navy-deep to-navy py-12">
         <div className="container-city">
           <div className="w-full">
-            <Link to="/city-wise-medical-courses" className="text-white hover:text-gold mb-4 inline-block">
+            <Link
+              to="/city-wise-medical-courses"
+              className="text-white hover:text-gold mb-4 inline-block"
+            >
               ← Back to all courses
             </Link>
             <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-              Oncology Courses in{" "}
-              {city.charAt(0).toUpperCase() + city.slice(1)}
+              Oncology Courses in {city.charAt(0).toUpperCase() + city.slice(1)}
             </h1>
           </div>
         </div>
@@ -48,9 +46,9 @@ function OncologyCityPage() {
           <div className="mb-12">
             <p className="text-lg text-slate-700 leading-relaxed mb-4">
               {city.charAt(0).toUpperCase() + city.slice(1)} is home to some of India's best medical
-              colleges, universities, and hospitals, making it an ideal location
-              for pursuing oncology specialization. Our comprehensive oncology programs provide world-class education and practical
-              training at DMHCA Institute.
+              colleges, universities, and hospitals, making it an ideal location for pursuing
+              oncology specialization. Our comprehensive oncology programs provide world-class
+              education and practical training at DMHCA Institute.
             </p>
 
             {/* Inline course cards shown immediately under intro (replaces Explore link) */}
@@ -90,7 +88,8 @@ function OncologyCityPage() {
           <div className="mt-16 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to start your journey?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto">
-              Enroll in our oncology program in {city.charAt(0).toUpperCase() + city.slice(1)} today and advance your medical career
+              Enroll in our oncology program in {city.charAt(0).toUpperCase() + city.slice(1)} today
+              and advance your medical career
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -124,9 +123,7 @@ function OncologyCityPage() {
                     Oncology in {relCourse.city}
                   </h3>
                   <p className="text-sm text-slate-600 mb-3">{relCourse.description}</p>
-                  <div className="text-xs font-semibold text-navy-deep">
-                    Learn more →
-                  </div>
+                  <div className="text-xs font-semibold text-navy-deep">Learn more →</div>
                 </Link>
               ))}
             </div>

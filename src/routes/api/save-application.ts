@@ -1,13 +1,13 @@
-import { createServerFn } from '@tanstack/react-start';
-import { createClient } from '@supabase/supabase-js';
+import { createServerFn } from "@tanstack/react-start";
+import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-  process.env.VITE_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  process.env.VITE_SUPABASE_URL || "",
+  process.env.SUPABASE_SERVICE_ROLE_KEY || "",
 );
 
-export const saveApplication = createServerFn()
-  .handler(async (input: {
+export const saveApplication = createServerFn().handler(
+  async (input: {
     user_id?: string | null;
     full_name: string;
     email: string;
@@ -19,7 +19,7 @@ export const saveApplication = createServerFn()
     message?: string | null;
     status?: string;
   }) => {
-    console.log('[SaveApplication] Received input:', { 
+    console.log("[SaveApplication] Received input:", {
       full_name: input.full_name,
       email: input.email,
       phone: input.phone,
@@ -29,13 +29,13 @@ export const saveApplication = createServerFn()
     try {
       // Validate required fields
       if (!input.full_name?.trim()) {
-        throw new Error('full_name is required');
+        throw new Error("full_name is required");
       }
       if (!input.email?.trim()) {
-        throw new Error('email is required');
+        throw new Error("email is required");
       }
       if (!input.phone?.trim()) {
-        throw new Error('phone is required');
+        throw new Error("phone is required");
       }
 
       // Build insert payload
@@ -43,7 +43,7 @@ export const saveApplication = createServerFn()
         full_name: input.full_name.trim(),
         email: input.email.trim(),
         phone: input.phone.trim(),
-        status: input.status || 'new',
+        status: input.status || "new",
       };
 
       // Optional fields
@@ -54,24 +54,22 @@ export const saveApplication = createServerFn()
       if (input.experience) payload.experience = input.experience;
       if (input.message) payload.message = input.message;
 
-      console.log('[SaveApplication] Inserting payload:', payload);
+      console.log("[SaveApplication] Inserting payload:", payload);
 
       // Insert using service role client
-      const { data, error } = await supabase
-        .from('applications')
-        .insert([payload])
-        .select();
+      const { data, error } = await supabase.from("applications").insert([payload]).select();
 
       if (error) {
-        console.error('[SaveApplication] DB error:', error);
+        console.error("[SaveApplication] DB error:", error);
         throw error;
       }
 
-      console.log('[SaveApplication] Success, inserted ID:', data?.[0]?.id);
+      console.log("[SaveApplication] Success, inserted ID:", data?.[0]?.id);
       return { success: true, data: data?.[0], applicationId: data?.[0]?.id };
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
-      console.error('[SaveApplication] Error:', message);
+      console.error("[SaveApplication] Error:", message);
       throw err;
     }
-  });
+  },
+);

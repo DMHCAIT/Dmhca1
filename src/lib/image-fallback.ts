@@ -5,29 +5,43 @@
 
 export const imageCache: Record<string, string> = {
   // Cardiology
-  "fellowship-in-echocardiography": "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
-  "certificate-in-hypertension": "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
-  "fellowship-in-interventional-cardiology": "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
-  "fellowship-in-clinical-cardiology": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-  "fellowship-in-cardiothoracic-surgery": "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
-  "fellowship-in-cardio-oncology": "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
-  "pg-diploma-in-cardiology": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-  "certificate-in-advanced-cardiac-care": "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  "fellowship-in-echocardiography":
+    "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
+  "certificate-in-hypertension":
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  "fellowship-in-interventional-cardiology":
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  "fellowship-in-clinical-cardiology":
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
+  "fellowship-in-cardiothoracic-surgery":
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  "fellowship-in-cardio-oncology":
+    "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
+  "pg-diploma-in-cardiology":
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
+  "certificate-in-advanced-cardiac-care":
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
 
   // Radiology
-  "fellowship-in-abdominal-imaging": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-  "fellowship-in-breast-imaging": "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
-  "fellowship-in-womens-imaging": "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  "fellowship-in-abdominal-imaging":
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
+  "fellowship-in-breast-imaging":
+    "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
+  "fellowship-in-womens-imaging":
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
 
   // General defaults by category
   cardiology: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-  radiology: "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  radiology:
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
   dermatology: "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
   obstetrics: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-  pediatrics: "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  pediatrics:
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
   neurology: "https://images.unsplash.com/photo-1579154204601-01d82b06ae4d?w=500&h=300&fit=crop",
   oncology: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&h=300&fit=crop",
-  pulmonary: "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
+  pulmonary:
+    "https://images.unsplash.com/photo-1631217b5fbb46ead842fc20db5e7aab?w=500&h=300&fit=crop",
 };
 
 /**

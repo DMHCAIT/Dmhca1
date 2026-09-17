@@ -1,27 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { LogIn } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { LogIn } from "lucide-react";
 
-export const Route = createFileRoute('/admin-login')({
+export const Route = createFileRoute("/admin-login")({
   head: () => ({
-    meta: [
-      { title: 'Admin Login — DMHCA' },
-      { name: 'description', content: 'Admin panel login' },
-    ],
+    meta: [{ title: "Admin Login — DMHCA" }, { name: "description", content: "Admin panel login" }],
   }),
   component: AdminLogin,
 });
 
 function AdminLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
@@ -34,10 +31,10 @@ function AdminLogin() {
         setError(authError.message);
       } else {
         // Redirect to admin dashboard will be handled by router
-        window.location.href = '/admin';
+        window.location.href = "/admin";
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -83,7 +80,7 @@ function AdminLogin() {
             disabled={loading}
             className="w-full px-4 py-2 bg-gold text-navy-deep rounded-lg font-semibold hover:bg-yellow-400 transition disabled:opacity-50"
           >
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
 

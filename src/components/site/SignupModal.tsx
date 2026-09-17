@@ -41,7 +41,7 @@ export function SignupModal({ isOpen, onClose, onSignupSuccess }: SignupModalPro
         setFullName("");
         setEmail("");
         setPassword("");
-        
+
         // Trigger success callback
         setTimeout(() => {
           onSignupSuccess();
@@ -75,9 +75,7 @@ export function SignupModal({ isOpen, onClose, onSignupSuccess }: SignupModalPro
         <form onSubmit={handleSignup} className="space-y-4">
           {/* Question 1: Full Name */}
           <div>
-            <label className="block text-sm font-medium text-navy-deep mb-2">
-              Full Name
-            </label>
+            <label className="block text-sm font-medium text-navy-deep mb-2">Full Name</label>
             <input
               type="text"
               value={fullName}
@@ -90,9 +88,7 @@ export function SignupModal({ isOpen, onClose, onSignupSuccess }: SignupModalPro
 
           {/* Question 2: Email */}
           <div>
-            <label className="block text-sm font-medium text-navy-deep mb-2">
-              Email Address
-            </label>
+            <label className="block text-sm font-medium text-navy-deep mb-2">Email Address</label>
             <input
               type="email"
               value={email}
@@ -105,9 +101,7 @@ export function SignupModal({ isOpen, onClose, onSignupSuccess }: SignupModalPro
 
           {/* Question 3: Password */}
           <div>
-            <label className="block text-sm font-medium text-navy-deep mb-2">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-navy-deep mb-2">Password</label>
             <input
               type="password"
               value={password}
@@ -119,11 +113,7 @@ export function SignupModal({ isOpen, onClose, onSignupSuccess }: SignupModalPro
             <p className="text-xs text-muted-foreground mt-1">At least 6 characters</p>
           </div>
 
-          {error && (
-            <div className="p-3 bg-red-50 text-red-700 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
+          {error && <div className="p-3 bg-red-50 text-red-700 rounded-lg text-sm">{error}</div>}
 
           {successMessage && (
             <div className="p-3 bg-green-50 text-green-700 rounded-lg text-sm">

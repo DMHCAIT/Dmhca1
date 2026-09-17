@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
-import { supabaseClient } from '@/lib/supabase';
-import { Save, X, ArrowLeft } from 'lucide-react';
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabaseClient } from "@/lib/supabase";
+import { Save, X, ArrowLeft } from "lucide-react";
 
-export const Route = createFileRoute('/admin/pages-editor')({
+export const Route = createFileRoute("/admin/pages-editor")({
   head: () => ({
     meta: [
-      { title: 'Page Editor — Admin' },
-      { name: 'description', content: 'Edit website pages' },
+      { title: "Page Editor — Admin" },
+      { name: "description", content: "Edit website pages" },
     ],
   }),
   component: PagesEditor,
@@ -29,11 +29,11 @@ interface PageContent {
 }
 
 const EDITABLE_PAGES = [
-  { page_name: 'home', display_name: 'Home Page', icon: '🏠' },
-  { page_name: 'about', display_name: 'About Us', icon: 'ℹ️' },
-  { page_name: 'contact', display_name: 'Contact Page', icon: '📧' },
-  { page_name: 'courses-overview', display_name: 'Courses Overview', icon: '📚' },
-  { page_name: 'events-overview', display_name: 'Events & Webinars', icon: '📅' },
+  { page_name: "home", display_name: "Home Page", icon: "🏠" },
+  { page_name: "about", display_name: "About Us", icon: "ℹ️" },
+  { page_name: "contact", display_name: "Contact Page", icon: "📧" },
+  { page_name: "courses-overview", display_name: "Courses Overview", icon: "📚" },
+  { page_name: "events-overview", display_name: "Events & Webinars", icon: "📅" },
 ];
 
 function PagesEditor() {
@@ -42,11 +42,11 @@ function PagesEditor() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState({
-    heroDescription: '',
-    heroImage: '',
-    content: '',
-    meta_description: '',
-    meta_keywords: '',
+    heroDescription: "",
+    heroImage: "",
+    content: "",
+    meta_description: "",
+    meta_keywords: "",
     is_active: true,
   });
 
@@ -58,14 +58,14 @@ function PagesEditor() {
     try {
       setLoading(true);
       const { data, error } = await supabaseClient
-        .from('site_pages')
-        .select('*')
+        .from("site_pages")
+        .select("*")
         .in(
-          'page_name',
-          EDITABLE_PAGES.map((p) => p.page_name)
+          "page_name",
+          EDITABLE_PAGES.map((p) => p.page_name),
         );
 
-      if (error && !error.message.includes('not found')) {
+      if (error && !error.message.includes("not found")) {
         throw error;
       }
 
@@ -77,14 +77,14 @@ function PagesEditor() {
         const existing = pageMap.get(defaultPage.page_name);
         return (
           existing || {
-            id: '',
+            id: "",
             page_name: defaultPage.page_name,
             display_name: defaultPage.display_name,
-            heroDescription: '',
-            heroImage: '',
-            content: '',
-            meta_description: '',
-            meta_keywords: '',
+            heroDescription: "",
+            heroImage: "",
+            content: "",
+            meta_description: "",
+            meta_keywords: "",
             is_active: true,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
@@ -94,7 +94,7 @@ function PagesEditor() {
 
       setPages(completePages);
     } catch (error) {
-      console.error('Error loading pages:', error);
+      console.error("Error loading pages:", error);
     } finally {
       setLoading(false);
     }
@@ -103,11 +103,11 @@ function PagesEditor() {
   const selectPage = (page: PageContent) => {
     setSelectedPage(page);
     setFormData({
-      heroDescription: page.heroDescription || '',
-      heroImage: page.heroImage || '',
-      content: page.content || '',
-      meta_description: page.meta_description || '',
-      meta_keywords: page.meta_keywords || '',
+      heroDescription: page.heroDescription || "",
+      heroImage: page.heroImage || "",
+      content: page.content || "",
+      meta_description: page.meta_description || "",
+      meta_keywords: page.meta_keywords || "",
       is_active: page.is_active,
     });
   };
@@ -120,17 +120,17 @@ function PagesEditor() {
 
       if (selectedPage.id) {
         const { error } = await supabaseClient
-          .from('site_pages')
+          .from("site_pages")
           .update({
             ...formData,
             updated_at: new Date().toISOString(),
           })
-          .eq('id', selectedPage.id);
+          .eq("id", selectedPage.id);
 
         if (error) throw error;
-        alert('✅ Page updated successfully!');
+        alert("✅ Page updated successfully!");
       } else {
-        const { error } = await supabaseClient.from('site_pages').insert([
+        const { error } = await supabaseClient.from("site_pages").insert([
           {
             page_name: selectedPage.page_name,
             display_name: selectedPage.display_name,
@@ -140,19 +140,17 @@ function PagesEditor() {
         ]);
 
         if (error) throw error;
-        alert('✅ Page created successfully!');
+        alert("✅ Page created successfully!");
       }
 
       // Update local state
       setPages(
-        pages.map((p) =>
-          p.page_name === selectedPage.page_name ? { ...p, ...formData } : p
-        )
+        pages.map((p) => (p.page_name === selectedPage.page_name ? { ...p, ...formData } : p)),
       );
       setSelectedPage({ ...selectedPage, ...formData });
     } catch (error) {
-      console.error('Error saving page:', error);
-      alert('Error saving page: ' + (error as any).message);
+      console.error("Error saving page:", error);
+      alert("Error saving page: " + (error as any).message);
     } finally {
       setSaving(false);
     }
@@ -190,13 +188,11 @@ function PagesEditor() {
                   onClick={() => selectPage(page)}
                   className={`w-full text-left p-3 hover:bg-gray-50 transition ${
                     selectedPage?.page_name === page.page_name
-                      ? 'bg-gold bg-opacity-10 border-l-4 border-gold'
-                      : ''
+                      ? "bg-gold bg-opacity-10 border-l-4 border-gold"
+                      : ""
                   }`}
                 >
-                  <p className="font-medium text-sm text-navy-deep">
-                    {page.display_name}
-                  </p>
+                  <p className="font-medium text-sm text-navy-deep">{page.display_name}</p>
                   <p className="text-xs text-gray-500 mt-1">{page.page_name}</p>
                 </button>
               ))}
@@ -209,13 +205,13 @@ function PagesEditor() {
           <div className="lg:col-span-3">
             <div className="bg-white rounded-lg shadow-md p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-navy-deep">
-                  {selectedPage.display_name}
-                </h2>
+                <h2 className="text-2xl font-bold text-navy-deep">{selectedPage.display_name}</h2>
                 <div className="flex gap-2">
                   <button
                     onClick={() => {
-                      selectPage(pages.find((p) => p.page_name === selectedPage.page_name) || selectedPage);
+                      selectPage(
+                        pages.find((p) => p.page_name === selectedPage.page_name) || selectedPage,
+                      );
                     }}
                     className="flex items-center gap-2 px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition"
                   >
@@ -256,9 +252,7 @@ function PagesEditor() {
                       <input
                         type="url"
                         value={formData.heroImage}
-                        onChange={(e) =>
-                          setFormData({ ...formData, heroImage: e.target.value })
-                        }
+                        onChange={(e) => setFormData({ ...formData, heroImage: e.target.value })}
                         className="w-full border rounded-lg px-4 py-3 focus:border-gold focus:outline-none"
                         placeholder="https://example.com/image.jpg"
                       />
@@ -318,9 +312,7 @@ function PagesEditor() {
                         type="checkbox"
                         id="is_active"
                         checked={formData.is_active}
-                        onChange={(e) =>
-                          setFormData({ ...formData, is_active: e.target.checked })
-                        }
+                        onChange={(e) => setFormData({ ...formData, is_active: e.target.checked })}
                         className="w-4 h-4 cursor-pointer"
                       />
                       <label htmlFor="is_active" className="text-sm font-medium cursor-pointer">

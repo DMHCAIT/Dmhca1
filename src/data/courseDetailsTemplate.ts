@@ -1,14 +1,14 @@
 /**
  * COURSE DETAILS STRUCTURE - IMPLEMENTATION GUIDE
- * 
+ *
  * This template shows the proper structure for adding complete course details
  * including overview, learning outcomes, curriculum, instructors, and FAQs.
- * 
+ *
  * Every course should follow this structure to provide comprehensive information
  * to students.
  */
 
-import { Course } from './courses';
+import { Course } from "./courses";
 
 /**
  * TEMPLATE: Complete Course Details Structure
@@ -18,12 +18,12 @@ import { Course } from './courses';
 export const courseDetailTemplate: Partial<Course> = {
   slug: "course-slug-here",
   title: "Course Title Here",
-  
+
   // ============================================
   // 1. COURSE OVERVIEW SECTION
   // ============================================
   overview: `Brief description of the course in 2-3 sentences explaining what the course covers and its relevance.`,
-  
+
   // ============================================
   // 2. WHAT YOU WILL LEARN SECTION
   // ============================================
@@ -35,7 +35,7 @@ export const courseDetailTemplate: Partial<Course> = {
     "Key learning outcome 5 - describe what students will be able to do",
     "Key learning outcome 6 - describe what students will be able to do",
   ],
-  
+
   // ============================================
   // 3. REQUIREMENTS/PREREQUISITES SECTION
   // ============================================
@@ -45,7 +45,7 @@ export const courseDetailTemplate: Partial<Course> = {
     "Basic knowledge of relevant subject",
     "English language proficiency",
   ],
-  
+
   // ============================================
   // 4. CURRICULUM WITH MODULES AND SUB-MODULES
   // ============================================
@@ -58,7 +58,7 @@ export const courseDetailTemplate: Partial<Course> = {
     "Module 5: Case Studies & Practice",
     "Module 6: Assessment & Certification",
   ],
-  
+
   // Detailed sub-topics/lessons for each module
   moduleDetails: [
     // Module 1 Sub-topics
@@ -110,7 +110,7 @@ export const courseDetailTemplate: Partial<Course> = {
       "Post-certification support",
     ],
   ],
-  
+
   // ============================================
   // 5. INSTRUCTORS/FACULTY SECTION
   // ============================================
@@ -134,10 +134,7 @@ export const courseDetailTemplate: Partial<Course> = {
       specialization: "Specialization Area",
       bio: "Brief biography highlighting their expertise and teaching approach.",
       image: "/instructors/instructor2.jpg",
-      qualifications: [
-        "MD in Specialization",
-        "Post-doctoral fellowship",
-      ],
+      qualifications: ["MD in Specialization", "Post-doctoral fellowship"],
       experience: "15+ years of clinical experience",
     },
     {
@@ -146,13 +143,11 @@ export const courseDetailTemplate: Partial<Course> = {
       specialization: "Specific Topic Area",
       bio: "Brief biography about their expertise in their specific area.",
       image: "/instructors/instructor3.jpg",
-      qualifications: [
-        "DNB in Specialization",
-      ],
+      qualifications: ["DNB in Specialization"],
       experience: "10+ years of clinical practice",
     },
   ],
-  
+
   // ============================================
   // 6. FREQUENTLY ASKED QUESTIONS SECTION
   // ============================================
@@ -208,7 +203,7 @@ export const courseDetailTemplate: Partial<Course> = {
       category: "Admission",
     },
   ],
-  
+
   // ============================================
   // 7. REVIEWS & TESTIMONIALS
   // ============================================
@@ -218,7 +213,8 @@ export const courseDetailTemplate: Partial<Course> = {
       studentImage: "/reviews/student1.jpg",
       rating: 5,
       title: "Exceptional Learning Experience",
-      comment: "This fellowship program exceeded all my expectations. The faculty were incredibly knowledgeable and supportive. The practical hands-on training with real cases was invaluable. Highly recommend to anyone looking to master this specialty.",
+      comment:
+        "This fellowship program exceeded all my expectations. The faculty were incredibly knowledgeable and supportive. The practical hands-on training with real cases was invaluable. Highly recommend to anyone looking to master this specialty.",
       date: "June 2024",
       verified: true,
       helpful: 24,
@@ -228,7 +224,8 @@ export const courseDetailTemplate: Partial<Course> = {
       studentImage: "/reviews/student2.jpg",
       rating: 5,
       title: "Best Professional Development Investment",
-      comment: "The curriculum is well-structured and the instructors bring real-world experience to every session. I felt well-prepared after completing the course. The support team was responsive to all queries. Worth every penny!",
+      comment:
+        "The curriculum is well-structured and the instructors bring real-world experience to every session. I felt well-prepared after completing the course. The support team was responsive to all queries. Worth every penny!",
       date: "May 2024",
       verified: true,
       helpful: 18,
@@ -237,7 +234,8 @@ export const courseDetailTemplate: Partial<Course> = {
       studentName: "Dr. Rajesh Kumar",
       rating: 4,
       title: "Great Content, Highly Recommended",
-      comment: "Comprehensive course with excellent faculty. The modules are well-organized and the learning material is current. Some topics could use more practical examples but overall a solid program.",
+      comment:
+        "Comprehensive course with excellent faculty. The modules are well-organized and the learning material is current. Some topics could use more practical examples but overall a solid program.",
       date: "April 2024",
       verified: true,
       helpful: 12,
@@ -246,13 +244,14 @@ export const courseDetailTemplate: Partial<Course> = {
       studentName: "Dr. Neha Sharma",
       rating: 5,
       title: "Life-Changing Program",
-      comment: "This course transformed my career. The knowledge and skills I gained have been instrumental in my professional growth. The networking opportunities with fellow students and faculty are invaluable.",
+      comment:
+        "This course transformed my career. The knowledge and skills I gained have been instrumental in my professional growth. The networking opportunities with fellow students and faculty are invaluable.",
       date: "March 2024",
       verified: true,
       helpful: 15,
     },
   ],
-  
+
   // ============================================
   // 8. METADATA
   // ============================================
@@ -270,41 +269,41 @@ export const courseDetailTemplate: Partial<Course> = {
 
 /**
  * INSTRUCTIONS FOR IMPLEMENTATION:
- * 
+ *
  * 1. OVERVIEW SECTION:
  *    - Write a compelling 2-3 sentence overview of what the course covers
  *    - Focus on the main learning objectives and relevance
- * 
+ *
  * 2. LEARNING OUTCOMES (learn array):
  *    - List 5-8 key things students will learn
  *    - Use action verbs (learn, understand, apply, analyze, etc.)
  *    - Make each point specific and measurable
- * 
+ *
  * 3. REQUIREMENTS:
  *    - List educational prerequisites (MBBS, MD, etc.)
  *    - Experience requirements (years of practice)
  *    - Knowledge prerequisites
  *    - Any other requirements
- * 
+ *
  * 4. CURRICULUM STRUCTURE:
  *    - Create 5-8 main modules with clear titles
  *    - For each module, list 5-8 specific topics/sub-modules
  *    - Organize from foundational to advanced concepts
  *    - Ensure progressive learning path
- * 
+ *
  * 5. INSTRUCTORS:
  *    - Add 2-4 main faculty members
  *    - Include name, title, specialization
  *    - Write brief bio (2-3 sentences)
  *    - List qualifications and experience
  *    - Add professional photo if available
- * 
+ *
  * 6. FREQUENTLY ASKED QUESTIONS:
  *    - Include 8-10 most common questions
  *    - Provide comprehensive, helpful answers
  *    - Categorize questions (Eligibility, Duration, Fees, etc.)
  *    - Address student concerns and uncertainties
- * 
+ *
  * 7. REVIEWS & TESTIMONIALS:
  *    - Include 3-5 genuine student reviews
  *    - Each review should include: name, rating (1-5), title, comment
@@ -312,12 +311,12 @@ export const courseDetailTemplate: Partial<Course> = {
  *    - Include student images if available
  *    - Reviews build trust and credibility
  *    - Display average rating and rating distribution
- * 
+ *
  * 8. METADATA:
  *    - Fill in all relevant course information
  *    - Duration, level, language, certificate status
  *    - Maximum students, start dates, batch type
- * 
+ *
  * TIPS FOR BETTER CONTENT:
  * - Be specific: Use concrete examples and numbers
  * - Use clear language: Avoid jargon, explain technical terms
@@ -331,40 +330,40 @@ export const courseDetailTemplate: Partial<Course> = {
 
 /**
  * QUICK CHECKLIST FOR EACH COURSE:
- * 
+ *
  * Course Overview:
  * ☐ Clear and compelling description
  * ☐ Mentions main topics
  * ☐ Highlights relevance and value
- * 
+ *
  * Learning Outcomes:
  * ☐ 5-8 specific outcomes
  * ☐ Action-oriented language
  * ☐ Covers theory and practice
- * 
+ *
  * Requirements:
  * ☐ Educational prerequisites
  * ☐ Experience requirements
  * ☐ Any prerequisites mentioned
- * 
+ *
  * Curriculum:
  * ☐ 5-8 modules
  * ☐ Clear progression
  * ☐ 5-8 topics per module
  * ☐ Balance of theory and practice
- * 
+ *
  * Instructors:
  * ☐ 2-4 faculty members
  * ☐ Relevant qualifications
  * ☐ Professional bios
  * ☐ Profile photos
- * 
+ *
  * FAQs:
  * ☐ 8-10 questions
  * ☐ Comprehensive answers
  * ☐ Addresses key concerns
  * ☐ Organized by category
- * 
+ *
  * Metadata:
  * ☐ All fields completed
  * ☐ Accurate information
