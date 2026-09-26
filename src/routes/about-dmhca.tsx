@@ -145,12 +145,10 @@ function About() {
               <div className="grid lg:grid-cols-2 gap-8 items-center">
                 <div>
                   <h3 className="font-display text-3xl text-navy-deep leading-tight mb-3">
-                    Start your Learning Journey Today!
+                    Advance Your Clinical Learning with DMHCA
                   </h3>
                   <p className="text-base text-muted-foreground mb-6">
-                    Join thousands of healthcare professionals who upskill with DMHCA — high-quality
-                    courses, practical training, and industry-recognized certifications designed for
-                    working clinicians.
+                    Explore specialised healthcare programs designed for working professionals. Learn through structured modules, live sessions, and guidance from experienced faculty, with study options that fit around clinical practice.
                   </p>
 
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
@@ -159,7 +157,7 @@ function About() {
                       ["Flexible Learning", "Self-paced and live options."],
                       [
                         "Learning Across Borders",
-                        "Connect with faculty and peers across countries.",
+                        "Connect with global faculty & peers.",
                       ],
                       ["Mentorship", "Dedicated tutor support."],
                     ].map(([t, s]) => (
@@ -183,7 +181,7 @@ function About() {
                       to="/top-medical-courses"
                       className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy-deep rounded-lg font-semibold shadow"
                     >
-                      Get Started Free <ArrowRight className="w-4 h-4" />
+                      Explore Programs <ArrowRight className="w-4 h-4" />
                     </Link>
                     <Link
                       to="/contact-us"
@@ -212,11 +210,11 @@ function About() {
                         </div>
                         <div className="text-right">
                           <div className="text-sm text-muted-foreground">Learners</div>
-                          <div className="text-2xl font-semibold text-navy-deep">42,000+</div>
+                          <div className="text-2xl font-semibold text-navy-deep">15,000+</div>
                         </div>
                       </div>
                       <div className="mt-3 text-sm text-muted-foreground">
-                        Hands-on modules, expert mentors, and industry-aligned certificates.
+                        programs designed for healthcare professionals.
                       </div>
                     </div>
                   </div>
