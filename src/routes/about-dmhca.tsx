@@ -157,7 +157,10 @@ function About() {
                     {[
                       ["Comprehensive Curriculum", "Practical, evidence-based modules."],
                       ["Flexible Learning", "Self-paced and live options."],
-                      ["Global Recognition", "Certificates accepted by partners."],
+                      [
+                        "Learning Across Borders",
+                        "Connect with faculty and peers across countries.",
+                      ],
                       ["Mentorship", "Dedicated tutor support."],
                     ].map(([t, s]) => (
                       <div
