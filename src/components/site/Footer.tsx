@@ -111,7 +111,7 @@ export function Footer() {
             <li>
               <Link
                 to="/courses/$slug"
-                params={{ slug: "certificate-in-diabetology" }}
+                params={{ slug: "fellowship-in-diabetology" }}
                 className="hover:text-gold transition-colors"
               >
                 Diabetology
