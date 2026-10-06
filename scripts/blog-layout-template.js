@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const routesDir = path.join(__dirname, '..', 'src', 'routes');
+const routesDir = path.join(__dirname, "..", "src", "routes");
 
 // Professional layout template
 const createProfessionalLayout = (config) => {
@@ -15,9 +15,9 @@ const createProfessionalLayout = (config) => {
     imageCaption,
     mainContent,
     faqs = [],
-    sidebarTip = 'Start building your foundation early. Strong fundamentals in science subjects during school will make your medical studies easier.',
-    category = 'Medical Career',
-    readingTime = 8
+    sidebarTip = "Start building your foundation early. Strong fundamentals in science subjects during school will make your medical studies easier.",
+    category = "Medical Career",
+    readingTime = 8,
   } = config;
 
   return `import { createFileRoute, Link } from "@tanstack/react-router";
@@ -105,7 +105,9 @@ ${mainContent}
             </article>
 
             {/* FAQs Section */}
-            ${faqs.length > 0 ? `<section className="mt-12">
+            ${
+              faqs.length > 0
+                ? `<section className="mt-12">
               <div className="border-t-2 border-gray-200 pt-12">
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">Frequently Asked Questions</h2>
                 <div className="space-y-4">
@@ -132,7 +134,9 @@ ${mainContent}
                   ))}
                 </div>
               </div>
-            </section>` : ''}
+            </section>`
+                : ""
+            }
 
             {/* Comments Section */}
             <section className="mt-12">
@@ -245,4 +249,4 @@ ${mainContent}
 // Export for use in other scripts
 module.exports = { createProfessionalLayout };
 
-console.log('✅ Professional layout template loaded and ready for transformation');
+console.log("✅ Professional layout template loaded and ready for transformation");

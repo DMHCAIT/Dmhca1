@@ -157,13 +157,26 @@ export const Route = createFileRoute("/privacy-policy")({
                   >
                     <h2 className="text-2xl font-semibold mb-3">Website Overview</h2>
                     <p className="text-sm">
-                      DMHCA is an online medical education and professional-development platform operated by New Delhi Medical Healthcare Private Limited (“NDMHC”). The platform provides information about certificate courses, fellowship programs, PG Diploma programs, workshops, and other learning opportunities designed for doctors and healthcare professionals.<br/>
-
-Through the website, users can explore available programs, review eligibility requirements, submit enquiries or applications, communicate with the admissions team, make authorised payments, and access related educational services.<br/>
-
-Certain programs may be offered with academic, institutional, faculty, or training partners. Where applicable, the role of the relevant partner, the awarding or certification body, and the nature of the collaboration will be communicated on the respective program page or during the admission process.
-
-Submitting an enquiry or application through the website does not guarantee admission, certification, academic recognition, professional registration, employment, or eligibility to practise. Admission remains subject to the applicable program requirements, document verification, payment confirmation, and DMHCA’s terms and policies.
+                      DMHCA is an online medical education and professional-development platform
+                      operated by New Delhi Medical Healthcare Private Limited (“NDMHC”). The
+                      platform provides information about certificate courses, fellowship programs,
+                      PG Diploma programs, workshops, and other learning opportunities designed for
+                      doctors and healthcare professionals.
+                      <br />
+                      Through the website, users can explore available programs, review eligibility
+                      requirements, submit enquiries or applications, communicate with the
+                      admissions team, make authorised payments, and access related educational
+                      services.
+                      <br />
+                      Certain programs may be offered with academic, institutional, faculty, or
+                      training partners. Where applicable, the role of the relevant partner, the
+                      awarding or certification body, and the nature of the collaboration will be
+                      communicated on the respective program page or during the admission process.
+                      Submitting an enquiry or application through the website does not guarantee
+                      admission, certification, academic recognition, professional registration,
+                      employment, or eligibility to practise. Admission remains subject to the
+                      applicable program requirements, document verification, payment confirmation,
+                      and DMHCA’s terms and policies.
                     </p>
                   </section>
 

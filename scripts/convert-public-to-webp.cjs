@@ -1,13 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const sharp = require('sharp');
+const fs = require("fs");
+const path = require("path");
+const sharp = require("sharp");
 
-const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+const PUBLIC_DIR = path.join(__dirname, "..", "public");
 
 async function convertFile(filePath) {
   const ext = path.extname(filePath).toLowerCase();
-  if (!['.png', '.jpg', '.jpeg'].includes(ext)) return null;
-  const out = filePath.replace(ext, '.webp');
+  if (![".png", ".jpg", ".jpeg"].includes(ext)) return null;
+  const out = filePath.replace(ext, ".webp");
   await sharp(filePath).webp({ quality: 80 }).toFile(out);
   await fs.promises.unlink(filePath);
   return { from: path.relative(process.cwd(), filePath), to: path.relative(process.cwd(), out) };
@@ -35,7 +35,7 @@ async function main() {
       const r = await convertFile(f);
       if (r) converted.push(r);
     } catch (err) {
-      console.error('Failed to convert', f, err);
+      console.error("Failed to convert", f, err);
     }
   }
 
@@ -44,7 +44,7 @@ async function main() {
     const repoFiles = await walk(process.cwd());
     const textFiles = repoFiles.filter((p) => /\.(js|ts|tsx|jsx|html|css)$/.test(p));
     for (const tf of textFiles) {
-      let content = await fs.promises.readFile(tf, 'utf8');
+      let content = await fs.promises.readFile(tf, "utf8");
       let changed = false;
       for (const { from, to } of converted) {
         const fromName = path.basename(from);
@@ -54,11 +54,11 @@ async function main() {
           changed = true;
         }
       }
-      if (changed) await fs.promises.writeFile(tf, content, 'utf8');
+      if (changed) await fs.promises.writeFile(tf, content, "utf8");
     }
   }
 
-  console.log('Converted files:', converted);
+  console.log("Converted files:", converted);
 }
 
 main().catch((e) => {

@@ -1,17 +1,14 @@
-import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
-import nodemailer from 'nodemailer';
+import crypto from "crypto";
+import { createClient } from "@supabase/supabase-js";
+import nodemailer from "nodemailer";
 
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+const supabase = createClient(process.env.VITE_SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
 // Email transporter
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT || 587),
-  secure: process.env.SMTP_SECURE === 'true',
+  secure: process.env.SMTP_SECURE === "true",
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -64,9 +61,9 @@ function generateEnrollmentEmailTemplate(studentName, courseName, courseDetails)
             <div class="course-box">
               <h3>📚 Your Course Details</h3>
               <p><strong>Course Name:</strong> ${courseName}</p>
-              ${courseDetails ? `<p><strong>Duration:</strong> ${courseDetails.duration || 'N/A'}</p>` : ''}
-              ${courseDetails ? `<p><strong>Level:</strong> ${courseDetails.level || 'N/A'}</p>` : ''}
-              ${courseDetails ? `<p><strong>Lessons:</strong> ${courseDetails.lessons || 'N/A'}</p>` : ''}
+              ${courseDetails ? `<p><strong>Duration:</strong> ${courseDetails.duration || "N/A"}</p>` : ""}
+              ${courseDetails ? `<p><strong>Level:</strong> ${courseDetails.level || "N/A"}</p>` : ""}
+              ${courseDetails ? `<p><strong>Lessons:</strong> ${courseDetails.lessons || "N/A"}</p>` : ""}
             </div>
 
             <div class="next-steps">
@@ -117,9 +114,9 @@ function generateEnrollmentEmailTemplate(studentName, courseName, courseDetails)
 
 export async function post(req) {
   try {
-    const { 
-      razorpay_order_id, 
-      razorpay_payment_id, 
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
       razorpay_signature,
       enrollmentId,
       studentEmail,
@@ -128,75 +125,80 @@ export async function post(req) {
     } = await req.json();
 
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-      return new Response(JSON.stringify({ error: 'Missing payment details' }), { status: 400 });
+      return new Response(JSON.stringify({ error: "Missing payment details" }), { status: 400 });
     }
 
     // Verify signature
     const keySecret = process.env.RAZORPAY_KEY_SECRET;
-    const hmac = crypto.createHmac('sha256', keySecret);
-    hmac.update(razorpay_order_id + '|' + razorpay_payment_id);
-    const generated = hmac.digest('hex');
+    const hmac = crypto.createHmac("sha256", keySecret);
+    hmac.update(razorpay_order_id + "|" + razorpay_payment_id);
+    const generated = hmac.digest("hex");
 
     if (generated !== razorpay_signature) {
-      return new Response(JSON.stringify({ error: 'Signature verification failed' }), { status: 400 });
+      return new Response(JSON.stringify({ error: "Signature verification failed" }), {
+        status: 400,
+      });
     }
 
     // Update payment record in DB
     const { error: updateError } = await supabase
-      .from('payments')
+      .from("payments")
       .update({
         razorpay_payment_id,
         razorpay_signature,
-        status: 'completed',
+        status: "completed",
         updated_at: new Date().toISOString(),
       })
-      .eq('razorpay_order_id', razorpay_order_id);
+      .eq("razorpay_order_id", razorpay_order_id);
 
     if (updateError) throw new Error(`DB error: ${updateError.message}`);
 
     // Mark enrollment as active
     const { data: payment } = await supabase
-      .from('payments')
-      .select('enrollment_id')
-      .eq('razorpay_order_id', razorpay_order_id)
+      .from("payments")
+      .select("enrollment_id")
+      .eq("razorpay_order_id", razorpay_order_id)
       .single();
 
     if (payment) {
       await supabase
-        .from('enrollments')
-        .update({ status: 'active', updated_at: new Date().toISOString() })
-        .eq('id', payment.enrollment_id);
+        .from("enrollments")
+        .update({ status: "active", updated_at: new Date().toISOString() })
+        .eq("id", payment.enrollment_id);
     }
 
     // Send enrollment confirmation email
     try {
       if (studentEmail) {
         const emailContent = generateEnrollmentEmailTemplate(
-          studentName || 'Student',
-          courseName || 'Your Course',
-          { duration: '6 months', level: 'Intermediate', lessons: '24' }
+          studentName || "Student",
+          courseName || "Your Course",
+          { duration: "6 months", level: "Intermediate", lessons: "24" },
         );
 
         await transporter.sendMail({
           from: {
-            name: 'DMHCA',
+            name: "DMHCA",
             address: process.env.SMTP_FROM || process.env.SMTP_USER,
           },
           to: studentEmail,
-          subject: `🎉 Enrollment Confirmed - ${courseName || 'Course'} | DMHCA`,
+          subject: `🎉 Enrollment Confirmed - ${courseName || "Course"} | DMHCA`,
           html: emailContent,
         });
       }
     } catch (emailErr) {
-      console.error('Email sending error:', emailErr);
+      console.error("Email sending error:", emailErr);
       // Don't fail the entire response if email fails
     }
 
-    return new Response(JSON.stringify({ ok: true, message: 'Payment verified and enrollment activated' }), {
-      status: 200,
-    });
+    return new Response(
+      JSON.stringify({ ok: true, message: "Payment verified and enrollment activated" }),
+      {
+        status: 200,
+      },
+    );
   } catch (err) {
-    console.error('razorpay verify:', err);
-    return new Response(JSON.stringify({ error: err.message || 'Server error' }), { status: 500 });
+    console.error("razorpay verify:", err);
+    return new Response(JSON.stringify({ error: err.message || "Server error" }), { status: 500 });
   }
 }

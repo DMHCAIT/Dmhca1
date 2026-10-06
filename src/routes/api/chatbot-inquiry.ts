@@ -170,17 +170,18 @@ export const submitChatbotInquiry = createServerFn({ method: "POST" })
       console.log("[Chatbot Inquiry] Saved successfully:", data);
 
       // Fire-and-forget: send lead to TeleCRM (do not block main request)
+      // DISABLED: TeleCRM integration
       // Build full phone with country code (e.g., "+91 9812345689")
-      const fullPhone = mobile.includes("+") ? mobile : `+91 ${mobile}`;
-
-      sendToTeleCRM({
-        name: name.trim(),
-        email: email.trim().toLowerCase(),
-        phone: fullPhone,
-        message: `Course Interest: ${course.trim()}`,
-        course: course.trim(),
-        website_url: "https://www.dmhca.in/",
-      });
+      // const fullPhone = mobile.includes("+") ? mobile : `+91 ${mobile}`;
+      //
+      // sendToTeleCRM({
+      //   name: name.trim(),
+      //   email: email.trim().toLowerCase(),
+      //   phone: fullPhone,
+      //   message: `Course Interest: ${course.trim()}`,
+      //   course: course.trim(),
+      //   website_url: "https://www.dmhca.in/",
+      // });
 
       return {
         success: true,

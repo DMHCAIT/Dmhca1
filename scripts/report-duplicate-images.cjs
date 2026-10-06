@@ -1,7 +1,7 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 // Read the TSX file and parse image path literals without importing.
-const file = fs.readFileSync(path.join(__dirname, '../src/data/courses.tsx'), 'utf8');
+const file = fs.readFileSync(path.join(__dirname, "../src/data/courses.tsx"), "utf8");
 const imageRegex = /image:\s*"([^"]+)"/g;
 let m;
 const images = [];
@@ -25,5 +25,8 @@ const out = {
   uniqueImages: map.size,
   duplicates: duplicates,
 };
-fs.writeFileSync(path.join(__dirname, 'duplicate-images-report.json'), JSON.stringify(out, null, 2));
-console.log('Report written to scripts/duplicate-images-report.json');
+fs.writeFileSync(
+  path.join(__dirname, "duplicate-images-report.json"),
+  JSON.stringify(out, null, 2),
+);
+console.log("Report written to scripts/duplicate-images-report.json");

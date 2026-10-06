@@ -23,9 +23,7 @@ export const Route = createFileRoute("/top-medical-courses/$fmt/$specialty")({
   head: ({ params }) => {
     const formatName = formatMap[params.fmt] || "Courses";
     const specialty = categories.find((c) => c.slug === params.specialty);
-    const title = specialty
-      ? `${specialty.name} ${formatName} — DMHCA`
-      : `${formatName} — DMHCA`;
+    const title = specialty ? `${specialty.name} ${formatName} — DMHCA` : `${formatName} — DMHCA`;
     return {
       meta: [
         { title },
@@ -55,12 +53,14 @@ function FilteredCourses() {
   // Intelligent parameter validation
   const isValidFormat = formatMap[fmtSlug];
   const isValidSpecialty = categories.some((c) => c.slug === specialtySlug);
-  
+
   // If parameters are invalid, show error
   if (!isValidFormat || !isValidSpecialty) {
     return (
       <div className="container-x py-20 text-center">
-        <h1 className="text-2xl font-bold text-navy-deep dark:text-white mb-4">Invalid Parameters</h1>
+        <h1 className="text-2xl font-bold text-navy-deep dark:text-white mb-4">
+          Invalid Parameters
+        </h1>
         <p className="text-muted-foreground mb-6">
           The format or specialty you requested could not be found.
         </p>
@@ -109,7 +109,7 @@ function FilteredCourses() {
 
   // Keep URL syncronization on mount (no-op if already present)
   useEffect(() => {
-    updateUrl({ q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    updateUrl({ q });
   }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
@@ -125,26 +125,21 @@ function FilteredCourses() {
   }
 
   const allSource = remoteCourses || (courses as Course[]);
-  const filtered = useMemo(
-    () => {
-      const result = allSource.filter(
-        (c) =>
-          (specialtySlug === "all" || (c.categories || []).includes(specialtySlug)) &&
-          (fmt === "all" || programType(c) === fmt) &&
-          (q.trim() === "" || (c.title || "").toLowerCase().includes(q.toLowerCase())),
-      );
-      return result;
-    },
-    [specialtySlug, fmt, q, allSource],
-  );
+  const filtered = useMemo(() => {
+    const result = allSource.filter(
+      (c) =>
+        (specialtySlug === "all" || (c.categories || []).includes(specialtySlug)) &&
+        (fmt === "all" || programType(c) === fmt) &&
+        (q.trim() === "" || (c.title || "").toLowerCase().includes(q.toLowerCase())),
+    );
+    return result;
+  }, [specialtySlug, fmt, q, allSource]);
 
   // CollectionPage Schema for filtered courses
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: specialty
-      ? `${specialty.name} ${formatMap[fmtSlug]}`
-      : `${formatMap[fmtSlug]} Courses`,
+    name: specialty ? `${specialty.name} ${formatMap[fmtSlug]}` : `${formatMap[fmtSlug]} Courses`,
     description: specialty
       ? `Browse ${formatMap[fmtSlug].toLowerCase()} in ${specialty.name.toLowerCase()}.`
       : `Browse ${formatMap[fmtSlug].toLowerCase()} across all specialties.`,
@@ -172,10 +167,14 @@ function FilteredCourses() {
             Catalogue
           </div>
           <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">
-            {specialty ? `${specialty.name} ${formatMap[fmtSlug].toLowerCase()}` : `[DEBUG: specialty=${specialty}, fmtSlug=${fmtSlug}, specialtySlug=${specialtySlug}]`} programs.
+            {specialty
+              ? `${specialty.name} ${formatMap[fmtSlug].toLowerCase()}`
+              : `[DEBUG: specialty=${specialty}, fmtSlug=${fmtSlug}, specialtySlug=${specialtySlug}]`}{" "}
+            programs.
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Filter {specialty ? specialty.name.toLowerCase() : "medical"} {formatMap[fmtSlug].toLowerCase()} courses.
+            Filter {specialty ? specialty.name.toLowerCase() : "medical"}{" "}
+            {formatMap[fmtSlug].toLowerCase()} courses.
           </p>
         </div>
       </section>
@@ -196,7 +195,8 @@ function FilteredCourses() {
               </span>
               <button
                 onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses/" + specialtySlug;
+                  window.location =
+                    window.location.origin + "/top-medical-courses/" + specialtySlug;
                 }}
                 className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
               >
@@ -206,7 +206,8 @@ function FilteredCourses() {
                 <button
                   key={slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + slug + "/" + specialtySlug;
+                    window.location =
+                      window.location.origin + "/top-medical-courses/" + slug + "/" + specialtySlug;
                   }}
                   className={`text-xs px-3 py-1.5 rounded-sm border transition ${fmt === formatName ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
                 >
@@ -233,7 +234,8 @@ function FilteredCourses() {
                 <button
                   key={c.slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + fmtSlug + "/" + c.slug;
+                    window.location =
+                      window.location.origin + "/top-medical-courses/" + fmtSlug + "/" + c.slug;
                   }}
                   className={`text-xs px-3 py-1.5 rounded-sm border transition ${c.slug === specialtySlug ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
                 >
@@ -252,7 +254,8 @@ function FilteredCourses() {
             No courses match — try clearing filters.{" "}
             <button
               onClick={() => {
-                window.location = window.location.origin + "/top-medical-courses/" + fmtSlug + "/" + specialtySlug;
+                window.location =
+                  window.location.origin + "/top-medical-courses/" + fmtSlug + "/" + specialtySlug;
               }}
               className="text-navy-deep underline bg-transparent border-0 cursor-pointer p-0 hover:text-navy-deep"
             >

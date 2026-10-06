@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 const repoRoot = process.cwd();
-const publicDir = path.join(repoRoot, 'public');
+const publicDir = path.join(repoRoot, "public");
 
 function walk(dir) {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => {
@@ -16,19 +16,19 @@ const publicFiles = walk(publicDir).map((p) => path.basename(p));
 
 let totalReplacements = 0;
 for (const cf of codeFiles) {
-  let content = fs.readFileSync(cf, 'utf8');
+  let content = fs.readFileSync(cf, "utf8");
   let changed = false;
   content = content.replace(/([\w\-\. %()!,]+)\.(png|jpg|jpeg)/gi, (match, name, ext) => {
-    const base = path.basename(name) + '.webp';
+    const base = path.basename(name) + ".webp";
     if (publicFiles.includes(base)) {
       changed = true;
       totalReplacements++;
-      return name + '.webp';
+      return name + ".webp";
     }
     return match;
   });
 
-  if (changed) fs.writeFileSync(cf, content, 'utf8');
+  if (changed) fs.writeFileSync(cf, content, "utf8");
 }
 
-console.log('Total replacements:', totalReplacements);
+console.log("Total replacements:", totalReplacements);

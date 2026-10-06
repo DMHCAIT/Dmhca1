@@ -145,14 +145,15 @@ export const submitContactForm = createServerFn({ method: "POST" })
       }
 
       // Fire-and-forget: send lead to TeleCRM (do not block main request)
-      sendToTeleCRM({
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        message: data.message,
-        course: data.course,
-        website_url: "https://www.dmhca.in/",
-      });
+      // DISABLED: TeleCRM integration
+      // sendToTeleCRM({
+      //   name: data.name,
+      //   email: data.email,
+      //   phone: data.phone,
+      //   message: data.message,
+      //   course: data.course,
+      //   website_url: "https://www.dmhca.in/",
+      // });
 
       return { success: true };
     } catch (err) {

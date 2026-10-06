@@ -72,7 +72,7 @@ function AllCourses() {
 
   // Keep URL syncronization on mount (no-op if already present)
   useEffect(() => {
-    updateUrl({ cat, q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    updateUrl({ cat, q });
   }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
@@ -167,13 +167,16 @@ function AllCourses() {
                     key={f}
                     onClick={() => {
                       if (f === "all") {
-                        window.location = window.location.origin + "/top-medical-courses" as any;
+                        window.location = (window.location.origin + "/top-medical-courses") as any;
                       } else if (f === "Certificate") {
-                        window.location = window.location.origin + "/top-medical-courses/certificates" as any;
+                        window.location = (window.location.origin +
+                          "/top-medical-courses/certificates") as any;
                       } else if (f === "PG Diploma") {
-                        window.location = window.location.origin + "/top-medical-courses/pg-diplomas" as any;
+                        window.location = (window.location.origin +
+                          "/top-medical-courses/pg-diplomas") as any;
                       } else if (f === "Fellowship") {
-                        window.location = window.location.origin + "/top-medical-courses/fellowships" as any;
+                        window.location = (window.location.origin +
+                          "/top-medical-courses/fellowships") as any;
                       }
                     }}
                     className={`text-xs px-3 py-1.5 rounded-sm border transition ${fmt === f ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
@@ -192,7 +195,7 @@ function AllCourses() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses" as any;
+                  window.location = (window.location.origin + "/top-medical-courses") as any;
                 }}
                 className={`text-xs px-3 py-1.5 rounded-sm border transition ${cat === "all" ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
               >
@@ -202,7 +205,9 @@ function AllCourses() {
                 <button
                   key={c.slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + c.slug as any;
+                    window.location = (window.location.origin +
+                      "/top-medical-courses/" +
+                      c.slug) as any;
                   }}
                   className={`text-xs px-3 py-1.5 rounded-sm border transition ${cat === c.slug ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
                 >
@@ -221,7 +226,7 @@ function AllCourses() {
             No courses match — try clearing filters.{" "}
             <button
               onClick={() => {
-                window.location = window.location.origin + "/top-medical-courses" as any;
+                window.location = (window.location.origin + "/top-medical-courses") as any;
               }}
               className="text-navy-deep underline bg-transparent border-0 cursor-pointer p-0 hover:text-navy-deep"
             >

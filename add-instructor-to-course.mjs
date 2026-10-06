@@ -1,20 +1,20 @@
-import { createClient } from '@supabase/supabase-js';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { createClient } from "@supabase/supabase-js";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Load environment variables from .env.local
-const envPath = path.join(__dirname, '.env.local');
-const envContent = fs.readFileSync(envPath, 'utf-8');
-const envLines = envContent.split('\n');
+const envPath = path.join(__dirname, ".env.local");
+const envContent = fs.readFileSync(envPath, "utf-8");
+const envLines = envContent.split("\n");
 
 envLines.forEach((line) => {
-  if (line && !line.startsWith('#')) {
-    const [key, ...value] = line.split('=');
-    process.env[key.trim()] = value.join('=').trim();
+  if (line && !line.startsWith("#")) {
+    const [key, ...value] = line.split("=");
+    process.env[key.trim()] = value.join("=").trim();
   }
 });
 
@@ -22,9 +22,9 @@ const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
-  console.error('Error: Missing Supabase credentials in environment variables');
-  console.error('URL:', supabaseUrl);
-  console.error('Key:', supabaseKey);
+  console.error("Error: Missing Supabase credentials in environment variables");
+  console.error("URL:", supabaseUrl);
+  console.error("Key:", supabaseKey);
   process.exit(1);
 }
 
@@ -38,24 +38,20 @@ async function addInstructorToCourse() {
       title: "Cosmetologist/Dermatologist",
       specialization: "Cosmetic Dermatology",
       image: "/Faculty_images/Dr Bhuvaneshwari.webp",
-      qualifications: [
-        "MBBS",
-        "MD Dermatology",
-        "Fellowship in Cosmetic Dermatology"
-      ],
-      experience: "15+ years in cosmetic and aesthetic medicine"
+      qualifications: ["MBBS", "MD Dermatology", "Fellowship in Cosmetic Dermatology"],
+      experience: "15+ years in cosmetic and aesthetic medicine",
     };
 
     const courseSlug = "certificate-in-clinical-cosmetology";
 
     // First, try to fetch the course
     const { data: existingCourse, error: fetchError } = await supabase
-      .from('courses')
-      .select('*')
-      .ilike('slug', courseSlug)
+      .from("courses")
+      .select("*")
+      .ilike("slug", courseSlug)
       .single();
 
-    if (fetchError && fetchError.code !== 'PGRST116') {
+    if (fetchError && fetchError.code !== "PGRST116") {
       throw fetchError;
     }
 
@@ -66,8 +62,10 @@ async function addInstructorToCourse() {
       categories: ["dermatology"],
       program: "Certificate",
       priceINR: 50000,
-      overview: "Advanced clinical cosmetology program designed to equip healthcare professionals with comprehensive knowledge and practical skills in modern cosmetic procedures and aesthetic medicine.",
-      heroDescription: "Master Clinical Cosmetology: Professional Certificate in Advanced Aesthetic Medicine Procedures",
+      overview:
+        "Advanced clinical cosmetology program designed to equip healthcare professionals with comprehensive knowledge and practical skills in modern cosmetic procedures and aesthetic medicine.",
+      heroDescription:
+        "Master Clinical Cosmetology: Professional Certificate in Advanced Aesthetic Medicine Procedures",
       level: "intermediate",
       rating: 4.8,
       reviewCount: 45,
@@ -80,7 +78,7 @@ async function addInstructorToCourse() {
         "Injectables and Fillers",
         "Advanced Aesthetic Procedures",
         "Patient Safety and Ethics",
-        "Business Management of Aesthetic Practice"
+        "Business Management of Aesthetic Practice",
       ],
       learn: [
         "Master advanced cosmetic procedures and techniques",
@@ -90,45 +88,45 @@ async function addInstructorToCourse() {
         "Understand safety protocols and patient management",
         "Develop business and practice management skills",
         "Hands-on clinical experience with real cases",
-        "Industry best practices and standards"
+        "Industry best practices and standards",
       ],
       requirements: [
         "MBBS or equivalent medical qualification",
         "Active medical practice or healthcare background",
         "Interest in aesthetic medicine",
-        "Basic computer literacy for online coursework"
+        "Basic computer literacy for online coursework",
       ],
       trainers: [instructor],
       faqs: [
         {
           q: "What are the prerequisites for this certificate course?",
-          a: "Candidates must have MBBS or equivalent medical qualification. Healthcare professionals with MD/MS degrees are also eligible."
+          a: "Candidates must have MBBS or equivalent medical qualification. Healthcare professionals with MD/MS degrees are also eligible.",
         },
         {
           q: "What is the duration of this course?",
-          a: "The certificate course typically spans 12-16 weeks with flexible online learning schedules."
+          a: "The certificate course typically spans 12-16 weeks with flexible online learning schedules.",
         },
         {
           q: "Will I get hands-on training?",
-          a: "Yes, the course includes practical demonstrations, case studies, and supervised clinical practice sessions."
+          a: "Yes, the course includes practical demonstrations, case studies, and supervised clinical practice sessions.",
         },
         {
           q: "Is this course recognized?",
-          a: "This is a professional development and continuing education course from DMHCA designed for skill enhancement and professional growth."
-        }
-      ]
+          a: "This is a professional development and continuing education course from DMHCA designed for skill enhancement and professional growth.",
+        },
+      ],
     };
 
     if (existingCourse) {
       // Update existing course
-      console.log('Updating existing course:', courseSlug);
-      
+      console.log("Updating existing course:", courseSlug);
+
       let existingData = {};
-      if (existingCourse.testimonials && typeof existingCourse.testimonials === 'string') {
+      if (existingCourse.testimonials && typeof existingCourse.testimonials === "string") {
         try {
           existingData = JSON.parse(existingCourse.testimonials);
         } catch (e) {
-          console.warn('Could not parse existing testimonials');
+          console.warn("Could not parse existing testimonials");
         }
       }
 
@@ -136,11 +134,11 @@ async function addInstructorToCourse() {
       courseData = {
         ...existingData,
         ...courseData,
-        trainers: [instructor] // Add or update trainers
+        trainers: [instructor], // Add or update trainers
       };
 
       const { data, error } = await supabase
-        .from('courses')
+        .from("courses")
         .update({
           testimonials: JSON.stringify(courseData),
           title: courseData.title,
@@ -148,50 +146,54 @@ async function addInstructorToCourse() {
           category: courseData.category,
           categories: courseData.categories,
           price: courseData.priceINR,
-          updated_at: new Date().toISOString()
+          updated_at: new Date().toISOString(),
         })
-        .eq('id', existingCourse.id)
+        .eq("id", existingCourse.id)
         .select();
 
       if (error) throw error;
-      console.log('✓ Course updated successfully');
-      console.log('Instructor added:', instructor.name, '-', instructor.title);
+      console.log("✓ Course updated successfully");
+      console.log("Instructor added:", instructor.name, "-", instructor.title);
       return data;
     } else {
       // Create new course
-      console.log('Creating new course:', courseSlug);
-      
+      console.log("Creating new course:", courseSlug);
+
       courseData = {
         ...courseData,
-        trainers: [instructor]
+        trainers: [instructor],
       };
 
       const { data, error } = await supabase
-        .from('courses')
-        .insert([{
-          testimonials: JSON.stringify(courseData),
-          slug: courseData.slug,
-          title: courseData.title,
-          category: courseData.category,
-          categories: courseData.categories,
-          price: courseData.priceINR,
-          duration_weeks: 16
-        }])
+        .from("courses")
+        .insert([
+          {
+            testimonials: JSON.stringify(courseData),
+            slug: courseData.slug,
+            title: courseData.title,
+            category: courseData.category,
+            categories: courseData.categories,
+            price: courseData.priceINR,
+            duration_weeks: 16,
+          },
+        ])
         .select();
 
       if (error) throw error;
-      console.log('✓ Course created successfully');
-      console.log('Instructor added:', instructor.name, '-', instructor.title);
+      console.log("✓ Course created successfully");
+      console.log("Instructor added:", instructor.name, "-", instructor.title);
       return data;
     }
   } catch (error) {
-    console.error('Error adding instructor to course:', error);
+    console.error("Error adding instructor to course:", error);
     process.exit(1);
   }
 }
 
 // Run the function
 addInstructorToCourse().then(() => {
-  console.log('\n✓ All done! The instructor has been added to the certificate-in-clinical-cosmetology course.');
+  console.log(
+    "\n✓ All done! The instructor has been added to the certificate-in-clinical-cosmetology course.",
+  );
   process.exit(0);
 });

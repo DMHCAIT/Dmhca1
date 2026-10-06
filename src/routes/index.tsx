@@ -844,7 +844,8 @@ function Home() {
               Academic partners
             </h2>
             <p className="text-muted-foreground mt-2 max-w-2xl mx-auto text-sm">
-             DMHCA works with selected universities and medical institutions to deliver structured, expert-led education for healthcare professionals.
+              DMHCA works with selected universities and medical institutions to deliver structured,
+              expert-led education for healthcare professionals.
             </p>
           </div>
 

@@ -83,7 +83,7 @@ function SpecialtyCourses() {
 
   // Keep URL syncronization on mount (no-op if already present)
   useEffect(() => {
-    updateUrl({ q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    updateUrl({ q });
   }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
@@ -144,8 +144,8 @@ function SpecialtyCourses() {
             {specialty?.name || "All"} programs.
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Filter {specialty?.name.toLowerCase() || "medical"} courses across all formats — Certificate,
-            PG Diploma, and Fellowship.
+            Filter {specialty?.name.toLowerCase() || "medical"} courses across all formats —
+            Certificate, PG Diploma, and Fellowship.
           </p>
         </div>
       </section>
@@ -176,7 +176,8 @@ function SpecialtyCourses() {
                 <button
                   key={slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + slug + "/" + specialtySlug;
+                    window.location =
+                      window.location.origin + "/top-medical-courses/" + slug + "/" + specialtySlug;
                   }}
                   className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
                 >

@@ -1,33 +1,33 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const routesDir = 'c:\\Users\\john\\OneDrive\\Desktop\\Dmhca1-main\\src\\routes';
+const routesDir = "c:\\Users\\john\\OneDrive\\Desktop\\Dmhca1-main\\src\\routes";
 
 // Blog files that need closing tag fix (21 files)
 const filesToUpdate = [
-  'how-to-become-a-cardiologist.tsx',
-  'how-to-become-a-cosmetologist.tsx',
-  'how-to-become-a-diabetologist.tsx',
-  'how-to-become-a-neurologist.tsx',
-  'how-to-become-an-embryologist.tsx',
-  'how-to-become-an-endocrinologist.tsx',
-  'how-to-become-an-oncologist.tsx',
-  'how-to-become-a-pediatrician.tsx',
-  'how-to-become-an-obstetrician-gynecologist.tsx',
-  'scope-of-cardiology.tsx',
-  'scope-of-cosmetology.tsx',
-  'scope-of-diabetology.tsx',
-  'scope-of-echocardiography.tsx',
-  'scope-of-endocrinology.tsx',
-  'scope-of-neurology.tsx',
-  'scope-of-obstetrics-and-gynecology.tsx',
-  'scope-of-oncology.tsx',
-  'scope-of-paediatrics.tsx',
-  'scope-of-radiology.tsx',
-  'how-to-crack-neet-pg.tsx',
-  'courses-after-mbbs-in-india.tsx'
+  "how-to-become-a-cardiologist.tsx",
+  "how-to-become-a-cosmetologist.tsx",
+  "how-to-become-a-diabetologist.tsx",
+  "how-to-become-a-neurologist.tsx",
+  "how-to-become-an-embryologist.tsx",
+  "how-to-become-an-endocrinologist.tsx",
+  "how-to-become-an-oncologist.tsx",
+  "how-to-become-a-pediatrician.tsx",
+  "how-to-become-an-obstetrician-gynecologist.tsx",
+  "scope-of-cardiology.tsx",
+  "scope-of-cosmetology.tsx",
+  "scope-of-diabetology.tsx",
+  "scope-of-echocardiography.tsx",
+  "scope-of-endocrinology.tsx",
+  "scope-of-neurology.tsx",
+  "scope-of-obstetrics-and-gynecology.tsx",
+  "scope-of-oncology.tsx",
+  "scope-of-paediatrics.tsx",
+  "scope-of-radiology.tsx",
+  "how-to-crack-neet-pg.tsx",
+  "courses-after-mbbs-in-india.tsx",
 ];
 
 const closingStructure = `
@@ -48,35 +48,37 @@ const closingStructure = `
 let fixed = 0;
 let failed = 0;
 
-filesToUpdate.forEach(file => {
+filesToUpdate.forEach((file) => {
   const filePath = path.join(routesDir, file);
-  
+
   if (!fs.existsSync(filePath)) {
     console.log(`❌ File not found: ${file}`);
     failed++;
     return;
   }
 
-  let content = fs.readFileSync(filePath, 'utf-8');
-  
+  let content = fs.readFileSync(filePath, "utf-8");
+
   // Check if file already has the complete closing
-  if (content.includes('Related Info Box')) {
+  if (content.includes("Related Info Box")) {
     console.log(`✅ Already complete: ${file}`);
     return;
   }
 
   // Find where to insert closing structure (before the closing );)
-  if (content.trim().endsWith(')}')) {
+  if (content.trim().endsWith(")}")) {
     // File ends with function closing, append before it
     const newContent = content.slice(0, -3) + closingStructure;
-    fs.writeFileSync(filePath, newContent, 'utf-8');
+    fs.writeFileSync(filePath, newContent, "utf-8");
     console.log(`✅ Fixed: ${file}`);
     fixed++;
   } else if (content.includes('<div className="lg:col-span-1">')) {
     // File has the sidebar structure started but not completed
     // Find the end and replace/complete it
     const regex = /<div className="lg:col-span-1">[\s\S]*?$/;
-    const newContent = content.replace(regex, `<div className="lg:col-span-1">
+    const newContent = content.replace(
+      regex,
+      `<div className="lg:col-span-1">
             <div className="sticky top-24">
               {/* Article Info Card */}
               <div className="bg-white rounded-xl p-6 shadow-md border border-gray-200 mb-6">
@@ -107,8 +109,9 @@ filesToUpdate.forEach(file => {
       </div>
     </div>
   );
-}`);
-    fs.writeFileSync(filePath, newContent, 'utf-8');
+}`,
+    );
+    fs.writeFileSync(filePath, newContent, "utf-8");
     console.log(`✅ Fixed: ${file}`);
     fixed++;
   } else {

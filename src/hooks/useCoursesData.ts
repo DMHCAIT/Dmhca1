@@ -87,7 +87,8 @@ function mergeWithStaticData(supabaseCourse: any): CourseData {
     level: supabaseCourse.level || staticCourse?.level || "",
     rating: supabaseCourse.rating || staticCourse?.rating || null,
     reviewCount: supabaseCourse.review_count || staticCourse?.reviewCount || 0,
-    overview: supabaseCourse.overview || supabaseCourse.short_description || staticCourse?.overview || "",
+    overview:
+      supabaseCourse.overview || supabaseCourse.short_description || staticCourse?.overview || "",
     heroDescription: staticCourse?.heroDescription || "",
     learn: staticCourse?.learn || [],
     requirements: staticCourse?.requirements || [],

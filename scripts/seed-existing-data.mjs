@@ -1,13 +1,13 @@
-import { createClient } from '@supabase/supabase-js';
-import dotenv from 'dotenv';
+import { createClient } from "@supabase/supabase-js";
+import dotenv from "dotenv";
 
-dotenv.config({ path: '.env.local' });
+dotenv.config({ path: ".env.local" });
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!supabaseUrl || !supabaseServiceKey) {
-  console.error('❌ Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
+  console.error("❌ Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
   process.exit(1);
 }
 
@@ -22,7 +22,8 @@ const existingCourses = [
     price: 110000,
     duration_weeks: 52,
     instructor_name: "Dr. Cardiac Specialist",
-    description: "Fellowship in Echocardiography: Master Cardiac Imaging Techniques for Comprehensive Diagnosis and Patient Care",
+    description:
+      "Fellowship in Echocardiography: Master Cardiac Imaging Techniques for Comprehensive Diagnosis and Patient Care",
     short_description: "Advanced cardiac imaging training",
     is_active: true,
   },
@@ -130,13 +131,13 @@ async function seedData() {
     console.log("📚 Seeding courses...");
     for (const course of existingCourses) {
       const { data: existing } = await supabase
-        .from('courses')
-        .select('id')
-        .eq('slug', course.slug)
+        .from("courses")
+        .select("id")
+        .eq("slug", course.slug)
         .single();
 
       if (!existing) {
-        const { error } = await supabase.from('courses').insert([
+        const { error } = await supabase.from("courses").insert([
           {
             ...course,
             created_at: new Date().toISOString(),
@@ -158,13 +159,13 @@ async function seedData() {
     console.log("\n📅 Seeding events...");
     for (const event of existingEvents) {
       const { data: existing } = await supabase
-        .from('events')
-        .select('id')
-        .eq('slug', event.slug)
+        .from("events")
+        .select("id")
+        .eq("slug", event.slug)
         .single();
 
       if (!existing) {
-        const { error } = await supabase.from('events').insert([
+        const { error } = await supabase.from("events").insert([
           {
             ...event,
             created_at: new Date().toISOString(),
@@ -187,23 +188,23 @@ async function seedData() {
     for (const page of pagesList) {
       try {
         const { data: existing } = await supabase
-          .from('site_pages')
-          .select('id')
-          .eq('page_name', page.page_name)
+          .from("site_pages")
+          .select("id")
+          .eq("page_name", page.page_name)
           .single();
 
         if (!existing) {
-          const { error } = await supabase.from('site_pages').insert([
+          const { error } = await supabase.from("site_pages").insert([
             {
               ...page,
-              content: '',
+              content: "",
               is_active: true,
               created_at: new Date().toISOString(),
               updated_at: new Date().toISOString(),
             },
           ]);
 
-          if (error && !error.message.includes('already')) {
+          if (error && !error.message.includes("already")) {
             console.error(`  ❌ Error adding ${page.display_name}:`, error.message);
           } else if (!error) {
             console.log(`  ✅ Added: ${page.display_name}`);
@@ -213,17 +214,17 @@ async function seedData() {
         }
       } catch (err) {
         // Page doesn't exist yet, so create it
-        const { error } = await supabase.from('site_pages').insert([
+        const { error } = await supabase.from("site_pages").insert([
           {
             ...page,
-            content: '',
+            content: "",
             is_active: true,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
           },
         ]);
 
-        if (error && !error.message.includes('already')) {
+        if (error && !error.message.includes("already")) {
           console.error(`  ❌ Error adding ${page.display_name}:`, error.message);
         } else if (!error) {
           console.log(`  ✅ Added: ${page.display_name}`);

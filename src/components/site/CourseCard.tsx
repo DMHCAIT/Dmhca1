@@ -105,9 +105,9 @@ function CourseCardComponent({ course }: { course: CourseData }) {
           {course.title}
         </div>
         <p className="mt-0 text-[13px] text-slate-700 line-clamp-2 mb-3">
-          {(course as any).heroDescription || 
-           course.overview || 
-           `Comprehensive ${programName.toLowerCase()} program in ${cat?.name || "Medical Science"} with expert-led training.`}
+          {(course as any).heroDescription ||
+            course.overview ||
+            `Comprehensive ${programName.toLowerCase()} program in ${cat?.name || "Medical Science"} with expert-led training.`}
         </p>
         <div className="flex items-center gap-3 text-xs text-muted-foreground justify-between flex-nowrap min-h-5">
           <div className="flex items-center gap-3 flex-nowrap overflow-hidden">

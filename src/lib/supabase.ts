@@ -9,7 +9,7 @@ const supabaseAnonKey =
 // For admin operations: try to get service role key from env
 // Development mode: expose service role key to frontend for admin operations
 const supabaseServiceKey =
-  import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY || 
+  import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY ||
   process.env.VITE_SUPABASE_SERVICE_ROLE_KEY ||
   process.env.SUPABASE_SERVICE_ROLE_KEY;
 

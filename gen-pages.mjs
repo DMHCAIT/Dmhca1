@@ -1,47 +1,109 @@
-import fs from 'fs';
+import fs from "fs";
 
 const specialties = [
-  { route: 'how-to-become-a-radiologist', title: 'How to Become a Radiologist', image: 'How-to-Become-a-Radiologist.webp', color: 'indigo', duration: '9.5-10.5 years' },
-  { route: 'how-to-become-a-cardiologist', title: 'How to Become a Cardiologist', image: 'How-to-Become-a-Cardiologist.webp', color: 'rose', duration: '12-13 years' },
-  { route: 'how-to-become-a-cosmetologist', title: 'How to Become a Cosmetologist', image: 'How-to-Become-a-Cosmetologist.webp', color: 'amber', duration: '8.5-9.5 years' },
-  { route: 'how-to-become-an-oncologist', title: 'How to Become an Oncologist', image: 'How-to-Become-an-Oncologist.webp', color: 'red', duration: '12-13 years' },
-  { route: 'how-to-become-a-neurologist', title: 'How to Become a Neurologist', image: 'How-to-Become-a-Neurologist.webp', color: 'violet', duration: '12-13 years' },
-  { route: 'how-to-become-a-diabetologist', title: 'How to Become a Diabetologist', image: 'How-to-Become-a-Diabetologist.webp', color: 'emerald', duration: '12-13 years' },
-  { route: 'how-to-become-an-endocrinologist', title: 'How to Become an Endocrinologist', image: 'How-to-Become-an-Endocrinologist.webp', color: 'indigo', duration: '12-13 years' },
-  { route: 'how-to-become-an-embryologist', title: 'How to Become an Embryologist', image: 'How-to-Become-an-Embryologist.webp', color: 'cyan', duration: '10.5-11 years' },
-  { route: 'how-to-become-a-pediatrician', title: 'How to Become a Pediatrician', image: 'How-to-Become-a-Pediatrician.webp', color: 'sky', duration: '12-13 years' },
-  { route: 'how-to-become-an-obstetrician-gynecologist', title: 'How to Become an Obstetrician-Gynecologist', image: 'How-to-Become-an-Obstetrician-Gynecologist.webp', color: 'pink', duration: '9.5-10 years' },
+  {
+    route: "how-to-become-a-radiologist",
+    title: "How to Become a Radiologist",
+    image: "How-to-Become-a-Radiologist.webp",
+    color: "indigo",
+    duration: "9.5-10.5 years",
+  },
+  {
+    route: "how-to-become-a-cardiologist",
+    title: "How to Become a Cardiologist",
+    image: "How-to-Become-a-Cardiologist.webp",
+    color: "rose",
+    duration: "12-13 years",
+  },
+  {
+    route: "how-to-become-a-cosmetologist",
+    title: "How to Become a Cosmetologist",
+    image: "How-to-Become-a-Cosmetologist.webp",
+    color: "amber",
+    duration: "8.5-9.5 years",
+  },
+  {
+    route: "how-to-become-an-oncologist",
+    title: "How to Become an Oncologist",
+    image: "How-to-Become-an-Oncologist.webp",
+    color: "red",
+    duration: "12-13 years",
+  },
+  {
+    route: "how-to-become-a-neurologist",
+    title: "How to Become a Neurologist",
+    image: "How-to-Become-a-Neurologist.webp",
+    color: "violet",
+    duration: "12-13 years",
+  },
+  {
+    route: "how-to-become-a-diabetologist",
+    title: "How to Become a Diabetologist",
+    image: "How-to-Become-a-Diabetologist.webp",
+    color: "emerald",
+    duration: "12-13 years",
+  },
+  {
+    route: "how-to-become-an-endocrinologist",
+    title: "How to Become an Endocrinologist",
+    image: "How-to-Become-an-Endocrinologist.webp",
+    color: "indigo",
+    duration: "12-13 years",
+  },
+  {
+    route: "how-to-become-an-embryologist",
+    title: "How to Become an Embryologist",
+    image: "How-to-Become-an-Embryologist.webp",
+    color: "cyan",
+    duration: "10.5-11 years",
+  },
+  {
+    route: "how-to-become-a-pediatrician",
+    title: "How to Become a Pediatrician",
+    image: "How-to-Become-a-Pediatrician.webp",
+    color: "sky",
+    duration: "12-13 years",
+  },
+  {
+    route: "how-to-become-an-obstetrician-gynecologist",
+    title: "How to Become an Obstetrician-Gynecologist",
+    image: "How-to-Become-an-Obstetrician-Gynecologist.webp",
+    color: "pink",
+    duration: "9.5-10 years",
+  },
 ];
 
 const colorGradients = {
-  indigo: 'from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700',
-  rose: 'from-rose-600/95 to-red-600/95 dark:from-rose-700 dark:to-red-700',
-  amber: 'from-amber-600/95 to-orange-600/95 dark:from-amber-700 dark:to-orange-700',
-  red: 'from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700',
-  violet: 'from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700',
-  emerald: 'from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700',
-  cyan: 'from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700',
-  sky: 'from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700',
-  pink: 'from-pink-600/95 to-rose-600/95 dark:from-pink-700 dark:to-rose-700',
+  indigo: "from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700",
+  rose: "from-rose-600/95 to-red-600/95 dark:from-rose-700 dark:to-red-700",
+  amber: "from-amber-600/95 to-orange-600/95 dark:from-amber-700 dark:to-orange-700",
+  red: "from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700",
+  violet: "from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700",
+  emerald: "from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700",
+  cyan: "from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700",
+  sky: "from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700",
+  pink: "from-pink-600/95 to-rose-600/95 dark:from-pink-700 dark:to-rose-700",
 };
 
 const buttonColors = {
-  indigo: 'from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700',
-  rose: 'from-rose-600/95 to-red-600/95 dark:from-rose-700 dark:to-red-700',
-  amber: 'from-amber-600/95 to-orange-600/95 dark:from-amber-700 dark:to-orange-700',
-  red: 'from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700',
-  violet: 'from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700',
-  emerald: 'from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700',
-  cyan: 'from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700',
-  sky: 'from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700',
-  pink: 'from-pink-600/95 to-rose-600/95 dark:from-pink-700 dark:to-rose-700',
+  indigo: "from-indigo-600/95 to-purple-600/95 dark:from-indigo-700 dark:to-purple-700",
+  rose: "from-rose-600/95 to-red-600/95 dark:from-rose-700 dark:to-red-700",
+  amber: "from-amber-600/95 to-orange-600/95 dark:from-amber-700 dark:to-orange-700",
+  red: "from-red-600/95 to-rose-600/95 dark:from-red-700 dark:to-rose-700",
+  violet: "from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700",
+  emerald: "from-emerald-600/95 to-teal-600/95 dark:from-emerald-700 dark:to-teal-700",
+  cyan: "from-cyan-600/95 to-blue-600/95 dark:from-cyan-700 dark:to-blue-700",
+  sky: "from-sky-600/95 to-blue-600/95 dark:from-sky-700 dark:to-blue-700",
+  pink: "from-pink-600/95 to-rose-600/95 dark:from-pink-700 dark:to-rose-700",
 };
 
 function generatePageContent(specialty) {
   const gradient = colorGradients[specialty.color];
   const buttonGradient = buttonColors[specialty.color];
-  const specialtyName = specialty.title.replace('How to Become a ', '').replace('How to Become an ', '');
-  
+  const specialtyName = specialty.title
+    .replace("How to Become a ", "")
+    .replace("How to Become an ", "");
+
   return `import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
@@ -306,10 +368,10 @@ function BlogContent() {
 `;
 }
 
-specialties.forEach(specialty => {
+specialties.forEach((specialty) => {
   const filePath = `src/routes/${specialty.route}.tsx`;
   const content = generatePageContent(specialty);
-  fs.writeFileSync(filePath, content, 'utf-8');
+  fs.writeFileSync(filePath, content, "utf-8");
   console.log(`✓ Generated ${filePath}`);
 });
 

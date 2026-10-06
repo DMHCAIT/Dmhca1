@@ -1,12 +1,19 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const routesDir = path.join(__dirname, '..', 'src', 'routes');
+const routesDir = path.join(__dirname, "..", "src", "routes");
 
 // Template for professional layout return statement (to be formatted for each file)
-const professionalLayoutTemplate = (title, route, imageName, imageAlt, imageCaption, sidebarTip) => `
+const professionalLayoutTemplate = (
+  title,
+  route,
+  imageName,
+  imageAlt,
+  imageCaption,
+  sidebarTip,
+) => `
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50">
       {/* Hero Section */}
@@ -193,7 +200,7 @@ const professionalLayoutTemplate = (title, route, imageName, imageAlt, imageCapt
   );
 }`;
 
-console.log('✅ Professional layout template loaded');
-console.log('📝 Ready to apply to blog files');
+console.log("✅ Professional layout template loaded");
+console.log("📝 Ready to apply to blog files");
 
 module.exports = { professionalLayoutTemplate };

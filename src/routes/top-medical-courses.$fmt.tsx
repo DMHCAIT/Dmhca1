@@ -40,25 +40,25 @@ function programType(c: Course) {
 function FilteredCourses() {
   const { fmt: fmtSlug } = useParams({ from: "/top-medical-courses/$fmt" });
   const location = useLocation();
-  
+
   // Check if this is actually a specialty, not a format
   const isSpecialty = categories.some((c) => c.slug === fmtSlug);
   const isFormat = formatMap[fmtSlug];
-  
+
   // Check if there's a third segment in the URL that matches a specialty (combined filter)
-  const pathParts = location.pathname.split('/').filter(Boolean);
+  const pathParts = location.pathname.split("/").filter(Boolean);
   // pathParts = ['top-medical-courses', 'certificates', 'radiology']
   const hasCombinedFilter = pathParts.length > 2 && categories.some((c) => c.slug === pathParts[2]);
-  
+
   // If this is a format route with a specialty parameter, render the child route via Outlet
   if (isFormat && hasCombinedFilter) {
     return <Outlet />;
   }
-  
+
   // If it's a valid specialty (not a format), render specialty view
   if (isSpecialty && !isFormat) {
     const specialty = categories.find((c) => c.slug === fmtSlug);
-    
+
     const [remoteCourses, setRemoteCourses] = useState<Course[] | null>(null);
     const [q, setQ] = useState<string>(() => {
       try {
@@ -139,8 +139,8 @@ function FilteredCourses() {
               {specialty?.name || "All"} programs.
             </h1>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              Filter {specialty?.name.toLowerCase() || "medical"} courses across all formats — Certificate,
-              PG Diploma, and Fellowship.
+              Filter {specialty?.name.toLowerCase() || "medical"} courses across all formats —
+              Certificate, PG Diploma, and Fellowship.
             </p>
           </div>
         </section>
@@ -160,7 +160,7 @@ function FilteredCourses() {
                 </span>
                 <button
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses";
+                    window.location.href = window.location.origin + "/top-medical-courses";
                   }}
                   className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
                 >
@@ -170,7 +170,8 @@ function FilteredCourses() {
                   <button
                     key={slug}
                     onClick={() => {
-                      window.location = window.location.origin + "/top-medical-courses/" + slug + "/" + fmtSlug;
+                      window.location.href =
+                        window.location.origin + "/top-medical-courses/" + slug + "/" + fmtSlug;
                     }}
                     className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
                   >
@@ -187,7 +188,7 @@ function FilteredCourses() {
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses";
+                    window.location.href = window.location.origin + "/top-medical-courses";
                   }}
                   className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
                 >
@@ -197,7 +198,8 @@ function FilteredCourses() {
                   <button
                     key={c.slug}
                     onClick={() => {
-                      window.location = window.location.origin + "/top-medical-courses/" + c.slug;
+                      window.location.href =
+                        window.location.origin + "/top-medical-courses/" + c.slug;
                     }}
                     className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
                   >
@@ -226,7 +228,7 @@ function FilteredCourses() {
       </div>
     );
   }
-  
+
   // If it's not a valid format or specialty, show error
   if (!isFormat) {
     return (
@@ -241,7 +243,7 @@ function FilteredCourses() {
       </div>
     );
   }
-  
+
   const fmt = formatMap[fmtSlug] || "all";
 
   const [remoteCourses, setRemoteCourses] = useState<Course[] | null>(null);
@@ -274,7 +276,7 @@ function FilteredCourses() {
 
   // Keep URL syncronization on mount (no-op if already present)
   useEffect(() => {
-    updateUrl({ q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    updateUrl({ q });
   }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
@@ -354,7 +356,7 @@ function FilteredCourses() {
               </span>
               <button
                 onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses";
+                  window.location.href = window.location.origin + "/top-medical-courses";
                 }}
                 className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
               >
@@ -364,7 +366,7 @@ function FilteredCourses() {
                 <button
                   key={slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + slug;
+                    window.location.href = window.location.origin + "/top-medical-courses/" + slug;
                   }}
                   className={`text-xs px-3 py-1.5 rounded-sm border transition ${fmt === formatName ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
                 >
@@ -381,7 +383,7 @@ function FilteredCourses() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses/" + fmtSlug;
+                  window.location.href = window.location.origin + "/top-medical-courses/" + fmtSlug;
                 }}
                 className="text-xs px-3 py-1.5 rounded-sm border transition bg-navy-deep text-primary-foreground border-navy-deep"
               >
@@ -391,7 +393,8 @@ function FilteredCourses() {
                 <button
                   key={c.slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + fmtSlug + "/" + c.slug;
+                    window.location.href =
+                      window.location.origin + "/top-medical-courses/" + fmtSlug + "/" + c.slug;
                   }}
                   className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
                 >
@@ -410,7 +413,7 @@ function FilteredCourses() {
             No courses match — try clearing filters.{" "}
             <button
               onClick={() => {
-                window.location = window.location.origin + "/top-medical-courses/" + fmtSlug;
+                window.location.href = window.location.origin + "/top-medical-courses/" + fmtSlug;
               }}
               className="text-navy-deep underline bg-transparent border-0 cursor-pointer p-0 hover:text-navy-deep"
             >

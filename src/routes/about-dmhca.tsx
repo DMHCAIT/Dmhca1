@@ -148,17 +148,16 @@ function About() {
                     Advance Your Clinical Learning with DMHCA
                   </h3>
                   <p className="text-base text-muted-foreground mb-6">
-                    Explore specialised healthcare programs designed for working professionals. Learn through structured modules, live sessions, and guidance from experienced faculty, with study options that fit around clinical practice.
+                    Explore specialised healthcare programs designed for working professionals.
+                    Learn through structured modules, live sessions, and guidance from experienced
+                    faculty, with study options that fit around clinical practice.
                   </p>
 
                   <div className="grid sm:grid-cols-2 gap-4 mb-6">
                     {[
                       ["Comprehensive Curriculum", "Practical, evidence-based modules."],
                       ["Flexible Learning", "Self-paced and live options."],
-                      [
-                        "Learning Across Borders",
-                        "Connect with global faculty & peers.",
-                      ],
+                      ["Learning Across Borders", "Connect with global faculty & peers."],
                       ["Mentorship", "Dedicated tutor support."],
                     ].map(([t, s]) => (
                       <div
