@@ -79,6 +79,8 @@ import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as VerifyCertificateIdRouteImport } from './routes/verify.$certificateId'
 import { Route as VerificationCertificateIdRouteImport } from './routes/verification.$certificateId'
+import { Route as TopMedicalCoursesSpecialtyRouteImport } from './routes/top-medical-courses.$specialty'
+import { Route as TopMedicalCoursesFmtRouteImport } from './routes/top-medical-courses.$fmt'
 import { Route as Char91specialtyChar93CoursesChar91cityChar93RouteImport } from './routes/[specialty]-courses.[city]'
 import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as SimpleEventSlugRouteImport } from './routes/simple-event.$slug'
@@ -109,6 +111,7 @@ import { Route as AdminCommentsRouteImport } from './routes/admin.comments'
 import { Route as AdminChatbotInquiriesRouteImport } from './routes/admin.chatbot-inquiries'
 import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
 import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
+import { Route as TopMedicalCoursesFmtSpecialtyRouteImport } from './routes/top-medical-courses.$fmt.$specialty'
 
 const VerifyRoute = VerifyRouteImport.update({
   id: '/verify',
@@ -476,6 +479,17 @@ const VerificationCertificateIdRoute =
     path: '/$certificateId',
     getParentRoute: () => VerificationRoute,
   } as any)
+const TopMedicalCoursesSpecialtyRoute =
+  TopMedicalCoursesSpecialtyRouteImport.update({
+    id: '/top-medical-courses/$specialty',
+    path: '/top-medical-courses/$specialty',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const TopMedicalCoursesFmtRoute = TopMedicalCoursesFmtRouteImport.update({
+  id: '/top-medical-courses/$fmt',
+  path: '/top-medical-courses/$fmt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const Char91specialtyChar93CoursesChar91cityChar93Route =
   Char91specialtyChar93CoursesChar91cityChar93RouteImport.update({
     id: '/specialty-courses/city',
@@ -631,6 +645,12 @@ const AdminApplicationsRoute = AdminApplicationsRouteImport.update({
   path: '/applications',
   getParentRoute: () => AdminRoute,
 } as any)
+const TopMedicalCoursesFmtSpecialtyRoute =
+  TopMedicalCoursesFmtSpecialtyRouteImport.update({
+    id: '/$specialty',
+    path: '/$specialty',
+    getParentRoute: () => TopMedicalCoursesFmtRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -711,6 +731,8 @@ export interface FileRoutesByFullPath {
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  '/top-medical-courses/$fmt': typeof TopMedicalCoursesFmtRouteWithChildren
+  '/top-medical-courses/$specialty': typeof TopMedicalCoursesSpecialtyRoute
   '/verification/$certificateId': typeof VerificationCertificateIdRoute
   '/verify/$certificateId': typeof VerifyCertificateIdRoute
   '/admin/': typeof AdminIndexRoute
@@ -733,6 +755,7 @@ export interface FileRoutesByFullPath {
   '/simple-event/': typeof SimpleEventIndexRoute
   '/sitemap/': typeof SitemapIndexRoute
   '/top-medical-courses/': typeof TopMedicalCoursesIndexRoute
+  '/top-medical-courses/$fmt/$specialty': typeof TopMedicalCoursesFmtSpecialtyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -811,6 +834,8 @@ export interface FileRoutesByTo {
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  '/top-medical-courses/$fmt': typeof TopMedicalCoursesFmtRouteWithChildren
+  '/top-medical-courses/$specialty': typeof TopMedicalCoursesSpecialtyRoute
   '/verification/$certificateId': typeof VerificationCertificateIdRoute
   '/verify/$certificateId': typeof VerifyCertificateIdRoute
   '/admin': typeof AdminIndexRoute
@@ -833,6 +858,7 @@ export interface FileRoutesByTo {
   '/simple-event': typeof SimpleEventIndexRoute
   '/sitemap': typeof SitemapIndexRoute
   '/top-medical-courses': typeof TopMedicalCoursesIndexRoute
+  '/top-medical-courses/$fmt/$specialty': typeof TopMedicalCoursesFmtSpecialtyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -914,6 +940,8 @@ export interface FileRoutesById {
   '/simple-event/$slug': typeof SimpleEventSlugRoute
   '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  '/top-medical-courses/$fmt': typeof TopMedicalCoursesFmtRouteWithChildren
+  '/top-medical-courses/$specialty': typeof TopMedicalCoursesSpecialtyRoute
   '/verification/$certificateId': typeof VerificationCertificateIdRoute
   '/verify/$certificateId': typeof VerifyCertificateIdRoute
   '/admin/': typeof AdminIndexRoute
@@ -936,6 +964,7 @@ export interface FileRoutesById {
   '/simple-event/': typeof SimpleEventIndexRoute
   '/sitemap/': typeof SitemapIndexRoute
   '/top-medical-courses/': typeof TopMedicalCoursesIndexRoute
+  '/top-medical-courses/$fmt/$specialty': typeof TopMedicalCoursesFmtSpecialtyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1018,6 +1047,8 @@ export interface FileRouteTypes {
     | '/simple-event/$slug'
     | '/sitemap/xml'
     | '/specialty-courses/city'
+    | '/top-medical-courses/$fmt'
+    | '/top-medical-courses/$specialty'
     | '/verification/$certificateId'
     | '/verify/$certificateId'
     | '/admin/'
@@ -1040,6 +1071,7 @@ export interface FileRouteTypes {
     | '/simple-event/'
     | '/sitemap/'
     | '/top-medical-courses/'
+    | '/top-medical-courses/$fmt/$specialty'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1118,6 +1150,8 @@ export interface FileRouteTypes {
     | '/simple-event/$slug'
     | '/sitemap/xml'
     | '/specialty-courses/city'
+    | '/top-medical-courses/$fmt'
+    | '/top-medical-courses/$specialty'
     | '/verification/$certificateId'
     | '/verify/$certificateId'
     | '/admin'
@@ -1140,6 +1174,7 @@ export interface FileRouteTypes {
     | '/simple-event'
     | '/sitemap'
     | '/top-medical-courses'
+    | '/top-medical-courses/$fmt/$specialty'
   id:
     | '__root__'
     | '/'
@@ -1220,6 +1255,8 @@ export interface FileRouteTypes {
     | '/simple-event/$slug'
     | '/sitemap/xml'
     | '/specialty-courses/city'
+    | '/top-medical-courses/$fmt'
+    | '/top-medical-courses/$specialty'
     | '/verification/$certificateId'
     | '/verify/$certificateId'
     | '/admin/'
@@ -1242,6 +1279,7 @@ export interface FileRouteTypes {
     | '/simple-event/'
     | '/sitemap/'
     | '/top-medical-courses/'
+    | '/top-medical-courses/$fmt/$specialty'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1309,6 +1347,8 @@ export interface RootRouteChildren {
   RadiologyCoursesCityRoute: typeof RadiologyCoursesCityRoute
   SitemapXmlRoute: typeof SitemapXmlRoute
   Char91specialtyChar93CoursesChar91cityChar93Route: typeof Char91specialtyChar93CoursesChar91cityChar93Route
+  TopMedicalCoursesFmtRoute: typeof TopMedicalCoursesFmtRouteWithChildren
+  TopMedicalCoursesSpecialtyRoute: typeof TopMedicalCoursesSpecialtyRoute
   BlogIndexRoute: typeof BlogIndexRoute
   CardiologyCoursesIndexRoute: typeof CardiologyCoursesIndexRoute
   ClinicalCardiologyCoursesIndexRoute: typeof ClinicalCardiologyCoursesIndexRoute
@@ -1821,6 +1861,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VerificationCertificateIdRouteImport
       parentRoute: typeof VerificationRoute
     }
+    '/top-medical-courses/$specialty': {
+      id: '/top-medical-courses/$specialty'
+      path: '/top-medical-courses/$specialty'
+      fullPath: '/top-medical-courses/$specialty'
+      preLoaderRoute: typeof TopMedicalCoursesSpecialtyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/top-medical-courses/$fmt': {
+      id: '/top-medical-courses/$fmt'
+      path: '/top-medical-courses/$fmt'
+      fullPath: '/top-medical-courses/$fmt'
+      preLoaderRoute: typeof TopMedicalCoursesFmtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/specialty-courses/city': {
       id: '/specialty-courses/city'
       path: '/specialty-courses/city'
@@ -2031,6 +2085,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminApplicationsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/top-medical-courses/$fmt/$specialty': {
+      id: '/top-medical-courses/$fmt/$specialty'
+      path: '/$specialty'
+      fullPath: '/top-medical-courses/$fmt/$specialty'
+      preLoaderRoute: typeof TopMedicalCoursesFmtSpecialtyRouteImport
+      parentRoute: typeof TopMedicalCoursesFmtRoute
+    }
   }
 }
 
@@ -2107,6 +2168,17 @@ const VerifyRouteChildren: VerifyRouteChildren = {
 const VerifyRouteWithChildren =
   VerifyRoute._addFileChildren(VerifyRouteChildren)
 
+interface TopMedicalCoursesFmtRouteChildren {
+  TopMedicalCoursesFmtSpecialtyRoute: typeof TopMedicalCoursesFmtSpecialtyRoute
+}
+
+const TopMedicalCoursesFmtRouteChildren: TopMedicalCoursesFmtRouteChildren = {
+  TopMedicalCoursesFmtSpecialtyRoute: TopMedicalCoursesFmtSpecialtyRoute,
+}
+
+const TopMedicalCoursesFmtRouteWithChildren =
+  TopMedicalCoursesFmtRoute._addFileChildren(TopMedicalCoursesFmtRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CertificateIdRoute: CertificateIdRoute,
@@ -2175,6 +2247,8 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapXmlRoute: SitemapXmlRoute,
   Char91specialtyChar93CoursesChar91cityChar93Route:
     Char91specialtyChar93CoursesChar91cityChar93Route,
+  TopMedicalCoursesFmtRoute: TopMedicalCoursesFmtRouteWithChildren,
+  TopMedicalCoursesSpecialtyRoute: TopMedicalCoursesSpecialtyRoute,
   BlogIndexRoute: BlogIndexRoute,
   CardiologyCoursesIndexRoute: CardiologyCoursesIndexRoute,
   ClinicalCardiologyCoursesIndexRoute: ClinicalCardiologyCoursesIndexRoute,

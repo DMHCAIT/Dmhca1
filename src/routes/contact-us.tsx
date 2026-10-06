@@ -153,7 +153,7 @@ function Contact() {
                       Hyderabad
                     </h3>
                     <p className="text-sm mt-3 text-slate-700 dark:text-slate-400 leading-relaxed">
-                      DMHCA, 8-2-351/W//B 1st Floor, Green Valley, Navodaya society, Banjara Hills
+                      DMHCA, 8-2-351/W/B 1st Floor, Green Valley, Navodaya society, Banjara Hills
                       Road no-3, Behind Times of India, Hyderabad, Telangana 500034
                     </p>
                     <div className="mt-3 space-y-1">

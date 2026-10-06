@@ -395,14 +395,6 @@ export const cityWiseCourses: CityWiseCourse[] = [
   },
   {
     specialty: "Cardiology",
-    city: "Kolkata",
-    slug: "cardiology-courses/kolkata",
-    description:
-      "Kolkata has established cardiology centers offering quality training and education.",
-    fees: "₹50,000 to ₹3,00,000",
-  },
-  {
-    specialty: "Cardiology",
     city: "Tamilnadu",
     slug: "cardiology-courses/tamilnadu",
     description:
@@ -460,9 +452,9 @@ export const cityWiseCourses: CityWiseCourse[] = [
   {
     specialty: "Cardiology",
     city: "Tiruchirappalli",
-    slug: "cardiology-courses/Tiruchurappalli",
+    slug: "cardiology-courses/tiruchirappalli",
     description:
-      "Tiruchurappalli is a leading center for medical education offering comprehensive cardiology specialization courses with modern facilities.",
+      "Tiruchirappalli is a leading center for medical education offering comprehensive cardiology specialization courses with modern facilities.",
     fees: "₹50,000 to ₹3,00,000",
   },
   {

@@ -33,7 +33,7 @@ export interface CourseData {
 const coursesCache = {
   data: null as CourseData[] | null,
   timestamp: 0,
-  CACHE_DURATION: 5 * 60 * 1000, // 5 minutes
+  CACHE_DURATION: 2 * 60 * 1000, // 2 minutes (reduced from 5 for faster updates)
 };
 
 // Attempt to hydrate in-memory cache from sessionStorage for instant loads across reloads
@@ -42,14 +42,23 @@ try {
     const raw = sessionStorage.getItem("dmhca_courses_cache");
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (parsed?.data && parsed?.timestamp) {
+      // Only use cache if it has overview data - invalidate old format caches
+      if (parsed?.data && parsed?.timestamp && parsed?.data[0]?.overview !== undefined) {
         coursesCache.data = parsed.data;
         coursesCache.timestamp = parsed.timestamp;
+      } else {
+        // Clear invalid cache
+        sessionStorage.removeItem("dmhca_courses_cache");
       }
     }
   }
 } catch (e) {
   // ignore storage errors
+  try {
+    sessionStorage.removeItem("dmhca_courses_cache");
+  } catch (e2) {
+    // ignore
+  }
 }
 
 /**
@@ -78,7 +87,7 @@ function mergeWithStaticData(supabaseCourse: any): CourseData {
     level: supabaseCourse.level || staticCourse?.level || "",
     rating: supabaseCourse.rating || staticCourse?.rating || null,
     reviewCount: supabaseCourse.review_count || staticCourse?.reviewCount || 0,
-    overview: staticCourse?.overview || "",
+    overview: supabaseCourse.overview || supabaseCourse.short_description || staticCourse?.overview || "",
     heroDescription: staticCourse?.heroDescription || "",
     learn: staticCourse?.learn || [],
     requirements: staticCourse?.requirements || [],
@@ -125,7 +134,7 @@ export function useCoursesData() {
             const { data: freshData, error: supabaseError } = await supabaseClient
               .from("courses")
               .select(
-                "id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at",
+                "id,slug,title,category,categories,image_url,program,price,rating,review_count,overview,short_description,created_at",
               )
               .order("created_at", { ascending: false })
               .limit(200);
@@ -147,7 +156,7 @@ export function useCoursesData() {
       const { data, error: supabaseError } = await supabaseClient
         .from("courses")
         .select(
-          "id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at",
+          "id,slug,title,category,categories,image_url,program,price,rating,review_count,overview,short_description,created_at",
         )
         .order("created_at", { ascending: false })
         .limit(30); // Reduced for fast initial load
@@ -160,7 +169,7 @@ export function useCoursesData() {
       supabaseClient
         .from("courses")
         .select(
-          "id,slug,title,category,categories,image_url,program,price,rating,review_count,created_at",
+          "id,slug,title,category,categories,image_url,program,price,rating,review_count,overview,short_description,created_at",
         )
         .order("created_at", { ascending: false })
         .limit(200)

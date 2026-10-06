@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 // avoid Next.js dynamic import in this Vite app
-import { supabaseClient } from "@/lib/supabase";
+import { supabaseClient, supabaseAdmin } from "@/lib/supabase";
 import { invalidateCoursesCache } from "@/hooks/useCoursesData";
 import {
   Plus,
@@ -410,19 +410,22 @@ function AdminCourses() {
       const ext = file.name.split(".").pop();
       const fileName = `${courseId}-${Date.now()}.${ext}`;
 
-      const { error: uploadError } = await supabaseClient.storage
+      // Use admin client for storage operations
+      const adminClient = supabaseAdmin || supabaseClient;
+
+      const { error: uploadError } = await adminClient.storage
         .from("course-images")
         .upload(fileName, file, { upsert: true });
 
       if (uploadError) throw uploadError;
 
-      const { data: publicUrlData } = supabaseClient.storage
+      const { data: publicUrlData } = adminClient.storage
         .from("course-images")
         .getPublicUrl(fileName);
       const publicUrl = publicUrlData.publicUrl;
 
       // Fetch the current course to preserve all its data
-      const { data: courseRecord, error: fetchError } = await supabaseClient
+      const { data: courseRecord, error: fetchError } = await adminClient
         .from("courses")
         .select("*")
         .eq("id", courseId)
@@ -442,8 +445,8 @@ function AdminCourses() {
 
       const updatedData = { ...courseData, image: publicUrl, image_url: publicUrl };
 
-      // Update with both image_url field and the data in testimonials
-      const { error: updateError } = await supabaseClient
+      // Update with both image_url field and the data in testimonials using admin client
+      const { error: updateError } = await adminClient
         .from("courses")
         .update({
           image_url: publicUrl,

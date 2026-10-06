@@ -1,49 +1,59 @@
-import { createFileRoute, useLocation } from "@tanstack/react-router";
+import { createFileRoute, useLocation, useParams, notFound } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
 import { categories, type Course, courses } from "@/data/courses";
 import { fetchCoursesFromSupabase } from "@/lib/courses-remote";
 import { CourseCard } from "@/components/site/CourseCard";
 
-export const Route = createFileRoute("/top-medical-courses/")({
-  head: () => ({
-    meta: [
-      { title: "All Courses — DMHCA" },
-      {
-        name: "description",
-        content:
-          "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
-      },
-    ],
-  }),
-  component: AllCourses,
+// Map URL slugs to program type names
+const formatMap: Record<string, string> = {
+  certificates: "Certificate",
+  "pg-diplomas": "PG Diploma",
+  fellowships: "Fellowship",
+};
+
+const reverseFormatMap: Record<string, string> = {
+  Certificate: "certificates",
+  "PG Diploma": "pg-diplomas",
+  Fellowship: "fellowships",
+};
+
+export const Route = createFileRoute("/top-medical-courses/$specialty")({
+  beforeLoad: ({ params }) => {
+    // Only allow valid specialty slugs
+    if (!categories.some((c) => c.slug === params.specialty)) {
+      throw notFound();
+    }
+  },
+  head: ({ params }) => {
+    const specialty = categories.find((c) => c.slug === params.specialty);
+    const title = specialty ? `${specialty.name} Courses — DMHCA` : "Courses — DMHCA";
+    return {
+      meta: [
+        { title },
+        {
+          name: "description",
+          content: specialty
+            ? `Browse all ${specialty.name.toLowerCase()} courses across all formats.`
+            : "Browse medical courses across all specialties.",
+        },
+      ],
+    };
+  },
+  component: SpecialtyCourses,
 });
 
 function programType(c: Course) {
   return c.program || "Certificate";
 }
 
-function AllCourses() {
+function SpecialtyCourses() {
+  const { specialty: specialtySlug } = useParams({ from: "/top-medical-courses/$specialty" });
   const location = useLocation();
   const searchParams = useMemo(() => new URLSearchParams(location.search || ""), [location.search]);
-  const cat = useMemo(() => {
-    try {
-      const p = searchParams.get("cat");
-      if (p) {
-        const slug = p.toLowerCase();
-        if (categories.some((c) => c.slug === slug)) return slug;
-      }
-    } catch (e) {}
-    return "all";
-  }, [searchParams]);
-  const [fmt, setFmt] = useState<string>("all");
+
+  const specialty = categories.find((c) => c.slug === specialtySlug);
+
   const [remoteCourses, setRemoteCourses] = useState<Course[] | null>(null);
-  // Initialize fmt from URL (so external links like ?fmt=Fellowship work)
-  useEffect(() => {
-    try {
-      const p = new URLSearchParams(location.search || "").get("fmt");
-      setFmt(p || "all");
-    } catch (e) {}
-  }, [location.search]);
 
   // Load courses from Supabase (fallback to static file if unavailable)
   useEffect(() => {
@@ -61,6 +71,7 @@ function AllCourses() {
       mounted = false;
     };
   }, []);
+
   const [q, setQ] = useState<string>(() => {
     try {
       const params = new URLSearchParams(window.location.search);
@@ -72,21 +83,13 @@ function AllCourses() {
 
   // Keep URL syncronization on mount (no-op if already present)
   useEffect(() => {
-    updateUrl({ cat, q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
+    updateUrl({ q }); /* eslint-disable-next-line react-hooks/exhaustive-deps */
   }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
-  function updateUrl(params: { cat?: string; fmt?: string; q?: string }) {
+  function updateUrl(params: { q?: string }) {
     const u = new URL(window.location.href);
     const s = u.searchParams;
-    if (params.cat !== undefined) {
-      if (params.cat === "all" || !params.cat) s.delete("cat");
-      else s.set("cat", params.cat);
-    }
-    if (params.fmt !== undefined) {
-      if (params.fmt === "all" || !params.fmt) s.delete("fmt");
-      else s.set("fmt", params.fmt);
-    }
     if (params.q !== undefined) {
       if (!params.q) s.delete("q");
       else s.set("q", params.q);
@@ -100,21 +103,21 @@ function AllCourses() {
     () =>
       allSource.filter(
         (c) =>
-          (cat === "all" || (c.categories || []).includes(cat)) &&
-          (fmt === "all" || programType(c) === fmt) &&
+          (specialtySlug === "all" || (c.categories || []).includes(specialtySlug)) &&
           (q.trim() === "" || (c.title || "").toLowerCase().includes(q.toLowerCase())),
       ),
-    [cat, fmt, q, allSource],
+    [specialtySlug, q, allSource],
   );
 
-  // CollectionPage Schema for all courses
-  const allCoursesSchema = {
+  // CollectionPage Schema for specialty courses
+  const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "All Medical Courses",
-    description:
-      "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
-    url: "https://dmhca.in/top-medical-courses",
+    name: specialty ? `${specialty.name} Courses` : "Medical Courses",
+    description: specialty
+      ? `Browse all ${specialty.name.toLowerCase()} courses across all formats.`
+      : "Browse medical courses across all specialties.",
+    url: `https://dmhca.in/top-medical-courses/${specialtySlug}`,
     mainEntity: {
       "@type": "ItemList",
       itemListElement: filtered.slice(0, 50).map((course, idx) => ({
@@ -130,7 +133,7 @@ function AllCourses() {
     <div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(allCoursesSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <section className="site-hero">
         <div className="container-x">
@@ -138,10 +141,10 @@ function AllCourses() {
             Catalogue
           </div>
           <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">
-            All programs.
+            {specialty?.name || "All"} programs.
           </h1>
           <p className="mt-3 max-w-2xl text-muted-foreground">
-            Filter across {categories.length} specialties and three program formats — Certificate,
+            Filter {specialty?.name.toLowerCase() || "medical"} courses across all formats — Certificate,
             PG Diploma, and Fellowship.
           </p>
         </div>
@@ -161,27 +164,25 @@ function AllCourses() {
               <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mr-1">
                 Format
               </span>
-              {["all", "Certificate", "PG Diploma", "Fellowship"].map((f) => {
-                return (
-                  <button
-                    key={f}
-                    onClick={() => {
-                      if (f === "all") {
-                        window.location = window.location.origin + "/top-medical-courses" as any;
-                      } else if (f === "Certificate") {
-                        window.location = window.location.origin + "/top-medical-courses/certificates" as any;
-                      } else if (f === "PG Diploma") {
-                        window.location = window.location.origin + "/top-medical-courses/pg-diplomas" as any;
-                      } else if (f === "Fellowship") {
-                        window.location = window.location.origin + "/top-medical-courses/fellowships" as any;
-                      }
-                    }}
-                    className={`text-xs px-3 py-1.5 rounded-sm border transition ${fmt === f ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
-                  >
-                    {f === "all" ? "All" : f}
-                  </button>
-                );
-              })}
+              <button
+                onClick={() => {
+                  window.location = window.location.origin + "/top-medical-courses";
+                }}
+                className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
+              >
+                All
+              </button>
+              {Object.entries(reverseFormatMap).map(([formatName, slug]) => (
+                <button
+                  key={slug}
+                  onClick={() => {
+                    window.location = window.location.origin + "/top-medical-courses/" + slug + "/" + specialtySlug;
+                  }}
+                  className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
+                >
+                  {formatName}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -192,9 +193,9 @@ function AllCourses() {
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses" as any;
+                  window.location = window.location.origin + "/top-medical-courses";
                 }}
-                className={`text-xs px-3 py-1.5 rounded-sm border transition ${cat === "all" ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
+                className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
               >
                 All specialties
               </button>
@@ -202,9 +203,9 @@ function AllCourses() {
                 <button
                   key={c.slug}
                   onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + c.slug as any;
+                    window.location = window.location.origin + "/top-medical-courses/" + c.slug;
                   }}
-                  className={`text-xs px-3 py-1.5 rounded-sm border transition ${cat === c.slug ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
+                  className={`text-xs px-3 py-1.5 rounded-sm border transition ${c.slug === specialtySlug ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
                 >
                   {c.name}
                 </button>
@@ -221,7 +222,7 @@ function AllCourses() {
             No courses match — try clearing filters.{" "}
             <button
               onClick={() => {
-                window.location = window.location.origin + "/top-medical-courses" as any;
+                window.location = window.location.origin + "/top-medical-courses/" + specialtySlug;
               }}
               className="text-navy-deep underline bg-transparent border-0 cursor-pointer p-0 hover:text-navy-deep"
             >
