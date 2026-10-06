@@ -112,6 +112,7 @@ import { Route as AdminChatbotInquiriesRouteImport } from './routes/admin.chatbo
 import { Route as AdminCertificatesRouteImport } from './routes/admin.certificates'
 import { Route as AdminApplicationsRouteImport } from './routes/admin.applications'
 import { Route as TopMedicalCoursesFmtSpecialtyRouteImport } from './routes/top-medical-courses.$fmt.$specialty'
+import { Route as CoursesCourseSlugLessonsLessonSlugRouteImport } from './routes/courses.$courseSlug.lessons.$lessonSlug'
 
 const VerifyRoute = VerifyRouteImport.update({
   id: '/verify',
@@ -651,6 +652,12 @@ const TopMedicalCoursesFmtSpecialtyRoute =
     path: '/$specialty',
     getParentRoute: () => TopMedicalCoursesFmtRoute,
   } as any)
+const CoursesCourseSlugLessonsLessonSlugRoute =
+  CoursesCourseSlugLessonsLessonSlugRouteImport.update({
+    id: '/courses/$courseSlug/lessons/$lessonSlug',
+    path: '/courses/$courseSlug/lessons/$lessonSlug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -756,6 +763,7 @@ export interface FileRoutesByFullPath {
   '/sitemap/': typeof SitemapIndexRoute
   '/top-medical-courses/': typeof TopMedicalCoursesIndexRoute
   '/top-medical-courses/$fmt/$specialty': typeof TopMedicalCoursesFmtSpecialtyRoute
+  '/courses/$courseSlug/lessons/$lessonSlug': typeof CoursesCourseSlugLessonsLessonSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -859,6 +867,7 @@ export interface FileRoutesByTo {
   '/sitemap': typeof SitemapIndexRoute
   '/top-medical-courses': typeof TopMedicalCoursesIndexRoute
   '/top-medical-courses/$fmt/$specialty': typeof TopMedicalCoursesFmtSpecialtyRoute
+  '/courses/$courseSlug/lessons/$lessonSlug': typeof CoursesCourseSlugLessonsLessonSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -965,6 +974,7 @@ export interface FileRoutesById {
   '/sitemap/': typeof SitemapIndexRoute
   '/top-medical-courses/': typeof TopMedicalCoursesIndexRoute
   '/top-medical-courses/$fmt/$specialty': typeof TopMedicalCoursesFmtSpecialtyRoute
+  '/courses/$courseSlug/lessons/$lessonSlug': typeof CoursesCourseSlugLessonsLessonSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -1072,6 +1082,7 @@ export interface FileRouteTypes {
     | '/sitemap/'
     | '/top-medical-courses/'
     | '/top-medical-courses/$fmt/$specialty'
+    | '/courses/$courseSlug/lessons/$lessonSlug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -1175,6 +1186,7 @@ export interface FileRouteTypes {
     | '/sitemap'
     | '/top-medical-courses'
     | '/top-medical-courses/$fmt/$specialty'
+    | '/courses/$courseSlug/lessons/$lessonSlug'
   id:
     | '__root__'
     | '/'
@@ -1280,6 +1292,7 @@ export interface FileRouteTypes {
     | '/sitemap/'
     | '/top-medical-courses/'
     | '/top-medical-courses/$fmt/$specialty'
+    | '/courses/$courseSlug/lessons/$lessonSlug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -1367,6 +1380,7 @@ export interface RootRouteChildren {
   RadiologyCoursesIndexRoute: typeof RadiologyCoursesIndexRoute
   SitemapIndexRoute: typeof SitemapIndexRoute
   TopMedicalCoursesIndexRoute: typeof TopMedicalCoursesIndexRoute
+  CoursesCourseSlugLessonsLessonSlugRoute: typeof CoursesCourseSlugLessonsLessonSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -2092,6 +2106,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TopMedicalCoursesFmtSpecialtyRouteImport
       parentRoute: typeof TopMedicalCoursesFmtRoute
     }
+    '/courses/$courseSlug/lessons/$lessonSlug': {
+      id: '/courses/$courseSlug/lessons/$lessonSlug'
+      path: '/courses/$courseSlug/lessons/$lessonSlug'
+      fullPath: '/courses/$courseSlug/lessons/$lessonSlug'
+      preLoaderRoute: typeof CoursesCourseSlugLessonsLessonSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -2268,6 +2289,8 @@ const rootRouteChildren: RootRouteChildren = {
   RadiologyCoursesIndexRoute: RadiologyCoursesIndexRoute,
   SitemapIndexRoute: SitemapIndexRoute,
   TopMedicalCoursesIndexRoute: TopMedicalCoursesIndexRoute,
+  CoursesCourseSlugLessonsLessonSlugRoute:
+    CoursesCourseSlugLessonsLessonSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
