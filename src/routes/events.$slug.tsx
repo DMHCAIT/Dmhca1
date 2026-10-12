@@ -74,7 +74,12 @@ function EventImage({
     <div className={`flex items-center justify-center overflow-hidden rounded-xl bg-[#f8f9fc] ${fullPoster && src && !failed ? "" : "aspect-video"}`}>
       {src && !failed ? (
         <picture className={fullPoster ? "block w-full" : "h-full w-full"}>
-          {mobileSrc && <source media="(max-width: 767px)" srcSet={encodeURI(mobileSrc)} />}
+          {mobileSrc && (
+            <source
+              media="(max-width: 767px)"
+              srcSet={`${encodeURI(mobileSrc)} 1x, ${encodeURI(src)} 2x, ${encodeURI(src)} 3x`}
+            />
+          )}
           <img
             src={src}
             alt={title}
