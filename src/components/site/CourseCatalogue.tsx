@@ -139,7 +139,7 @@ export function CourseCatalogue({
               </a>
             </div>
           ) : (
-            <div className="course-catalogue-grid grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-6 xl:gap-y-8">
+            <div className="course-catalogue-grid grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-6 xl:gap-x-6 xl:gap-y-8">
               {courses.map((course) => (
                 <CourseCard key={course.slug} course={course} compact />
               ))}

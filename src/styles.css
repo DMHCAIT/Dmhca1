@@ -912,6 +912,72 @@ body
   border-radius: 1rem;
 }
 
+.career-pathway-label {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  color: #800020;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.resource-article .prose .career-pathway > h2 {
+  margin-top: 0;
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.resource-article .prose .career-pathway > p {
+  max-width: 80ch;
+  margin-bottom: 1.75rem;
+  color: #6b5b68;
+}
+
+.career-pathway-steps {
+  display: grid;
+  gap: 1rem;
+}
+
+.career-pathway-steps > div {
+  align-items: flex-start;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid #29334a1a;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 8px 24px -20px #29334a50;
+}
+
+.career-pathway-steps > div > .flex-1 {
+  min-width: 0;
+}
+
+.resource-article .prose .career-pathway-steps h3 {
+  margin-top: 0;
+  margin-bottom: 0.625rem;
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  text-wrap: pretty;
+}
+
+.resource-article .prose .career-pathway-steps p {
+  margin: 0;
+  color: #6b5b68;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+@media (min-width: 900px) {
+  .career-pathway-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .career-pathway-steps > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    border-color: #80002026;
+    background: linear-gradient(110deg, #fff5f8, #ffffff);
+  }
+}
+
 .resource-directory-page section > .space-y-16 > div,
 .resource-sitemap-page > section:not(.resource-hero) > .container-x > div:not(:last-child) {
   padding: 1.5rem;
@@ -1541,7 +1607,11 @@ body
 }
 
 .academic-logo-item {
-  background: transparent;
+  min-width: 0;
+  border: 1px solid #29334a12;
+  border-radius: 1rem;
+  background: #ffffff;
+  box-shadow: 0 4px 16px -12px #29334a24;
 }
 
 .academic-logo-item img {
@@ -1550,7 +1620,7 @@ body
   flex-shrink: 1;
   min-width: 0;
   max-height: 96px;
-  max-width: 240px;
+  max-width: 100%;
 }
 
 .home-training {
@@ -2157,4 +2227,13 @@ img {
   image-rendering: auto;
   filter: none !important;
   -webkit-backface-visibility: visible;
+}
+.resource-event-detail-page [aria-label="Event poster"] {
+  --event-poster-width: 886px;
+}
+
+@media (max-width: 767px) {
+  .resource-event-detail-page [aria-label="Event poster"] {
+    --event-poster-width: 263px;
+  }
 }

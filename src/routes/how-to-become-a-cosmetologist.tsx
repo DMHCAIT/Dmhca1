@@ -84,7 +84,8 @@ function BlogContent() {
       <section className="py-8 sm:py-12 md:py-16 bg-white/50 backdrop-blur-sm px-4 sm:px-0">
         <div className="container-x max-w-4xl">
           <div className="prose prose-lg prose-slate max-w-none">
-            <div className="mb-12 not-prose">
+            <div className="career-pathway mb-12 not-prose">
+              <span className="career-pathway-label">Your career roadmap</span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-6">
                 Path to Cosmetologist
               </h2>
@@ -95,7 +96,7 @@ function BlogContent() {
                 specialty.
               </p>
 
-              <div className="space-y-6">
+              <div className="career-pathway-steps">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-gradient-to-br from-[#800020]/95 to-[#800020]/95 text-white font-bold">

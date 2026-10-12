@@ -124,7 +124,7 @@ function CourseCardComponent({
             course.overview ||
             `Comprehensive ${programName.toLowerCase()} program in ${cat?.name || "Medical Science"} with expert-led training.`}
         </p>
-        <div className="course-card-meta mt-auto flex min-h-5 flex-nowrap items-center gap-x-1.5 pt-2 text-[11px] text-muted-foreground sm:flex-wrap sm:gap-x-3 sm:gap-y-2 sm:text-xs">
+        <div className="course-card-meta mt-auto flex min-h-5 flex-nowrap items-center gap-x-1.5 pt-2 text-[11px] text-muted-foreground sm:gap-x-3 sm:text-xs">
           {course.lessons != null && (
             <span className="flex flex-shrink-0 items-center gap-1 whitespace-nowrap font-semibold text-slate-800 sm:gap-1.5">
               <BookOpen className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> {course.lessons} lessons

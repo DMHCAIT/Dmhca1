@@ -65,9 +65,9 @@ export function CourseDetail({
   const isPgDiploma = /pg\s*diploma|post\s*graduate\s*diploma/i.test(
     `${ptype} ${course.program ?? ""} ${course.title ?? ""}`,
   );
-  const aaaPartner = { src: "/AAA-logo.png", name: "American Accreditation Association" };
+  const aaaPartner = { src: "/AAA-logo-dark-text.png", name: "American Accreditation Association" };
   const ibmpPartner = {
-    src: "/ACADEMIC PARTNERS/IBMP LOGO .webp",
+    src: "/ACADEMIC PARTNERS/ibmp-logo.webp",
     name: "International Board of Medical Practitioners",
   };
   const academicPartners = isPgDiploma
@@ -492,7 +492,7 @@ export function CourseDetail({
                     Academic partners
                   </h2>
 
-                  <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 sm:p-6 shadow-sm">
+                  <div className="py-3">
                     <div
                       className={`flex flex-wrap justify-center gap-3 sm:gap-4 ${
                         isPgDiploma ? "" : "sm:max-w-md sm:mx-auto"
@@ -501,18 +501,20 @@ export function CourseDetail({
                       {academicPartners.map(({ src, name }) => (
                         <div
                           key={src}
-                          className={`rounded-lg bg-white/80 dark:!bg-white p-3 flex items-center justify-center shadow-sm hover:shadow-md transition-shadow duration-200 w-[calc(50%-0.375rem)] sm:w-[calc(50%-0.5rem)] ${
+                          className={`academic-logo-item h-28 px-3 sm:px-6 flex items-center justify-center w-[calc(50%-0.375rem)] sm:w-[calc(50%-0.5rem)] ${
                             isPgDiploma ? "sm:!w-[calc(33.333%-0.667rem)]" : ""
                           }`}
                         >
-                          <div className="w-full max-w-28 h-20 md:max-w-32 md:h-24 flex items-center justify-center bg-white dark:!bg-white rounded-md">
-                            <img
-                              src={src}
-                              alt={name}
-                              loading="lazy"
-                              className="max-w-full max-h-full object-contain"
-                            />
-                          </div>
+                          <img
+                            src={src}
+                            alt={name}
+                            loading="lazy"
+                            style={{
+                              maxWidth: `min(100%, ${src === aaaPartner.src ? 210 : src === ibmpPartner.src || src.endsWith("btu_hero_logo.webp") ? 88 : 240}px)`,
+                              maxHeight: 88,
+                            }}
+                            className="object-contain"
+                          />
                         </div>
                       ))}
                     </div>

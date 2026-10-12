@@ -96,10 +96,6 @@ function Home() {
     if (typeof window !== "undefined") {
       const loggedIn = localStorage.getItem("isLoggedIn") === "true";
       setIsLoggedIn(loggedIn);
-      // Show signup popin immediately on home for new visitors
-      if (!loggedIn) {
-        setShowSignupModal(true);
-      }
     }
   }, []);
 
@@ -744,7 +740,7 @@ function Home() {
             {[
               {
                 file: "AAA-logo.png",
-                src: "/AAA-logo.png",
+                src: "/AAA-logo-dark-text.png",
                 name: "American Accreditation Association",
                 width: 349,
                 height: 141,
@@ -762,10 +758,10 @@ function Home() {
                 height: 633,
               },
               {
-                file: "IBMP LOGO .webp",
+                file: "ibmp-logo.webp",
                 name: "International Board of Medical Practitioners",
-                width: 1163,
-                height: 1166,
+                width: 96,
+                height: 96,
               },
               {
                 file: "logo-srdu.webp",
@@ -797,8 +793,8 @@ function Home() {
                     width={width}
                     height={height}
                     style={{
-                      maxWidth: Math.min(240, width / 2),
-                      maxHeight: Math.min(96, height / 2),
+                      maxWidth: `min(100%, ${file === "AAA-logo.png" ? 210 : file === "ibmp-logo.webp" || file === "btu_hero_logo.webp" ? 88 : 240}px)`,
+                      maxHeight: 88,
                     }}
                     loading="lazy"
                     className="object-contain"

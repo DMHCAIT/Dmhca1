@@ -38,8 +38,8 @@ export const events: Event[] = [
     time: "4:00 PM IST",
     location: "Online",
     registrationPending: true,
-    image: "/events&webinars/dmhca_female_hormones_webinar.webp",
-    mobileImage: "/events&webinars/dmhca_female_hormones_webinar_mobile.webp",
+    image: "/events&webinars/Female- Hormones- and- Fertility- CME -Event-desktop.webp",
+    mobileImage: "/events&webinars/Female-Hormones- and- Fertility-CME-Event1-mobile.png",
     shortDescription:
       "A focused session on how female hormones shape fertility, and how to approach subfertility in clinical practice, from a reproductive medicine consultant in London.",
     description:

@@ -61,22 +61,25 @@ function EventImage({
   src,
   mobileSrc,
   title,
+  fullPoster = false,
 }: {
   src?: string;
   mobileSrc?: string;
   title: string;
+  fullPoster?: boolean;
 }) {
   const [failed, setFailed] = useState(false);
 
   return (
-    <div className="flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-[#f8f9fc]">
+    <div className={`flex items-center justify-center overflow-hidden rounded-xl bg-[#f8f9fc] ${fullPoster && src && !failed ? "" : "aspect-video"}`}>
       {src && !failed ? (
-        <picture className="h-full w-full">
-          {mobileSrc && <source media="(max-width: 767px)" srcSet={mobileSrc} />}
+        <picture className={fullPoster ? "block w-full" : "h-full w-full"}>
+          {mobileSrc && <source media="(max-width: 767px)" srcSet={encodeURI(mobileSrc)} />}
           <img
             src={src}
             alt={title}
-            className="h-full w-full object-cover"
+            className={fullPoster ? "mx-auto block h-auto w-full object-contain" : "h-full w-full object-cover"}
+            style={fullPoster && mobileSrc ? { maxWidth: "var(--event-poster-width)" } : undefined}
             onError={() => {
               console.warn(`Unable to load event image: ${src}`);
               setFailed(true);
@@ -147,6 +150,7 @@ function EventDetailPage() {
                     src={event.image}
                     mobileSrc={event.mobileImage}
                     title={event.title}
+                    fullPoster
                   />
                 </div>
               )}
