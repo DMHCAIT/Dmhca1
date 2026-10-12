@@ -141,61 +141,47 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
-  // Popin removed — no persistent modal shown on root
+  // Undefined means consent is still being loaded; null means the visitor has not decided.
+  const [cookieConsent, setCookieConsent] = useState<string | null | undefined>(undefined);
 
-  // Cookie consent: null = not decided, "accept" or "deny"
-  // Initialize to null to avoid hydration mismatch (load from localStorage in useEffect)
-  const [cookieConsent, setCookieConsent] = useState<string | null>(null);
-
-  // Load cookie consent from localStorage after hydration
   useEffect(() => {
     try {
       const saved = localStorage.getItem("dmhca_cookie_consent");
-      if (saved) setCookieConsent(saved);
-    } catch (e) {}
+      setCookieConsent(saved === "accept" || saved === "deny" ? saved : null);
+    } catch (error) {
+      console.error("Failed to load cookie consent:", error);
+      setCookieConsent(null);
+    }
   }, []);
 
-  // Persist cookie consent to localStorage when it changes
-  useEffect(() => {
+  function handleCookieConsent(choice: "accept" | "deny") {
     try {
-      if (cookieConsent) localStorage.setItem("dmhca_cookie_consent", cookieConsent);
-    } catch (e) {}
-  }, [cookieConsent]);
-
-  function handleCookieConsent(choice: string) {
+      localStorage.setItem("dmhca_cookie_consent", choice);
+    } catch (error) {
+      console.error("Failed to save cookie consent:", error);
+    }
     setCookieConsent(choice);
-    // Persist to localStorage after state update
-    setTimeout(() => {
-      try {
-        localStorage.setItem("dmhca_cookie_consent", choice);
-      } catch (e) {
-        console.error("Failed to save cookie consent:", e);
-      }
-    }, 0);
   }
 
-  // Show a root-level popin (SignupFlow) after 10s with blurred backdrop for 10s
   const [showPopin, setShowPopin] = useState(false);
   useEffect(() => {
     try {
       const closed = localStorage.getItem("dmhca_popin_closed");
-      if (closed === "1") return; // do not show again
-    } catch (e) {}
-
-    const openTimer = setTimeout(() => setShowPopin(true), 10000);
-    return () => clearTimeout(openTimer);
+      setShowPopin(closed !== "1");
+    } catch (error) {
+      console.error("Failed to load signup popup preference:", error);
+      setShowPopin(true);
+    }
   }, []);
 
-  useEffect(() => {
-    if (!showPopin) return;
-    const hideTimer = setTimeout(() => {
-      setShowPopin(false);
-      try {
-        localStorage.setItem("dmhca_popin_closed", "1");
-      } catch (e) {}
-    }, 10000);
-    return () => clearTimeout(hideTimer);
-  }, [showPopin]);
+  function dismissPopin() {
+    setShowPopin(false);
+    try {
+      localStorage.setItem("dmhca_popin_closed", "1");
+    } catch (error) {
+      console.error("Failed to save signup popup preference:", error);
+    }
+  }
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
@@ -206,31 +192,13 @@ function RootComponent() {
           </main>
           <Footer />
 
-          {/* Popin overlay */}
           {showPopin && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center">
-              <div className="absolute inset-0 bg-black/30 backdrop-blur-sm" />
-              <div className="relative z-10 w-full max-w-md mx-4">
-                <SignupFlow
-                  isOpen={true}
-                  onClose={() => {
-                    setShowPopin(false);
-                    try {
-                      localStorage.setItem("dmhca_popin_closed", "1");
-                    } catch (e) {}
-                  }}
-                  onSuccess={() => {
-                    setShowPopin(false);
-                    try {
-                      localStorage.setItem("dmhca_popin_closed", "1");
-                    } catch (e) {}
-                  }}
-                  onSwitchToLogin={() => {
-                    setShowPopin(false);
-                  }}
-                />
-              </div>
-            </div>
+            <SignupFlow
+              isOpen={true}
+              onClose={dismissPopin}
+              onSuccess={dismissPopin}
+              onSwitchToLogin={dismissPopin}
+            />
           )}
 
           {/* Cookie banner fixed to bottom */}
@@ -266,7 +234,7 @@ function RootComponent() {
                       onClick={() => handleCookieConsent("deny")}
                       className="px-3 md:px-5 py-1.5 md:py-2 text-xs md:text-sm border border-gray-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-900 whitespace-nowrap"
                     >
-                      Deny
+                      Reject
                     </button>
                   </div>
                 </div>

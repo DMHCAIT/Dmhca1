@@ -170,7 +170,7 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
   // Portal to <body> so ancestors with transform/backdrop-filter (e.g. the header) can't clip the fixed overlay.
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex overflow-y-auto overscroll-contain bg-slate-950/65 p-3 sm:p-4"
+      className="fixed inset-0 z-50 flex overflow-y-auto overscroll-contain bg-slate-950/65 p-3 backdrop-blur-md sm:p-4"
       role="dialog"
       aria-modal="true"
     >
