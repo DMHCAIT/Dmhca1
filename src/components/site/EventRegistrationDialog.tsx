@@ -25,6 +25,7 @@ import {
 } from "@/routes/api/event-registration";
 import {
   eventDesignations,
+  eventPaymentMethods,
   eventReferralSources,
   eventRegistrationSchema,
 } from "@/lib/event-registration-schema";
@@ -39,6 +40,16 @@ type RazorpayCheckoutOptions = {
   description: string;
   prefill: { name: string; email: string; contact: string };
   theme: { color: string };
+  config: {
+    display: {
+      blocks: Record<
+        string,
+        { name: string; instruments: { method: (typeof eventPaymentMethods)[number] }[] }
+      >;
+      sequence: string[];
+      preferences: { show_default_blocks: boolean };
+    };
+  };
   handler: (response: {
     razorpay_order_id: string;
     razorpay_payment_id: string;
@@ -224,6 +235,16 @@ export function EventRegistrationDialog() {
           contact: validation.data.phone,
         },
         theme: { color: "#800020" },
+        config: {
+          display: {
+            blocks: {
+              event_upi: { name: "UPI", instruments: [{ method: eventPaymentMethods[0] }] },
+              event_card: { name: "Cards", instruments: [{ method: eventPaymentMethods[1] }] },
+            },
+            sequence: ["block.event_upi", "block.event_card"],
+            preferences: { show_default_blocks: false },
+          },
+        },
         handler: async (response) => {
           if (checkoutFinishedRef.current) return;
           checkoutFinishedRef.current = true;
@@ -537,7 +558,7 @@ export function EventRegistrationDialog() {
                   </Button>
                   <span className="mt-3 flex items-center justify-center gap-2 text-xs leading-5 text-[#6b5b68]">
                     <LockKeyhole className="h-4 w-4" aria-hidden="true" />
-                    Secure checkout by Razorpay
+                    UPI or card payment via Razorpay
                   </span>
                 </div>
               </form>

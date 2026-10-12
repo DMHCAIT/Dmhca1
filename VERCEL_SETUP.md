@@ -123,6 +123,15 @@ SESSION_SECRET = your-secure-random-string-32-chars-minimum
 - Razorpay generates and expires the UPI QR. Verify that UPI is enabled and
   automatic payment capture is configured in the merchant dashboard. The server
   only confirms registrations for captured INR 599 payments.
+- Event checkout uses a runtime payment-method configuration showing only UPI
+  and cards, with default blocks disabled. Server verification also checks the
+  payment method; wallets, EMI, netbanking, and pay-later are not accepted.
+- If **Refresh QR** is clickable but does not produce a scannable QR, inspect
+  the failed Razorpay iframe request in the browser Network panel. Record only
+  the HTTP status, error code/description, and request ID; do not share keys,
+  tokens, personal details, or full request/response payloads. Check UPI/QR
+  availability with Razorpay support using the request ID. Runtime method
+  configuration cannot enable a merchant feature or fix a gateway/network error.
 - Before release, check portrait and landscape layouts, keyboard scrolling,
   checkout cancellation/retry, and QR refresh. Simulated checkout tests do not
   verify live QR generation or the transfer of funds; use Razorpay test mode or

@@ -3,7 +3,11 @@ import { createClient } from "@supabase/supabase-js";
 import crypto from "crypto";
 import Razorpay from "razorpay";
 import { getEventBySlug } from "@/data/events";
-import { eventRegistrationSchema, verifyEventPaymentSchema } from "@/lib/event-registration-schema";
+import {
+  eventPaymentMethods,
+  eventRegistrationSchema,
+  verifyEventPaymentSchema,
+} from "@/lib/event-registration-schema";
 
 const eventSlug = "female-hormones-fertility-and-subfertility";
 const eventPriceInRupees = 599;
@@ -228,6 +232,11 @@ export const verifyEventRegistrationPayment = createServerFn({ method: "POST" })
     }
 
     const razorpayPayment = await razorpay.payments.fetch(data.paymentId);
+    if (!eventPaymentMethods.some((method) => method === razorpayPayment.method)) {
+      throw new Error(
+        "Only UPI and card payments are accepted for this event. If you were charged, contact support with your payment reference; do not pay again.",
+      );
+    }
     if (
       razorpayPayment.order_id !== data.orderId ||
       razorpayPayment.amount !== eventPriceInPaise ||

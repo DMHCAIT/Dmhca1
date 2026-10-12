@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const eventPaymentMethods = ["upi", "card"] as const;
+
 export const eventDesignations = [
   "Consultant",
   "Specialist / Senior resident",
