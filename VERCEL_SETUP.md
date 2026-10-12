@@ -107,6 +107,27 @@ SESSION_SECRET = your-secure-random-string-32-chars-minimum
 - Verify `SESSION_SECRET` is set and long enough
 - Review Vercel function logs for runtime errors
 
+### CME Registration and Razorpay Checkout
+- The registration dialog scrolls as a single panel and follows the browser's
+  visual viewport when the mobile keyboard opens. Opening it does not
+  automatically focus a text field or open the keyboard.
+- The registration dialog unmounts during Razorpay checkout, releasing its
+  focus trap and pointer lock so the payment iframe and **Refresh QR** control
+  remain interactive. Cancelling checkout restores the entered details.
+- A failed checkout-script download can be retried without creating an order
+  first. Payment success is shown only after server-side verification.
+- After verified payment, mobile and desktop show a thank-you confirmation
+  explaining that the team will provide the event link before the event starts.
+- If verification fails after a payment response, the form shows the payment
+  reference and support instructions instead of prompting for another payment.
+- Razorpay generates and expires the UPI QR. Verify that UPI is enabled and
+  automatic payment capture is configured in the merchant dashboard. The server
+  only confirms registrations for captured INR 599 payments.
+- Before release, check portrait and landscape layouts, keyboard scrolling,
+  checkout cancellation/retry, and QR refresh. Simulated checkout tests do not
+  verify live QR generation or the transfer of funds; use Razorpay test mode or
+  an explicitly approved live transaction for end-to-end payment validation.
+
 ## Re-deployment After Changes
 
 1. Make changes locally
