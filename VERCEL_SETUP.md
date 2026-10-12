@@ -5,6 +5,19 @@
 - GitHub repository connected to Vercel
 - Vercel account access
 
+## Local SSR troubleshooting
+
+- Run `npm run dev` and allow the first server render to finish before refreshing.
+- A browser disconnect can produce `aborted` / `ECONNRESET` while SSR is in progress.
+  The server entry and error middleware recognize cancellation using the incoming
+  request's abort signal and return a bodyless `499 Client Closed Request` rather
+  than rendering an application-error page. TanStack/h3 may still log the original
+  abort internally; genuine failures on live requests remain logged HTTP 500s.
+- Vite 8 resolves TypeScript paths natively. The Vite config removes the legacy
+  paths plugin injected by the Lovable wrapper and enables `resolve.tsconfigPaths`.
+- Run the SSR regression checks with
+  `node --experimental-vm-modules --test scripts/test-ssr.mjs`.
+
 ## Required Environment Variables in Vercel Dashboard
 
 **IMPORTANT**: Do NOT commit `.env.local` to GitHub. Use Vercel's Environment Variables dashboard instead.

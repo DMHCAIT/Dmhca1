@@ -189,7 +189,7 @@ function AdminChatbotInquiries() {
               className={`px-4 py-2 rounded-lg font-medium transition ${
                 filter === status
                   ? "bg-gold text-navy-deep"
-                  : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-slate-700 hover:border-gold"
+                  : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-slate-700"
               }`}
             >
               {status.charAt(0).toUpperCase() + status.slice(1)}

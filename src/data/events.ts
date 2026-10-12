@@ -1,6 +1,7 @@
 export interface EventSpeaker {
   name: string;
   title: string;
+  qualifications?: string;
   image?: string;
 }
 
@@ -9,8 +10,12 @@ export interface Event {
   slug: string;
   title: string;
   date: string;
+  startsAt?: string;
+  time?: string;
+  registrationPending?: boolean;
   location: string;
-  image: string;
+  image?: string;
+  mobileImage?: string;
   shortDescription: string;
   description: string;
   objectives?: string[];
@@ -24,6 +29,42 @@ export interface Event {
 }
 
 export const events: Event[] = [
+  {
+    id: "female-hormones-fertility-subfertility",
+    slug: "female-hormones-fertility-and-subfertility",
+    title: "Female Hormones: Fertility and Subfertility",
+    date: "27 October 2026",
+    startsAt: "2026-10-27T16:00:00+05:30",
+    time: "4:00 PM IST",
+    location: "Online",
+    registrationPending: true,
+    image: "/events&webinars/dmhca_female_hormones_webinar.webp",
+    mobileImage: "/events&webinars/dmhca_female_hormones_webinar_mobile.webp",
+    shortDescription:
+      "A focused session on how female hormones shape fertility, and how to approach subfertility in clinical practice, from a reproductive medicine consultant in London.",
+    description:
+      "A focused session on how female hormones shape fertility, and how to approach subfertility in clinical practice, from a reproductive medicine consultant in London.",
+    whatYouLearn: [
+      "Understand the role of female hormones in fertility and reproductive health",
+      "Learn how hormonal imbalances can contribute to subfertility",
+      "Explore the clinical evaluation of hormonal disorders affecting fertility",
+      "Understand diagnostic approaches and evidence-based management strategies for subfertility",
+    ],
+    eventContent: [
+      "Introduction to Female Hormones and Reproductive Physiology",
+      "Hormonal Regulation of Fertility and the Menstrual Cycle",
+      "Evaluation and Diagnosis of Subfertility",
+      "Clinical Approaches to Fertility Management and Treatment",
+    ],
+    speakers: [
+      {
+        name: "Dr Himanshu Borase",
+        qualifications: "MBBS, FRCOG, MSc, DFSRH, DGO",
+        title: "Reproductive Medicine Consultant, St Barts Hospital, London, UK",
+        image: "/events&webinars/event-speaker.png",
+      },
+    ],
+  },
   {
     id: "ultrasound-workshop",
     slug: "join-our-3-day-master-workshop-in-ultrasound-with-hands-on-training-program",

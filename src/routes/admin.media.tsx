@@ -109,7 +109,7 @@ function AdminMedia() {
       <div className="bg-white rounded-lg shadow p-6">
         <div
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-gold transition"
+          className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer transition"
         >
           <Upload className="w-12 h-12 text-gray-400 mx-auto mb-2" />
           <p className="text-gray-600 font-medium">Click to upload or drag and drop</p>

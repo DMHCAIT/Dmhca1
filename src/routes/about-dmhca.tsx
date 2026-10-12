@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { CheckCircle2, Sparkles, ArrowRight, Zap, Stethoscope, BookOpen } from "lucide-react";
+import { useState } from "react";
+import { CheckCircle2, Sparkles, ArrowRight } from "lucide-react";
+import { HeroArtwork } from "@/components/site/HeroArtwork";
 
 export const Route = createFileRoute("/about-dmhca")({
   head: () => ({
@@ -16,6 +18,7 @@ export const Route = createFileRoute("/about-dmhca")({
 });
 
 function About() {
+  const [facultyPaused, setFacultyPaused] = useState(false);
   const faculty = [
     "Dr Bhuvaneshwari.webp",
     "Dr Nirvana Ibrahim.webp",
@@ -27,41 +30,31 @@ function About() {
   ];
 
   return (
-    <div>
-      <style>{`
-        @keyframes marquee { from { transform: translateX(0%); } to { transform: translateX(-50%); } }
-        .animate-marquee { animation: marquee 18s linear infinite; }
-      `}</style>
-
+    <div className="home-page about-page">
       {/* Small hero for About page */}
-      <section className="site-hero py-10 lg:py-14">
-        <div className="container-x relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 border border-gold/20 rounded-full mb-4">
+      <section className="home-hero about-hero home-section-panel">
+        <HeroArtwork />
+        <div className="container-home py-12 lg:py-16 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-5">
               <Sparkles className="w-4 h-4 text-gold" />
               <span className="text-xs uppercase tracking-[0.15em] text-gold font-medium">
                 Excellence in Medical Education
               </span>
             </div>
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl text-white mb-4 leading-tight">
+            <h1 className="font-display text-[2.125rem] md:text-5xl lg:text-[3.75rem] text-white mb-5 leading-tight tracking-[-0.04em]">
               Transforming Healthcare <span className="text-gold">Education</span>
             </h1>
-            <p className="text-base md:text-lg text-blue-100 leading-relaxed mb-6 max-w-2xl mx-auto">
+            <p className="text-foreground/80 leading-relaxed mb-7 max-w-2xl mx-auto">
               Delhi Medical Health Care Academy empowers medical professionals with practical
               expertise and world-class education.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link
                 to="/top-medical-courses"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-gold text-navy-deep rounded-lg hover:bg-yellow-400 transition font-semibold text-sm group"
+                className="hero-primary-action inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full transition font-semibold text-sm group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
                 Explore Courses <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/contact-us"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-white/10 text-white border border-white/20 rounded-lg hover:bg-white/20 transition text-sm"
-              >
-                Join Us
               </Link>
             </div>
           </div>
@@ -69,19 +62,19 @@ function About() {
       </section>
 
       {/* About Content Intro */}
-      <section className="bg-white border-b border-border">
-        <div className="container-x py-12 lg:py-16">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep dark:text-white mb-4">
+      <section className="about-introduction">
+        <div className="container-home py-12 lg:py-16">
+          <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-6 lg:gap-x-16">
+            <h2 className="about-intro-heading font-display text-3xl lg:text-4xl text-foreground lg:row-span-2">
               DMHCA — Delhi Medical Health Care Academy
             </h2>
-            <p className="text-base text-muted-foreground leading-relaxed mb-6">
+            <p className="text-muted-foreground leading-relaxed">
               DMHCA, also known as the Delhi Medical Health Care Academy, is a prestigious institute
               that specializes in medical training courses. Our institute is dedicated to equipping
               students with the knowledge and skills necessary to provide compassionate,
               understanding, and effective healthcare to those in need.
             </p>
-            <p className="text-base text-muted-foreground leading-relaxed">
+            <p className="text-muted-foreground leading-relaxed">
               Our mission at DMHCA is to provide a transformative healthcare education experience.
               We believe that education is the key to the future and that healthcare is an essential
               field for the sustenance, maintenance, and existence of human beings. That is why we
@@ -94,18 +87,13 @@ function About() {
       </section>
 
       {/* How It Works */}
-      <section className="py-12 lg:py-16">
-        <div className="container-x">
-          <div className="max-w-4xl mx-auto text-center mb-8">
-            <h2 className="font-display text-3xl lg:text-4xl text-navy-deep dark:text-white mb-2">
-              How it works?
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Explore courses, enroll, and start learning — three simple steps to upskill.
-            </p>
+      <section className="about-learning home-light-panel py-8 lg:py-10">
+        <div className="container-home">
+          <div className="academic-intro mb-8">
+            <h2 className="font-display text-3xl lg:text-4xl text-foreground">How it works?</h2>
           </div>
 
-          <div className="max-w-5xl mx-auto grid sm:grid-cols-3 gap-6 mb-10">
+          <ol className="about-steps">
             {[
               {
                 num: "01",
@@ -123,30 +111,32 @@ function About() {
                 desc: "Access materials instantly and follow guided practical modules.",
               },
             ].map((c) => (
-              <div
-                key={c.num}
-                className="bg-white rounded-2xl p-6 border border-border shadow-sm hover:shadow-md transition"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gold flex items-center justify-center text-white font-semibold">
-                    {c.num}
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-navy-deep">{c.title}</h4>
-                    <p className="text-sm text-muted-foreground">{c.desc}</p>
-                  </div>
+              <li key={c.num} className="about-step">
+                <span
+                  className="about-step-number font-display text-3xl font-bold"
+                  aria-hidden="true"
+                >
+                  {c.num}
+                </span>
+                <div className="about-step-content">
+                  <h3 className="font-display text-xl text-foreground">{c.title}</h3>
+                  <p className="mt-2 text-muted-foreground">{c.desc}</p>
                 </div>
-              </div>
+              </li>
             ))}
-          </div>
+          </ol>
+        </div>
+      </section>
 
-          <div className="max-w-5xl mx-auto">
-            <div className="bg-white rounded-2xl p-8 border border-border shadow-lg">
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
+      <section className="about-clinical py-8 lg:py-10">
+        <div className="container-home">
+          <div>
+            <div>
+              <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-center">
                 <div>
-                  <h3 className="font-display text-3xl text-navy-deep leading-tight mb-3">
+                  <h2 className="font-display text-2xl md:text-3xl text-foreground leading-tight mb-4">
                     Advance Your Clinical Learning with DMHCA
-                  </h3>
+                  </h2>
                   <p className="text-base text-muted-foreground mb-6">
                     Explore specialised healthcare programs designed for working professionals.
                     Learn through structured modules, live sessions, and guidance from experienced
@@ -160,11 +150,8 @@ function About() {
                       ["Learning Across Borders", "Connect with global faculty & peers."],
                       ["Mentorship", "Dedicated tutor support."],
                     ].map(([t, s]) => (
-                      <div
-                        key={t}
-                        className="flex items-start gap-3 bg-muted-foreground/3 p-4 rounded-lg"
-                      >
-                        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gold flex items-center justify-center text-white">
+                      <div key={t} className="flex items-start gap-3 py-3">
+                        <div className="about-feature-icon flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center">
                           <CheckCircle2 className="w-5 h-5" />
                         </div>
                         <div>
@@ -175,16 +162,16 @@ function About() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-wrap items-center gap-3">
                     <Link
                       to="/top-medical-courses"
-                      className="inline-flex items-center gap-2 px-5 py-3 bg-gold text-navy-deep rounded-lg font-semibold shadow"
+                      className="inline-flex items-center gap-2 px-5 py-3 bg-gold rounded-full font-semibold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
                     >
                       Explore Programs <ArrowRight className="w-4 h-4" />
                     </Link>
                     <Link
                       to="/contact-us"
-                      className="inline-flex items-center gap-2 px-4 py-2 border border-border rounded-lg text-sm"
+                      className="home-section-link inline-flex items-center gap-2 text-sm"
                     >
                       Contact Admissions
                     </Link>
@@ -192,27 +179,28 @@ function About() {
                 </div>
 
                 <div className="flex items-center justify-center w-full">
-                  <div className="w-full max-w-md rounded-xl overflow-hidden border border-border">
-                    <div className="w-full h-auto bg-gray-100">
+                  <div className="about-image-card w-full max-w-[446px] rounded-[1.5rem] overflow-hidden">
+                    <div className="w-full h-auto">
                       <img
                         src="/dmhca_about.webp"
                         alt="Healthcare professional - DMHCA"
-                        className="w-full h-auto object-cover object-center min-h-56 sm:h-56 md:h-64 lg:h-72"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 448px"
+                        width={446}
+                        height={288}
+                        className="w-full h-auto"
                       />
                     </div>
-                    <div className="p-4 bg-white">
+                    <div className="about-image-stats p-5 sm:p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <div className="text-sm text-muted-foreground">Courses available</div>
-                          <div className="text-2xl font-semibold text-navy-deep">103+</div>
+                          <div className="text-sm text-foreground/75">Courses available</div>
+                          <div className="text-3xl font-bold text-gold">103+</div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm text-muted-foreground">Learners</div>
-                          <div className="text-2xl font-semibold text-navy-deep">15,000+</div>
+                          <div className="text-sm text-foreground/75">Learners</div>
+                          <div className="text-3xl font-bold text-gold">15,000+</div>
                         </div>
                       </div>
-                      <div className="mt-3 text-sm text-muted-foreground">
+                      <div className="mt-4 text-sm text-foreground/75">
                         programs designed for healthcare professionals.
                       </div>
                     </div>
@@ -225,65 +213,76 @@ function About() {
       </section>
 
       {/* Academic Leadership Members */}
-      <section className="bg-white py-10 lg:py-12">
-        <div className="container-x">
-          <div className="max-w-3xl mx-auto text-center mb-6">
-            <h2 className="font-display text-2xl lg:text-3xl text-navy-deep dark:text-white mb-1">
-              Academic Leadership Members
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              Our faculty and leaders guiding academic excellence
-            </p>
+      <section className="about-faculty py-12 lg:py-16">
+        <div className="container-home">
+          <div className="flex flex-wrap items-center justify-between gap-5 mb-8">
+            <div className="academic-intro">
+              <h2 className="font-display text-3xl lg:text-4xl text-foreground">
+                Academic Leadership Members
+              </h2>
+            </div>
+            <button
+              type="button"
+              className="about-faculty-pause home-section-link text-sm"
+              aria-pressed={facultyPaused}
+              onClick={() => setFacultyPaused((paused) => !paused)}
+            >
+              {facultyPaused ? "Resume movement" : "Pause movement"}
+            </button>
           </div>
 
-          <div className="overflow-hidden">
-            <div className="flex animate-marquee gap-6 items-center py-4">
-              {faculty.concat(faculty).map((file, idx) => {
-                const name = file.replace(/\.[^/.]+$/, "");
-                return (
-                  <div
-                    key={idx}
-                    className="flex-shrink-0 w-40 rounded-md overflow-hidden border border-border bg-white/5 shadow-sm"
-                  >
-                    <div className="w-40 h-40 overflow-hidden">
-                      <img
-                        src={`/Faculty_images/${file}`}
-                        alt={name}
-                        className="w-full h-full object-cover object-top"
-                      />
-                    </div>
-                    <div className="py-2 text-center bg-white/0">
-                      <div className="text-sm text-navy-deep dark:text-slate-100 font-medium">
-                        {name}
+          <div className="about-faculty-strip">
+            <div className="about-faculty-track" data-paused={facultyPaused}>
+              {[false, true].map((duplicate) => (
+                <div
+                  className="about-faculty-group"
+                  key={String(duplicate)}
+                  aria-hidden={duplicate || undefined}
+                >
+                  {faculty.map((file, idx) => {
+                    const name = file.replace(/\.[^/.]+$/, "").replace(/^Dr\s+/, "Dr. ");
+                    return (
+                      <div key={idx} className="about-faculty-card rounded-2xl">
+                        <img
+                          src={`/Faculty_images/${file}`}
+                          alt={name}
+                          width={250}
+                          height={250}
+                          className="about-faculty-portrait"
+                        />
+                        <div className="px-3 py-4">
+                          <div className="text-sm text-foreground font-semibold">{name}</div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
+                    );
+                  })}
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="site-hero py-12 lg:py-16">
-        <div className="container-x">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl lg:text-4xl text-white mb-3">
-              Ready to Transform Your Career?
-            </h2>
-            <p className="text-sm text-blue-100 mb-6">
-              Join thousands of healthcare professionals who advanced their careers with DMHCA
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Link to="/contact-us" className="px-5 py-3 bg-gold text-navy-deep rounded-lg">
-                Apply Now
-              </Link>
+      <section className="about-admissions home-admissions home-section-panel">
+        <HeroArtwork />
+        <div className="container-home relative z-10 py-9 lg:py-12">
+          <div className="flex flex-col items-center gap-5 text-center max-w-3xl mx-auto">
+            <div>
+              <div className="about-admissions-accent" aria-hidden="true" />
+              <h2 className="font-display text-3xl lg:text-4xl text-white mb-3 tracking-tight">
+                Ready to Transform Your Career?
+              </h2>
+              <p className="text-foreground/80 max-w-xl mx-auto">
+                Join thousands of healthcare professionals who advanced their careers with DMHCA
+              </p>
+            </div>
+            <div className="flex justify-center">
               <Link
                 to="/top-medical-courses"
-                className="px-5 py-3 bg-white/10 text-white rounded-lg"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gold rounded-full font-semibold hover:bg-white transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
-                Browse Courses
+                Browse Courses <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
             </div>
           </div>

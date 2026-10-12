@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/simple-event")({
+export const Route = createFileRoute("/events")({
   head: () => ({
     meta: [
       { title: "Events & Webinars - DMHCA" },

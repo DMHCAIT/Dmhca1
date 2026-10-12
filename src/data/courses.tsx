@@ -5618,7 +5618,7 @@ export const _courses: Course[] = [
     meta: { duration: "6 months", lessons: "15", skill_level: "Certificate", certificate: "yes" },
     trainers: [
       {
-        name: "Dr Bhuvaneshwari",
+        name: "Dr. Bhuvaneshwari",
         title: "Cosmetologist/Dermatologist",
         bio: "Expert in cosmetic dermatology and aesthetic procedures.",
         image: "/Faculty_images/dr-bhuvaneshwari.jpg",

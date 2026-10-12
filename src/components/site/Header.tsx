@@ -1,13 +1,12 @@
 import { Link, useNavigate, useSearch, useLocation } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Menu, X, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
 import { SignupFlow } from "@/components/SignupFlow";
 import { OTPLoginModal } from "@/components/OTPLoginModal";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import { ChatbotWidget } from "@/components/ChatbotWidget";
 import { syncLocalCartToServer, loadServerCartToLocal } from "@/lib/cart-sync";
 
-const logo = "/logo.webp";
+import { BrandLogo } from "@/components/site/BrandLogo";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about-dmhca", label: "About" },
@@ -176,41 +175,31 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-background dark:bg-slate-950 dark:border-b dark:border-slate-800 border-b border-border/50 hairline">
-        <div className="container-x flex items-center justify-between h-16">
+      <header className="site-header sticky top-0 z-40 bg-background/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-[0_4px_24px_-20px_rgba(128,0,32,0.25)]">
+        <div className="container-x relative flex items-center justify-between gap-3 h-[72px]">
           {/* Mobile Menu Button - Left */}
           <button
-            className="lg:hidden p-2 order-first"
+            className="lg:hidden flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/5 order-first"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
+            aria-expanded={open}
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
 
           {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <img
-              src={logo}
-              alt="DMHCA"
-              className="h-10 w-auto transition-opacity hover:opacity-75"
-              onError={(e) => {
-                const t = e.currentTarget as HTMLImageElement;
-                t.src = logo;
-
-                // ensure visibility on light backgrounds if only dark logo exists
-                t.style.filter = "brightness(0) invert(1)";
-              }}
-            />
+          <Link to="/" className="flex items-center transition-opacity hover:opacity-75">
+            <BrandLogo />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-7 text-base">
+          <nav className="hidden lg:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2 items-center gap-1 rounded-full bg-gold/5 p-1 text-sm font-semibold">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
-                className="text-foreground/80 dark:text-slate-400 hover:text-navy-deep dark:hover:text-gold transition"
-                activeProps={{ className: "text-navy-deep dark:text-gold" }}
+                className="header-nav-link rounded-full px-5 py-2.5 text-foreground/75 transition-colors hover:bg-card hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                activeProps={{ className: "header-nav-active" }}
                 activeOptions={{ exact: n.to === "/" }}
               >
                 {n.label}
@@ -220,17 +209,16 @@ export function Header() {
 
           {/* Desktop Right-Side Elements */}
           <div className="hidden lg:flex items-center gap-3 relative">
-            <ThemeToggle />
             {isLoggedIn ? (
               <>
                 <button
                   onClick={() => {
                     if (typeof window !== "undefined") window.location.href = "/cart";
                   }}
-                  className="p-2 text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
+                  className="header-cart"
                   title="Shopping Cart"
                 >
-                  <ShoppingCart className="w-5 h-5" />
+                  <ShoppingBag className="w-5 h-5" strokeWidth={1.8} />
                 </button>
                 <div className="relative">
                   <button
@@ -267,17 +255,17 @@ export function Header() {
                   onClick={() => {
                     if (typeof window !== "undefined") window.location.href = "/cart";
                   }}
-                  className="p-2 text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
+                  className="header-cart"
                   title="Shopping Cart"
                 >
-                  <ShoppingCart className="w-5 h-5" />
+                  <ShoppingBag className="w-5 h-5" strokeWidth={1.8} />
                 </button>
                 <button
                   onClick={() => {
                     setShowLoginModal(true);
                     setShowSignupModal(false);
                   }}
-                  className="text-base px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
+                  className="header-account"
                 >
                   Login
                 </button>
@@ -288,17 +276,17 @@ export function Header() {
                   onClick={() => {
                     if (typeof window !== "undefined") window.location.href = "/cart";
                   }}
-                  className="p-2 text-navy-deep dark:text-gold hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition"
+                  className="header-cart"
                   title="Shopping Cart"
                 >
-                  <ShoppingCart className="w-5 h-5" />
+                  <ShoppingBag className="w-5 h-5" strokeWidth={1.8} />
                 </button>
                 <button
                   onClick={() => {
                     setShowSignupModal(true);
                     setShowLoginModal(false);
                   }}
-                  className="text-base px-4 py-2 bg-navy-deep dark:bg-gold dark:text-slate-900 text-primary-foreground rounded-sm hover:bg-navy dark:hover:bg-yellow-500 transition"
+                  className="header-account"
                 >
                   Sign Up
                 </button>
@@ -306,10 +294,13 @@ export function Header() {
             )}
           </div>
 
-          {/* Mobile Theme Toggle - Right */}
-          <div className="lg:hidden p-2 order-last">
-            <ThemeToggle />
-          </div>
+          <Link
+            to="/cart"
+            className="header-cart header-cart-mobile order-last"
+            aria-label="Shopping Cart"
+          >
+            <ShoppingBag className="w-5 h-5" strokeWidth={1.8} />
+          </Link>
         </div>
 
         {open && (
@@ -334,7 +325,7 @@ export function Header() {
                   className="flex-1 px-3 py-2 text-sm md:text-base bg-gray-100 dark:bg-slate-800 text-navy-deep dark:text-gold rounded-lg hover:bg-gray-200 dark:hover:bg-slate-700 transition flex items-center justify-center gap-2"
                   title="Shopping Cart"
                 >
-                  <ShoppingCart className="w-4 md:w-5 h-4 md:h-5" />
+                  <ShoppingBag className="w-4 md:w-5 h-4 md:h-5" />
                   Cart
                 </button>
                 {isLoggedIn ? (
@@ -368,7 +359,7 @@ export function Header() {
                       setShowSignupModal(false);
                       setOpen(false);
                     }}
-                    className="flex-1 px-3 py-2 text-sm md:text-base bg-navy-deep dark:bg-gold dark:text-slate-900 text-white rounded-lg hover:bg-navy dark:hover:bg-yellow-500 transition font-semibold"
+                    className="header-account flex-1"
                   >
                     Login
                   </button>
@@ -379,7 +370,7 @@ export function Header() {
                       setShowLoginModal(false);
                       setOpen(false);
                     }}
-                    className="flex-1 px-3 py-2 text-sm md:text-base bg-navy-deep dark:bg-gold dark:text-slate-900 text-primary-foreground rounded-lg hover:bg-navy dark:hover:bg-yellow-500 transition font-semibold"
+                    className="header-account flex-1"
                   >
                     Sign Up
                   </button>

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Clock, BookOpen, ArrowUpRight, Star, Award } from "lucide-react";
+import { Clock, BookOpen, Star, Award } from "lucide-react";
 import { type Course, formatINR, getCategory } from "@/data/courses";
 import { memo } from "react";
 
@@ -38,7 +38,13 @@ function getIBMCourseName(dmhcaTitle: string): string {
   return dmhcaTitle; // Return original if no pattern matches
 }
 
-function CourseCardComponent({ course }: { course: CourseData }) {
+function CourseCardComponent({
+  course,
+  compact = false,
+}: {
+  course: CourseData;
+  compact?: boolean;
+}) {
   const categoryName = Array.isArray(course.categories) ? course.categories[0] : course.category;
   const cat = getCategory(categoryName);
   const programType =
@@ -73,7 +79,7 @@ function CourseCardComponent({ course }: { course: CourseData }) {
     <Link
       to="/courses/$slug"
       params={{ slug: course.slug }}
-      className="group block bg-card border border-border rounded-md overflow-hidden hover:border-navy-deep/40 hover:shadow-[0_24px_50px_-30px_rgba(15,27,61,0.45)] transition"
+      className="group relative flex h-full flex-col [container:course-card/inline-size] overflow-hidden rounded-lg bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(15,27,61,0.45)]"
     >
       <div className="aspect-[5/3] relative overflow-hidden bg-navy-deep">
         <img
@@ -81,52 +87,57 @@ function CourseCardComponent({ course }: { course: CourseData }) {
           alt={`${course.title} - ${cat?.name || "Medical"} Course`}
           loading="lazy"
           referrerPolicy="no-referrer"
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+          className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
             (e.currentTarget as HTMLImageElement).style.display = "none";
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/85 via-navy-deep/30 to-transparent" />
-        <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.18em] px-2 py-1 bg-primary-foreground/15 text-primary-foreground rounded-sm">
-          <span className="w-1 h-1 rounded-full bg-gold" /> {programName}
-        </div>
-        {course.rating && (
-          <div className="absolute top-3 right-3 inline-flex items-center gap-1 text-[11px] px-2 py-1 bg-primary-foreground/95 text-navy-deep rounded-sm">
-            <Star className="w-3 h-3 fill-gold text-gold" /> {course.rating}{" "}
-            <span className="text-muted-foreground">({course.reviewCount})</span>
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-transparent" />
+        <div className="absolute inset-x-2.5 top-2.5 z-10 flex items-start justify-between gap-2 sm:inset-x-3 sm:top-3">
+          <div className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-navy-deep/70 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.1em] text-white shadow-sm backdrop-blur-sm sm:px-3 sm:py-1.5 sm:text-[10px] sm:tracking-[0.16em]">
+            <span className="h-1 w-1 flex-shrink-0 rounded-full bg-gold" />
+            <span className="truncate">{programName}</span>
           </div>
-        )}
-        <div className="absolute bottom-3 left-3 text-[10px] uppercase tracking-[0.2em] text-gold/60">
+          {course.rating != null && (
+            <div className="inline-flex flex-shrink-0 items-center gap-1 rounded-full bg-white px-2 py-1 text-[11px] font-semibold text-navy-deep shadow-md sm:gap-1.5 sm:px-3 sm:py-1.5 sm:text-xs">
+              <Star className="h-3 w-3 fill-gold text-gold sm:h-3.5 sm:w-3.5" />
+              <span>{course.rating}</span>
+              {course.reviewCount != null && (
+                <span className="font-normal text-slate-500">({course.reviewCount})</span>
+              )}
+            </div>
+          )}
+        </div>
+        <div className="absolute bottom-2.5 left-2.5 max-w-[calc(100%-1.25rem)] truncate rounded-full bg-white/95 px-2.5 py-1 text-[9px] font-semibold uppercase tracking-[0.12em] text-[#800020] sm:bottom-3 sm:left-3 sm:max-w-[calc(100%-1.5rem)] sm:text-[10px] sm:tracking-[0.2em]">
           {cat?.name}
         </div>
       </div>
-      <div className="p-5">
-        <div className="font-display text-slate-950 text-lg font-semibold leading-tight mb-2 line-clamp-2">
+      <div className={`flex flex-1 flex-col ${compact ? "p-3.5" : "px-3.5 py-3 sm:px-4"}`}>
+        <div
+          title={course.title}
+          className={`mb-1.5 truncate font-display font-bold leading-tight text-slate-950 ${compact ? "text-base" : "text-lg"}`}
+        >
           {course.title}
         </div>
-        <p className="mt-0 text-[13px] text-slate-700 line-clamp-2 mb-3">
+        <p className="mb-2.5 mt-0 line-clamp-2 text-sm leading-relaxed text-slate-700">
           {(course as any).heroDescription ||
             course.overview ||
             `Comprehensive ${programName.toLowerCase()} program in ${cat?.name || "Medical Science"} with expert-led training.`}
         </p>
-        <div className="flex items-center gap-3 text-xs text-muted-foreground justify-between flex-nowrap min-h-5">
-          <div className="flex items-center gap-3 flex-nowrap overflow-hidden">
-            {course.lessons != null && (
-              <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold">
-                <BookOpen className="w-3.5 h-3.5" /> {course.lessons} lessons
-              </span>
-            )}
-            {course.months != null && (
-              <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold">
-                <Clock className="w-3.5 h-3.5" /> {course.months} months
-              </span>
-            )}
-            <span className="flex items-center gap-1.5 whitespace-nowrap flex-shrink-0 text-slate-800 font-semibold">
-              <Award className="w-3.5 h-3.5" /> {displayLevel}
+        <div className="course-card-meta mt-auto flex min-h-5 flex-nowrap items-center gap-x-1.5 pt-2 text-[11px] text-muted-foreground sm:flex-wrap sm:gap-x-3 sm:gap-y-2 sm:text-xs">
+          {course.lessons != null && (
+            <span className="flex flex-shrink-0 items-center gap-1 whitespace-nowrap font-semibold text-slate-800 sm:gap-1.5">
+              <BookOpen className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> {course.lessons} lessons
             </span>
-          </div>
-          <span className="inline-flex items-center gap-1 text-sm text-navy-deep group-hover:text-gold transition whitespace-nowrap flex-shrink-0">
-            View <ArrowUpRight className="w-4 h-4" />
+          )}
+          {course.months != null && (
+            <span className="flex flex-shrink-0 items-center gap-1 whitespace-nowrap font-semibold text-slate-800 sm:gap-1.5">
+              <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> {course.months} months
+            </span>
+          )}
+          <span className="flex min-w-0 items-center gap-1 whitespace-nowrap font-semibold text-slate-800 sm:gap-1.5">
+            <Award className="h-3 w-3 flex-shrink-0 sm:h-3.5 sm:w-3.5" />
+            <span className="truncate">{displayLevel}</span>
           </span>
         </div>
       </div>

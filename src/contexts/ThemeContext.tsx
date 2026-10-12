@@ -1,11 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-
-type Theme = "light" | "dark";
+import React, { createContext, useContext, useEffect } from "react";
 
 interface ThemeContextType {
-  theme: Theme;
-  toggleTheme: () => void;
-  setTheme: (theme: Theme) => void;
+  theme: "light";
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -13,50 +9,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export { ThemeContext };
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("light");
-
-  // Load theme from localStorage on mount
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    // Check localStorage first, then system preference, default to light
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
-
-    setThemeState(initialTheme);
-    applyTheme(initialTheme);
+    document.documentElement.classList.remove("dark");
+    localStorage.removeItem("theme");
   }, []);
 
-  // Apply theme to DOM and localStorage
-  const applyTheme = (newTheme: Theme) => {
-    if (typeof window === "undefined") return;
-
-    const html = document.documentElement;
-    if (newTheme === "dark") {
-      html.classList.add("dark");
-    } else {
-      html.classList.remove("dark");
-    }
-    localStorage.setItem("theme", newTheme);
-  };
-
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    applyTheme(newTheme);
-  };
-
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
-
-  // Always render context (no mounting gate to avoid SSR/hydration issues)
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme: "light" }}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {

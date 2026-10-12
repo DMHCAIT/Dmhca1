@@ -16,9 +16,8 @@ export const Route = createFileRoute("/scope-of-endocrinology")({
 
 function BlogContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
-      <section className="site-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-violet-600/95 to-indigo-600/95 dark:from-violet-700 dark:to-indigo-700"></div>
+    <div className="home-page resource-page resource-article min-h-screen">
+      <section className="resource-hero relative overflow-hidden">
         <div className="relative container-x py-4 sm:py-6 md:py-8">
           <Link
             to="/blog"
@@ -28,7 +27,7 @@ function BlogContent() {
             Back to Blogs
           </Link>
           <div className="max-w-3xl">
-            <div className="inline-block px-3 sm:px-4 py-1 bg-violet-500/20 border border-violet-300/50 rounded-full text-violet-200 text-xs font-semibold mb-2">
+            <div className="inline-block px-3 sm:px-4 py-1 bg-[#800020]/20 border border-[#f7cbd7]/50 rounded-full text-[#f7cbd7] text-xs font-semibold mb-2">
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
@@ -72,7 +71,7 @@ function BlogContent() {
         </div>
       </section>
 
-      <section className="py-2 sm:py-3 md:py-4 bg-white dark:bg-slate-800 px-4 sm:px-0">
+      <section className="py-2 sm:py-3 md:py-4 bg-white px-4 sm:px-0">
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
@@ -85,11 +84,11 @@ function BlogContent() {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 md:py-16 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm px-4 sm:px-0">
+      <section className="py-8 sm:py-12 md:py-16 bg-white/50 backdrop-blur-sm px-4 sm:px-0">
         <div className="container-x max-w-4xl">
-          <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
-            <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 via-indigo-50 to-purple-50 dark:from-violet-900/30 dark:via-indigo-900/30 dark:to-purple-900/30 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-violet-200 dark:border-violet-800/50 not-prose">
-              <h2 className="text-xl sm:text-2xl font-bold text-violet-900 dark:text-violet-200 mb-4">
+          <div className="prose prose-lg prose-slate max-w-none">
+            <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
                 Quick Navigation
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
@@ -105,7 +104,7 @@ function BlogContent() {
                   <a
                     key={item.href}
                     href={item.href}
-                    className="text-sm sm:text-base text-violet-900 dark:text-violet-200 hover:text-violet-600 dark:hover:text-violet-300 font-medium"
+                    className="text-sm sm:text-base text-[#800020] hover:text-[#800020] font-medium"
                   >
                     • {item.label}
                   </a>
@@ -115,15 +114,15 @@ function BlogContent() {
 
             <div
               id="career-overview"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-violet-200 dark:border-violet-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-violet-100 dark:bg-violet-900/30 border border-violet-300 dark:border-violet-700 rounded-full text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 1
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-violet-900 dark:text-violet-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Career Overview in Endocrinology
               </h2>
-              <p className="text-violet-900 dark:text-violet-100 text-sm sm:text-base leading-relaxed">
+              <p className="text-[#800020] text-sm sm:text-base leading-relaxed">
                 Endocrinologists specialize in diagnosing and managing hormonal and metabolic
                 disorders. They provide comprehensive care including diagnosis, treatment planning,
                 long-term management, and preventive strategies for endocrine diseases.
@@ -132,31 +131,31 @@ function BlogContent() {
 
             <div
               id="clinical-practice"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-900/20 dark:to-violet-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-indigo-200 dark:border-indigo-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 border border-indigo-300 dark:border-indigo-700 rounded-full text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 2
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-900 dark:text-indigo-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Clinical Practice Settings
               </h2>
-              <div className="space-y-3 text-indigo-900 dark:text-indigo-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>
                     <strong>Hospital Departments:</strong> Work in endocrinology departments of
                     teaching hospitals
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>
                     <strong>Specialized Clinics:</strong> Manage thyroid, diabetes, and other
                     endocrine clinics
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>
                     <strong>Private Practice:</strong> Establish own endocrinology consultation
                     center
@@ -167,29 +166,29 @@ function BlogContent() {
 
             <div
               id="disease-management"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-900/20 dark:to-purple-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-violet-200 dark:border-violet-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-violet-100 dark:bg-violet-900/30 border border-violet-300 dark:border-violet-700 rounded-full text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 3
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-violet-900 dark:text-violet-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Disease Management Focus
               </h2>
-              <div className="space-y-3 text-violet-900 dark:text-violet-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Thyroid disease management including hypothyroidism and hyperthyroidism</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Diabetes management with integrated care approach</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Pituitary and adrenal disorder diagnosis and management</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Metabolic bone diseases and osteoporosis management</div>
                 </div>
               </div>
@@ -197,29 +196,29 @@ function BlogContent() {
 
             <div
               id="diagnostic-expertise"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-900/20 dark:to-violet-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-indigo-200 dark:border-indigo-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 border border-indigo-300 dark:border-indigo-700 rounded-full text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 4
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-900 dark:text-indigo-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Diagnostic Expertise
               </h2>
-              <div className="space-y-3 text-indigo-900 dark:text-indigo-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Interpretation of complex hormonal assays and tests</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Advanced imaging interpretation (MRI, CT for endocrine pathology)</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Perform diagnostic procedures like thyroid fine needle aspiration</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Manage complex diagnostic dilemmas</div>
                 </div>
               </div>
@@ -227,32 +226,32 @@ function BlogContent() {
 
             <div
               id="specializations"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-violet-200 dark:border-violet-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-violet-100 dark:bg-violet-900/30 border border-violet-300 dark:border-violet-700 rounded-full text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 5
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-violet-900 dark:text-violet-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Specialization Areas
               </h2>
-              <p className="text-violet-900 dark:text-violet-100 text-sm sm:text-base leading-relaxed mb-3">
+              <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
                 Endocrinologists can develop expertise in specialized areas:
               </p>
-              <div className="space-y-3 text-violet-900 dark:text-violet-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>
                     <strong>Thyroid Specialist</strong> - Comprehensive thyroid disease management
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>
                     <strong>Pituitary Expert</strong> - Complex pituitary and hypothalamic disorders
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>
                     <strong>Reproductive Endocrinologist</strong> - Hormonal infertility management
                   </div>
@@ -262,29 +261,29 @@ function BlogContent() {
 
             <div
               id="earning-potential"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-900/20 dark:to-violet-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-indigo-200 dark:border-indigo-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-indigo-100 dark:bg-indigo-900/30 border border-indigo-300 dark:border-indigo-700 rounded-full text-indigo-700 dark:text-indigo-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 6
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-indigo-900 dark:text-indigo-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Earning Potential
               </h2>
-              <div className="space-y-3 text-indigo-900 dark:text-indigo-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Hospital endocrinologists: 15-30 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Clinic-based specialists: 25-45 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Private practitioners: 45-80 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-indigo-600 dark:text-indigo-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Corporate and pharmaceutical roles: 50+ lakhs annually</div>
                 </div>
               </div>
@@ -292,64 +291,58 @@ function BlogContent() {
 
             <div
               id="research-scope"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/20 dark:to-indigo-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-violet-200 dark:border-violet-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-violet-100 dark:bg-violet-900/30 border border-violet-300 dark:border-violet-700 rounded-full text-violet-700 dark:text-violet-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 7
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-violet-900 dark:text-violet-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Research and Academic Opportunities
               </h2>
-              <div className="space-y-3 text-violet-900 dark:text-violet-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Conduct research on endocrine disorders and new treatments</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Teach in medical colleges and guide residents</div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-violet-600 dark:text-violet-400 font-bold">•</span>
+                  <span className="text-[#800020] font-bold">•</span>
                   <div>Publish in international endocrinology journals</div>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
                 Endocrinology Scope Overview
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-                  <p className="text-xs uppercase tracking-wide text-red-700 dark:text-red-300 font-bold">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
                     Disease Prevalence
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-red-900 dark:text-red-100 mt-2">
-                    Very High
-                  </p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Very High</p>
                 </div>
-                <div className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg">
-                  <p className="text-xs uppercase tracking-wide text-purple-700 dark:text-purple-300 font-bold">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
                     Research Opportunity
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-purple-900 dark:text-purple-100 mt-2">
-                    Abundant
-                  </p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Abundant</p>
                 </div>
-                <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
-                  <p className="text-xs uppercase tracking-wide text-green-700 dark:text-green-300 font-bold">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
                     Career Flexibility
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-green-900 dark:text-green-100 mt-2">
-                    High
-                  </p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">High</p>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
                 Key Tips for Excelling in Endocrinology
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -361,20 +354,15 @@ function BlogContent() {
                   "Develop excellent patient counseling skills",
                   "Build expertise in multidisciplinary care",
                 ].map((tip, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 rounded-lg"
-                  >
-                    <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
-                      ✓ {tip}
-                    </p>
+                  <div key={idx} className="p-4 bg-[#f8f9fc] border border-[#29334a]/15 rounded-lg">
+                    <p className="font-bold text-[#29334a] text-sm sm:text-base">✓ {tip}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
                 Frequently Asked Questions
               </h2>
               <div className="space-y-4 sm:space-y-6">
@@ -406,12 +394,12 @@ function BlogContent() {
                 ].map((faq, idx) => (
                   <div
                     key={idx}
-                    className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition"
+                    className="p-4 sm:p-6 bg-gradient-to-br from-[#f8f9fc] to-[#f8f9fc] border border-[#29334a]/15 rounded-lg sm:rounded-xl hover:shadow-md transition"
                   >
                     <details className="group">
-                      <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                      <summary className="flex items-start justify-between cursor-pointer font-semibold text-[#29334a] text-sm sm:text-base">
                         <span className="flex-1 text-left pr-4">{faq.q}</span>
-                        <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                        <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-[#6b5b68] group-open:rotate-180 transition-transform">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
@@ -426,7 +414,7 @@ function BlogContent() {
                           </svg>
                         </span>
                       </summary>
-                      <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">
+                      <p className="text-[#29334a] mt-3 text-xs sm:text-sm leading-relaxed">
                         {faq.a}
                       </p>
                     </details>
@@ -436,37 +424,33 @@ function BlogContent() {
             </div>
 
             <div className="space-y-4 sm:space-y-6 mb-12 not-prose">
-              <div className="flex flex-col gap-2 sm:gap-3 text-sm sm:text-base px-4 py-3 bg-slate-100 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
+              <div className="flex flex-col gap-2 sm:gap-3 text-sm sm:text-base px-4 py-3 bg-[#f8f9fc] rounded-lg border border-[#29334a]/15">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">
-                    Reading Time
-                  </span>
-                  <span className="text-slate-900 dark:text-slate-100">8 min</span>
+                  <span className="font-semibold text-[#29334a]">Reading Time</span>
+                  <span className="text-[#29334a]">8 min</span>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">Category</span>
-                  <span className="text-slate-900 dark:text-slate-100">Specialty Guide</span>
+                  <span className="font-semibold text-[#29334a]">Category</span>
+                  <span className="text-[#29334a]">Specialty Guide</span>
                 </div>
                 <div className="flex items-center justify-between gap-4">
-                  <span className="font-semibold text-slate-700 dark:text-slate-300">
-                    Last Updated
-                  </span>
-                  <span className="text-slate-900 dark:text-slate-100">June 2025</span>
+                  <span className="font-semibold text-[#29334a]">Last Updated</span>
+                  <span className="text-[#29334a]">June 2025</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-900/20 dark:to-indigo-900/20 border-2 border-violet-200 dark:border-violet-800 rounded-lg sm:rounded-xl">
-              <h3 className="text-lg sm:text-xl font-bold text-violet-900 dark:text-violet-200 mb-2">
+            <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border-2 border-[#f7cbd7] rounded-lg sm:rounded-xl">
+              <h3 className="text-lg sm:text-xl font-bold text-[#800020] mb-2">
                 Still have questions?
               </h3>
-              <p className="text-sm sm:text-base text-violet-800 dark:text-violet-300 mb-4">
+              <p className="text-sm sm:text-base text-[#800020] mb-4">
                 Don't hesitate to reach out to our expert counselors who can provide personalized
                 guidance for your endocrinology specialization career journey.
               </p>
               <Link
                 to="/contact-us"
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-violet-600 hover:bg-violet-700 text-white font-semibold rounded-lg transition text-sm sm:text-base"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#800020] hover:bg-[#68001e] text-white font-semibold rounded-lg transition text-sm sm:text-base"
               >
                 Contact Our Experts →
               </Link>

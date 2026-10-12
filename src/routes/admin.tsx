@@ -10,6 +10,7 @@ import {
   Settings,
   BookOpen,
   Users,
+  CalendarDays,
   Menu,
   X,
   Award,
@@ -64,6 +65,12 @@ function AdminLayout() {
     { icon: BookOpen, label: "Courses", href: "/admin/courses", key: "courses" },
     { icon: Award, label: "Certificates", href: "/admin/certificates", key: "certificates" },
     { icon: Users, label: "Applications", href: "/admin/applications", key: "applications" },
+    {
+      icon: CalendarDays,
+      label: "Event Registrations",
+      href: "/admin/event-registrations",
+      key: "event-registrations",
+    },
     {
       icon: MessageCircle,
       label: "Chatbot Inquiries",

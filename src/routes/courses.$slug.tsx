@@ -102,7 +102,7 @@ function calculateFees(price: number) {
   const razorpayRate = 0.04; // 4% Razorpay
   const gstAmount = price * gstRate;
   const razorpayAmount = price * razorpayRate;
-  const totalPrice = price + gstAmount + razorpayAmount;
+  const totalPrice = price + gstAmount;
   return { gstAmount, razorpayAmount, totalPrice };
 }
 

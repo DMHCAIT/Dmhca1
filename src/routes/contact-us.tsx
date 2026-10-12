@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { submitContactForm } from "@/lib/api/contact-form.function";
+import { ResourceHero } from "@/components/site/ResourceHero";
 
 function Contact() {
   // Remove any trailing hash from URL (e.g., /contact-us/#) on mount
@@ -102,185 +103,178 @@ function Contact() {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900">
+    <div className="home-page resource-page resource-contact-page">
       {/* Hero Header */}
-      <section className="site-hero py-12 lg:py-16">
-        <div className="container-home">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="font-display text-4xl md:text-5xl text-white mb-3">Contact Us</h1>
-            <p className="text-base md:text-lg text-blue-100">
-              Get in touch — we're here to help with any questions or support you need.
-            </p>
-          </div>
-        </div>
-      </section>
+      <ResourceHero
+        eyebrow="We're here to help"
+        title="Contact Us"
+        description="Get in touch — we're here to help with any questions or support you need."
+      />
 
       <div className="container-home py-12 lg:py-16">
         <div className="mx-auto max-w-6xl">
-          <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             <div className="lg:col-span-2 space-y-6">
-              <section className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700">
+              <section className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-[#29334a]/15">
                 <div className="flex items-start gap-4 mb-2">
-                  <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-5 h-5 text-blue-600 dark:text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                  <div className="w-8 h-8 bg-[#f7cbd7]/25 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-[#800020]" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
                     </svg>
                   </div>
-                  <h2 className="font-display text-2xl text-navy-deep dark:text-slate-100">
-                    Our Addresses
-                  </h2>
+                  <h2 className="font-display text-2xl text-navy-deep">Our Addresses</h2>
                 </div>
                 <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800 rounded-lg border border-blue-100 dark:border-slate-700">
-                    <h3 className="font-bold text-navy-deep dark:text-slate-100 text-lg">Delhi</h3>
-                    <p className="text-sm mt-3 text-slate-700 dark:text-slate-400 leading-relaxed">
+                  <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg border border-[#f7cbd7]">
+                    <h3 className="font-bold text-navy-deep text-lg">Delhi</h3>
+                    <p className="text-sm mt-3 text-[#29334a] leading-relaxed">
                       Buliding No.-581/2, First Floor, Khatana Farm, Mandi Rd, Sultanpur, New
                       Delhi-30
                     </p>
                     <div className="mt-3 space-y-1">
-                      <p className="text-sm font-semibold text-navy-deep dark:text-slate-200">
-                        +91 9899711530
-                      </p>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">info@dmhca.in</p>
+                      <p className="text-sm font-semibold text-navy-deep">+91 9899711530</p>
+                      <p className="text-sm text-[#6b5b68]">info@dmhca.in</p>
                     </div>
                   </div>
-                  <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-slate-800 dark:to-slate-800 rounded-lg border border-blue-100 dark:border-slate-700">
-                    <h3 className="font-bold text-navy-deep dark:text-slate-100 text-lg">
-                      Hyderabad
-                    </h3>
-                    <p className="text-sm mt-3 text-slate-700 dark:text-slate-400 leading-relaxed">
+                  <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg border border-[#f7cbd7]">
+                    <h3 className="font-bold text-navy-deep text-lg">Hyderabad</h3>
+                    <p className="text-sm mt-3 text-[#29334a] leading-relaxed">
                       DMHCA, 8-2-351/W/B 1st Floor, Green Valley, Navodaya society, Banjara Hills
                       Road no-3, Behind Times of India, Hyderabad, Telangana 500034
                     </p>
                     <div className="mt-3 space-y-1">
-                      <p className="text-sm font-semibold text-navy-deep dark:text-slate-200">
-                        +91 9899711530
-                      </p>
-                      <p className="text-sm text-slate-600 dark:text-slate-400">info@dmhca.in</p>
+                      <p className="text-sm font-semibold text-navy-deep">+91 9899711530</p>
+                      <p className="text-sm text-[#6b5b68]">info@dmhca.in</p>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700">
+              <section className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-[#29334a]/15">
                 <div className="flex items-start gap-4 mb-2">
-                  <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-5 h-5 text-blue-600 dark:text-white"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
+                  <div className="w-8 h-8 bg-[#f7cbd7]/25 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-[#800020]" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" />
                     </svg>
                   </div>
-                  <h2 className="font-display text-2xl text-navy-deep dark:text-slate-100">
-                    For Academic Support
-                  </h2>
+                  <h2 className="font-display text-2xl text-navy-deep">For Academic Support</h2>
                 </div>
-                <p className="mt-3 text-sm text-slate-600 dark:text-slate-400">
+                <p className="mt-3 text-sm text-[#6b5b68]">
                   Contact our academic services team for guidance, resources, and personalized
                   assistance.
                 </p>
-                <div className="mt-4 p-4 bg-blue-50 dark:bg-slate-800 rounded-lg border border-blue-100 dark:border-slate-700">
-                  <p className="font-semibold text-navy-deep dark:text-slate-200">
-                    M. No. – 9289980479
-                  </p>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                    Email – support@dmhca.in
-                  </p>
+                <div className="mt-4 p-4 bg-[#f7cbd7]/25 rounded-lg border border-[#f7cbd7]">
+                  <p className="font-semibold text-navy-deep">M. No. – 9289980479</p>
+                  <p className="text-sm text-[#6b5b68] mt-1">Email – support@dmhca.in</p>
                 </div>
               </section>
 
-              <section className="bg-white dark:bg-slate-900 p-6 md:p-8 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700">
-                <h2 className="font-display text-2xl text-navy-deep dark:text-slate-100">
-                  Send a Message
-                </h2>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+              <section className="bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-[#29334a]/15">
+                <h2 className="font-display text-2xl text-navy-deep">Send a Message</h2>
+                <p className="mt-2 text-sm text-[#6b5b68]">
                   Send us a message and we'll get back to you shortly.
                 </p>
                 <form className="mt-6 space-y-5" onSubmit={handleSubmit}>
                   {submitted && (
-                    <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800 rounded-lg flex items-start gap-3">
+                    <div
+                      role="status"
+                      className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg flex items-start gap-3"
+                    >
                       <svg
-                        className="w-5 h-5 text-emerald-600 dark:text-white mt-0.5 flex-shrink-0"
+                        className="w-5 h-5 text-[#800020] mt-0.5 flex-shrink-0"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                       </svg>
-                      <p className="text-emerald-800 dark:text-emerald-200 font-medium">
+                      <p className="text-[#800020] font-medium">
                         Thank you! Your message has been sent successfully. We'll get back to you
                         shortly.
                       </p>
                     </div>
                   )}
                   {error && (
-                    <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg flex items-start gap-3">
+                    <div
+                      role="alert"
+                      className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg flex items-start gap-3"
+                    >
                       <svg
-                        className="w-5 h-5 text-red-600 dark:text-red-400 mt-0.5 flex-shrink-0"
+                        className="w-5 h-5 text-[#800020] mt-0.5 flex-shrink-0"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
                       </svg>
-                      <p className="text-red-800 dark:text-red-200 font-medium">{error}</p>
+                      <p className="text-[#800020] font-medium">{error}</p>
                     </div>
                   )}
                   <div>
-                    <label className="block text-sm font-semibold text-navy-deep dark:text-slate-200 mb-2">
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-sm font-semibold text-navy-deep mb-2"
+                    >
                       Name *
                     </label>
                     <input
                       type="text"
+                      id="contact-name"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/50 transition text-slate-900 placeholder-slate-400 dark:placeholder-slate-500"
+                      className="w-full px-4 py-3 border-2 border-[#29334a]/15 rounded-lg focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#f7cbd7] transition text-[#29334a] placeholder-[#6b5b68]"
                       placeholder="Your name"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-navy-deep dark:text-slate-200 mb-2">
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-sm font-semibold text-navy-deep mb-2"
+                    >
                       Email *
                     </label>
                     <input
                       type="email"
+                      id="contact-email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/50 transition text-slate-900 placeholder-slate-400 dark:placeholder-slate-500"
+                      className="w-full px-4 py-3 border-2 border-[#29334a]/15 rounded-lg focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#f7cbd7] transition text-[#29334a] placeholder-[#6b5b68]"
                       placeholder="you@example.com"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-navy-deep dark:text-slate-200 mb-2">
+                    <label
+                      htmlFor="contact-phone"
+                      className="block text-sm font-semibold text-navy-deep mb-2"
+                    >
                       Mobile No *
                     </label>
                     <input
                       type="tel"
+                      id="contact-phone"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/50 transition text-slate-900 placeholder-slate-400 dark:placeholder-slate-500"
+                      className="w-full px-4 py-3 border-2 border-[#29334a]/15 rounded-lg focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#f7cbd7] transition text-[#29334a] placeholder-[#6b5b68]"
                       placeholder="+91 XXXXX XXXXX"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-navy-deep dark:text-slate-200 mb-2">
+                    <label
+                      htmlFor="contact-message"
+                      className="block text-sm font-semibold text-navy-deep mb-2"
+                    >
                       Message *
                     </label>
                     <textarea
+                      id="contact-message"
                       name="message"
                       value={formData.message}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border-2 border-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 rounded-lg focus:outline-none focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-900/50 transition text-slate-900 placeholder-slate-400 dark:placeholder-slate-500 resize-none h-36"
+                      className="w-full px-4 py-3 border-2 border-[#29334a]/15 rounded-lg focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#f7cbd7] transition text-[#29334a] placeholder-[#6b5b68] resize-none h-36"
                       placeholder="Write your message..."
                       required
                     ></textarea>
@@ -300,65 +294,59 @@ function Contact() {
             </div>
 
             <aside className="space-y-6">
-              <section className="bg-gradient-to-br from-navy-deep to-slate-800 dark:from-slate-800 dark:to-slate-900 text-white p-6 md:p-8 rounded-2xl shadow-lg border dark:border-slate-700">
+              <section className="bg-gradient-to-br from-navy-deep to-[#29334a] text-white p-6 md:p-8 rounded-2xl shadow-lg border">
                 <div className="flex items-start gap-3 mb-4">
                   <svg className="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" />
                   </svg>
                   <h3 className="font-bold text-lg">Quick Contact</h3>
                 </div>
-                <p className="text-sm text-blue-100 dark:text-slate-300 mb-4">
+                <p className="text-sm text-[#f7cbd7] mb-4">
                   Reach us via phone or email for quick assistance.
                 </p>
                 <div className="space-y-3 text-sm">
-                  <div className="flex items-center gap-2 pb-3 border-b border-slate-700 dark:border-slate-600">
-                    <span className="inline-block w-2 h-2 bg-yellow-400 rounded-full" />
+                  <div className="flex items-center gap-2 pb-3 border-b border-[#29334a]/15">
+                    <span className="inline-block w-2 h-2 bg-[#800020] rounded-full" />
                     <div>
                       <div className="font-semibold">Phone</div>
-                      <div className="text-blue-100 dark:text-slate-300">+91 9899711530</div>
+                      <div className="text-[#f7cbd7]">+91 9899711530</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 pb-3 border-b border-slate-700 dark:border-slate-600">
-                    <span className="inline-block w-2 h-2 bg-yellow-400 rounded-full" />
+                  <div className="flex items-center gap-2 pb-3 border-b border-[#29334a]/15">
+                    <span className="inline-block w-2 h-2 bg-[#800020] rounded-full" />
                     <div>
                       <div className="font-semibold">Email</div>
-                      <div className="text-blue-100 dark:text-slate-300">info@dmhca.in</div>
+                      <div className="text-[#f7cbd7]">info@dmhca.in</div>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="inline-block w-2 h-2 bg-yellow-400 rounded-full" />
+                    <span className="inline-block w-2 h-2 bg-[#800020] rounded-full" />
                     <div>
                       <div className="font-semibold">Address (Primary)</div>
-                      <div className="text-blue-100 dark:text-slate-300">New Delhi</div>
+                      <div className="text-[#f7cbd7]">New Delhi</div>
                     </div>
                   </div>
                 </div>
               </section>
 
-              <section className="bg-white dark:bg-slate-900 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
-                <div className="p-6 md:p-8 border-b border-slate-200 dark:border-slate-700">
-                  <h4 className="font-bold text-navy-deep dark:text-slate-100 text-lg">
-                    Frequently Asked Questions
-                  </h4>
+              <section className="bg-white rounded-2xl shadow-lg border border-[#29334a]/15 overflow-hidden">
+                <div className="p-6 md:p-8 border-b border-[#29334a]/15">
+                  <h4 className="font-bold text-navy-deep text-lg">Frequently Asked Questions</h4>
                 </div>
-                <div className="divide-y divide-slate-200 dark:divide-slate-700">
+                <div className="divide-y divide-[#29334a]/15">
                   {faqs.map((f, i) => (
                     <div key={i}>
                       <button
                         onClick={() => toggleFaq(i)}
-                        className="w-full text-left py-4 px-6 flex justify-between items-center hover:bg-slate-50 dark:hover:bg-slate-800 transition"
+                        className="w-full text-left py-4 px-6 flex justify-between items-center hover:bg-[#f8f9fc] transition"
                       >
-                        <span className="font-medium text-slate-900 dark:text-slate-200 text-sm">
-                          {f.q}
-                        </span>
-                        <span className="text-slate-400 dark:text-slate-500 font-bold text-lg flex-shrink-0">
+                        <span className="font-medium text-[#29334a] text-sm">{f.q}</span>
+                        <span className="text-[#6b5b68] font-bold text-lg flex-shrink-0">
                           {openIndex === i ? "−" : "+"}
                         </span>
                       </button>
                       {openIndex === i && (
-                        <div className="px-6 pb-4 text-sm text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800">
-                          {f.a}
-                        </div>
+                        <div className="px-6 pb-4 text-sm text-[#6b5b68] bg-[#f8f9fc]">{f.a}</div>
                       )}
                     </div>
                   ))}

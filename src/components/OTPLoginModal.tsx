@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Loader2, X } from "lucide-react";
@@ -102,11 +103,16 @@ export function OTPLoginModal({ isOpen, onClose, onSuccess, onSwitchToSignup }) 
     }
   };
 
-  if (!isOpen) return null;
+  if (!isOpen || typeof document === "undefined" || !document.body) return null;
 
-  return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl p-8 max-w-lg w-full shadow-2xl relative">
+  // Portal to <body> so ancestors with transform/backdrop-filter (e.g. the header) can't clip the fixed overlay.
+  return createPortal(
+    <div
+      className="fixed inset-0 z-50 flex overflow-y-auto overscroll-contain bg-black/50 p-3 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="relative m-auto w-full max-w-lg rounded-xl bg-white p-5 shadow-2xl sm:p-8">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -205,6 +211,7 @@ export function OTPLoginModal({ isOpen, onClose, onSuccess, onSwitchToSignup }) 
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

@@ -2,28 +2,21 @@ import { Link } from "@tanstack/react-router";
 import { categories } from "@/data/courses";
 import { Mail, Phone, MapPin, Facebook, Youtube, Instagram, Linkedin } from "lucide-react";
 
-const logo = "/logo.webp";
-const whiteLogo = "/logo-white.webp";
+import { BrandLogo } from "@/components/site/BrandLogo";
 
 export function Footer() {
   return (
-    <footer className="mt-24 bg-navy-deep text-primary-foreground pb-14 md:pb-16">
-      <div className="container-x py-12 md:py-14 grid gap-8 grid-cols-2 md:grid-cols-4 lg:grid-cols-12">
+    <footer className="site-footer mt-8 md:mt-12 text-primary-foreground">
+      <div className="container-x py-6 md:py-10 grid gap-x-6 gap-y-5 md:gap-8 grid-cols-2 md:grid-cols-4 lg:grid-cols-12">
         <div className="col-span-2 md:col-span-2 lg:col-span-4">
-          <img
-            src={whiteLogo}
-            alt="DMHCA Logo - Delhi Medical Health Care Academy"
-            className="h-10 w-auto transition-opacity hover:opacity-75"
-            onError={(e) => {
-              const t = e.currentTarget as HTMLImageElement;
-              t.src = whiteLogo;
-            }}
-          />
-          <p className="mt-4 md:mt-6 text-xs md:text-sm text-primary-foreground/70">
+          <Link to="/" className="footer-brand inline-flex transition-opacity hover:opacity-75">
+            <BrandLogo />
+          </Link>
+          <p className="mt-3 md:mt-6 text-sm text-primary-foreground/70">
             Explore online medical programs, fellowship training, PG Diplomas and certificate
             courses for doctors and healthcare professionals.
           </p>
-          <div className="mt-4 md:mt-6 space-y-1.5 md:space-y-2 text-xs md:text-sm text-primary-foreground/80">
+          <div className="mt-3 md:mt-6 space-y-1.5 md:space-y-2 text-sm font-normal text-primary-foreground/80">
             <div className="flex items-center gap-2">
               <Phone className="w-3 h-3 md:w-4 md:h-4 text-gold shrink-0" />{" "}
               <span>+91 9899711530</span>
@@ -41,7 +34,7 @@ export function Footer() {
 
         <div className="col-span-1 md:col-span-2 lg:col-span-3">
           <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Explore</div>
-          <ul className="space-y-0.5 md:space-y-1 text-xs md:text-sm">
+          <ul className="space-y-0.5 md:space-y-1 text-sm font-normal">
             <li>
               <Link to="/" className="hover:text-gold transition-colors">
                 Home
@@ -58,7 +51,7 @@ export function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/simple-event" className="hover:text-gold transition-colors">
+              <Link to="/events" className="hover:text-gold transition-colors">
                 Events
               </Link>
             </li>
@@ -79,7 +72,7 @@ export function Footer() {
           <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">
             Specialties
           </div>
-          <ul className="space-y-0.5 md:space-y-1 text-xs md:text-sm">
+          <ul className="space-y-0.5 md:space-y-1 text-sm font-normal">
             {categories.slice(0, 6).map((c) => (
               <li key={c.slug}>
                 <Link
@@ -94,93 +87,91 @@ export function Footer() {
           </ul>
         </div>
 
-        <div className="col-span-2 md:col-span-4 lg:col-span-2">
-          <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">
-            Top courses
+        <div className="col-span-2 md:col-span-4 lg:col-span-2 grid grid-cols-2 gap-x-6 md:block">
+          <div>
+            <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">
+              Top courses
+            </div>
+            <ul className="space-y-0.5 md:space-y-1 text-sm font-normal">
+              <li>
+                <Link
+                  to="/courses/$slug"
+                  params={{ slug: "certificate-in-hypertension" }}
+                  className="hover:text-gold transition-colors"
+                >
+                  Hypertension
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/courses/$slug"
+                  params={{ slug: "fellowship-in-diabetology" }}
+                  className="hover:text-gold transition-colors"
+                >
+                  Diabetology
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/courses/$slug"
+                  params={{ slug: "fellowship-in-critical-care" }}
+                  className="hover:text-gold transition-colors"
+                >
+                  Critical Care
+                </Link>
+              </li>
+            </ul>
           </div>
-          <ul className="space-y-0.5 md:space-y-1 text-xs md:text-sm">
-            <li>
-              <Link
-                to="/courses/$slug"
-                params={{ slug: "certificate-in-hypertension" }}
-                className="hover:text-gold transition-colors"
-              >
-                Hypertension
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/courses/$slug"
-                params={{ slug: "fellowship-in-diabetology" }}
-                className="hover:text-gold transition-colors"
-              >
-                Diabetology
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/courses/$slug"
-                params={{ slug: "fellowship-in-critical-care" }}
-                className="hover:text-gold transition-colors"
-              >
-                Critical Care
-              </Link>
-            </li>
-          </ul>
-          <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-primary-foreground/5">
+          <div className="md:mt-4 md:pt-4">
             <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Follow</div>
-            <div className="flex items-center gap-2 md:gap-3 mt-2 md:mt-3">
+            <div className="flex flex-wrap items-center gap-1.5 md:gap-3 mt-2 md:mt-3">
               <a
                 href="https://www.facebook.com/dmhca.in"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
+                aria-label="DMHCA on Facebook"
+                className="footer-social inline-flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-xl text-white shadow-md transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#1877F2] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
-                  <Facebook className="w-3 h-3 md:w-4 md:h-4 text-white" />
-                </div>
+                <Facebook className="h-4 w-4 text-white" aria-hidden="true" />
               </a>
               <a
                 href="https://www.youtube.com/@dmhca"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
+                aria-label="DMHCA on YouTube"
+                className="footer-social inline-flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-xl text-white shadow-md transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#FF0000] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
-                  <Youtube className="w-3 h-3 md:w-4 md:h-4 text-white" />
-                </div>
+                <Youtube className="h-4 w-4 text-white" aria-hidden="true" />
               </a>
               <a
                 href="https://www.instagram.com/dmhca_official/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
+                aria-label="DMHCA on Instagram"
+                className="footer-social inline-flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-xl text-white shadow-md transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-linear-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
-                  <Instagram className="w-3 h-3 md:w-4 md:h-4 text-white" />
-                </div>
+                <Instagram className="h-4 w-4 text-white" aria-hidden="true" />
               </a>
               <a
                 href="https://www.linkedin.com/company/dmhca/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
+                aria-label="DMHCA on LinkedIn"
+                className="footer-social inline-flex h-8 w-8 md:h-9 md:w-9 items-center justify-center rounded-xl text-white shadow-md transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
-                <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-[#0A66C2] flex items-center justify-center shadow-sm opacity-90 hover:opacity-100 transition-opacity">
-                  <Linkedin className="w-3 h-3 md:w-4 md:h-4 text-white" />
-                </div>
+                <Linkedin className="h-4 w-4 text-white" aria-hidden="true" />
               </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="border-t border-primary-foreground/10">
-        <div className="container-x py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
+      <div className="footer-legal">
+        <div className="container-x py-2 md:py-3 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 text-xs sm:text-sm font-normal text-primary-foreground/60 text-center md:text-left">
           <div>
             © {new Date().getFullYear()} Delhi Medical Health Care Academy. All rights reserved.
           </div>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 md:gap-x-5 md:gap-y-2">
             <Link to="/term-conditions" className="hover:text-gold">
               Terms &amp; Conditions
             </Link>

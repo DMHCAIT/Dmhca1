@@ -4,6 +4,8 @@ import { Link } from "@tanstack/react-router";
 import { cityWiseCourses, getAllSpecialties } from "@/data/cityWiseCourses";
 import { categories, courses } from "@/data/courses";
 import { events } from "@/data/events";
+import { ResourceHero } from "@/components/site/ResourceHero";
+import { BookOpen, Calendar, MapPin } from "lucide-react";
 
 export const Route = createFileRoute("/city-wise-medical-courses")({
   component: CityWiseMedicalCourses,
@@ -32,66 +34,60 @@ function CityWiseMedicalCourses() {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-slate-900 min-h-screen">
+    <div className="home-page resource-page resource-directory-page min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-800 dark:from-slate-800 dark:via-slate-800 dark:to-slate-900 py-12">
-        <div className="container-home">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="font-display text-4xl md:text-5xl text-white mb-4">
-              List of Medical Courses City Wise
-            </h1>
-            <p className="text-lg text-slate-300 dark:text-slate-400">
-              Explore medical specialization courses available across different cities in India.
-              Find the perfect course location for your medical career.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ResourceHero
+        eyebrow="Medical education, closer to you"
+        title="List of Medical Courses City Wise"
+        description="Explore medical specialization courses available across different cities in India. Find the perfect course location for your medical career."
+      />
 
       {/* Main Content */}
       <div className="container-home py-16">
         <div className="max-w-6xl mx-auto">
           {/* Table of Contents */}
-          <div className="bg-slate-50 dark:bg-slate-800 rounded-lg p-8 mb-12 border border-slate-200 dark:border-slate-700">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-6">
-              What's on This Page
-            </h2>
+          <div className="bg-[#f8f9fc] rounded-lg p-8 mb-12 border border-[#29334a]/15">
+            <h2 className="text-2xl font-bold text-[#29334a] mb-6">What's on This Page</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">
-                  City-Wise Courses
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
+              <a
+                href="#city-courses"
+                className="rounded-xl border border-border bg-white p-4 transition"
+              >
+                <h3 className="font-bold text-[#29334a] mb-2">City-Wise Courses</h3>
+                <p className="text-sm text-[#6b5b68]">
                   Medical courses grouped by specialty across different Indian cities
                 </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">
-                  Course Categories
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
+              </a>
+              <a
+                href="#course-categories"
+                className="rounded-xl border border-border bg-white p-4 transition"
+              >
+                <h3 className="font-bold text-[#29334a] mb-2">Course Categories</h3>
+                <p className="text-sm text-[#6b5b68]">
                   Browse by medical specialty: Cardiology, Radiology, Surgery, and more
                 </p>
-              </div>
-              <div>
-                <h3 className="font-bold text-slate-900 dark:text-slate-200 mb-2">
-                  Events & Webinars
-                </h3>
-                <p className="text-sm text-slate-600 dark:text-slate-400">
+              </a>
+              <a
+                href="#city-events"
+                className="rounded-xl border border-border bg-white p-4 transition"
+              >
+                <h3 className="font-bold text-[#29334a] mb-2">Events & Webinars</h3>
+                <p className="text-sm text-[#6b5b68]">
                   Upcoming workshops, seminars, and educational events from DMHCA
                 </p>
-              </div>
+              </a>
             </div>
           </div>
 
           {/* Section 1: Specialty Sections (City-Wise) */}
-          <section className="mb-20">
+          <section id="city-courses" className="mb-20 scroll-mt-28">
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-                📍 City-Wise Medical Courses
+              <h2 className="text-4xl font-bold text-[#29334a] mb-2">
+                <MapPin className="mr-2 inline-block h-6 w-6 text-[#800020]" aria-hidden="true" />{" "}
+                City-Wise Medical Courses
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
-              <p className="text-slate-600 dark:text-slate-400 mt-3">
+              <p className="text-[#6b5b68] mt-3">
                 Explore specialized medical courses available in different cities across India
               </p>
             </div>
@@ -100,7 +96,7 @@ function CityWiseMedicalCourses() {
               {specialties.map((specialty) => (
                 <div key={specialty} className="scroll-mt-32">
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-2 capitalize">
+                    <h3 className="text-2xl font-bold text-[#29334a] mb-2 capitalize">
                       {specialty} Courses by City
                     </h3>
                     <div className="w-12 h-1 bg-gradient-to-r from-navy-deep to-navy rounded"></div>
@@ -112,22 +108,18 @@ function CityWiseMedicalCourses() {
                       <Link
                         key={course.slug}
                         to={`/${course.slug}/`}
-                        className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 dark:hover:border-slate-500 transition-all duration-300"
+                        className="group bg-white border border-[#29334a]/15 rounded-lg p-4 hover:shadow-lg transition-all duration-300"
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <h4 className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-navy-deep dark:group-hover:text-slate-50 transition">
+                          <h4 className="font-bold text-[#29334a] group-hover:text-navy-deep transition">
                             {specialty} in {course.city}
                           </h4>
-                          <span className="text-slate-400 dark:text-slate-500 group-hover:text-navy-deep dark:group-hover:text-slate-300 transition">
+                          <span className="text-[#6b5b68] group-hover:text-navy-deep transition">
                             →
                           </span>
                         </div>
-                        <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                          {course.description}
-                        </p>
-                        <div className="text-xs font-semibold text-navy-deep dark:text-slate-200">
-                          Learn more
-                        </div>
+                        <p className="text-sm text-[#6b5b68] mb-3">{course.description}</p>
+                        <div className="text-xs font-semibold text-navy-deep">Learn more</div>
                       </Link>
                     ))}
                   </div>
@@ -137,13 +129,17 @@ function CityWiseMedicalCourses() {
           </section>
 
           {/* Section 2: Course Categories */}
-          <section className="mb-20 pt-12 border-t border-slate-200 dark:border-slate-700">
+          <section
+            id="course-categories"
+            className="mb-20 scroll-mt-28 pt-12 border-t border-[#29334a]/15"
+          >
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-                📚 Course Categories
+              <h2 className="text-4xl font-bold text-[#29334a] mb-2">
+                <BookOpen className="mr-2 inline-block h-6 w-6 text-[#800020]" aria-hidden="true" />{" "}
+                Course Categories
               </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded"></div>
-              <p className="text-slate-600 dark:text-slate-400 mt-3">
+              <div className="w-16 h-1 bg-gradient-to-r from-[#800020] to-[#800020] rounded"></div>
+              <p className="text-[#6b5b68] mt-3">
                 Browse medical specializations with {courses.length} professional courses available
               </p>
             </div>
@@ -153,21 +149,17 @@ function CityWiseMedicalCourses() {
                 <Link
                   key={category.slug}
                   to={`/top-medical-courses#${category.slug}`}
-                  className="group bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg p-6 hover:shadow-lg hover:border-blue-300 dark:hover:border-blue-400 transition-all duration-300"
+                  className="group bg-gradient-to-br from-[#f8f9fc] to-[#f8f9fc] border border-[#29334a]/15 rounded-lg p-6 hover:shadow-lg transition-all duration-300"
                 >
-                  <h3 className="font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition mb-2">
+                  <h3 className="font-bold text-lg text-[#29334a] group-hover:text-[#800020] transition mb-2">
                     {category.name}
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-                    {category.tagline}
-                  </p>
+                  <p className="text-sm text-[#6b5b68] mb-4">{category.tagline}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-slate-600 dark:text-slate-400">
+                    <span className="text-sm font-semibold text-[#6b5b68]">
                       {category.courseCount} course{category.courseCount !== 1 ? "s" : ""}
                     </span>
-                    <span className="text-blue-600 dark:text-white group-hover:translate-x-1 transition">
-                      →
-                    </span>
+                    <span className="text-[#800020] group-hover:translate-x-1 transition">→</span>
                   </div>
                 </Link>
               ))}
@@ -175,13 +167,17 @@ function CityWiseMedicalCourses() {
           </section>
 
           {/* Section 3: Events & Webinars */}
-          <section className="mb-20 pt-12 border-t border-slate-200 dark:border-slate-700">
+          <section
+            id="city-events"
+            className="mb-20 scroll-mt-28 pt-12 border-t border-[#29334a]/15"
+          >
             <div className="mb-8">
-              <h2 className="text-4xl font-bold text-slate-900 dark:text-slate-100 mb-2">
-                🎓 Events & Webinars
+              <h2 className="text-4xl font-bold text-[#29334a] mb-2">
+                <Calendar className="mr-2 inline-block h-6 w-6 text-[#800020]" aria-hidden="true" />{" "}
+                Events & Webinars
               </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded"></div>
-              <p className="text-slate-600 dark:text-slate-400 mt-3">
+              <div className="w-16 h-1 bg-gradient-to-r from-[#800020] to-[#800020] rounded"></div>
+              <p className="text-[#6b5b68] mt-3">
                 Join our upcoming workshops, seminars, and educational events
               </p>
             </div>
@@ -191,33 +187,38 @@ function CityWiseMedicalCourses() {
                 <Link
                   key={event.id}
                   to={`/events/${event.slug}`}
-                  className="group bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
+                  className="group bg-white border border-[#29334a]/15 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="h-40 bg-slate-200 overflow-hidden">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
+                  {event.image && (
+                    <div className="h-40 bg-[#f8f9fc] overflow-hidden">
+                      <img
+                        src={event.image}
+                        alt={event.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  )}
                   <div className="p-4">
-                    <h3 className="font-bold text-slate-900 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition mb-2 line-clamp-2">
+                    <h3
+                      title={event.title}
+                      className="truncate font-bold text-[#29334a] group-hover:text-[#800020] transition mb-2"
+                    >
                       {event.title}
                     </h3>
-                    <div className="space-y-2 text-sm text-slate-600">
+                    <div className="space-y-2 text-sm text-[#6b5b68]">
                       <div className="flex items-center gap-2">
-                        <span>📅</span>
+                        <Calendar className="h-4 w-4 text-[#800020]" aria-hidden="true" />
                         <span>{event.date}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span>📍</span>
+                        <MapPin className="h-4 w-4 text-[#800020]" aria-hidden="true" />
                         <span>{event.location}</span>
                       </div>
                     </div>
-                    <p className="text-sm text-slate-600 mt-3 mb-3 line-clamp-2">
+                    <p className="text-sm text-[#6b5b68] mt-3 mb-3 line-clamp-2">
                       {event.shortDescription}
                     </p>
-                    <div className="text-xs font-semibold text-purple-600">View details →</div>
+                    <div className="text-xs font-semibold text-[#800020]">View details →</div>
                   </div>
                 </Link>
               ))}
@@ -226,7 +227,7 @@ function CityWiseMedicalCourses() {
               <div className="text-center mt-8">
                 <Link
                   to="/events"
-                  className="inline-block px-6 py-2 bg-purple-600 text-white rounded-lg font-bold hover:bg-purple-700 transition"
+                  className="inline-block px-6 py-2 bg-[#800020] text-white rounded-lg font-bold hover:bg-[#68001e] transition"
                 >
                   View All Events ({events.length})
                 </Link>
@@ -235,7 +236,7 @@ function CityWiseMedicalCourses() {
           </section>
 
           {/* CTA Section */}
-          <div className="mt-20 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
+          <div className="mt-20 bg-gradient-to-r from-[#29334a] to-[#29334a] rounded-2xl p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to Enroll?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto">
               Contact our admission team to learn more about your preferred course and city
@@ -245,13 +246,13 @@ function CityWiseMedicalCourses() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+919899711530"
-                className="px-8 py-3 bg-white text-slate-900 rounded-lg font-bold hover:bg-slate-100 transition"
+                className="px-8 py-3 bg-white text-[#29334a] rounded-lg font-bold hover:bg-[#f8f9fc] transition"
               >
                 Call: +91 9899711530
               </a>
               <a
                 href="mailto:info@dmhca.in"
-                className="px-8 py-3 border border-white text-white rounded-lg font-bold hover:bg-white hover:text-slate-900 transition"
+                className="px-8 py-3 border border-white text-white rounded-lg font-bold hover:bg-white hover:text-[#29334a] transition"
               >
                 Email: info@dmhca.in
               </a>

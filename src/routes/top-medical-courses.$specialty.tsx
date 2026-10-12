@@ -1,21 +1,8 @@
-import { createFileRoute, useLocation, useParams, notFound } from "@tanstack/react-router";
+import { createFileRoute, useParams, notFound } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
 import { categories, type Course, courses } from "@/data/courses";
 import { fetchCoursesFromSupabase } from "@/lib/courses-remote";
-import { CourseCard } from "@/components/site/CourseCard";
-
-// Map URL slugs to program type names
-const formatMap: Record<string, string> = {
-  certificates: "Certificate",
-  "pg-diplomas": "PG Diploma",
-  fellowships: "Fellowship",
-};
-
-const reverseFormatMap: Record<string, string> = {
-  Certificate: "certificates",
-  "PG Diploma": "pg-diplomas",
-  Fellowship: "fellowships",
-};
+import { CourseCatalogue } from "@/components/site/CourseCatalogue";
 
 export const Route = createFileRoute("/top-medical-courses/$specialty")({
   beforeLoad: ({ params }) => {
@@ -48,8 +35,6 @@ function programType(c: Course) {
 
 function SpecialtyCourses() {
   const { specialty: specialtySlug } = useParams({ from: "/top-medical-courses/$specialty" });
-  const location = useLocation();
-  const searchParams = useMemo(() => new URLSearchParams(location.search || ""), [location.search]);
 
   const specialty = categories.find((c) => c.slug === specialtySlug);
 
@@ -130,114 +115,29 @@ function SpecialtyCourses() {
   };
 
   return (
-    <div>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
-      <section className="site-hero">
-        <div className="container-x">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">
-            Catalogue
-          </div>
-          <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">
-            {specialty?.name || "All"} programs.
-          </h1>
-          <p className="mt-3 max-w-2xl text-muted-foreground">
-            Filter {specialty?.name.toLowerCase() || "medical"} courses across all formats —
-            Certificate, PG Diploma, and Fellowship.
-          </p>
-        </div>
-      </section>
-
-      <section className="container-x py-10 text-navy-deep">
-        {/* Top filter bar */}
-        <div className="bg-card border border-border rounded-md p-5 mb-8 space-y-5">
-          <div className="grid md:grid-cols-[1fr_auto] gap-4 items-center">
-            <input
-              value={q}
-              onChange={(e) => setQ(e.target.value)}
-              placeholder="Search courses by title…"
-              className="w-full px-4 py-2.5 border border-border rounded-sm bg-background text-sm focus:outline-none focus:border-navy-deep"
-            />
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mr-1">
-                Format
-              </span>
-              <button
-                onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses";
-                }}
-                className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
-              >
-                All
-              </button>
-              {Object.entries(reverseFormatMap).map(([formatName, slug]) => (
-                <button
-                  key={slug}
-                  onClick={() => {
-                    window.location =
-                      window.location.origin + "/top-medical-courses/" + slug + "/" + specialtySlug;
-                  }}
-                  className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
-                >
-                  {formatName}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mb-2.5">
-              Specialty
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <button
-                onClick={() => {
-                  window.location = window.location.origin + "/top-medical-courses";
-                }}
-                className="text-xs px-3 py-1.5 rounded-sm border transition border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"
-              >
-                All specialties
-              </button>
-              {categories.map((c) => (
-                <button
-                  key={c.slug}
-                  onClick={() => {
-                    window.location = window.location.origin + "/top-medical-courses/" + c.slug;
-                  }}
-                  className={`text-xs px-3 py-1.5 rounded-sm border transition ${c.slug === specialtySlug ? "bg-navy-deep text-primary-foreground border-navy-deep" : "border-border text-muted-foreground hover:border-navy-deep hover:text-navy-deep"}`}
-                >
-                  {c.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="text-xs text-muted-foreground mb-5">
-          {filtered.length} program{filtered.length === 1 ? "" : "s"}
-        </div>
-        {filtered.length === 0 ? (
-          <div className="py-20 text-center text-muted-foreground">
-            No courses match — try clearing filters.{" "}
-            <button
-              onClick={() => {
-                window.location = window.location.origin + "/top-medical-courses/" + specialtySlug;
-              }}
-              className="text-navy-deep underline bg-transparent border-0 cursor-pointer p-0 hover:text-navy-deep"
-            >
-              Reset
-            </button>
-          </div>
-        ) : (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((c) => (
-              <CourseCard key={c.slug} course={c} />
-            ))}
-          </div>
-        )}
-      </section>
-    </div>
+      <CourseCatalogue
+        title={`${specialty?.name || "All"} programs.`}
+        description={`Filter ${specialty?.name.toLowerCase() || "medical"} courses across all formats — Certificate, PG Diploma, and Fellowship.`}
+        courses={filtered}
+        selectedFormat="all"
+        selectedSpecialty={specialtySlug}
+        search={q}
+        onSearchChange={setQ}
+        formatHref={(slug) =>
+          slug === "all"
+            ? `/top-medical-courses/${specialtySlug}`
+            : `/top-medical-courses/${slug}/${specialtySlug}`
+        }
+        specialtyHref={(slug) =>
+          slug === "all" ? "/top-medical-courses" : `/top-medical-courses/${slug}`
+        }
+        resetHref={`/top-medical-courses/${specialtySlug}`}
+      />
+    </>
   );
 }

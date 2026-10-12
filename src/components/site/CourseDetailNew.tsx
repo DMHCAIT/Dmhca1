@@ -144,7 +144,7 @@ export function CourseDetailNew({
                       {reviews.map((review, idx) => (
                         <div
                           key={idx}
-                          className="border border-border rounded-lg p-5 bg-card hover:border-gold/30 transition"
+                          className="border border-border rounded-lg p-5 bg-card transition"
                         >
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex items-start gap-3 flex-1">
@@ -320,7 +320,7 @@ export function CourseDetailNew({
                 {course.faqs.map((faq: { q: string; a: string }, idx: number) => (
                   <details
                     key={idx}
-                    className="group border border-border rounded-lg overflow-hidden bg-card hover:border-gold/30 transition"
+                    className="group border border-border rounded-lg overflow-hidden bg-card transition"
                     open={idx === 0}
                   >
                     <summary className="cursor-pointer px-4 py-4 flex items-center justify-between font-medium text-navy-deep hover:bg-secondary/20">
@@ -380,7 +380,7 @@ export function CourseDetailNew({
                 </Link>
                 <a
                   href="tel:+917042011441"
-                  className="w-full inline-flex justify-center items-center px-5 py-3 border border-border text-navy-deep text-sm font-medium rounded hover:border-navy-deep hover:bg-secondary/20 transition"
+                  className="w-full inline-flex justify-center items-center px-5 py-3 border border-border text-navy-deep text-sm font-medium rounded hover:bg-secondary/20 transition"
                 >
                   Book Demo Class
                 </a>
@@ -455,7 +455,7 @@ export function CourseDetailNew({
                   key={r.slug}
                   to="/courses/$slug"
                   params={{ slug: r.slug }}
-                  className="group block bg-card border border-border rounded-lg overflow-hidden hover:border-gold/30 hover:shadow-lg transition"
+                  className="group block bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition"
                 >
                   <div className="aspect-[5/3] relative overflow-hidden bg-navy-deep">
                     <img

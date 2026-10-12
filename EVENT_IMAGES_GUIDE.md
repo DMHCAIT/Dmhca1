@@ -5,6 +5,22 @@ The event pages have been created with placeholder images. You need to download 
 
 ## Event Images to Download
 
+The upcoming "Female Hormones: Fertility and Subfertility" CME is listed at
+`/events/female-hormones-fertility-and-subfertility`. No event or speaker image
+has been supplied, so its clickable listing card reserves an image area with a
+calendar placeholder. Add an `image` path to the event entry in `src/data/events.ts`
+and a speaker `image` path when the photos are available. Its payment link is pending;
+do not label it as free or add a registration button until the payment URL is confirmed.
+
+All event detail pages share a burgundy-accented layout with session information,
+speaker profiles, optional learning outcomes/objectives/agenda, and related events.
+Existing event images appear uncropped in a full-width hero with translucent text
+panels on desktop. On mobile, the complete image sits above the content for readability.
+Images use contain sizing, so portrait or wide posters may have surrounding space.
+Events without an image use a text-led hero. Registration enquiries link to
+`/contact-us`; this is not a payment action.
+Fees are shown only when explicitly supplied in the event data. Comments are not displayed.
+
 ### 1. Ultrasound Workshop
 - **Source URL**: https://dmhca.in/simple-event/join-our-3-day-master-workshop-in-ultrasound-with-hands-on-training-program/
 - **Target File**: `public/events&webinars/ultrasound-workshop.webp`
@@ -81,7 +97,7 @@ Update the `src/data/events.ts` file with the correct image paths once downloade
 ## Verifying Images Are Loading
 
 1. Start the dev server: `npm run dev`
-2. Navigate to: http://localhost:8080/simple-event
+2. Navigate to: http://localhost:8080/events
 3. Check if images are displaying correctly
 4. Click on individual events to verify detail page images
 

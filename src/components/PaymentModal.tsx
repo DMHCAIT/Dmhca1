@@ -256,7 +256,7 @@ export function PaymentModal({ isOpen, onClose, applicationData, amount, courseN
               <button
                 onClick={handleLoanRedirect}
                 disabled={loading}
-                className="w-full px-4 py-3 bg-white border-2 border-slate-300 hover:border-slate-400 text-slate-900 font-bold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-4 py-3 bg-white border-2 border-slate-300 text-slate-900 font-bold rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
                 Apply for Education Loan

@@ -31,9 +31,9 @@ function RadiologyCityPage() {
     : [];
 
   return (
-    <div className="bg-white min-h-screen">
+    <div className="home-page resource-page resource-city-page min-h-screen">
       {/* Header */}
-      <div className="bg-gradient-to-r from-navy-deep to-navy py-12">
+      <div className="resource-hero">
         <div className="container-city">
           <div className="w-full">
             <Link
@@ -55,7 +55,7 @@ function RadiologyCityPage() {
         <div className="w-full">
           {/* Introduction */}
           <div className="mb-12">
-            <p className="text-lg text-slate-700 leading-relaxed mb-4">
+            <p className="text-lg text-[#29334a] leading-relaxed mb-4">
               {city.charAt(0).toUpperCase() + city.slice(1)} is home to some of India's best medical
               colleges, universities, and hospitals, making it an ideal location for pursuing{" "}
               {specialty} specialization. Our comprehensive {specialty} programs provide world-class
@@ -93,7 +93,7 @@ function RadiologyCityPage() {
           </div>
 
           {/* CTA Section */}
-          <div className="mt-16 bg-gradient-to-r from-slate-900 to-slate-800 rounded-2xl p-12 text-center text-white">
+          <div className="mt-16 bg-gradient-to-r from-[#29334a] to-[#29334a] rounded-2xl p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-4">Ready to start your journey?</h2>
             <p className="text-lg mb-8 max-w-2xl mx-auto">
               Enroll in our {specialty} program in {city.charAt(0).toUpperCase() + city.slice(1)}{" "}
@@ -102,13 +102,13 @@ function RadiologyCityPage() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+919899711530"
-                className="px-8 py-3 bg-white text-slate-900 rounded-lg font-bold hover:bg-slate-100 transition"
+                className="px-8 py-3 bg-white text-[#29334a] rounded-lg font-bold hover:bg-[#f8f9fc] transition"
               >
                 Call: +91 9899711530
               </a>
               <a
                 href="mailto:info@dmhca.in"
-                className="px-8 py-3 border border-white text-white rounded-lg font-bold hover:bg-white hover:text-slate-900 transition"
+                className="px-8 py-3 border border-white text-white rounded-lg font-bold hover:bg-white hover:text-[#29334a] transition"
               >
                 Email: info@dmhca.in
               </a>
@@ -119,7 +119,7 @@ function RadiologyCityPage() {
 
           {/* Related Courses */}
           <div className="mt-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-8">
+            <h2 className="text-3xl font-bold text-[#29334a] mb-8">
               {specialty.charAt(0).toUpperCase() + specialty.slice(1)} Courses in Other Cities
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -127,12 +127,12 @@ function RadiologyCityPage() {
                 <Link
                   key={relCourse.slug}
                   to={`/${relCourse.slug}/`}
-                  className="group bg-white border border-slate-200 rounded-lg p-4 hover:shadow-lg hover:border-slate-300 transition-all"
+                  className="group bg-white border border-[#29334a]/15 rounded-lg p-4 hover:shadow-lg transition-all"
                 >
-                  <h3 className="font-bold text-slate-900 group-hover:text-navy-deep transition mb-2">
+                  <h3 className="font-bold text-[#29334a] group-hover:text-navy-deep transition mb-2">
                     {specialty} in {relCourse.city}
                   </h3>
-                  <p className="text-sm text-slate-600 mb-3">{relCourse.description}</p>
+                  <p className="text-sm text-[#6b5b68] mb-3">{relCourse.description}</p>
                   <div className="text-xs font-semibold text-navy-deep">Learn more →</div>
                 </Link>
               ))}
@@ -150,13 +150,13 @@ function CollapsibleFAQ({ question, shortAnswer }) {
     <div className="border rounded-lg overflow-hidden bg-white hover:shadow-md transition-shadow">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50 transition text-left"
+        className="w-full flex items-center justify-between px-6 py-4 hover:bg-[#f8f9fc] transition text-left"
       >
-        <div className="text-base font-bold text-slate-900">{question}</div>
-        <div className="text-slate-600 ml-4 text-xl">{open ? "−" : "+"}</div>
+        <div className="text-base font-bold text-[#29334a]">{question}</div>
+        <div className="text-[#6b5b68] ml-4 text-xl">{open ? "−" : "+"}</div>
       </button>
       {open && (
-        <div className="px-6 py-4 bg-slate-50 text-slate-700 text-sm leading-relaxed border-t border-slate-200">
+        <div className="px-6 py-4 bg-[#f8f9fc] text-[#29334a] text-sm leading-relaxed border-t border-[#29334a]/15">
           {shortAnswer}
         </div>
       )}

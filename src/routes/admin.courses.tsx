@@ -566,7 +566,7 @@ function AdminCourses() {
             filteredCourses.map((course) => (
               <div
                 key={course.id}
-                className="bg-slate-700 border border-slate-600 rounded-lg overflow-hidden hover:border-blue-500 transition"
+                className="bg-slate-700 border border-slate-600 rounded-lg overflow-hidden transition"
               >
                 {/* Course Header */}
                 <div className="p-6">

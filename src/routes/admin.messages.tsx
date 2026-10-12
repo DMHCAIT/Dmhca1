@@ -127,7 +127,7 @@ function AdminMessages() {
             className={`px-4 py-2 rounded-lg font-medium transition ${
               filter === f
                 ? "bg-gold text-navy-deep"
-                : "bg-white text-gray-700 border border-gray-300 hover:border-gold"
+                : "bg-white text-gray-700 border border-gray-300"
             }`}
           >
             {f.charAt(0).toUpperCase() + f.slice(1)}

@@ -1,11 +1,20 @@
 import { createFileRoute, Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { ArrowUpRight, Star, StarHalf, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Star,
+  StarHalf,
+  Quote,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo } from "react";
 const heroImg = "/herofellowshiplarge.webp";
 import { categories } from "@/data/courses";
 import { useCoursesData } from "@/hooks/useCoursesData";
 import { CourseCard } from "@/components/site/CourseCard";
+import { HeroArtwork } from "@/components/site/HeroArtwork";
 import { SignupFlow } from "@/components/SignupFlow";
 import { OTPLoginModal } from "@/components/OTPLoginModal";
 
@@ -134,7 +143,6 @@ function Home() {
   ];
 
   const [isPaused, setIsPaused] = useState(false);
-  const [animDuration, setAnimDuration] = useState(0.6);
   useEffect(() => {
     if (isPaused) return;
     console.log("starting slide interval, isPaused=", isPaused);
@@ -343,7 +351,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="home-page">
       {/* Auth Modals */}
       <SignupFlow
         isOpen={showSignupModal}
@@ -372,79 +380,35 @@ function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
-      {/* Compact editorial hero (Asymmetric direction) */}
+      {/* Centered, text-focused hero */}
       <section
-        className="site-hero"
+        className="home-hero relative overflow-hidden mx-3 my-4 rounded-[1.75rem] sm:mx-6 sm:my-5 sm:rounded-[2rem]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Decorative background elements */}
-        <div
-          className="absolute inset-0 opacity-30 pointer-events-none"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 50%, rgba(203, 163, 91, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(203, 163, 91, 0.08) 0%, transparent 50%)",
-          }}
-        />
-        {/* Mobile: use slide hero image as subtle background */}
-        <div
-          className="absolute inset-0 pointer-events-none sm:hidden"
-          style={{
-            backgroundImage: `url(${slides[slide].blockImg || slides[slide].heroImg})`,
-            opacity: 0.18,
-            backgroundPosition: "center right",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-        {/* Sliding background images (translateX) */}
-        <motion.div
-          className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-          initial={false}
-          animate={{ x: `-${slide * 100}%` }}
-          transition={{ duration: animDuration, ease: "easeInOut" }}
-        >
-          <div className="flex h-full w-[300%]">
-            {slides.map((s, i) => (
-              <div key={i} className="w-1/3 h-full flex-shrink-0 relative">
-                <div
-                  className="absolute inset-0 bg-center bg-cover brightness-75"
-                  style={{ backgroundImage: `url(${s.heroImg || "/hero-fallback.webp"})` }}
-                  onError={(_e: any) => {
-                    console.error("background failed:", s.heroImg, "index", i);
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 via-transparent to-transparent" />
-                {s.program === "Fellowship" && <div className="absolute inset-0 bg-black/40" />}
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        <div className="container-home py-4 sm:py-6 md:py-8 lg:py-12 grid grid-cols-12 gap-3 sm:gap-4 md:gap-6 lg:gap-8 items-center relative z-10">
-          {/* Left: content */}
+        <HeroArtwork />
+        <div className="container-home max-w-[76rem] py-7 sm:py-10 lg:py-12 relative z-10">
           <motion.div
-            className="col-span-12 sm:col-span-6 md:col-span-8 lg:col-span-8 space-y-3 sm:space-y-4 md:space-y-6 relative z-30"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            className="mx-auto max-w-5xl space-y-4 sm:space-y-6 text-center relative z-30"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             {/* Premium badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gold/30 bg-gold/5 w-fit text-center sm:text-left"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 w-fit text-center"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="w-2 h-2 rounded-full bg-gold animate-pulse flex-shrink-0" />
+              <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
               <span className="text-xs font-semibold text-gold uppercase tracking-wider">
                 Excellence in Medical Education
               </span>
             </motion.div>
 
-            <div className="space-y-2">
-              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-[1.08] sm:leading-[1.05] tracking-tight max-w-full">
+            <div className="space-y-3 sm:space-y-4">
+              <h1 className="mx-auto flex min-h-[4.32em] sm:min-h-0 items-center justify-center font-display text-[1.875rem] sm:text-5xl lg:text-[3.75rem] text-foreground leading-[1.12] tracking-[-0.04em] max-w-5xl">
                 <div>
                   <motion.span
                     className="relative inline-block"
@@ -453,14 +417,10 @@ function Home() {
                     transition={{ duration: 0.25, delay: 0.1 }}
                   >
                     {slides[slide].titleMain}
-                    <span
-                      className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-gold via-gold/50 to-transparent rounded-full"
-                      style={{ width: "100%" }}
-                    />
                   </motion.span>
                   <br />
                   <motion.span
-                    className="font-medium text-gold tracking-tight not-italic"
+                    className="home-hero-highlight font-semibold text-gold not-italic"
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.25, delay: 0.15 }}
@@ -471,8 +431,7 @@ function Home() {
               </h1>
 
               <motion.p
-                className="text-sm sm:text-base md:text-lg text-white max-w-full leading-relaxed"
-                style={{ wordSpacing: "0.18rem" }}
+                className="mx-auto pt-1 text-sm text-foreground/75 max-w-xl leading-relaxed"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.25, delay: 0.2 }}
@@ -482,14 +441,14 @@ function Home() {
             </div>
 
             <motion.div
-              className="flex flex-wrap gap-2.5"
+              className="flex flex-wrap justify-center gap-2.5"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
               <Link
                 to="/top-medical-courses"
-                className="group inline-flex items-center gap-2 px-4 py-2 sm:px-6 sm:py-2.5 bg-gold text-navy-deep text-sm font-medium hover:shadow-lg hover:shadow-gold/30 transition rounded-sm"
+                className="hero-primary-action group inline-flex min-h-12 items-center gap-3 px-7 py-3 text-sm font-semibold shadow-[0_12px_28px_-12px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 hover:shadow-lg transition rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               >
                 Explore Courses{" "}
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -498,7 +457,7 @@ function Home() {
                 <Link
                   to="/top-medical-courses"
                   search={{ fmt: slides[slide].program }}
-                  className="px-4 py-2 rounded-sm border border-border text-sm text-navy-deep hover:bg-gold/10 transition bg-navy-deep text-primary-foreground"
+                  className="inline-flex min-h-12 items-center px-5 py-2 rounded-full text-sm text-foreground bg-white/10 hover:bg-white/20 transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
                 >
                   {slides[slide].program}
                 </Link>
@@ -506,22 +465,18 @@ function Home() {
                   <button
                     aria-label="Previous slide"
                     onClick={() => {
-                      setAnimDuration(0);
                       setSlide((slide - 1 + slides.length) % slides.length);
-                      setTimeout(() => setAnimDuration(0.6), 50);
                     }}
-                    className="p-2 rounded-sm border border-border text-sm"
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-foreground bg-white/10 hover:bg-white/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
                   >
                     ‹
                   </button>
                   <button
                     aria-label="Next slide"
                     onClick={() => {
-                      setAnimDuration(0);
                       setSlide((slide + 1) % slides.length);
-                      setTimeout(() => setAnimDuration(0.6), 50);
                     }}
-                    className="p-2 rounded-sm border border-border text-sm"
+                    className="flex h-11 w-11 items-center justify-center rounded-full text-foreground bg-white/10 hover:bg-white/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
                   >
                     ›
                   </button>
@@ -529,36 +484,64 @@ function Home() {
               </div>
             </motion.div>
 
-            <motion.div
-              className="pt-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <p className="text-xs text-gold/70 uppercase tracking-widest mb-2 font-semibold hidden sm:block">
-                Trending specialties
-              </p>
-              <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs font-medium hidden sm:flex">
-                {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map(
-                  (s, i) => (
-                    <motion.div
-                      key={s}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
-                    >
-                      <Link
-                        to="/top-medical-courses"
-                        search={{ cat: s }}
-                        className="text-white hover:text-gold transition"
+            <div className="hero-details hidden sm:flex flex-wrap lg:flex-nowrap justify-center lg:justify-between items-center gap-6 pt-7 text-left">
+              <motion.div
+                className="text-center lg:text-left"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <p className="hero-specialties-label uppercase tracking-widest mb-3 hidden sm:block">
+                  Trending specialties
+                </p>
+                <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs font-medium">
+                  {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map(
+                    (s, i) => (
+                      <motion.div
+                        key={s}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
                       >
-                        {categories.find((c) => c.slug === s)?.name}
-                      </Link>
-                    </motion.div>
-                  ),
-                )}
+                        <Link
+                          to="/top-medical-courses"
+                          search={{ cat: s }}
+                          className="hero-specialty-link inline-flex rounded-full px-3 py-2 text-foreground transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                        >
+                          {categories.find((c) => c.slug === s)?.name}
+                        </Link>
+                      </motion.div>
+                    ),
+                  )}
+                </div>
+              </motion.div>
+
+              <div className="flex shrink-0 flex-wrap justify-center items-stretch gap-3 text-sm">
+                <div className="hero-trust-item flex items-center gap-3 py-2">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
+                    <Users className="h-5 w-5 text-gold" aria-hidden="true" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-display text-2xl font-bold leading-tight text-foreground">
+                      15,000<span className="text-gold">+</span>
+                    </div>
+                    <span className="text-xs text-foreground/75">Active Learners</span>
+                  </div>
+                </div>
+                <div className="hero-trust-item flex items-center gap-3 py-2">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
+                    <Star className="h-5 w-5 fill-gold text-gold" aria-hidden="true" />
+                  </div>
+                  <div className="text-left">
+                    <div className="flex items-baseline gap-1.5 whitespace-nowrap text-foreground">
+                      <span className="font-display text-2xl font-bold leading-tight">4.8</span>
+                      <span className="text-xs text-foreground/75">/ 5</span>
+                    </div>
+                    <span className="text-xs text-foreground/75">Learner rating</span>
+                  </div>
+                </div>
               </div>
-            </motion.div>
+            </div>
 
             {currentFmt ? (
               <div className="mt-4">
@@ -574,100 +557,30 @@ function Home() {
               </div>
             ) : null}
           </motion.div>
-
-          {/* Right: portrait + stat card */}
-          <motion.div
-            className="col-span-5 sm:col-span-6 md:col-span-4 lg:col-span-4 relative hidden sm:block"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="relative w-full h-auto z-20">
-              {/* Block Image - All Screen Sizes */}
-              {slides[slide].blockImg ? (
-                <motion.div
-                  className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep border-2 border-gold"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <img
-                    loading="lazy"
-                    src={slides[slide].blockImg}
-                    alt="DMHCA faculty"
-                    className="w-full h-auto object-cover object-top"
-                    onError={(e: any) => {
-                      e.currentTarget.src = "/hero-fallback.webp";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                </motion.div>
-              ) : null}
-
-              {/* Floating stat card */}
-              <motion.div
-                className="absolute -left-2 sm:-left-3 md:-left-6 bottom-4 sm:bottom-6 bg-white p-3 sm:p-4 shadow-2xl border-l-2 border-gold max-w-[180px] sm:max-w-[220px] z-50 rounded-md stat-card flex flex-col items-center text-center gap-1"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                whileHover={{ y: -5 }}
-              >
-                <div>
-                  <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-navy mb-1 stat-label">
-                    Active Learners
-                  </p>
-                  <p className="text-xl sm:text-2xl text-navy font-bold stat-number">
-                    15,000<span className="text-gold">+</span>
-                  </p>
-                  <div className="mt-2 flex items-center justify-center gap-2 text-xs sm:text-sm text-navy dark:text-gray-600">
-                    <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-gold text-gold" />
-                    <span className="ml-1 font-medium">4.8 / 5</span>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </motion.div>
-          {/* Mobile stacked image hidden on small screens per request */}
-          <div className="col-span-12 hidden">
-            <div className="relative w-full rounded-sm overflow-hidden shadow-2xl bg-navy-deep">
-              <img
-                loading="lazy"
-                src={slides[slide].heroImg}
-                alt="DMHCA faculty"
-                className={`w-full h-auto object-cover object-center brightness-60`}
-                onError={(e: any) => {
-                  e.currentTarget.src = "/hero-fallback.webp";
-                }}
-              />
-            </div>
-          </div>
         </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       </section>
 
       {/* Stats bar */}
-      <section className="bg-hero-dark text-on-hero-dark">
-        <div className="container-home py-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+      <section className="home-impact mx-3 sm:mx-6 rounded-[1.75rem]">
+        <div className="container-home py-7 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6 text-center">
           {[
             { k: "103+", v: "Specialised programs" },
             { k: "60+", v: "Faculty worldwide" },
             { k: categories.length.toString(), v: "Clinical specialties" },
             { k: "50+", v: "Countries reached" },
           ].map((s) => (
-            <div key={s.v}>
-              <div className="font-display text-3xl text-gold font-medium">{s.k}</div>
-              <div className="text-xs uppercase tracking-[0.15em] text-primary-foreground/70 mt-1">
-                {s.v}
+            <div key={s.v} className="rounded-xl px-2 py-2">
+              <div className="home-impact-value font-display text-3xl sm:text-4xl font-bold tracking-tight">
+                {s.k}
               </div>
+              <div className="text-xs font-medium tracking-wide text-foreground/80 mt-2">{s.v}</div>
             </div>
           ))}
         </div>
       </section>
 
       {/* Specialties - Large Image Cards */}
-      <section className="bg-hero-light text-on-hero-light py-8">
+      <section className="home-surface home-specialties py-12 md:py-16">
         <div className="container-home">
           <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
             <div>
@@ -678,10 +591,7 @@ function Home() {
                 Find your discipline
               </h2>
             </div>
-            <Link
-              to="/top-medical-courses"
-              className="text-sm text-navy-deep dark:text-white hover:text-gold"
-            >
+            <Link to="/top-medical-courses" className="home-section-link text-sm">
               All categories →
             </Link>
           </div>
@@ -721,19 +631,6 @@ function Home() {
                 const category = categories.find((c) => c.slug === slug);
                 if (!category) return null;
 
-                // Specialty-specific colors as fallback + medical images
-                const specialtyColors: { [key: string]: string } = {
-                  radiology: "from-blue-900 to-blue-700",
-                  dermatology: "from-pink-900 to-pink-700",
-                  endocrinology: "from-purple-900 to-purple-700",
-                  cardiology: "from-red-900 to-red-700",
-                  emergency: "from-orange-900 to-orange-700",
-                  orthopedics: "from-amber-900 to-amber-700",
-                  medicine: "from-navy-deep to-navy",
-                  oncology: "from-indigo-900 to-indigo-700",
-                };
-
-                // Working medical images from Unsplash
                 const specialtyImages: { [key: string]: string } = {
                   radiology: "/courses/Radiology.webp",
                   dermatology: "/courses/Dermatology.webp",
@@ -766,24 +663,20 @@ function Home() {
                         ss.set("cat", slug);
                         return Object.fromEntries(ss.entries());
                       })()}
-                      className={`group relative overflow-hidden rounded-2xl aspect-video md:aspect-square h-auto block bg-gradient-to-br ${specialtyColors[slug]}`}
+                      className="home-specialty-card group relative overflow-hidden rounded-2xl aspect-video md:aspect-[4/3] h-auto block"
                     >
-                      {/* Background image with zoom effect */}
-                      <motion.img
+                      <img
                         loading="lazy"
                         src={imageUrl}
                         alt={category.name}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:brightness-110 transition-all duration-500"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.6 }}
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
 
-                      {/* Dark gradient overlay - only at bottom */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent group-hover:from-black/80 transition-all duration-300" />
+                      <div className="home-specialty-overlay absolute inset-0" />
 
                       {/* Content - bottom left */}
                       <motion.div
-                        className="absolute bottom-0 left-0 right-0 p-6 md:p-8 z-10"
+                        className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4 }}
@@ -802,32 +695,29 @@ function Home() {
       </section>
 
       {/* Featured / Top Rated */}
-      <section className="bg-hero-dark text-on-hero-dark py-12">
+      <section className="home-light-panel home-programs home-section-panel py-10 md:py-14">
         <div className="container-home">
           <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
             <div>
-              <div className="text-xs uppercase tracking-[0.25em] text-on-hero-dark/80 gold-rule">
+              <div className="text-xs uppercase tracking-[0.25em] text-gold gold-rule">
                 Top rated
               </div>
-              <h2 className="font-display text-3xl md:text-4xl text-on-hero-dark mt-3">
+              <h2 className="font-display text-3xl md:text-4xl text-foreground mt-3">
                 Featured programs
               </h2>
             </div>
-            <Link
-              to="/top-medical-courses"
-              className="text-sm text-on-hero-dark/90 hover:text-gold"
-            >
+            <Link to="/top-medical-courses" className="home-section-link text-sm">
               View all courses →
             </Link>
           </div>
           {loading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="home-program-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 3 }).map((_, i) => (
                 <div key={i} className="h-64 rounded-md bg-card animate-pulse" />
               ))}
             </div>
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="home-program-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.map((c) => (
                 <CourseCard key={c.slug} course={c as any} />
               ))}
@@ -837,82 +727,117 @@ function Home() {
       </section>
 
       {/* University Partners / Academic Alliances */}
-      <section className="bg-hero-light dark:bg-white text-on-hero-light py-12">
+      <section className="home-academic py-12 md:py-16">
         <div className="container-home">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl text-navy-deep dark:text-white mt-3">
-              Academic partners
-            </h2>
-            <p className="text-muted-foreground mt-2 max-w-2xl mx-auto text-sm">
-              DMHCA works with selected universities and medical institutions to deliver structured,
-              expert-led education for healthcare professionals.
-            </p>
+          <div className="academic-intro">
+            <div>
+              <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-3">
+                Academic alliances
+              </div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground">
+                Academic partners
+              </h2>
+            </div>
           </div>
 
-          {/* Academic partners — styled horizontal carousel */}
-          <div className="mb-16">
-            <div className="relative">
-              <div className="mx-auto max-w-6xl py-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-3 items-center">
-                  {[
-                    "btu_hero_logo.webp",
-                    "duke logo.webp",
-                    "IBMP LOGO .webp",
-                    "logo-srdu.webp",
-                  ].map((file) => (
-                    <div
-                      key={file}
-                      className="rounded-xl bg-white/80 dark:!bg-white p-3 flex items-center justify-center shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1"
-                    >
-                      <div className="w-40 h-28 md:w-48 md:h-32 lg:w-56 lg:h-36 flex items-center justify-center bg-white dark:!bg-white rounded-lg">
-                        <img
-                          src={`/ACADEMIC PARTNERS/${file}`}
-                          alt={file}
-                          className="max-w-full max-h-full object-contain"
-                        />
-                      </div>
-                    </div>
-                  ))}
+          <div className="academic-logo-grid mt-8 md:mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-x-10">
+            {[
+              {
+                file: "AAA-logo.png",
+                src: "/AAA-logo.png",
+                name: "American Accreditation Association",
+                width: 349,
+                height: 141,
+              },
+              {
+                file: "btu_hero_logo.webp",
+                name: "Bir Tikendrajit University",
+                width: 150,
+                height: 150,
+              },
+              {
+                file: "duke logo.webp",
+                name: "Duke International University",
+                width: 1627,
+                height: 633,
+              },
+              {
+                file: "IBMP LOGO .webp",
+                name: "International Board of Medical Practitioners",
+                width: 1163,
+                height: 1166,
+              },
+              {
+                file: "logo-srdu.webp",
+                name: "Shri Rukmani Dwarkadhish University",
+                width: 752,
+                height: 307,
+              },
+            ].map(
+              ({
+                file,
+                src,
+                name,
+                width,
+                height,
+              }: {
+                file: string;
+                src?: string;
+                name: string;
+                width: number;
+                height: number;
+              }) => (
+                <div
+                  key={file}
+                  className="academic-logo-item flex h-28 items-center justify-center px-3 sm:px-6"
+                >
+                  <img
+                    src={src ?? `/ACADEMIC PARTNERS/${file}`}
+                    alt={name}
+                    width={width}
+                    height={height}
+                    style={{
+                      maxWidth: Math.min(240, width / 2),
+                      maxHeight: Math.min(96, height / 2),
+                    }}
+                    loading="lazy"
+                    className="object-contain"
+                  />
                 </div>
-              </div>
-              <style>{`
-              .partners-carousel { background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2)); border-radius: 12px; }
-              .scrollbar-hide::-webkit-scrollbar { display: none; }
-              .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-            `}</style>
-            </div>
+              ),
+            )}
           </div>
         </div>
       </section>
 
       {/* Google Reviews / Alumni Voices */}
-      <section className="site-hero">
-        <div className="container-x py-8">
-          <div className="mb-6">
-            <div className="text-xs uppercase tracking-[0.25em] text-primary-foreground gold-rule">
+      <section className="home-light-panel home-alumni home-section-panel">
+        <div className="container-home py-8 md:py-14">
+          <div className="mb-6 md:mb-8 max-w-2xl">
+            <div className="text-xs uppercase tracking-[0.25em] text-gold gold-rule">
               Alumni voices
             </div>
-            <h2 className="font-display text-3xl md:text-4xl text-primary-foreground mt-3">
+            <h2 className="font-display text-[1.75rem] md:text-4xl text-primary-foreground mt-2 md:mt-3">
               Loved by Doctors Worldwide
             </h2>
             <p className="text-primary-foreground/85 mt-2 text-sm">
               verified reviews from practicing physicians
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row items-center gap-4 mb-4 sm:mb-6">
             <button
               onClick={prevReviews}
-              className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors"
+              className="hidden sm:flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               aria-label="Previous reviews"
             >
               <ChevronLeft className="w-5 h-5 text-primary-foreground" />
             </button>
-            <div className="flex-1 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="flex-1 min-w-0 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {loading &&
                 Array.from({ length: reviewsPerPage }).map((_, i) => (
                   <div
                     key={i}
-                    className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl animate-pulse min-h-[6rem]"
+                    className="rounded-2xl bg-card p-5 sm:p-6 flex flex-col shadow-lg animate-pulse min-h-[18rem]"
                   />
                 ))}
               {!loading &&
@@ -922,19 +847,26 @@ function Home() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="bg-white/8 border border-white/15 rounded-md p-4 sm:p-6 flex flex-col shadow-xl"
+                    className="home-review-card flex flex-col rounded-2xl bg-card p-5 sm:p-6 shadow-lg"
                   >
-                    <div className="mb-3">
-                      <div>
-                        <div className="text-sm font-medium text-primary-foreground">{r.name}</div>
-                        <div className="text-xs text-primary-foreground/80">{r.role}</div>
+                    <div className="mb-5 flex items-center gap-3">
+                      <div
+                        aria-hidden="true"
+                        className="home-review-avatar flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-lg font-bold"
+                      >
+                        {r.name.charAt(0)}
                       </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="text-sm font-semibold text-foreground">{r.name}</div>
+                        <div className="mt-0.5 text-xs text-muted-foreground">{r.role}</div>
+                      </div>
+                      <Quote aria-hidden="true" className="h-7 w-7 shrink-0 text-gold" />
                     </div>
-                    <Quote className="w-5 h-5 sm:w-6 sm:h-6 text-gold/70" />
-                    <p className="text-xs sm:text-sm text-primary-foreground/90 mt-2 leading-relaxed flex-1 min-h-[5.5rem] sm:min-h-[6.75rem] overflow-hidden">
-                      {r.text}
-                    </p>
-                    <div className="mt-4 flex items-center gap-1 border border-slate-700 px-2 py-1 w-fit">
+                    <p className="text-sm text-foreground/85 leading-relaxed flex-1">{r.text}</p>
+                    <div
+                      aria-label={`${r.rating ?? 5} out of 5 stars`}
+                      className="mt-5 flex items-center gap-1 pt-4"
+                    >
                       {(() => {
                         const rating = Number(r.rating ?? 5);
                         const full = Math.floor(rating);
@@ -945,21 +877,24 @@ function Home() {
                           nodes.push(
                             <Star
                               key={`full-${i}`}
-                              className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-yellow-300 text-yellow-300"
+                              aria-hidden="true"
+                              className="h-4 w-4 fill-gold text-gold"
                             />,
                           );
                         if (hasHalf)
                           nodes.push(
                             <StarHalf
                               key={`half`}
-                              className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-yellow-300 text-yellow-300"
+                              aria-hidden="true"
+                              className="h-4 w-4 fill-gold text-gold"
                             />,
                           );
                         for (let i = 0; i < empty; i++)
                           nodes.push(
                             <Star
                               key={`empty-${i}`}
-                              className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-primary-foreground/30"
+                              aria-hidden="true"
+                              className="h-4 w-4 text-muted-foreground/40"
                             />,
                           );
                         return nodes;
@@ -970,7 +905,7 @@ function Home() {
             </div>
             <button
               onClick={nextReviews}
-              className="hidden sm:flex p-2 rounded-md border border-border hover:bg-secondary transition-colors"
+              className="hidden sm:flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               aria-label="Next reviews"
             >
               <ChevronRight className="w-5 h-5 text-primary-foreground" />
@@ -979,14 +914,14 @@ function Home() {
           <div className="flex sm:hidden justify-center gap-2">
             <button
               onClick={prevReviews}
-              className="p-2 rounded-md border border-border hover:bg-secondary transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               aria-label="Previous reviews"
             >
               <ChevronLeft className="w-5 h-5 text-primary-foreground" />
             </button>
             <button
               onClick={nextReviews}
-              className="p-2 rounded-md border border-border hover:bg-secondary transition-colors"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/15 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
               aria-label="Next reviews"
             >
               <ChevronRight className="w-5 h-5 text-primary-foreground" />
@@ -996,81 +931,102 @@ function Home() {
       </section>
 
       {/* Training partners - moving marquee */}
-      <section className="bg-white/60 dark:bg-navy-deep/10 py-8">
+      <section className="home-surface home-training py-12 md:py-16">
         <div className="container-home">
-          <div className="text-center mb-6">
-            <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule inline-block">
-              Training partners
+          <div className="academic-intro mb-8">
+            <div>
+              <div className="text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-3">
+                Training network
+              </div>
+              <h2 className="font-display text-3xl md:text-4xl text-foreground">
+                Our training partners
+              </h2>
             </div>
-            <h2 className="font-display text-2xl md:text-3xl text-navy-deep dark:text-white mt-2">
-              Our training partners
-            </h2>
           </div>
 
-          <div className="overflow-hidden">
-            <div className="marquee">
-              <div className="marquee__inner flex gap-8 items-center">
-                {(() => {
-                  const logos = [
-                    // 'aig-logo-white.webp', (removed)
-                    "images (1).webp",
-                    "images.webp",
-                    "KIMS_Main_Logo_Col-01.webp",
-                    "Logo-medicover.webp",
-                    "logo.webp",
-                    "Noora-Logo-01.webp",
-                    "skinfinity-skin-hair-laser-and-aesthetic-clinic-noida-625ce89ba1d3f.webp",
-                    "Untitled-design.webp",
-                    "VPH_New-Logo-1024x462.webp",
-                  ];
-                  const unique = Array.from(new Set(logos));
-                  const sequence = unique.concat(unique); // duplicate for seamless loop
-                  return sequence.map((file, idx) => (
-                    <div
-                      key={idx}
-                      className="flex-shrink-0 w-48 h-24 md:w-56 md:h-28 lg:w-64 lg:h-32 flex items-center justify-center bg-card dark:bg-white rounded-lg p-3 shadow-sm dark:shadow-md"
-                    >
-                      <img
-                        src={`/Training partners/${file}`}
-                        alt={file}
-                        className="max-w-full max-h-full object-contain"
-                      />
-                    </div>
-                  ));
-                })()}
-              </div>
+          <div className="home-logo-marquee overflow-hidden">
+            <div className="training-logo-track">
+              {(() => {
+                const logos = [
+                  { file: "images (1).webp", width: 288, height: 175 },
+                  { file: "images.webp", width: 331, height: 152 },
+                  { file: "KIMS_Main_Logo_Col-01.webp", width: 901, height: 402 },
+                  { file: "Logo-medicover.webp", width: 250, height: 250 },
+                  { file: "logo.webp", width: 109, height: 56 },
+                  { file: "Noora-Logo-01.webp", width: 2250, height: 869 },
+                  {
+                    file: "skinfinity-skin-hair-laser-and-aesthetic-clinic-noida-625ce89ba1d3f.webp",
+                    width: 888,
+                    height: 588,
+                  },
+                  { file: "Untitled-design.webp", width: 500, height: 500 },
+                  { file: "VPH_New-Logo-1024x462.webp", width: 1024, height: 462 },
+                ];
+                return [0, 1].map((copy) => (
+                  <div
+                    className="training-logo-group"
+                    key={copy}
+                    aria-hidden={copy === 1 ? true : undefined}
+                  >
+                    {logos.map(({ file, width, height }) => (
+                      <div
+                        key={file}
+                        className="training-logo-item flex-shrink-0 w-44 h-24 sm:w-52 sm:h-28 flex items-center justify-center px-4"
+                      >
+                        <img
+                          src={`/Training partners/${file}`}
+                          alt={file}
+                          width={width}
+                          height={height}
+                          style={{ maxWidth: width / 2, maxHeight: Math.min(80, height / 2) }}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ));
+              })()}
             </div>
-            <style>{`
-              .marquee { --gap: 2rem; }
-              .marquee__inner { display: flex; gap: var(--gap); width: max-content; animation: marquee-left 18s linear infinite; }
-              @keyframes marquee-left {
-                0% { transform: translateX(0%); }
-                100% { transform: translateX(-50%); }
-              }
-            `}</style>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="container-x py-12">
-        <div className="rounded-md bg-navy-deep text-primary-foreground p-10 md:p-14 grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <div className="text-xs uppercase tracking-[0.25em] text-gold">Admissions open</div>
-            <h2 className="font-display text-3xl md:text-4xl mt-3">
+      <section className="home-admissions home-section-panel">
+        <div className="container-home py-8 md:py-14 grid md:grid-cols-2 gap-5 md:gap-6 items-center">
+          <div className="admissions-copy">
+            <div className="admissions-eyebrow inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-gold font-semibold">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold" aria-hidden="true" />
+              Admissions open
+            </div>
+            <h2 className="font-display text-[1.75rem] leading-tight md:text-[2.75rem] mt-3 md:mt-4 max-w-xl">
               Begin the next chapter of your medical career
             </h2>
+            <p className="mt-3 md:mt-4 max-w-lg text-sm sm:text-base text-foreground/80">
+              Explore your next step with guidance on fellowships, PG Diplomas and certificate
+              programs.
+            </p>
           </div>
-          <div className="flex md:justify-end gap-3 flex-wrap">
+          <div className="admissions-actions rounded-2xl p-5 sm:p-8 md:ml-auto w-full max-w-md">
+            <div className="text-xs uppercase tracking-[0.16em] text-gold font-semibold">
+              Your next step
+            </div>
+            <h3 className="font-display text-lg sm:text-xl mt-2 sm:mt-3">
+              Find the program that fits your goals.
+            </h3>
+            <p className="mt-2 mb-4 sm:mb-5 text-sm sm:text-base text-muted-foreground">
+              Speak with our team or explore the available programs.
+            </p>
             <Link
               to="/contact-us"
-              className="px-5 py-3 bg-gold text-navy-deep text-sm rounded-sm hover:opacity-90"
+              className="admissions-primary flex items-center justify-between gap-3 px-5 py-3 sm:py-3.5 text-sm font-semibold rounded-xl transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             >
               Talk to Counsellor
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             <Link
               to="/top-medical-courses"
-              className="px-5 py-3 border border-primary-foreground/30 text-sm rounded-sm hover:border-gold"
+              className="admissions-secondary mt-2 sm:mt-3 flex items-center justify-center gap-2 py-2 text-sm font-semibold rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
             >
               Browse programs
             </Link>

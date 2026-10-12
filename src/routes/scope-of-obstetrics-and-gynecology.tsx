@@ -19,10 +19,9 @@ export const Route = createFileRoute("/scope-of-obstetrics-and-gynecology")({
 
 function BlogContent() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+    <div className="home-page resource-page resource-article min-h-screen">
       {/* Hero Section */}
-      <section className="site-hero relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-rose-600/95 to-pink-600/95 dark:from-rose-700 dark:to-pink-700"></div>
+      <section className="resource-hero relative overflow-hidden">
         <div className="relative container-x py-4 sm:py-6 md:py-8">
           <Link
             to="/blog"
@@ -32,7 +31,7 @@ function BlogContent() {
             Back to Blogs
           </Link>
           <div className="max-w-3xl">
-            <div className="inline-block px-3 sm:px-4 py-1 bg-rose-500/20 border border-rose-300/50 rounded-full text-rose-200 text-xs font-semibold mb-2">
+            <div className="inline-block px-3 sm:px-4 py-1 bg-[#800020]/20 border border-[#f7cbd7]/50 rounded-full text-[#f7cbd7] text-xs font-semibold mb-2">
               Medical Specialty Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
@@ -80,7 +79,7 @@ function BlogContent() {
       </section>
 
       {/* Featured Image */}
-      <section className="py-4 sm:py-6 md:py-8 bg-white dark:bg-slate-800 px-4 sm:px-0">
+      <section className="py-4 sm:py-6 md:py-8 bg-white px-4 sm:px-0">
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
@@ -94,15 +93,15 @@ function BlogContent() {
       </section>
 
       {/* Main Content */}
-      <section className="py-8 sm:py-12 md:py-16 bg-white/50 dark:bg-slate-800/30 backdrop-blur-sm px-4 sm:px-0">
+      <section className="py-8 sm:py-12 md:py-16 bg-white/50 backdrop-blur-sm px-4 sm:px-0">
         <div className="container-x max-w-4xl">
-          <div className="prose prose-lg prose-slate dark:prose-invert max-w-none">
+          <div className="prose prose-lg prose-slate max-w-none">
             {/* Quick Summary */}
-            <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-rose-50 via-pink-50 to-fuchsia-50 dark:from-rose-900/30 dark:via-pink-900/30 dark:to-fuchsia-900/30 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-rose-200 dark:border-rose-800/50 not-prose">
-              <h2 className="text-xl sm:text-2xl font-bold text-rose-900 dark:text-rose-200 mb-4">
+            <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
+              <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
                 Career Scope in Obstetrics and Gynecology
               </h2>
-              <p className="text-sm sm:text-base text-rose-800 dark:text-rose-300 mb-6 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#800020] mb-6 leading-relaxed">
                 Obstetrics and Gynecology is a dynamic and rewarding medical specialty with
                 expanding career opportunities in India and globally. This specialty focuses on
                 women's reproductive health, pregnancy management, and surgical interventions. With
@@ -111,31 +110,27 @@ function BlogContent() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 text-xl">✓</span>
-                  <span className="text-rose-900 dark:text-rose-200">7 major career pathways</span>
+                  <span className="text-[#800020] text-xl">✓</span>
+                  <span className="text-[#800020]">7 major career pathways</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 text-xl">✓</span>
-                  <span className="text-rose-900 dark:text-rose-200">
-                    Clinical practice opportunities
-                  </span>
+                  <span className="text-[#800020] text-xl">✓</span>
+                  <span className="text-[#800020]">Clinical practice opportunities</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 text-xl">✓</span>
-                  <span className="text-rose-900 dark:text-rose-200">Specialization options</span>
+                  <span className="text-[#800020] text-xl">✓</span>
+                  <span className="text-[#800020]">Specialization options</span>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 text-xl">✓</span>
-                  <span className="text-rose-900 dark:text-rose-200">
-                    Excellent earning potential
-                  </span>
+                  <span className="text-[#800020] text-xl">✓</span>
+                  <span className="text-[#800020]">Excellent earning potential</span>
                 </div>
               </div>
             </div>
 
             {/* Table of Contents */}
-            <div className="mb-12 sm:mb-14 md:mb-16 p-4 sm:p-6 md:p-8 bg-slate-100 dark:bg-slate-700/50 rounded-lg sm:rounded-xl md:rounded-2xl border border-slate-200 dark:border-slate-600 not-prose">
-              <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mb-4 sm:mb-6">
+            <div className="mb-12 sm:mb-14 md:mb-16 p-4 sm:p-6 md:p-8 bg-[#f8f9fc] rounded-lg sm:rounded-xl md:rounded-2xl border border-[#29334a]/15 not-prose">
+              <h3 className="text-lg sm:text-xl font-bold text-[#29334a] mb-4 sm:mb-6">
                 Table of Contents
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
@@ -151,13 +146,13 @@ function BlogContent() {
                   <a
                     key={item.num}
                     href={`#section-${item.num}`}
-                    className="p-3 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-rose-50 dark:hover:bg-rose-900/20 transition group"
+                    className="p-3 bg-white border border-[#29334a]/15 rounded-lg hover:bg-[#f7cbd7]/25 transition group"
                   >
                     <div className="flex items-start gap-2 sm:gap-3">
-                      <span className="inline-block px-2 sm:px-2.5 py-1 bg-rose-600 text-white text-xs font-bold rounded flex-shrink-0">
+                      <span className="inline-block px-2 sm:px-2.5 py-1 bg-[#800020] text-white text-xs font-bold rounded flex-shrink-0">
                         {item.num}
                       </span>
-                      <span className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 group-hover:text-rose-600 dark:group-hover:text-rose-400 line-clamp-2">
+                      <span className="text-xs sm:text-sm font-semibold text-[#29334a] group-hover:text-[#800020] line-clamp-2">
                         {item.title}
                       </span>
                     </div>
@@ -169,48 +164,48 @@ function BlogContent() {
             {/* Section 1: Clinical Practice */}
             <div
               id="section-1"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-rose-200 dark:border-rose-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-rose-100 dark:bg-rose-900/30 border border-rose-300 dark:border-rose-700 rounded-full text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 1
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-900 dark:text-rose-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Clinical Practice Opportunities
               </h2>
-              <div className="space-y-3 text-rose-900 dark:text-rose-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Hospital Positions</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Work as consultant obstetrician-gynecologist in government and private
                       hospitals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Patient Care Responsibilities</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Manage obstetric cases, conduct deliveries, provide antenatal/postnatal care
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Emergency Care</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Handle gynecological emergencies, hysterectomies, and ectopic pregnancies
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Community Outreach</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Provide family planning services, counseling, and community health programs
                     </p>
                   </div>
@@ -221,49 +216,49 @@ function BlogContent() {
             {/* Section 2: Hospital & Academic */}
             <div
               id="section-2"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-fuchsia-50 to-pink-50 dark:from-fuchsia-900/20 dark:to-pink-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-fuchsia-200 dark:border-fuchsia-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-fuchsia-100 dark:bg-fuchsia-900/30 border border-fuchsia-300 dark:border-fuchsia-700 rounded-full text-fuchsia-700 dark:text-fuchsia-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 2
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-fuchsia-900 dark:text-fuchsia-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Hospital and Academic Positions
               </h2>
-              <div className="space-y-3 text-fuchsia-900 dark:text-fuchsia-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-fuchsia-600 dark:text-fuchsia-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Medical College Faculty</p>
-                    <p className="text-xs sm:text-sm text-fuchsia-800 dark:text-fuchsia-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Secure positions in medical colleges teaching undergraduate and postgraduate
                       students
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-fuchsia-600 dark:text-fuchsia-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Department Leadership</p>
-                    <p className="text-xs sm:text-sm text-fuchsia-800 dark:text-fuchsia-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Lead hospital departments and manage clinical teams in tertiary care centers
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-fuchsia-600 dark:text-fuchsia-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Clinical Education</p>
-                    <p className="text-xs sm:text-sm text-fuchsia-800 dark:text-fuchsia-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Conduct ward rounds, seminars, and clinical case discussions for medical
                       education
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-fuchsia-600 dark:text-fuchsia-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Academic Activities</p>
-                    <p className="text-xs sm:text-sm text-fuchsia-800 dark:text-fuchsia-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Engage in examinations, curriculum development, and quality assurance
                     </p>
                   </div>
@@ -274,49 +269,49 @@ function BlogContent() {
             {/* Section 3: Private Practice */}
             <div
               id="section-3"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-pink-200 dark:border-pink-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-pink-100 dark:bg-pink-900/30 border border-pink-300 dark:border-pink-700 rounded-full text-pink-700 dark:text-pink-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 3
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-pink-900 dark:text-pink-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Private Practice and Entrepreneurship
               </h2>
-              <div className="space-y-3 text-pink-900 dark:text-pink-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Nursing Home Establishment</p>
-                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Establish independent nursing homes and diagnostic centers specializing in
                       women's health
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Profitable Services</p>
-                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Build profitable practice through consultation fees, surgical procedures, and
                       imaging
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Specialized Services</p>
-                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Offer infertility treatment, ultrasound imaging, and cosmetic gynecology
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-pink-600 dark:text-pink-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Financial Independence</p>
-                    <p className="text-xs sm:text-sm text-pink-800 dark:text-pink-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Achieve financial independence and flexibility in working hours through
                       private enterprise
                     </p>
@@ -328,47 +323,47 @@ function BlogContent() {
             {/* Section 4: Specializations */}
             <div
               id="section-4"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-red-50 to-pink-50 dark:from-red-900/20 dark:to-pink-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-red-200 dark:border-red-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-full text-red-700 dark:text-red-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 4
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-red-900 dark:text-red-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Specialization and Sub-specialty Options
               </h2>
-              <div className="space-y-3 text-red-900 dark:text-red-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Reproductive Medicine and Infertility</p>
-                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Pursue fellowship for IVF center practice and fertility treatment expertise
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Uro-gynecology</p>
-                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Specialize in treating pelvic floor disorders and urinary incontinence
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Maternal-Fetal Medicine</p>
-                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Focus on managing high-risk pregnancies and fetal complications
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-red-600 dark:text-red-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Gynecological Oncology</p>
-                    <p className="text-xs sm:text-sm text-red-800 dark:text-red-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Develop expertise in cancer management and specialized surgical care
                     </p>
                   </div>
@@ -379,48 +374,48 @@ function BlogContent() {
             {/* Section 5: Research & Academics */}
             <div
               id="section-5"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-purple-50 to-fuchsia-50 dark:from-purple-900/20 dark:to-fuchsia-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-purple-200 dark:border-purple-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-purple-100 dark:bg-purple-900/30 border border-purple-300 dark:border-purple-700 rounded-full text-purple-700 dark:text-purple-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 5
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-purple-900 dark:text-purple-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Research and Academic Excellence
               </h2>
-              <div className="space-y-3 text-purple-900 dark:text-purple-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Women's Health Research</p>
-                    <p className="text-xs sm:text-sm text-purple-800 dark:text-purple-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Conduct research on women's health topics and contribute to medical literature
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Clinical Trials</p>
-                    <p className="text-xs sm:text-sm text-purple-800 dark:text-purple-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Participate in clinical trials and contribute to evidence-based medical
                       practice
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Academic Publications</p>
-                    <p className="text-xs sm:text-sm text-purple-800 dark:text-purple-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Publish research papers in national and international medical journals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-purple-600 dark:text-purple-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Expert Recognition</p>
-                    <p className="text-xs sm:text-sm text-purple-800 dark:text-purple-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Build reputation as expert in specific areas and gain academic community
                       recognition
                     </p>
@@ -432,49 +427,49 @@ function BlogContent() {
             {/* Section 6: Global Opportunities */}
             <div
               id="section-6"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-orange-200 dark:border-orange-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-orange-100 dark:bg-orange-900/30 border border-orange-300 dark:border-orange-700 rounded-full text-orange-700 dark:text-orange-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 6
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-900 dark:text-orange-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Global Career Opportunities
               </h2>
-              <div className="space-y-3 text-orange-900 dark:text-orange-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Developed Countries Practice</p>
-                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Practice in USA, Canada, Australia through licensing and equivalency exams
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Middle Eastern Opportunities</p>
-                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Work in Middle Eastern countries offering lucrative salaries and modern
                       facilities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">International Fellowships</p>
-                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Pursue fellowship training in other countries for international exposure and
                       skills
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-orange-600 dark:text-orange-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Global Network</p>
-                    <p className="text-xs sm:text-sm text-orange-800 dark:text-orange-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Build international career network and access to conferences and learning
                       opportunities
                     </p>
@@ -486,48 +481,48 @@ function BlogContent() {
             {/* Section 7: Emerging Areas */}
             <div
               id="section-7"
-              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-rose-50 to-red-50 dark:from-rose-900/20 dark:to-red-900/20 rounded-lg sm:rounded-xl md:rounded-2xl border border-rose-200 dark:border-rose-800 not-prose"
+              className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
-              <div className="inline-block px-3 sm:px-4 py-1 bg-rose-100 dark:bg-rose-900/30 border border-rose-300 dark:border-rose-700 rounded-full text-rose-700 dark:text-rose-300 text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
+              <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 7
               </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-rose-900 dark:text-rose-100 mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
                 Emerging Areas in Women's Health
               </h2>
-              <div className="space-y-3 text-rose-900 dark:text-rose-100 text-sm sm:text-base">
+              <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Maternal Health Focus</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Focus on maternal health and reducing maternal mortality in underserved areas
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Minimally Invasive Surgery</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Practice advanced laparoscopy and hysteroscopy procedures for better patient
                       outcomes
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Reproductive Health Education</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Work in reproductive health awareness and family planning education programs
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-rose-600 dark:text-rose-400 font-bold">→</span>
+                  <span className="text-[#800020] font-bold">→</span>
                   <div>
                     <p className="font-semibold">Telemedicine Initiatives</p>
-                    <p className="text-xs sm:text-sm text-rose-800 dark:text-rose-300">
+                    <p className="text-xs sm:text-sm text-[#800020]">
                       Engage in telemedicine and digital health for remote women's health
                       consultations
                     </p>
@@ -538,108 +533,96 @@ function BlogContent() {
 
             {/* Career Timeline */}
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
                 Career Timeline
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                <div className="p-4 bg-gradient-to-br from-rose-100 to-pink-100 dark:from-rose-900/30 dark:to-pink-900/30 border border-rose-200 dark:border-rose-700 rounded-lg">
-                  <p className="text-xs sm:text-sm text-rose-700 dark:text-rose-300 font-semibold mb-1">
-                    12 to MBBS
-                  </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-rose-900 dark:text-rose-100">
-                    4.5 years
-                  </p>
+                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">12 to MBBS</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">4.5 years</p>
                 </div>
-                <div className="p-4 bg-gradient-to-br from-fuchsia-100 to-pink-100 dark:from-fuchsia-900/30 dark:to-pink-900/30 border border-fuchsia-200 dark:border-fuchsia-700 rounded-lg">
-                  <p className="text-xs sm:text-sm text-fuchsia-700 dark:text-fuchsia-300 font-semibold mb-1">
+                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
                     MBBS to MD OB-GYN
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-fuchsia-900 dark:text-fuchsia-100">
-                    3 years
-                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3 years</p>
                 </div>
-                <div className="p-4 bg-gradient-to-br from-purple-100 to-fuchsia-100 dark:from-purple-900/30 dark:to-fuchsia-900/30 border border-purple-200 dark:border-purple-700 rounded-lg">
-                  <p className="text-xs sm:text-sm text-purple-700 dark:text-purple-300 font-semibold mb-1">
+                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
                     Total Duration
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-purple-900 dark:text-purple-100">
-                    7.5+ years
-                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">7.5+ years</p>
                 </div>
               </div>
             </div>
 
             {/* Key Tips Section */}
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-50 mb-4 sm:mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
                 Key Tips for Success
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
-                  <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
                     ✓ Clinical Skills
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
                     Develop strong clinical skills and surgical proficiency
                   </p>
                 </div>
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
-                  <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
                     ✓ Communication
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
                     Build excellent patient communication and counseling skills
                   </p>
                 </div>
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
-                  <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
                     ✓ Clinical Exposure
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
                     Gain exposure to diverse clinical cases during MBBS
                   </p>
                 </div>
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
-                  <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
                     ✓ Keep Updated
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
                     Stay updated with latest obstetric and gynecologic practices
                   </p>
                 </div>
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
-                  <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
                     ✓ Research Interest
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
                     Develop interest in research and evidence-based practice
                   </p>
                 </div>
-                <div className="p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg">
-                  <p className="font-bold text-slate-900 dark:text-slate-100 text-sm sm:text-base mb-2">
-                    ✓ Mentorship
-                  </p>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">✓ Mentorship</p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
                     Network with established gynecologists and mentors
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-20 p-10 bg-gradient-to-r from-rose-600/95 to-pink-600/95 dark:from-rose-700 dark:to-pink-700 rounded-2xl border border-rose-400/20 dark:border-rose-500/30 shadow-lg not-prose">
+            <div className="mt-20 p-10 bg-gradient-to-r from-[#800020]/95 to-[#800020]/95 rounded-2xl border border-[#800020]/20 shadow-lg not-prose">
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white dark:text-slate-50 mb-3">
-                    Ready to Pursue OB-GYN?
-                  </h3>
-                  <p className="text-slate-100 dark:text-slate-300 mb-6 leading-relaxed text-lg">
+                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue OB-GYN?</h3>
+                  <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
                     Explore comprehensive OB-GYN programs and get expert guidance for your women's
                     health specialty career.
                   </p>
                   <Link
                     to="/top-medical-courses"
-                    className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-gray-100 text-rose-600 font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105"
+                    className="inline-flex items-center justify-center px-8 py-3 bg-white hover:bg-[#f8f9fc] text-[#800020] font-bold rounded-lg transition shadow-md hover:shadow-lg transform hover:scale-105"
                   >
                     Explore Programs →
                   </Link>
@@ -650,12 +633,12 @@ function BlogContent() {
         </div>
       </section>
 
-      <section className="py-12 sm:py-16 md:py-20 bg-white dark:bg-slate-800 px-4 sm:px-0">
+      <section className="py-12 sm:py-16 md:py-20 bg-white px-4 sm:px-0">
         <div className="container-x max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#29334a] mb-3 sm:mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-8 text-sm sm:text-base">
+          <p className="text-[#6b5b68] mb-8 text-sm sm:text-base">
             Get answers to common questions about OB-GYN career opportunities.
           </p>
 
@@ -688,12 +671,12 @@ function BlogContent() {
             ].map((faq, idx) => (
               <div
                 key={idx}
-                className="p-4 sm:p-6 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-700/50 dark:to-slate-700 border border-slate-200 dark:border-slate-600 rounded-lg sm:rounded-xl hover:shadow-md transition"
+                className="p-4 sm:p-6 bg-gradient-to-br from-[#f8f9fc] to-[#f8f9fc] border border-[#29334a]/15 rounded-lg sm:rounded-xl hover:shadow-md transition"
               >
                 <details className="group">
-                  <summary className="flex items-start justify-between cursor-pointer font-semibold text-slate-900 dark:text-slate-100 text-sm sm:text-base">
+                  <summary className="flex items-start justify-between cursor-pointer font-semibold text-[#29334a] text-sm sm:text-base">
                     <span className="flex-1 text-left pr-4">{faq.q}</span>
-                    <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-slate-500 dark:text-slate-400 group-open:rotate-180 transition-transform">
+                    <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-[#6b5b68] group-open:rotate-180 transition-transform">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
@@ -708,25 +691,23 @@ function BlogContent() {
                       </svg>
                     </span>
                   </summary>
-                  <p className="text-slate-700 dark:text-slate-300 mt-3 text-xs sm:text-sm leading-relaxed">
-                    {faq.a}
-                  </p>
+                  <p className="text-[#29334a] mt-3 text-xs sm:text-sm leading-relaxed">{faq.a}</p>
                 </details>
               </div>
             ))}
           </div>
 
-          <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-900/20 dark:to-rose-900/20 border-2 border-pink-200 dark:border-pink-800 rounded-lg sm:rounded-xl">
-            <h3 className="text-lg sm:text-xl font-bold text-pink-900 dark:text-pink-200 mb-2">
+          <div className="mt-10 sm:mt-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border-2 border-[#f7cbd7] rounded-lg sm:rounded-xl">
+            <h3 className="text-lg sm:text-xl font-bold text-[#800020] mb-2">
               Still have questions?
             </h3>
-            <p className="text-sm sm:text-base text-pink-800 dark:text-pink-300 mb-4">
+            <p className="text-sm sm:text-base text-[#800020] mb-4">
               Don't hesitate to reach out to our expert counselors who can provide personalized
               guidance for your obstetrics and gynecology specialization career journey.
             </p>
             <Link
               to="/contact-us"
-              className="inline-flex items-center gap-2 px-6 py-2.5 bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-lg transition text-sm sm:text-base"
+              className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#800020] hover:bg-[#68001e] text-white font-semibold rounded-lg transition text-sm sm:text-base"
             >
               Contact Our Experts →
             </Link>

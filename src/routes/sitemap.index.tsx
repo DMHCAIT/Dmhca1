@@ -9,8 +9,9 @@ import {
 } from "@/data/courses";
 import { cityWiseCourses, getAllSpecialties } from "@/data/cityWiseCourses";
 import { events } from "@/data/events";
-import { ChevronRight } from "lucide-react";
+import { BookOpen, ChevronRight } from "lucide-react";
 import { useMemo } from "react";
+import { ResourceHero } from "@/components/site/ResourceHero";
 
 export const Route = createFileRoute("/sitemap/")({
   head: () => ({
@@ -48,81 +49,21 @@ function Sitemap() {
       .filter((c) => c.courseCount > 0);
   }, []);
 
-  // Top Medical Courses - Specialty Pages (matching old website structure)
-  const topMedicalCourses = [
-    { name: "Radiology Courses", slug: "radiology-courses" },
-    { name: "Cardiology Courses", slug: "cardiology-courses" },
-    { name: "Internal Medicine Courses", slug: "internal-medicine-courses" },
-    { name: "Obstetrics and Gynecology Courses", slug: "obstetrics-and-gynecology-courses" },
-    { name: "Critical Care Medicine Courses", slug: "critical-care-medicine-courses" },
-    { name: "Paediatrics Courses", slug: "paediatrics-courses" },
-    { name: "Embryology Courses", slug: "embryology-courses" },
-    { name: "Oncology Courses", slug: "oncology-courses" },
-    { name: "Cosmetology Courses", slug: "cosmetology-courses" },
-    { name: "Clinical Cardiology Courses", slug: "clinical-cardiology-courses" },
-    { name: "Clinical Embryology Courses", slug: "clinical-embryology-courses" },
-    { name: "Neurology Courses", slug: "neurology-courses" },
-    { name: "Endocrinology Courses", slug: "endocrinology-courses" },
-    { name: "Diabetology Courses", slug: "diabetology-courses" },
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="home-page resource-page resource-sitemap-page min-h-screen">
       {/* Hero Section */}
-      <section className="site-hero">
-        <div className="container-x">
-          <div className="text-xs uppercase tracking-[0.25em] text-navy-deep dark:text-white gold-rule">
-            Navigation
-          </div>
-          <h1 className="font-display text-4xl md:text-5xl text-navy-deep dark:text-white mt-3">
-            Sitemap
-          </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl">
-            Explore all medical programs, specialties, and resources available at DMHCA.
-          </p>
-        </div>
-      </section>
+      <ResourceHero
+        eyebrow="Find your way"
+        title="Sitemap"
+        description="Explore all medical programs, specialties, and resources available at DMHCA."
+      />
 
       {/* Main Content */}
       <section className="py-16 bg-white">
         <div className="container-x space-y-16">
-          {/* Top Medical Courses - Specialty Pages */}
-          <div>
-            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">
-              Top Medical Courses
-            </h2>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
-              {topMedicalCourses.map((specialty) => (
-                <Link
-                  key={specialty.slug}
-                  to={`/${specialty.slug}/`}
-                  className="flex items-center justify-between p-4 border border-slate-200 rounded-lg hover:border-navy-deep/40 hover:bg-slate-50 transition group"
-                >
-                  <div>
-                    <div className="text-lg font-semibold text-navy-deep group-hover:text-navy">
-                      {specialty.name}
-                    </div>
-                    {/* Courses in Delhi quick link (links to the city-specific specialty page) */}
-                    <div className="text-sm text-muted-foreground mt-1">
-                      <Link
-                        to={`/${specialty.slug}/delhi/`}
-                        className="text-sm text-gold hover:underline"
-                      >
-                        Courses in Delhi →
-                      </Link>
-                    </div>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-navy-deep transition" />
-                </Link>
-              ))}
-            </div>
-          </div>
-
           {/* Original List Of Medical Courses */}
-          <div className="mt-12 pt-12 border-t border-slate-200">
-            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">
-              List Of Medical Courses
-            </h2>
+          <div className="mt-12 pt-12 border-t border-[#29334a]/15">
+            <h2 className="font-display text-3xl text-navy-deep mb-8">List Of Medical Courses</h2>
 
             {/* Fellowships */}
             <div className="mb-12">
@@ -133,7 +74,7 @@ function Sitemap() {
                     key={course.slug}
                     to="/courses/$slug"
                     params={{ slug: course.slug }}
-                    className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                    className="flex items-start justify-between p-3 border border-[#29334a]/15 rounded-md hover:bg-[#f8f9fc] transition group"
                   >
                     <div className="flex-1">
                       <div className="font-medium text-navy-deep group-hover:text-navy line-clamp-2">
@@ -143,7 +84,7 @@ function Sitemap() {
                         {formatINR(course.priceINR)}
                       </div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
+                    <ChevronRight className="w-4 h-4 text-[#6b5b68] group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
                   </Link>
                 ))}
               </div>
@@ -158,7 +99,7 @@ function Sitemap() {
                     key={course.slug}
                     to="/courses/$slug"
                     params={{ slug: course.slug }}
-                    className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                    className="flex items-start justify-between p-3 border border-[#29334a]/15 rounded-md hover:bg-[#f8f9fc] transition group"
                   >
                     <div className="flex-1">
                       <div className="font-medium text-navy-deep group-hover:text-navy line-clamp-2">
@@ -168,7 +109,7 @@ function Sitemap() {
                         {formatINR(course.priceINR)}
                       </div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
+                    <ChevronRight className="w-4 h-4 text-[#6b5b68] group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
                   </Link>
                 ))}
               </div>
@@ -183,7 +124,7 @@ function Sitemap() {
                     key={course.slug}
                     to="/courses/$slug"
                     params={{ slug: course.slug }}
-                    className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                    className="flex items-start justify-between p-3 border border-[#29334a]/15 rounded-md hover:bg-[#f8f9fc] transition group"
                   >
                     <div className="flex-1">
                       <div className="font-medium text-navy-deep group-hover:text-navy line-clamp-2">
@@ -193,7 +134,7 @@ function Sitemap() {
                         {formatINR(course.priceINR)}
                       </div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
+                    <ChevronRight className="w-4 h-4 text-[#6b5b68] group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
                   </Link>
                 ))}
               </div>
@@ -202,7 +143,7 @@ function Sitemap() {
 
           {/* List Of Medical Courses City Wise */}
           <div>
-            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">
+            <h2 className="font-display text-3xl text-navy-deep mb-8">
               List of Medical Courses City Wise
             </h2>
 
@@ -218,7 +159,7 @@ function Sitemap() {
                       <Link
                         key={course.slug}
                         to={`/${course.slug}/`}
-                        className="flex items-start justify-between p-3 border border-slate-200 rounded-md hover:border-navy-deep/40 hover:bg-slate-50 transition group"
+                        className="flex items-start justify-between p-3 border border-[#29334a]/15 rounded-md hover:bg-[#f8f9fc] transition group"
                       >
                         <div className="flex-1">
                           <div className="font-medium text-navy-deep group-hover:text-navy">
@@ -228,7 +169,7 @@ function Sitemap() {
                             {course.description}
                           </div>
                         </div>
-                        <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
+                        <ChevronRight className="w-4 h-4 text-[#6b5b68] group-hover:text-navy-deep transition flex-shrink-0 ml-2" />
                       </Link>
                     ))}
                   </div>
@@ -243,16 +184,20 @@ function Sitemap() {
 
           {/* Blogs Section */}
           <div>
-            <h2 className="font-display text-3xl text-navy-deep dark:text-white mb-8">Blogs</h2>
+            <h2 className="font-display text-3xl text-navy-deep mb-8">Blogs</h2>
             <div className="space-y-6">
               {/* Featured View All Blogs Card */}
               <Link
                 to="/blog/"
-                className="flex items-center justify-between p-6 border-2 border-gold/50 rounded-lg hover:border-gold hover:bg-gold/10 transition group bg-gradient-to-r from-gold/5 to-transparent"
+                className="flex items-center justify-between p-6 border-2 border-gold/50 rounded-lg hover:bg-gold/10 transition group bg-gradient-to-r from-gold/5 to-transparent"
               >
                 <div>
                   <div className="text-xl font-bold text-navy-deep group-hover:text-navy">
-                    📚 View All Blogs
+                    <BookOpen
+                      className="mr-2 inline-block h-5 w-5 text-[#800020]"
+                      aria-hidden="true"
+                    />{" "}
+                    View All Blogs
                   </div>
                   <div className="text-sm text-muted-foreground mt-1">
                     Explore all 22 medical articles on specializations, career guidance & education
@@ -370,7 +315,7 @@ function Sitemap() {
                   <Link
                     key={blog.to}
                     to={blog.to}
-                    className="flex items-start justify-between p-4 border border-slate-200 rounded-lg hover:border-gold hover:bg-gold/5 transition group"
+                    className="flex items-start justify-between p-4 border border-[#29334a]/15 rounded-lg hover:bg-gold/5 transition group"
                   >
                     <div className="flex-1">
                       <div className="text-sm font-semibold text-navy-deep group-hover:text-navy line-clamp-2">
@@ -378,87 +323,9 @@ function Sitemap() {
                       </div>
                       <div className="text-xs text-gold mt-2 font-medium">{blog.category}</div>
                     </div>
-                    <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-gold transition flex-shrink-0 ml-2" />
+                    <ChevronRight className="w-4 h-4 text-[#6b5b68] group-hover:text-gold transition flex-shrink-0 ml-2" />
                   </Link>
                 ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Statistics */}
-          <div className="bg-slate-50 rounded-xl p-8 border border-slate-200">
-            <h2 className="font-display text-2xl text-navy-deep dark:text-white mb-6">
-              Program Overview
-            </h2>
-            <div className="grid gap-6 md:grid-cols-3">
-              <div>
-                <div className="text-4xl font-black text-gold">{courses.length}+</div>
-                <div className="text-sm text-muted-foreground mt-2">Total Programs</div>
-              </div>
-              <div>
-                <div className="text-4xl font-black text-navy-deep">{fellowships.length}</div>
-                <div className="text-sm text-muted-foreground mt-2">Fellowships</div>
-              </div>
-              <div>
-                <div className="text-4xl font-black text-navy-deep">
-                  {pgDiplomas.length + certificates.length}
-                </div>
-                <div className="text-sm text-muted-foreground mt-2">Diplomas & Certificates</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="bg-navy-deep text-primary-foreground rounded-lg py-3 px-6 md:py-4 md:px-10 max-w-4xl mx-auto">
-            <h2 className="font-display text-lg mb-3">Quick Links</h2>
-            <div className="grid grid-cols-3 gap-y-4 gap-x-8 items-start">
-              <div className="">
-                <Link
-                  to="/"
-                  className="text-primary-foreground hover:text-gold transition text-base"
-                >
-                  Home
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/simple-event"
-                  className="text-primary-foreground hover:text-gold transition text-base"
-                >
-                  Events
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/about-dmhca"
-                  className="text-primary-foreground hover:text-gold transition text-base"
-                >
-                  About Us
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/blog/"
-                  className="text-primary-foreground hover:text-gold transition text-base"
-                >
-                  Blogs
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/top-medical-courses"
-                  className="text-primary-foreground hover:text-gold transition text-base"
-                >
-                  All Courses
-                </Link>
-              </div>
-              <div>
-                <Link
-                  to="/contact-us"
-                  className="text-primary-foreground hover:text-gold transition text-base"
-                >
-                  Contact
-                </Link>
               </div>
             </div>
           </div>
