@@ -8,7 +8,7 @@ const base = "https://www.dmhca.in";
 const today = new Date().toISOString().split("T")[0];
 
 const jiti = createJiti(import.meta.url, { alias: { "@": join(root, "src") }, moduleCache: false });
-const { courses, categories } = await jiti.import(join(root, "src/data/courses.tsx"));
+const { courses } = await jiti.import(join(root, "src/data/courses.tsx"));
 const { cityWiseCourses } = await jiti.import(join(root, "src/data/cityWiseCourses.ts"));
 const { events } = await jiti.import(join(root, "src/data/events.ts"));
 
@@ -30,7 +30,6 @@ add("/top-medical-courses", "daily", "0.95");
 ["fellowships", "pg-diplomas", "certificates"].forEach((f) =>
   add(`/top-medical-courses/${f}`, "weekly", "0.9"),
 );
-categories.forEach((c) => add(`/course-category/${c.slug}`, "weekly", "0.85"));
 courses.forEach((c) => add(`/courses/${c.slug}`, "weekly", "0.8"));
 specialtyPages.forEach((s) => add(`/${s}`, "weekly", "0.75"));
 cityWiseCourses.forEach((c) => add(`/${c.slug}`, "monthly", "0.6"));

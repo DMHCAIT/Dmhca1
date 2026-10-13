@@ -79,7 +79,6 @@ import { Route as ClinicalCardiologyCoursesCityRouteImport } from './routes/clin
 import { Route as ClinicalEmbryologyCoursesIndexRouteImport } from './routes/clinical-embryology-courses.index'
 import { Route as CosmetologyCoursesIndexRouteImport } from './routes/cosmetology-courses.index'
 import { Route as CosmetologyCoursesCityRouteImport } from './routes/cosmetology-courses/$city'
-import { Route as CourseCategorySlugRouteImport } from './routes/course-category.$slug'
 import { Route as CoursesSlugRouteImport } from './routes/courses.$slug'
 import { Route as CriticalCareMedicineCoursesIndexRouteImport } from './routes/critical-care-medicine-courses.index'
 import { Route as CriticalCareMedicineCoursesCityRouteImport } from './routes/critical-care-medicine-courses/$city'
@@ -480,11 +479,6 @@ const CosmetologyCoursesCityRoute = CosmetologyCoursesCityRouteImport.update({
   path: '/cosmetology-courses/$city',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CourseCategorySlugRoute = CourseCategorySlugRouteImport.update({
-  id: '/course-category/$slug',
-  path: '/course-category/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CoursesSlugRoute = CoursesSlugRouteImport.update({
   id: '/courses/$slug',
   path: '/courses/$slug',
@@ -724,7 +718,6 @@ export interface FileRoutesByFullPath {
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
-  '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/critical-care-medicine-courses/$city': typeof CriticalCareMedicineCoursesCityRoute
   '/embryology-courses/$city': typeof EmbryologyCoursesCityRoute
@@ -827,7 +820,6 @@ export interface FileRoutesByTo {
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
-  '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/critical-care-medicine-courses/$city': typeof CriticalCareMedicineCoursesCityRoute
   '/embryology-courses/$city': typeof EmbryologyCoursesCityRoute
@@ -933,7 +925,6 @@ export interface FileRoutesById {
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
-  '/course-category/$slug': typeof CourseCategorySlugRoute
   '/courses/$slug': typeof CoursesSlugRoute
   '/critical-care-medicine-courses/$city': typeof CriticalCareMedicineCoursesCityRoute
   '/embryology-courses/$city': typeof EmbryologyCoursesCityRoute
@@ -1040,7 +1031,6 @@ export interface FileRouteTypes {
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
-    | '/course-category/$slug'
     | '/courses/$slug'
     | '/critical-care-medicine-courses/$city'
     | '/embryology-courses/$city'
@@ -1143,7 +1133,6 @@ export interface FileRouteTypes {
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
-    | '/course-category/$slug'
     | '/courses/$slug'
     | '/critical-care-medicine-courses/$city'
     | '/embryology-courses/$city'
@@ -1248,7 +1237,6 @@ export interface FileRouteTypes {
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
-    | '/course-category/$slug'
     | '/courses/$slug'
     | '/critical-care-medicine-courses/$city'
     | '/embryology-courses/$city'
@@ -1340,7 +1328,6 @@ export interface RootRouteChildren {
   CardiologyCoursesCityRoute: typeof CardiologyCoursesCityRoute
   ClinicalCardiologyCoursesCityRoute: typeof ClinicalCardiologyCoursesCityRoute
   CosmetologyCoursesCityRoute: typeof CosmetologyCoursesCityRoute
-  CourseCategorySlugRoute: typeof CourseCategorySlugRoute
   CoursesSlugRoute: typeof CoursesSlugRoute
   CriticalCareMedicineCoursesCityRoute: typeof CriticalCareMedicineCoursesCityRoute
   EmbryologyCoursesCityRoute: typeof EmbryologyCoursesCityRoute
@@ -1867,13 +1854,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CosmetologyCoursesCityRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/course-category/$slug': {
-      id: '/course-category/$slug'
-      path: '/course-category/$slug'
-      fullPath: '/course-category/$slug'
-      preLoaderRoute: typeof CourseCategorySlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/courses/$slug': {
       id: '/courses/$slug'
       path: '/courses/$slug'
@@ -2239,7 +2219,6 @@ const rootRouteChildren: RootRouteChildren = {
   CardiologyCoursesCityRoute: CardiologyCoursesCityRoute,
   ClinicalCardiologyCoursesCityRoute: ClinicalCardiologyCoursesCityRoute,
   CosmetologyCoursesCityRoute: CosmetologyCoursesCityRoute,
-  CourseCategorySlugRoute: CourseCategorySlugRoute,
   CoursesSlugRoute: CoursesSlugRoute,
   CriticalCareMedicineCoursesCityRoute: CriticalCareMedicineCoursesCityRoute,
   EmbryologyCoursesCityRoute: EmbryologyCoursesCityRoute,

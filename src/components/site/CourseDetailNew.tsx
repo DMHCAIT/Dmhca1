@@ -72,8 +72,8 @@ export function CourseDetailNew({
         <div className="absolute inset-0 bg-gradient-to-r from-navy-deep/95 via-blue-900/90 to-navy-deep/85" />
         <div className="relative container-x course-detail-wide py-6 lg:py-8">
           <Link
-            to="/course-category/$slug"
-            params={{ slug: primaryCat.slug }}
+            to="/top-medical-courses"
+            search={{ cat: primaryCat.slug }}
             className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.22em] text-gold hover:opacity-80"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> {primaryCat.name}

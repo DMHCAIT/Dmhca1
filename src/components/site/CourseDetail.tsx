@@ -239,12 +239,6 @@ export function CourseDetail({
       {
         "@type": "ListItem",
         position: 3,
-        name: primaryCat.name,
-        item: `https://www.dmhca.in/course-category/${primaryCat.slug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
         name: course.title,
         item: `https://www.dmhca.in/courses/${course.slug}`,
       },
@@ -307,8 +301,8 @@ export function CourseDetail({
         <div className="course-hero-content">
           <div className="course-hero-copy">
             <Link
-              to="/course-category/$slug"
-              params={{ slug: primaryCat.slug }}
+              to="/top-medical-courses"
+              search={{ cat: primaryCat.slug }}
               className="course-hero-category group mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               <ArrowLeft
