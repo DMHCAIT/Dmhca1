@@ -134,13 +134,13 @@ function CataloguePage({
     description: specialty
       ? `Browse all ${specialty.name.toLowerCase()} courses across all formats.`
       : `Browse ${format.toLowerCase()} across every medical specialty.`,
-    url: `https://dmhca.in${basePath}`,
+    url: `https://www.dmhca.in${basePath}`,
     mainEntity: {
       "@type": "ItemList",
       itemListElement: filteredCourses.slice(0, 50).map((course, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `https://dmhca.in/courses/${course.slug}`,
+        url: `https://www.dmhca.in/courses/${course.slug}`,
         name: course.title,
       })),
     },

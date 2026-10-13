@@ -20,12 +20,12 @@ export const Route = createFileRoute("/course-category/$slug")({
           { name: "twitter:card", content: "summary" },
           {
             name: "canonical",
-            content: `https://dmhca.in/course-category/${loaderData.category.slug}`,
+            content: `https://www.dmhca.in/course-category/${loaderData.category.slug}`,
           },
         ]
       : [],
     links: loaderData
-      ? [{ rel: "canonical", href: `https://dmhca.in/course-category/${loaderData.category.slug}` }]
+      ? [{ rel: "canonical", href: `https://www.dmhca.in/course-category/${loaderData.category.slug}` }]
       : [],
   }),
   notFoundComponent: () => (
@@ -48,13 +48,13 @@ function CategoryPage() {
     "@type": "CollectionPage",
     name: `${category.name} Courses`,
     description: category.tagline,
-    url: `https://dmhca.in/course-category/${category.slug}`,
+    url: `https://www.dmhca.in/course-category/${category.slug}`,
     mainEntity: {
       "@type": "ItemList",
       itemListElement: list.map((course, idx) => ({
         "@type": "ListItem",
         position: idx + 1,
-        url: `https://dmhca.in/courses/${course.slug}`,
+        url: `https://www.dmhca.in/courses/${course.slug}`,
         name: course.title,
       })),
     },

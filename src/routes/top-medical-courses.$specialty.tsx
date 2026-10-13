@@ -102,13 +102,13 @@ function SpecialtyCourses() {
     description: specialty
       ? `Browse all ${specialty.name.toLowerCase()} courses across all formats.`
       : "Browse medical courses across all specialties.",
-    url: `https://dmhca.in/top-medical-courses/${specialtySlug}`,
+    url: `https://www.dmhca.in/top-medical-courses/${specialtySlug}`,
     mainEntity: {
       "@type": "ItemList",
       itemListElement: filtered.slice(0, 50).map((course, idx) => ({
         "@type": "ListItem",
         position: idx + 1,
-        url: `https://dmhca.in/courses/${course.slug}`,
+        url: `https://www.dmhca.in/courses/${course.slug}`,
         name: course.title,
       })),
     },

@@ -202,14 +202,14 @@ export function CourseDetail({
     provider: {
       "@type": "Organization",
       name: "DMHCA",
-      url: "https://dmhca.in",
-      logo: "https://dmhca.in/logo.webp",
+      url: "https://www.dmhca.in",
+      logo: "https://www.dmhca.in/logo.webp",
     },
     image: course.image,
     duration: course.months ? `PT${course.months}M` : undefined,
     numberOfLessons: course.lessons || undefined,
     educationLevel: course.level,
-    url: `https://dmhca.in/courses/${course.slug}`,
+    url: `https://www.dmhca.in/courses/${course.slug}`,
     aggregateRating:
       course.rating && course.reviewCount
         ? {
@@ -228,25 +228,25 @@ export function CourseDetail({
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://dmhca.in",
+        item: "https://www.dmhca.in",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Courses",
-        item: "https://dmhca.in/top-medical-courses",
+        item: "https://www.dmhca.in/top-medical-courses",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: primaryCat.name,
-        item: `https://dmhca.in/course-category/${primaryCat.slug}`,
+        item: `https://www.dmhca.in/course-category/${primaryCat.slug}`,
       },
       {
         "@type": "ListItem",
         position: 4,
         name: course.title,
-        item: `https://dmhca.in/courses/${course.slug}`,
+        item: `https://www.dmhca.in/courses/${course.slug}`,
       },
     ],
   };
@@ -255,8 +255,8 @@ export function CourseDetail({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "DMHCA",
-    url: "https://dmhca.in",
-    logo: "https://dmhca.in/logo.webp",
+    url: "https://www.dmhca.in",
+    logo: "https://www.dmhca.in/logo.webp",
     description: "Top institute for accredited medical courses and fellowships",
     sameAs: [
       "https://www.facebook.com/dmhca",

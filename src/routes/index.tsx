@@ -48,8 +48,8 @@ export const Route = createFileRoute("/")({
           "Advance your medical career with accredited online fellowships and certificate programs across radiology, cardiology, gynaecology, dermatology, oncology and more.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://dmhca.in/logo.webp" },
-      { property: "og:url", content: "https://dmhca.in/" },
+      { property: "og:image", content: "https://www.dmhca.in/logo.webp" },
+      { property: "og:url", content: "https://www.dmhca.in/" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "DMHCA - Top Institute For Medical Courses" },
       {
@@ -57,11 +57,11 @@ export const Route = createFileRoute("/")({
         content:
           "Advance your medical career with accredited online fellowships and certificate programs",
       },
-      { name: "twitter:image", content: "https://dmhca.in/logo.webp" },
+      { name: "twitter:image", content: "https://www.dmhca.in/logo.webp" },
       { name: "theme-color", content: "#1a2a4a" },
     ],
     links: [
-      { rel: "canonical", href: "https://dmhca.in/" },
+      { rel: "canonical", href: "https://www.dmhca.in/" },
       { rel: "prefetch", href: "/top-medical-courses" },
       { rel: "dns-prefetch", href: "https://cdn.jsdelivr.net" },
     ],
@@ -311,8 +311,8 @@ function Home() {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "DMHCA",
-      url: "https://dmhca.in",
-      logo: "https://dmhca.in/logo.webp",
+      url: "https://www.dmhca.in",
+      logo: "https://www.dmhca.in/logo.webp",
       description:
         "Top institute for accredited medical courses, fellowships and certificate programs",
       sameAs: [

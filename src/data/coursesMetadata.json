@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "source": "https://dmhca.in/top-medical-courses/",
+    "source": "https://www.dmhca.in/top-medical-courses/",
     "extractionDate": "2026-06-13",
     "totalCourses": 75,
     "version": "1.0"
@@ -71,7 +71,7 @@
   "instructor": {
     "name": "DMHCA",
     "fullName": "Delhi Medical Healthcare Academy",
-    "website": "https://dmhca.in",
+    "website": "https://www.dmhca.in",
     "coursesCount": 75
   },
   "notes": {

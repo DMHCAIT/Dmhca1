@@ -99,13 +99,13 @@ function FilteredCourses() {
     "@type": "CollectionPage",
     name: `${specialty?.name || "Medical"} ${format}`,
     description: `Browse ${format.toLowerCase()} in ${specialty?.name.toLowerCase() || "all specialties"}.`,
-    url: `https://dmhca.in/top-medical-courses/${formatSlug}/${specialtySlug}`,
+    url: `https://www.dmhca.in/top-medical-courses/${formatSlug}/${specialtySlug}`,
     mainEntity: {
       "@type": "ItemList",
       itemListElement: filteredCourses.slice(0, 50).map((course, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        url: `https://dmhca.in/courses/${course.slug}`,
+        url: `https://www.dmhca.in/courses/${course.slug}`,
         name: course.title,
       })),
     },

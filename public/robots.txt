@@ -13,7 +13,7 @@ Disallow: /*.json$
 Request-rate: 30/60
 
 # Sitemap location
-Sitemap: https://dmhca.in/sitemap.xml
+Sitemap: https://www.dmhca.in/sitemap.xml
 
 # Additional rules for specific crawlers
 User-agent: Googlebot

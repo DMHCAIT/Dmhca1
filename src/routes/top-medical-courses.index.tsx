@@ -114,13 +114,13 @@ function AllCourses() {
     name: "All Medical Courses",
     description:
       "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
-    url: "https://dmhca.in/top-medical-courses",
+    url: "https://www.dmhca.in/top-medical-courses",
     mainEntity: {
       "@type": "ItemList",
       itemListElement: filtered.slice(0, 50).map((course, idx) => ({
         "@type": "ListItem",
         position: idx + 1,
-        url: `https://dmhca.in/courses/${course.slug}`,
+        url: `https://www.dmhca.in/courses/${course.slug}`,
         name: course.title,
       })),
     },

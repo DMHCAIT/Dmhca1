@@ -405,7 +405,7 @@ const blogSlugs = new Set([
 
 // This route handles direct certificate ID access at root level
 // Supports both:
-// - https://dmhca.in/[certificateId]
+// - https://www.dmhca.in/[certificateId]
 // - https://verify.dmhca.in/[certificateId] (via subdomain routing)
 // Also handles blog slugs that are accessed at root level
 

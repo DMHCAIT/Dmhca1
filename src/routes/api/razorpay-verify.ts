@@ -270,7 +270,7 @@ function generateEnrollmentEmailTemplate(studentName: string, courseName: string
               </div>
 
               <div style="text-align: center; margin: 30px 0;">
-                <a href="https://dmhca.in" class="button">Go to Dashboard</a>
+                <a href="https://www.dmhca.in" class="button">Go to Dashboard</a>
               </div>
 
               <div class="support-box">
@@ -291,9 +291,9 @@ function generateEnrollmentEmailTemplate(studentName: string, courseName: string
                 © ${currentYear} Delhi Medical Health Care Academy (DMHCA). All rights reserved.
               </p>
               <p>
-                <a href="https://dmhca.in/privacy-policy" class="footer-link">Privacy Policy</a> | 
-                <a href="https://dmhca.in/term-conditions" class="footer-link">Terms & Conditions</a> | 
-                <a href="https://dmhca.in/refund-returns-policy" class="footer-link">Refund Policy</a>
+                <a href="https://www.dmhca.in/privacy-policy" class="footer-link">Privacy Policy</a> | 
+                <a href="https://www.dmhca.in/term-conditions" class="footer-link">Terms & Conditions</a> | 
+                <a href="https://www.dmhca.in/refund-returns-policy" class="footer-link">Refund Policy</a>
               </p>
               <p style="margin-top: 12px; color: #9ca3af;">
                 New Delhi, India

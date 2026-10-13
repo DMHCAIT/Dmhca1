@@ -10,7 +10,7 @@ export const Route = createFileRoute("/sitemap/xml")({
 });
 
 function Sitemap() {
-  const baseUrl = "https://dmhca.in";
+  const baseUrl = "https://www.dmhca.in";
 
   const urls = [
     // Homepage
