@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-endocrinology")({
+export const Route = createFileRoute("/blog/scope-of-diabetology")({
   head: () => ({
     meta: [
-      { title: "Scope of Endocrinology in India — DMHCA" },
+      { title: "Scope of Diabetology in India — DMHCA" },
       {
         name: "description",
-        content: "Career opportunities and specializations in endocrine disorders.",
+        content: "Career opportunities and specializations in diabetes management.",
       },
     ],
   }),
@@ -31,10 +31,10 @@ function BlogContent() {
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Endocrinology
+              Scope of Diabetology
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore the diverse field of endocrinology and metabolic disorders.
+              Explore career opportunities in diabetes management.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ function BlogContent() {
               <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
                 <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
-                <div className="font-bold text-sm sm:text-lg">High</div>
+                <div className="font-bold text-sm sm:text-lg">Stable</div>
               </div>
             </div>
           </div>
@@ -75,8 +75,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Endocrinology.webp"
-              alt="Scope of Endocrinology"
+              src="/blog-images/Scope-of-Diabetology.webp"
+              alt="Scope of Diabetology"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -93,13 +93,13 @@ function BlogContent() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { label: "Career Overview in Endocrinology", href: "#career-overview" },
-                  { label: "Clinical Practice Settings", href: "#clinical-practice" },
-                  { label: "Disease Management Focus", href: "#disease-management" },
-                  { label: "Diagnostic Expertise", href: "#diagnostic-expertise" },
+                  { label: "Career Overview in Diabetology", href: "#career-overview" },
+                  { label: "Patient Care and Management", href: "#patient-care" },
+                  { label: "Prevention and Education", href: "#prevention" },
+                  { label: "Research and Innovation", href: "#research" },
                   { label: "Specialization Areas", href: "#specializations" },
                   { label: "Earning Potential", href: "#earning-potential" },
-                  { label: "Research and Academic Opportunities", href: "#research-scope" },
+                  { label: "Public Health Scope", href: "#public-health" },
                 ].map((item) => (
                   <a
                     key={item.href}
@@ -120,106 +120,105 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Career Overview in Endocrinology
+                Career Overview in Diabetology
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed">
-                Endocrinologists specialize in diagnosing and managing hormonal and metabolic
-                disorders. They provide comprehensive care including diagnosis, treatment planning,
-                long-term management, and preventive strategies for endocrine diseases.
+                Diabetologists specialize in diagnosing and managing diabetes and metabolic
+                disorders. They provide comprehensive care including lifestyle modification,
+                medication management, complication prevention, and patient education.
               </p>
             </div>
 
             <div
-              id="clinical-practice"
+              id="patient-care"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Clinical Practice Settings
+                Patient Care and Management
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Hospital Departments:</strong> Work in endocrinology departments of
-                    teaching hospitals
+                    <strong>Outpatient Clinics:</strong> Manage diabetes patients in specialized
+                    diabetes clinics
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Specialized Clinics:</strong> Manage thyroid, diabetes, and other
-                    endocrine clinics
+                    <strong>Hospital Practice:</strong> Manage hospitalized diabetic patients and
+                    emergencies
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Private Practice:</strong> Establish own endocrinology consultation
-                    center
+                    <strong>Private Practice:</strong> Establish own diabetes care center
                   </div>
                 </div>
               </div>
             </div>
 
             <div
-              id="disease-management"
+              id="prevention"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Disease Management Focus
+                Prevention and Education
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Thyroid disease management including hypothyroidism and hyperthyroidism</div>
+                  <div>Develop diabetes prevention programs for at-risk populations</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Diabetes management with integrated care approach</div>
+                  <div>Conduct lifestyle modification and dietary counseling</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Pituitary and adrenal disorder diagnosis and management</div>
+                  <div>Provide patient education on self-management</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Metabolic bone diseases and osteoporosis management</div>
+                  <div>Prevent or delay diabetes complications</div>
                 </div>
               </div>
             </div>
 
             <div
-              id="diagnostic-expertise"
+              id="research"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Diagnostic Expertise
+                Research and Innovation
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Interpretation of complex hormonal assays and tests</div>
+                  <div>Conduct clinical research on new diabetes treatments</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Advanced imaging interpretation (MRI, CT for endocrine pathology)</div>
+                  <div>Participate in international diabetes research</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Perform diagnostic procedures like thyroid fine needle aspiration</div>
+                  <div>Develop innovative management protocols</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Manage complex diagnostic dilemmas</div>
+                  <div>Publish in peer-reviewed journals</div>
                 </div>
               </div>
             </div>
@@ -235,25 +234,25 @@ function BlogContent() {
                 Specialization Areas
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
-                Endocrinologists can develop expertise in specialized areas:
+                Diabetologists can specialize in various areas:
               </p>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Thyroid Specialist</strong> - Comprehensive thyroid disease management
+                    <strong>Type 1 Diabetes Specialist</strong> - Insulin management and immunology
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Pituitary Expert</strong> - Complex pituitary and hypothalamic disorders
+                    <strong>Type 2 Diabetes and Obesity</strong> - Metabolic management
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Reproductive Endocrinologist</strong> - Hormonal infertility management
+                    <strong>Gestational Diabetes Specialist</strong> - Pregnancy and diabetes
                   </div>
                 </div>
               </div>
@@ -272,87 +271,90 @@ function BlogContent() {
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Hospital endocrinologists: 15-30 lakhs annually</div>
+                  <div>Hospital diabetologists: 12-25 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Clinic-based specialists: 25-45 lakhs annually</div>
+                  <div>Specialized diabetes clinics: 20-40 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Private practitioners: 45-80 lakhs annually</div>
+                  <div>Private practitioners: 25-45 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Corporate and pharmaceutical roles: 50+ lakhs annually</div>
+                  <div>Corporate/research positions: 40+ lakhs annually</div>
                 </div>
               </div>
             </div>
 
             <div
-              id="research-scope"
+              id="public-health"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Research and Academic Opportunities
+                Public Health Scope
               </h2>
+              <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
+                Significant opportunities in public health and preventive medicine:
+              </p>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Conduct research on endocrine disorders and new treatments</div>
+                  <div>Lead national diabetes screening programs</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Teach in medical colleges and guide residents</div>
+                  <div>Develop community health initiatives</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Publish in international endocrinology journals</div>
+                  <div>Work in diabetes health policy and guidelines</div>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Endocrinology Scope Overview
+                Diabetology Scope Overview
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Disease Prevalence
+                    Job Demand
                   </p>
                   <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Very High</p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Research Opportunity
+                    Disease Prevalence
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Abundant</p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Rising</p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Career Flexibility
+                    Growth Trajectory
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">High</p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Stable</p>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Key Tips for Excelling in Endocrinology
+                Key Tips for Excelling in Diabetology
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {[
-                  "Master endocrine physiology and biochemistry thoroughly",
-                  "Develop expertise in hormone assay interpretation",
-                  "Stay updated with new hormone therapies",
-                  "Engage in clinical research and publications",
-                  "Develop excellent patient counseling skills",
-                  "Build expertise in multidisciplinary care",
+                  "Master latest diabetes management protocols",
+                  "Develop strong patient counseling skills",
+                  "Stay updated with new medications and treatments",
+                  "Focus on complication prevention strategies",
+                  "Engage in research on diabetes management",
+                  "Build expertise in preventive programs",
                 ].map((tip, idx) => (
                   <div key={idx} className="p-4 bg-[#f8f9fc] border border-[#29334a]/15 rounded-lg">
                     <p className="font-bold text-[#29334a] text-sm sm:text-base">✓ {tip}</p>
@@ -368,28 +370,28 @@ function BlogContent() {
               <div className="space-y-4 sm:space-y-6">
                 {[
                   {
-                    q: "What is the scope of endocrinology in India?",
-                    a: "Endocrinology has tremendous scope in India due to rising metabolic and endocrine disorders. Endocrinologists can work in hospitals, specialized clinics, research centers, and private practice with excellent earning potential and job security",
+                    q: "What is the scope of diabetology in India?",
+                    a: "Diabetology has exceptional scope in India as diabetes prevalence is among the highest globally. Diabetologists can work in hospitals, clinics, research centers, and private practice with excellent job security and earning potential.",
                   },
                   {
-                    q: "What are the career opportunities after MD in Endocrinology?",
-                    a: "Endocrinologists can work in hospital endocrinology departments, establish private practice, work in specialized clinics, engage in clinical and basic research, teach in medical colleges, conduct public health programs, and explore international opportunities.",
+                    q: "What are the career opportunities after MD in Internal Medicine with Diabetology focus?",
+                    a: "Diabetologists can work in diabetes care centers, endocrinology clinics, hospitals, engage in research on diabetes management, teach in medical colleges, establish diabetes prevention programs, conduct public health initiatives, and offer telemedicine services.",
                   },
                   {
-                    q: "What subspecialties are available in endocrinology?",
-                    a: "Popular subspecialties include Thyroid Disorders, Pituitary and Adrenal Disorders, Reproductive Endocrinology, Metabolic Bone Disease, Neuroendocrinology, Pediatric Endocrinology, and Diabetes Management with integrated care.",
+                    q: "What specializations are available in diabetology?",
+                    a: "Popular specializations include Type 1 Diabetes Management, Type 2 Diabetes and Obesity, Gestational Diabetes, Pediatric Diabetes, Diabetic Complications Management, and Preventive Diabetology focusing on lifestyle modification programs.",
                   },
                   {
-                    q: "What is the salary potential for endocrinologists?",
-                    a: "Hospital endocrinologists earn 15-30 lakhs annually, clinic-based specialists earn 25-45 lakhs annually, while private practitioners with established practice earn 45-80+ lakhs annually depending on patient volume and specialization.",
+                    q: "What is the salary potential for diabetologists?",
+                    a: "Hospital-based diabetologists earn 12-25 lakhs annually, while private practitioners typically earn 25-45 lakhs annually. Those with diabetes prevention programs and corporate contracts earn 45+ lakhs annually.",
                   },
                   {
-                    q: "Is endocrinology a good specialty to pursue?",
-                    a: "Yes, endocrinology offers excellent career prospects with good earning potential, intellectual challenges, and diverse patient population. Rising prevalence of thyroid disorders and metabolic diseases ensures consistent demand.",
+                    q: "Is diabetology a good specialty to pursue?",
+                    a: "Yes, diabetology offers excellent career prospects due to high disease prevalence. It combines clinical practice, preventive medicine, and research opportunities with consistent patient flow and good earning potential.",
                   },
                   {
-                    q: "What skills are required for success in endocrinology?",
-                    a: "Essential skills include strong knowledge of endocrine physiology and pathology, proficiency with hormone assays and imaging interpretation, excellent diagnostic acumen, patient counseling abilities, research aptitude, and continuous learning of new therapies.",
+                    q: "What skills are required for success in diabetology?",
+                    a: "Essential skills include strong metabolic knowledge, expertise in diabetes management protocols, understanding of newer medications, counseling and lifestyle coaching abilities, research aptitude, and excellent communication for patient education.",
                   },
                 ].map((faq, idx) => (
                   <div
@@ -446,7 +448,7 @@ function BlogContent() {
               </h3>
               <p className="text-sm sm:text-base text-[#800020] mb-4">
                 Don't hesitate to reach out to our expert counselors who can provide personalized
-                guidance for your endocrinology specialization career journey.
+                guidance for your diabetology specialization career journey.
               </p>
               <Link
                 to="/contact-us"

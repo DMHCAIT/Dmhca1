@@ -11,7 +11,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-export const Route = createFileRoute("/ayush-hybrid-programs")({
+export const Route = createFileRoute("/blog/ayush-hybrid-programs")({
   head: () => ({
     meta: [
       { title: "AYUSH Doctor Hybrid Programs: The Complete 2025 Guide — DMHCA" },

@@ -91,7 +91,7 @@ function BlogsListing() {
             {blogsList.map((blog) => (
               <Link
                 key={blog.slug}
-                to={`/${blog.slug}`}
+                to={`/blog/${blog.slug}`}
                 className="resource-card group flex flex-col overflow-hidden rounded-2xl border border-border bg-white transition hover:-translate-y-1"
               >
                 <div className="aspect-[2/1] overflow-hidden bg-[#f8f9fc]">

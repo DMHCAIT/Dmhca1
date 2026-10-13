@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-echocardiography")({
+export const Route = createFileRoute("/blog/scope-of-endocrinology")({
   head: () => ({
     meta: [
-      { title: "Scope of Echocardiography in India — DMHCA" },
+      { title: "Scope of Endocrinology in India — DMHCA" },
       {
         name: "description",
-        content: "Career opportunities and specializations in cardiac ultrasound.",
+        content: "Career opportunities and specializations in endocrine disorders.",
       },
     ],
   }),
@@ -31,10 +31,10 @@ function BlogContent() {
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Echocardiography
+              Scope of Endocrinology
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore the growing field of cardiac ultrasound.
+              Explore the diverse field of endocrinology and metabolic disorders.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ function BlogContent() {
               <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
                 <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
-                <div className="font-bold text-sm sm:text-lg">Very High</div>
+                <div className="font-bold text-sm sm:text-lg">High</div>
               </div>
             </div>
           </div>
@@ -75,8 +75,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Echocardiography.webp"
-              alt="Scope of Echocardiography"
+              src="/blog-images/Scope-of-Endocrinology.webp"
+              alt="Scope of Endocrinology"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -93,13 +93,13 @@ function BlogContent() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { label: "Career Overview in Echocardiography", href: "#career-overview" },
-                  { label: "Clinical Settings and Practice", href: "#clinical-settings" },
-                  { label: "Advanced Imaging Techniques", href: "#imaging-techniques" },
-                  { label: "Procedure and Application Scope", href: "#procedure-scope" },
-                  { label: "Specialization Opportunities", href: "#specializations" },
+                  { label: "Career Overview in Endocrinology", href: "#career-overview" },
+                  { label: "Clinical Practice Settings", href: "#clinical-practice" },
+                  { label: "Disease Management Focus", href: "#disease-management" },
+                  { label: "Diagnostic Expertise", href: "#diagnostic-expertise" },
+                  { label: "Specialization Areas", href: "#specializations" },
                   { label: "Earning Potential", href: "#earning-potential" },
-                  { label: "Future Growth and Innovation", href: "#future-growth" },
+                  { label: "Research and Academic Opportunities", href: "#research-scope" },
                 ].map((item) => (
                   <a
                     key={item.href}
@@ -120,105 +120,106 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Career Overview in Echocardiography
+                Career Overview in Endocrinology
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed">
-                Echocardiographers specialize in cardiac ultrasound imaging, providing diagnostic
-                information for cardiac assessment. They perform sophisticated imaging studies,
-                interpret findings, and assist in treatment planning.
+                Endocrinologists specialize in diagnosing and managing hormonal and metabolic
+                disorders. They provide comprehensive care including diagnosis, treatment planning,
+                long-term management, and preventive strategies for endocrine diseases.
               </p>
             </div>
 
             <div
-              id="clinical-settings"
+              id="clinical-practice"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Clinical Settings and Practice
+                Clinical Practice Settings
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Cardiology Centers:</strong> Work in specialized cardiac centers and
-                    hospitals
+                    <strong>Hospital Departments:</strong> Work in endocrinology departments of
+                    teaching hospitals
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Diagnostic Labs:</strong> Operate diagnostic ultrasound centers
+                    <strong>Specialized Clinics:</strong> Manage thyroid, diabetes, and other
+                    endocrine clinics
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Catheterization Labs:</strong> Provide imaging support during
-                    interventions
+                    <strong>Private Practice:</strong> Establish own endocrinology consultation
+                    center
                   </div>
                 </div>
               </div>
             </div>
 
             <div
-              id="imaging-techniques"
+              id="disease-management"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Advanced Imaging Techniques
+                Disease Management Focus
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Transthoracic echocardiography (TTE) with complete protocols</div>
+                  <div>Thyroid disease management including hypothyroidism and hyperthyroidism</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Transesophageal echocardiography (TEE) for advanced imaging</div>
+                  <div>Diabetes management with integrated care approach</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>3D echocardiography and volumetric analysis</div>
+                  <div>Pituitary and adrenal disorder diagnosis and management</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Stress echocardiography for ischemia assessment</div>
+                  <div>Metabolic bone diseases and osteoporosis management</div>
                 </div>
               </div>
             </div>
 
             <div
-              id="procedure-scope"
+              id="diagnostic-expertise"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Procedure and Application Scope
+                Diagnostic Expertise
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Assess cardiac function and structure</div>
+                  <div>Interpretation of complex hormonal assays and tests</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Evaluate valvular disease and function</div>
+                  <div>Advanced imaging interpretation (MRI, CT for endocrine pathology)</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Diagnose congenital heart diseases</div>
+                  <div>Perform diagnostic procedures like thyroid fine needle aspiration</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Guide interventional procedures</div>
+                  <div>Manage complex diagnostic dilemmas</div>
                 </div>
               </div>
             </div>
@@ -231,29 +232,28 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Specialization Opportunities
+                Specialization Areas
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
-                Echocardiographers can specialize in various areas:
+                Endocrinologists can develop expertise in specialized areas:
               </p>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Stress Echo Specialist</strong> - Ischemia detection and risk assessment
+                    <strong>Thyroid Specialist</strong> - Comprehensive thyroid disease management
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>TEE Expert</strong> - Perioperative and advanced imaging
+                    <strong>Pituitary Expert</strong> - Complex pituitary and hypothalamic disorders
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Pediatric Echocardiography</strong> - Congenital and pediatric cardiac
-                    disease
+                    <strong>Reproductive Endocrinologist</strong> - Hormonal infertility management
                   </div>
                 </div>
               </div>
@@ -272,90 +272,87 @@ function BlogContent() {
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Hospital echocardiographers: 10-22 lakhs annually</div>
+                  <div>Hospital endocrinologists: 15-30 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Cardiology clinic-based: 20-40 lakhs annually</div>
+                  <div>Clinic-based specialists: 25-45 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Private diagnostic center: 40-70 lakhs annually</div>
+                  <div>Private practitioners: 45-80 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>International opportunities: 50+ lakhs annually</div>
+                  <div>Corporate and pharmaceutical roles: 50+ lakhs annually</div>
                 </div>
               </div>
             </div>
 
             <div
-              id="future-growth"
+              id="research-scope"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Future Growth and Innovation
+                Research and Academic Opportunities
               </h2>
-              <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
-                Echocardiography continues to evolve with technology:
-              </p>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>AI-assisted image analysis and diagnosis</div>
+                  <div>Conduct research on endocrine disorders and new treatments</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Point-of-care echocardiography expansion</div>
+                  <div>Teach in medical colleges and guide residents</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Advanced strain imaging and myocardial mechanics</div>
+                  <div>Publish in international endocrinology journals</div>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Echocardiography Scope Overview
+                Endocrinology Scope Overview
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Skill Demand
+                    Disease Prevalence
                   </p>
                   <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Very High</p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Technology Integration
+                    Research Opportunity
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Cutting-Edge</p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Abundant</p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Job Security
+                    Career Flexibility
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Excellent</p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">High</p>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Key Tips for Excelling in Echocardiography
+                Key Tips for Excelling in Endocrinology
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {[
-                  "Master cardiac anatomy in great detail",
-                  "Develop excellent hand-eye coordination",
-                  "Practice extensively on patients",
-                  "Stay updated with imaging technology",
-                  "Attend advanced echocardiography courses",
-                  "Maintain certification and CME credits",
+                  "Master endocrine physiology and biochemistry thoroughly",
+                  "Develop expertise in hormone assay interpretation",
+                  "Stay updated with new hormone therapies",
+                  "Engage in clinical research and publications",
+                  "Develop excellent patient counseling skills",
+                  "Build expertise in multidisciplinary care",
                 ].map((tip, idx) => (
                   <div key={idx} className="p-4 bg-[#f8f9fc] border border-[#29334a]/15 rounded-lg">
                     <p className="font-bold text-[#29334a] text-sm sm:text-base">✓ {tip}</p>
@@ -371,28 +368,28 @@ function BlogContent() {
               <div className="space-y-4 sm:space-y-6">
                 {[
                   {
-                    q: "What is the scope of echocardiography in India?",
-                    a: "Echocardiography has excellent scope due to high prevalence of cardiac diseases. Echocardiographers can work in hospitals, diagnostic centers, cardiology clinics, and private practice with strong job security and competitive salaries.",
+                    q: "What is the scope of endocrinology in India?",
+                    a: "Endocrinology has tremendous scope in India due to rising metabolic and endocrine disorders. Endocrinologists can work in hospitals, specialized clinics, research centers, and private practice with excellent earning potential and job security",
                   },
                   {
-                    q: "What career opportunities exist after fellowship in echocardiography?",
-                    a: "Echocardiographers can work in cardiology centers, establish diagnostic ultrasound clinics, perform procedures in catheterization labs, work as independent contractors, teach in medical colleges, engage in research, and explore international opportunities.",
+                    q: "What are the career opportunities after MD in Endocrinology?",
+                    a: "Endocrinologists can work in hospital endocrinology departments, establish private practice, work in specialized clinics, engage in clinical and basic research, teach in medical colleges, conduct public health programs, and explore international opportunities.",
                   },
                   {
-                    q: "What types of echocardiography can specialists perform?",
-                    a: "Specialists can perform Transthoracic Echocardiography (TTE), Transesophageal Echocardiography (TEE), 3D echocardiography, Doppler studies, Stress echocardiography, and advanced cardiac imaging with expertise in different protocols.",
+                    q: "What subspecialties are available in endocrinology?",
+                    a: "Popular subspecialties include Thyroid Disorders, Pituitary and Adrenal Disorders, Reproductive Endocrinology, Metabolic Bone Disease, Neuroendocrinology, Pediatric Endocrinology, and Diabetes Management with integrated care.",
                   },
                   {
-                    q: "What is the earning potential for echocardiographers?",
-                    a: "Hospital echocardiographers earn 10-22 lakhs annually, clinic-based specialists earn 20-40 lakhs annually, while private practitioners with their own ultrasound center earn 40-70+ lakhs annually depending on patient volume.",
+                    q: "What is the salary potential for endocrinologists?",
+                    a: "Hospital endocrinologists earn 15-30 lakhs annually, clinic-based specialists earn 25-45 lakhs annually, while private practitioners with established practice earn 45-80+ lakhs annually depending on patient volume and specialization.",
                   },
                   {
-                    q: "Is echocardiography a good career choice?",
-                    a: "Yes, echocardiography offers excellent career prospects with good earning potential, job security, and flexibility. It combines technical skills with clinical decision-making and provides immediate diagnostic impact on patient care.",
+                    q: "Is endocrinology a good specialty to pursue?",
+                    a: "Yes, endocrinology offers excellent career prospects with good earning potential, intellectual challenges, and diverse patient population. Rising prevalence of thyroid disorders and metabolic diseases ensures consistent demand.",
                   },
                   {
-                    q: "What skills are required for success in echocardiography?",
-                    a: "Essential skills include strong cardiac anatomy knowledge, proficiency with ultrasound technology, image acquisition and interpretation expertise, excellent hand-eye coordination, ability to handle complex cardiac cases, and continuous learning of new imaging modalities.",
+                    q: "What skills are required for success in endocrinology?",
+                    a: "Essential skills include strong knowledge of endocrine physiology and pathology, proficiency with hormone assays and imaging interpretation, excellent diagnostic acumen, patient counseling abilities, research aptitude, and continuous learning of new therapies.",
                   },
                 ].map((faq, idx) => (
                   <div
@@ -449,7 +446,7 @@ function BlogContent() {
               </h3>
               <p className="text-sm sm:text-base text-[#800020] mb-4">
                 Don't hesitate to reach out to our expert counselors who can provide personalized
-                guidance for your echocardiography specialization career journey.
+                guidance for your endocrinology specialization career journey.
               </p>
               <Link
                 to="/contact-us"

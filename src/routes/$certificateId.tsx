@@ -378,6 +378,31 @@ const blogPosts: Record<string, any> = {
   },
 };
 
+const blogSlugs = new Set([
+  "ayush-hybrid-programs",
+  "how-to-crack-neet-pg",
+  "courses-after-mbbs-in-india",
+  "scope-of-cardiology",
+  "scope-of-obstetrics-and-gynecology",
+  "scope-of-cosmetology",
+  "scope-of-paediatrics",
+  "scope-of-oncology",
+  "scope-of-neurology",
+  "scope-of-echocardiography",
+  "scope-of-diabetology",
+  "scope-of-endocrinology",
+  "how-to-become-a-radiologist",
+  "how-to-become-a-cardiologist",
+  "how-to-become-a-cosmetologist",
+  "how-to-become-an-oncologist",
+  "how-to-become-a-neurologist",
+  "how-to-become-a-diabetologist",
+  "how-to-become-an-endocrinologist",
+  "how-to-become-an-embryologist",
+  "how-to-become-a-pediatrician",
+  "how-to-become-an-obstetrician-gynecologist",
+]);
+
 // This route handles direct certificate ID access at root level
 // Supports both:
 // - https://dmhca.in/[certificateId]
@@ -391,9 +416,9 @@ export const Route = createFileRoute("/$certificateId")({
 function RootCertificateHandler() {
   const { certificateId } = Route.useParams();
 
-  // Check if this is a blog slug
-  if (blogPosts[certificateId]) {
-    return <BlogPostPage slug={certificateId} />;
+  // Check if this is a blog slug and redirect to /blog/[slug]
+  if (blogSlugs.has(certificateId) || blogPosts[certificateId]) {
+    return <Navigate to={`/blog/${certificateId}`} replace />;
   }
 
   const [redirectUrl, setRedirectUrl] = useState<string | null>(null);

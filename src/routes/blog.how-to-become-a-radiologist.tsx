@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/how-to-become-a-neurologist")({
+export const Route = createFileRoute("/blog/how-to-become-a-radiologist")({
   head: () => ({
     meta: [
-      { title: "How to Become a Neurologist — DMHCA" },
-      { name: "description", content: "Step-by-step guide to becoming a neurologist in India." },
+      { title: "How to Become a Radiologist — DMHCA" },
+      { name: "description", content: "Step-by-step guide to becoming a radiologist in India." },
     ],
   }),
   component: BlogContent,
@@ -28,10 +28,10 @@ function BlogContent() {
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              How to Become a Neurologist
+              How to Become a Radiologist
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Complete pathway to becoming a neurologist in India
+              Complete pathway to becoming a radiologist in India
             </p>
           </div>
 
@@ -54,7 +54,7 @@ function BlogContent() {
               <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
                 <div className="text-xs sm:text-sm text-white/70">Duration</div>
-                <div className="font-bold text-sm sm:text-lg">12-13 years</div>
+                <div className="font-bold text-sm sm:text-lg">9.5-10.5 years</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
@@ -72,8 +72,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/How-to-Become-a-Neurologist.webp"
-              alt="How to Become a Neurologist"
+              src="/blog-images/How-to-Become-a-Radiologist.webp"
+              alt="How to Become a Radiologist"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -87,10 +87,10 @@ function BlogContent() {
             <div className="career-pathway mb-12 not-prose">
               <span className="career-pathway-label">Your career roadmap</span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-6">
-                Path to Neurologist
+                Path to Radiologist
               </h2>
               <p className="text-[#29334a] mb-8 text-sm sm:text-base">
-                Becoming a neurologist in India requires a systematic approach combining academic
+                Becoming a radiologist in India requires a systematic approach combining academic
                 excellence, competitive entrance exams, and clinical experience. This guide outlines
                 the complete pathway to help you navigate your journey into this rewarding medical
                 specialty.
@@ -225,7 +225,7 @@ function BlogContent() {
               </h2>
               <div className="bg-gradient-to-r from-[#800020]/95 to-[#800020]/95 rounded-lg p-6 text-white">
                 <p className="text-sm sm:text-base">
-                  Total Duration: <span className="font-bold text-lg">12-13 years</span>
+                  Total Duration: <span className="font-bold text-lg">9.5-10.5 years</span>
                 </p>
                 <p className="text-sm sm:text-base text-white/80 mt-2">
                   This includes 12th to MBBS, internship, NEET-PG preparation, and postgraduate
@@ -281,7 +281,7 @@ function BlogContent() {
                   <details className="group">
                     <summary className="flex items-start justify-between cursor-pointer font-semibold text-[#29334a] text-sm sm:text-base">
                       <span className="flex-1 text-left pr-4">
-                        What is the total time required to become a neurologist?
+                        What is the total time required to become a radiologist?
                       </span>
                       <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-[#6b5b68] group-open:rotate-180 transition-transform">
                         <svg
@@ -299,7 +299,7 @@ function BlogContent() {
                       </span>
                     </summary>
                     <p className="text-[#29334a] mt-3 text-xs sm:text-sm leading-relaxed">
-                      Total duration is approximately 12-13 years. This includes 12th completion,
+                      Total duration is approximately 9.5-10.5 years. This includes 12th completion,
                       5.5-year MBBS program, 1-year internship, NEET-PG preparation, and 3-year
                       postgraduate specialization training.
                     </p>
@@ -461,7 +461,7 @@ function BlogContent() {
                   <h3 className="text-2xl font-bold text-white mb-3">Still have questions?</h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
                     Don't hesitate to reach out to our expert counselors who can provide
-                    personalized guidance for your neurology specialization career journey.
+                    personalized guidance for your radiology specialization career journey.
                   </p>
                   <Link
                     to="/contact-us"

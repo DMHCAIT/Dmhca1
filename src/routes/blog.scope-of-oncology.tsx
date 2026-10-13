@@ -1,14 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/courses-after-mbbs-in-india")({
+export const Route = createFileRoute("/blog/scope-of-oncology")({
   head: () => ({
     meta: [
-      { title: "Courses After MBBS in India: Complete Postgraduate Guide — DMHCA" },
+      { title: "Scope of Oncology in India — DMHCA" },
       {
         name: "description",
-        content:
-          "Comprehensive guide to all postgraduate and specialization courses available for MBBS graduates in India. Explore MD, MS, DM, MCh, and more.",
+        content: "Career prospects and opportunities in oncology and cancer specialization.",
       },
     ],
   }),
@@ -30,14 +29,15 @@ function BlogContent() {
           </Link>
           <div className="max-w-3xl">
             <div className="inline-block px-3 sm:px-4 py-1 bg-[#800020]/20 border border-[#f7cbd7]/50 rounded-full text-[#f7cbd7] text-xs font-semibold mb-2">
-              Career Planning Guide • 2025 Edition
+              Medical Specialty Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Courses After MBBS in India: Your Complete Postgraduate Roadmap
+              Scope of Oncology: Career Opportunities & Specializations
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore all postgraduate and specialization courses available for MBBS graduates.
-              Master your career path with comprehensive guidance on MD, MS, DM, MCh, and beyond.
+              Explore the rapidly advancing field of cancer medicine. Master modern treatment
+              modalities, develop specialized expertise, and build a fulfilling career with
+              exceptional earning potential.
             </p>
           </div>
 
@@ -60,15 +60,15 @@ function BlogContent() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
               <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
-                <div className="text-xs sm:text-sm text-white/70">Specializations</div>
-                <div className="font-bold text-sm sm:text-lg">50+</div>
+                <div className="text-xs sm:text-sm text-white/70">Job Market</div>
+                <div className="font-bold text-sm sm:text-lg">Excellent</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
               <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
-                <div className="text-xs sm:text-sm text-white/70">Updated</div>
-                <div className="font-bold text-sm sm:text-lg">June 2025</div>
+                <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
+                <div className="font-bold text-sm sm:text-lg">Rapid</div>
               </div>
             </div>
           </div>
@@ -80,8 +80,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Courses-After-MBBS-in-India.webp"
-              alt="Courses After MBBS in India"
+              src="/blog-images/Scope-of-Oncology.webp"
+              alt="Scope of Oncology"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -96,30 +96,30 @@ function BlogContent() {
             {/* Quick Summary */}
             <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
               <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
-                What You'll Learn in This Guide
+                Career Scope in Oncology
               </h2>
               <p className="text-sm sm:text-base text-[#800020] mb-6 leading-relaxed">
-                This comprehensive guide explores all postgraduate options available for MBBS
-                graduates in India. From MD and MS programs to DM/MCh super specialties and
-                international opportunities, discover the pathway that matches your career
-                aspirations.
+                Oncology is a rapidly advancing medical specialty with tremendous career potential.
+                As cancer incidence rises and treatment options expand, demand for qualified
+                oncologists continues to grow. The specialty offers multiple pathways with
+                exceptional earning potential and opportunities for innovation.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">7 major postgraduate pathways</span>
+                  <span className="text-[#800020]">7 major career pathways</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Detailed eligibility criteria</span>
+                  <span className="text-[#800020]">Subspecialization options</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Career planning tips</span>
+                  <span className="text-[#800020]">Research opportunities</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">International opportunities</span>
+                  <span className="text-[#800020]">Highest earning potential</span>
                 </div>
               </div>
             </div>
@@ -131,13 +131,13 @@ function BlogContent() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { num: 1, title: "MD (Doctorate of Medicine)" },
-                  { num: 2, title: "MS (Master of Surgery)" },
-                  { num: 3, title: "PG Diploma Programs" },
-                  { num: 4, title: "DM (Super-specialty)" },
-                  { num: 5, title: "MCh (Super-specialty)" },
-                  { num: 6, title: "MBA in Healthcare" },
-                  { num: 7, title: "International Opportunities" },
+                  { num: 1, title: "Cancer Treatment" },
+                  { num: 2, title: "Hospital Employment" },
+                  { num: 3, title: "Private Practice" },
+                  { num: 4, title: "Subspecialization" },
+                  { num: 5, title: "Research & Trials" },
+                  { num: 6, title: "Academic Roles" },
+                  { num: 7, title: "Global Opportunities" },
                 ].map((item) => (
                   <a
                     key={item.num}
@@ -157,7 +157,8 @@ function BlogContent() {
               </div>
             </div>
 
-            {/* Section 1: MD */}
+            {/* Sections 1-7 */}
+            {/* Section 1 */}
             <div
               id="section-1"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -166,55 +167,52 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                MD (Doctorate of Medicine)
+                Cancer Treatment and Patient Management
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Duration: 3 years full-time postgraduate degree</p>
+                    <p className="font-semibold">Diagnosis and Treatment Planning</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Comprehensive medical training and specialization
+                      Diagnose and manage various types of cancers including solid tumors and
+                      hematologic malignancies
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Eligibility: MBBS completion + 1 year internship + NEET-PG qualification
-                    </p>
+                    <p className="font-semibold">Comprehensive Treatment Approach</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Must be registered with MCI/State Medical Council
+                      Develop personalized treatment plans combining chemotherapy, targeted therapy,
+                      and immunotherapy
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Focus: Clinical training with research and thesis component
-                    </p>
+                    <p className="font-semibold">Patient Care and Supportive Services</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Balanced blend of practice and research
+                      Provide comprehensive supportive care and manage treatment-related
+                      complications
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Specialties: Internal Medicine, Pediatrics, Psychiatry, etc.
-                    </p>
+                    <p className="font-semibold">Cancer Prevention and Screening</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Multiple medical specializations available
+                      Perform cancer screening programs and early detection initiatives
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 2: MS */}
+            {/* Section 2 */}
             <div
               id="section-2"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -223,55 +221,49 @@ function BlogContent() {
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                MS (Master of Surgery)
+                Hospital and Cancer Center Employment
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Duration: 3 years full-time postgraduate degree</p>
+                    <p className="font-semibold">Government Hospital Positions</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Comprehensive surgical training program
+                      Work in government hospitals and medical college oncology departments
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Eligibility: MBBS completion + 1 year internship + NEET-PG qualification
-                    </p>
+                    <p className="font-semibold">Cancer Center Leadership</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Similar to MD eligibility requirements
+                      Lead oncology departments and manage cancer treatment services
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Focus: Surgical training with research and thesis requirement
-                    </p>
+                    <p className="font-semibold">Corporate Hospital Opportunities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Practical surgical skills with academic rigor
+                      Work in corporate cancer centers with advanced treatment facilities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Specialties: General Surgery, Orthopedics, ENT, Ophthalmology, etc.
-                    </p>
+                    <p className="font-semibold">Modern Treatment Facilities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Diverse surgical specializations
+                      Access state-of-the-art equipment and latest cancer treatment technologies
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 3: PG Diploma */}
+            {/* Section 3 */}
             <div
               id="section-3"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -280,53 +272,49 @@ function BlogContent() {
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                PG Diploma Programs
+                Private Practice and Entrepreneurship
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Duration: 2-3 years depending on specialty</p>
-                    <p className="text-xs sm:text-sm text-[#800020]">Shorter than MD/MS programs</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-[#800020] font-bold">→</span>
-                  <div>
-                    <p className="font-semibold">
-                      Focus: More practical, less research emphasis than MD/MS
-                    </p>
+                    <p className="font-semibold">Independent Oncology Practice</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Clinically oriented training approach
+                      Establish independent oncology clinics and cancer treatment centers
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Specialties: Anesthesia, Radiology, Pathology, OBG, etc.
-                    </p>
+                    <p className="font-semibold">Patient Consultation Services</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Diverse specialty options available
+                      Provide specialized oncology consultations and second opinions
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Benefit: Faster completion with clinically oriented training
-                    </p>
+                    <p className="font-semibold">Patient Relationship Building</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Quick entry into specialized practice
+                      Build patient base through quality care and reputation
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#800020] font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">High Income Potential</p>
+                    <p className="text-xs sm:text-sm text-[#800020]">
+                      Private oncology practice offers exceptional earning potential
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 4: DM */}
+            {/* Section 4 */}
             <div
               id="section-4"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -335,55 +323,49 @@ function BlogContent() {
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                DM (Doctor of Medicine - Super-specialty)
+                Subspecialization Opportunities
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Duration: 3 years advanced specialization</p>
+                    <p className="font-semibold">Medical Oncology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Highly specialized medical training
+                      Specialize in chemotherapy and systemic cancer treatment
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Eligibility: MD in relevant specialty + entrance exam
-                    </p>
+                    <p className="font-semibold">Surgical Oncology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Requires prior MD qualification
+                      Pursue surgical oncology for cancer surgery specialization
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Examples: DM Cardiology, DM Neurology, DM Nephrology, DM Gastroenterology
-                    </p>
+                    <p className="font-semibold">Organ-Specific Oncology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Multiple super-specialty options
+                      Focus on breast oncology, lung cancer, or other organ-specific cancers
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Career: Highly specialized practice and research opportunities
-                    </p>
+                    <p className="font-semibold">Specialist Consultant Roles</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Premium expertise and earning potential
+                      Develop expertise in specific cancer types and treatment protocols
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 5: MCh */}
+            {/* Section 5 */}
             <div
               id="section-5"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -392,55 +374,49 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                MCh (Master of Chirurgie - Super-specialty)
+                Research and Clinical Trials
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Duration: 3 years advanced surgical specialization
-                    </p>
+                    <p className="font-semibold">Clinical Trial Participation</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Highest level of surgical expertise
+                      Conduct and participate in cancer clinical trials and research studies
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Eligibility: MS in relevant surgical specialty + entrance exam
-                    </p>
-                    <p className="text-xs sm:text-sm text-[#800020]">Requires MS qualification</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-[#800020] font-bold">→</span>
-                  <div>
-                    <p className="font-semibold">
-                      Examples: MCh Urology, MCh Pediatric Surgery, MCh CTVS, MCh Neurosurgery
-                    </p>
+                    <p className="font-semibold">Drug Development</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Specialized surgical branches
+                      Participate in cancer drug development and novel therapy research
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Career: Advanced surgical expertise and specialized centers
-                    </p>
+                    <p className="font-semibold">Research Publishing</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Elite surgical specialization
+                      Publish research in prestigious oncology journals advancing cancer care
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#800020] font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">Innovation and Discovery</p>
+                    <p className="text-xs sm:text-sm text-[#800020]">
+                      Contribute to innovation in cancer treatment and research
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 6: MBA */}
+            {/* Section 6 */}
             <div
               id="section-6"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -449,57 +425,49 @@ function BlogContent() {
                 SECTION 6
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                MBA in Healthcare/Hospital Administration
+                Academic and Teaching Roles
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Duration: 2 years full-time or 3-4 years part-time
-                    </p>
+                    <p className="font-semibold">Medical College Faculty</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Flexible options for working professionals
+                      Pursue academic career as faculty in medical colleges and universities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Focus: Healthcare management, hospital administration, policy
-                    </p>
+                    <p className="font-semibold">Student and Resident Training</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Business and administrative skills
+                      Train medical students and oncology residents in cancer management
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Career Path: Hospital director, healthcare consultant, policy maker
-                    </p>
+                    <p className="font-semibold">Leadership Opportunities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Leadership and management roles
+                      Lead oncology departments as professors and academic leaders
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Benefit: Blend clinical knowledge with management expertise
-                    </p>
+                    <p className="font-semibold">Knowledge Dissemination</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Unique combination of skills
+                      Share expertise and mentor next generation of oncologists
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 7: International */}
+            {/* Section 7 */}
             <div
               id="section-7"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -508,110 +476,112 @@ function BlogContent() {
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                International Postgraduate Studies
+                Global Opportunities and International Practice
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      USA: USMLE (United States Medical Licensing Exam)
-                    </p>
+                    <p className="font-semibold">International Practice Opportunities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Path to medical practice in United States
+                      Work in oncology hospitals and cancer centers globally
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      UK: FRCPS (Royal College of Physicians), FRCS (Surgery)
-                    </p>
+                    <p className="font-semibold">Advanced Technology Access</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Prestigious UK medical qualifications
+                      Access cutting-edge cancer treatment technology internationally
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Australia/Canada: RACGP, CCPA, and other certifications
-                    </p>
+                    <p className="font-semibold">Fellowship Training</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Opportunities in developed healthcare systems
+                      Pursue fellowships and advanced training internationally
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">
-                      Benefit: Global career opportunities and international recognition
-                    </p>
+                    <p className="font-semibold">Global Network</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Worldwide medical practice options
+                      Build international oncology network and professional connections
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Career Planning Tips */}
+            {/* Career Timeline */}
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Career Planning Tips
+                Career Timeline
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">12 to MBBS</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">5.5 years</p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
+                    MBBS to MD Oncology
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3-4 years</p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
+                    Total Duration
+                  </p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">8.5-9.5 years</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Key Tips Section */}
+            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
+                Key Tips for Success
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Choose by Interest
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Choose specialization based on your interest, not market demand
-                  </p>
-                </div>
-                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Gain Exposure
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Gain clinical exposure during internship year to test interests
-                  </p>
-                </div>
-                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Start Early
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Start preparation for entrance exams early for better results
-                  </p>
-                </div>
-                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Research Institutes
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Research institutes and mentors thoroughly before applying
-                  </p>
-                </div>
-                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Global Opportunities
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Consider international opportunities if interested in global practice
-                  </p>
-                </div>
-                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Balance Development
-                  </p>
-                  <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Balance academics with professional and personal development
-                  </p>
-                </div>
+                {[
+                  {
+                    title: "Cancer Biology Foundation",
+                    desc: "Develop strong fundamentals in cancer pathology and biology",
+                  },
+                  {
+                    title: "Stay Updated",
+                    desc: "Stay updated with latest cancer treatment protocols and guidelines",
+                  },
+                  {
+                    title: "Hands-on Experience",
+                    desc: "Gain hands-on experience in cancer diagnostics and treatment",
+                  },
+                  {
+                    title: "Research Engagement",
+                    desc: "Engage in research to advance cancer treatment knowledge",
+                  },
+                  {
+                    title: "Develop Compassion",
+                    desc: "Develop compassion and emotional intelligence for patient care",
+                  },
+                  {
+                    title: "Pursue Fellowships",
+                    desc: "Pursue fellowships and additional training in specialized cancers",
+                  },
+                ].map((tip, i) => (
+                  <div key={i} className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                    <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                      ✓ {tip.title}
+                    </p>
+                    <p className="text-xs sm:text-sm text-[#6b5b68]">{tip.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -619,12 +589,10 @@ function BlogContent() {
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-3">
-                    Ready to Plan Your Postgraduate Career?
-                  </h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue Oncology?</h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
-                    Explore comprehensive postgraduate programs and get personalized guidance for
-                    your medical career advancement.
+                    Explore comprehensive oncology programs and build a rewarding career in cancer
+                    medicine.
                   </p>
                   <Link
                     to="/top-medical-courses"
@@ -645,34 +613,34 @@ function BlogContent() {
             Frequently Asked Questions
           </h2>
           <p className="text-[#6b5b68] mb-8 text-sm sm:text-base">
-            Get answers to common questions about postgraduate medical education in India.
+            Get answers to common questions about oncology career opportunities.
           </p>
 
           <div className="space-y-4 sm:space-y-6">
             {[
               {
-                q: "What are the main postgraduate options after MBBS in India?",
-                a: "After MBBS, you can pursue MD (Doctorate of Medicine), MS (Master of Surgery), PG Diploma, or super-specialty courses like DM or MCh. Each has different duration and requirements.",
+                q: "What is the scope of oncology in India?",
+                a: "Oncology is rapidly expanding in India with increasing cancer incidence, improved healthcare infrastructure, and growing private sector investment. There are excellent opportunities in cancer centers, hospitals, research institutions, and private practice. India is becoming a hub for oncology professionals.",
               },
               {
-                q: "Is NEET-PG mandatory for all postgraduate courses?",
-                a: "Yes, NEET-PG is the primary entrance exam for most MD, MS, and PG Diploma programs in India. Some institutions may have their own entrance exams.",
+                q: "What are the different subspecialties in oncology?",
+                a: "Oncology includes Medical Oncology, Surgical Oncology, Radiation Oncology, Hematology-Oncology, and Pediatric Oncology. Each subspecialty offers distinct career paths and specialization opportunities with excellent earning potential.",
               },
               {
-                q: "How long is an MD/MS program?",
-                a: "MD (Doctorate of Medicine) and MS (Master of Surgery) programs typically last 3 years with mandatory thesis/research component.",
+                q: "What is the career progression in oncology?",
+                a: "Career progression includes positions as resident, senior resident, assistant consultant, consultant, and senior consultant. Many oncologists establish cancer centers, lead research teams, pursue academic roles, or develop specialized treatment protocols.",
               },
               {
-                q: "Can I study abroad after MBBS?",
-                a: "Yes, many medical graduates pursue postgraduate studies abroad. Popular destinations include USA (USMLE), UK (FRCPS), Canada, and Australia (RACGP).",
+                q: "Are there research opportunities in oncology?",
+                a: "Yes, India has significant research opportunities in cancer biology, immunotherapy, targeted therapy, and precision medicine. Many institutions offer fellowships in clinical research and opportunities to collaborate with pharmaceutical companies.",
               },
               {
-                q: "What is a PG Diploma and how is it different from MD?",
-                a: "PG Diploma programs are typically 2-3 years long and focus on practical clinical training with less emphasis on research compared to MD programs.",
+                q: "What is the earning potential for oncologists?",
+                a: "Oncologists have high earning potential with government positions offering 10-15 lakhs annually. Private sector consultants earn 20-40 lakhs, while those in private centers can earn 30-50+ lakhs, making it one of the highest-paying specialties.",
               },
               {
-                q: "What are super-specialty courses (DM/MCh)?",
-                a: "DM (Doctor of Medicine) and MCh (Master of Chirurgie) are 3-year super-specialty courses pursued after completing MD/MS. They provide advanced specialized knowledge.",
+                q: "Can oncologists work internationally?",
+                a: "Yes, Indian oncologists can work in USA, Canada, UK, and Australia after qualifying relevant exams. Many international cancer centers actively recruit experienced Indian oncologists due to their expertise.",
               },
             ].map((faq, idx) => (
               <div
@@ -709,7 +677,7 @@ function BlogContent() {
             </h3>
             <p className="text-sm sm:text-base text-[#800020] mb-4">
               Don't hesitate to reach out to our expert counselors who can provide personalized
-              guidance for your postgraduate career pathway.
+              guidance for your oncology specialization career journey.
             </p>
             <Link
               to="/contact-us"

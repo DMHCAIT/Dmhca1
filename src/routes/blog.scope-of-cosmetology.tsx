@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-cosmetology")({
+export const Route = createFileRoute("/blog/scope-of-cosmetology")({
   head: () => ({
     meta: [
       { title: "Scope of Cosmetology in India — DMHCA" },

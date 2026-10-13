@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-oncology")({
+export const Route = createFileRoute("/blog/scope-of-neurology")({
   head: () => ({
     meta: [
-      { title: "Scope of Oncology in India — DMHCA" },
+      { title: "Scope of Neurology in India — DMHCA" },
       {
         name: "description",
-        content: "Career prospects and opportunities in oncology and cancer specialization.",
+        content:
+          "Career opportunities and advancement in neurology and neurological specialization.",
       },
     ],
   }),
@@ -29,15 +30,15 @@ function BlogContent() {
           </Link>
           <div className="max-w-3xl">
             <div className="inline-block px-3 sm:px-4 py-1 bg-[#800020]/20 border border-[#f7cbd7]/50 rounded-full text-[#f7cbd7] text-xs font-semibold mb-2">
-              Medical Specialty Guide • 2025 Edition
+              Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Oncology: Career Opportunities & Specializations
+              Scope of Neurology: Career Opportunities & Specializations
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore the rapidly advancing field of cancer medicine. Master modern treatment
-              modalities, develop specialized expertise, and build a fulfilling career with
-              exceptional earning potential.
+              Explore the fascinating field of neurology. Master neurological diagnosis, develop
+              advanced clinical skills, and build a successful practice with excellent earning
+              potential and global opportunities.
             </p>
           </div>
 
@@ -68,7 +69,7 @@ function BlogContent() {
               <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
                 <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
-                <div className="font-bold text-sm sm:text-lg">Rapid</div>
+                <div className="font-bold text-sm sm:text-lg">High</div>
               </div>
             </div>
           </div>
@@ -80,8 +81,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Oncology.webp"
-              alt="Scope of Oncology"
+              src="/blog-images/Scope-of-Neurology.webp"
+              alt="Scope of Neurology"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -96,13 +97,13 @@ function BlogContent() {
             {/* Quick Summary */}
             <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
               <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
-                Career Scope in Oncology
+                Career Scope in Neurology
               </h2>
               <p className="text-sm sm:text-base text-[#800020] mb-6 leading-relaxed">
-                Oncology is a rapidly advancing medical specialty with tremendous career potential.
-                As cancer incidence rises and treatment options expand, demand for qualified
-                oncologists continues to grow. The specialty offers multiple pathways with
-                exceptional earning potential and opportunities for innovation.
+                Neurology offers exceptional career scope with high patient demand, excellent
+                earning potential, and opportunities for subspecialization and research. The field
+                encompasses diagnosis and treatment of neurological disorders affecting millions
+                worldwide.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="flex items-start gap-3">
@@ -119,7 +120,7 @@ function BlogContent() {
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Highest earning potential</span>
+                  <span className="text-[#800020]">Strong global demand</span>
                 </div>
               </div>
             </div>
@@ -131,13 +132,13 @@ function BlogContent() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { num: 1, title: "Cancer Treatment" },
-                  { num: 2, title: "Hospital Employment" },
-                  { num: 3, title: "Private Practice" },
-                  { num: 4, title: "Subspecialization" },
-                  { num: 5, title: "Research & Trials" },
-                  { num: 6, title: "Academic Roles" },
-                  { num: 7, title: "Global Opportunities" },
+                  { num: 1, title: "Diagnostic Opportunities" },
+                  { num: 2, title: "Patient Management" },
+                  { num: 3, title: "Research & Academic" },
+                  { num: 4, title: "Subspecialties" },
+                  { num: 5, title: "International Practice" },
+                  { num: 6, title: "Earning Potential" },
+                  { num: 7, title: "Work-Life Balance" },
                 ].map((item) => (
                   <a
                     key={item.num}
@@ -167,45 +168,42 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Cancer Treatment and Patient Management
+                Diagnostic Opportunities
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Diagnosis and Treatment Planning</p>
+                    <p className="font-semibold">Advanced Imaging Interpretation</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Diagnose and manage various types of cancers including solid tumors and
-                      hematologic malignancies
+                      Advanced imaging interpretation (CT, MRI, EEG) and diagnostic expertise
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Comprehensive Treatment Approach</p>
+                    <p className="font-semibold">Clinical Examination</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Develop personalized treatment plans combining chemotherapy, targeted therapy,
-                      and immunotherapy
+                      Clinical neurological examination expertise and diagnostic skills
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Patient Care and Supportive Services</p>
+                    <p className="font-semibold">Neurosurgical Consultation</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Provide comprehensive supportive care and manage treatment-related
-                      complications
+                      Neurosurgical consultation and planning for complex cases
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Cancer Prevention and Screening</p>
+                    <p className="font-semibold">Post-operative Management</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Perform cancer screening programs and early detection initiatives
+                      Post-operative neurological management and monitoring
                     </p>
                   </div>
                 </div>
@@ -221,42 +219,42 @@ function BlogContent() {
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Hospital and Cancer Center Employment
+                Patient Management
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Government Hospital Positions</p>
+                    <p className="font-semibold">Chronic Disease Management</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work in government hospitals and medical college oncology departments
+                      Chronic disease management and long-term patient care
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Cancer Center Leadership</p>
+                    <p className="font-semibold">Outpatient Consultations</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Lead oncology departments and manage cancer treatment services
+                      Regular outpatient consultations and patient relationships
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Corporate Hospital Opportunities</p>
+                    <p className="font-semibold">Hospital Inpatient Care</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work in corporate cancer centers with advanced treatment facilities
+                      Hospital inpatient care and acute patient management
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Modern Treatment Facilities</p>
+                    <p className="font-semibold">Emergency Stroke Management</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Access state-of-the-art equipment and latest cancer treatment technologies
+                      Emergency stroke and seizure management capabilities
                     </p>
                   </div>
                 </div>
@@ -272,42 +270,42 @@ function BlogContent() {
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Private Practice and Entrepreneurship
+                Research & Academic Career
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Independent Oncology Practice</p>
+                    <p className="font-semibold">Clinical Trials</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Establish independent oncology clinics and cancer treatment centers
+                      Clinical trials participation and research studies
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Patient Consultation Services</p>
+                    <p className="font-semibold">Research Publications</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Provide specialized oncology consultations and second opinions
+                      Neurological research publications in peer-reviewed journals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Patient Relationship Building</p>
+                    <p className="font-semibold">Medical Education</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Build patient base through quality care and reputation
+                      Medical education and teaching responsibilities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">High Income Potential</p>
+                    <p className="font-semibold">Academic Career</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Private oncology practice offers exceptional earning potential
+                      Academic career advancement and professional development
                     </p>
                   </div>
                 </div>
@@ -323,42 +321,42 @@ function BlogContent() {
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Subspecialization Opportunities
+                Subspecialties
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Medical Oncology</p>
+                    <p className="font-semibold">Neuroradiology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Specialize in chemotherapy and systemic cancer treatment
+                      Neuroradiology and imaging subspecialization
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Surgical Oncology</p>
+                    <p className="font-semibold">Neurophysiology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pursue surgical oncology for cancer surgery specialization
+                      Neurophysiology and EEG expertise
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Organ-Specific Oncology</p>
+                    <p className="font-semibold">Movement Disorders</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Focus on breast oncology, lung cancer, or other organ-specific cancers
+                      Movement disorders and specialized treatment
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Specialist Consultant Roles</p>
+                    <p className="font-semibold">Neuro-oncology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Develop expertise in specific cancer types and treatment protocols
+                      Neuro-oncology and brain tumor management
                     </p>
                   </div>
                 </div>
@@ -374,42 +372,42 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Research and Clinical Trials
+                International Practice
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Clinical Trial Participation</p>
+                    <p className="font-semibold">Global Demand</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Conduct and participate in cancer clinical trials and research studies
+                      High demand in developed countries worldwide
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Drug Development</p>
+                    <p className="font-semibold">Global Recognition</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Participate in cancer drug development and novel therapy research
+                      Excellent global recognition and professional standing
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Research Publishing</p>
+                    <p className="font-semibold">Immigration Pathways</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Publish research in prestigious oncology journals advancing cancer care
+                      Multiple immigration pathways and opportunities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Innovation and Discovery</p>
+                    <p className="font-semibold">Fellowship Training</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Contribute to innovation in cancer treatment and research
+                      International fellowship opportunities and training
                     </p>
                   </div>
                 </div>
@@ -425,42 +423,42 @@ function BlogContent() {
                 SECTION 6
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Academic and Teaching Roles
+                Earning Potential
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Medical College Faculty</p>
+                    <p className="font-semibold">Government Positions</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pursue academic career as faculty in medical colleges and universities
+                      Government positions: ₹10-15 lakhs/year
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Student and Resident Training</p>
+                    <p className="font-semibold">Hospital Consultants</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Train medical students and oncology residents in cancer management
+                      Hospital consultants: ₹20-40 lakhs/year
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Leadership Opportunities</p>
+                    <p className="font-semibold">Private Practice</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Lead oncology departments as professors and academic leaders
+                      Private practice: ₹30-60+ lakhs/year
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Knowledge Dissemination</p>
+                    <p className="font-semibold">Research Positions</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Share expertise and mentor next generation of oncologists
+                      Research and academic positions with high income
                     </p>
                   </div>
                 </div>
@@ -476,42 +474,42 @@ function BlogContent() {
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Global Opportunities and International Practice
+                Work-Life Balance
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">International Practice Opportunities</p>
+                    <p className="font-semibold">Better than Surgical</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work in oncology hospitals and cancer centers globally
+                      Generally better than many surgical specialties
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Advanced Technology Access</p>
+                    <p className="font-semibold">Scheduled Hours</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Access cutting-edge cancer treatment technology internationally
+                      Scheduled outpatient hours and regular schedule
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Fellowship Training</p>
+                    <p className="font-semibold">Limited On-call</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pursue fellowships and advanced training internationally
+                      Limited on-call duties in diagnostic settings
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Global Network</p>
+                    <p className="font-semibold">Remote Opportunities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Build international oncology network and professional connections
+                      Remote consultation opportunities available
                     </p>
                   </div>
                 </div>
@@ -530,7 +528,7 @@ function BlogContent() {
                 </div>
                 <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
-                    MBBS to MD Oncology
+                    MBBS to MD Neurology
                   </p>
                   <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3-4 years</p>
                 </div>
@@ -551,28 +549,28 @@ function BlogContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {[
                   {
-                    title: "Cancer Biology Foundation",
-                    desc: "Develop strong fundamentals in cancer pathology and biology",
+                    title: "Develop Examination Skills",
+                    desc: "Build strong neurological examination skills and diagnostic abilities",
                   },
                   {
                     title: "Stay Updated",
-                    desc: "Stay updated with latest cancer treatment protocols and guidelines",
+                    desc: "Stay current with neurological advances and new treatment protocols",
                   },
                   {
-                    title: "Hands-on Experience",
-                    desc: "Gain hands-on experience in cancer diagnostics and treatment",
+                    title: "Research Record",
+                    desc: "Develop research and publication record for career advancement",
                   },
                   {
-                    title: "Research Engagement",
-                    desc: "Engage in research to advance cancer treatment knowledge",
+                    title: "Consider Subspecialization",
+                    desc: "Consider subspecialization in your area of interest",
                   },
                   {
-                    title: "Develop Compassion",
-                    desc: "Develop compassion and emotional intelligence for patient care",
+                    title: "Build Patient Relationships",
+                    desc: "Build strong patient relationships for long-term practice",
                   },
                   {
-                    title: "Pursue Fellowships",
-                    desc: "Pursue fellowships and additional training in specialized cancers",
+                    title: "Professional Networking",
+                    desc: "Network with neurologists and develop professional connections",
                   },
                 ].map((tip, i) => (
                   <div key={i} className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
@@ -589,10 +587,10 @@ function BlogContent() {
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue Oncology?</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue Neurology?</h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
-                    Explore comprehensive oncology programs and build a rewarding career in cancer
-                    medicine.
+                    Explore comprehensive neurology programs and build a successful career in
+                    neurological medicine.
                   </p>
                   <Link
                     to="/top-medical-courses"
@@ -613,34 +611,34 @@ function BlogContent() {
             Frequently Asked Questions
           </h2>
           <p className="text-[#6b5b68] mb-8 text-sm sm:text-base">
-            Get answers to common questions about oncology career opportunities.
+            Get answers to common questions about neurology career opportunities.
           </p>
 
           <div className="space-y-4 sm:space-y-6">
             {[
               {
-                q: "What is the scope of oncology in India?",
-                a: "Oncology is rapidly expanding in India with increasing cancer incidence, improved healthcare infrastructure, and growing private sector investment. There are excellent opportunities in cancer centers, hospitals, research institutions, and private practice. India is becoming a hub for oncology professionals.",
+                q: "What is the scope of neurology?",
+                a: "Neurology encompasses diagnosis and treatment of brain, spinal cord, and peripheral nerve diseases. Large patient base with chronic conditions requiring long-term care. Growing demand due to increasing neurological disorder prevalence.",
               },
               {
-                q: "What are the different subspecialties in oncology?",
-                a: "Oncology includes Medical Oncology, Surgical Oncology, Radiation Oncology, Hematology-Oncology, and Pediatric Oncology. Each subspecialty offers distinct career paths and specialization opportunities with excellent earning potential.",
+                q: "What is the global demand for neurologists?",
+                a: "High demand globally, especially in developed countries. Neurological disorders are increasing due to aging populations and lifestyle changes. Strong opportunities in USA, Canada, UK, Australia, and Gulf countries.",
               },
               {
-                q: "What is the career progression in oncology?",
-                a: "Career progression includes positions as resident, senior resident, assistant consultant, consultant, and senior consultant. Many oncologists establish cancer centers, lead research teams, pursue academic roles, or develop specialized treatment protocols.",
+                q: "What are earning prospects in neurology?",
+                a: "Government: ₹10-15 lakhs/year. Private consultant: ₹20-40 lakhs/year. Private practice: ₹30-60+ lakhs/year. Excellent earning potential with established practice and subspecialization.",
               },
               {
-                q: "Are there research opportunities in oncology?",
-                a: "Yes, India has significant research opportunities in cancer biology, immunotherapy, targeted therapy, and precision medicine. Many institutions offer fellowships in clinical research and opportunities to collaborate with pharmaceutical companies.",
+                q: "Can neurologists subspecialize?",
+                a: "Yes, subspecialties include neuroradiology, neurophysiology, neuro-oncology, movement disorders, and stroke management. Each subspecialty offers enhanced career prospects and earning potential.",
               },
               {
-                q: "What is the earning potential for oncologists?",
-                a: "Oncologists have high earning potential with government positions offering 10-15 lakhs annually. Private sector consultants earn 20-40 lakhs, while those in private centers can earn 30-50+ lakhs, making it one of the highest-paying specialties.",
+                q: "Is there good work-life balance?",
+                a: "Yes, neurology generally offers better balance than surgical specialties, though emergency stroke cases may require availability. Scheduled outpatient hours provide predictable work schedule.",
               },
               {
-                q: "Can oncologists work internationally?",
-                a: "Yes, Indian oncologists can work in USA, Canada, UK, and Australia after qualifying relevant exams. Many international cancer centers actively recruit experienced Indian oncologists due to their expertise.",
+                q: "What skills are essential?",
+                a: "Strong clinical examination skills, imaging interpretation, excellent communication, patience with chronic disease management, and research aptitude are essential for success in neurology.",
               },
             ].map((faq, idx) => (
               <div
@@ -677,7 +675,7 @@ function BlogContent() {
             </h3>
             <p className="text-sm sm:text-base text-[#800020] mb-4">
               Don't hesitate to reach out to our expert counselors who can provide personalized
-              guidance for your oncology specialization career journey.
+              guidance for your neurology specialization career journey.
             </p>
             <Link
               to="/contact-us"

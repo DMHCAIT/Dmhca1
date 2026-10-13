@@ -1,14 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-neurology")({
+export const Route = createFileRoute("/blog/scope-of-paediatrics")({
   head: () => ({
     meta: [
-      { title: "Scope of Neurology in India — DMHCA" },
+      { title: "Scope of Pediatrics in India — DMHCA" },
       {
         name: "description",
-        content:
-          "Career opportunities and advancement in neurology and neurological specialization.",
+        content: "Career opportunities and scope in pediatrics and child health specialization.",
       },
     ],
   }),
@@ -30,15 +29,15 @@ function BlogContent() {
           </Link>
           <div className="max-w-3xl">
             <div className="inline-block px-3 sm:px-4 py-1 bg-[#800020]/20 border border-[#f7cbd7]/50 rounded-full text-[#f7cbd7] text-xs font-semibold mb-2">
-              Medical Career Guide • 2025 Edition
+              Medical Specialty Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Neurology: Career Opportunities & Specializations
+              Scope of Pediatrics: Career Opportunities & Specializations
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore the fascinating field of neurology. Master neurological diagnosis, develop
-              advanced clinical skills, and build a successful practice with excellent earning
-              potential and global opportunities.
+              Explore rewarding careers in child health. Master pediatric care, develop
+              subspecialties, and build a fulfilling practice with excellent opportunities in India
+              and globally.
             </p>
           </div>
 
@@ -81,8 +80,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Neurology.webp"
-              alt="Scope of Neurology"
+              src="/blog-images/Scope-of-Paediatrics.webp"
+              alt="Scope of Pediatrics"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -97,13 +96,13 @@ function BlogContent() {
             {/* Quick Summary */}
             <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
               <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
-                Career Scope in Neurology
+                Career Scope in Pediatrics
               </h2>
               <p className="text-sm sm:text-base text-[#800020] mb-6 leading-relaxed">
-                Neurology offers exceptional career scope with high patient demand, excellent
-                earning potential, and opportunities for subspecialization and research. The field
-                encompasses diagnosis and treatment of neurological disorders affecting millions
-                worldwide.
+                Pediatrics is one of the most rewarding medical specialties focusing on child health
+                and development. In India, pediatrics offers tremendous scope with expanding
+                healthcare infrastructure, government health programs, and excellent private sector
+                opportunities.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="flex items-start gap-3">
@@ -112,7 +111,7 @@ function BlogContent() {
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Subspecialization options</span>
+                  <span className="text-[#800020]">Pediatric subspecialties</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
@@ -132,13 +131,13 @@ function BlogContent() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { num: 1, title: "Diagnostic Opportunities" },
-                  { num: 2, title: "Patient Management" },
-                  { num: 3, title: "Research & Academic" },
+                  { num: 1, title: "Clinical Practice" },
+                  { num: 2, title: "Hospital Settings" },
+                  { num: 3, title: "Private Practice" },
                   { num: 4, title: "Subspecialties" },
-                  { num: 5, title: "International Practice" },
-                  { num: 6, title: "Earning Potential" },
-                  { num: 7, title: "Work-Life Balance" },
+                  { num: 5, title: "Public Health" },
+                  { num: 6, title: "Academic Career" },
+                  { num: 7, title: "Global Opportunities" },
                 ].map((item) => (
                   <a
                     key={item.num}
@@ -168,42 +167,42 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Diagnostic Opportunities
+                Clinical Pediatric Practice
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Advanced Imaging Interpretation</p>
+                    <p className="font-semibold">Preventive Child Care</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Advanced imaging interpretation (CT, MRI, EEG) and diagnostic expertise
+                      Immunization programs and health screening for children
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Clinical Examination</p>
+                    <p className="font-semibold">Diagnosis and Treatment</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Clinical neurological examination expertise and diagnostic skills
+                      Diagnosis and treatment of childhood acute and chronic diseases
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Neurosurgical Consultation</p>
+                    <p className="font-semibold">Development Monitoring</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neurosurgical consultation and planning for complex cases
+                      Child growth and development assessment and monitoring
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Post-operative Management</p>
+                    <p className="font-semibold">Family Education</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Post-operative neurological management and monitoring
+                      Parent education and nutritional counseling services
                     </p>
                   </div>
                 </div>
@@ -219,42 +218,42 @@ function BlogContent() {
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Patient Management
+                Hospital and Healthcare Settings
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Chronic Disease Management</p>
+                    <p className="font-semibold">Government Hospitals</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Chronic disease management and long-term patient care
+                      Work in government hospitals and medical colleges
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Outpatient Consultations</p>
+                    <p className="font-semibold">Corporate Healthcare</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Regular outpatient consultations and patient relationships
+                      Corporate hospital positions with modern facilities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Hospital Inpatient Care</p>
+                    <p className="font-semibold">NICU Management</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Hospital inpatient care and acute patient management
+                      Neonatal intensive care unit management and expertise
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Emergency Stroke Management</p>
+                    <p className="font-semibold">Emergency Services</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Emergency stroke and seizure management capabilities
+                      Pediatric emergency department and critical care roles
                     </p>
                   </div>
                 </div>
@@ -270,42 +269,42 @@ function BlogContent() {
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Research & Academic Career
+                Private Practice and Clinical Services
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Clinical Trials</p>
+                    <p className="font-semibold">Private Clinic Establishment</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Clinical trials participation and research studies
+                      Establish private pediatric clinics and practice centers
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Research Publications</p>
+                    <p className="font-semibold">Patient Consultation</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neurological research publications in peer-reviewed journals
+                      Pediatric consultations and specialized care services
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Medical Education</p>
+                    <p className="font-semibold">Flexible Schedule</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Medical education and teaching responsibilities
+                      Flexible practice schedule and regular work hours
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Academic Career</p>
+                    <p className="font-semibold">High Income Potential</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Academic career advancement and professional development
+                      Excellent earning potential in private practice
                     </p>
                   </div>
                 </div>
@@ -321,42 +320,42 @@ function BlogContent() {
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Subspecialties
+                Pediatric Subspecialties
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Neuroradiology</p>
+                    <p className="font-semibold">Neonatology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neuroradiology and imaging subspecialization
+                      Neonatal care and intensive neonatal management
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Neurophysiology</p>
+                    <p className="font-semibold">Pediatric Cardiology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neurophysiology and EEG expertise
+                      Cardiac care and congenital heart disease management
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Movement Disorders</p>
+                    <p className="font-semibold">Pediatric Nephrology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Movement disorders and specialized treatment
+                      Kidney and urinary system disease specialization
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Neuro-oncology</p>
+                    <p className="font-semibold">Other Subspecialties</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neuro-oncology and brain tumor management
+                      Gastroenterology, neurology, oncology and other specialties
                     </p>
                   </div>
                 </div>
@@ -372,42 +371,42 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                International Practice
+                Community Health and Public Health
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Global Demand</p>
+                    <p className="font-semibold">Community Health Programs</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      High demand in developed countries worldwide
+                      Child health promotion and community health initiatives
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Global Recognition</p>
+                    <p className="font-semibold">Public Health Career</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Excellent global recognition and professional standing
+                      Public health expertise and child health policy work
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Immigration Pathways</p>
+                    <p className="font-semibold">NGO and International Work</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Multiple immigration pathways and opportunities
+                      International organizations and global health NGOs
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Fellowship Training</p>
+                    <p className="font-semibold">Health Education</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      International fellowship opportunities and training
+                      Child health education and health awareness programs
                     </p>
                   </div>
                 </div>
@@ -423,42 +422,42 @@ function BlogContent() {
                 SECTION 6
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Earning Potential
+                Academic and Research Career
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Government Positions</p>
+                    <p className="font-semibold">Medical Education</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Government positions: ₹10-15 lakhs/year
+                      Teaching medical students and pediatric residents
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Hospital Consultants</p>
+                    <p className="font-semibold">Clinical Research</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Hospital consultants: ₹20-40 lakhs/year
+                      Clinical research and pediatric medical studies
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Private Practice</p>
+                    <p className="font-semibold">Academic Leadership</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Private practice: ₹30-60+ lakhs/year
+                      Department leadership and academic positions
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Research Positions</p>
+                    <p className="font-semibold">Research Publications</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Research and academic positions with high income
+                      Publication in medical journals and research advancement
                     </p>
                   </div>
                 </div>
@@ -474,42 +473,42 @@ function BlogContent() {
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Work-Life Balance
+                International Opportunities
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Better than Surgical</p>
+                    <p className="font-semibold">Global Demand</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Generally better than many surgical specialties
+                      High demand for pediatricians in developed countries
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Scheduled Hours</p>
+                    <p className="font-semibold">International Practice</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Scheduled outpatient hours and regular schedule
+                      Practice opportunities in USA, UK, Canada, Australia
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Limited On-call</p>
+                    <p className="font-semibold">Fellowship Training</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Limited on-call duties in diagnostic settings
+                      International fellowship and advanced training opportunities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Remote Opportunities</p>
+                    <p className="font-semibold">Professional Network</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Remote consultation opportunities available
+                      Build international pediatric professional networks
                     </p>
                   </div>
                 </div>
@@ -528,7 +527,7 @@ function BlogContent() {
                 </div>
                 <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
-                    MBBS to MD Neurology
+                    MBBS to MD Pediatrics
                   </p>
                   <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3-4 years</p>
                 </div>
@@ -549,28 +548,28 @@ function BlogContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {[
                   {
-                    title: "Develop Examination Skills",
-                    desc: "Build strong neurological examination skills and diagnostic abilities",
+                    title: "Develop Patience",
+                    desc: "Develop patience and understanding with children and their families",
                   },
                   {
                     title: "Stay Updated",
-                    desc: "Stay current with neurological advances and new treatment protocols",
+                    desc: "Stay current with pediatric advances and vaccine schedules",
                   },
                   {
-                    title: "Research Record",
-                    desc: "Develop research and publication record for career advancement",
+                    title: "Clinical Exposure",
+                    desc: "Gain diverse clinical exposure in different pediatric settings",
                   },
                   {
-                    title: "Consider Subspecialization",
-                    desc: "Consider subspecialization in your area of interest",
+                    title: "Learn Programs",
+                    desc: "Learn government health programs and public health initiatives",
                   },
                   {
-                    title: "Build Patient Relationships",
-                    desc: "Build strong patient relationships for long-term practice",
+                    title: "Child Health Advocacy",
+                    desc: "Advocate for child health and welfare in your practice",
                   },
                   {
-                    title: "Professional Networking",
-                    desc: "Network with neurologists and develop professional connections",
+                    title: "Specialization",
+                    desc: "Consider subspecialization for enhanced career prospects",
                   },
                 ].map((tip, i) => (
                   <div key={i} className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
@@ -587,10 +586,12 @@ function BlogContent() {
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue Neurology?</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">
+                    Ready to Pursue Pediatrics?
+                  </h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
-                    Explore comprehensive neurology programs and build a successful career in
-                    neurological medicine.
+                    Explore comprehensive pediatrics programs and build a rewarding career in child
+                    health medicine.
                   </p>
                   <Link
                     to="/top-medical-courses"
@@ -611,34 +612,34 @@ function BlogContent() {
             Frequently Asked Questions
           </h2>
           <p className="text-[#6b5b68] mb-8 text-sm sm:text-base">
-            Get answers to common questions about neurology career opportunities.
+            Get answers to common questions about pediatrics career opportunities.
           </p>
 
           <div className="space-y-4 sm:space-y-6">
             {[
               {
-                q: "What is the scope of neurology?",
-                a: "Neurology encompasses diagnosis and treatment of brain, spinal cord, and peripheral nerve diseases. Large patient base with chronic conditions requiring long-term care. Growing demand due to increasing neurological disorder prevalence.",
+                q: "What is the scope of pediatrics in India?",
+                a: "Pediatrics has excellent scope in India with expanding healthcare infrastructure, government programs, and private sector growth. Large pediatric population ensures steady demand. Subspecialization opportunities are abundant with increasing parent expectations for specialized care.",
               },
               {
-                q: "What is the global demand for neurologists?",
-                a: "High demand globally, especially in developed countries. Neurological disorders are increasing due to aging populations and lifestyle changes. Strong opportunities in USA, Canada, UK, Australia, and Gulf countries.",
+                q: "What are the major pediatric subspecialties?",
+                a: "Major subspecialties include Neonatology, Pediatric Cardiology, Nephrology, Gastroenterology, Neurology, and Oncology. Each offers distinct career prospects and specialized practice opportunities with higher earning potential.",
               },
               {
-                q: "What are earning prospects in neurology?",
-                a: "Government: ₹10-15 lakhs/year. Private consultant: ₹20-40 lakhs/year. Private practice: ₹30-60+ lakhs/year. Excellent earning potential with established practice and subspecialization.",
+                q: "Is government employment available?",
+                a: "Yes, government employment is available in medical colleges, government hospitals, and public health centers. Competitive exams like NEET qualify candidates. Government positions offer job security and pension benefits.",
               },
               {
-                q: "Can neurologists subspecialize?",
-                a: "Yes, subspecialties include neuroradiology, neurophysiology, neuro-oncology, movement disorders, and stroke management. Each subspecialty offers enhanced career prospects and earning potential.",
+                q: "What is the earning potential?",
+                a: "Government positions: ₹10-15 lakhs/year. Private consultants: ₹20-40 lakhs/year. Private practice: ₹30-50+ lakhs/year. Subspecialists earn significantly more, especially with established practice.",
               },
               {
-                q: "Is there good work-life balance?",
-                a: "Yes, neurology generally offers better balance than surgical specialties, though emergency stroke cases may require availability. Scheduled outpatient hours provide predictable work schedule.",
+                q: "Is there private practice scope?",
+                a: "Yes, strong private practice scope with growing number of dedicated pediatric clinics. Good work-life balance with scheduled hours. Regular hours suit family-oriented practitioners.",
               },
               {
-                q: "What skills are essential?",
-                a: "Strong clinical examination skills, imaging interpretation, excellent communication, patience with chronic disease management, and research aptitude are essential for success in neurology.",
+                q: "Are international opportunities available?",
+                a: "Yes, high demand in USA, UK, Canada, and Australia. Indian pediatricians are sought after for their training. International practice offers higher income and advanced infrastructure.",
               },
             ].map((faq, idx) => (
               <div
@@ -675,7 +676,7 @@ function BlogContent() {
             </h3>
             <p className="text-sm sm:text-base text-[#800020] mb-4">
               Don't hesitate to reach out to our expert counselors who can provide personalized
-              guidance for your neurology specialization career journey.
+              guidance for your pediatrics specialization career journey.
             </p>
             <Link
               to="/contact-us"

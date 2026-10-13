@@ -1,14 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/how-to-become-an-endocrinologist")({
+export const Route = createFileRoute("/blog/how-to-become-a-pediatrician")({
   head: () => ({
     meta: [
-      { title: "How to Become an Endocrinologist — DMHCA" },
-      {
-        name: "description",
-        content: "Step-by-step guide to becoming a endocrinologist in India.",
-      },
+      { title: "How to Become a Pediatrician — DMHCA" },
+      { name: "description", content: "Step-by-step guide to becoming a pediatrician in India." },
     ],
   }),
   component: BlogContent,
@@ -31,10 +28,10 @@ function BlogContent() {
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              How to Become an Endocrinologist
+              How to Become a Pediatrician
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Complete pathway to becoming a endocrinologist in India
+              Complete pathway to becoming a pediatrician in India
             </p>
           </div>
 
@@ -75,8 +72,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/How-to-Become-an-Endocrinologist.webp"
-              alt="How to Become an Endocrinologist"
+              src="/blog-images/How-to-Become-a-Pediatrician.webp"
+              alt="How to Become a Pediatrician"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -90,13 +87,13 @@ function BlogContent() {
             <div className="career-pathway mb-12 not-prose">
               <span className="career-pathway-label">Your career roadmap</span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-6">
-                Path to Endocrinologist
+                Path to Pediatrician
               </h2>
               <p className="text-[#29334a] mb-8 text-sm sm:text-base">
-                Becoming a endocrinologist in India requires a systematic approach combining
-                academic excellence, competitive entrance exams, and clinical experience. This guide
-                outlines the complete pathway to help you navigate your journey into this rewarding
-                medical specialty.
+                Becoming a pediatrician in India requires a systematic approach combining academic
+                excellence, competitive entrance exams, and clinical experience. This guide outlines
+                the complete pathway to help you navigate your journey into this rewarding medical
+                specialty.
               </p>
 
               <div className="career-pathway-steps">
@@ -284,7 +281,7 @@ function BlogContent() {
                   <details className="group">
                     <summary className="flex items-start justify-between cursor-pointer font-semibold text-[#29334a] text-sm sm:text-base">
                       <span className="flex-1 text-left pr-4">
-                        What is the total time required to become a endocrinologist?
+                        What is the total time required to become a pediatrician?
                       </span>
                       <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center text-[#6b5b68] group-open:rotate-180 transition-transform">
                         <svg
@@ -464,7 +461,7 @@ function BlogContent() {
                   <h3 className="text-2xl font-bold text-white mb-3">Still have questions?</h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
                     Don't hesitate to reach out to our expert counselors who can provide
-                    personalized guidance for your endocrinology specialization career journey.
+                    personalized guidance for your pediatrics specialization career journey.
                   </p>
                   <Link
                     to="/contact-us"

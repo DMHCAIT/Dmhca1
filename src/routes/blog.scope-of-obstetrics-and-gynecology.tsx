@@ -1,13 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-paediatrics")({
+export const Route = createFileRoute("/blog/scope-of-obstetrics-and-gynecology")({
   head: () => ({
     meta: [
-      { title: "Scope of Pediatrics in India — DMHCA" },
+      {
+        title: "Scope of Obstetrics and Gynecology: Career Opportunities & Specializations — DMHCA",
+      },
       {
         name: "description",
-        content: "Career opportunities and scope in pediatrics and child health specialization.",
+        content:
+          "Explore diverse career opportunities in OB-GYN. Learn about clinical practice, specializations, research, and earning potential in women's health medical specialty.",
       },
     ],
   }),
@@ -32,12 +35,12 @@ function BlogContent() {
               Medical Specialty Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Pediatrics: Career Opportunities & Specializations
+              Scope of Obstetrics & Gynecology: Career Opportunities & Specializations
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore rewarding careers in child health. Master pediatric care, develop
-              subspecialties, and build a fulfilling practice with excellent opportunities in India
-              and globally.
+              Explore comprehensive career pathways in women's health. Master clinical practice,
+              subspecializations, research, and achieve exceptional earning potential in this
+              dynamic medical specialty.
             </p>
           </div>
 
@@ -80,8 +83,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Paediatrics.webp"
-              alt="Scope of Pediatrics"
+              src="/blog-images/Scope-of-Obstetrics-and-Gynecology.webp"
+              alt="Scope of Obstetrics and Gynecology"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -96,13 +99,14 @@ function BlogContent() {
             {/* Quick Summary */}
             <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
               <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
-                Career Scope in Pediatrics
+                Career Scope in Obstetrics and Gynecology
               </h2>
               <p className="text-sm sm:text-base text-[#800020] mb-6 leading-relaxed">
-                Pediatrics is one of the most rewarding medical specialties focusing on child health
-                and development. In India, pediatrics offers tremendous scope with expanding
-                healthcare infrastructure, government health programs, and excellent private sector
-                opportunities.
+                Obstetrics and Gynecology is a dynamic and rewarding medical specialty with
+                expanding career opportunities in India and globally. This specialty focuses on
+                women's reproductive health, pregnancy management, and surgical interventions. With
+                increasing awareness and growing healthcare infrastructure, OB-GYN professionals
+                have diverse career pathways.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="flex items-start gap-3">
@@ -111,15 +115,15 @@ function BlogContent() {
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Pediatric subspecialties</span>
+                  <span className="text-[#800020]">Clinical practice opportunities</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Research opportunities</span>
+                  <span className="text-[#800020]">Specialization options</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Strong global demand</span>
+                  <span className="text-[#800020]">Excellent earning potential</span>
                 </div>
               </div>
             </div>
@@ -132,12 +136,12 @@ function BlogContent() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
                   { num: 1, title: "Clinical Practice" },
-                  { num: 2, title: "Hospital Settings" },
+                  { num: 2, title: "Hospital & Academic" },
                   { num: 3, title: "Private Practice" },
-                  { num: 4, title: "Subspecialties" },
-                  { num: 5, title: "Public Health" },
-                  { num: 6, title: "Academic Career" },
-                  { num: 7, title: "Global Opportunities" },
+                  { num: 4, title: "Specializations" },
+                  { num: 5, title: "Research & Academics" },
+                  { num: 6, title: "Global Opportunities" },
+                  { num: 7, title: "Emerging Areas" },
                 ].map((item) => (
                   <a
                     key={item.num}
@@ -157,8 +161,7 @@ function BlogContent() {
               </div>
             </div>
 
-            {/* Sections 1-7 */}
-            {/* Section 1 */}
+            {/* Section 1: Clinical Practice */}
             <div
               id="section-1"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -167,49 +170,50 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Clinical Pediatric Practice
+                Clinical Practice Opportunities
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Preventive Child Care</p>
+                    <p className="font-semibold">Hospital Positions</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Immunization programs and health screening for children
+                      Work as consultant obstetrician-gynecologist in government and private
+                      hospitals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Diagnosis and Treatment</p>
+                    <p className="font-semibold">Patient Care Responsibilities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Diagnosis and treatment of childhood acute and chronic diseases
+                      Manage obstetric cases, conduct deliveries, provide antenatal/postnatal care
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Development Monitoring</p>
+                    <p className="font-semibold">Emergency Care</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Child growth and development assessment and monitoring
+                      Handle gynecological emergencies, hysterectomies, and ectopic pregnancies
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Family Education</p>
+                    <p className="font-semibold">Community Outreach</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Parent education and nutritional counseling services
+                      Provide family planning services, counseling, and community health programs
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 2 */}
+            {/* Section 2: Hospital & Academic */}
             <div
               id="section-2"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -218,49 +222,51 @@ function BlogContent() {
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Hospital and Healthcare Settings
+                Hospital and Academic Positions
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Government Hospitals</p>
+                    <p className="font-semibold">Medical College Faculty</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work in government hospitals and medical colleges
+                      Secure positions in medical colleges teaching undergraduate and postgraduate
+                      students
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Corporate Healthcare</p>
+                    <p className="font-semibold">Department Leadership</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Corporate hospital positions with modern facilities
+                      Lead hospital departments and manage clinical teams in tertiary care centers
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">NICU Management</p>
+                    <p className="font-semibold">Clinical Education</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neonatal intensive care unit management and expertise
+                      Conduct ward rounds, seminars, and clinical case discussions for medical
+                      education
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Emergency Services</p>
+                    <p className="font-semibold">Academic Activities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pediatric emergency department and critical care roles
+                      Engage in examinations, curriculum development, and quality assurance
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 3 */}
+            {/* Section 3: Private Practice */}
             <div
               id="section-3"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -269,49 +275,52 @@ function BlogContent() {
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Private Practice and Clinical Services
+                Private Practice and Entrepreneurship
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Private Clinic Establishment</p>
+                    <p className="font-semibold">Nursing Home Establishment</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Establish private pediatric clinics and practice centers
+                      Establish independent nursing homes and diagnostic centers specializing in
+                      women's health
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Patient Consultation</p>
+                    <p className="font-semibold">Profitable Services</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pediatric consultations and specialized care services
+                      Build profitable practice through consultation fees, surgical procedures, and
+                      imaging
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Flexible Schedule</p>
+                    <p className="font-semibold">Specialized Services</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Flexible practice schedule and regular work hours
+                      Offer infertility treatment, ultrasound imaging, and cosmetic gynecology
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">High Income Potential</p>
+                    <p className="font-semibold">Financial Independence</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Excellent earning potential in private practice
+                      Achieve financial independence and flexibility in working hours through
+                      private enterprise
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 4 */}
+            {/* Section 4: Specializations */}
             <div
               id="section-4"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -320,49 +329,49 @@ function BlogContent() {
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Pediatric Subspecialties
+                Specialization and Sub-specialty Options
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Neonatology</p>
+                    <p className="font-semibold">Reproductive Medicine and Infertility</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Neonatal care and intensive neonatal management
+                      Pursue fellowship for IVF center practice and fertility treatment expertise
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Pediatric Cardiology</p>
+                    <p className="font-semibold">Uro-gynecology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Cardiac care and congenital heart disease management
+                      Specialize in treating pelvic floor disorders and urinary incontinence
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Pediatric Nephrology</p>
+                    <p className="font-semibold">Maternal-Fetal Medicine</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Kidney and urinary system disease specialization
+                      Focus on managing high-risk pregnancies and fetal complications
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Other Subspecialties</p>
+                    <p className="font-semibold">Gynecological Oncology</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Gastroenterology, neurology, oncology and other specialties
+                      Develop expertise in cancer management and specialized surgical care
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 5 */}
+            {/* Section 5: Research & Academics */}
             <div
               id="section-5"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -371,49 +380,51 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Community Health and Public Health
+                Research and Academic Excellence
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Community Health Programs</p>
+                    <p className="font-semibold">Women's Health Research</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Child health promotion and community health initiatives
+                      Conduct research on women's health topics and contribute to medical literature
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Public Health Career</p>
+                    <p className="font-semibold">Clinical Trials</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Public health expertise and child health policy work
+                      Participate in clinical trials and contribute to evidence-based medical
+                      practice
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">NGO and International Work</p>
+                    <p className="font-semibold">Academic Publications</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      International organizations and global health NGOs
+                      Publish research papers in national and international medical journals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Health Education</p>
+                    <p className="font-semibold">Expert Recognition</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Child health education and health awareness programs
+                      Build reputation as expert in specific areas and gain academic community
+                      recognition
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 6 */}
+            {/* Section 6: Global Opportunities */}
             <div
               id="section-6"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -422,49 +433,52 @@ function BlogContent() {
                 SECTION 6
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Academic and Research Career
+                Global Career Opportunities
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Medical Education</p>
+                    <p className="font-semibold">Developed Countries Practice</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Teaching medical students and pediatric residents
+                      Practice in USA, Canada, Australia through licensing and equivalency exams
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Clinical Research</p>
+                    <p className="font-semibold">Middle Eastern Opportunities</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Clinical research and pediatric medical studies
+                      Work in Middle Eastern countries offering lucrative salaries and modern
+                      facilities
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Academic Leadership</p>
+                    <p className="font-semibold">International Fellowships</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Department leadership and academic positions
+                      Pursue fellowship training in other countries for international exposure and
+                      skills
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Research Publications</p>
+                    <p className="font-semibold">Global Network</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Publication in medical journals and research advancement
+                      Build international career network and access to conferences and learning
+                      opportunities
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 7 */}
+            {/* Section 7: Emerging Areas */}
             <div
               id="section-7"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -473,42 +487,44 @@ function BlogContent() {
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                International Opportunities
+                Emerging Areas in Women's Health
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Global Demand</p>
+                    <p className="font-semibold">Maternal Health Focus</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      High demand for pediatricians in developed countries
+                      Focus on maternal health and reducing maternal mortality in underserved areas
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">International Practice</p>
+                    <p className="font-semibold">Minimally Invasive Surgery</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Practice opportunities in USA, UK, Canada, Australia
+                      Practice advanced laparoscopy and hysteroscopy procedures for better patient
+                      outcomes
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Fellowship Training</p>
+                    <p className="font-semibold">Reproductive Health Education</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      International fellowship and advanced training opportunities
+                      Work in reproductive health awareness and family planning education programs
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Professional Network</p>
+                    <p className="font-semibold">Telemedicine Initiatives</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Build international pediatric professional networks
+                      Engage in telemedicine and digital health for remote women's health
+                      consultations
                     </p>
                   </div>
                 </div>
@@ -523,19 +539,19 @@ function BlogContent() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">12 to MBBS</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">5.5 years</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">4.5 years</p>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
-                    MBBS to MD Pediatrics
+                    MBBS to MD OB-GYN
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3-4 years</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3 years</p>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
                     Total Duration
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">8.5-9.5 years</p>
+                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">7.5+ years</p>
                 </div>
               </div>
             </div>
@@ -546,39 +562,52 @@ function BlogContent() {
                 Key Tips for Success
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                {[
-                  {
-                    title: "Develop Patience",
-                    desc: "Develop patience and understanding with children and their families",
-                  },
-                  {
-                    title: "Stay Updated",
-                    desc: "Stay current with pediatric advances and vaccine schedules",
-                  },
-                  {
-                    title: "Clinical Exposure",
-                    desc: "Gain diverse clinical exposure in different pediatric settings",
-                  },
-                  {
-                    title: "Learn Programs",
-                    desc: "Learn government health programs and public health initiatives",
-                  },
-                  {
-                    title: "Child Health Advocacy",
-                    desc: "Advocate for child health and welfare in your practice",
-                  },
-                  {
-                    title: "Specialization",
-                    desc: "Consider subspecialization for enhanced career prospects",
-                  },
-                ].map((tip, i) => (
-                  <div key={i} className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                    <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                      ✓ {tip.title}
-                    </p>
-                    <p className="text-xs sm:text-sm text-[#6b5b68]">{tip.desc}</p>
-                  </div>
-                ))}
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                    ✓ Clinical Skills
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
+                    Develop strong clinical skills and surgical proficiency
+                  </p>
+                </div>
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                    ✓ Communication
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
+                    Build excellent patient communication and counseling skills
+                  </p>
+                </div>
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                    ✓ Clinical Exposure
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
+                    Gain exposure to diverse clinical cases during MBBS
+                  </p>
+                </div>
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                    ✓ Keep Updated
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
+                    Stay updated with latest obstetric and gynecologic practices
+                  </p>
+                </div>
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                    ✓ Research Interest
+                  </p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
+                    Develop interest in research and evidence-based practice
+                  </p>
+                </div>
+                <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">✓ Mentorship</p>
+                  <p className="text-xs sm:text-sm text-[#6b5b68]">
+                    Network with established gynecologists and mentors
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -586,12 +615,10 @@ function BlogContent() {
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-3">
-                    Ready to Pursue Pediatrics?
-                  </h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue OB-GYN?</h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
-                    Explore comprehensive pediatrics programs and build a rewarding career in child
-                    health medicine.
+                    Explore comprehensive OB-GYN programs and get expert guidance for your women's
+                    health specialty career.
                   </p>
                   <Link
                     to="/top-medical-courses"
@@ -612,34 +639,34 @@ function BlogContent() {
             Frequently Asked Questions
           </h2>
           <p className="text-[#6b5b68] mb-8 text-sm sm:text-base">
-            Get answers to common questions about pediatrics career opportunities.
+            Get answers to common questions about OB-GYN career opportunities.
           </p>
 
           <div className="space-y-4 sm:space-y-6">
             {[
               {
-                q: "What is the scope of pediatrics in India?",
-                a: "Pediatrics has excellent scope in India with expanding healthcare infrastructure, government programs, and private sector growth. Large pediatric population ensures steady demand. Subspecialization opportunities are abundant with increasing parent expectations for specialized care.",
+                q: "What is the scope of Obstetrics and Gynecology in India?",
+                a: "OB-GYN offers extensive career opportunities in India with growing private practice potential, hospital positions, teaching roles, and specialized areas like reproductive medicine. Demand is increasing with improving healthcare access and women's health awareness.",
               },
               {
-                q: "What are the major pediatric subspecialties?",
-                a: "Major subspecialties include Neonatology, Pediatric Cardiology, Nephrology, Gastroenterology, Neurology, and Oncology. Each offers distinct career prospects and specialized practice opportunities with higher earning potential.",
+                q: "What are the employment opportunities for gynecologists?",
+                a: "Opportunities include government hospitals, private nursing homes, corporate hospitals, independent clinics, academic positions in medical colleges, reproductive medicine centers, NGOs focusing on women's health, and international opportunities.",
               },
               {
-                q: "Is government employment available?",
-                a: "Yes, government employment is available in medical colleges, government hospitals, and public health centers. Competitive exams like NEET qualify candidates. Government positions offer job security and pension benefits.",
+                q: "Is there scope for specialization within OB-GYN?",
+                a: "Yes, multiple sub-specializations exist like Maternal-Fetal Medicine, Reproductive Medicine and Infertility, Uro-gynecology, Gynecological Oncology, and Minimally Invasive Surgery. These enhance career prospects and earning potential.",
               },
               {
-                q: "What is the earning potential?",
-                a: "Government positions: ₹10-15 lakhs/year. Private consultants: ₹20-40 lakhs/year. Private practice: ₹30-50+ lakhs/year. Subspecialists earn significantly more, especially with established practice.",
+                q: "What is the earning potential for gynecologists in India?",
+                a: "Government doctors earn through salary and practice allowances. Private practitioners earn significantly more through consultation fees and procedures. Top specialists earn 15-30 lakhs annually, with some earning even higher.",
               },
               {
-                q: "Is there private practice scope?",
-                a: "Yes, strong private practice scope with growing number of dedicated pediatric clinics. Good work-life balance with scheduled hours. Regular hours suit family-oriented practitioners.",
+                q: "Are there international career prospects in OB-GYN?",
+                a: "Yes, Indian gynecologists can pursue careers abroad in USA, Canada, Australia, and Middle East. They need to qualify relevant licensing exams (USMLE for USA, PLAB for UK) and complete local medical equivalency training.",
               },
               {
-                q: "Are international opportunities available?",
-                a: "Yes, high demand in USA, UK, Canada, and Australia. Indian pediatricians are sought after for their training. International practice offers higher income and advanced infrastructure.",
+                q: "What skills are essential for success in OB-GYN?",
+                a: "Essential skills include strong clinical examination abilities, excellent communication and empathy, surgical and procedural proficiency, decision-making in emergencies, leadership qualities, and continuous learning mindset.",
               },
             ].map((faq, idx) => (
               <div
@@ -676,7 +703,7 @@ function BlogContent() {
             </h3>
             <p className="text-sm sm:text-base text-[#800020] mb-4">
               Don't hesitate to reach out to our expert counselors who can provide personalized
-              guidance for your pediatrics specialization career journey.
+              guidance for your obstetrics and gynecology specialization career journey.
             </p>
             <Link
               to="/contact-us"

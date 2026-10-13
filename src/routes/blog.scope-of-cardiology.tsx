@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-cardiology")({
+export const Route = createFileRoute("/blog/scope-of-cardiology")({
   head: () => ({
     meta: [
       { title: "Scope of Cardiology: Career Opportunities & Specializations — DMHCA" },

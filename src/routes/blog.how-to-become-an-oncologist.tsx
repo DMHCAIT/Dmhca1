@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/how-to-become-an-oncologist")({
+export const Route = createFileRoute("/blog/how-to-become-an-oncologist")({
   head: () => ({
     meta: [
       { title: "How to Become an Oncologist — DMHCA" },

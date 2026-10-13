@@ -1,16 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-obstetrics-and-gynecology")({
+export const Route = createFileRoute("/blog/courses-after-mbbs-in-india")({
   head: () => ({
     meta: [
-      {
-        title: "Scope of Obstetrics and Gynecology: Career Opportunities & Specializations — DMHCA",
-      },
+      { title: "Courses After MBBS in India: Complete Postgraduate Guide — DMHCA" },
       {
         name: "description",
         content:
-          "Explore diverse career opportunities in OB-GYN. Learn about clinical practice, specializations, research, and earning potential in women's health medical specialty.",
+          "Comprehensive guide to all postgraduate and specialization courses available for MBBS graduates in India. Explore MD, MS, DM, MCh, and more.",
       },
     ],
   }),
@@ -32,15 +30,14 @@ function BlogContent() {
           </Link>
           <div className="max-w-3xl">
             <div className="inline-block px-3 sm:px-4 py-1 bg-[#800020]/20 border border-[#f7cbd7]/50 rounded-full text-[#f7cbd7] text-xs font-semibold mb-2">
-              Medical Specialty Guide • 2025 Edition
+              Career Planning Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Obstetrics & Gynecology: Career Opportunities & Specializations
+              Courses After MBBS in India: Your Complete Postgraduate Roadmap
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore comprehensive career pathways in women's health. Master clinical practice,
-              subspecializations, research, and achieve exceptional earning potential in this
-              dynamic medical specialty.
+              Explore all postgraduate and specialization courses available for MBBS graduates.
+              Master your career path with comprehensive guidance on MD, MS, DM, MCh, and beyond.
             </p>
           </div>
 
@@ -63,15 +60,15 @@ function BlogContent() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
               <Award className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
-                <div className="text-xs sm:text-sm text-white/70">Job Market</div>
-                <div className="font-bold text-sm sm:text-lg">Excellent</div>
+                <div className="text-xs sm:text-sm text-white/70">Specializations</div>
+                <div className="font-bold text-sm sm:text-lg">50+</div>
               </div>
             </div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-2 text-white">
               <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
-                <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
-                <div className="font-bold text-sm sm:text-lg">High</div>
+                <div className="text-xs sm:text-sm text-white/70">Updated</div>
+                <div className="font-bold text-sm sm:text-lg">June 2025</div>
               </div>
             </div>
           </div>
@@ -83,8 +80,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Obstetrics-and-Gynecology.webp"
-              alt="Scope of Obstetrics and Gynecology"
+              src="/blog-images/Courses-After-MBBS-in-India.webp"
+              alt="Courses After MBBS in India"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -99,31 +96,30 @@ function BlogContent() {
             {/* Quick Summary */}
             <div className="mb-8 sm:mb-10 md:mb-12 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 via-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border-2 border-[#f7cbd7] not-prose">
               <h2 className="text-xl sm:text-2xl font-bold text-[#800020] mb-4">
-                Career Scope in Obstetrics and Gynecology
+                What You'll Learn in This Guide
               </h2>
               <p className="text-sm sm:text-base text-[#800020] mb-6 leading-relaxed">
-                Obstetrics and Gynecology is a dynamic and rewarding medical specialty with
-                expanding career opportunities in India and globally. This specialty focuses on
-                women's reproductive health, pregnancy management, and surgical interventions. With
-                increasing awareness and growing healthcare infrastructure, OB-GYN professionals
-                have diverse career pathways.
+                This comprehensive guide explores all postgraduate options available for MBBS
+                graduates in India. From MD and MS programs to DM/MCh super specialties and
+                international opportunities, discover the pathway that matches your career
+                aspirations.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">7 major career pathways</span>
+                  <span className="text-[#800020]">7 major postgraduate pathways</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Clinical practice opportunities</span>
+                  <span className="text-[#800020]">Detailed eligibility criteria</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Specialization options</span>
+                  <span className="text-[#800020]">Career planning tips</span>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] text-xl">✓</span>
-                  <span className="text-[#800020]">Excellent earning potential</span>
+                  <span className="text-[#800020]">International opportunities</span>
                 </div>
               </div>
             </div>
@@ -135,13 +131,13 @@ function BlogContent() {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { num: 1, title: "Clinical Practice" },
-                  { num: 2, title: "Hospital & Academic" },
-                  { num: 3, title: "Private Practice" },
-                  { num: 4, title: "Specializations" },
-                  { num: 5, title: "Research & Academics" },
-                  { num: 6, title: "Global Opportunities" },
-                  { num: 7, title: "Emerging Areas" },
+                  { num: 1, title: "MD (Doctorate of Medicine)" },
+                  { num: 2, title: "MS (Master of Surgery)" },
+                  { num: 3, title: "PG Diploma Programs" },
+                  { num: 4, title: "DM (Super-specialty)" },
+                  { num: 5, title: "MCh (Super-specialty)" },
+                  { num: 6, title: "MBA in Healthcare" },
+                  { num: 7, title: "International Opportunities" },
                 ].map((item) => (
                   <a
                     key={item.num}
@@ -161,7 +157,7 @@ function BlogContent() {
               </div>
             </div>
 
-            {/* Section 1: Clinical Practice */}
+            {/* Section 1: MD */}
             <div
               id="section-1"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -170,50 +166,55 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Clinical Practice Opportunities
+                MD (Doctorate of Medicine)
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Hospital Positions</p>
+                    <p className="font-semibold">Duration: 3 years full-time postgraduate degree</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work as consultant obstetrician-gynecologist in government and private
-                      hospitals
+                      Comprehensive medical training and specialization
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Patient Care Responsibilities</p>
+                    <p className="font-semibold">
+                      Eligibility: MBBS completion + 1 year internship + NEET-PG qualification
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Manage obstetric cases, conduct deliveries, provide antenatal/postnatal care
+                      Must be registered with MCI/State Medical Council
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Emergency Care</p>
+                    <p className="font-semibold">
+                      Focus: Clinical training with research and thesis component
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Handle gynecological emergencies, hysterectomies, and ectopic pregnancies
+                      Balanced blend of practice and research
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Community Outreach</p>
+                    <p className="font-semibold">
+                      Specialties: Internal Medicine, Pediatrics, Psychiatry, etc.
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Provide family planning services, counseling, and community health programs
+                      Multiple medical specializations available
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 2: Hospital & Academic */}
+            {/* Section 2: MS */}
             <div
               id="section-2"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -222,51 +223,55 @@ function BlogContent() {
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Hospital and Academic Positions
+                MS (Master of Surgery)
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Medical College Faculty</p>
+                    <p className="font-semibold">Duration: 3 years full-time postgraduate degree</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Secure positions in medical colleges teaching undergraduate and postgraduate
-                      students
+                      Comprehensive surgical training program
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Department Leadership</p>
+                    <p className="font-semibold">
+                      Eligibility: MBBS completion + 1 year internship + NEET-PG qualification
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Lead hospital departments and manage clinical teams in tertiary care centers
+                      Similar to MD eligibility requirements
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Clinical Education</p>
+                    <p className="font-semibold">
+                      Focus: Surgical training with research and thesis requirement
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Conduct ward rounds, seminars, and clinical case discussions for medical
-                      education
+                      Practical surgical skills with academic rigor
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Academic Activities</p>
+                    <p className="font-semibold">
+                      Specialties: General Surgery, Orthopedics, ENT, Ophthalmology, etc.
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Engage in examinations, curriculum development, and quality assurance
+                      Diverse surgical specializations
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 3: Private Practice */}
+            {/* Section 3: PG Diploma */}
             <div
               id="section-3"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -275,52 +280,53 @@ function BlogContent() {
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Private Practice and Entrepreneurship
+                PG Diploma Programs
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Nursing Home Establishment</p>
+                    <p className="font-semibold">Duration: 2-3 years depending on specialty</p>
+                    <p className="text-xs sm:text-sm text-[#800020]">Shorter than MD/MS programs</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#800020] font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">
+                      Focus: More practical, less research emphasis than MD/MS
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Establish independent nursing homes and diagnostic centers specializing in
-                      women's health
+                      Clinically oriented training approach
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Profitable Services</p>
+                    <p className="font-semibold">
+                      Specialties: Anesthesia, Radiology, Pathology, OBG, etc.
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Build profitable practice through consultation fees, surgical procedures, and
-                      imaging
+                      Diverse specialty options available
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Specialized Services</p>
-                    <p className="text-xs sm:text-sm text-[#800020]">
-                      Offer infertility treatment, ultrasound imaging, and cosmetic gynecology
+                    <p className="font-semibold">
+                      Benefit: Faster completion with clinically oriented training
                     </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-[#800020] font-bold">→</span>
-                  <div>
-                    <p className="font-semibold">Financial Independence</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Achieve financial independence and flexibility in working hours through
-                      private enterprise
+                      Quick entry into specialized practice
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 4: Specializations */}
+            {/* Section 4: DM */}
             <div
               id="section-4"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -329,49 +335,55 @@ function BlogContent() {
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Specialization and Sub-specialty Options
+                DM (Doctor of Medicine - Super-specialty)
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Reproductive Medicine and Infertility</p>
+                    <p className="font-semibold">Duration: 3 years advanced specialization</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pursue fellowship for IVF center practice and fertility treatment expertise
+                      Highly specialized medical training
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Uro-gynecology</p>
+                    <p className="font-semibold">
+                      Eligibility: MD in relevant specialty + entrance exam
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Specialize in treating pelvic floor disorders and urinary incontinence
+                      Requires prior MD qualification
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Maternal-Fetal Medicine</p>
+                    <p className="font-semibold">
+                      Examples: DM Cardiology, DM Neurology, DM Nephrology, DM Gastroenterology
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Focus on managing high-risk pregnancies and fetal complications
+                      Multiple super-specialty options
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Gynecological Oncology</p>
+                    <p className="font-semibold">
+                      Career: Highly specialized practice and research opportunities
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Develop expertise in cancer management and specialized surgical care
+                      Premium expertise and earning potential
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 5: Research & Academics */}
+            {/* Section 5: MCh */}
             <div
               id="section-5"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -380,51 +392,55 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Research and Academic Excellence
+                MCh (Master of Chirurgie - Super-specialty)
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Women's Health Research</p>
+                    <p className="font-semibold">
+                      Duration: 3 years advanced surgical specialization
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Conduct research on women's health topics and contribute to medical literature
+                      Highest level of surgical expertise
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Clinical Trials</p>
+                    <p className="font-semibold">
+                      Eligibility: MS in relevant surgical specialty + entrance exam
+                    </p>
+                    <p className="text-xs sm:text-sm text-[#800020]">Requires MS qualification</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-[#800020] font-bold">→</span>
+                  <div>
+                    <p className="font-semibold">
+                      Examples: MCh Urology, MCh Pediatric Surgery, MCh CTVS, MCh Neurosurgery
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Participate in clinical trials and contribute to evidence-based medical
-                      practice
+                      Specialized surgical branches
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Academic Publications</p>
-                    <p className="text-xs sm:text-sm text-[#800020]">
-                      Publish research papers in national and international medical journals
+                    <p className="font-semibold">
+                      Career: Advanced surgical expertise and specialized centers
                     </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="text-[#800020] font-bold">→</span>
-                  <div>
-                    <p className="font-semibold">Expert Recognition</p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Build reputation as expert in specific areas and gain academic community
-                      recognition
+                      Elite surgical specialization
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 6: Global Opportunities */}
+            {/* Section 6: MBA */}
             <div
               id="section-6"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -433,52 +449,57 @@ function BlogContent() {
                 SECTION 6
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Global Career Opportunities
+                MBA in Healthcare/Hospital Administration
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Developed Countries Practice</p>
+                    <p className="font-semibold">
+                      Duration: 2 years full-time or 3-4 years part-time
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Practice in USA, Canada, Australia through licensing and equivalency exams
+                      Flexible options for working professionals
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Middle Eastern Opportunities</p>
+                    <p className="font-semibold">
+                      Focus: Healthcare management, hospital administration, policy
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work in Middle Eastern countries offering lucrative salaries and modern
-                      facilities
+                      Business and administrative skills
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">International Fellowships</p>
+                    <p className="font-semibold">
+                      Career Path: Hospital director, healthcare consultant, policy maker
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Pursue fellowship training in other countries for international exposure and
-                      skills
+                      Leadership and management roles
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Global Network</p>
+                    <p className="font-semibold">
+                      Benefit: Blend clinical knowledge with management expertise
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Build international career network and access to conferences and learning
-                      opportunities
+                      Unique combination of skills
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Section 7: Emerging Areas */}
+            {/* Section 7: International */}
             <div
               id="section-7"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
@@ -487,125 +508,108 @@ function BlogContent() {
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Emerging Areas in Women's Health
+                International Postgraduate Studies
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Maternal Health Focus</p>
+                    <p className="font-semibold">
+                      USA: USMLE (United States Medical Licensing Exam)
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Focus on maternal health and reducing maternal mortality in underserved areas
+                      Path to medical practice in United States
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Minimally Invasive Surgery</p>
+                    <p className="font-semibold">
+                      UK: FRCPS (Royal College of Physicians), FRCS (Surgery)
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Practice advanced laparoscopy and hysteroscopy procedures for better patient
-                      outcomes
+                      Prestigious UK medical qualifications
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Reproductive Health Education</p>
+                    <p className="font-semibold">
+                      Australia/Canada: RACGP, CCPA, and other certifications
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Work in reproductive health awareness and family planning education programs
+                      Opportunities in developed healthcare systems
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">→</span>
                   <div>
-                    <p className="font-semibold">Telemedicine Initiatives</p>
+                    <p className="font-semibold">
+                      Benefit: Global career opportunities and international recognition
+                    </p>
                     <p className="text-xs sm:text-sm text-[#800020]">
-                      Engage in telemedicine and digital health for remote women's health
-                      consultations
+                      Worldwide medical practice options
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Career Timeline */}
+            {/* Career Planning Tips */}
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Career Timeline
-              </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">12 to MBBS</p>
-                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">4.5 years</p>
-                </div>
-                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
-                    MBBS to MD OB-GYN
-                  </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">3 years</p>
-                </div>
-                <div className="p-4 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="text-xs sm:text-sm text-[#800020] font-semibold mb-1">
-                    Total Duration
-                  </p>
-                  <p className="text-2xl sm:text-3xl font-bold text-[#800020]">7.5+ years</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Key Tips Section */}
-            <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Key Tips for Success
+                Career Planning Tips
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Clinical Skills
+                    ✓ Choose by Interest
                   </p>
                   <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Develop strong clinical skills and surgical proficiency
+                    Choose specialization based on your interest, not market demand
                   </p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Communication
+                    ✓ Gain Exposure
                   </p>
                   <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Build excellent patient communication and counseling skills
+                    Gain clinical exposure during internship year to test interests
                   </p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Clinical Exposure
+                    ✓ Start Early
                   </p>
                   <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Gain exposure to diverse clinical cases during MBBS
+                    Start preparation for entrance exams early for better results
                   </p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Keep Updated
+                    ✓ Research Institutes
                   </p>
                   <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Stay updated with latest obstetric and gynecologic practices
+                    Research institutes and mentors thoroughly before applying
                   </p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
-                    ✓ Research Interest
+                    ✓ Global Opportunities
                   </p>
                   <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Develop interest in research and evidence-based practice
+                    Consider international opportunities if interested in global practice
                   </p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
-                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">✓ Mentorship</p>
+                  <p className="font-bold text-[#29334a] text-sm sm:text-base mb-2">
+                    ✓ Balance Development
+                  </p>
                   <p className="text-xs sm:text-sm text-[#6b5b68]">
-                    Network with established gynecologists and mentors
+                    Balance academics with professional and personal development
                   </p>
                 </div>
               </div>
@@ -615,10 +619,12 @@ function BlogContent() {
               <div className="flex items-start gap-6">
                 <BookOpen className="w-10 h-10 text-white flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-2xl font-bold text-white mb-3">Ready to Pursue OB-GYN?</h3>
+                  <h3 className="text-2xl font-bold text-white mb-3">
+                    Ready to Plan Your Postgraduate Career?
+                  </h3>
                   <p className="text-[#f8f9fc] mb-6 leading-relaxed text-lg">
-                    Explore comprehensive OB-GYN programs and get expert guidance for your women's
-                    health specialty career.
+                    Explore comprehensive postgraduate programs and get personalized guidance for
+                    your medical career advancement.
                   </p>
                   <Link
                     to="/top-medical-courses"
@@ -639,34 +645,34 @@ function BlogContent() {
             Frequently Asked Questions
           </h2>
           <p className="text-[#6b5b68] mb-8 text-sm sm:text-base">
-            Get answers to common questions about OB-GYN career opportunities.
+            Get answers to common questions about postgraduate medical education in India.
           </p>
 
           <div className="space-y-4 sm:space-y-6">
             {[
               {
-                q: "What is the scope of Obstetrics and Gynecology in India?",
-                a: "OB-GYN offers extensive career opportunities in India with growing private practice potential, hospital positions, teaching roles, and specialized areas like reproductive medicine. Demand is increasing with improving healthcare access and women's health awareness.",
+                q: "What are the main postgraduate options after MBBS in India?",
+                a: "After MBBS, you can pursue MD (Doctorate of Medicine), MS (Master of Surgery), PG Diploma, or super-specialty courses like DM or MCh. Each has different duration and requirements.",
               },
               {
-                q: "What are the employment opportunities for gynecologists?",
-                a: "Opportunities include government hospitals, private nursing homes, corporate hospitals, independent clinics, academic positions in medical colleges, reproductive medicine centers, NGOs focusing on women's health, and international opportunities.",
+                q: "Is NEET-PG mandatory for all postgraduate courses?",
+                a: "Yes, NEET-PG is the primary entrance exam for most MD, MS, and PG Diploma programs in India. Some institutions may have their own entrance exams.",
               },
               {
-                q: "Is there scope for specialization within OB-GYN?",
-                a: "Yes, multiple sub-specializations exist like Maternal-Fetal Medicine, Reproductive Medicine and Infertility, Uro-gynecology, Gynecological Oncology, and Minimally Invasive Surgery. These enhance career prospects and earning potential.",
+                q: "How long is an MD/MS program?",
+                a: "MD (Doctorate of Medicine) and MS (Master of Surgery) programs typically last 3 years with mandatory thesis/research component.",
               },
               {
-                q: "What is the earning potential for gynecologists in India?",
-                a: "Government doctors earn through salary and practice allowances. Private practitioners earn significantly more through consultation fees and procedures. Top specialists earn 15-30 lakhs annually, with some earning even higher.",
+                q: "Can I study abroad after MBBS?",
+                a: "Yes, many medical graduates pursue postgraduate studies abroad. Popular destinations include USA (USMLE), UK (FRCPS), Canada, and Australia (RACGP).",
               },
               {
-                q: "Are there international career prospects in OB-GYN?",
-                a: "Yes, Indian gynecologists can pursue careers abroad in USA, Canada, Australia, and Middle East. They need to qualify relevant licensing exams (USMLE for USA, PLAB for UK) and complete local medical equivalency training.",
+                q: "What is a PG Diploma and how is it different from MD?",
+                a: "PG Diploma programs are typically 2-3 years long and focus on practical clinical training with less emphasis on research compared to MD programs.",
               },
               {
-                q: "What skills are essential for success in OB-GYN?",
-                a: "Essential skills include strong clinical examination abilities, excellent communication and empathy, surgical and procedural proficiency, decision-making in emergencies, leadership qualities, and continuous learning mindset.",
+                q: "What are super-specialty courses (DM/MCh)?",
+                a: "DM (Doctor of Medicine) and MCh (Master of Chirurgie) are 3-year super-specialty courses pursued after completing MD/MS. They provide advanced specialized knowledge.",
               },
             ].map((faq, idx) => (
               <div
@@ -703,7 +709,7 @@ function BlogContent() {
             </h3>
             <p className="text-sm sm:text-base text-[#800020] mb-4">
               Don't hesitate to reach out to our expert counselors who can provide personalized
-              guidance for your obstetrics and gynecology specialization career journey.
+              guidance for your postgraduate career pathway.
             </p>
             <Link
               to="/contact-us"

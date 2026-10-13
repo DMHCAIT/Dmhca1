@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/how-to-crack-neet-pg")({
+export const Route = createFileRoute("/blog/how-to-crack-neet-pg")({
   head: () => ({
     meta: [
       { title: "How to Crack NEET PG: Complete 2025 Preparation Guide — DMHCA" },

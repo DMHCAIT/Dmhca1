@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, BookOpen, Clock, Users, Award, TrendingUp } from "lucide-react";
 
-export const Route = createFileRoute("/scope-of-diabetology")({
+export const Route = createFileRoute("/blog/scope-of-echocardiography")({
   head: () => ({
     meta: [
-      { title: "Scope of Diabetology in India — DMHCA" },
+      { title: "Scope of Echocardiography in India — DMHCA" },
       {
         name: "description",
-        content: "Career opportunities and specializations in diabetes management.",
+        content: "Career opportunities and specializations in cardiac ultrasound.",
       },
     ],
   }),
@@ -31,10 +31,10 @@ function BlogContent() {
               Medical Career Guide • 2025 Edition
             </div>
             <h1 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 leading-tight tracking-tight">
-              Scope of Diabetology
+              Scope of Echocardiography
             </h1>
             <p className="text-sm sm:text-base text-white/90 max-w-2xl mb-4 leading-relaxed">
-              Explore career opportunities in diabetes management.
+              Explore the growing field of cardiac ultrasound.
             </p>
           </div>
 
@@ -64,7 +64,7 @@ function BlogContent() {
               <TrendingUp className="w-5 sm:w-6 h-5 sm:h-6 flex-shrink-0" />
               <div>
                 <div className="text-xs sm:text-sm text-white/70">Growth Rate</div>
-                <div className="font-bold text-sm sm:text-lg">Stable</div>
+                <div className="font-bold text-sm sm:text-lg">Very High</div>
               </div>
             </div>
           </div>
@@ -75,8 +75,8 @@ function BlogContent() {
         <div className="container-x flex justify-center">
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
-              src="/blog-images/Scope-of-Diabetology.webp"
-              alt="Scope of Diabetology"
+              src="/blog-images/Scope-of-Echocardiography.webp"
+              alt="Scope of Echocardiography"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
@@ -93,13 +93,13 @@ function BlogContent() {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {[
-                  { label: "Career Overview in Diabetology", href: "#career-overview" },
-                  { label: "Patient Care and Management", href: "#patient-care" },
-                  { label: "Prevention and Education", href: "#prevention" },
-                  { label: "Research and Innovation", href: "#research" },
-                  { label: "Specialization Areas", href: "#specializations" },
+                  { label: "Career Overview in Echocardiography", href: "#career-overview" },
+                  { label: "Clinical Settings and Practice", href: "#clinical-settings" },
+                  { label: "Advanced Imaging Techniques", href: "#imaging-techniques" },
+                  { label: "Procedure and Application Scope", href: "#procedure-scope" },
+                  { label: "Specialization Opportunities", href: "#specializations" },
                   { label: "Earning Potential", href: "#earning-potential" },
-                  { label: "Public Health Scope", href: "#public-health" },
+                  { label: "Future Growth and Innovation", href: "#future-growth" },
                 ].map((item) => (
                   <a
                     key={item.href}
@@ -120,105 +120,105 @@ function BlogContent() {
                 SECTION 1
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Career Overview in Diabetology
+                Career Overview in Echocardiography
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed">
-                Diabetologists specialize in diagnosing and managing diabetes and metabolic
-                disorders. They provide comprehensive care including lifestyle modification,
-                medication management, complication prevention, and patient education.
+                Echocardiographers specialize in cardiac ultrasound imaging, providing diagnostic
+                information for cardiac assessment. They perform sophisticated imaging studies,
+                interpret findings, and assist in treatment planning.
               </p>
             </div>
 
             <div
-              id="patient-care"
+              id="clinical-settings"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 2
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Patient Care and Management
+                Clinical Settings and Practice
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Outpatient Clinics:</strong> Manage diabetes patients in specialized
-                    diabetes clinics
+                    <strong>Cardiology Centers:</strong> Work in specialized cardiac centers and
+                    hospitals
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Hospital Practice:</strong> Manage hospitalized diabetic patients and
-                    emergencies
+                    <strong>Diagnostic Labs:</strong> Operate diagnostic ultrasound centers
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Private Practice:</strong> Establish own diabetes care center
+                    <strong>Catheterization Labs:</strong> Provide imaging support during
+                    interventions
                   </div>
                 </div>
               </div>
             </div>
 
             <div
-              id="prevention"
+              id="imaging-techniques"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 3
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Prevention and Education
+                Advanced Imaging Techniques
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Develop diabetes prevention programs for at-risk populations</div>
+                  <div>Transthoracic echocardiography (TTE) with complete protocols</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Conduct lifestyle modification and dietary counseling</div>
+                  <div>Transesophageal echocardiography (TEE) for advanced imaging</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Provide patient education on self-management</div>
+                  <div>3D echocardiography and volumetric analysis</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Prevent or delay diabetes complications</div>
+                  <div>Stress echocardiography for ischemia assessment</div>
                 </div>
               </div>
             </div>
 
             <div
-              id="research"
+              id="procedure-scope"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 4
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Research and Innovation
+                Procedure and Application Scope
               </h2>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Conduct clinical research on new diabetes treatments</div>
+                  <div>Assess cardiac function and structure</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Participate in international diabetes research</div>
+                  <div>Evaluate valvular disease and function</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Develop innovative management protocols</div>
+                  <div>Diagnose congenital heart diseases</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Publish in peer-reviewed journals</div>
+                  <div>Guide interventional procedures</div>
                 </div>
               </div>
             </div>
@@ -231,28 +231,29 @@ function BlogContent() {
                 SECTION 5
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Specialization Areas
+                Specialization Opportunities
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
-                Diabetologists can specialize in various areas:
+                Echocardiographers can specialize in various areas:
               </p>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Type 1 Diabetes Specialist</strong> - Insulin management and immunology
+                    <strong>Stress Echo Specialist</strong> - Ischemia detection and risk assessment
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Type 2 Diabetes and Obesity</strong> - Metabolic management
+                    <strong>TEE Expert</strong> - Perioperative and advanced imaging
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
                   <div>
-                    <strong>Gestational Diabetes Specialist</strong> - Pregnancy and diabetes
+                    <strong>Pediatric Echocardiography</strong> - Congenital and pediatric cardiac
+                    disease
                   </div>
                 </div>
               </div>
@@ -271,90 +272,90 @@ function BlogContent() {
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Hospital diabetologists: 12-25 lakhs annually</div>
+                  <div>Hospital echocardiographers: 10-22 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Specialized diabetes clinics: 20-40 lakhs annually</div>
+                  <div>Cardiology clinic-based: 20-40 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Private practitioners: 25-45 lakhs annually</div>
+                  <div>Private diagnostic center: 40-70 lakhs annually</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Corporate/research positions: 40+ lakhs annually</div>
+                  <div>International opportunities: 50+ lakhs annually</div>
                 </div>
               </div>
             </div>
 
             <div
-              id="public-health"
+              id="future-growth"
               className="mb-12 sm:mb-14 md:mb-16 scroll-mt-24 p-4 sm:p-6 md:p-8 bg-gradient-to-br from-[#f7cbd7]/25 to-[#f7cbd7]/25 rounded-lg sm:rounded-xl md:rounded-2xl border border-[#f7cbd7] not-prose"
             >
               <div className="inline-block px-3 sm:px-4 py-1 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-full text-[#800020] text-xs sm:text-sm font-semibold mb-3 sm:mb-4">
                 SECTION 7
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#800020] mb-3 sm:mb-4">
-                Public Health Scope
+                Future Growth and Innovation
               </h2>
               <p className="text-[#800020] text-sm sm:text-base leading-relaxed mb-3">
-                Significant opportunities in public health and preventive medicine:
+                Echocardiography continues to evolve with technology:
               </p>
               <div className="space-y-3 text-[#800020] text-sm sm:text-base">
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Lead national diabetes screening programs</div>
+                  <div>AI-assisted image analysis and diagnosis</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Develop community health initiatives</div>
+                  <div>Point-of-care echocardiography expansion</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <span className="text-[#800020] font-bold">•</span>
-                  <div>Work in diabetes health policy and guidelines</div>
+                  <div>Advanced strain imaging and myocardial mechanics</div>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Diabetology Scope Overview
+                Echocardiography Scope Overview
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Job Demand
+                    Skill Demand
                   </p>
                   <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Very High</p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Disease Prevalence
+                    Technology Integration
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Rising</p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Cutting-Edge</p>
                 </div>
                 <div className="p-4 bg-[#f7cbd7]/25 border border-[#f7cbd7] rounded-lg">
                   <p className="text-xs uppercase tracking-wide text-[#800020] font-bold">
-                    Growth Trajectory
+                    Job Security
                   </p>
-                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Stable</p>
+                  <p className="text-xl sm:text-2xl font-bold text-[#800020] mt-2">Excellent</p>
                 </div>
               </div>
             </div>
 
             <div className="mb-12 sm:mb-14 md:mb-16 not-prose">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#29334a] mb-4 sm:mb-6">
-                Key Tips for Excelling in Diabetology
+                Key Tips for Excelling in Echocardiography
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {[
-                  "Master latest diabetes management protocols",
-                  "Develop strong patient counseling skills",
-                  "Stay updated with new medications and treatments",
-                  "Focus on complication prevention strategies",
-                  "Engage in research on diabetes management",
-                  "Build expertise in preventive programs",
+                  "Master cardiac anatomy in great detail",
+                  "Develop excellent hand-eye coordination",
+                  "Practice extensively on patients",
+                  "Stay updated with imaging technology",
+                  "Attend advanced echocardiography courses",
+                  "Maintain certification and CME credits",
                 ].map((tip, idx) => (
                   <div key={idx} className="p-4 bg-[#f8f9fc] border border-[#29334a]/15 rounded-lg">
                     <p className="font-bold text-[#29334a] text-sm sm:text-base">✓ {tip}</p>
@@ -370,28 +371,28 @@ function BlogContent() {
               <div className="space-y-4 sm:space-y-6">
                 {[
                   {
-                    q: "What is the scope of diabetology in India?",
-                    a: "Diabetology has exceptional scope in India as diabetes prevalence is among the highest globally. Diabetologists can work in hospitals, clinics, research centers, and private practice with excellent job security and earning potential.",
+                    q: "What is the scope of echocardiography in India?",
+                    a: "Echocardiography has excellent scope due to high prevalence of cardiac diseases. Echocardiographers can work in hospitals, diagnostic centers, cardiology clinics, and private practice with strong job security and competitive salaries.",
                   },
                   {
-                    q: "What are the career opportunities after MD in Internal Medicine with Diabetology focus?",
-                    a: "Diabetologists can work in diabetes care centers, endocrinology clinics, hospitals, engage in research on diabetes management, teach in medical colleges, establish diabetes prevention programs, conduct public health initiatives, and offer telemedicine services.",
+                    q: "What career opportunities exist after fellowship in echocardiography?",
+                    a: "Echocardiographers can work in cardiology centers, establish diagnostic ultrasound clinics, perform procedures in catheterization labs, work as independent contractors, teach in medical colleges, engage in research, and explore international opportunities.",
                   },
                   {
-                    q: "What specializations are available in diabetology?",
-                    a: "Popular specializations include Type 1 Diabetes Management, Type 2 Diabetes and Obesity, Gestational Diabetes, Pediatric Diabetes, Diabetic Complications Management, and Preventive Diabetology focusing on lifestyle modification programs.",
+                    q: "What types of echocardiography can specialists perform?",
+                    a: "Specialists can perform Transthoracic Echocardiography (TTE), Transesophageal Echocardiography (TEE), 3D echocardiography, Doppler studies, Stress echocardiography, and advanced cardiac imaging with expertise in different protocols.",
                   },
                   {
-                    q: "What is the salary potential for diabetologists?",
-                    a: "Hospital-based diabetologists earn 12-25 lakhs annually, while private practitioners typically earn 25-45 lakhs annually. Those with diabetes prevention programs and corporate contracts earn 45+ lakhs annually.",
+                    q: "What is the earning potential for echocardiographers?",
+                    a: "Hospital echocardiographers earn 10-22 lakhs annually, clinic-based specialists earn 20-40 lakhs annually, while private practitioners with their own ultrasound center earn 40-70+ lakhs annually depending on patient volume.",
                   },
                   {
-                    q: "Is diabetology a good specialty to pursue?",
-                    a: "Yes, diabetology offers excellent career prospects due to high disease prevalence. It combines clinical practice, preventive medicine, and research opportunities with consistent patient flow and good earning potential.",
+                    q: "Is echocardiography a good career choice?",
+                    a: "Yes, echocardiography offers excellent career prospects with good earning potential, job security, and flexibility. It combines technical skills with clinical decision-making and provides immediate diagnostic impact on patient care.",
                   },
                   {
-                    q: "What skills are required for success in diabetology?",
-                    a: "Essential skills include strong metabolic knowledge, expertise in diabetes management protocols, understanding of newer medications, counseling and lifestyle coaching abilities, research aptitude, and excellent communication for patient education.",
+                    q: "What skills are required for success in echocardiography?",
+                    a: "Essential skills include strong cardiac anatomy knowledge, proficiency with ultrasound technology, image acquisition and interpretation expertise, excellent hand-eye coordination, ability to handle complex cardiac cases, and continuous learning of new imaging modalities.",
                   },
                 ].map((faq, idx) => (
                   <div
@@ -448,7 +449,7 @@ function BlogContent() {
               </h3>
               <p className="text-sm sm:text-base text-[#800020] mb-4">
                 Don't hesitate to reach out to our expert counselors who can provide personalized
-                guidance for your diabetology specialization career journey.
+                guidance for your echocardiography specialization career journey.
               </p>
               <Link
                 to="/contact-us"

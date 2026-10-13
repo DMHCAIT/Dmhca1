@@ -17,41 +17,19 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AdminLoginRouteImport } from './routes/admin-login'
 import { Route as AdmissionRouteImport } from './routes/admission'
 import { Route as ApplyRouteImport } from './routes/apply'
-import { Route as AyushHybridProgramsRouteImport } from './routes/ayush-hybrid-programs'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as CityWiseMedicalCoursesRouteImport } from './routes/city-wise-medical-courses'
 import { Route as ContactRedirectRouteImport } from './routes/contact-redirect'
 import { Route as ContactUsRouteImport } from './routes/contact-us'
-import { Route as CoursesAfterMbbsInIndiaRouteImport } from './routes/courses-after-mbbs-in-india'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FacultyRouteImport } from './routes/faculty'
 import { Route as FellowshipRouteImport } from './routes/fellowship'
-import { Route as HowToBecomeACardiologistRouteImport } from './routes/how-to-become-a-cardiologist'
-import { Route as HowToBecomeACosmetologistRouteImport } from './routes/how-to-become-a-cosmetologist'
-import { Route as HowToBecomeADiabetologistRouteImport } from './routes/how-to-become-a-diabetologist'
-import { Route as HowToBecomeANeurologistRouteImport } from './routes/how-to-become-a-neurologist'
-import { Route as HowToBecomeAPediatricianRouteImport } from './routes/how-to-become-a-pediatrician'
-import { Route as HowToBecomeARadiologistRouteImport } from './routes/how-to-become-a-radiologist'
-import { Route as HowToBecomeAnEmbryologistRouteImport } from './routes/how-to-become-an-embryologist'
-import { Route as HowToBecomeAnEndocrinologistRouteImport } from './routes/how-to-become-an-endocrinologist'
-import { Route as HowToBecomeAnObstetricianGynecologistRouteImport } from './routes/how-to-become-an-obstetrician-gynecologist'
-import { Route as HowToBecomeAnOncologistRouteImport } from './routes/how-to-become-an-oncologist'
-import { Route as HowToCrackNeetPgRouteImport } from './routes/how-to-crack-neet-pg'
 import { Route as LpProfileRouteImport } from './routes/lp-profile'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundReturnsPolicyRouteImport } from './routes/refund-returns-policy'
-import { Route as ScopeOfCardiologyRouteImport } from './routes/scope-of-cardiology'
-import { Route as ScopeOfCosmetologyRouteImport } from './routes/scope-of-cosmetology'
-import { Route as ScopeOfDiabetologyRouteImport } from './routes/scope-of-diabetology'
-import { Route as ScopeOfEchocardiographyRouteImport } from './routes/scope-of-echocardiography'
-import { Route as ScopeOfEndocrinologyRouteImport } from './routes/scope-of-endocrinology'
-import { Route as ScopeOfNeurologyRouteImport } from './routes/scope-of-neurology'
-import { Route as ScopeOfObstetricsAndGynecologyRouteImport } from './routes/scope-of-obstetrics-and-gynecology'
-import { Route as ScopeOfOncologyRouteImport } from './routes/scope-of-oncology'
-import { Route as ScopeOfPaediatricsRouteImport } from './routes/scope-of-paediatrics'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermConditionsRouteImport } from './routes/term-conditions'
 import { Route as TestPageRouteImport } from './routes/test-page'
@@ -73,6 +51,28 @@ import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminSyncCoursesRouteImport } from './routes/admin/sync-courses'
 import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogAyushHybridProgramsRouteImport } from './routes/blog.ayush-hybrid-programs'
+import { Route as BlogCoursesAfterMbbsInIndiaRouteImport } from './routes/blog.courses-after-mbbs-in-india'
+import { Route as BlogHowToBecomeACardiologistRouteImport } from './routes/blog.how-to-become-a-cardiologist'
+import { Route as BlogHowToBecomeACosmetologistRouteImport } from './routes/blog.how-to-become-a-cosmetologist'
+import { Route as BlogHowToBecomeADiabetologistRouteImport } from './routes/blog.how-to-become-a-diabetologist'
+import { Route as BlogHowToBecomeANeurologistRouteImport } from './routes/blog.how-to-become-a-neurologist'
+import { Route as BlogHowToBecomeAPediatricianRouteImport } from './routes/blog.how-to-become-a-pediatrician'
+import { Route as BlogHowToBecomeARadiologistRouteImport } from './routes/blog.how-to-become-a-radiologist'
+import { Route as BlogHowToBecomeAnEmbryologistRouteImport } from './routes/blog.how-to-become-an-embryologist'
+import { Route as BlogHowToBecomeAnEndocrinologistRouteImport } from './routes/blog.how-to-become-an-endocrinologist'
+import { Route as BlogHowToBecomeAnObstetricianGynecologistRouteImport } from './routes/blog.how-to-become-an-obstetrician-gynecologist'
+import { Route as BlogHowToBecomeAnOncologistRouteImport } from './routes/blog.how-to-become-an-oncologist'
+import { Route as BlogHowToCrackNeetPgRouteImport } from './routes/blog.how-to-crack-neet-pg'
+import { Route as BlogScopeOfCardiologyRouteImport } from './routes/blog.scope-of-cardiology'
+import { Route as BlogScopeOfCosmetologyRouteImport } from './routes/blog.scope-of-cosmetology'
+import { Route as BlogScopeOfDiabetologyRouteImport } from './routes/blog.scope-of-diabetology'
+import { Route as BlogScopeOfEchocardiographyRouteImport } from './routes/blog.scope-of-echocardiography'
+import { Route as BlogScopeOfEndocrinologyRouteImport } from './routes/blog.scope-of-endocrinology'
+import { Route as BlogScopeOfNeurologyRouteImport } from './routes/blog.scope-of-neurology'
+import { Route as BlogScopeOfObstetricsAndGynecologyRouteImport } from './routes/blog.scope-of-obstetrics-and-gynecology'
+import { Route as BlogScopeOfOncologyRouteImport } from './routes/blog.scope-of-oncology'
+import { Route as BlogScopeOfPaediatricsRouteImport } from './routes/blog.scope-of-paediatrics'
 import { Route as CardiologyCoursesIndexRouteImport } from './routes/cardiology-courses.index'
 import { Route as CardiologyCoursesCityRouteImport } from './routes/cardiology-courses/$city'
 import { Route as ClinicalCardiologyCoursesIndexRouteImport } from './routes/clinical-cardiology-courses.index'
@@ -155,11 +155,6 @@ const ApplyRoute = ApplyRouteImport.update({
   path: '/apply',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AyushHybridProgramsRoute = AyushHybridProgramsRouteImport.update({
-  id: '/ayush-hybrid-programs',
-  path: '/ayush-hybrid-programs',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CartRoute = CartRouteImport.update({
   id: '/cart',
   path: '/cart',
@@ -178,11 +173,6 @@ const ContactRedirectRoute = ContactRedirectRouteImport.update({
 const ContactUsRoute = ContactUsRouteImport.update({
   id: '/contact-us',
   path: '/contact-us',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CoursesAfterMbbsInIndiaRoute = CoursesAfterMbbsInIndiaRouteImport.update({
-  id: '/courses-after-mbbs-in-india',
-  path: '/courses-after-mbbs-in-india',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -210,68 +200,6 @@ const FellowshipRoute = FellowshipRouteImport.update({
   path: '/fellowship',
   getParentRoute: () => rootRouteImport,
 } as any)
-const HowToBecomeACardiologistRoute =
-  HowToBecomeACardiologistRouteImport.update({
-    id: '/how-to-become-a-cardiologist',
-    path: '/how-to-become-a-cardiologist',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeACosmetologistRoute =
-  HowToBecomeACosmetologistRouteImport.update({
-    id: '/how-to-become-a-cosmetologist',
-    path: '/how-to-become-a-cosmetologist',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeADiabetologistRoute =
-  HowToBecomeADiabetologistRouteImport.update({
-    id: '/how-to-become-a-diabetologist',
-    path: '/how-to-become-a-diabetologist',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeANeurologistRoute = HowToBecomeANeurologistRouteImport.update({
-  id: '/how-to-become-a-neurologist',
-  path: '/how-to-become-a-neurologist',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowToBecomeAPediatricianRoute =
-  HowToBecomeAPediatricianRouteImport.update({
-    id: '/how-to-become-a-pediatrician',
-    path: '/how-to-become-a-pediatrician',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeARadiologistRoute = HowToBecomeARadiologistRouteImport.update({
-  id: '/how-to-become-a-radiologist',
-  path: '/how-to-become-a-radiologist',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowToBecomeAnEmbryologistRoute =
-  HowToBecomeAnEmbryologistRouteImport.update({
-    id: '/how-to-become-an-embryologist',
-    path: '/how-to-become-an-embryologist',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeAnEndocrinologistRoute =
-  HowToBecomeAnEndocrinologistRouteImport.update({
-    id: '/how-to-become-an-endocrinologist',
-    path: '/how-to-become-an-endocrinologist',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeAnObstetricianGynecologistRoute =
-  HowToBecomeAnObstetricianGynecologistRouteImport.update({
-    id: '/how-to-become-an-obstetrician-gynecologist',
-    path: '/how-to-become-an-obstetrician-gynecologist',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowToBecomeAnOncologistRoute = HowToBecomeAnOncologistRouteImport.update({
-  id: '/how-to-become-an-oncologist',
-  path: '/how-to-become-an-oncologist',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowToCrackNeetPgRoute = HowToCrackNeetPgRouteImport.update({
-  id: '/how-to-crack-neet-pg',
-  path: '/how-to-crack-neet-pg',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LpProfileRoute = LpProfileRouteImport.update({
   id: '/lp-profile',
   path: '/lp-profile',
@@ -290,52 +218,6 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const RefundReturnsPolicyRoute = RefundReturnsPolicyRouteImport.update({
   id: '/refund-returns-policy',
   path: '/refund-returns-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfCardiologyRoute = ScopeOfCardiologyRouteImport.update({
-  id: '/scope-of-cardiology',
-  path: '/scope-of-cardiology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfCosmetologyRoute = ScopeOfCosmetologyRouteImport.update({
-  id: '/scope-of-cosmetology',
-  path: '/scope-of-cosmetology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfDiabetologyRoute = ScopeOfDiabetologyRouteImport.update({
-  id: '/scope-of-diabetology',
-  path: '/scope-of-diabetology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfEchocardiographyRoute = ScopeOfEchocardiographyRouteImport.update({
-  id: '/scope-of-echocardiography',
-  path: '/scope-of-echocardiography',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfEndocrinologyRoute = ScopeOfEndocrinologyRouteImport.update({
-  id: '/scope-of-endocrinology',
-  path: '/scope-of-endocrinology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfNeurologyRoute = ScopeOfNeurologyRouteImport.update({
-  id: '/scope-of-neurology',
-  path: '/scope-of-neurology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfObstetricsAndGynecologyRoute =
-  ScopeOfObstetricsAndGynecologyRouteImport.update({
-    id: '/scope-of-obstetrics-and-gynecology',
-    path: '/scope-of-obstetrics-and-gynecology',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ScopeOfOncologyRoute = ScopeOfOncologyRouteImport.update({
-  id: '/scope-of-oncology',
-  path: '/scope-of-oncology',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScopeOfPaediatricsRoute = ScopeOfPaediatricsRouteImport.update({
-  id: '/scope-of-paediatrics',
-  path: '/scope-of-paediatrics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -441,6 +323,130 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogAyushHybridProgramsRoute = BlogAyushHybridProgramsRouteImport.update({
+  id: '/blog/ayush-hybrid-programs',
+  path: '/blog/ayush-hybrid-programs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogCoursesAfterMbbsInIndiaRoute =
+  BlogCoursesAfterMbbsInIndiaRouteImport.update({
+    id: '/blog/courses-after-mbbs-in-india',
+    path: '/blog/courses-after-mbbs-in-india',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeACardiologistRoute =
+  BlogHowToBecomeACardiologistRouteImport.update({
+    id: '/blog/how-to-become-a-cardiologist',
+    path: '/blog/how-to-become-a-cardiologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeACosmetologistRoute =
+  BlogHowToBecomeACosmetologistRouteImport.update({
+    id: '/blog/how-to-become-a-cosmetologist',
+    path: '/blog/how-to-become-a-cosmetologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeADiabetologistRoute =
+  BlogHowToBecomeADiabetologistRouteImport.update({
+    id: '/blog/how-to-become-a-diabetologist',
+    path: '/blog/how-to-become-a-diabetologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeANeurologistRoute =
+  BlogHowToBecomeANeurologistRouteImport.update({
+    id: '/blog/how-to-become-a-neurologist',
+    path: '/blog/how-to-become-a-neurologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeAPediatricianRoute =
+  BlogHowToBecomeAPediatricianRouteImport.update({
+    id: '/blog/how-to-become-a-pediatrician',
+    path: '/blog/how-to-become-a-pediatrician',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeARadiologistRoute =
+  BlogHowToBecomeARadiologistRouteImport.update({
+    id: '/blog/how-to-become-a-radiologist',
+    path: '/blog/how-to-become-a-radiologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeAnEmbryologistRoute =
+  BlogHowToBecomeAnEmbryologistRouteImport.update({
+    id: '/blog/how-to-become-an-embryologist',
+    path: '/blog/how-to-become-an-embryologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeAnEndocrinologistRoute =
+  BlogHowToBecomeAnEndocrinologistRouteImport.update({
+    id: '/blog/how-to-become-an-endocrinologist',
+    path: '/blog/how-to-become-an-endocrinologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeAnObstetricianGynecologistRoute =
+  BlogHowToBecomeAnObstetricianGynecologistRouteImport.update({
+    id: '/blog/how-to-become-an-obstetrician-gynecologist',
+    path: '/blog/how-to-become-an-obstetrician-gynecologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToBecomeAnOncologistRoute =
+  BlogHowToBecomeAnOncologistRouteImport.update({
+    id: '/blog/how-to-become-an-oncologist',
+    path: '/blog/how-to-become-an-oncologist',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogHowToCrackNeetPgRoute = BlogHowToCrackNeetPgRouteImport.update({
+  id: '/blog/how-to-crack-neet-pg',
+  path: '/blog/how-to-crack-neet-pg',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogScopeOfCardiologyRoute = BlogScopeOfCardiologyRouteImport.update({
+  id: '/blog/scope-of-cardiology',
+  path: '/blog/scope-of-cardiology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogScopeOfCosmetologyRoute = BlogScopeOfCosmetologyRouteImport.update({
+  id: '/blog/scope-of-cosmetology',
+  path: '/blog/scope-of-cosmetology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogScopeOfDiabetologyRoute = BlogScopeOfDiabetologyRouteImport.update({
+  id: '/blog/scope-of-diabetology',
+  path: '/blog/scope-of-diabetology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogScopeOfEchocardiographyRoute =
+  BlogScopeOfEchocardiographyRouteImport.update({
+    id: '/blog/scope-of-echocardiography',
+    path: '/blog/scope-of-echocardiography',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogScopeOfEndocrinologyRoute =
+  BlogScopeOfEndocrinologyRouteImport.update({
+    id: '/blog/scope-of-endocrinology',
+    path: '/blog/scope-of-endocrinology',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogScopeOfNeurologyRoute = BlogScopeOfNeurologyRouteImport.update({
+  id: '/blog/scope-of-neurology',
+  path: '/blog/scope-of-neurology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogScopeOfObstetricsAndGynecologyRoute =
+  BlogScopeOfObstetricsAndGynecologyRouteImport.update({
+    id: '/blog/scope-of-obstetrics-and-gynecology',
+    path: '/blog/scope-of-obstetrics-and-gynecology',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const BlogScopeOfOncologyRoute = BlogScopeOfOncologyRouteImport.update({
+  id: '/blog/scope-of-oncology',
+  path: '/blog/scope-of-oncology',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogScopeOfPaediatricsRoute = BlogScopeOfPaediatricsRouteImport.update({
+  id: '/blog/scope-of-paediatrics',
+  path: '/blog/scope-of-paediatrics',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CardiologyCoursesIndexRoute = CardiologyCoursesIndexRouteImport.update({
@@ -674,41 +680,19 @@ export interface FileRoutesByFullPath {
   '/admin-login': typeof AdminLoginRoute
   '/admission': typeof AdmissionRoute
   '/apply': typeof ApplyRoute
-  '/ayush-hybrid-programs': typeof AyushHybridProgramsRoute
   '/cart': typeof CartRoute
   '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
-  '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/dashboard': typeof DashboardRoute
   '/disclaimer': typeof DisclaimerRoute
   '/events': typeof EventsRouteWithChildren
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
-  '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
-  '/how-to-become-a-cosmetologist': typeof HowToBecomeACosmetologistRoute
-  '/how-to-become-a-diabetologist': typeof HowToBecomeADiabetologistRoute
-  '/how-to-become-a-neurologist': typeof HowToBecomeANeurologistRoute
-  '/how-to-become-a-pediatrician': typeof HowToBecomeAPediatricianRoute
-  '/how-to-become-a-radiologist': typeof HowToBecomeARadiologistRoute
-  '/how-to-become-an-embryologist': typeof HowToBecomeAnEmbryologistRoute
-  '/how-to-become-an-endocrinologist': typeof HowToBecomeAnEndocrinologistRoute
-  '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
-  '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
-  '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
   '/lp-profile': typeof LpProfileRoute
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
-  '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
-  '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
-  '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
-  '/scope-of-endocrinology': typeof ScopeOfEndocrinologyRoute
-  '/scope-of-neurology': typeof ScopeOfNeurologyRoute
-  '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
-  '/scope-of-oncology': typeof ScopeOfOncologyRoute
-  '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
@@ -728,6 +712,28 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
+  '/blog/ayush-hybrid-programs': typeof BlogAyushHybridProgramsRoute
+  '/blog/courses-after-mbbs-in-india': typeof BlogCoursesAfterMbbsInIndiaRoute
+  '/blog/how-to-become-a-cardiologist': typeof BlogHowToBecomeACardiologistRoute
+  '/blog/how-to-become-a-cosmetologist': typeof BlogHowToBecomeACosmetologistRoute
+  '/blog/how-to-become-a-diabetologist': typeof BlogHowToBecomeADiabetologistRoute
+  '/blog/how-to-become-a-neurologist': typeof BlogHowToBecomeANeurologistRoute
+  '/blog/how-to-become-a-pediatrician': typeof BlogHowToBecomeAPediatricianRoute
+  '/blog/how-to-become-a-radiologist': typeof BlogHowToBecomeARadiologistRoute
+  '/blog/how-to-become-an-embryologist': typeof BlogHowToBecomeAnEmbryologistRoute
+  '/blog/how-to-become-an-endocrinologist': typeof BlogHowToBecomeAnEndocrinologistRoute
+  '/blog/how-to-become-an-obstetrician-gynecologist': typeof BlogHowToBecomeAnObstetricianGynecologistRoute
+  '/blog/how-to-become-an-oncologist': typeof BlogHowToBecomeAnOncologistRoute
+  '/blog/how-to-crack-neet-pg': typeof BlogHowToCrackNeetPgRoute
+  '/blog/scope-of-cardiology': typeof BlogScopeOfCardiologyRoute
+  '/blog/scope-of-cosmetology': typeof BlogScopeOfCosmetologyRoute
+  '/blog/scope-of-diabetology': typeof BlogScopeOfDiabetologyRoute
+  '/blog/scope-of-echocardiography': typeof BlogScopeOfEchocardiographyRoute
+  '/blog/scope-of-endocrinology': typeof BlogScopeOfEndocrinologyRoute
+  '/blog/scope-of-neurology': typeof BlogScopeOfNeurologyRoute
+  '/blog/scope-of-obstetrics-and-gynecology': typeof BlogScopeOfObstetricsAndGynecologyRoute
+  '/blog/scope-of-oncology': typeof BlogScopeOfOncologyRoute
+  '/blog/scope-of-paediatrics': typeof BlogScopeOfPaediatricsRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
@@ -780,40 +786,18 @@ export interface FileRoutesByTo {
   '/admin-login': typeof AdminLoginRoute
   '/admission': typeof AdmissionRoute
   '/apply': typeof ApplyRoute
-  '/ayush-hybrid-programs': typeof AyushHybridProgramsRoute
   '/cart': typeof CartRoute
   '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
-  '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/dashboard': typeof DashboardRoute
   '/disclaimer': typeof DisclaimerRoute
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
-  '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
-  '/how-to-become-a-cosmetologist': typeof HowToBecomeACosmetologistRoute
-  '/how-to-become-a-diabetologist': typeof HowToBecomeADiabetologistRoute
-  '/how-to-become-a-neurologist': typeof HowToBecomeANeurologistRoute
-  '/how-to-become-a-pediatrician': typeof HowToBecomeAPediatricianRoute
-  '/how-to-become-a-radiologist': typeof HowToBecomeARadiologistRoute
-  '/how-to-become-an-embryologist': typeof HowToBecomeAnEmbryologistRoute
-  '/how-to-become-an-endocrinologist': typeof HowToBecomeAnEndocrinologistRoute
-  '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
-  '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
-  '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
   '/lp-profile': typeof LpProfileRoute
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
-  '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
-  '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
-  '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
-  '/scope-of-endocrinology': typeof ScopeOfEndocrinologyRoute
-  '/scope-of-neurology': typeof ScopeOfNeurologyRoute
-  '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
-  '/scope-of-oncology': typeof ScopeOfOncologyRoute
-  '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
@@ -833,6 +817,28 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
+  '/blog/ayush-hybrid-programs': typeof BlogAyushHybridProgramsRoute
+  '/blog/courses-after-mbbs-in-india': typeof BlogCoursesAfterMbbsInIndiaRoute
+  '/blog/how-to-become-a-cardiologist': typeof BlogHowToBecomeACardiologistRoute
+  '/blog/how-to-become-a-cosmetologist': typeof BlogHowToBecomeACosmetologistRoute
+  '/blog/how-to-become-a-diabetologist': typeof BlogHowToBecomeADiabetologistRoute
+  '/blog/how-to-become-a-neurologist': typeof BlogHowToBecomeANeurologistRoute
+  '/blog/how-to-become-a-pediatrician': typeof BlogHowToBecomeAPediatricianRoute
+  '/blog/how-to-become-a-radiologist': typeof BlogHowToBecomeARadiologistRoute
+  '/blog/how-to-become-an-embryologist': typeof BlogHowToBecomeAnEmbryologistRoute
+  '/blog/how-to-become-an-endocrinologist': typeof BlogHowToBecomeAnEndocrinologistRoute
+  '/blog/how-to-become-an-obstetrician-gynecologist': typeof BlogHowToBecomeAnObstetricianGynecologistRoute
+  '/blog/how-to-become-an-oncologist': typeof BlogHowToBecomeAnOncologistRoute
+  '/blog/how-to-crack-neet-pg': typeof BlogHowToCrackNeetPgRoute
+  '/blog/scope-of-cardiology': typeof BlogScopeOfCardiologyRoute
+  '/blog/scope-of-cosmetology': typeof BlogScopeOfCosmetologyRoute
+  '/blog/scope-of-diabetology': typeof BlogScopeOfDiabetologyRoute
+  '/blog/scope-of-echocardiography': typeof BlogScopeOfEchocardiographyRoute
+  '/blog/scope-of-endocrinology': typeof BlogScopeOfEndocrinologyRoute
+  '/blog/scope-of-neurology': typeof BlogScopeOfNeurologyRoute
+  '/blog/scope-of-obstetrics-and-gynecology': typeof BlogScopeOfObstetricsAndGynecologyRoute
+  '/blog/scope-of-oncology': typeof BlogScopeOfOncologyRoute
+  '/blog/scope-of-paediatrics': typeof BlogScopeOfPaediatricsRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
@@ -887,41 +893,19 @@ export interface FileRoutesById {
   '/admin-login': typeof AdminLoginRoute
   '/admission': typeof AdmissionRoute
   '/apply': typeof ApplyRoute
-  '/ayush-hybrid-programs': typeof AyushHybridProgramsRoute
   '/cart': typeof CartRoute
   '/city-wise-medical-courses': typeof CityWiseMedicalCoursesRoute
   '/contact-redirect': typeof ContactRedirectRoute
   '/contact-us': typeof ContactUsRoute
-  '/courses-after-mbbs-in-india': typeof CoursesAfterMbbsInIndiaRoute
   '/dashboard': typeof DashboardRoute
   '/disclaimer': typeof DisclaimerRoute
   '/events': typeof EventsRouteWithChildren
   '/faculty': typeof FacultyRoute
   '/fellowship': typeof FellowshipRoute
-  '/how-to-become-a-cardiologist': typeof HowToBecomeACardiologistRoute
-  '/how-to-become-a-cosmetologist': typeof HowToBecomeACosmetologistRoute
-  '/how-to-become-a-diabetologist': typeof HowToBecomeADiabetologistRoute
-  '/how-to-become-a-neurologist': typeof HowToBecomeANeurologistRoute
-  '/how-to-become-a-pediatrician': typeof HowToBecomeAPediatricianRoute
-  '/how-to-become-a-radiologist': typeof HowToBecomeARadiologistRoute
-  '/how-to-become-an-embryologist': typeof HowToBecomeAnEmbryologistRoute
-  '/how-to-become-an-endocrinologist': typeof HowToBecomeAnEndocrinologistRoute
-  '/how-to-become-an-obstetrician-gynecologist': typeof HowToBecomeAnObstetricianGynecologistRoute
-  '/how-to-become-an-oncologist': typeof HowToBecomeAnOncologistRoute
-  '/how-to-crack-neet-pg': typeof HowToCrackNeetPgRoute
   '/lp-profile': typeof LpProfileRoute
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/scope-of-cardiology': typeof ScopeOfCardiologyRoute
-  '/scope-of-cosmetology': typeof ScopeOfCosmetologyRoute
-  '/scope-of-diabetology': typeof ScopeOfDiabetologyRoute
-  '/scope-of-echocardiography': typeof ScopeOfEchocardiographyRoute
-  '/scope-of-endocrinology': typeof ScopeOfEndocrinologyRoute
-  '/scope-of-neurology': typeof ScopeOfNeurologyRoute
-  '/scope-of-obstetrics-and-gynecology': typeof ScopeOfObstetricsAndGynecologyRoute
-  '/scope-of-oncology': typeof ScopeOfOncologyRoute
-  '/scope-of-paediatrics': typeof ScopeOfPaediatricsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
@@ -941,6 +925,28 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/sync-courses': typeof AdminSyncCoursesRoute
   '/admin/users': typeof AdminUsersRoute
+  '/blog/ayush-hybrid-programs': typeof BlogAyushHybridProgramsRoute
+  '/blog/courses-after-mbbs-in-india': typeof BlogCoursesAfterMbbsInIndiaRoute
+  '/blog/how-to-become-a-cardiologist': typeof BlogHowToBecomeACardiologistRoute
+  '/blog/how-to-become-a-cosmetologist': typeof BlogHowToBecomeACosmetologistRoute
+  '/blog/how-to-become-a-diabetologist': typeof BlogHowToBecomeADiabetologistRoute
+  '/blog/how-to-become-a-neurologist': typeof BlogHowToBecomeANeurologistRoute
+  '/blog/how-to-become-a-pediatrician': typeof BlogHowToBecomeAPediatricianRoute
+  '/blog/how-to-become-a-radiologist': typeof BlogHowToBecomeARadiologistRoute
+  '/blog/how-to-become-an-embryologist': typeof BlogHowToBecomeAnEmbryologistRoute
+  '/blog/how-to-become-an-endocrinologist': typeof BlogHowToBecomeAnEndocrinologistRoute
+  '/blog/how-to-become-an-obstetrician-gynecologist': typeof BlogHowToBecomeAnObstetricianGynecologistRoute
+  '/blog/how-to-become-an-oncologist': typeof BlogHowToBecomeAnOncologistRoute
+  '/blog/how-to-crack-neet-pg': typeof BlogHowToCrackNeetPgRoute
+  '/blog/scope-of-cardiology': typeof BlogScopeOfCardiologyRoute
+  '/blog/scope-of-cosmetology': typeof BlogScopeOfCosmetologyRoute
+  '/blog/scope-of-diabetology': typeof BlogScopeOfDiabetologyRoute
+  '/blog/scope-of-echocardiography': typeof BlogScopeOfEchocardiographyRoute
+  '/blog/scope-of-endocrinology': typeof BlogScopeOfEndocrinologyRoute
+  '/blog/scope-of-neurology': typeof BlogScopeOfNeurologyRoute
+  '/blog/scope-of-obstetrics-and-gynecology': typeof BlogScopeOfObstetricsAndGynecologyRoute
+  '/blog/scope-of-oncology': typeof BlogScopeOfOncologyRoute
+  '/blog/scope-of-paediatrics': typeof BlogScopeOfPaediatricsRoute
   '/cardiology-courses/$city': typeof CardiologyCoursesCityRoute
   '/clinical-cardiology-courses/$city': typeof ClinicalCardiologyCoursesCityRoute
   '/cosmetology-courses/$city': typeof CosmetologyCoursesCityRoute
@@ -996,41 +1002,19 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/admission'
     | '/apply'
-    | '/ayush-hybrid-programs'
     | '/cart'
     | '/city-wise-medical-courses'
     | '/contact-redirect'
     | '/contact-us'
-    | '/courses-after-mbbs-in-india'
     | '/dashboard'
     | '/disclaimer'
     | '/events'
     | '/faculty'
     | '/fellowship'
-    | '/how-to-become-a-cardiologist'
-    | '/how-to-become-a-cosmetologist'
-    | '/how-to-become-a-diabetologist'
-    | '/how-to-become-a-neurologist'
-    | '/how-to-become-a-pediatrician'
-    | '/how-to-become-a-radiologist'
-    | '/how-to-become-an-embryologist'
-    | '/how-to-become-an-endocrinologist'
-    | '/how-to-become-an-obstetrician-gynecologist'
-    | '/how-to-become-an-oncologist'
-    | '/how-to-crack-neet-pg'
     | '/lp-profile'
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/scope-of-cardiology'
-    | '/scope-of-cosmetology'
-    | '/scope-of-diabetology'
-    | '/scope-of-echocardiography'
-    | '/scope-of-endocrinology'
-    | '/scope-of-neurology'
-    | '/scope-of-obstetrics-and-gynecology'
-    | '/scope-of-oncology'
-    | '/scope-of-paediatrics'
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
@@ -1050,6 +1034,28 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/sync-courses'
     | '/admin/users'
+    | '/blog/ayush-hybrid-programs'
+    | '/blog/courses-after-mbbs-in-india'
+    | '/blog/how-to-become-a-cardiologist'
+    | '/blog/how-to-become-a-cosmetologist'
+    | '/blog/how-to-become-a-diabetologist'
+    | '/blog/how-to-become-a-neurologist'
+    | '/blog/how-to-become-a-pediatrician'
+    | '/blog/how-to-become-a-radiologist'
+    | '/blog/how-to-become-an-embryologist'
+    | '/blog/how-to-become-an-endocrinologist'
+    | '/blog/how-to-become-an-obstetrician-gynecologist'
+    | '/blog/how-to-become-an-oncologist'
+    | '/blog/how-to-crack-neet-pg'
+    | '/blog/scope-of-cardiology'
+    | '/blog/scope-of-cosmetology'
+    | '/blog/scope-of-diabetology'
+    | '/blog/scope-of-echocardiography'
+    | '/blog/scope-of-endocrinology'
+    | '/blog/scope-of-neurology'
+    | '/blog/scope-of-obstetrics-and-gynecology'
+    | '/blog/scope-of-oncology'
+    | '/blog/scope-of-paediatrics'
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
@@ -1102,40 +1108,18 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/admission'
     | '/apply'
-    | '/ayush-hybrid-programs'
     | '/cart'
     | '/city-wise-medical-courses'
     | '/contact-redirect'
     | '/contact-us'
-    | '/courses-after-mbbs-in-india'
     | '/dashboard'
     | '/disclaimer'
     | '/faculty'
     | '/fellowship'
-    | '/how-to-become-a-cardiologist'
-    | '/how-to-become-a-cosmetologist'
-    | '/how-to-become-a-diabetologist'
-    | '/how-to-become-a-neurologist'
-    | '/how-to-become-a-pediatrician'
-    | '/how-to-become-a-radiologist'
-    | '/how-to-become-an-embryologist'
-    | '/how-to-become-an-endocrinologist'
-    | '/how-to-become-an-obstetrician-gynecologist'
-    | '/how-to-become-an-oncologist'
-    | '/how-to-crack-neet-pg'
     | '/lp-profile'
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/scope-of-cardiology'
-    | '/scope-of-cosmetology'
-    | '/scope-of-diabetology'
-    | '/scope-of-echocardiography'
-    | '/scope-of-endocrinology'
-    | '/scope-of-neurology'
-    | '/scope-of-obstetrics-and-gynecology'
-    | '/scope-of-oncology'
-    | '/scope-of-paediatrics'
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
@@ -1155,6 +1139,28 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/sync-courses'
     | '/admin/users'
+    | '/blog/ayush-hybrid-programs'
+    | '/blog/courses-after-mbbs-in-india'
+    | '/blog/how-to-become-a-cardiologist'
+    | '/blog/how-to-become-a-cosmetologist'
+    | '/blog/how-to-become-a-diabetologist'
+    | '/blog/how-to-become-a-neurologist'
+    | '/blog/how-to-become-a-pediatrician'
+    | '/blog/how-to-become-a-radiologist'
+    | '/blog/how-to-become-an-embryologist'
+    | '/blog/how-to-become-an-endocrinologist'
+    | '/blog/how-to-become-an-obstetrician-gynecologist'
+    | '/blog/how-to-become-an-oncologist'
+    | '/blog/how-to-crack-neet-pg'
+    | '/blog/scope-of-cardiology'
+    | '/blog/scope-of-cosmetology'
+    | '/blog/scope-of-diabetology'
+    | '/blog/scope-of-echocardiography'
+    | '/blog/scope-of-endocrinology'
+    | '/blog/scope-of-neurology'
+    | '/blog/scope-of-obstetrics-and-gynecology'
+    | '/blog/scope-of-oncology'
+    | '/blog/scope-of-paediatrics'
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
@@ -1208,41 +1214,19 @@ export interface FileRouteTypes {
     | '/admin-login'
     | '/admission'
     | '/apply'
-    | '/ayush-hybrid-programs'
     | '/cart'
     | '/city-wise-medical-courses'
     | '/contact-redirect'
     | '/contact-us'
-    | '/courses-after-mbbs-in-india'
     | '/dashboard'
     | '/disclaimer'
     | '/events'
     | '/faculty'
     | '/fellowship'
-    | '/how-to-become-a-cardiologist'
-    | '/how-to-become-a-cosmetologist'
-    | '/how-to-become-a-diabetologist'
-    | '/how-to-become-a-neurologist'
-    | '/how-to-become-a-pediatrician'
-    | '/how-to-become-a-radiologist'
-    | '/how-to-become-an-embryologist'
-    | '/how-to-become-an-endocrinologist'
-    | '/how-to-become-an-obstetrician-gynecologist'
-    | '/how-to-become-an-oncologist'
-    | '/how-to-crack-neet-pg'
     | '/lp-profile'
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/scope-of-cardiology'
-    | '/scope-of-cosmetology'
-    | '/scope-of-diabetology'
-    | '/scope-of-echocardiography'
-    | '/scope-of-endocrinology'
-    | '/scope-of-neurology'
-    | '/scope-of-obstetrics-and-gynecology'
-    | '/scope-of-oncology'
-    | '/scope-of-paediatrics'
     | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
@@ -1262,6 +1246,28 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/sync-courses'
     | '/admin/users'
+    | '/blog/ayush-hybrid-programs'
+    | '/blog/courses-after-mbbs-in-india'
+    | '/blog/how-to-become-a-cardiologist'
+    | '/blog/how-to-become-a-cosmetologist'
+    | '/blog/how-to-become-a-diabetologist'
+    | '/blog/how-to-become-a-neurologist'
+    | '/blog/how-to-become-a-pediatrician'
+    | '/blog/how-to-become-a-radiologist'
+    | '/blog/how-to-become-an-embryologist'
+    | '/blog/how-to-become-an-endocrinologist'
+    | '/blog/how-to-become-an-obstetrician-gynecologist'
+    | '/blog/how-to-become-an-oncologist'
+    | '/blog/how-to-crack-neet-pg'
+    | '/blog/scope-of-cardiology'
+    | '/blog/scope-of-cosmetology'
+    | '/blog/scope-of-diabetology'
+    | '/blog/scope-of-echocardiography'
+    | '/blog/scope-of-endocrinology'
+    | '/blog/scope-of-neurology'
+    | '/blog/scope-of-obstetrics-and-gynecology'
+    | '/blog/scope-of-oncology'
+    | '/blog/scope-of-paediatrics'
     | '/cardiology-courses/$city'
     | '/clinical-cardiology-courses/$city'
     | '/cosmetology-courses/$city'
@@ -1316,46 +1322,46 @@ export interface RootRouteChildren {
   AdminLoginRoute: typeof AdminLoginRoute
   AdmissionRoute: typeof AdmissionRoute
   ApplyRoute: typeof ApplyRoute
-  AyushHybridProgramsRoute: typeof AyushHybridProgramsRoute
   CartRoute: typeof CartRoute
   CityWiseMedicalCoursesRoute: typeof CityWiseMedicalCoursesRoute
   ContactRedirectRoute: typeof ContactRedirectRoute
   ContactUsRoute: typeof ContactUsRoute
-  CoursesAfterMbbsInIndiaRoute: typeof CoursesAfterMbbsInIndiaRoute
   DashboardRoute: typeof DashboardRoute
   DisclaimerRoute: typeof DisclaimerRoute
   EventsRoute: typeof EventsRouteWithChildren
   FacultyRoute: typeof FacultyRoute
   FellowshipRoute: typeof FellowshipRoute
-  HowToBecomeACardiologistRoute: typeof HowToBecomeACardiologistRoute
-  HowToBecomeACosmetologistRoute: typeof HowToBecomeACosmetologistRoute
-  HowToBecomeADiabetologistRoute: typeof HowToBecomeADiabetologistRoute
-  HowToBecomeANeurologistRoute: typeof HowToBecomeANeurologistRoute
-  HowToBecomeAPediatricianRoute: typeof HowToBecomeAPediatricianRoute
-  HowToBecomeARadiologistRoute: typeof HowToBecomeARadiologistRoute
-  HowToBecomeAnEmbryologistRoute: typeof HowToBecomeAnEmbryologistRoute
-  HowToBecomeAnEndocrinologistRoute: typeof HowToBecomeAnEndocrinologistRoute
-  HowToBecomeAnObstetricianGynecologistRoute: typeof HowToBecomeAnObstetricianGynecologistRoute
-  HowToBecomeAnOncologistRoute: typeof HowToBecomeAnOncologistRoute
-  HowToCrackNeetPgRoute: typeof HowToCrackNeetPgRoute
   LpProfileRoute: typeof LpProfileRoute
   PaymentRoute: typeof PaymentRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundReturnsPolicyRoute: typeof RefundReturnsPolicyRoute
-  ScopeOfCardiologyRoute: typeof ScopeOfCardiologyRoute
-  ScopeOfCosmetologyRoute: typeof ScopeOfCosmetologyRoute
-  ScopeOfDiabetologyRoute: typeof ScopeOfDiabetologyRoute
-  ScopeOfEchocardiographyRoute: typeof ScopeOfEchocardiographyRoute
-  ScopeOfEndocrinologyRoute: typeof ScopeOfEndocrinologyRoute
-  ScopeOfNeurologyRoute: typeof ScopeOfNeurologyRoute
-  ScopeOfObstetricsAndGynecologyRoute: typeof ScopeOfObstetricsAndGynecologyRoute
-  ScopeOfOncologyRoute: typeof ScopeOfOncologyRoute
-  ScopeOfPaediatricsRoute: typeof ScopeOfPaediatricsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermConditionsRoute: typeof TermConditionsRoute
   TestPageRoute: typeof TestPageRoute
   VerificationRoute: typeof VerificationRouteWithChildren
   VerifyRoute: typeof VerifyRouteWithChildren
+  BlogAyushHybridProgramsRoute: typeof BlogAyushHybridProgramsRoute
+  BlogCoursesAfterMbbsInIndiaRoute: typeof BlogCoursesAfterMbbsInIndiaRoute
+  BlogHowToBecomeACardiologistRoute: typeof BlogHowToBecomeACardiologistRoute
+  BlogHowToBecomeACosmetologistRoute: typeof BlogHowToBecomeACosmetologistRoute
+  BlogHowToBecomeADiabetologistRoute: typeof BlogHowToBecomeADiabetologistRoute
+  BlogHowToBecomeANeurologistRoute: typeof BlogHowToBecomeANeurologistRoute
+  BlogHowToBecomeAPediatricianRoute: typeof BlogHowToBecomeAPediatricianRoute
+  BlogHowToBecomeARadiologistRoute: typeof BlogHowToBecomeARadiologistRoute
+  BlogHowToBecomeAnEmbryologistRoute: typeof BlogHowToBecomeAnEmbryologistRoute
+  BlogHowToBecomeAnEndocrinologistRoute: typeof BlogHowToBecomeAnEndocrinologistRoute
+  BlogHowToBecomeAnObstetricianGynecologistRoute: typeof BlogHowToBecomeAnObstetricianGynecologistRoute
+  BlogHowToBecomeAnOncologistRoute: typeof BlogHowToBecomeAnOncologistRoute
+  BlogHowToCrackNeetPgRoute: typeof BlogHowToCrackNeetPgRoute
+  BlogScopeOfCardiologyRoute: typeof BlogScopeOfCardiologyRoute
+  BlogScopeOfCosmetologyRoute: typeof BlogScopeOfCosmetologyRoute
+  BlogScopeOfDiabetologyRoute: typeof BlogScopeOfDiabetologyRoute
+  BlogScopeOfEchocardiographyRoute: typeof BlogScopeOfEchocardiographyRoute
+  BlogScopeOfEndocrinologyRoute: typeof BlogScopeOfEndocrinologyRoute
+  BlogScopeOfNeurologyRoute: typeof BlogScopeOfNeurologyRoute
+  BlogScopeOfObstetricsAndGynecologyRoute: typeof BlogScopeOfObstetricsAndGynecologyRoute
+  BlogScopeOfOncologyRoute: typeof BlogScopeOfOncologyRoute
+  BlogScopeOfPaediatricsRoute: typeof BlogScopeOfPaediatricsRoute
   CardiologyCoursesCityRoute: typeof CardiologyCoursesCityRoute
   ClinicalCardiologyCoursesCityRoute: typeof ClinicalCardiologyCoursesCityRoute
   CosmetologyCoursesCityRoute: typeof CosmetologyCoursesCityRoute
@@ -1453,13 +1459,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ayush-hybrid-programs': {
-      id: '/ayush-hybrid-programs'
-      path: '/ayush-hybrid-programs'
-      fullPath: '/ayush-hybrid-programs'
-      preLoaderRoute: typeof AyushHybridProgramsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/cart': {
       id: '/cart'
       path: '/cart'
@@ -1486,13 +1485,6 @@ declare module '@tanstack/react-router' {
       path: '/contact-us'
       fullPath: '/contact-us'
       preLoaderRoute: typeof ContactUsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/courses-after-mbbs-in-india': {
-      id: '/courses-after-mbbs-in-india'
-      path: '/courses-after-mbbs-in-india'
-      fullPath: '/courses-after-mbbs-in-india'
-      preLoaderRoute: typeof CoursesAfterMbbsInIndiaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -1530,83 +1522,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FellowshipRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/how-to-become-a-cardiologist': {
-      id: '/how-to-become-a-cardiologist'
-      path: '/how-to-become-a-cardiologist'
-      fullPath: '/how-to-become-a-cardiologist'
-      preLoaderRoute: typeof HowToBecomeACardiologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-a-cosmetologist': {
-      id: '/how-to-become-a-cosmetologist'
-      path: '/how-to-become-a-cosmetologist'
-      fullPath: '/how-to-become-a-cosmetologist'
-      preLoaderRoute: typeof HowToBecomeACosmetologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-a-diabetologist': {
-      id: '/how-to-become-a-diabetologist'
-      path: '/how-to-become-a-diabetologist'
-      fullPath: '/how-to-become-a-diabetologist'
-      preLoaderRoute: typeof HowToBecomeADiabetologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-a-neurologist': {
-      id: '/how-to-become-a-neurologist'
-      path: '/how-to-become-a-neurologist'
-      fullPath: '/how-to-become-a-neurologist'
-      preLoaderRoute: typeof HowToBecomeANeurologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-a-pediatrician': {
-      id: '/how-to-become-a-pediatrician'
-      path: '/how-to-become-a-pediatrician'
-      fullPath: '/how-to-become-a-pediatrician'
-      preLoaderRoute: typeof HowToBecomeAPediatricianRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-a-radiologist': {
-      id: '/how-to-become-a-radiologist'
-      path: '/how-to-become-a-radiologist'
-      fullPath: '/how-to-become-a-radiologist'
-      preLoaderRoute: typeof HowToBecomeARadiologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-an-embryologist': {
-      id: '/how-to-become-an-embryologist'
-      path: '/how-to-become-an-embryologist'
-      fullPath: '/how-to-become-an-embryologist'
-      preLoaderRoute: typeof HowToBecomeAnEmbryologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-an-endocrinologist': {
-      id: '/how-to-become-an-endocrinologist'
-      path: '/how-to-become-an-endocrinologist'
-      fullPath: '/how-to-become-an-endocrinologist'
-      preLoaderRoute: typeof HowToBecomeAnEndocrinologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-an-obstetrician-gynecologist': {
-      id: '/how-to-become-an-obstetrician-gynecologist'
-      path: '/how-to-become-an-obstetrician-gynecologist'
-      fullPath: '/how-to-become-an-obstetrician-gynecologist'
-      preLoaderRoute: typeof HowToBecomeAnObstetricianGynecologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-become-an-oncologist': {
-      id: '/how-to-become-an-oncologist'
-      path: '/how-to-become-an-oncologist'
-      fullPath: '/how-to-become-an-oncologist'
-      preLoaderRoute: typeof HowToBecomeAnOncologistRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-to-crack-neet-pg': {
-      id: '/how-to-crack-neet-pg'
-      path: '/how-to-crack-neet-pg'
-      fullPath: '/how-to-crack-neet-pg'
-      preLoaderRoute: typeof HowToCrackNeetPgRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/lp-profile': {
       id: '/lp-profile'
       path: '/lp-profile'
@@ -1633,69 +1548,6 @@ declare module '@tanstack/react-router' {
       path: '/refund-returns-policy'
       fullPath: '/refund-returns-policy'
       preLoaderRoute: typeof RefundReturnsPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-cardiology': {
-      id: '/scope-of-cardiology'
-      path: '/scope-of-cardiology'
-      fullPath: '/scope-of-cardiology'
-      preLoaderRoute: typeof ScopeOfCardiologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-cosmetology': {
-      id: '/scope-of-cosmetology'
-      path: '/scope-of-cosmetology'
-      fullPath: '/scope-of-cosmetology'
-      preLoaderRoute: typeof ScopeOfCosmetologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-diabetology': {
-      id: '/scope-of-diabetology'
-      path: '/scope-of-diabetology'
-      fullPath: '/scope-of-diabetology'
-      preLoaderRoute: typeof ScopeOfDiabetologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-echocardiography': {
-      id: '/scope-of-echocardiography'
-      path: '/scope-of-echocardiography'
-      fullPath: '/scope-of-echocardiography'
-      preLoaderRoute: typeof ScopeOfEchocardiographyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-endocrinology': {
-      id: '/scope-of-endocrinology'
-      path: '/scope-of-endocrinology'
-      fullPath: '/scope-of-endocrinology'
-      preLoaderRoute: typeof ScopeOfEndocrinologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-neurology': {
-      id: '/scope-of-neurology'
-      path: '/scope-of-neurology'
-      fullPath: '/scope-of-neurology'
-      preLoaderRoute: typeof ScopeOfNeurologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-obstetrics-and-gynecology': {
-      id: '/scope-of-obstetrics-and-gynecology'
-      path: '/scope-of-obstetrics-and-gynecology'
-      fullPath: '/scope-of-obstetrics-and-gynecology'
-      preLoaderRoute: typeof ScopeOfObstetricsAndGynecologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-oncology': {
-      id: '/scope-of-oncology'
-      path: '/scope-of-oncology'
-      fullPath: '/scope-of-oncology'
-      preLoaderRoute: typeof ScopeOfOncologyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scope-of-paediatrics': {
-      id: '/scope-of-paediatrics'
-      path: '/scope-of-paediatrics'
-      fullPath: '/scope-of-paediatrics'
-      preLoaderRoute: typeof ScopeOfPaediatricsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -1843,6 +1695,160 @@ declare module '@tanstack/react-router' {
       path: '/blog'
       fullPath: '/blog/'
       preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/ayush-hybrid-programs': {
+      id: '/blog/ayush-hybrid-programs'
+      path: '/blog/ayush-hybrid-programs'
+      fullPath: '/blog/ayush-hybrid-programs'
+      preLoaderRoute: typeof BlogAyushHybridProgramsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/courses-after-mbbs-in-india': {
+      id: '/blog/courses-after-mbbs-in-india'
+      path: '/blog/courses-after-mbbs-in-india'
+      fullPath: '/blog/courses-after-mbbs-in-india'
+      preLoaderRoute: typeof BlogCoursesAfterMbbsInIndiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-a-cardiologist': {
+      id: '/blog/how-to-become-a-cardiologist'
+      path: '/blog/how-to-become-a-cardiologist'
+      fullPath: '/blog/how-to-become-a-cardiologist'
+      preLoaderRoute: typeof BlogHowToBecomeACardiologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-a-cosmetologist': {
+      id: '/blog/how-to-become-a-cosmetologist'
+      path: '/blog/how-to-become-a-cosmetologist'
+      fullPath: '/blog/how-to-become-a-cosmetologist'
+      preLoaderRoute: typeof BlogHowToBecomeACosmetologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-a-diabetologist': {
+      id: '/blog/how-to-become-a-diabetologist'
+      path: '/blog/how-to-become-a-diabetologist'
+      fullPath: '/blog/how-to-become-a-diabetologist'
+      preLoaderRoute: typeof BlogHowToBecomeADiabetologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-a-neurologist': {
+      id: '/blog/how-to-become-a-neurologist'
+      path: '/blog/how-to-become-a-neurologist'
+      fullPath: '/blog/how-to-become-a-neurologist'
+      preLoaderRoute: typeof BlogHowToBecomeANeurologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-a-pediatrician': {
+      id: '/blog/how-to-become-a-pediatrician'
+      path: '/blog/how-to-become-a-pediatrician'
+      fullPath: '/blog/how-to-become-a-pediatrician'
+      preLoaderRoute: typeof BlogHowToBecomeAPediatricianRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-a-radiologist': {
+      id: '/blog/how-to-become-a-radiologist'
+      path: '/blog/how-to-become-a-radiologist'
+      fullPath: '/blog/how-to-become-a-radiologist'
+      preLoaderRoute: typeof BlogHowToBecomeARadiologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-an-embryologist': {
+      id: '/blog/how-to-become-an-embryologist'
+      path: '/blog/how-to-become-an-embryologist'
+      fullPath: '/blog/how-to-become-an-embryologist'
+      preLoaderRoute: typeof BlogHowToBecomeAnEmbryologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-an-endocrinologist': {
+      id: '/blog/how-to-become-an-endocrinologist'
+      path: '/blog/how-to-become-an-endocrinologist'
+      fullPath: '/blog/how-to-become-an-endocrinologist'
+      preLoaderRoute: typeof BlogHowToBecomeAnEndocrinologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-an-obstetrician-gynecologist': {
+      id: '/blog/how-to-become-an-obstetrician-gynecologist'
+      path: '/blog/how-to-become-an-obstetrician-gynecologist'
+      fullPath: '/blog/how-to-become-an-obstetrician-gynecologist'
+      preLoaderRoute: typeof BlogHowToBecomeAnObstetricianGynecologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-become-an-oncologist': {
+      id: '/blog/how-to-become-an-oncologist'
+      path: '/blog/how-to-become-an-oncologist'
+      fullPath: '/blog/how-to-become-an-oncologist'
+      preLoaderRoute: typeof BlogHowToBecomeAnOncologistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/how-to-crack-neet-pg': {
+      id: '/blog/how-to-crack-neet-pg'
+      path: '/blog/how-to-crack-neet-pg'
+      fullPath: '/blog/how-to-crack-neet-pg'
+      preLoaderRoute: typeof BlogHowToCrackNeetPgRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-cardiology': {
+      id: '/blog/scope-of-cardiology'
+      path: '/blog/scope-of-cardiology'
+      fullPath: '/blog/scope-of-cardiology'
+      preLoaderRoute: typeof BlogScopeOfCardiologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-cosmetology': {
+      id: '/blog/scope-of-cosmetology'
+      path: '/blog/scope-of-cosmetology'
+      fullPath: '/blog/scope-of-cosmetology'
+      preLoaderRoute: typeof BlogScopeOfCosmetologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-diabetology': {
+      id: '/blog/scope-of-diabetology'
+      path: '/blog/scope-of-diabetology'
+      fullPath: '/blog/scope-of-diabetology'
+      preLoaderRoute: typeof BlogScopeOfDiabetologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-echocardiography': {
+      id: '/blog/scope-of-echocardiography'
+      path: '/blog/scope-of-echocardiography'
+      fullPath: '/blog/scope-of-echocardiography'
+      preLoaderRoute: typeof BlogScopeOfEchocardiographyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-endocrinology': {
+      id: '/blog/scope-of-endocrinology'
+      path: '/blog/scope-of-endocrinology'
+      fullPath: '/blog/scope-of-endocrinology'
+      preLoaderRoute: typeof BlogScopeOfEndocrinologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-neurology': {
+      id: '/blog/scope-of-neurology'
+      path: '/blog/scope-of-neurology'
+      fullPath: '/blog/scope-of-neurology'
+      preLoaderRoute: typeof BlogScopeOfNeurologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-obstetrics-and-gynecology': {
+      id: '/blog/scope-of-obstetrics-and-gynecology'
+      path: '/blog/scope-of-obstetrics-and-gynecology'
+      fullPath: '/blog/scope-of-obstetrics-and-gynecology'
+      preLoaderRoute: typeof BlogScopeOfObstetricsAndGynecologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-oncology': {
+      id: '/blog/scope-of-oncology'
+      path: '/blog/scope-of-oncology'
+      fullPath: '/blog/scope-of-oncology'
+      preLoaderRoute: typeof BlogScopeOfOncologyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/scope-of-paediatrics': {
+      id: '/blog/scope-of-paediatrics'
+      path: '/blog/scope-of-paediatrics'
+      fullPath: '/blog/scope-of-paediatrics'
+      preLoaderRoute: typeof BlogScopeOfPaediatricsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cardiology-courses/': {
@@ -2229,47 +2235,48 @@ const rootRouteChildren: RootRouteChildren = {
   AdminLoginRoute: AdminLoginRoute,
   AdmissionRoute: AdmissionRoute,
   ApplyRoute: ApplyRoute,
-  AyushHybridProgramsRoute: AyushHybridProgramsRoute,
   CartRoute: CartRoute,
   CityWiseMedicalCoursesRoute: CityWiseMedicalCoursesRoute,
   ContactRedirectRoute: ContactRedirectRoute,
   ContactUsRoute: ContactUsRoute,
-  CoursesAfterMbbsInIndiaRoute: CoursesAfterMbbsInIndiaRoute,
   DashboardRoute: DashboardRoute,
   DisclaimerRoute: DisclaimerRoute,
   EventsRoute: EventsRouteWithChildren,
   FacultyRoute: FacultyRoute,
   FellowshipRoute: FellowshipRoute,
-  HowToBecomeACardiologistRoute: HowToBecomeACardiologistRoute,
-  HowToBecomeACosmetologistRoute: HowToBecomeACosmetologistRoute,
-  HowToBecomeADiabetologistRoute: HowToBecomeADiabetologistRoute,
-  HowToBecomeANeurologistRoute: HowToBecomeANeurologistRoute,
-  HowToBecomeAPediatricianRoute: HowToBecomeAPediatricianRoute,
-  HowToBecomeARadiologistRoute: HowToBecomeARadiologistRoute,
-  HowToBecomeAnEmbryologistRoute: HowToBecomeAnEmbryologistRoute,
-  HowToBecomeAnEndocrinologistRoute: HowToBecomeAnEndocrinologistRoute,
-  HowToBecomeAnObstetricianGynecologistRoute:
-    HowToBecomeAnObstetricianGynecologistRoute,
-  HowToBecomeAnOncologistRoute: HowToBecomeAnOncologistRoute,
-  HowToCrackNeetPgRoute: HowToCrackNeetPgRoute,
   LpProfileRoute: LpProfileRoute,
   PaymentRoute: PaymentRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundReturnsPolicyRoute: RefundReturnsPolicyRoute,
-  ScopeOfCardiologyRoute: ScopeOfCardiologyRoute,
-  ScopeOfCosmetologyRoute: ScopeOfCosmetologyRoute,
-  ScopeOfDiabetologyRoute: ScopeOfDiabetologyRoute,
-  ScopeOfEchocardiographyRoute: ScopeOfEchocardiographyRoute,
-  ScopeOfEndocrinologyRoute: ScopeOfEndocrinologyRoute,
-  ScopeOfNeurologyRoute: ScopeOfNeurologyRoute,
-  ScopeOfObstetricsAndGynecologyRoute: ScopeOfObstetricsAndGynecologyRoute,
-  ScopeOfOncologyRoute: ScopeOfOncologyRoute,
-  ScopeOfPaediatricsRoute: ScopeOfPaediatricsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermConditionsRoute: TermConditionsRoute,
   TestPageRoute: TestPageRoute,
   VerificationRoute: VerificationRouteWithChildren,
   VerifyRoute: VerifyRouteWithChildren,
+  BlogAyushHybridProgramsRoute: BlogAyushHybridProgramsRoute,
+  BlogCoursesAfterMbbsInIndiaRoute: BlogCoursesAfterMbbsInIndiaRoute,
+  BlogHowToBecomeACardiologistRoute: BlogHowToBecomeACardiologistRoute,
+  BlogHowToBecomeACosmetologistRoute: BlogHowToBecomeACosmetologistRoute,
+  BlogHowToBecomeADiabetologistRoute: BlogHowToBecomeADiabetologistRoute,
+  BlogHowToBecomeANeurologistRoute: BlogHowToBecomeANeurologistRoute,
+  BlogHowToBecomeAPediatricianRoute: BlogHowToBecomeAPediatricianRoute,
+  BlogHowToBecomeARadiologistRoute: BlogHowToBecomeARadiologistRoute,
+  BlogHowToBecomeAnEmbryologistRoute: BlogHowToBecomeAnEmbryologistRoute,
+  BlogHowToBecomeAnEndocrinologistRoute: BlogHowToBecomeAnEndocrinologistRoute,
+  BlogHowToBecomeAnObstetricianGynecologistRoute:
+    BlogHowToBecomeAnObstetricianGynecologistRoute,
+  BlogHowToBecomeAnOncologistRoute: BlogHowToBecomeAnOncologistRoute,
+  BlogHowToCrackNeetPgRoute: BlogHowToCrackNeetPgRoute,
+  BlogScopeOfCardiologyRoute: BlogScopeOfCardiologyRoute,
+  BlogScopeOfCosmetologyRoute: BlogScopeOfCosmetologyRoute,
+  BlogScopeOfDiabetologyRoute: BlogScopeOfDiabetologyRoute,
+  BlogScopeOfEchocardiographyRoute: BlogScopeOfEchocardiographyRoute,
+  BlogScopeOfEndocrinologyRoute: BlogScopeOfEndocrinologyRoute,
+  BlogScopeOfNeurologyRoute: BlogScopeOfNeurologyRoute,
+  BlogScopeOfObstetricsAndGynecologyRoute:
+    BlogScopeOfObstetricsAndGynecologyRoute,
+  BlogScopeOfOncologyRoute: BlogScopeOfOncologyRoute,
+  BlogScopeOfPaediatricsRoute: BlogScopeOfPaediatricsRoute,
   CardiologyCoursesCityRoute: CardiologyCoursesCityRoute,
   ClinicalCardiologyCoursesCityRoute: ClinicalCardiologyCoursesCityRoute,
   CosmetologyCoursesCityRoute: CosmetologyCoursesCityRoute,
