@@ -7,13 +7,16 @@ import { CourseCatalogue } from "@/components/site/CourseCatalogue";
 export const Route = createFileRoute("/top-medical-courses/")({
   head: () => ({
     meta: [
-      { title: "All Courses — DMHCA" },
+      { title: "Top Medical Courses Online – Fellowships, PG Diplomas & Certificates | DMHCA" },
       {
         name: "description",
         content:
-          "Browse fellowships, PG diplomas, and certificate courses across every medical specialty.",
+          "Explore the top medical courses online at DMHCA: accredited fellowships, PG diplomas and certificate courses across cardiology, radiology, gynaecology, diabetology, oncology and every medical specialty.",
       },
+      { property: "og:title", content: "Top Medical Courses Online | DMHCA" },
+      { property: "og:url", content: "https://www.dmhca.in/top-medical-courses" },
     ],
+    links: [{ rel: "canonical", href: "https://www.dmhca.in/top-medical-courses" }],
   }),
   component: AllCourses,
 });

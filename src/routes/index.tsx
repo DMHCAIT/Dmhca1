@@ -21,16 +21,16 @@ import { OTPLoginModal } from "@/components/OTPLoginModal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Online Medical Courses, Fellowships & PG Diplomas | DMHCA " },
+      { title: "DMHCA ? Top Medical Courses Online | Fellowships, PG Diplomas & Certificates" },
       {
         name: "description",
         content:
-          "Advance your medical career with accredited online fellowships and certificate programs across radiology, cardiology, gynaecology, dermatology, oncology and more.",
+          "DMHCA (dmhca.in) offers top medical courses online: accredited fellowships, PG diplomas and certificate programs in cardiology, radiology, gynaecology, diabetology, oncology and more for doctors.",
       },
       {
         name: "keywords",
         content:
-          "medical courses, online fellowship, medical education, cardiology, radiology, gynecology, dermatology, PG diploma, certificate courses",
+          "dmhca, dmhca.in, top medical courses, top medical courses online, medical courses, online fellowship, medical education, cardiology, radiology, gynecology, dermatology, PG diploma, certificate courses",
       },
       { name: "viewport", content: "width=device-width, initial-scale=1.0, maximum-scale=5.0" },
       { name: "author", content: "DMHCA" },
@@ -64,6 +64,34 @@ export const Route = createFileRoute("/")({
       { rel: "canonical", href: "https://www.dmhca.in/" },
       { rel: "prefetch", href: "/top-medical-courses" },
       { rel: "dns-prefetch", href: "https://cdn.jsdelivr.net" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "EducationalOrganization",
+              "@id": "https://www.dmhca.in/#organization",
+              name: "DMHCA",
+              alternateName: ["DMHCA", "dmhca.in", "Delhi Medical Health Care Academy"],
+              url: "https://www.dmhca.in/",
+              logo: "https://www.dmhca.in/logo.webp",
+              description:
+                "DMHCA offers top medical courses online: fellowships, PG diplomas and certificate programs for doctors.",
+            },
+            {
+              "@type": "WebSite",
+              "@id": "https://www.dmhca.in/#website",
+              url: "https://www.dmhca.in/",
+              name: "DMHCA",
+              alternateName: ["dmhca.in", "DMHCA Medical Courses"],
+              publisher: { "@id": "https://www.dmhca.in/#organization" },
+            },
+          ],
+        }),
+      },
     ],
   }),
   component: Home,

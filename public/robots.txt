@@ -1,29 +1,11 @@
-# DMHCA Medical Courses - Robots Configuration
-
-# Allow all robots to crawl the site
+# DMHCA - https://www.dmhca.in
 User-agent: *
 Allow: /
-
-# Disallow admin and private areas (if any)
 Disallow: /admin/
-Disallow: /private/
-Disallow: /*.json$
+Disallow: /admin-login
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /cart
+Disallow: /payment
 
-# Crawl delay for faster crawlers
-Request-rate: 30/60
-
-# Sitemap location
 Sitemap: https://www.dmhca.in/sitemap.xml
-
-# Additional rules for specific crawlers
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Yandexbot
-Allow: /
-Crawl-delay: 1

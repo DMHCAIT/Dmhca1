@@ -30,7 +30,6 @@ import { Route as LpProfileRouteImport } from './routes/lp-profile'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundReturnsPolicyRouteImport } from './routes/refund-returns-policy'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermConditionsRouteImport } from './routes/term-conditions'
 import { Route as TestPageRouteImport } from './routes/test-page'
 import { Route as VerificationRouteImport } from './routes/verification'
@@ -105,7 +104,6 @@ import { Route as PediatricsCoursesCityRouteImport } from './routes/pediatrics-c
 import { Route as RadiologyCoursesIndexRouteImport } from './routes/radiology-courses.index'
 import { Route as RadiologyCoursesCityRouteImport } from './routes/radiology-courses/$city'
 import { Route as SitemapIndexRouteImport } from './routes/sitemap.index'
-import { Route as SitemapXmlRouteImport } from './routes/sitemap.xml'
 import { Route as Char91specialtyChar93CoursesChar91cityChar93RouteImport } from './routes/[specialty]-courses.[city]'
 import { Route as TopMedicalCoursesIndexRouteImport } from './routes/top-medical-courses.index'
 import { Route as TopMedicalCoursesFmtRouteImport } from './routes/top-medical-courses.$fmt'
@@ -218,11 +216,6 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const RefundReturnsPolicyRoute = RefundReturnsPolicyRouteImport.update({
   id: '/refund-returns-policy',
   path: '/refund-returns-policy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermConditionsRoute = TermConditionsRouteImport.update({
@@ -620,11 +613,6 @@ const SitemapIndexRoute = SitemapIndexRouteImport.update({
   path: '/sitemap/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapXmlRoute = SitemapXmlRouteImport.update({
-  id: '/sitemap/xml',
-  path: '/sitemap/xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const Char91specialtyChar93CoursesChar91cityChar93Route =
   Char91specialtyChar93CoursesChar91cityChar93RouteImport.update({
     id: '/specialty-courses/city',
@@ -693,7 +681,6 @@ export interface FileRoutesByFullPath {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
   '/verification': typeof VerificationRouteWithChildren
@@ -749,7 +736,6 @@ export interface FileRoutesByFullPath {
   '/paediatrics-courses/$city': typeof PaediatricsCoursesCityRoute
   '/pediatrics-courses/$city': typeof PediatricsCoursesCityRoute
   '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
-  '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
   '/top-medical-courses/$fmt': typeof TopMedicalCoursesFmtRouteWithChildren
   '/top-medical-courses/$specialty': typeof TopMedicalCoursesSpecialtyRoute
@@ -798,7 +784,6 @@ export interface FileRoutesByTo {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
   '/verification': typeof VerificationRouteWithChildren
@@ -854,7 +839,6 @@ export interface FileRoutesByTo {
   '/paediatrics-courses/$city': typeof PaediatricsCoursesCityRoute
   '/pediatrics-courses/$city': typeof PediatricsCoursesCityRoute
   '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
-  '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
   '/top-medical-courses/$fmt': typeof TopMedicalCoursesFmtRouteWithChildren
   '/top-medical-courses/$specialty': typeof TopMedicalCoursesSpecialtyRoute
@@ -906,7 +890,6 @@ export interface FileRoutesById {
   '/payment': typeof PaymentRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund-returns-policy': typeof RefundReturnsPolicyRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/term-conditions': typeof TermConditionsRoute
   '/test-page': typeof TestPageRoute
   '/verification': typeof VerificationRouteWithChildren
@@ -962,7 +945,6 @@ export interface FileRoutesById {
   '/paediatrics-courses/$city': typeof PaediatricsCoursesCityRoute
   '/pediatrics-courses/$city': typeof PediatricsCoursesCityRoute
   '/radiology-courses/$city': typeof RadiologyCoursesCityRoute
-  '/sitemap/xml': typeof SitemapXmlRoute
   '/specialty-courses/city': typeof Char91specialtyChar93CoursesChar91cityChar93Route
   '/top-medical-courses/$fmt': typeof TopMedicalCoursesFmtRouteWithChildren
   '/top-medical-courses/$specialty': typeof TopMedicalCoursesSpecialtyRoute
@@ -1015,7 +997,6 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
     | '/verification'
@@ -1071,7 +1052,6 @@ export interface FileRouteTypes {
     | '/paediatrics-courses/$city'
     | '/pediatrics-courses/$city'
     | '/radiology-courses/$city'
-    | '/sitemap/xml'
     | '/specialty-courses/city'
     | '/top-medical-courses/$fmt'
     | '/top-medical-courses/$specialty'
@@ -1120,7 +1100,6 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
     | '/verification'
@@ -1176,7 +1155,6 @@ export interface FileRouteTypes {
     | '/paediatrics-courses/$city'
     | '/pediatrics-courses/$city'
     | '/radiology-courses/$city'
-    | '/sitemap/xml'
     | '/specialty-courses/city'
     | '/top-medical-courses/$fmt'
     | '/top-medical-courses/$specialty'
@@ -1227,7 +1205,6 @@ export interface FileRouteTypes {
     | '/payment'
     | '/privacy-policy'
     | '/refund-returns-policy'
-    | '/sitemap.xml'
     | '/term-conditions'
     | '/test-page'
     | '/verification'
@@ -1283,7 +1260,6 @@ export interface FileRouteTypes {
     | '/paediatrics-courses/$city'
     | '/pediatrics-courses/$city'
     | '/radiology-courses/$city'
-    | '/sitemap/xml'
     | '/specialty-courses/city'
     | '/top-medical-courses/$fmt'
     | '/top-medical-courses/$specialty'
@@ -1335,7 +1311,6 @@ export interface RootRouteChildren {
   PaymentRoute: typeof PaymentRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundReturnsPolicyRoute: typeof RefundReturnsPolicyRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermConditionsRoute: typeof TermConditionsRoute
   TestPageRoute: typeof TestPageRoute
   VerificationRoute: typeof VerificationRouteWithChildren
@@ -1376,7 +1351,6 @@ export interface RootRouteChildren {
   PaediatricsCoursesCityRoute: typeof PaediatricsCoursesCityRoute
   PediatricsCoursesCityRoute: typeof PediatricsCoursesCityRoute
   RadiologyCoursesCityRoute: typeof RadiologyCoursesCityRoute
-  SitemapXmlRoute: typeof SitemapXmlRoute
   Char91specialtyChar93CoursesChar91cityChar93Route: typeof Char91specialtyChar93CoursesChar91cityChar93Route
   TopMedicalCoursesFmtRoute: typeof TopMedicalCoursesFmtRouteWithChildren
   TopMedicalCoursesSpecialtyRoute: typeof TopMedicalCoursesSpecialtyRoute
@@ -1548,13 +1522,6 @@ declare module '@tanstack/react-router' {
       path: '/refund-returns-policy'
       fullPath: '/refund-returns-policy'
       preLoaderRoute: typeof RefundReturnsPolicyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/term-conditions': {
@@ -2075,13 +2042,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemap/xml': {
-      id: '/sitemap/xml'
-      path: '/sitemap/xml'
-      fullPath: '/sitemap/xml'
-      preLoaderRoute: typeof SitemapXmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/specialty-courses/city': {
       id: '/specialty-courses/city'
       path: '/specialty-courses/city'
@@ -2248,7 +2208,6 @@ const rootRouteChildren: RootRouteChildren = {
   PaymentRoute: PaymentRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundReturnsPolicyRoute: RefundReturnsPolicyRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermConditionsRoute: TermConditionsRoute,
   TestPageRoute: TestPageRoute,
   VerificationRoute: VerificationRouteWithChildren,
@@ -2292,7 +2251,6 @@ const rootRouteChildren: RootRouteChildren = {
   PaediatricsCoursesCityRoute: PaediatricsCoursesCityRoute,
   PediatricsCoursesCityRoute: PediatricsCoursesCityRoute,
   RadiologyCoursesCityRoute: RadiologyCoursesCityRoute,
-  SitemapXmlRoute: SitemapXmlRoute,
   Char91specialtyChar93CoursesChar91cityChar93Route:
     Char91specialtyChar93CoursesChar91cityChar93Route,
   TopMedicalCoursesFmtRoute: TopMedicalCoursesFmtRouteWithChildren,
