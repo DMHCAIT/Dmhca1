@@ -15,7 +15,7 @@ import {
   X,
   Award,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -32,6 +32,12 @@ function AdminLayout() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
+  useEffect(() => {
+    if (!isLoading && !isAuthed) {
+      void navigate({ to: "/admin-login", replace: true });
+    }
+  }, [isAuthed, isLoading, navigate]);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -44,8 +50,6 @@ function AdminLayout() {
   }
 
   if (!isAuthed) {
-    // Redirect to admin login
-    navigate({ to: "/admin-login" });
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
@@ -57,7 +61,7 @@ function AdminLayout() {
 
   const handleLogout = async () => {
     await logout();
-    navigate({ to: "/admin" });
+    void navigate({ to: "/admin-login", replace: true });
   };
 
   const menuItems = [

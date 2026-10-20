@@ -22,19 +22,21 @@ function AdminLogin() {
     setLoading(true);
 
     try {
-      const { error: authError } = await supabaseClient.auth.signInWithPassword({
-        email,
+      const { data, error: authError } = await supabaseClient.auth.signInWithPassword({
+        email: email.trim(),
         password,
       });
 
       if (authError) {
         setError(authError.message);
+      } else if (!data.session?.access_token || !data.session.user) {
+        setError("Sign-in did not create a session. Please try again.");
       } else {
-        // Redirect to admin dashboard will be handled by router
         window.location.href = "/admin";
       }
     } catch (err) {
-      setError("An unexpected error occurred");
+      console.error("Admin sign-in failed:", err);
+      setError(err instanceof Error ? err.message : "An unexpected sign-in error occurred.");
     } finally {
       setLoading(false);
     }

@@ -21,7 +21,7 @@ import { OTPLoginModal } from "@/components/OTPLoginModal";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "DMHCA ? Top Medical Courses Online | Fellowships, PG Diplomas & Certificates" },
+      { title: "DMHCA : Top Medical Courses Online | Fellowships, PG Diplomas & Certificates" },
       {
         name: "description",
         content:

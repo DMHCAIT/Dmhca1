@@ -93,6 +93,29 @@ Your complete admin panel has been set up with the following features:
 
 ## 🗄️ Database Structure
 
+### Event registration payment status
+
+At `/admin/event-registrations`, choose **Paid**, **Pending**, or **Payment setup failed**
+on a registration and click **Save status**. Verify payments received through an
+external Razorpay payment link before selecting Paid.
+
+Only authenticated admins and moderators can save changes. Updates persist in
+`event_registrations.status` and `event_registrations.updated_at`; the status badge,
+payment count, and filters update after the database confirms the save. Reloading
+the page retrieves the saved status. A manual confirmation does not create a
+Razorpay payment ID or change records in the separate `payments` table.
+
+Both local development and production require a real Supabase login at
+`/admin-login`. Signed-out users are redirected there rather than being allowed
+into a local admin preview. The signed-in email must have an `admin` or
+`moderator` role in `admin_users` to load or update event registrations.
+The secondary Supabase service client uses separate, non-persistent auth storage
+so it cannot share or clear the browser login session.
+
+This uses the existing columns and status values from migration
+`019_create_event_registrations.sql`; no additional database migration is required
+if that migration is already applied.
+
 ### Applications Table
 ```sql
 CREATE TABLE applications (

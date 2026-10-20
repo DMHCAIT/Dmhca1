@@ -3,13 +3,17 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CalendarDays, CreditCard, Mail, MapPin, Phone, RefreshCw, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabaseClient } from "@/lib/supabase";
-import { getEventRegistrations } from "@/routes/api/admin-event-registrations";
+import {
+  getEventRegistrations,
+  updateEventRegistrationStatus,
+} from "@/routes/api/admin-event-registrations";
+import { eventPaymentStatusSchema, type EventPaymentStatus } from "@/lib/event-registration-schema";
 
 export const Route = createFileRoute("/admin/event-registrations")({
   head: () => ({
     meta: [
       { title: "Event Registrations — Admin" },
-      { name: "description", content: "View paid CME event registrations" },
+      { name: "description", content: "Manage CME event registrations and payment statuses" },
     ],
   }),
   component: AdminEventRegistrations,
@@ -48,6 +52,8 @@ function AdminEventRegistrations() {
   const [filter, setFilter] = useState<RegistrationFilter>("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [savingId, setSavingId] = useState<string | null>(null);
+  const [statusMessage, setStatusMessage] = useState("");
 
   const loadRegistrations = useCallback(async () => {
     setLoading(true);
@@ -55,9 +61,13 @@ function AdminEventRegistrations() {
     try {
       const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
       if (sessionError) throw sessionError;
+      const accessToken = sessionData.session?.access_token;
+      if (!accessToken) {
+        throw new Error("Your admin session has expired. Please sign in again.");
+      }
 
       const results = await getEventRegistrations({
-        data: { accessToken: sessionData.session?.access_token },
+        data: { accessToken },
       });
       setRegistrations(results as Registration[]);
     } catch (loadError) {
@@ -74,6 +84,29 @@ function AdminEventRegistrations() {
     void loadRegistrations();
   }, [loadRegistrations]);
 
+  const updateStatus = async (registration: Registration, status: EventPaymentStatus) => {
+    setSavingId(registration.id);
+    setStatusMessage("");
+    try {
+      const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
+      if (sessionError) throw sessionError;
+      const accessToken = sessionData.session?.access_token;
+      if (!accessToken) {
+        throw new Error("Please sign in with an admin account to change registration statuses.");
+      }
+
+      const saved = await updateEventRegistrationStatus({
+        data: { accessToken, registrationId: registration.id, status },
+      });
+      setRegistrations((current) =>
+        current.map((item) => (item.id === saved.id ? { ...item, ...saved } : item)),
+      );
+      setStatusMessage(`Payment status for ${registration.full_name} saved to the database.`);
+    } finally {
+      setSavingId(null);
+    }
+  };
+
   const filteredRegistrations = useMemo(
     () =>
       filter === "all"
@@ -89,8 +122,16 @@ function AdminEventRegistrations() {
         <div>
           <h1 className="text-3xl font-bold text-navy-deep">Event Registrations</h1>
           <p className="mt-2 text-gray-600">Female Hormones: Fertility and Subfertility CME</p>
+          <p className="mt-1 text-sm text-gray-500">
+            Confirm payment through your Razorpay link before manually marking a registration as
+            paid.
+          </p>
         </div>
-        <Button variant="outline" onClick={() => void loadRegistrations()} disabled={loading}>
+        <Button
+          variant="outline"
+          onClick={() => void loadRegistrations()}
+          disabled={loading || savingId !== null}
+        >
           <RefreshCw className={`mr-2 h-4 w-4 ${loading ? "animate-spin" : ""}`} />
           Refresh
         </Button>
@@ -120,6 +161,15 @@ function AdminEventRegistrations() {
         ))}
       </nav>
 
+      {statusMessage && (
+        <p
+          role="status"
+          className="rounded-lg border border-green-200 bg-green-50 p-4 text-green-800"
+        >
+          {statusMessage}
+        </p>
+      )}
+
       {error ? (
         <div role="alert" className="rounded-lg border border-red-200 bg-red-50 p-5 text-red-800">
           <p>{error}</p>
@@ -138,7 +188,13 @@ function AdminEventRegistrations() {
       ) : (
         <div className="space-y-4">
           {filteredRegistrations.map((registration) => (
-            <RegistrationCard key={registration.id} registration={registration} />
+            <RegistrationCard
+              key={registration.id}
+              registration={registration}
+              onUpdateStatus={updateStatus}
+              saving={savingId === registration.id}
+              disabled={savingId !== null}
+            />
           ))}
         </div>
       )}
@@ -167,7 +223,34 @@ function SummaryCard({
   );
 }
 
-function RegistrationCard({ registration }: { registration: Registration }) {
+function RegistrationCard({
+  registration,
+  onUpdateStatus,
+  saving,
+  disabled,
+}: {
+  registration: Registration;
+  onUpdateStatus: (registration: Registration, status: EventPaymentStatus) => Promise<void>;
+  saving: boolean;
+  disabled: boolean;
+}) {
+  const [selectedStatus, setSelectedStatus] = useState(registration.status);
+  const [saveError, setSaveError] = useState("");
+  useEffect(() => {
+    setSelectedStatus(registration.status);
+  }, [registration.status]);
+
+  const saveStatus = async () => {
+    setSaveError("");
+    try {
+      const status = eventPaymentStatusSchema.parse(selectedStatus);
+      await onUpdateStatus(registration, status);
+    } catch (error) {
+      console.error("Error updating CME registration status:", error);
+      setSaveError(error instanceof Error ? error.message : "Couldn't save the payment status.");
+    }
+  };
+
   const paid = registration.status === "paid";
   return (
     <article className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -215,8 +298,55 @@ function RegistrationCard({ registration }: { registration: Registration }) {
         <Detail
           icon={CreditCard}
           label="Razorpay payment ID"
-          value={registration.razorpay_payment_id || "Not paid"}
+          value={
+            registration.razorpay_payment_id ||
+            (paid ? "Not recorded (payment confirmed manually)" : "Not recorded")
+          }
         />
+      </div>
+      <div className="border-t border-gray-100 px-5 py-4">
+        <div className="flex flex-wrap items-center gap-3">
+          <label
+            htmlFor={`payment-status-${registration.id}`}
+            className="text-sm font-medium text-navy-deep"
+          >
+            Payment status
+          </label>
+          <select
+            id={`payment-status-${registration.id}`}
+            value={selectedStatus}
+            onChange={(event) => {
+              setSelectedStatus(event.target.value);
+              setSaveError("");
+            }}
+            disabled={disabled}
+            className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-navy-deep disabled:opacity-50"
+          >
+            {!eventPaymentStatusSchema.safeParse(registration.status).success && (
+              <option value={registration.status}>
+                {registration.status.replaceAll("_", " ")}
+              </option>
+            )}
+            {filters
+              .filter(({ value }) => value !== "all")
+              .map(({ value, label }) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+          </select>
+          <Button
+            onClick={() => void saveStatus()}
+            disabled={disabled || selectedStatus === registration.status}
+          >
+            {saving ? "Saving..." : "Save status"}
+          </Button>
+        </div>
+        {saveError && (
+          <p role="alert" className="mt-3 text-sm text-red-700">
+            {saveError}
+          </p>
+        )}
       </div>
     </article>
   );

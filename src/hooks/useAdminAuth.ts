@@ -1,51 +1,43 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
 import { supabaseClient } from "@/lib/supabase";
 
 export function useAdminAuth() {
   const [isAuthed, setIsAuthed] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const isDev = import.meta.env.DEV;
-  const navigate = useNavigate();
 
   useEffect(() => {
-    checkAuth();
-    const { data } = supabaseClient.auth.onAuthStateChange((event, session) => {
-      if (session?.user) {
-        setIsAuthed(true);
-      } else if (isDev) {
-        // In development mode, allow access without Supabase session
-        setIsAuthed(true);
-      } else {
-        setIsAuthed(false);
-      }
+    let active = true;
+    let authEventReceived = false;
+    const { data } = supabaseClient.auth.onAuthStateChange((_event, session) => {
+      if (!active) return;
+      authEventReceived = true;
+      setIsAuthed(Boolean(session?.user && session.access_token));
       setIsLoading(false);
     });
 
-    return () => data.subscription.unsubscribe();
-  }, [navigate, isDev]);
-
-  const checkAuth = async () => {
-    try {
-      const {
-        data: { session },
-      } = await supabaseClient.auth.getSession();
-      if (session?.user) {
-        setIsAuthed(true);
-      } else if (isDev) {
-        // In development, allow access even if Supabase fails
-        setIsAuthed(true);
-      } else {
-        setIsAuthed(false);
+    const checkAuth = async () => {
+      try {
+        const { data: sessionData, error } = await supabaseClient.auth.getSession();
+        if (error) throw error;
+        if (active && !authEventReceived) {
+          setIsAuthed(Boolean(sessionData.session?.user && sessionData.session.access_token));
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        if (active && !authEventReceived) {
+          setIsAuthed(false);
+          setIsLoading(false);
+        }
       }
-    } catch (error) {
-      console.error("Auth check failed:", error);
-      // In development, allow access even if Supabase fails
-      setIsAuthed(isDev);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
+    void checkAuth();
+
+    return () => {
+      active = false;
+      data.subscription.unsubscribe();
+    };
+  }, []);
 
   return { isAuthed, isLoading };
 }

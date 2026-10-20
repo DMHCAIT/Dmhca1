@@ -2,6 +2,10 @@ import { z } from "zod";
 
 export const eventPaymentMethods = ["upi", "card"] as const;
 
+export const eventPaymentStatuses = ["paid", "pending", "payment_setup_failed"] as const;
+export const eventPaymentStatusSchema = z.enum(eventPaymentStatuses);
+export type EventPaymentStatus = z.infer<typeof eventPaymentStatusSchema>;
+
 export const eventDesignations = [
   "Consultant",
   "Specialist / Senior resident",

@@ -23,8 +23,15 @@ export const supabaseClient = createClient(supabaseUrl, supabaseAnonKey);
 // Admin client for authenticated operations (service role key)
 // Use this in admin panel for operations that need bypass of RLS policies
 export const supabaseAdmin = supabaseServiceKey
-  ? createClient(supabaseUrl, supabaseServiceKey)
-  : createClient(supabaseUrl, supabaseAnonKey); // Fallback to anon key if service key not available
+  ? createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        storageKey: "dmhca-admin-service",
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+    })
+  : supabaseClient;
 
 // Database types
 export interface EventComment {
