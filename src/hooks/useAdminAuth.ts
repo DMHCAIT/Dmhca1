@@ -1,5 +1,22 @@
 import { useEffect, useState } from "react";
+import { isAuthApiError, isAuthSessionMissingError } from "@supabase/supabase-js";
 import { supabaseClient } from "@/lib/supabase";
+
+// getSession() only reads the browser's cached token, so ask Supabase whether the
+// session is still valid. Revoked sessions (e.g. after a password change) are
+// signed out locally; network errors leave the session alone.
+async function verifySessionWithServer() {
+  const { data: sessionData } = await supabaseClient.auth.getSession();
+  if (!sessionData.session) return false;
+
+  const { error } = await supabaseClient.auth.getUser();
+  if (!error) return true;
+  if (isAuthSessionMissingError(error) || (isAuthApiError(error) && error.status < 500)) {
+    await supabaseClient.auth.signOut({ scope: "local" });
+    return false;
+  }
+  return true;
+}
 
 export function useAdminAuth() {
   const [isAuthed, setIsAuthed] = useState(false);
@@ -7,35 +24,38 @@ export function useAdminAuth() {
 
   useEffect(() => {
     let active = true;
-    let authEventReceived = false;
     const { data } = supabaseClient.auth.onAuthStateChange((_event, session) => {
       if (!active) return;
-      authEventReceived = true;
-      setIsAuthed(Boolean(session?.user && session.access_token));
-      setIsLoading(false);
+      if (!session?.user || !session.access_token) {
+        setIsAuthed(false);
+        setIsLoading(false);
+      }
     });
 
     const checkAuth = async () => {
       try {
-        const { data: sessionData, error } = await supabaseClient.auth.getSession();
-        if (error) throw error;
-        if (active && !authEventReceived) {
-          setIsAuthed(Boolean(sessionData.session?.user && sessionData.session.access_token));
-          setIsLoading(false);
-        }
+        const valid = await verifySessionWithServer();
+        if (active) setIsAuthed(valid);
       } catch (error) {
         console.error("Auth check failed:", error);
-        if (active && !authEventReceived) {
-          setIsAuthed(false);
-          setIsLoading(false);
-        }
+        if (active) setIsAuthed(false);
+      } finally {
+        if (active) setIsLoading(false);
       }
     };
     void checkAuth();
 
+    const recheckWhenVisible = () => {
+      if (document.visibilityState === "visible") void checkAuth();
+    };
+    document.addEventListener("visibilitychange", recheckWhenVisible);
+    window.addEventListener("focus", recheckWhenVisible);
+
     return () => {
       active = false;
       data.subscription.unsubscribe();
+      document.removeEventListener("visibilitychange", recheckWhenVisible);
+      window.removeEventListener("focus", recheckWhenVisible);
     };
   }, []);
 
