@@ -4,7 +4,6 @@ import crypto from "crypto";
 import Razorpay from "razorpay";
 import { getEventBySlug } from "@/data/events";
 import {
-  eventPaymentMethods,
   eventRegistrationSchema,
   verifyEventPaymentSchema,
 } from "@/lib/event-registration-schema";
@@ -31,17 +30,6 @@ function getPaymentServices() {
   };
 }
 
-function getRegistrationSupabase() {
-  const supabaseUrl = process.env.VITE_SUPABASE_URL;
-  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-
-  if (!supabaseUrl || !supabaseServiceKey) {
-    throw new Error("Event registration storage is not configured on the server.");
-  }
-
-  return createClient(supabaseUrl, supabaseServiceKey);
-}
-
 function getEvent() {
   const event = getEventBySlug(eventSlug);
   if (!event?.registrationPending) {
@@ -55,11 +43,11 @@ function getEvent() {
   return event;
 }
 
-export const createEventRegistration = createServerFn({ method: "POST" })
+export const createEventRegistrationOrder = createServerFn({ method: "POST" })
   .validator(eventRegistrationSchema)
   .handler(async ({ data }) => {
     const event = getEvent();
-    const supabase = getRegistrationSupabase();
+    const { supabase, razorpay, razorpayKeyId } = getPaymentServices();
 
     const { data: registration, error: registrationError } = await supabase
       .from("event_registrations")
@@ -124,7 +112,84 @@ export const createEventRegistration = createServerFn({ method: "POST" })
       throw new Error("We couldn't save your registration. Please contact support.");
     }
 
-    return { registrationId: registration.id };
+    let orderId: string;
+    try {
+      const order = await razorpay.orders.create({
+        amount: eventPriceInPaise,
+        currency: "INR",
+        receipt: `event_${registration.id.replaceAll("-", "").slice(0, 24)}`,
+        notes: {
+          event_registration_id: registration.id,
+          event_slug: event.slug,
+          site_url: process.env.SITE_URL || "https://www.dmhca.in",
+        },
+      });
+      orderId = order.id;
+    } catch (error) {
+      console.error("Razorpay event order creation failed.", error);
+      const { error: registrationUpdateError } = await supabase
+        .from("event_registrations")
+        .update({ status: "payment_setup_failed" })
+        .eq("id", registration.id);
+      if (registrationUpdateError) {
+        console.error(
+          "Could not mark event registration after payment setup failed.",
+          registrationUpdateError,
+        );
+      }
+      throw new Error("We couldn't start your payment. Please try again.");
+    }
+
+    const { error: registrationUpdateError } = await supabase
+      .from("event_registrations")
+      .update({ razorpay_order_id: orderId })
+      .eq("id", registration.id);
+    if (registrationUpdateError) {
+      const { error: statusUpdateError } = await supabase
+        .from("event_registrations")
+        .update({ status: "payment_setup_failed" })
+        .eq("id", registration.id);
+      if (statusUpdateError) {
+        console.error(
+          "Could not mark event registration after order persistence failed.",
+          statusUpdateError,
+        );
+      }
+      throw new Error("Your payment could not be prepared. Please try again.");
+    }
+
+    const { error: paymentError } = await supabase.from("payments").insert({
+      course_name: event.title,
+      student_name: data.fullName,
+      student_email: data.email,
+      amount: eventPriceInRupees,
+      currency: "INR",
+      payment_method: "razorpay",
+      razorpay_order_id: orderId,
+      status: "pending",
+    });
+
+    if (paymentError) {
+      const { error: statusUpdateError } = await supabase
+        .from("event_registrations")
+        .update({ status: "payment_setup_failed" })
+        .eq("id", registration.id);
+      if (statusUpdateError) {
+        console.error(
+          "Could not mark event registration after payment record failed.",
+          statusUpdateError,
+        );
+      }
+      throw new Error("Your payment could not be prepared. Please try again.");
+    }
+
+    return {
+      keyId: razorpayKeyId,
+      orderId,
+      amount: eventPriceInPaise,
+      currency: "INR",
+      eventTitle: event.title,
+    };
   });
 
 export const verifyEventRegistrationPayment = createServerFn({ method: "POST" })
@@ -167,11 +232,6 @@ export const verifyEventRegistrationPayment = createServerFn({ method: "POST" })
     }
 
     const razorpayPayment = await razorpay.payments.fetch(data.paymentId);
-    if (!eventPaymentMethods.some((method) => method === razorpayPayment.method)) {
-      throw new Error(
-        "Only UPI and card payments are accepted for this event. If you were charged, contact support with your payment reference; do not pay again.",
-      );
-    }
     if (
       razorpayPayment.order_id !== data.orderId ||
       razorpayPayment.amount !== eventPriceInPaise ||
