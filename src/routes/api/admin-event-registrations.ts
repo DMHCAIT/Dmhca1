@@ -1,16 +1,13 @@
 import { createServerFn } from "@tanstack/react-start";
 import { createClient } from "@supabase/supabase-js";
 import { z } from "zod";
-import { eventPaymentStatusSchema } from "@/lib/event-registration-schema";
+import Razorpay from "razorpay";
+import { syncRegistrationWithRazorpay } from "@/lib/event-payment-sync";
+
+const eventSlug = "female-hormones-fertility-and-subfertility";
 
 const listRegistrationsSchema = z.object({
   accessToken: z.string().min(1),
-});
-
-const updateRegistrationStatusSchema = z.object({
-  accessToken: z.string().min(1),
-  registrationId: z.string().uuid(),
-  status: eventPaymentStatusSchema,
 });
 
 async function getAdminClient(accessToken: string) {
@@ -46,49 +43,48 @@ async function getAdminClient(accessToken: string) {
   return adminClient;
 }
 
+const registrationColumns =
+  "id, event_slug, event_title, full_name, email, phone, designation, specialty, institution, city, referral_source, status, payment_region, amount, currency, razorpay_order_id, razorpay_payment_id, created_at, updated_at";
+
+// Read-only: statuses come from Razorpay, so admins cannot edit them manually.
 export const getEventRegistrations = createServerFn({ method: "POST" })
   .validator(listRegistrationsSchema)
   .handler(async ({ data }) => {
     const adminClient = await getAdminClient(data.accessToken);
     const { data: registrations, error } = await adminClient
       .from("event_registrations")
-      .select(
-        "id, event_slug, event_title, full_name, email, phone, designation, specialty, institution, city, referral_source, status, razorpay_order_id, razorpay_payment_id, created_at, updated_at",
-      )
-      .eq("event_slug", "female-hormones-fertility-and-subfertility")
+      .select(registrationColumns)
+      .eq("event_slug", eventSlug)
       .order("created_at", { ascending: false });
 
     if (error) {
       console.error("[Admin event registrations] Registration query failed.", error);
       throw new Error(
-        "Couldn't load event registrations. Check that migration 019 has been applied.",
+        "Couldn't load event registrations. Check that migrations 019 and 020 have been applied.",
       );
     }
 
-    return registrations;
-  });
+    const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
+    const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
+    if (!razorpayKeyId || !razorpayKeySecret) return registrations;
 
-export const updateEventRegistrationStatus = createServerFn({ method: "POST" })
-  .validator(updateRegistrationStatusSchema)
-  .handler(async ({ data }) => {
-    const adminClient = await getAdminClient(data.accessToken);
-    const { data: registration, error } = await adminClient
-      .from("event_registrations")
-      .update({
-        status: data.status,
-        updated_at: new Date().toISOString(),
-      })
-      .eq("id", data.registrationId)
-      .eq("event_slug", "female-hormones-fertility-and-subfertility")
-      .select("id, status, updated_at")
-      .single();
+    const razorpay = new Razorpay({ key_id: razorpayKeyId, key_secret: razorpayKeySecret });
+    const unsettled = registrations.filter(
+      (registration) => registration.status !== "paid" && registration.razorpay_order_id,
+    );
+    const results = await Promise.allSettled(
+      unsettled.map((registration) =>
+        syncRegistrationWithRazorpay(adminClient, razorpay, registration),
+      ),
+    );
+    const synced = new Map<string, string>();
+    results.forEach((result, index) => {
+      if (result.status === "fulfilled") synced.set(unsettled[index].id, result.value);
+      else console.error("[Admin event registrations] Razorpay sync failed.", result.reason);
+    });
 
-    if (error || !registration) {
-      console.error("[Admin event registrations] Status update failed.", error);
-      throw new Error(
-        "Couldn't save the registration status. Refresh the registrations and try again.",
-      );
-    }
-
-    return registration;
+    return registrations.map((registration) => ({
+      ...registration,
+      status: synced.get(registration.id) ?? registration.status,
+    }));
   });

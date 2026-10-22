@@ -4,13 +4,15 @@ import crypto from "crypto";
 import Razorpay from "razorpay";
 import { getEventBySlug } from "@/data/events";
 import {
+  eventPricing,
   eventRegistrationSchema,
+  getEventPricingByCurrency,
+  reportEventPaymentOutcomeSchema,
   verifyEventPaymentSchema,
 } from "@/lib/event-registration-schema";
+import { syncRegistrationWithRazorpay } from "@/lib/event-payment-sync";
 
 const eventSlug = "female-hormones-fertility-and-subfertility";
-const eventPriceInRupees = 599;
-const eventPriceInPaise = eventPriceInRupees * 100;
 
 function getPaymentServices() {
   const supabaseUrl = process.env.VITE_SUPABASE_URL;
@@ -47,6 +49,7 @@ export const createEventRegistrationOrder = createServerFn({ method: "POST" })
   .validator(eventRegistrationSchema)
   .handler(async ({ data }) => {
     const event = getEvent();
+    const pricing = eventPricing[data.paymentRegion];
     const { supabase, razorpay, razorpayKeyId } = getPaymentServices();
 
     const { data: registration, error: registrationError } = await supabase
@@ -69,6 +72,9 @@ export const createEventRegistrationOrder = createServerFn({ method: "POST" })
         referral_source: data.referralSource || null,
         consent: data.consent,
         status: "pending",
+        payment_region: data.paymentRegion,
+        amount: pricing.amount,
+        currency: pricing.currency,
       })
       .select("id")
       .single();
@@ -115,12 +121,13 @@ export const createEventRegistrationOrder = createServerFn({ method: "POST" })
     let orderId: string;
     try {
       const order = await razorpay.orders.create({
-        amount: eventPriceInPaise,
-        currency: "INR",
+        amount: pricing.amountInSubunits,
+        currency: pricing.currency,
         receipt: `event_${registration.id.replaceAll("-", "").slice(0, 24)}`,
         notes: {
           event_registration_id: registration.id,
           event_slug: event.slug,
+          payment_region: data.paymentRegion,
           site_url: process.env.SITE_URL || "https://www.dmhca.in",
         },
       });
@@ -162,8 +169,8 @@ export const createEventRegistrationOrder = createServerFn({ method: "POST" })
       course_name: event.title,
       student_name: data.fullName,
       student_email: data.email,
-      amount: eventPriceInRupees,
-      currency: "INR",
+      amount: pricing.amount,
+      currency: pricing.currency,
       payment_method: "razorpay",
       razorpay_order_id: orderId,
       status: "pending",
@@ -186,8 +193,9 @@ export const createEventRegistrationOrder = createServerFn({ method: "POST" })
     return {
       keyId: razorpayKeyId,
       orderId,
-      amount: eventPriceInPaise,
-      currency: "INR",
+      amount: pricing.amountInSubunits,
+      currency: pricing.currency,
+      displayAmount: pricing.display,
       eventTitle: event.title,
     };
   });
@@ -216,7 +224,7 @@ export const verifyEventRegistrationPayment = createServerFn({ method: "POST" })
     ] = await Promise.all([
       supabase
         .from("event_registrations")
-        .select("id, status, razorpay_payment_id")
+        .select("id, status, razorpay_payment_id, amount, currency")
         .eq("event_slug", eventSlug)
         .eq("razorpay_order_id", data.orderId)
         .single(),
@@ -231,14 +239,15 @@ export const verifyEventRegistrationPayment = createServerFn({ method: "POST" })
       throw new Error("We couldn't find this registration payment. Please contact support.");
     }
 
+    const pricing = getEventPricingByCurrency(registration.currency);
     const razorpayPayment = await razorpay.payments.fetch(data.paymentId);
     if (
       razorpayPayment.order_id !== data.orderId ||
-      razorpayPayment.amount !== eventPriceInPaise ||
-      razorpayPayment.currency !== "INR" ||
+      Number(razorpayPayment.amount) !== pricing.amountInSubunits ||
+      razorpayPayment.currency !== pricing.currency ||
       razorpayPayment.status !== "captured" ||
-      Number(payment.amount) !== eventPriceInRupees ||
-      payment.currency !== "INR"
+      Number(payment.amount) !== pricing.amount ||
+      payment.currency !== pricing.currency
     ) {
       throw new Error(
         "The payment has not been captured. Please contact support if you were charged.",
@@ -279,4 +288,24 @@ export const verifyEventRegistrationPayment = createServerFn({ method: "POST" })
     }
 
     return { ok: true };
+  });
+
+// Called when the shopper closes checkout or a payment attempt fails. The final
+// status is always taken from Razorpay, never from the browser's claim.
+export const reportEventPaymentOutcome = createServerFn({ method: "POST" })
+  .validator(reportEventPaymentOutcomeSchema)
+  .handler(async ({ data }) => {
+    const { supabase, razorpay } = getPaymentServices();
+    const { data: registration, error } = await supabase
+      .from("event_registrations")
+      .select("id, status, currency, razorpay_order_id")
+      .eq("event_slug", eventSlug)
+      .eq("razorpay_order_id", data.orderId)
+      .maybeSingle();
+    if (error || !registration) return { status: null };
+
+    const status = await syncRegistrationWithRazorpay(supabase, razorpay, registration, {
+      checkoutClosed: data.outcome === "cancelled",
+    });
+    return { status };
   });

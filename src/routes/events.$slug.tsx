@@ -279,7 +279,13 @@ function EventDetailPage() {
                       <p className="mt-3 text-3xl font-semibold text-[#29334a]">
                         ₹599
                         <span className="ml-2 text-sm font-normal text-[#6b5b68]">
-                          one-time registration
+                          one-time registration (India)
+                        </span>
+                      </p>
+                      <p className="mt-1 text-xl font-semibold text-[#29334a]">
+                        $7
+                        <span className="ml-2 text-sm font-normal text-[#6b5b68]">
+                          international participants
                         </span>
                       </p>
                     </>

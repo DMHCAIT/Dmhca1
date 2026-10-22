@@ -3,17 +3,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { CalendarDays, CreditCard, Mail, MapPin, Phone, RefreshCw, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabaseClient } from "@/lib/supabase";
-import {
-  getEventRegistrations,
-  updateEventRegistrationStatus,
-} from "@/routes/api/admin-event-registrations";
-import { eventPaymentStatusSchema, type EventPaymentStatus } from "@/lib/event-registration-schema";
+import { getEventRegistrations } from "@/routes/api/admin-event-registrations";
+import { getEventPricingByCurrency } from "@/lib/event-registration-schema";
 
 export const Route = createFileRoute("/admin/event-registrations")({
   head: () => ({
     meta: [
       { title: "Event Registrations — Admin" },
-      { name: "description", content: "Manage CME event registrations and payment statuses" },
+      { name: "description", content: "View CME event registrations and payment statuses" },
     ],
   }),
   component: AdminEventRegistrations,
@@ -32,28 +29,55 @@ type Registration = {
   city: string;
   referral_source: string | null;
   status: string;
+  payment_region: string | null;
+  amount: number | string | null;
+  currency: string | null;
   razorpay_order_id: string | null;
   razorpay_payment_id: string | null;
   created_at: string;
   updated_at: string;
 };
 
-type RegistrationFilter = "all" | "paid" | "pending" | "payment_setup_failed";
+type RegistrationFilter = "all" | "paid" | "cancelled" | "failed" | "pending";
 
 const filters: { value: RegistrationFilter; label: string }[] = [
   { value: "all", label: "All" },
   { value: "paid", label: "Paid" },
+  { value: "cancelled", label: "Cancelled" },
+  { value: "failed", label: "Failed" },
   { value: "pending", label: "Pending" },
-  { value: "payment_setup_failed", label: "Payment setup failed" },
 ];
+
+const statusStyles: Record<string, { label: string; className: string }> = {
+  paid: { label: "Paid", className: "bg-green-100 text-green-800" },
+  cancelled: { label: "Cancelled", className: "bg-gray-200 text-gray-800" },
+  failed: { label: "Payment failed", className: "bg-red-100 text-red-800" },
+  payment_setup_failed: { label: "Payment setup failed", className: "bg-red-100 text-red-800" },
+  pending: { label: "Pending", className: "bg-amber-100 text-amber-800" },
+};
+
+function statusStyle(status: string) {
+  return (
+    statusStyles[status] ?? {
+      label: status.replaceAll("_", " "),
+      className: "bg-amber-100 text-amber-800",
+    }
+  );
+}
+
+function matchesFilter(registration: Registration, filter: RegistrationFilter) {
+  if (filter === "all") return true;
+  if (filter === "failed") {
+    return registration.status === "failed" || registration.status === "payment_setup_failed";
+  }
+  return registration.status === filter;
+}
 
 function AdminEventRegistrations() {
   const [registrations, setRegistrations] = useState<Registration[]>([]);
   const [filter, setFilter] = useState<RegistrationFilter>("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [savingId, setSavingId] = useState<string | null>(null);
-  const [statusMessage, setStatusMessage] = useState("");
 
   const loadRegistrations = useCallback(async () => {
     setLoading(true);
@@ -84,37 +108,15 @@ function AdminEventRegistrations() {
     void loadRegistrations();
   }, [loadRegistrations]);
 
-  const updateStatus = async (registration: Registration, status: EventPaymentStatus) => {
-    setSavingId(registration.id);
-    setStatusMessage("");
-    try {
-      const { data: sessionData, error: sessionError } = await supabaseClient.auth.getSession();
-      if (sessionError) throw sessionError;
-      const accessToken = sessionData.session?.access_token;
-      if (!accessToken) {
-        throw new Error("Please sign in with an admin account to change registration statuses.");
-      }
-
-      const saved = await updateEventRegistrationStatus({
-        data: { accessToken, registrationId: registration.id, status },
-      });
-      setRegistrations((current) =>
-        current.map((item) => (item.id === saved.id ? { ...item, ...saved } : item)),
-      );
-      setStatusMessage(`Payment status for ${registration.full_name} saved to the database.`);
-    } finally {
-      setSavingId(null);
-    }
-  };
-
   const filteredRegistrations = useMemo(
-    () =>
-      filter === "all"
-        ? registrations
-        : registrations.filter((registration) => registration.status === filter),
+    () => registrations.filter((registration) => matchesFilter(registration, filter)),
     [filter, registrations],
   );
-  const paidCount = registrations.filter((registration) => registration.status === "paid").length;
+  const paid = registrations.filter((registration) => registration.status === "paid");
+  const indianPaidCount = paid.filter(
+    (registration) => getEventPricingByCurrency(registration.currency).currency === "INR",
+  ).length;
+  const internationalPaidCount = paid.length - indianPaidCount;
 
   return (
     <div className="space-y-6 p-6">
@@ -123,23 +125,19 @@ function AdminEventRegistrations() {
           <h1 className="text-3xl font-bold text-navy-deep">Event Registrations</h1>
           <p className="mt-2 text-gray-600">Female Hormones: Fertility and Subfertility CME</p>
           <p className="mt-1 text-sm text-gray-500">
-            Confirm payment through your Razorpay link before manually marking a registration as
-            paid.
+            Payment statuses are updated automatically from Razorpay and cannot be edited manually.
           </p>
         </div>
-        <Button
-          variant="outline"
-          onClick={() => void loadRegistrations()}
-          disabled={loading || savingId !== null}
-        >
+        <Button variant="outline" onClick={() => void loadRegistrations()} disabled={loading}>
           <RefreshCw className={`mr-2 h-4 w-4 ${loading ? "animate-spin" : ""}`} />
           Refresh
         </Button>
       </header>
 
-      <section className="grid gap-4 sm:grid-cols-2">
-        <SummaryCard label="Total registrations" count={registrations.length} />
-        <SummaryCard label="Payments confirmed" count={paidCount} paid />
+      <section className="grid gap-4 sm:grid-cols-3">
+        <SummaryCard label="Paid registrations" count={paid.length} paid />
+        <SummaryCard label="Indian payments (₹599)" count={indianPaidCount} paid />
+        <SummaryCard label="International payments ($7)" count={internationalPaidCount} paid />
       </section>
 
       <nav aria-label="Filter registrations" className="flex flex-wrap gap-2">
@@ -155,20 +153,11 @@ function AdminEventRegistrations() {
                 : "border border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
             }`}
           >
-            {label}
-            {value === "all" ? ` (${registrations.length})` : ""}
+            {label} (
+            {registrations.filter((registration) => matchesFilter(registration, value)).length})
           </button>
         ))}
       </nav>
-
-      {statusMessage && (
-        <p
-          role="status"
-          className="rounded-lg border border-green-200 bg-green-50 p-4 text-green-800"
-        >
-          {statusMessage}
-        </p>
-      )}
 
       {error ? (
         <div role="alert" className="rounded-lg border border-red-200 bg-red-50 p-5 text-red-800">
@@ -188,20 +177,13 @@ function AdminEventRegistrations() {
       ) : (
         <div className="space-y-4">
           {filteredRegistrations.map((registration) => (
-            <RegistrationCard
-              key={registration.id}
-              registration={registration}
-              onUpdateStatus={updateStatus}
-              saving={savingId === registration.id}
-              disabled={savingId !== null}
-            />
+            <RegistrationCard key={registration.id} registration={registration} />
           ))}
         </div>
       )}
     </div>
   );
 }
-
 function SummaryCard({
   label,
   count,
@@ -223,34 +205,9 @@ function SummaryCard({
   );
 }
 
-function RegistrationCard({
-  registration,
-  onUpdateStatus,
-  saving,
-  disabled,
-}: {
-  registration: Registration;
-  onUpdateStatus: (registration: Registration, status: EventPaymentStatus) => Promise<void>;
-  saving: boolean;
-  disabled: boolean;
-}) {
-  const [selectedStatus, setSelectedStatus] = useState(registration.status);
-  const [saveError, setSaveError] = useState("");
-  useEffect(() => {
-    setSelectedStatus(registration.status);
-  }, [registration.status]);
-
-  const saveStatus = async () => {
-    setSaveError("");
-    try {
-      const status = eventPaymentStatusSchema.parse(selectedStatus);
-      await onUpdateStatus(registration, status);
-    } catch (error) {
-      console.error("Error updating CME registration status:", error);
-      setSaveError(error instanceof Error ? error.message : "Couldn't save the payment status.");
-    }
-  };
-
+function RegistrationCard({ registration }: { registration: Registration }) {
+  const pricing = getEventPricingByCurrency(registration.currency);
+  const status = statusStyle(registration.status);
   const paid = registration.status === "paid";
   return (
     <article className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
@@ -259,12 +216,8 @@ function RegistrationCard({
           <h2 className="text-lg font-semibold text-navy-deep">{registration.full_name}</h2>
           <p className="mt-1 text-sm text-gray-600">{registration.event_title}</p>
         </div>
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-semibold ${
-            paid ? "bg-green-100 text-green-800" : "bg-amber-100 text-amber-800"
-          }`}
-        >
-          {paid ? "Paid · ₹599" : registration.status.replaceAll("_", " ")}
+        <span className={`rounded-full px-3 py-1 text-xs font-semibold ${status.className}`}>
+          {status.label} · {pricing.display} ({pricing.currency})
         </span>
       </div>
 
@@ -297,61 +250,23 @@ function RegistrationCard({
         />
         <Detail
           icon={CreditCard}
-          label="Razorpay payment ID"
-          value={
-            registration.razorpay_payment_id ||
-            (paid ? "Not recorded (payment confirmed manually)" : "Not recorded")
-          }
+          label={paid ? "Amount paid" : "Amount"}
+          value={`${pricing.display} ${pricing.currency} (${pricing.label})`}
         />
-      </div>
-      <div className="border-t border-gray-100 px-5 py-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <label
-            htmlFor={`payment-status-${registration.id}`}
-            className="text-sm font-medium text-navy-deep"
-          >
-            Payment status
-          </label>
-          <select
-            id={`payment-status-${registration.id}`}
-            value={selectedStatus}
-            onChange={(event) => {
-              setSelectedStatus(event.target.value);
-              setSaveError("");
-            }}
-            disabled={disabled}
-            className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-navy-deep disabled:opacity-50"
-          >
-            {!eventPaymentStatusSchema.safeParse(registration.status).success && (
-              <option value={registration.status}>
-                {registration.status.replaceAll("_", " ")}
-              </option>
-            )}
-            {filters
-              .filter(({ value }) => value !== "all")
-              .map(({ value, label }) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-          </select>
-          <Button
-            onClick={() => void saveStatus()}
-            disabled={disabled || selectedStatus === registration.status}
-          >
-            {saving ? "Saving..." : "Save status"}
-          </Button>
-        </div>
-        {saveError && (
-          <p role="alert" className="mt-3 text-sm text-red-700">
-            {saveError}
-          </p>
-        )}
+        <Detail
+          icon={CreditCard}
+          label="Razorpay payment ID"
+          value={registration.razorpay_payment_id || "Not recorded"}
+        />
+        <Detail
+          icon={CreditCard}
+          label="Razorpay order ID"
+          value={registration.razorpay_order_id || "Not created"}
+        />
       </div>
     </article>
   );
 }
-
 function Detail({
   icon: Icon,
   label,

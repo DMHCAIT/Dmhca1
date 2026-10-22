@@ -21,14 +21,16 @@ import {
 } from "@/components/ui/select";
 import {
   createEventRegistrationOrder,
+  reportEventPaymentOutcome,
   verifyEventRegistrationPayment,
 } from "@/routes/api/event-registration";
 import {
   eventDesignations,
+  eventPricing,
   eventReferralSources,
   eventRegistrationSchema,
 } from "@/lib/event-registration-schema";
-import type { EventRegistrationInput } from "@/lib/event-registration-schema";
+import type { EventPaymentRegion, EventRegistrationInput } from "@/lib/event-registration-schema";
 
 type RazorpayCheckoutOptions = {
   key: string;
@@ -109,6 +111,7 @@ export function EventRegistrationDialog() {
   const [designation, setDesignation] = useState("");
   const [referralSource, setReferralSource] = useState("");
   const [consent, setConsent] = useState(false);
+  const [paymentRegion, setPaymentRegion] = useState<EventPaymentRegion | "">("");
   const [isBusy, setIsBusy] = useState(false);
   const [paymentState, setPaymentState] = useState<
     "idle" | "checkout" | "verifying" | "verification_failed" | "complete"
@@ -169,6 +172,10 @@ export function EventRegistrationDialog() {
   async function handleSubmit(formEvent: FormEvent<HTMLFormElement>) {
     formEvent.preventDefault();
     setError("");
+    if (!paymentRegion) {
+      setError("Please choose Indian payment or International payment.");
+      return;
+    }
     if (!designation) {
       setError("Please select your designation.");
       return;
@@ -195,6 +202,7 @@ export function EventRegistrationDialog() {
       city: String(formData.get("city") || ""),
       ...(selectedReferralSource ? { referralSource: selectedReferralSource } : {}),
       consent: true,
+      paymentRegion,
     };
 
     const validation = eventRegistrationSchema.safeParse(registration);
@@ -255,6 +263,11 @@ export function EventRegistrationDialog() {
           ondismiss: () => {
             if (checkoutFinishedRef.current) return;
             checkoutRef.current = null;
+            void reportEventPaymentOutcome({
+              data: { orderId: order.orderId, outcome: "cancelled" },
+            }).catch((reportError) =>
+              console.error("Could not record cancelled event payment.", reportError),
+            );
             setPaymentState("idle");
             setIsBusy(false);
             setError(
@@ -268,6 +281,11 @@ export function EventRegistrationDialog() {
 
       checkoutRef.current = checkout;
       checkout.on("payment.failed", () => {
+        void reportEventPaymentOutcome({
+          data: { orderId: order.orderId, outcome: "failed" },
+        }).catch((reportError) =>
+          console.error("Could not record failed event payment.", reportError),
+        );
         setError("Payment could not be completed. Please try again.");
       });
       setPaymentState("checkout");
@@ -294,6 +312,7 @@ export function EventRegistrationDialog() {
         setDesignation("");
         setReferralSource("");
         setConsent(false);
+        setPaymentRegion("");
       }
     }
   }
@@ -337,7 +356,8 @@ export function EventRegistrationDialog() {
                 </DialogDescription>
               </DialogHeader>
               <p className="mt-4 text-sm leading-6 text-[#6b5b68]">
-                Your payment of ₹599 was successful. Your registration is confirmed.
+                Your payment of {eventPricing[draft.paymentRegion ?? "indian"].display} was
+                successful. Your registration is confirmed.
               </p>
               <Button
                 className="mt-6 bg-[#800020] text-white hover:bg-[#68001e]"
@@ -391,12 +411,55 @@ export function EventRegistrationDialog() {
                   </DialogTitle>
                   <DialogDescription className="mt-2 text-sm leading-5 sm:text-base sm:leading-6">
                     Complete your details to confirm your seat. Registration fee:{" "}
-                    <strong className="text-[#800020]">₹599</strong>.
+                    <strong className="text-[#800020]">
+                      {paymentRegion
+                        ? eventPricing[paymentRegion].display
+                        : `${eventPricing.indian.display} (India) / ${eventPricing.international.display} (International)`}
+                    </strong>
+                    .
                   </DialogDescription>
                 </DialogHeader>
               </div>
               <form onSubmit={handleSubmit} className="flex flex-col" aria-busy={isBusy}>
                 <fieldset disabled={isBusy} className="min-w-0 px-5 py-5 sm:px-8">
+                  <div role="radiogroup" aria-label="Payment type" className="mb-5">
+                    <p className="mb-2 text-sm font-medium text-[#29334a]">
+                      Choose your payment type
+                    </p>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {(Object.keys(eventPricing) as EventPaymentRegion[]).map((region) => {
+                        const option = eventPricing[region];
+                        const selected = paymentRegion === region;
+                        return (
+                          <button
+                            key={region}
+                            type="button"
+                            role="radio"
+                            aria-checked={selected}
+                            onClick={() => {
+                              setPaymentRegion(region);
+                              setError("");
+                            }}
+                            className={`rounded-xl border-2 px-4 py-3 text-left transition ${
+                              selected
+                                ? "border-[#800020] bg-[#f7cbd7]/40"
+                                : "border-[#29334a]/15 bg-white hover:border-[#800020]/50"
+                            }`}
+                          >
+                            <span className="block text-sm font-medium text-[#29334a]">
+                              {option.label}
+                            </span>
+                            <span className="mt-1 block text-xl font-semibold text-[#800020]">
+                              {option.display}
+                              <span className="ml-1 text-xs font-normal text-[#6b5b68]">
+                                {option.currency}
+                              </span>
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <FormField label="Full name" htmlFor="event-full-name">
                       <Input
@@ -533,7 +596,11 @@ export function EventRegistrationDialog() {
                     disabled={isBusy}
                     className="h-auto w-full whitespace-normal rounded-xl bg-[#800020] px-4 py-3 text-center text-sm leading-5 text-white hover:bg-[#68001e] sm:text-base"
                   >
-                    {isBusy ? "Preparing secure payment…" : "Submit and continue to payment"}
+                    {isBusy
+                      ? "Preparing secure payment…"
+                      : paymentRegion
+                        ? `Submit and pay ${eventPricing[paymentRegion].display}`
+                        : "Submit and continue to payment"}
                   </Button>
                   <span className="mt-3 flex items-center justify-center gap-2 text-xs leading-5 text-[#6b5b68]">
                     <LockKeyhole className="h-4 w-4" aria-hidden="true" />
