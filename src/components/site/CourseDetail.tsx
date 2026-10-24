@@ -72,17 +72,16 @@ export function CourseDetail({
   };
   const academicPartners = isPgDiploma
     ? [
-        aaaPartner,
         { src: "/ACADEMIC PARTNERS/btu_hero_logo.webp", name: "Bir Tikendrajit University" },
         { src: "/ACADEMIC PARTNERS/duke logo.webp", name: "Duke International University" },
-        ibmpPartner,
         {
           src: "/ACADEMIC PARTNERS/logo-srdu.webp",
           name: "Shri Rukmani Dwarkadhish University",
         },
       ]
     : [aaaPartner, ibmpPartner];
-  const fellowshipTraining = "11 Months Online + 1 Month Clinical Training";
+  const trainingLabel = isPgDiploma ? "12-Month PG Diploma" : "12-Month Fellowship";
+  const clinicalTraining = "11 Months Online + 1 Month Clinical Training";
   const navigate = useNavigate();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
@@ -319,14 +318,14 @@ export function CourseDetail({
                 {course.heroDescription}
               </p>
             )}
-            {isFellowship && (
+            {(isFellowship || isPgDiploma) && (
               <div className="course-hero-training mt-4 flex w-fit max-w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border px-4 py-2">
                 <div className="inline-flex items-center gap-2 font-semibold uppercase tracking-wider">
                   <Clock className="h-4 w-4" aria-hidden="true" />
-                  12-Month Fellowship
+                  {trainingLabel}
                 </div>
                 <div className="text-balance text-sm font-medium leading-snug">
-                  {fellowshipTraining}
+                  {clinicalTraining}
                 </div>
               </div>
             )}
@@ -803,11 +802,11 @@ export function CourseDetail({
 
                 {/* Pricing Card */}
                 <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all mb-6">
-                  {isFellowship && (
+                  {(isFellowship || isPgDiploma) && (
                     <div className="border-b border-[#800020]/15 bg-[#800020]/5 px-5 py-3 sm:px-6">
                       <div className="mb-1 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#800020]">
                         <Clock className="h-4 w-4" aria-hidden="true" />
-                        12-Month Fellowship
+                        {trainingLabel}
                       </div>
                       <div className="text-sm font-medium leading-snug text-navy-deep">
                         11 Months Online + 1 Month Clinical

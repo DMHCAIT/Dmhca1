@@ -37,6 +37,8 @@ export function ChatbotWidget(): JSX.Element {
   const [countrySearch, setCountrySearch] = useState("");
   const [selectedCountry, setSelectedCountry] = useState<(typeof COUNTRIES)[0] | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const eventId = useRef<string | null>(null);
+  const submitting = useRef(false);
 
   // Scroll to latest message
   useEffect(() => {
@@ -122,6 +124,10 @@ export function ChatbotWidget(): JSX.Element {
 
       case "mobile": {
         const digitsOnly = userInput.replace(/\D/g, "");
+        if (digitsOnly.length !== (selectedCountry?.length || 10)) {
+          addMessage("Please enter a valid phone number for your selected country.", "bot");
+          return;
+        }
         setFormData((prev) => ({ ...prev, mobile: digitsOnly }));
         setCurrentStep("course");
         addMessage("Thanks! Which course are you interested in?", "bot");
@@ -139,16 +145,28 @@ export function ChatbotWidget(): JSX.Element {
   };
 
   const chooseCourse = (course: string, addUserMessage: boolean = true): void => {
+    if (submitting.current) return;
+    submitting.current = true;
+    eventId.current ??= crypto.randomUUID();
     if (addUserMessage) {
       addMessage(course, "user");
     }
 
     const finalData = {
+      event_id: eventId.current,
       name: formData.name,
       email: formData.email,
       mobile: `${formData.countryCode} ${formData.mobile}`.trim(),
       course,
       timestamp: new Date().toISOString(),
+      transcript: [
+        ...messages.map((message) => ({
+          role: message.sender === "user" ? ("user" as const) : ("assistant" as const),
+          content: message.text,
+        })),
+        // The latest course reply has not reached React state yet.
+        { role: "user" as const, content: course },
+      ],
     };
 
     setFormData((prev) => ({ ...prev, course }));
@@ -156,27 +174,32 @@ export function ChatbotWidget(): JSX.Element {
     setIsLoading(true);
 
     submitChatbotInquiry({ data: finalData })
-      .then((result: any) => {
-        console.log("[Chatbot] Submission result:", result);
-        if (!result.success) {
-          console.error("[Chatbot] Submission failed:", result.message);
-        }
+      .then(() => {
+        eventId.current = null;
         addMessage(
           "Thank you for contacting us. Our support team will get back to you shortly.",
           "bot",
         );
       })
       .catch((err) => {
-        console.error("[Chatbot] Submission error:", err);
+        console.error(
+          "[Chatbot] Submission failed:",
+          err instanceof Error ? err.message : "Unknown error",
+        );
+        setCurrentStep("course");
         addMessage(
-          "Thank you for contacting us. Our support team will get back to you shortly.",
+          "We could not confirm your enquiry was saved. Please select your course again to retry.",
           "bot",
         );
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        submitting.current = false;
+        setIsLoading(false);
+      });
   };
 
   const handleReset = (): void => {
+    eventId.current = null;
     setCurrentStep("greeting");
     setFormData({ name: "", email: "", countryCode: "", mobile: "", course: "" });
     setInput("");

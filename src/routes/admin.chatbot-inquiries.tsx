@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabaseClient } from "@/lib/supabase";
 import { Trash2, MessageCircle, Phone, Mail, BookOpen, Calendar } from "lucide-react";
+import { CrmDeliveryDetails, type CrmDeliveryFields } from "@/components/CrmDeliveryDetails";
 
 export const Route = createFileRoute("/admin/chatbot-inquiries")({
   head: () => ({
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/admin/chatbot-inquiries")({
   component: AdminChatbotInquiries,
 });
 
-interface ChatbotInquiry {
+interface ChatbotInquiry extends CrmDeliveryFields {
   id: string;
   full_name: string;
   email: string;
@@ -23,7 +24,12 @@ interface ChatbotInquiry {
   notes: string;
   created_at: string;
   updated_at: string;
-  form_data?: any;
+  message?: string;
+  form_data?: {
+    originalCourse?: string;
+    submissionTime?: string;
+    transcript?: { role: "user" | "assistant"; content: string }[];
+  };
 }
 
 function AdminChatbotInquiries() {
@@ -339,6 +345,24 @@ function AdminChatbotInquiries() {
                 </p>
               </div>
             </div>
+
+            <CrmDeliveryDetails enquiry={selectedInquiry} />
+            {selectedInquiry.message && (
+              <p className="mb-4 whitespace-pre-wrap text-sm">{selectedInquiry.message}</p>
+            )}
+            {!!selectedInquiry.form_data?.transcript?.length && (
+              <details className="mb-6">
+                <summary className="cursor-pointer font-semibold">Conversation transcript</summary>
+                <div className="mt-2 space-y-2">
+                  {selectedInquiry.form_data.transcript.map((entry, index) => (
+                    <p key={index} className="whitespace-pre-wrap break-words text-sm">
+                      <strong>{entry.role === "user" ? "Visitor" : "Assistant"}:</strong>{" "}
+                      {entry.content}
+                    </p>
+                  ))}
+                </div>
+              </details>
+            )}
 
             {/* Notes */}
             <div className="mb-6">

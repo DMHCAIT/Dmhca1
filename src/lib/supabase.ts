@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import type { CrmDeliveryFields } from "@/components/CrmDeliveryDetails";
 
 // For browser: use VITE_-prefixed variables
 // For server: use non-prefixed variables
@@ -44,7 +45,7 @@ export interface EventComment {
   updated_at: string;
 }
 
-export interface ContactMessage {
+export interface ContactMessage extends CrmDeliveryFields {
   id: string;
   name: string;
   email: string;

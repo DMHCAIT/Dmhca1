@@ -4,6 +4,59 @@
 
 The admin panel already has the infrastructure to manage form submissions. The **applications** table serves as a general-purpose form submission handler. This guide shows how to extend it for custom forms.
 
+## Contact form and chatbot CRM delivery
+
+- The contact form saves to `contact_messages`; the chatbot saves to `applications`
+  with `form_type = 'chatbot_inquiry'`. Both remain visible in their existing admin pages.
+- Apply **only** [migration 021](migrations/021_crm_enquiry_delivery.sql) for this
+  feature. It adds a unique durable `event_id`, `crm_status`, `crm_error`, and
+  `crm_delivered_at` to both tables. Existing enquiries are not automatically queued.
+- The backend requires `VITE_SUPABASE_URL` and the server-only
+  `SUPABASE_SERVICE_ROLE_KEY` to save enquiries and delivery status. CRM variables
+  must never have a `VITE_` prefix.
+- Set `CRM_BASE_URL`, `CRM_SOURCE_ID`, `CRM_SOURCE_API_KEY`,
+  `CRM_CHATBOT_SOURCE_ID`, `CRM_CHATBOT_SOURCE_API_KEY`, and
+  `CRM_INTAKE_SIGNING_KEY` on the **website backend**. Contact and chatbot handlers
+  select their respective source credentials; the client cannot select the channel.
+- The backend awaits `POST /api/webhooks/lead-intake`. It signs the exact JSON body
+  with HMAC-SHA256 using the signing-key string directly and sends the required
+  bearer, source, Unix-seconds timestamp, and `v1=` signature headers. Only HTTP 202
+  marks delivery complete. Requests time out after 15 seconds and do not follow redirects.
+- If the CRM source restricts origins, set `CRM_ORIGIN` to an exactly allowed origin.
+  No Origin header is sent unless this variable is configured.
+- Enquiries are saved **before** delivery. A CRM outage does not discard a saved
+  enquiry or falsely mark it delivered: it leaves `crm_status = 'failed'` and a
+  sanitized error visible in admin. A database save failure is reported to the visitor.
+- Contact payloads omit `transcript`. Chatbot payloads include the available conversation
+  using `user`/`assistant` roles, also shown in the admin enquiry details. Both send a
+  nonblank lead message, which creates a CRM note.
+- The browser generates an event UUID and keeps it through an unconfirmed submission.
+  The backend persists it before sending; retries load the original saved enquiry,
+  reuse that UUID, and generate fresh timestamps and signatures. Duplicate submissions
+  do not overwrite the original enquiry, and delivered records are not sent again.
+
+### Retrying failed or interrupted deliveries
+
+Using Node.js 22.18+ (or Node.js 24), run `npm run crm:retry` from a trusted backend
+environment with the above server variables configured. Locally it also loads
+`.env.local` without overriding existing environment settings. Each run processes
+up to 100 pending/failed enquiries **per channel**, oldest first, and exits nonzero
+if any retry fails. It never queues legacy enquiries. Schedule this command using
+your hosting platform's scheduler if automatic retries are required; a scheduler
+is not installed by this change. The script logs event IDs/statuses, not credentials
+or lead contents. Admin users can see CRM status/errors in Contact Messages and
+Chatbot Inquiries; retrying is a trusted backend operation, not a public API.
+
+Run `npm run test:crm` for mocked contract, validation, persistence, and retry tests.
+Tests do not send enquiries to real CRM or database services.
+
+### Deployment connectivity
+
+`CRM_BASE_URL=http://localhost:3000` only works when CRM is reachable on port 3000
+from the website backend's own machine. Hosted deployments require a reachable
+CRM HTTPS domain or a temporary HTTPS tunnel. Configure production variables and
+restart/redeploy the website backend after changing them.
+
 ---
 
 ## Current Applications Table Structure

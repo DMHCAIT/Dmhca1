@@ -9,6 +9,8 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
+    "test:crm": "node --test tests/crm.test.mjs",
+    "crm:retry": "node scripts/retry-crm.mjs",
     "format": "prettier --write .",
     "seed:courses": "bun run scripts/seed-courses-to-db.mts",
     "seed:all": "bun run scripts/seed-all-courses.mts",

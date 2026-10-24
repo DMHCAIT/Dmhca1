@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { supabaseClient } from "@/lib/supabase";
 import { Trash2, Calendar, Mail, Phone, CheckCircle2 } from "lucide-react";
 import type { ContactMessage } from "@/lib/supabase";
+import { CrmDeliveryDetails } from "@/components/CrmDeliveryDetails";
 
 export const Route = createFileRoute("/admin/messages")({
   head: () => ({
@@ -188,6 +189,7 @@ function AdminMessages() {
                 )}
               </div>
 
+              <CrmDeliveryDetails enquiry={message} />
               <div className="flex gap-2">
                 <button
                   onClick={() => updateStatus(message.id, "reviewed")}

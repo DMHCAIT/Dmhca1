@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 import { submitContactForm } from "@/lib/api/contact-form.function";
 import { ResourceHero } from "@/components/site/ResourceHero";
 
@@ -48,6 +49,7 @@ function Contact() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const eventId = useRef<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -73,13 +75,18 @@ function Contact() {
       if (!formData.phone.trim()) {
         throw new Error("Mobile number is required");
       }
+      const phone = parsePhoneNumberFromString(formData.phone.trim());
+      if (!phone?.isPossible()) {
+        throw new Error("Enter a possible number with + and country code.");
+      }
       if (!formData.message.trim()) {
         throw new Error("Message is required");
       }
 
-      // Call server function (saves to Supabase and sends to TeleCRM)
-      const result = await submitContactForm({
+      eventId.current ??= crypto.randomUUID();
+      await submitContactForm({
         data: {
+          event_id: eventId.current,
           name: formData.name.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
@@ -88,6 +95,7 @@ function Contact() {
       });
 
       // Success
+      eventId.current = null;
       setSubmitted(true);
       setFormData({ name: "", email: "", phone: "", message: "" });
 
@@ -258,7 +266,8 @@ function Contact() {
                       value={formData.phone}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border-2 border-[#29334a]/15 rounded-lg focus:outline-none focus:border-[#800020] focus:ring-2 focus:ring-[#f7cbd7] transition text-[#29334a] placeholder-[#6b5b68]"
-                      placeholder="+91 XXXXX XXXXX"
+                      placeholder="+91 98765 43210"
+                      title="Enter a valid mobile number with + and country code"
                       required
                     />
                   </div>
