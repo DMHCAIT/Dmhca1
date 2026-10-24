@@ -181,6 +181,14 @@
   }
 }
 
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
 p {
   font-size: 0.875rem;
   font-weight: 400;
@@ -223,6 +231,24 @@ body
   background: var(--card);
   color: var(--brand-accent);
   box-shadow: 0 3px 12px -8px #80002050;
+}
+
+.header-search-results {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.header-search-results::-webkit-scrollbar {
+  width: 4px;
+}
+
+.header-search-results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.header-search-results::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #cbd5e1;
 }
 
 .header-cart {
@@ -1869,6 +1895,17 @@ body
 
 .hero-trust-item + .hero-trust-item {
   margin-left: 8px;
+}
+
+@media (max-width: 359px) {
+  .site-header .brand-logo img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .site-header .brand-logo .brand-wordmark {
+    font-size: 20px;
+  }
 }
 
 .brand-logo .brand-wordmark {

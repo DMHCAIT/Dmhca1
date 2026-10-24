@@ -7,6 +7,7 @@ import { ChatbotWidget } from "@/components/ChatbotWidget";
 import { syncLocalCartToServer, loadServerCartToLocal } from "@/lib/cart-sync";
 
 import { BrandLogo } from "@/components/site/BrandLogo";
+import { HeaderSearch } from "@/components/site/HeaderSearch";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about-dmhca", label: "About" },
@@ -176,10 +177,10 @@ export function Header() {
   return (
     <>
       <header className="site-header sticky top-0 z-40 bg-background/95 dark:bg-slate-950/95 backdrop-blur-xl shadow-[0_4px_24px_-20px_rgba(128,0,32,0.25)]">
-        <div className="container-x relative flex items-center justify-between gap-3 h-[72px]">
+        <div className="container-x group/header relative flex items-center justify-between gap-1 sm:gap-3 h-[72px]">
           {/* Mobile Menu Button - Left */}
           <button
-            className="lg:hidden flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gold/5 order-first"
+            className="lg:hidden flex h-10 w-10 max-[359px]:w-9 shrink-0 items-center justify-center rounded-xl bg-gold/5 order-first"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
             aria-expanded={open}
@@ -188,17 +189,17 @@ export function Header() {
           </button>
 
           {/* Logo */}
-          <Link to="/" className="flex items-center transition-opacity hover:opacity-75">
+          <Link to="/" className="flex shrink-0 items-center transition-opacity hover:opacity-75">
             <BrandLogo />
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex lg:absolute lg:left-1/2 lg:-translate-x-1/2 items-center gap-1 rounded-full bg-gold/5 p-1 text-sm font-semibold">
+          <nav className="hidden lg:absolute lg:left-1/2 lg:-translate-x-1/2 lg:flex shrink-0 items-center gap-1 rounded-full bg-gold/5 p-1 text-sm font-semibold">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
-                className="header-nav-link rounded-full px-5 py-2.5 text-foreground/75 transition-colors hover:bg-card hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+                className="header-nav-link rounded-full px-3 xl:px-5 py-2.5 text-foreground/75 transition-colors hover:bg-card hover:text-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
                 activeProps={{ className: "header-nav-active" }}
                 activeOptions={{ exact: n.to === "/" }}
               >
@@ -208,7 +209,8 @@ export function Header() {
           </nav>
 
           {/* Desktop Right-Side Elements */}
-          <div className="hidden lg:flex items-center gap-3 relative">
+          <div className="hidden lg:flex items-center gap-3">
+            <HeaderSearch />
             {isLoggedIn ? (
               <>
                 <button
@@ -294,13 +296,12 @@ export function Header() {
             )}
           </div>
 
-          <Link
-            to="/cart"
-            className="header-cart header-cart-mobile order-last"
-            aria-label="Shopping Cart"
-          >
-            <ShoppingBag className="w-5 h-5" strokeWidth={1.8} />
-          </Link>
+          <div className="flex shrink-0 items-center gap-1 order-last lg:hidden">
+            <HeaderSearch />
+            <Link to="/cart" className="header-cart" aria-label="Shopping Cart">
+              <ShoppingBag className="w-5 h-5" strokeWidth={1.8} />
+            </Link>
+          </div>
         </div>
 
         {open && (
