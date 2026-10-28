@@ -60,6 +60,7 @@ function AdminCourses() {
     program: "Certificate",
     category: "",
     priceINR: "",
+    priceUSD: "",
     months: "",
     level: "",
     lessons: "",
@@ -209,6 +210,7 @@ function AdminCourses() {
       program: programType,
       category: courseData.category || course.category || "",
       priceINR: courseData.priceINR || course.price || "",
+      priceUSD: courseData.priceUSD == null ? "" : String(courseData.priceUSD),
       months: monthsValue,
       level: levelValue,
       lessons:
@@ -251,6 +253,7 @@ function AdminCourses() {
       program: "Certificate",
       category: "",
       priceINR: "",
+      priceUSD: "",
       months: "",
       level: "",
       lessons: "",
@@ -286,12 +289,22 @@ function AdminCourses() {
         return;
       }
 
+      const usd = formData.priceUSD.trim() === "" ? null : Number(formData.priceUSD);
+      if (
+        usd !== null &&
+        (!Number.isFinite(usd) ||
+          usd <= 0 ||
+          Math.abs(Math.round(usd * 100) - usd * 100) > 0.000001)
+      ) {
+        throw new Error("USD fee must be positive with at most two decimal places");
+      }
       const courseData = {
         title: formData.title,
         slug: formData.slug,
         program: formData.program,
         category: formData.category,
         priceINR: parseFloat(formData.priceINR as any) || 0,
+        priceUSD: usd,
         months: parseFloat(formData.months as any) || 0,
         level: formData.level,
         lessons: parseInt(formData.lessons as any) || 0,
@@ -849,7 +862,7 @@ function AdminCourses() {
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div>
                       <label className="block text-sm font-semibold mb-2 text-gray-300">
-                        Price (₹)
+                        Indian course fee (INR, before charges)
                       </label>
                       <input
                         type="number"
@@ -858,6 +871,29 @@ function AdminCourses() {
                         className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
                         placeholder="0"
                       />
+                    </div>
+
+                    <div>
+                      <label
+                        htmlFor="course-price-usd"
+                        className="block text-sm font-semibold mb-2 text-gray-300"
+                      >
+                        International total fee (USD)
+                      </label>
+                      <input
+                        id="course-price-usd"
+                        type="number"
+                        min="0.01"
+                        step="0.01"
+                        value={formData.priceUSD}
+                        onChange={(e) => setFormData({ ...formData, priceUSD: e.target.value })}
+                        className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white"
+                        placeholder="Not set"
+                      />
+                      <p className="mt-2 text-sm text-gray-300">
+                        Final USD amount: no extra GST or Razorpay fee. Leave blank to require an
+                        international pricing enquiry.
+                      </p>
                     </div>
 
                     <div>

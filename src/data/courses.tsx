@@ -52,6 +52,7 @@ export type Course = {
   months: number | null;
   level: string;
   priceINR: number;
+  priceUSD?: number | null;
   rating: number | null;
   reviewCount: number;
   program?: string;

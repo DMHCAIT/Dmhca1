@@ -3,6 +3,10 @@ import { Link, useNavigate, createFileRoute } from "@tanstack/react-router";
 import { getCourse } from "@/data/courses";
 import { saveCart } from "@/routes/api/save-cart";
 import { createApplicationFromCart } from "@/routes/api/create-application-from-cart";
+import { useQuery } from "@tanstack/react-query";
+import { usePricingCurrency } from "@/contexts/PricingContext";
+import { getCheckoutQuote } from "@/lib/course-pricing.function";
+import { formatCourseMoney } from "@/lib/course-pricing";
 
 export const Route = createFileRoute("/cart")({
   component: CartPage,
@@ -10,6 +14,20 @@ export const Route = createFileRoute("/cart")({
 
 function CartPage() {
   const [items, setItems] = useState<any[]>([]);
+  const [cartLoaded, setCartLoaded] = useState(false);
+  const currency = usePricingCurrency();
+  const checkoutItems = items.map((item) => ({ course: String(item.slug), qty: 1 }));
+  const {
+    data: quote,
+    error: pricingError,
+    isFetching: pricingLoading,
+  } = useQuery({
+    queryKey: ["cart-pricing", checkoutItems, currency],
+    queryFn: () => getCheckoutQuote({ data: { items: checkoutItems } }),
+    enabled: !!currency && items.length > 0,
+    retry: false,
+  });
+  const money = (value: number) => (currency ? formatCourseMoney(value, currency) : "Unavailable");
   const [userId, setUserId] = useState<string | null>(null);
   const [processingCheckout, setProcessingCheckout] = useState(false);
   const [error, setError] = useState("");
@@ -31,10 +49,12 @@ function CartPage() {
     } catch (e) {
       setItems([]);
     }
+    setCartLoaded(true);
   }, []);
 
   // Save cart to localStorage AND database whenever items change
   useEffect(() => {
+    if (!cartLoaded) return;
     try {
       localStorage.setItem("cart", JSON.stringify(items));
 
@@ -46,7 +66,7 @@ function CartPage() {
         });
       }
     } catch (e) {}
-  }, [items, userId]);
+  }, [items, userId, cartLoaded]);
 
   function updateQty(slug: string, qty: number) {
     setItems((prev) => prev.map((i) => (i.slug === slug ? { ...i, qty: Math.max(1, qty) } : i)));
@@ -59,6 +79,8 @@ function CartPage() {
   const handleProceedCheckout = async () => {
     try {
       setError("");
+      if (!quote || pricingLoading)
+        throw new Error("Course prices are unavailable. Please refresh or contact support.");
 
       // Check if user is logged in
       const isLoggedIn =
@@ -102,16 +124,13 @@ function CartPage() {
           phone,
           courseName,
           userId: userId || undefined,
+          items: checkoutItems,
         },
       });
 
       if (result.success && result.applicationId) {
-        // Calculate checkout total (Price + GST + Razorpay)
-        const checkoutTotal = Math.round(cartTotal + cartTotal * 0.04);
-
-        // Redirect to payment page with basePrice parameter
         if (typeof window !== "undefined") {
-          window.location.href = `/payment?applicationId=${result.applicationId}&amount=${checkoutTotal}&basePrice=${subtotal}`;
+          window.location.href = `/payment?applicationId=${result.applicationId}`;
         }
       }
     } catch (err) {
@@ -120,16 +139,9 @@ function CartPage() {
     }
   };
 
-  const subtotal = items.reduce((s, it) => s + Number(it.priceINR || 0) * (it.qty || 1), 0);
-
-  // Fees
-  const GST_RATE = 0.18; // 18%
-  const RAZORPAY_RATE = 0.04; // 4%
-
-  const gst = subtotal * GST_RATE;
-  const razorpayFee = subtotal * RAZORPAY_RATE;
-  const cartTotal = subtotal + gst; // Cart shows only Price + GST
-  const checkoutTotal = subtotal + gst + razorpayFee; // Full amount for checkout
+  const subtotal = quote?.subtotal || 0;
+  const gst = quote?.gst || 0;
+  const cartTotal = subtotal + gst;
 
   return (
     <div className="container-x py-10">
@@ -159,7 +171,9 @@ function CartPage() {
                 <div className="flex-1">
                   <div className="font-semibold text-slate-900 text-lg">{it.title}</div>
                   <div className="text-sm text-slate-600 mt-1">
-                    ₹ {Number(it.priceINR || 0).toLocaleString("en-IN")}
+                    {quote
+                      ? money(quote.lines.find((line) => line.slug === it.slug)?.subtotal || 0)
+                      : "Price unavailable"}
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -199,26 +213,41 @@ function CartPage() {
 
           <aside className="p-6 bg-white border border-slate-200 rounded-xl shadow-sm">
             <h3 className="text-lg font-bold mb-4">Order Summary</h3>
+            {error && (
+              <p role="alert" className="mb-4 text-sm text-red-700">
+                {error}
+              </p>
+            )}
             <div className="text-sm text-slate-600 mb-4">
-              Price <span className="float-right">₹ {subtotal.toLocaleString("en-IN")}</span>
+              Price <span className="float-right">{quote ? money(subtotal) : "Unavailable"}</span>
             </div>
-            <div className="text-sm text-slate-600 mb-4">
-              GST (18%){" "}
-              <span className="float-right">₹ {Math.round(gst).toLocaleString("en-IN")}</span>
-            </div>
+            {currency === "INR" && (
+              <div className="text-sm text-slate-600 mb-4">
+                GST (18%) <span className="float-right">{money(gst)}</span>
+              </div>
+            )}
             <div className="border-t border-slate-200 pt-4 mt-4">
               <div className="text-base text-slate-800 font-bold">
                 Total{" "}
-                <span className="float-right">
-                  ₹ {Math.round(cartTotal).toLocaleString("en-IN")}
-                </span>
+                <span className="float-right">{quote ? money(cartTotal) : "Unavailable"}</span>
               </div>
             </div>
 
+            {currency === "USD" && quote && (
+              <p className="mt-3 text-sm text-slate-600">
+                Final USD fee. No additional GST or payment fee.
+              </p>
+            )}
+            {(!currency || pricingError) && (
+              <p role="alert" className="mt-3 text-red-700">
+                {pricingError?.message ||
+                  "Unable to determine pricing country. Please contact support."}
+              </p>
+            )}
             <div className="mt-6 space-y-2">
               <button
                 onClick={handleProceedCheckout}
-                disabled={processingCheckout}
+                disabled={processingCheckout || !quote || pricingLoading}
                 className="w-full px-4 py-3 bg-[#001f3f] text-white rounded font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {processingCheckout ? "Processing..." : "Proceed to Checkout"}

@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
+import { CheckoutItemsSchema } from "@/lib/course-pricing.function";
 
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL || "",
@@ -14,12 +15,15 @@ const CreateApplicationSchema = z.object({
   courseName: z.string().min(1, "Course name required"),
   programName: z.string().optional(),
   userId: z.string().uuid().optional(),
+  items: CheckoutItemsSchema,
 });
 
 export const createApplicationFromCart = createServerFn({ method: "POST" })
   .validator(CreateApplicationSchema)
-  .handler(async ({ data: { email, fullName, phone, courseName, programName, userId } }) => {
+  .handler(async ({ data: { email, fullName, phone, courseName, programName, userId, items } }) => {
     try {
+      const { loadCheckoutQuote } = await import("@/lib/course-pricing.server");
+      const quote = await loadCheckoutQuote(items);
       console.log("[CreateApplication] Creating application from cart:", {
         email,
         fullName,
@@ -32,8 +36,9 @@ export const createApplicationFromCart = createServerFn({ method: "POST" })
       const insertPayload: Record<string, any> = {
         full_name: fullName.trim(),
         email: email.trim(),
-        phone: phone.trim(),
-        course_name: courseName || null,
+        phone: phone?.trim() || "",
+        course_name: quote.lines.map((line) => line.courseName).join(", "),
+        checkout_items: quote.lines.map((line) => ({ course: line.slug, qty: line.qty })),
         program_name: programName || null,
         status: "new",
       };

@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "test:crm": "node --test tests/crm.test.mjs",
+    "test:pricing": "node --experimental-test-module-mocks --test tests/course-pricing.test.mjs tests/course-pricing-server.test.mjs",
     "crm:retry": "node scripts/retry-crm.mjs",
     "format": "prettier --write .",
     "seed:courses": "bun run scripts/seed-courses-to-db.mts",

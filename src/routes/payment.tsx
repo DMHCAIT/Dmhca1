@@ -1,35 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseClient } from "@/lib/supabase";
-import { createEnrollment } from "@/routes/api/enroll";
 import { createRazorpayOrder } from "@/routes/api/razorpay-create-order";
 import { verifyRazorpayPayment } from "@/routes/api/razorpay-verify";
-import { getCourse } from "@/data/courses";
+import { useQuery } from "@tanstack/react-query";
+import { getCheckoutQuote } from "@/lib/course-pricing.function";
+import { usePricingCurrency } from "@/contexts/PricingContext";
+import { formatCourseMoney } from "@/lib/course-pricing";
 
 export const Route = createFileRoute("/payment")({
   component: PaymentPage,
 });
 
 function PaymentPage() {
-  const [application, setApplication] = useState<any>(null);
-  const [amount, setAmount] = useState<number>(0);
-  const [basePrice, setBasePrice] = useState<number>(0);
+  const [application, setApplication] = useState<{
+    id: string;
+    user_id?: string;
+    checkout_items?: { course: string; qty: number }[] | null;
+    course_name: string;
+    full_name: string;
+    email: string;
+    phone: string;
+  } | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [showRazorpayFee, setShowRazorpayFee] = useState(false);
+  const currency = usePricingCurrency();
+  const {
+    data: quote,
+    error: priceError,
+    isFetching: priceLoading,
+  } = useQuery({
+    queryKey: ["payment-pricing", application?.id, currency],
+    queryFn: () => {
+      if (!application) throw new Error("Application not found");
+      return getCheckoutQuote({
+        data: {
+          items: application.checkout_items || [{ course: application.course_name, qty: 1 }],
+        },
+      });
+    },
+    enabled: !!application && !!currency,
+    retry: false,
+  });
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
     const appId = params.get("applicationId");
-    const amt = params.get("amount");
-    const basePriceParam = params.get("basePrice");
-
-    if (amt) setAmount(Number(amt));
-    if (basePriceParam) {
-      setBasePrice(Number(basePriceParam));
-    }
     if (appId) {
       (async () => {
         try {
@@ -58,8 +76,11 @@ function PaymentPage() {
           setApplication(app);
         } catch (e) {
           console.error("Failed to fetch application", e);
+          setError("Failed to load application data");
         }
       })();
+    } else {
+      setError("Application not found. Please apply for a course before paying.");
     }
   }, []);
 
@@ -83,16 +104,17 @@ function PaymentPage() {
       }
 
       if (!application) throw new Error("Application not found");
+      if (!quote || priceLoading) throw new Error("Prices unavailable. Please refresh checkout.");
 
       const courseName = application.course_name || "Course";
       const studentName = application.full_name || "";
       const studentEmail = application.email || "";
 
-      // Always use the calculated total (which accounts for basePrice if available)
       const numericAmount = Number(total || 0);
 
       console.log("[Payment] Creating Razorpay order with:", {
         amount: numericAmount,
+        applicationId: application.id,
         enrollmentId: application.id,
         courseName,
         studentName,
@@ -102,12 +124,13 @@ function PaymentPage() {
       const orderData = await createRazorpayOrder({
         data: {
           amount: numericAmount,
+          applicationId: application.id,
           enrollmentId: application.id || null,
           userId: userId || null,
           courseName,
-          studentName: studentName || null,
-          studentEmail: studentEmail || null,
-          currency: "INR",
+          studentName: studentName || undefined,
+          studentEmail: studentEmail || undefined,
+          currency: quote.currency,
         },
       });
 
@@ -167,12 +190,11 @@ function PaymentPage() {
     }
   };
 
-  const formatINR = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
-  // Use basePrice if available, otherwise derive from amount
-  const subtotal = basePrice > 0 ? basePrice : Math.round(amount / (1 + 0.18 + 0.04)) || 0;
-  const gst = Math.round(subtotal * 0.18) || 0;
-  const razorpayFee = Math.round(subtotal * 0.04) || 0;
-  const total = subtotal + gst + razorpayFee || 0;
+  const money = (n: number) => (currency ? formatCourseMoney(n, currency) : "Unavailable");
+  const subtotal = quote?.subtotal || 0;
+  const gst = quote?.gst || 0;
+  const razorpayFee = quote?.razorpayFee || 0;
+  const total = quote?.total || 0;
 
   const handleRazorpayUPI = () => startRazorpay();
 
@@ -207,22 +229,39 @@ function PaymentPage() {
                     <div className="text-sm text-slate-500 mb-2">Amount Details</div>
                     <div className="grid grid-cols-2 gap-2 text-sm text-slate-600">
                       <div>Course Fee</div>
-                      <div className="text-right">{formatINR(subtotal)}</div>
-                      <div>GST (18%)</div>
-                      <div className="text-right">{formatINR(gst)}</div>
-                      {showRazorpayFee && (
+                      <div className="text-right">{quote ? money(subtotal) : "Unavailable"}</div>
+                      {currency === "INR" && (
+                        <>
+                          <div>GST (18%)</div>
+                          <div className="text-right">{quote ? money(gst) : "Unavailable"}</div>
+                        </>
+                      )}
+                      {currency === "INR" && (
                         <>
                           <div>Razorpay Fee (4%)</div>
-                          <div className="text-right">{formatINR(razorpayFee)}</div>
+                          <div className="text-right">
+                            {quote ? money(razorpayFee) : "Unavailable"}
+                          </div>
                         </>
                       )}
                       <div className="col-span-2 border-t mt-2 pt-2 flex justify-between font-bold">
-                        Total <div>{formatINR(showRazorpayFee ? total : subtotal + gst)}</div>
+                        Total <div>{quote ? money(total) : "Unavailable"}</div>
                       </div>
+                      {currency === "USD" && quote && (
+                        <p className="text-sm text-slate-600">
+                          Final USD fee. No additional GST or payment fee.
+                        </p>
+                      )}
+                      {(error || priceError || !currency) && (
+                        <p role="alert" className="text-red-700">
+                          {error ||
+                            priceError?.message ||
+                            "Unable to determine pricing country. Please contact support."}
+                        </p>
+                      )}
                     </div>
                   </div>
 
-                  {/* suppress debug error UI — show only success message after payment */}
                   {success && (
                     <div className="mt-2 text-emerald-700">
                       Payment successful — confirmation will be emailed.
@@ -230,7 +269,7 @@ function PaymentPage() {
                   )}
                 </div>
               ) : (
-                <div>Loading application...</div>
+                <div role={error ? "alert" : "status"}>{error || "Loading application..."}</div>
               )}
             </div>
 
@@ -240,39 +279,41 @@ function PaymentPage() {
                 <div className="space-y-3">
                   <button
                     type="button"
-                    onClick={() => {
-                      setShowRazorpayFee(true);
-                      handleRazorpayUPI();
-                    }}
+                    onClick={handleRazorpayUPI}
                     onKeyDown={(e) => e.key === "Enter" && handleRazorpayUPI()}
                     tabIndex={0}
                     aria-label="Pay with UPI/Card"
                     data-test="pay-upi-card"
+                    disabled={loading || !quote || priceLoading || success}
                     className="w-full px-4 py-3 bg-[#001f3f] text-white rounded-md font-semibold z-50"
                   >
-                    Pay with UPI/Card
+                    {currency === "USD" ? "Pay in USD" : "Pay with UPI/Card"}
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const loanUrl =
-                        import.meta.env.VITE_LOAN_PARTNER_URL || process.env.VITE_LOAN_PARTNER_URL;
-                      const q = new URLSearchParams({
-                        applicationId: String(application?.id || ""),
-                        amount: String(total),
-                        name: application?.full_name || "",
-                        email: application?.email || "",
-                      }).toString();
-                      if (loanUrl && typeof window !== "undefined") {
-                        window.location.href = `${loanUrl}?${q}`;
-                      } else {
-                        setError("Loan partner URL not configured");
-                      }
-                    }}
-                    className="w-full px-4 py-3 border border-slate-200 rounded-md text-slate-700"
-                  >
-                    Pay by Loan
-                  </button>
+                  {currency === "INR" && (
+                    <button
+                      type="button"
+                      disabled={loading || !quote || priceLoading || success}
+                      onClick={() => {
+                        const loanUrl =
+                          import.meta.env.VITE_LOAN_PARTNER_URL ||
+                          process.env.VITE_LOAN_PARTNER_URL;
+                        const q = new URLSearchParams({
+                          applicationId: String(application?.id || ""),
+                          amount: String(total),
+                          name: application?.full_name || "",
+                          email: application?.email || "",
+                        }).toString();
+                        if (loanUrl && typeof window !== "undefined") {
+                          window.location.href = `${loanUrl}?${q}`;
+                        } else {
+                          setError("Loan partner URL not configured");
+                        }
+                      }}
+                      className="w-full px-4 py-3 border border-slate-200 rounded-md text-slate-700"
+                    >
+                      Pay by Loan
+                    </button>
+                  )}
                 </div>
                 <div className="mt-4 text-xs text-slate-500">
                   By proceeding you agree to our terms and privacy policy.

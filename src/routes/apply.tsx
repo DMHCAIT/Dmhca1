@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseClient } from "@/lib/supabase";
 import { courses } from "@/data/courses";
-import { PaymentModal } from "@/components/PaymentModal";
+import { getCourseQuote } from "@/lib/course-pricing.function";
 
 export const Route = createFileRoute("/apply")({
   head: () => ({
@@ -30,10 +30,6 @@ function ApplicationForm() {
   const [loading, setLoading] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const [applicationData, setApplicationData] = useState<any>(null);
-  const [coursePrice, setCoursePrice] = useState(0);
-  const [checkoutAmount, setCheckoutAmount] = useState<number | null>(null);
 
   // Get course and program from query parameters
   useEffect(() => {
@@ -42,12 +38,6 @@ function ApplicationForm() {
       const courseParam = params.get("course");
       const programParam = params.get("program");
       const fromParam = params.get("from");
-      const amountParam = params.get("amount");
-
-      // Store amount from URL if coming from cart
-      if (amountParam) {
-        setCheckoutAmount(Number(amountParam));
-      }
 
       // Normalize program value: "Certificate" -> "Certificate Course"
       let normalizedProgram = programParam ? decodeURIComponent(programParam) : "";
@@ -76,7 +66,6 @@ function ApplicationForm() {
                 course: found.title,
                 program: found.program || prev.program,
               }));
-              setCoursePrice(found.priceINR || 0);
             }
           }
         }
@@ -110,6 +99,8 @@ function ApplicationForm() {
       if (!formData.phone.trim()) {
         throw new Error("Phone number is required");
       }
+      // Resolve current regional price before creating an application.
+      const quote = await getCourseQuote({ data: { course: formData.course } });
 
       // Determine current user id (if logged in)
       let currentUserId: string | null = null;
@@ -137,7 +128,8 @@ function ApplicationForm() {
         full_name: formData.fullName.trim(),
         email: formData.email.trim(),
         phone: formData.phone.trim(),
-        course_name: formData.course || null,
+        course_name: quote.courseName,
+        checkout_items: [{ course: quote.slug, qty: 1 }],
         program_name: formData.program || null,
         qualification: formData.qualification || null,
         experience: formData.experience || null,
@@ -165,28 +157,13 @@ function ApplicationForm() {
       }
 
       const appId = insertedData?.[0]?.id;
+      if (!appId) throw new Error("Failed to create application - no ID returned");
 
-      // Determine the amount to use for checkout
-      let totalAmount: number;
-
-      if (checkoutAmount) {
-        // Use the amount passed from cart
-        totalAmount = checkoutAmount;
-      } else {
-        // Calculate amount if not coming from cart
-        const course = courses.find((c) => c.title === formData.course);
-        const price = course ? course.priceINR : 0;
-        const gst = Math.round(price * 0.18);
-        const razorpayFee = Math.round(price * 0.04);
-        totalAmount = price + gst + razorpayFee;
-      }
-
-      setApplicationData({ id: appId, ...formData, courseTitle: formData.course });
       setProcessing(true);
       // Redirect to payment page after a brief delay
       setTimeout(() => {
         if (typeof window !== "undefined" && appId) {
-          window.location.href = `/payment?applicationId=${appId}&amount=${totalAmount}`;
+          window.location.href = `/payment?applicationId=${appId}`;
         }
       }, 1500);
     } catch (err) {
@@ -478,17 +455,6 @@ function ApplicationForm() {
           )}
         </div>
       </div>
-
-      {/* Payment Modal */}
-      {applicationData && (
-        <PaymentModal
-          isOpen={showPaymentModal}
-          onClose={() => setShowPaymentModal(false)}
-          applicationData={applicationData}
-          amount={coursePrice}
-          courseName={applicationData.courseTitle}
-        />
-      )}
     </div>
   );
 }

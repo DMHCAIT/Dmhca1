@@ -15,6 +15,8 @@ import appCss from "../styles.css?url";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ContactStrip } from "@/components/site/ContactStrip";
+import { getPricingRegion } from "@/lib/course-pricing.function";
+import { PricingProvider } from "@/contexts/PricingContext";
 
 function NotFoundComponent() {
   return (
@@ -71,6 +73,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: () => getPricingRegion(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -140,6 +143,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const region = Route.useLoaderData();
 
   const [showPopin, setShowPopin] = useState(false);
   useEffect(() => {
@@ -163,25 +167,27 @@ function RootComponent() {
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
-        <div className={`min-h-screen flex flex-col`}>
-          <Header />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <Footer />
+        <PricingProvider currency={region.currency}>
+          <div className={`min-h-screen flex flex-col`}>
+            <Header />
+            <main className="flex-1">
+              <Outlet />
+            </main>
+            <Footer />
 
-          {showPopin && (
-            <SignupFlow
-              isOpen={true}
-              onClose={dismissPopin}
-              onSuccess={dismissPopin}
-              onSwitchToLogin={dismissPopin}
-            />
-          )}
+            {showPopin && (
+              <SignupFlow
+                isOpen={true}
+                onClose={dismissPopin}
+                onSuccess={dismissPopin}
+                onSwitchToLogin={dismissPopin}
+              />
+            )}
 
-          {/* Contact Strip - Fixed to bottom */}
-          <ContactStrip />
-        </div>
+            {/* Contact Strip - Fixed to bottom */}
+            <ContactStrip />
+          </div>
+        </PricingProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );

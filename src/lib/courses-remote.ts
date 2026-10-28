@@ -1,4 +1,5 @@
 import { supabaseClient } from "@/lib/supabase";
+import type { Course } from "@/data/courses";
 
 export async function fetchCoursesFromSupabase() {
   try {
@@ -10,7 +11,8 @@ export async function fetchCoursesFromSupabase() {
     if (error) throw error;
 
     const normalized = (data || []).map((row: any) => {
-      let parsed = {};
+      let parsed: Partial<Course> & { category?: string; weeks?: number; description?: string } =
+        {};
       try {
         parsed =
           row.testimonials && typeof row.testimonials === "string"
@@ -43,6 +45,7 @@ export async function fetchCoursesFromSupabase() {
         months: parsed.months ?? row.months ?? parsed.weeks ?? row.weeks ?? null,
         level: parsed.level || row.level || "",
         priceINR: parsed.priceINR ?? row.price ?? 0,
+        priceUSD: parsed.priceUSD ?? null,
         rating: parsed.rating ?? row.rating ?? null,
         reviewCount: parsed.reviewCount ?? row.review_count ?? 0,
         program: parsed.program || row.program || "Certificate",

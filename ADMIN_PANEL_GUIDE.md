@@ -23,11 +23,54 @@ Your complete admin panel has been set up with the following features:
 
 **Fields:**
 - Title, Slug, Category
-- Price (₹), Duration (weeks)
+- Indian base course fee (INR), international final course fee (USD), Duration (weeks)
 - Instructor name
 - Short description & full description
 - Course image
 - Active/Inactive status
+
+**Regional course pricing:**
+- Enter the Indian **base** course fee in INR. Indian checkout adds 18% GST and a
+  Razorpay fee of 4% of the base fee (rounded as before).
+- Enter the **final total** international fee in USD, with at most two decimal
+  places. Visitors in every country other than India see and pay this USD amount.
+  No GST or payment fee is added to it, and no exchange-rate conversion is used.
+- Leave USD blank to show "Contact us for international pricing" and disable
+  international checkout for that course. Existing courses need USD fees entered
+  individually; Indian prices are not used as a fallback.
+- Save the course, then reload its public page to check the new price. The course
+  page, cart and payment screen read server-calculated quotes. If a saved fee
+  changes before payment, checkout requires a refresh rather than charging a
+  different amount silently.
+
+**Deployment requirements (before enabling checkout):**
+1. Apply `migrations/022_course_international_pricing.sql` to Supabase. It adds
+   cart/payment course snapshots and the transactional enrollment function used
+   by payment verification. Do not rerun older destructive payment migrations.
+2. Enable international payments and USD presentment for your Razorpay account.
+   Razorpay's checkout/order currency is USD for international visitors; your
+   bank's settlement currency is determined separately by Razorpay.
+3. Deploy behind Vercel's trusted `x-vercel-ip-country` geolocation. Unknown
+   countries block checkout with a support message instead of guessing. Other
+   hosts must implement trusted server-side geolocation first; do not forward
+   arbitrary client-supplied country headers.
+4. Keep regional HTML and pricing responses private and uncached. The application
+   sends `Cache-Control: private, no-store`; do not override it with CDN or
+   prerender caching rules.
+
+**Testing from India:**
+- Local development defaults to INR when the hosting country header is absent;
+  this is a development preview, not detection of your physical location.
+- In local development, set `PRICING_TEST_COUNTRY=IN` for India or `US` / `PH` for
+  international visitors, restart the dev server, and reload the page. This
+  server-only override is ignored in production.
+- For production, use a US/Philippines VPN or a tester abroad. Check the course,
+  cart, final total, and Razorpay checkout currency. A VPN's exit country is the
+  detected country; browser language and device region do not change pricing.
+- For example, INR 10,000 becomes INR 12,200 at payment. An admin USD fee of 199.99
+  remains USD 199.99 throughout checkout.
+- Use Razorpay test credentials for payment testing. No live migration or real
+  payment is performed by the code change itself.
 
 #### 3. **Application Management** (`/admin/applications`)
 **Features:**

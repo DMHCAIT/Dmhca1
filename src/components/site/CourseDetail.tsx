@@ -16,6 +16,10 @@ import {
 } from "lucide-react";
 import { type Course } from "@/data/courses";
 import { saveCart } from "@/routes/api/save-cart";
+import { useQuery } from "@tanstack/react-query";
+import { usePricingCurrency } from "@/contexts/PricingContext";
+import { getCourseQuote } from "@/lib/course-pricing.function";
+import { formatCourseMoney } from "@/lib/course-pricing";
 
 // Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
 const courseNameMapping: Record<string, string> = {
@@ -61,6 +65,18 @@ export function CourseDetail({
   formatINR: (n: number) => string;
   related: any[];
 }) {
+  const currency = usePricingCurrency();
+  const {
+    data: quote,
+    error: priceError,
+    isPending: pricePending,
+  } = useQuery({
+    queryKey: ["course-price", course.slug, currency],
+    queryFn: () => getCourseQuote({ data: { course: course.slug } }),
+    enabled: !!currency,
+    retry: false,
+    staleTime: 0,
+  });
   const isFellowship = ptype.trim().toLowerCase() === "fellowship";
   const isPgDiploma = /pg\s*diploma|post\s*graduate\s*diploma/i.test(
     `${ptype} ${course.program ?? ""} ${course.title ?? ""}`,
@@ -132,6 +148,7 @@ export function CourseDetail({
   }, []);
 
   const handleEnrollClick = () => {
+    if (!quote) return;
     // Check if user is logged in
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("token");
@@ -139,7 +156,7 @@ export function CourseDetail({
         // User is logged in, navigate to apply
         navigate({
           to: "/apply",
-          search: { program: course.program, course: getIBMCourseName(course.title) },
+          search: { program: course.program, course: course.title },
         });
       } else {
         // User not logged in, show OTP modal
@@ -823,9 +840,17 @@ export function CourseDetail({
                         className="text-3xl sm:text-4xl font-black"
                         style={{ letterSpacing: "0.02em" }}
                       >
-                        {formatINR(course.priceINR).replace(".00", "")}
+                        {quote
+                          ? formatCourseMoney(quote.subtotal, quote.currency)
+                          : !currency
+                            ? "Pricing location unavailable"
+                            : pricePending
+                              ? "Loading price..."
+                              : priceError?.message || "Contact us for pricing"}
                       </div>
-                      <div className="text-sm sm:text-base font-bold">+GST</div>
+                      {quote?.currency === "INR" && (
+                        <div className="text-sm sm:text-base font-bold">+GST</div>
+                      )}
                     </div>
                   </div>
 
@@ -837,13 +862,19 @@ export function CourseDetail({
                         className="text-slate-900 dark:text-slate-100 font-bold"
                         style={{ letterSpacing: "0.02em" }}
                       >
-                        ₹ {Math.floor(totalPrice).toLocaleString("en-IN")}
+                        {quote
+                          ? formatCourseMoney(
+                              quote.currency === "INR" ? quote.subtotal + quote.gst : quote.total,
+                              quote.currency,
+                            )
+                          : "Unavailable"}
                       </span>
                     </div>
 
                     {/* CTAs */}
                     <div className="space-y-3">
                       <button
+                        disabled={!quote}
                         onClick={() => {
                           try {
                             if (typeof window === "undefined") return;
@@ -892,7 +923,7 @@ export function CourseDetail({
                             console.error("Add to study failed", e);
                           }
                         }}
-                        className="w-full inline-flex justify-center items-center px-5 py-3 bg-[#800020] hover:bg-[#68001e] text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide"
+                        className="w-full inline-flex justify-center items-center px-5 py-3 bg-[#800020] hover:bg-[#68001e] text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         Add to study
                       </button>

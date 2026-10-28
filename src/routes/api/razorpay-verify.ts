@@ -3,6 +3,7 @@ import { z } from "zod";
 import crypto from "crypto";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
+import { formatCourseMoney } from "@/lib/course-pricing";
 
 const supabase = createClient(
   process.env.VITE_SUPABASE_URL || "",
@@ -244,7 +245,7 @@ function generateEnrollmentEmailTemplate(studentName: string, courseName: string
                 <h3>💳 Payment Details</h3>
                 <div class="payment-row">
                   <span class="payment-label">Total Amount Paid:</span>
-                  <span class="payment-value">₹${amount}</span>
+                  <span class="payment-value">${escapeHtml(amount)}</span>
                 </div>
                 <div class="payment-row">
                   <span class="payment-label">Payment Method:</span>
@@ -385,7 +386,9 @@ export const verifyRazorpayPayment = createServerFn({ method: "POST" })
       // Fetch payment record to get enrollment details
       const { data: payment, error: fetchError } = await supabase
         .from("payments")
-        .select("id, enrollment_id, student_name, student_email, course_name")
+        .select(
+          "id, enrollment_id, student_name, student_email, course_name, amount, currency, course_items",
+        )
         .eq("razorpay_order_id", razorpay_order_id)
         .single();
 
@@ -400,53 +403,12 @@ export const verifyRazorpayPayment = createServerFn({ method: "POST" })
 
       console.log("[Verify Payment] Payment fetched:", payment);
 
-      // Mark enrollment as active or create new one
-      if (payment.enrollment_id) {
-        // Enrollment already exists, activate it
-        const { error: activateError } = await supabase
-          .from("enrollments")
-          .update({ status: "active", updated_at: new Date().toISOString() })
-          .eq("id", payment.enrollment_id);
-
-        if (activateError) {
-          console.error("[Verify Payment] Failed to activate enrollment:", activateError);
-          throw new Error(`Failed to activate enrollment: ${activateError.message}`);
-        }
-
-        console.log("[Verify Payment] Enrollment activated:", payment.enrollment_id);
-      } else {
-        // No enrollment yet — create one using stored student info
-        const { data: newEnroll, error: enrollErr } = await supabase
-          .from("enrollments")
-          .insert({
-            user_id: null,
-            course_id: null,
-            course_name: payment.course_name || courseName,
-            student_name: payment.student_name || studentName || "Student",
-            student_email: payment.student_email || studentEmail,
-            payment_method: "razorpay",
-            status: "active",
-          })
-          .select()
-          .single();
-
-        if (enrollErr) {
-          console.error("[Verify Payment] Failed to create enrollment:", enrollErr);
-          throw new Error(`Failed to create enrollment: ${enrollErr.message}`);
-        }
-
-        // Associate payment with new enrollment
-        const { error: linkError } = await supabase
-          .from("payments")
-          .update({ enrollment_id: newEnroll.id })
-          .eq("id", payment.id);
-
-        if (linkError) {
-          console.error("[Verify Payment] Failed to link enrollment:", linkError);
-          throw new Error(`Failed to link enrollment: ${linkError.message}`);
-        }
-
-        console.log("[Verify Payment] Enrollment created and activated:", newEnroll.id);
+      const { error: activateError } = await supabase.rpc("activate_course_payment", {
+        p_payment_id: payment.id,
+      });
+      if (activateError) {
+        console.error("[Verify Payment] Failed to activate enrollments:", activateError);
+        throw new Error(`Failed to activate enrollments: ${activateError.message}`);
       }
 
       // Send email
@@ -458,7 +420,7 @@ export const verifyRazorpayPayment = createServerFn({ method: "POST" })
           const emailContent = generateEnrollmentEmailTemplate(
             payment.student_name || studentName || "Student",
             payment.course_name || courseName,
-            String(amount || ""),
+            formatCourseMoney(Number(payment.amount), payment.currency === "USD" ? "USD" : "INR"),
           );
 
           try {
