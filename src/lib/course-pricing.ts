@@ -24,7 +24,7 @@ export function formatCourseMoney(amount: number, currency: CourseCurrency) {
   return new Intl.NumberFormat(currency === "INR" ? "en-IN" : "en-US", {
     style: "currency",
     currency,
-    currencyDisplay: currency === "USD" ? "code" : "symbol",
+    currencyDisplay: "symbol",
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(amount);

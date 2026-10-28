@@ -163,7 +163,12 @@ function CartPage() {
               >
                 <div className="w-28 h-20 rounded overflow-hidden flex-shrink-0 bg-white border">
                   <img
-                    src={getCourse(it.slug)?.image || it.image || "/logo.webp"}
+                    src={
+                      quote?.lines.find((line) => line.slug === it.slug)?.image ||
+                      it.image ||
+                      getCourse(it.slug)?.image ||
+                      "/logo.webp"
+                    }
                     alt={it.title}
                     className="w-full h-full object-cover"
                   />
@@ -226,18 +231,15 @@ function CartPage() {
                 GST (18%) <span className="float-right">{money(gst)}</span>
               </div>
             )}
-            <div className="border-t border-slate-200 pt-4 mt-4">
-              <div className="text-base text-slate-800 font-bold">
-                Total{" "}
-                <span className="float-right">{quote ? money(cartTotal) : "Unavailable"}</span>
+            {currency !== "USD" && (
+              <div className="border-t border-slate-200 pt-4 mt-4">
+                <div className="text-base text-slate-800 font-bold">
+                  Total{" "}
+                  <span className="float-right">{quote ? money(cartTotal) : "Unavailable"}</span>
+                </div>
               </div>
-            </div>
-
-            {currency === "USD" && quote && (
-              <p className="mt-3 text-sm text-slate-600">
-                Final USD fee. No additional GST or payment fee.
-              </p>
             )}
+
             {(!currency || pricingError) && (
               <p role="alert" className="mt-3 text-red-700">
                 {pricingError?.message ||

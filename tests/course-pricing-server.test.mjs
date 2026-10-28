@@ -5,8 +5,19 @@ let country = "IN";
 let databaseError = false;
 const headers = new Map();
 const records = [
-  { slug: "course-a", title: "Course A", price: 10000, testimonials: '{"priceUSD":199.99}' },
-  { slug: "course-b", title: "Course B", price: 5000, testimonials: { priceUSD: 100 } },
+  {
+    slug: "course-a",
+    title: "Course A",
+    price: 10000,
+    testimonials: '{"priceUSD":199.99}',
+    image_url: "/a.webp",
+  },
+  {
+    slug: "course-b",
+    title: "Course B",
+    price: 5000,
+    testimonials: { priceUSD: 100, image: "/b.webp" },
+  },
   { slug: "course-without-usd", title: "No USD", price: 20000, testimonials: "{}" },
 ];
 const originalOverride = process.env.PRICING_TEST_COUNTRY;
@@ -130,6 +141,10 @@ test("US and Philippines checkout use saved final USD totals for every cart cour
     assert.deepEqual(
       quote.lines.map((line) => line.slug),
       ["course-a", "course-b"],
+    );
+    assert.deepEqual(
+      quote.lines.map((line) => line.image),
+      ["/a.webp", "/b.webp"],
     );
   }
 });

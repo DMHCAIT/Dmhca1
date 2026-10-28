@@ -51,6 +51,7 @@ test("missing or invalid USD price blocks checkout without INR fallback", () => 
 
 test("invalid INR price blocks checkout and currencies are explicitly formatted", () => {
   assert.throws(() => calculateCoursePrice({ priceINR: 0 }, "INR"), /Contact us/);
-  assert.match(formatCourseMoney(199.99, "USD"), /USD.*199\.99/);
+  assert.equal(formatCourseMoney(199.99, "USD"), "$199.99");
+  assert.equal(formatCourseMoney(2000, "USD"), "$2,000");
   assert.match(formatCourseMoney(100000, "INR"), /₹1,00,000/);
 });

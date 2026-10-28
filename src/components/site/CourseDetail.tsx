@@ -174,6 +174,7 @@ export function CourseDetail({
       const item = {
         slug: course.slug,
         title: course.title,
+        image: course.image || null,
         priceINR: course.priceINR || course.price || 0,
         qty: 1,
       };
@@ -196,6 +197,7 @@ export function CourseDetail({
       const item = {
         slug: course.slug,
         title: course.title,
+        image: course.image || null,
         priceINR: course.priceINR || course.price || 0,
         qty: 1,
       };
@@ -856,20 +858,19 @@ export function CourseDetail({
 
                   {/* Content */}
                   <div className="p-5 sm:p-6 space-y-4">
-                    <div className="text-sm text-slate-600 dark:text-slate-300 font-semibold">
-                      Total:{" "}
-                      <span
-                        className="text-slate-900 dark:text-slate-100 font-bold"
-                        style={{ letterSpacing: "0.02em" }}
-                      >
-                        {quote
-                          ? formatCourseMoney(
-                              quote.currency === "INR" ? quote.subtotal + quote.gst : quote.total,
-                              quote.currency,
-                            )
-                          : "Unavailable"}
-                      </span>
-                    </div>
+                    {quote?.currency !== "USD" && (
+                      <div className="text-sm text-slate-600 dark:text-slate-300 font-semibold">
+                        Total:{" "}
+                        <span
+                          className="text-slate-900 dark:text-slate-100 font-bold"
+                          style={{ letterSpacing: "0.02em" }}
+                        >
+                          {quote
+                            ? formatCourseMoney(quote.subtotal + quote.gst, quote.currency)
+                            : "Unavailable"}
+                        </span>
+                      </div>
+                    )}
 
                     {/* CTAs */}
                     <div className="space-y-3">
@@ -894,6 +895,7 @@ export function CourseDetail({
                             const item = {
                               slug: course.slug,
                               title: course.title,
+                              image: course.image || null,
                               priceINR: course.priceINR || course.price || 0,
                               qty: 1,
                             };

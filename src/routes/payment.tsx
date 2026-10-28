@@ -244,13 +244,10 @@ function PaymentPage() {
                           </div>
                         </>
                       )}
-                      <div className="col-span-2 border-t mt-2 pt-2 flex justify-between font-bold">
-                        Total <div>{quote ? money(total) : "Unavailable"}</div>
-                      </div>
-                      {currency === "USD" && quote && (
-                        <p className="text-sm text-slate-600">
-                          Final USD fee. No additional GST or payment fee.
-                        </p>
+                      {currency !== "USD" && (
+                        <div className="col-span-2 border-t mt-2 pt-2 flex justify-between font-bold">
+                          Total <div>{quote ? money(total) : "Unavailable"}</div>
+                        </div>
                       )}
                       {(error || priceError || !currency) && (
                         <p role="alert" className="text-red-700">

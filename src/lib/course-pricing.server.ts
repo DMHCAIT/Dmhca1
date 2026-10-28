@@ -30,7 +30,7 @@ export async function loadCourseQuote(courseIdentifier: string) {
   // Match exact saved identifiers; never use a browser-supplied price.
   const { data: bySlug, error: slugError } = await db
     .from("courses")
-    .select("slug, title, price, testimonials")
+    .select("slug, title, price, testimonials, image_url")
     .eq("slug", courseIdentifier)
     .maybeSingle();
   if (slugError) throw new Error("Unable to load course pricing");
@@ -38,7 +38,7 @@ export async function loadCourseQuote(courseIdentifier: string) {
   if (!record) {
     const { data, error } = await db
       .from("courses")
-      .select("slug, title, price, testimonials")
+      .select("slug, title, price, testimonials, image_url")
       .eq("title", courseIdentifier)
       .maybeSingle();
     if (error) throw new Error("Unable to load course pricing");
@@ -51,7 +51,8 @@ export async function loadCourseQuote(courseIdentifier: string) {
     { priceINR: Number(record.price), priceUSD: details?.priceUSD },
     currency,
   );
-  return { ...price, slug: record.slug, courseName: record.title };
+  const image: string | null = record.image_url || details?.image || null;
+  return { ...price, slug: record.slug, courseName: record.title, image };
 }
 
 export async function loadCheckoutQuote(items: { course: string; qty: number }[]) {
