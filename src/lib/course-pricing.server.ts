@@ -1,6 +1,61 @@
 import { getRequestHeader, setResponseHeader } from "@tanstack/react-start/server";
 import { createClient } from "@supabase/supabase-js";
 import { calculateCoursePrice, currencyForCountry } from "./course-pricing.ts";
+import type { Course } from "../data/courses";
+import type { CourseCurrency } from "./course-pricing.ts";
+
+type PricingRecord = {
+  slug: string;
+  title: string;
+  price: number | string | null;
+  image_url?: string | null;
+};
+
+function quoteFromRecord(
+  record: PricingRecord,
+  details: Partial<Course> | null,
+  currency: CourseCurrency,
+) {
+  const price = calculateCoursePrice(
+    { priceINR: Number(record.price), priceUSD: details?.priceUSD },
+    currency,
+  );
+  const image = record.image_url || details?.image || null;
+  return { ...price, slug: record.slug, courseName: record.title, image };
+}
+
+export async function loadCoursePage(slug: string) {
+  const { currency } = getVisitorPricing();
+  const db = createClient(
+    process.env.VITE_SUPABASE_URL || "",
+    process.env.SUPABASE_SERVICE_ROLE_KEY || "",
+  );
+  const { data: record, error } = await db
+    .from("courses")
+    .select("slug, title, price, testimonials, image_url")
+    .ilike("slug", slug)
+    .maybeSingle();
+  if (error) throw new Error("Unable to load course pricing");
+  if (!record) throw new Error("Course not found. Please choose a course from the catalogue.");
+  const details: Partial<Course> | null =
+    typeof record.testimonials === "string" ? JSON.parse(record.testimonials) : record.testimonials;
+  const course = details?.title ? { ...details, slug: record.slug } : null;
+  if (!currency) {
+    return {
+      course,
+      quote: null,
+      pricingError: "Unable to determine pricing country. Please contact support.",
+    };
+  }
+  // Invalid/missing fees must not prevent the course content from rendering.
+  try {
+    return { course, quote: quoteFromRecord(record, details, currency), pricingError: null };
+  } catch (error) {
+    if (!(error instanceof Error)) throw error;
+    console.error("Unable to calculate course page pricing:", error);
+    return { course, quote: null, pricingError: error.message };
+  }
+}
 
 export function getVisitorPricing() {
   setResponseHeader("Cache-Control", "private, no-store");
@@ -47,12 +102,7 @@ export async function loadCourseQuote(courseIdentifier: string) {
   if (!record) throw new Error("Course not found. Please choose a course from the catalogue.");
   const details =
     typeof record.testimonials === "string" ? JSON.parse(record.testimonials) : record.testimonials;
-  const price = calculateCoursePrice(
-    { priceINR: Number(record.price), priceUSD: details?.priceUSD },
-    currency,
-  );
-  const image: string | null = record.image_url || details?.image || null;
-  return { ...price, slug: record.slug, courseName: record.title, image };
+  return quoteFromRecord(record, details, currency);
 }
 
 export async function loadCheckoutQuote(items: { course: string; qty: number }[]) {

@@ -3,13 +3,14 @@ import assert from "node:assert/strict";
 
 let country = "IN";
 let databaseError = false;
+let databaseReads = 0;
 const headers = new Map();
 const records = [
   {
     slug: "course-a",
     title: "Course A",
     price: 10000,
-    testimonials: '{"priceUSD":199.99}',
+    testimonials: '{"title":"Course A","overview":"Course overview","priceUSD":199.99}',
     image_url: "/a.webp",
   },
   {
@@ -46,6 +47,18 @@ mock.module("@supabase/supabase-js", {
         assert.equal(table, "courses");
         return {
           select: () => ({
+            ilike: (field, identifier) => ({
+              maybeSingle: async () => {
+                databaseReads++;
+                return {
+                  data:
+                    records.find(
+                      (record) => record[field]?.toLowerCase() === identifier.toLowerCase(),
+                    ) || null,
+                  error: databaseError ? { message: "database unavailable" } : null,
+                };
+              },
+            }),
             eq: (field, identifier) => ({
               maybeSingle: async () => ({
                 data: records.find((record) => record[field] === identifier) || null,
@@ -59,7 +72,7 @@ mock.module("@supabase/supabase-js", {
   },
 });
 
-const { getVisitorPricing, loadCourseQuote, loadCheckoutQuote } =
+const { getVisitorPricing, loadCourseQuote, loadCheckoutQuote, loadCoursePage } =
   await import("../src/lib/course-pricing.server.ts");
 
 beforeEach(() => {
@@ -68,7 +81,75 @@ beforeEach(() => {
   delete process.env.PRICING_TEST_COUNTRY;
   country = "IN";
   databaseError = false;
+  databaseReads = 0;
   headers.clear();
+});
+
+test("course content and INR/USD prices are ready together after one database read", async () => {
+  for (const [location, currency, subtotal] of [
+    ["IN", "INR", 10000],
+    ["US", "USD", 199.99],
+    ["PH", "USD", 199.99],
+  ]) {
+    country = location;
+    databaseReads = 0;
+    const page = await loadCoursePage("COURSE-A");
+    assert.equal(databaseReads, 1);
+    assert.equal(page.course.title, "Course A");
+    assert.equal(page.course.slug, "course-a");
+    assert.equal(page.course.overview, "Course overview");
+    assert.equal(page.quote.currency, currency);
+    assert.equal(page.quote.subtotal, subtotal);
+    assert.equal(page.pricingError, null);
+    assert.equal(headers.get("Cache-Control"), "private, no-store");
+  }
+});
+
+test("missing USD fee renders course content without a loading or INR fallback", async () => {
+  country = "US";
+  records.push({
+    slug: "page-no-usd",
+    title: "No international price",
+    price: 5000,
+    testimonials: { title: "No international price" },
+  });
+  try {
+    const page = await loadCoursePage("page-no-usd");
+    assert.equal(page.course.title, "No international price");
+    assert.equal(page.quote, null);
+    assert.match(page.pricingError, /Contact us for international pricing/);
+    assert.equal(databaseReads, 1);
+  } finally {
+    records.pop();
+  }
+});
+
+test("unknown production country returns course content with explicit pricing error", async () => {
+  process.env.NODE_ENV = "production";
+  country = undefined;
+  const page = await loadCoursePage("course-a");
+  assert.equal(page.course.title, "Course A");
+  assert.equal(page.quote, null);
+  assert.match(page.pricingError, /Unable to determine pricing country/);
+});
+
+test("course page uses current saved prices on each load and never caches another region", async () => {
+  const originalPrice = records[0].price;
+  try {
+    assert.equal((await loadCoursePage("course-a")).quote.subtotal, originalPrice);
+    records[0].price = 12000;
+    assert.equal((await loadCoursePage("course-a")).quote.subtotal, 12000);
+    country = "US";
+    assert.equal((await loadCoursePage("course-a")).quote.subtotal, 199.99);
+  } finally {
+    records[0].price = originalPrice;
+  }
+});
+
+test("course page database errors and unknown slugs surface explicitly", async () => {
+  await assert.rejects(loadCoursePage("unlisted"), /Course not found/);
+  databaseError = true;
+  await assert.rejects(loadCoursePage("course-a"), /Unable to load course pricing/);
 });
 
 test("localhost development without hosting geolocation shows Indian course fees", async () => {

@@ -16,9 +16,8 @@ import {
 } from "lucide-react";
 import { type Course } from "@/data/courses";
 import { saveCart } from "@/routes/api/save-cart";
-import { useQuery } from "@tanstack/react-query";
 import { usePricingCurrency } from "@/contexts/PricingContext";
-import { getCourseQuote } from "@/lib/course-pricing.function";
+import type { loadCourseQuote } from "@/lib/course-pricing.server";
 import { formatCourseMoney } from "@/lib/course-pricing";
 
 // Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
@@ -55,6 +54,8 @@ export function CourseDetail({
   totalPrice,
   formatINR,
   related,
+  quote,
+  pricingError,
 }: {
   course: any;
   primaryCat: any;
@@ -64,19 +65,10 @@ export function CourseDetail({
   totalPrice: number;
   formatINR: (n: number) => string;
   related: any[];
+  quote: Awaited<ReturnType<typeof loadCourseQuote>> | null;
+  pricingError: string | null;
 }) {
   const currency = usePricingCurrency();
-  const {
-    data: quote,
-    error: priceError,
-    isPending: pricePending,
-  } = useQuery({
-    queryKey: ["course-price", course.slug, currency],
-    queryFn: () => getCourseQuote({ data: { course: course.slug } }),
-    enabled: !!currency,
-    retry: false,
-    staleTime: 0,
-  });
   const isFellowship = ptype.trim().toLowerCase() === "fellowship";
   const isPgDiploma = /pg\s*diploma|post\s*graduate\s*diploma/i.test(
     `${ptype} ${course.program ?? ""} ${course.title ?? ""}`,
@@ -833,25 +825,29 @@ export function CourseDetail({
                     </div>
                   )}
                   {/* Header */}
-                  <div className="bg-gradient-to-r from-[#800020] to-[#402b43] px-5 sm:px-6 py-4 text-white">
+                  <div className="@container bg-gradient-to-r from-[#800020] to-[#402b43] px-5 sm:px-6 py-4 text-white">
                     <div className="text-xs font-bold uppercase tracking-wider opacity-90 mb-1">
                       Course Fee
                     </div>
-                    <div className="flex items-baseline gap-2 flex-wrap">
+                    <div className="flex flex-nowrap items-baseline gap-2">
                       <div
-                        className="text-3xl sm:text-4xl font-black"
+                        className={
+                          quote
+                            ? "whitespace-nowrap text-[min(2.25rem,12cqi)] font-black"
+                            : "text-3xl sm:text-4xl font-black"
+                        }
                         style={{ letterSpacing: "0.02em" }}
                       >
                         {quote
                           ? formatCourseMoney(quote.subtotal, quote.currency)
                           : !currency
                             ? "Pricing location unavailable"
-                            : pricePending
-                              ? "Loading price..."
-                              : priceError?.message || "Contact us for pricing"}
+                            : pricingError || "Contact us for pricing"}
                       </div>
                       {quote?.currency === "INR" && (
-                        <div className="text-sm sm:text-base font-bold">+GST</div>
+                        <div className="shrink-0 whitespace-nowrap text-sm sm:text-base font-bold">
+                          +GST
+                        </div>
                       )}
                     </div>
                   </div>

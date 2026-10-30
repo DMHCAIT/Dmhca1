@@ -1,12 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { categories } from "@/data/courses";
 import { Mail, Phone, MapPin, Facebook, Youtube, Instagram, Linkedin } from "lucide-react";
 
 import { BrandLogo } from "@/components/site/BrandLogo";
 
 export function Footer() {
   return (
-    <footer className="site-footer mt-8 md:mt-12 text-primary-foreground">
+    <footer className="site-footer mt-8 pb-16 md:mt-12 md:pb-20 text-primary-foreground">
       <div className="container-x py-6 md:py-10 grid gap-x-6 gap-y-5 md:gap-8 grid-cols-2 md:grid-cols-4 lg:grid-cols-12">
         <div className="col-span-2 md:col-span-2 lg:col-span-4">
           <Link to="/" className="footer-brand inline-flex transition-opacity hover:opacity-75">
@@ -69,62 +68,35 @@ export function Footer() {
         </div>
 
         <div className="col-span-1 md:col-span-2 lg:col-span-3">
-          <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">
-            Specialties
-          </div>
+          <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Legal</div>
           <ul className="space-y-0.5 md:space-y-1 text-sm font-normal">
-            {categories.slice(0, 6).map((c) => (
-              <li key={c.slug}>
-                <Link
-                  to="/top-medical-courses"
-                  search={{ cat: c.slug }}
-                  className="hover:text-gold transition-colors"
-                >
-                  {c.name}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link to="/term-conditions" className="hover:text-gold transition-colors">
+                Terms &amp; Conditions
+              </Link>
+            </li>
+            <li>
+              <Link to="/disclaimer" className="hover:text-gold transition-colors">
+                Disclaimer
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy-policy" className="hover:text-gold transition-colors">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link to="/refund-returns-policy" className="hover:text-gold transition-colors">
+                Refund Policy
+              </Link>
+            </li>
           </ul>
         </div>
 
-        <div className="col-span-2 md:col-span-4 lg:col-span-2 grid grid-cols-2 gap-x-6 md:block">
+        <div className="col-span-2 md:col-span-4 lg:col-span-2">
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">
-              Top courses
-            </div>
-            <ul className="space-y-0.5 md:space-y-1 text-sm font-normal">
-              <li>
-                <Link
-                  to="/courses/$slug"
-                  params={{ slug: "certificate-in-hypertension" }}
-                  className="hover:text-gold transition-colors"
-                >
-                  Hypertension
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/courses/$slug"
-                  params={{ slug: "fellowship-in-diabetology" }}
-                  className="hover:text-gold transition-colors"
-                >
-                  Diabetology
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/courses/$slug"
-                  params={{ slug: "fellowship-in-critical-care" }}
-                  className="hover:text-gold transition-colors"
-                >
-                  Critical Care
-                </Link>
-              </li>
-            </ul>
-          </div>
-          <div className="md:mt-4 md:pt-4">
             <div className="text-xs uppercase tracking-[0.2em] text-gold mb-2 md:mb-3">Follow</div>
-            <div className="flex flex-wrap items-center gap-1.5 md:gap-3 mt-2 md:mt-3">
+            <div className="flex flex-nowrap items-center gap-1.5 md:gap-3 mt-2 md:mt-3 [&>a]:min-w-0">
               <a
                 href="https://www.facebook.com/dmhca.in"
                 target="_blank"
@@ -162,28 +134,6 @@ export function Footer() {
                 <Linkedin className="h-4 w-4 text-white" aria-hidden="true" />
               </a>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="footer-legal">
-        <div className="container-x py-2 md:py-3 flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 text-xs sm:text-sm font-normal text-primary-foreground/60 text-center md:text-left">
-          <div>
-            © {new Date().getFullYear()} Delhi Medical Health Care Academy. All rights reserved.
-          </div>
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1.5 md:gap-x-5 md:gap-y-2">
-            <Link to="/term-conditions" className="hover:text-gold">
-              Terms &amp; Conditions
-            </Link>
-            <Link to="/disclaimer" className="hover:text-gold">
-              Disclaimer
-            </Link>
-            <Link to="/privacy-policy" className="hover:text-gold">
-              Privacy Policy
-            </Link>
-            <Link to="/refund-returns-policy" className="hover:text-gold">
-              Refund Policy
-            </Link>
           </div>
         </div>
       </div>

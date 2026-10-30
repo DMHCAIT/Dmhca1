@@ -24,8 +24,8 @@ export function ContactStrip() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white dark:bg-gradient-to-r dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 border-t border-gray-200 dark:border-slate-700">
-      <div className="container-x py-2">
+    <div className="fixed bottom-0 left-0 right-0 z-40 flex h-16 items-center md:h-20 bg-white dark:bg-gradient-to-r dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 border-t border-gray-200 dark:border-slate-700">
+      <div className="container-x w-full py-2">
         <div className="flex flex-row items-center justify-center gap-4 md:gap-16">
           {/* Contact Us Section */}
           <Link

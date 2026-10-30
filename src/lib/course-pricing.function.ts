@@ -23,6 +23,13 @@ export const getCourseQuote = createServerFn({ method: "POST" })
     return loadCourseQuote(data.course);
   });
 
+export const getCoursePage = createServerFn({ method: "GET" })
+  .validator(z.object({ slug: z.string().trim().min(1).max(500) }))
+  .handler(async ({ data }) => {
+    const { loadCoursePage } = await import("./course-pricing.server");
+    return loadCoursePage(data.slug);
+  });
+
 export const getCheckoutQuote = createServerFn({ method: "POST" })
   .validator(z.object({ items: CheckoutItemsSchema }))
   .handler(async ({ data }) => {

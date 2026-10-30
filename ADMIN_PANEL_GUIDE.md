@@ -42,6 +42,9 @@ Your complete admin panel has been set up with the following features:
   page, cart and payment screen read server-calculated quotes. If a saved fee
   changes before payment, checkout requires a refresh rather than charging a
   different amount silently.
+- Course pages load content and regional pricing together in one database lookup.
+  Fees are included in the initial server render, without a second course refresh
+  or a separate browser pricing request. Checkout still verifies current saved fees.
 
 **Deployment requirements (before enabling checkout):**
 1. Apply `migrations/022_course_international_pricing.sql` to Supabase. It adds
