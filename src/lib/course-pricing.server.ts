@@ -32,14 +32,20 @@ export async function loadCoursePage(slug: string) {
   );
   const { data: record, error } = await db
     .from("courses")
-    .select("slug, title, price, testimonials, image_url")
+    .select("slug, title, price, testimonials, image_url, sample_certificate_url")
     .ilike("slug", slug)
     .maybeSingle();
   if (error) throw new Error("Unable to load course pricing");
   if (!record) throw new Error("Course not found. Please choose a course from the catalogue.");
   const details: Partial<Course> | null =
     typeof record.testimonials === "string" ? JSON.parse(record.testimonials) : record.testimonials;
-  const course = details?.title ? { ...details, slug: record.slug } : null;
+  const course = details?.title
+    ? {
+        ...details,
+        slug: record.slug,
+        sampleCertificateUrl: record.sample_certificate_url ?? null,
+      }
+    : null;
   if (!currency) {
     return {
       course,

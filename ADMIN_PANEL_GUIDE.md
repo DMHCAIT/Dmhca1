@@ -27,7 +27,29 @@ Your complete admin panel has been set up with the following features:
 - Instructor name
 - Short description & full description
 - Course image
+- Optional sample certificate image
 - Active/Inactive status
+
+**Sample certificates:**
+- Apply [migration 023](migrations/023_course_sample_certificates.sql) before deploying.
+  It adds the nullable `courses.sample_certificate_url` column without modifying
+  existing course content.
+- In **Courses → Edit Course** (or **Add New Course**), use **Sample Certificate**
+  to upload an image, then click **Update Course** (or **Add Course**).
+- The upload accepts `image/*` formats, up to 100 MB, using the existing public
+  `course-images` bucket under `sample-certificates/`. Keep that bucket public and
+  unrestricted by MIME type (its existing configuration); normal storage upload
+  permissions still apply. Formats not supported by the viewer's browser may
+  download instead of opening inline.
+- Saving a certificate shows a **Resources → View Sample Certificate** link
+  between the fee card and recommended courses on that course's public details
+  page. It opens the image in a fixed-height modal with a blurred background;
+  long images scroll inside the modal without a visible scrollbar. If the browser
+  cannot display the image, the modal offers a link to open or download it.
+- Upload another image to replace it, or use **Remove certificate** and save to
+  hide the Resources card. Courses without a certificate show no empty card.
+- Reload the public course page after saving to see changes. Canceling the editor
+  does not publish an uploaded image to the course.
 
 **Regional course pricing:**
 - Enter the Indian **base** course fee in INR. Indian checkout adds 18% GST and a

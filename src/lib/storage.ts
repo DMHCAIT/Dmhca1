@@ -1,7 +1,7 @@
 import { supabaseClient } from "@/lib/supabase";
 
 export interface UploadOptions {
-  bucket: "images" | "videos" | "media";
+  bucket: "images" | "videos" | "media" | "course-images";
   folder?: string;
   onProgress?: (progress: number) => void;
 }

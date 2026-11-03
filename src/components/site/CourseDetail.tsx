@@ -4,6 +4,14 @@ import { CourseCard } from "./CourseCard";
 import { OTPLoginModal } from "../OTPLoginModal";
 import { SignupFlow } from "../SignupFlow";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   ArrowLeft,
   Star,
   BookOpen,
@@ -78,6 +86,7 @@ export function CourseDetail({
     src: "/ACADEMIC PARTNERS/ibmp-logo.webp",
     name: "International Board of Medical Practitioners",
   };
+  const actdPartner = { src: "/ACTD-logo.png", name: "ACTD" };
   const academicPartners = isPgDiploma
     ? [
         { src: "/ACADEMIC PARTNERS/btu_hero_logo.webp", name: "Bir Tikendrajit University" },
@@ -87,13 +96,16 @@ export function CourseDetail({
           name: "Shri Rukmani Dwarkadhish University",
         },
       ]
-    : [aaaPartner, ibmpPartner];
+    : isFellowship
+      ? [aaaPartner, actdPartner]
+      : [aaaPartner, ibmpPartner];
   const trainingLabel = isPgDiploma ? "12-Month PG Diploma" : "12-Month Fellowship";
   const clinicalTraining = "11 Months Online + 1 Month Clinical Training";
   const navigate = useNavigate();
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [showOtpModal, setShowOtpModal] = useState(false);
   const [showSignupFlow, setShowSignupFlow] = useState(false);
+  const [sampleCertificateError, setSampleCertificateError] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -918,12 +930,12 @@ export function CourseDetail({
 
                             window.location.href = "/cart";
                           } catch (e) {
-                            console.error("Add to study failed", e);
+                            console.error("Add to cart failed", e);
                           }
                         }}
                         className="w-full inline-flex justify-center items-center px-5 py-3 bg-[#800020] hover:bg-[#68001e] text-white text-base font-bold rounded-xl transition shadow-lg hover:shadow-xl tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Add to study
+                        Add to Cart
                       </button>
                       <Link
                         to="/contact-us"
@@ -935,9 +947,74 @@ export function CourseDetail({
                   </div>
                 </div>
 
+                {course.sampleCertificateUrl && (
+                  <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 sm:p-6">
+                    <h4 className="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">
+                      Resources
+                    </h4>
+                    <Dialog
+                      onOpenChange={(open) => {
+                        if (open) setSampleCertificateError(false);
+                      }}
+                    >
+                      <DialogTrigger asChild>
+                        <button
+                          type="button"
+                          className="inline-flex items-center gap-3 rounded-lg text-left text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-[#800020] dark:hover:text-white transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blue-600"
+                        >
+                          <FileCheck className="h-4 w-4 text-blue-600" aria-hidden="true" />
+                          View Sample Certificate
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent
+                        overlayClassName="bg-black/60 backdrop-blur-sm"
+                        className="flex h-[42rem] max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-2xl flex-col gap-0 overflow-hidden rounded-2xl border-slate-200 bg-white p-0 text-slate-900 shadow-2xl sm:rounded-2xl"
+                      >
+                        <DialogHeader className="shrink-0 border-b border-slate-200 px-5 py-5 pr-12 text-left sm:px-6 sm:pr-12">
+                          <DialogTitle>View Sample Certificate</DialogTitle>
+                          <DialogDescription className="sr-only">
+                            Sample certificate for {course.title}. Scroll to view the full image.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <div
+                          role="region"
+                          aria-label="Scrollable sample certificate"
+                          tabIndex={0}
+                          className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 [&::-webkit-scrollbar]:hidden"
+                          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                        >
+                          {sampleCertificateError ? (
+                            <p role="alert" className="text-sm text-slate-700">
+                              The certificate image could not be displayed.{" "}
+                              <a
+                                href={course.sampleCertificateUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-semibold text-blue-700 underline"
+                              >
+                                Open or download the certificate
+                              </a>
+                              .
+                            </p>
+                          ) : (
+                            <img
+                              src={course.sampleCertificateUrl}
+                              alt={`Sample certificate for ${course.title}`}
+                              className="mx-auto block h-auto w-full"
+                              onError={() => setSampleCertificateError(true)}
+                            />
+                          )}
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                )}
+
                 {/* Related Courses */}
                 {related.length > 0 && (
-                  <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 sm:p-6">
+                  <div
+                    className={`${course.sampleCertificateUrl ? "mt-4 " : ""}bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm p-5 sm:p-6`}
+                  >
                     <h4 className="text-sm font-bold text-slate-900 dark:text-slate-100 uppercase tracking-wider mb-4">
                       Recommended Courses
                     </h4>

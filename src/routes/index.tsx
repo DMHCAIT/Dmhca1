@@ -764,7 +764,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="academic-logo-grid mt-8 md:mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-8 sm:gap-x-10">
+          <div className="academic-logo-grid mt-8 md:mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-6 gap-y-8 sm:gap-x-10 lg:gap-x-6 xl:gap-x-10">
             {[
               {
                 file: "AAA-logo.png",
@@ -797,6 +797,13 @@ function Home() {
                 width: 752,
                 height: 307,
               },
+              {
+                file: "ACTD-logo.png",
+                src: "/ACTD-logo.png",
+                name: "ACTD",
+                width: 500,
+                height: 500,
+              },
             ].map(
               ({
                 file,
@@ -813,7 +820,7 @@ function Home() {
               }) => (
                 <div
                   key={file}
-                  className="academic-logo-item flex h-28 items-center justify-center px-3 sm:px-6"
+                  className="academic-logo-item flex h-28 items-center justify-center px-3 sm:px-6 lg:px-3"
                 >
                   <img
                     src={src ?? `/ACADEMIC PARTNERS/${file}`}

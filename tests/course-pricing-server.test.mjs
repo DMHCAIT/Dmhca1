@@ -124,6 +124,59 @@ test("missing USD fee renders course content without a loading or INR fallback",
   }
 });
 
+test("course page exposes the saved sample certificate and reflects replacement and removal", async () => {
+  const record = {
+    slug: "with-certificate",
+    title: "Course with certificate",
+    price: 5000,
+    testimonials: {
+      title: "Course with certificate",
+      sampleCertificateUrl: "https://example.com/stale-certificate.png",
+    },
+    sample_certificate_url: "https://example.com/certificate.png",
+  };
+  records.push(record);
+  try {
+    assert.equal(
+      (await loadCoursePage(record.slug)).course.sampleCertificateUrl,
+      record.sample_certificate_url,
+    );
+    record.sample_certificate_url = "https://example.com/replacement.webp";
+    assert.equal(
+      (await loadCoursePage(record.slug)).course.sampleCertificateUrl,
+      record.sample_certificate_url,
+    );
+    record.sample_certificate_url = null;
+    assert.equal((await loadCoursePage(record.slug)).course.sampleCertificateUrl, null);
+  } finally {
+    records.pop();
+  }
+});
+
+test("courses without sample certificates expose no resource URL", async () => {
+  assert.equal((await loadCoursePage("course-a")).course.sampleCertificateUrl, null);
+});
+
+test("sample certificate remains available when course pricing cannot be determined", async () => {
+  process.env.NODE_ENV = "production";
+  country = undefined;
+  records.push({
+    slug: "certificate-without-pricing",
+    title: "Certificate without pricing",
+    price: 5000,
+    testimonials: { title: "Certificate without pricing" },
+    sample_certificate_url: "https://example.com/certificate.svg",
+  });
+  try {
+    const page = await loadCoursePage("certificate-without-pricing");
+    assert.equal(page.course.sampleCertificateUrl, "https://example.com/certificate.svg");
+    assert.equal(page.quote, null);
+    assert.match(page.pricingError, /Unable to determine pricing country/);
+  } finally {
+    records.pop();
+  }
+});
+
 test("unknown production country returns course content with explicit pricing error", async () => {
   process.env.NODE_ENV = "production";
   country = undefined;

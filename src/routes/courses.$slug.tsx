@@ -133,7 +133,10 @@ function CoursePage() {
   // Get related courses from local data
   let related: Course[] = [];
   try {
-    related = relatedCourses(slug, 3);
+    related = relatedCourses(slug, 3, {
+      categories: finalCourse.categories,
+      program: finalCourse.program,
+    });
   } catch (e) {
     related = [];
   }

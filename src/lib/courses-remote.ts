@@ -41,6 +41,7 @@ export async function fetchCoursesFromSupabase() {
         image: row.image_url || parsed.image || null,
         heroImage: row.hero_image || parsed.heroImage || null,
         heroDescription: row.hero_description || parsed.heroDescription || parsed.overview || "",
+        sampleCertificateUrl: row.sample_certificate_url ?? null,
         lessons: parsed.lessons ?? row.lessons ?? null,
         months: parsed.months ?? row.months ?? parsed.weeks ?? row.weeks ?? null,
         level: parsed.level || row.level || "",

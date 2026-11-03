@@ -1899,37 +1899,8 @@ body
 
 @media (max-width: 359px) {
   .site-header .brand-logo img {
-    width: 24px;
-    height: 24px;
-  }
-
-  .site-header .brand-logo .brand-wordmark {
-    font-size: 20px;
-  }
-}
-
-.brand-logo .brand-wordmark {
-  display: inline-block;
-  padding-right: 0.08em;
-  white-space: nowrap;
-  font-family: var(--font-sans);
-  font-weight: 900;
-  color: #1c1d4d;
-}
-
-@supports (background-clip: text) {
-  .brand-logo .brand-wordmark {
-    background: linear-gradient(100deg, #15213d 0%, #38243e 32%, #742b3c 66%, #aa3035 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
-}
-
-@media (forced-colors: active) {
-  .brand-logo .brand-wordmark {
-    background: none;
-    color: CanvasText;
+    width: 120px;
+    height: auto;
   }
 }
 

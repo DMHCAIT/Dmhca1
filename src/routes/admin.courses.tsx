@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 // avoid Next.js dynamic import in this Vite app
 import { supabaseClient, supabaseAdmin } from "@/lib/supabase";
 import { invalidateCoursesCache } from "@/hooks/useCoursesData";
+import { uploadFile } from "@/lib/storage";
 import {
   Plus,
   Edit2,
@@ -33,6 +34,7 @@ function AdminCourses() {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingCertificate, setUploadingCertificate] = useState(false);
   const [stats, setStats] = useState({ total: 0, fellowships: 0, pgDiplomas: 0, certificates: 0 });
   const [categories, setCategories] = useState<string[]>([]);
   const [currentCourseId, setCurrentCourseId] = useState<string | null>(null);
@@ -68,6 +70,7 @@ function AdminCourses() {
     reviewCount: "",
     overview: "",
     heroDescription: "",
+    sampleCertificateUrl: "",
     learn: [] as string[],
     learnInput: "",
     requirements: [] as string[],
@@ -224,6 +227,7 @@ function AdminCourses() {
         (course.review_count ? String(course.review_count) : ""),
       overview: courseData.overview || "",
       heroDescription: courseData.heroDescription || "",
+      sampleCertificateUrl: course.sample_certificate_url || "",
       learn: Array.isArray(courseData.learn) ? courseData.learn : [],
       learnInput: "",
       requirements: Array.isArray(courseData.requirements) ? courseData.requirements : [],
@@ -261,6 +265,7 @@ function AdminCourses() {
       reviewCount: "",
       overview: "",
       heroDescription: "",
+      sampleCertificateUrl: "",
       learn: [],
       learnInput: "",
       requirements: [],
@@ -355,6 +360,7 @@ function AdminCourses() {
           .from("courses")
           .update({
             testimonials: JSON.stringify(updatedCourseData),
+            sample_certificate_url: formData.sampleCertificateUrl || null,
             slug: formData.slug,
             title: formData.title,
             category: formData.category,
@@ -374,6 +380,7 @@ function AdminCourses() {
           .insert([
             {
               testimonials: JSON.stringify(courseData),
+              sample_certificate_url: formData.sampleCertificateUrl || null,
               slug: formData.slug,
               title: formData.title,
               category: formData.category,
@@ -476,6 +483,33 @@ function AdminCourses() {
       alert("Error uploading image: " + (error as any)?.message || error);
     } finally {
       setUploadingImage(false);
+    }
+  };
+
+  const handleCertificateUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.currentTarget;
+    const file = input.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploadingCertificate(true);
+      if (!file.type.startsWith("image/")) {
+        throw new Error("Please choose an image file for the sample certificate.");
+      }
+      const { url } = await uploadFile(file, {
+        bucket: "course-images",
+        folder: "sample-certificates",
+      });
+      setFormData((previous) => ({ ...previous, sampleCertificateUrl: url }));
+    } catch (error) {
+      console.error("Error uploading sample certificate:", error);
+      alert(
+        "Error uploading sample certificate: " +
+          (error instanceof Error ? error.message : String(error)),
+      );
+    } finally {
+      setUploadingCertificate(false);
+      input.value = "";
     }
   };
 
@@ -784,6 +818,7 @@ function AdminCourses() {
                   {showEditModal ? "Edit Course" : "Add New Course"}
                 </h2>
                 <button
+                  disabled={uploadingCertificate}
                   onClick={() => {
                     setShowEditModal(false);
                     setShowAddModal(false);
@@ -975,6 +1010,62 @@ function AdminCourses() {
                       />
                     </div>
                   </div>
+                </div>
+
+                {/* Sample certificate */}
+                <div className="border-b border-slate-600 pb-4">
+                  <h3 className="text-lg font-bold text-blue-300 mb-4">Sample Certificate</h3>
+                  <p className="text-sm text-gray-300 mb-4">
+                    Upload any image format (up to 100 MB), then save the course to display View
+                    Sample Certificate in its Resources card.
+                  </p>
+                  <label
+                    htmlFor="sample-certificate-upload"
+                    className="block text-sm font-semibold mb-2 text-gray-300"
+                  >
+                    {formData.sampleCertificateUrl
+                      ? "Replace certificate image"
+                      : "Upload certificate image"}
+                  </label>
+                  <input
+                    id="sample-certificate-upload"
+                    type="file"
+                    accept="image/*"
+                    disabled={uploadingCertificate}
+                    onChange={handleCertificateUpload}
+                    className="block w-full text-sm text-gray-300 disabled:opacity-50"
+                  />
+                  {uploadingCertificate && (
+                    <p role="status" className="mt-3 text-sm text-blue-300">
+                      Uploading sample certificate...
+                    </p>
+                  )}
+                  {formData.sampleCertificateUrl && (
+                    <div className="flex items-center gap-4 mt-4">
+                      <a
+                        href={formData.sampleCertificateUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-blue-300 underline"
+                      >
+                        View current sample certificate
+                      </a>
+                      <button
+                        type="button"
+                        disabled={uploadingCertificate}
+                        onClick={() =>
+                          setFormData((previous) => ({ ...previous, sampleCertificateUrl: "" }))
+                        }
+                        className="text-sm text-red-400 hover:text-red-300 disabled:opacity-50"
+                      >
+                        Remove certificate
+                      </button>
+                    </div>
+                  )}
+                  <p className="text-xs text-gray-400 mt-3">
+                    Changes apply after saving. Removing the certificate hides the Resources card.
+                    Formats your browser cannot display may download instead.
+                  </p>
                 </div>
 
                 {/* SECTION 4: Descriptions (Rich Text) */}
@@ -1752,6 +1843,7 @@ function AdminCourses() {
                 {/* Action Buttons */}
                 <div className="flex gap-4 pt-6 border-t border-slate-600">
                   <button
+                    disabled={uploadingCertificate}
                     onClick={() => {
                       setShowEditModal(false);
                       setShowAddModal(false);
@@ -1763,7 +1855,8 @@ function AdminCourses() {
                   </button>
                   <button
                     onClick={handleSaveCourse}
-                    className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition"
+                    disabled={uploadingCertificate}
+                    className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {showEditModal ? "Update Course" : "Add Course"}
                   </button>

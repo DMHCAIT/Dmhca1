@@ -46,6 +46,7 @@ export type Course = {
   // Hero Section (Course Details Page) - Different from overview
   heroImage?: string; // Custom image for course details page hero
   heroDescription?: string; // Custom description for hero section (optional)
+  sampleCertificateUrl?: string | null;
 
   // Course Metadata
   lessons: number | null;
@@ -12065,13 +12066,27 @@ export const getCourse = (slug: string) => courses.find((c) => c.slug === slug);
 export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
 export const coursesByCategory = (slug: string) =>
   courses.filter((c) => c.categories.includes(slug));
-export const relatedCourses = (slug: string, n = 3) => {
+export const relatedCourses = (
+  slug: string,
+  n = 3,
+  fallback?: { categories?: string[]; program?: string },
+) => {
   const c = getCourse(slug);
-  if (!c) return [];
-  const sameCat = courses.filter(
-    (o) => o.slug !== slug && o.categories.some((cat) => c.categories.includes(cat)),
-  );
-  return sameCat.slice(0, n);
+  const cats = c?.categories ?? fallback?.categories ?? [];
+  const program = (c?.program ?? fallback?.program ?? "").toLowerCase();
+  const others = courses.filter((o) => o.slug !== slug);
+  const picked: Course[] = [];
+  const add = (list: Course[]) => {
+    for (const o of list) {
+      if (picked.length >= n) return;
+      if (!picked.includes(o)) picked.push(o);
+    }
+  };
+  // Prefer same category, then same program type, then any course.
+  add(others.filter((o) => o.categories.some((cat) => cats.includes(cat))));
+  if (program) add(others.filter((o) => o.program?.toLowerCase() === program));
+  add(others);
+  return picked;
 };
 
 // Statistics
