@@ -406,7 +406,7 @@ function Home() {
 
       {/* Centered, text-focused hero */}
       <section
-        className="home-hero relative overflow-hidden mx-3 my-4 rounded-[1.75rem] sm:mx-6 sm:my-5 sm:rounded-[2rem]"
+        className="home-hero relative overflow-hidden mx-6 my-4 rounded-[1.75rem] sm:mx-16 sm:my-5 sm:rounded-[2rem] lg:mx-32"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -585,7 +585,7 @@ function Home() {
       </section>
 
       {/* Stats bar */}
-      <section className="home-impact mx-3 sm:mx-6 rounded-[1.75rem]">
+      <section className="home-impact mx-6 sm:mx-16 lg:mx-32 rounded-[1.75rem]">
         <div className="container-home py-7 grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-6 text-center">
           {[
             { k: "103+", v: "Specialised programs" },

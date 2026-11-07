@@ -32,7 +32,7 @@ function About() {
   return (
     <div className="home-page about-page">
       {/* Small hero for About page */}
-      <section className="home-hero about-hero home-section-panel">
+      <section className="home-hero about-hero relative overflow-hidden mx-6 my-4 rounded-[1.75rem] sm:mx-16 sm:my-5 sm:rounded-[2rem] lg:mx-32">
         <HeroArtwork />
         <div className="container-home py-12 lg:py-16 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
