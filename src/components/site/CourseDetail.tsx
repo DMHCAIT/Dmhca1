@@ -82,11 +82,8 @@ export function CourseDetail({
     `${ptype} ${course.program ?? ""} ${course.title ?? ""}`,
   );
   const aaaPartner = { src: "/AAA-logo-dark-text.png", name: "American Accreditation Association" };
-  const ibmpPartner = {
-    src: "/ACADEMIC PARTNERS/ibmp-logo.webp",
-    name: "International Board of Medical Practitioners",
-  };
   const actdPartner = { src: "/ACTD-logo.png", name: "ACTD" };
+  const certificateActdPartner = { src: "/ACADEMIC PARTNERS/ACTD-2.webp", name: "ACTD" };
   const academicPartners = isPgDiploma
     ? [
         { src: "/ACADEMIC PARTNERS/btu_hero_logo.webp", name: "Bir Tikendrajit University" },
@@ -98,7 +95,7 @@ export function CourseDetail({
       ]
     : isFellowship
       ? [aaaPartner, actdPartner]
-      : [aaaPartner, ibmpPartner];
+      : [aaaPartner, certificateActdPartner];
   const trainingLabel = isPgDiploma ? "12-Month PG Diploma" : "12-Month Fellowship";
   const clinicalTraining = "11 Months Online + 1 Month Clinical Training";
   const navigate = useNavigate();
@@ -526,7 +523,7 @@ export function CourseDetail({
                             alt={name}
                             loading="lazy"
                             style={{
-                              maxWidth: `min(100%, ${src === aaaPartner.src ? 210 : src === ibmpPartner.src || src.endsWith("btu_hero_logo.webp") ? 88 : 240}px)`,
+                              maxWidth: `min(100%, ${src === aaaPartner.src ? 210 : src.endsWith("btu_hero_logo.webp") ? 88 : 240}px)`,
                               maxHeight: 88,
                             }}
                             className="object-contain"
