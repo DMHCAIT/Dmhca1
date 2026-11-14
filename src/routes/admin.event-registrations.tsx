@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabaseClient } from "@/lib/supabase";
 import { getEventRegistrations } from "@/routes/api/admin-event-registrations";
 import { getEventPricingByCurrency } from "@/lib/event-registration-schema";
+import { getAllEvents } from "@/data/events";
 
 export const Route = createFileRoute("/admin/event-registrations")({
   head: () => ({
@@ -78,6 +79,7 @@ function AdminEventRegistrations() {
   const [filter, setFilter] = useState<RegistrationFilter>("all");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [selectedEventSlug, setSelectedEventSlug] = useState<string>("female-hormones-fertility-and-subfertility");
 
   const loadRegistrations = useCallback(async () => {
     setLoading(true);
@@ -91,18 +93,18 @@ function AdminEventRegistrations() {
       }
 
       const results = await getEventRegistrations({
-        data: { accessToken },
+        data: { accessToken, eventSlug: selectedEventSlug },
       });
       setRegistrations(results as Registration[]);
     } catch (loadError) {
-      console.error("Error loading CME registrations:", loadError);
+      console.error("Error loading event registrations:", loadError);
       setError(
         loadError instanceof Error ? loadError.message : "Couldn't load event registrations.",
       );
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [selectedEventSlug]);
 
   useEffect(() => {
     void loadRegistrations();
@@ -117,13 +119,34 @@ function AdminEventRegistrations() {
     (registration) => getEventPricingByCurrency(registration.currency).currency === "INR",
   ).length;
   const internationalPaidCount = paid.length - indianPaidCount;
+  const availableEvents = getAllEvents().filter((event) => event.registrationPending);
+  const currentEvent = availableEvents.find((e) => e.slug === selectedEventSlug);
 
   return (
     <div className="space-y-6 p-6">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-navy-deep">Event Registrations</h1>
-          <p className="mt-2 text-gray-600">Female Hormones: Fertility and Subfertility CME</p>
+          <div className="mt-4 flex items-center gap-3">
+            <label htmlFor="event-select" className="text-sm font-medium text-gray-700">
+              Filter by event:
+            </label>
+            <select
+              id="event-select"
+              value={selectedEventSlug}
+              onChange={(e) => setSelectedEventSlug(e.target.value)}
+              className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-navy-deep hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-[#800020]"
+            >
+              {availableEvents.map((event) => (
+                <option key={event.slug} value={event.slug}>
+                  {event.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          {currentEvent && (
+            <p className="mt-2 text-gray-600">{currentEvent.title}</p>
+          )}
           <p className="mt-1 text-sm text-gray-500">
             Payment statuses are updated automatically from Razorpay and cannot be edited manually.
           </p>

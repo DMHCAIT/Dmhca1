@@ -30,6 +30,43 @@ export interface Event {
 
 export const events: Event[] = [
   {
+    id: "copd-nutrition-webinar",
+    slug: "nutritional-management-of-copd",
+    title: "Nutritional Management of COPD",
+    date: "18 November 2026",
+    startsAt: "2026-11-18T17:00:00+05:30",
+    time: "5:00 to 6:00 PM IST",
+    location: "Online",
+    image: "/events&webinars/copd-event.webp",
+    registrationPending: true,
+    shortDescription: "A one-hour session on how diet supports people living with chronic obstructive pulmonary disease, led by a dietitian and nutrition coach.",
+    description:
+      "A one-hour session on how diet supports people living with chronic obstructive pulmonary disease, led by a dietitian and nutrition coach.",
+    whatYouLearn: [
+      "Understand the role of nutrition in COPD management",
+      "Learn evidence-based dietary strategies for patients with COPD",
+      "Explore how nutritional management supports better respiratory health",
+      "Gain practical dietary tips to improve nutritional care and respiratory health in COPD patients",
+    ],
+    eventContent: [
+      "Introduction to COPD and the Role of Nutrition in Disease Management",
+      "Nutritional Requirements and Evidence-Based Dietary Strategies for COPD Patients",
+      "Practical Nutritional Approaches for Better Respiratory Health",
+      "Dietary Management Strategies and Clinical Nutrition Tips for COPD Care",
+    ],
+    speakers: [
+      {
+        name: "Dr. Akriti Singh",
+        title: "Dietitian & Nutrition Coach",
+        image: "/events&webinars/copd-event-speaker.webp",
+      },
+    ],
+    price: {
+      original: 0,
+      current: 0,
+    },
+  },
+  {
     id: "female-hormones-fertility-subfertility",
     slug: "female-hormones-fertility-and-subfertility",
     title: "Female Hormones: Fertility and Subfertility",

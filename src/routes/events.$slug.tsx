@@ -18,6 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { ResourceHero } from "@/components/site/ResourceHero";
 import { EventRegistrationDialog } from "@/components/site/EventRegistrationDialog";
+import { CopdEventRegistrationDialog } from "@/components/site/CopdEventRegistrationDialog";
 
 export const Route = createFileRoute("/events/$slug")({
   component: EventDetailPage,
@@ -272,23 +273,34 @@ function EventDetailPage() {
                 </dl>
                 <div className="mt-6 border-t border-[#29334a]/15 pt-6">
                   {event.registrationPending ? (
-                    <>
-                      <p className="text-sm leading-6 text-[#6b5b68]">
-                        Pay online to confirm your registration
-                      </p>
-                      <p className="mt-3 text-3xl font-semibold text-[#29334a]">
-                        ₹599
-                        <span className="ml-2 text-sm font-normal text-[#6b5b68]">
-                          one-time registration (India)
-                        </span>
-                      </p>
-                      <p className="mt-1 text-xl font-semibold text-[#29334a]">
-                        $7
-                        <span className="ml-2 text-sm font-normal text-[#6b5b68]">
-                          international participants
-                        </span>
-                      </p>
-                    </>
+                    event.slug === "nutritional-management-of-copd" ? (
+                      <>
+                        <p className="text-sm leading-6 text-[#6b5b68]">
+                          Registration
+                        </p>
+                        <p className="mt-3 text-3xl font-semibold text-[#29334a]">
+                          Free event
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="text-sm leading-6 text-[#6b5b68]">
+                          Pay online to confirm your registration
+                        </p>
+                        <p className="mt-3 text-3xl font-semibold text-[#29334a]">
+                          ₹599
+                          <span className="ml-2 text-sm font-normal text-[#6b5b68]">
+                            one-time registration (India)
+                          </span>
+                        </p>
+                        <p className="mt-1 text-xl font-semibold text-[#29334a]">
+                          $7
+                          <span className="ml-2 text-sm font-normal text-[#6b5b68]">
+                            international participants
+                          </span>
+                        </p>
+                      </>
+                    )
                   ) : event.price ? (
                     <>
                       <p className="text-xs text-[#6b5b68]">Listed registration fee</p>
@@ -309,7 +321,11 @@ function EventDetailPage() {
                     </p>
                   )}
                   {event.registrationPending ? (
-                    <EventRegistrationDialog />
+                    event.slug === "nutritional-management-of-copd" ? (
+                      <CopdEventRegistrationDialog />
+                    ) : (
+                      <EventRegistrationDialog />
+                    )
                   ) : (
                     <>
                       <Button

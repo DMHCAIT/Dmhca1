@@ -4,10 +4,9 @@ import { z } from "zod";
 import Razorpay from "razorpay";
 import { syncRegistrationWithRazorpay } from "@/lib/event-payment-sync";
 
-const eventSlug = "female-hormones-fertility-and-subfertility";
-
 const listRegistrationsSchema = z.object({
   accessToken: z.string().min(1),
+  eventSlug: z.string().min(1),
 });
 
 async function getAdminClient(accessToken: string) {
@@ -54,7 +53,7 @@ export const getEventRegistrations = createServerFn({ method: "POST" })
     const { data: registrations, error } = await adminClient
       .from("event_registrations")
       .select(registrationColumns)
-      .eq("event_slug", eventSlug)
+      .eq("event_slug", data.eventSlug)
       .order("created_at", { ascending: false });
 
     if (error) {
