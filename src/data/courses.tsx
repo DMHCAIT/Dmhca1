@@ -5623,7 +5623,7 @@ export const _courses: Course[] = [
         name: "Dr. Bhuvaneshwari",
         title: "Cosmetologist/Dermatologist",
         bio: "Expert in cosmetic dermatology and aesthetic procedures.",
-        image: "/Faculty_images/dr-bhuvaneshwari.jpg",
+        image: "/Faculty_images/Dr Bhuvaneshwari.webp",
       },
     ],
   },
@@ -11360,7 +11360,7 @@ export const _courses: Course[] = [
     slug: "certificate-in-child-health",
     title: "Certificate in Child Health",
     categories: ["pediatrics"],
-    image: "courses/certificate_in_child_health_380x230(1).webp",
+    image: "/courses/certificate_in_child_health_380x230(1).webp",
     lessons: 18,
     months: 3,
     level: "intermediate",
@@ -11449,7 +11449,7 @@ export const _courses: Course[] = [
     slug: "certificate-in-antenatal-care",
     title: "Certificate in Antenatal Care",
     categories: ["obs-gynae"],
-    image: "courses/certificate_antenatal_care.webp",
+    image: "/courses/certificate_antenatal_care.webp",
     lessons: 21,
     months: 3,
     level: "intermediate",
@@ -11539,7 +11539,7 @@ export const _courses: Course[] = [
     slug: "certificate-in-addiction-psychology",
     title: "Certificate in Addiction Psychology",
     categories: ["medicine"],
-    image: "courses/addiction_psychology.webp",
+    image: "/courses/addiction_psychology.webp",
     lessons: 18,
     months: 3,
     level: "intermediate",
@@ -11628,7 +11628,7 @@ export const _courses: Course[] = [
     slug: "advanced-certificate-in-cath-lab-technology",
     title: "Advanced Certificate in Cath Lab Technology",
     categories: ["cardiology"],
-    image: "courses/advanced_certificate_cath_lab_technology_course.webp",
+    image: "/courses/advanced_certificate_cath_lab_technology_course.webp",
     lessons: 24,
     months: 6,
     level: "intermediate",
@@ -11731,7 +11731,7 @@ export const _courses: Course[] = [
     slug: "certificate-in-sexual-health-wellness",
     title: "Certificate in Sexual Health & Wellness",
     categories: ["medicine"],
-    image: "courses/sexual_health_wellness_course.webp",
+    image: "/courses/sexual_health_wellness_course.webp",
     lessons: 16,
     months: 3,
     level: "intermediate",
@@ -11818,7 +11818,7 @@ export const _courses: Course[] = [
     slug: "certificate-in-preventive-cardiology",
     title: "Certificate in Preventive Cardiology",
     categories: ["cardiology"],
-    image: "courses/preventive_cardiology_course.webp",
+    image: "/courses/preventive_cardiology_course.webp",
     lessons: 18,
     months: 3,
     level: "intermediate",
@@ -11907,7 +11907,7 @@ export const _courses: Course[] = [
     slug: "certificate-in-fetal-monitoring",
     title: "Certificate in Fetal Monitoring",
     categories: ["obs-gynae"],
-    image: "courses/fetal_monitoring_course.webp",
+    image: "/courses/fetal_monitoring_course.webp",
     lessons: 14,
     months: 2,
     level: "intermediate",
@@ -11986,7 +11986,10 @@ export const _courses: Course[] = [
 (() => {
   const used = new Set<string>();
   for (const c of _courses) {
-    // Ensure missing images remain blank so they can be added later
+    if (c.image && c.image.startsWith("courses/")) {
+      c.image = `/${c.image}`;
+    }
+
     if (!c.image) {
       c.image = "";
       continue;

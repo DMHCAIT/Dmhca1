@@ -58,30 +58,8 @@ function SpecialtyCourses() {
   }, []);
 
   const [q, setQ] = useState<string>(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("q") || "";
-    } catch (e) {
-      return "";
-    }
+    return "";
   });
-
-  // Keep URL syncronization on mount (no-op if already present)
-  useEffect(() => {
-    updateUrl({ q });
-  }, []);
-
-  // Keep URL in sync when filters change (so links are shareable)
-  function updateUrl(params: { q?: string }) {
-    const u = new URL(window.location.href);
-    const s = u.searchParams;
-    if (params.q !== undefined) {
-      if (!params.q) s.delete("q");
-      else s.set("q", params.q);
-    }
-    const newUrl = u.pathname + (s.toString() ? `?${s.toString()}` : "");
-    window.history.replaceState({}, "", newUrl);
-  }
 
   const allSource = remoteCourses || (courses as Course[]);
   const filtered = useMemo(

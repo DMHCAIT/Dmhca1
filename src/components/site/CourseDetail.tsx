@@ -213,6 +213,15 @@ export function CourseDetail({
   };
 
   // JSON-LD Schemas
+  const durationMonths = course.months || 0;
+  const courseDuration = durationMonths > 0 ? `P${durationMonths}M` : undefined;
+  const courseMode =
+    course.program === "Fellowship" ||
+    course.program === "PG Diploma" ||
+    course.program === "Certificate"
+      ? "Online"
+      : "Blended";
+
   const courseSchema = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -225,10 +234,30 @@ export function CourseDetail({
       logo: "https://www.dmhca.in/logo.webp",
     },
     image: course.image,
-    duration: course.months ? `PT${course.months}M` : undefined,
-    numberOfLessons: course.lessons || undefined,
-    educationLevel: course.level,
     url: `https://www.dmhca.in/courses/${course.slug}`,
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      name: course.title,
+      courseMode,
+      courseWorkload: course.lessons ? `${course.lessons} lessons` : undefined,
+      duration: courseDuration,
+      educationalCredentialAwarded: "Certificate" === course.program
+        ? "Course Certificate"
+        : `${course.program || "Course"} Certificate`,
+      location: {
+        "@type": "VirtualLocation",
+        url: `https://www.dmhca.in/courses/${course.slug}`,
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      price: course.priceINR || 0,
+      priceCurrency: "INR",
+      availability: "https://schema.org/InStock",
+      url: `https://www.dmhca.in/courses/${course.slug}`,
+      category: course.program || "Certificate",
+    },
+    educationalLevel: course.level || course.program || "Professional",
     aggregateRating:
       course.rating && course.reviewCount
         ? {

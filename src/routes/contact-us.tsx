@@ -370,4 +370,16 @@ function Contact() {
 }
 
 // Register route so file-based router picks up /contact-us
-export const Route = createFileRoute("/contact-us")({ component: Contact });
+export const Route = createFileRoute("/contact-us")({
+  head: () => ({
+    meta: [
+      { title: "Contact DMHCA | Medical Course & Student Support Team" },
+      {
+        name: "description",
+        content:
+          "Contact DMHCA for medical course enquiries, admissions and academic support. Find our Delhi and Hyderabad addresses, phone numbers and email contacts.",
+      },
+    ],
+  }),
+  component: Contact,
+});

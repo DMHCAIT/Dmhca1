@@ -2,6 +2,16 @@ import React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/term-conditions")({
+  head: () => ({
+    meta: [
+      { title: "DMHCA Terms & Conditions | Course Admission Policies" },
+      {
+        name: "description",
+        content:
+          "Review DMHCA's terms and conditions for course admission, fees, batch transfers, document submission, student responsibilities and cancellation policies.",
+      },
+    ],
+  }),
   component: TermConditions,
 });
 

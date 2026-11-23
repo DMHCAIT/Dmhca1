@@ -2,6 +2,16 @@ import React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/privacy-policy")({
+  head: () => ({
+    meta: [
+      { title: "DMHCA Privacy Policy | Data Collection & User Rights" },
+      {
+        name: "description",
+        content:
+          "Read DMHCA's privacy policy to learn about eligibility, data usage, third party copyrights, intellectual property, refund and returns policy.",
+      },
+    ],
+  }),
   component: function PrivacyPolicy() {
     const handleScroll = (id: string) => (e: React.MouseEvent) => {
       e.preventDefault();

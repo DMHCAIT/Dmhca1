@@ -78,11 +78,7 @@ function CataloguePage({
   const selectedSpecialty = specialtySlug || "all";
   const [remoteCourses, setRemoteCourses] = useState<Course[] | null>(null);
   const [search, setSearch] = useState<string>(() => {
-    try {
-      return new URLSearchParams(window.location.search).get("q") || "";
-    } catch {
-      return "";
-    }
+    return "";
   });
 
   useEffect(() => {
@@ -101,13 +97,6 @@ function CataloguePage({
       mounted = false;
     };
   }, []);
-
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    if (search) url.searchParams.set("q", search);
-    else url.searchParams.delete("q");
-    window.history.replaceState({}, "", url.pathname + url.search);
-  }, [search]);
 
   const allCourses = remoteCourses || (courses as Course[]);
   const filteredCourses = useMemo(

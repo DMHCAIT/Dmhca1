@@ -2,6 +2,16 @@ import React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/disclaimer")({
+  head: () => ({
+    meta: [
+      { title: "DMHCA Disclaimer | Course & Certification" },
+      {
+        name: "description",
+        content:
+          "Understand DMHCA's course and certification disclaimer, including educational purposes, licensing limits, qualification status and learner responsibilities.",
+      },
+    ],
+  }),
   component: Disclaimer,
 });
 

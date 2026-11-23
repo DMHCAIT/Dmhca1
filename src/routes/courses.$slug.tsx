@@ -59,7 +59,6 @@ export const Route = createFileRoute("/courses/$slug")({
             name: "twitter:image",
             content: loaderData.course.image || loaderData.course.heroImage,
           },
-          { name: "canonical", content: `https://www.dmhca.in/courses/${loaderData.slug}` },
         ]
       : [],
     links: loaderData

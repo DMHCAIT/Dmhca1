@@ -65,18 +65,8 @@ function AllCourses() {
     };
   }, []);
   const [q, setQ] = useState<string>(() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.get("q") || "";
-    } catch (e) {
-      return "";
-    }
+    return "";
   });
-
-  // Keep URL syncronization on mount (no-op if already present)
-  useEffect(() => {
-    updateUrl({ cat, q });
-  }, []);
 
   // Keep URL in sync when filters change (so links are shareable)
   function updateUrl(params: { cat?: string; fmt?: string; q?: string }) {

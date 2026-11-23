@@ -89,7 +89,15 @@ function CourseCardComponent({
           referrerPolicy="no-referrer"
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
+            const image = e.currentTarget as HTMLImageElement;
+            if (image.dataset.fallbackApplied) return;
+            image.dataset.fallbackApplied = "true";
+            image.src =
+              cat?.slug === "cardiology"
+                ? "/courses/cardiology.webp"
+                : cat?.slug === "radiology"
+                  ? "/courses/Radiology.webp"
+                  : "/courses/medicine.webp";
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-transparent" />

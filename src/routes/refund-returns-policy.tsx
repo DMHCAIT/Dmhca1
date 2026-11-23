@@ -2,6 +2,16 @@ import React from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/refund-returns-policy")({
+  head: () => ({
+    meta: [
+      { title: "DMHCA Refund & Returns Policy | Course Refunds Guide" },
+      {
+        name: "description",
+        content:
+          "Read DMHCA's refund and returns policy for course cancellations, eligible refunds, applicable payments, refusal, late fees, request steps and processing timelines.",
+      },
+    ],
+  }),
   component: function RefundPolicy() {
     const handleScroll = (id: string) => (e: React.MouseEvent) => {
       e.preventDefault();
