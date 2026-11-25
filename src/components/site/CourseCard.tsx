@@ -72,15 +72,11 @@ function CourseCardComponent({
     return programType;
   })();
 
-  // Map program types to display levels per request:
-  // - Fellowship and PG Diploma => "Expert"
-  // - Certificate courses => "Intermediate"
   const displayLevel = (() => {
+    if (course.level) return course.level.charAt(0).toUpperCase() + course.level.slice(1);
     const p = (programType || "").toLowerCase();
     if (p.includes("fellowship") || p.includes("pg diploma") || p.includes("pg")) return "Expert";
     if (p.includes("certificate") || p.includes("cert")) return "Intermediate";
-    // fallback to course.level if present, otherwise show programType
-    if (course.level) return course.level.charAt(0).toUpperCase() + course.level.slice(1);
     return programType;
   })();
   return (
@@ -143,12 +139,12 @@ function CourseCardComponent({
             `Comprehensive ${programName.toLowerCase()} program in ${cat?.name || "Medical Science"} with expert-led training.`}
         </p>
         <div className="course-card-meta mt-auto flex min-h-5 flex-nowrap items-center gap-x-1.5 pt-2 text-[11px] text-muted-foreground sm:gap-x-3 sm:text-xs">
-          {course.lessons != null && (
+          {course.lessons != null && course.lessons > 0 && (
             <span className="flex flex-shrink-0 items-center gap-1 whitespace-nowrap font-semibold text-slate-800 sm:gap-1.5">
               <BookOpen className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> {course.lessons} lessons
             </span>
           )}
-          {course.months != null && (
+          {course.months != null && course.months > 0 && (
             <span className="flex flex-shrink-0 items-center gap-1 whitespace-nowrap font-semibold text-slate-800 sm:gap-1.5">
               <Clock className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> {course.months} months
             </span>

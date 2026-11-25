@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { supabaseClient } from "@/lib/supabase";
 import { courses as staticCourses } from "@/data/courses";
+import { mergeCourseListData } from "@/lib/course-list-data";
 
 export interface CourseData {
   id: string;
@@ -21,7 +22,7 @@ export interface CourseData {
   learn?: string[];
   requirements?: string[];
   modules?: string[];
-  moduleDetails?: string[][];
+  moduleDetails?: Array<string[] | string>;
   faqs?: any[];
   trainers?: any[];
   reviews?: any[];
@@ -35,11 +36,14 @@ const coursesCache = {
   timestamp: 0,
   CACHE_DURATION: 2 * 60 * 1000, // 2 minutes (reduced from 5 for faster updates)
 };
+const cacheKey = "dmhca_courses_cache_v2";
+const courseListFields =
+  "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,duration_weeks,testimonials,created_at";
 
 // Attempt to hydrate in-memory cache from sessionStorage for instant loads across reloads
 try {
   if (typeof sessionStorage !== "undefined") {
-    const raw = sessionStorage.getItem("dmhca_courses_cache");
+    const raw = sessionStorage.getItem(cacheKey);
     if (raw) {
       const parsed = JSON.parse(raw);
       // Only use cache if it has overview data - invalidate old format caches
@@ -48,14 +52,14 @@ try {
         coursesCache.timestamp = parsed.timestamp;
       } else {
         // Clear invalid cache
-        sessionStorage.removeItem("dmhca_courses_cache");
+        sessionStorage.removeItem(cacheKey);
       }
     }
   }
 } catch (e) {
   // ignore storage errors
   try {
-    sessionStorage.removeItem("dmhca_courses_cache");
+    sessionStorage.removeItem(cacheKey);
   } catch (e2) {
     // ignore
   }
@@ -66,40 +70,8 @@ try {
  * Static data provides lessons, months, and other details
  * Supabase data can override with updates
  */
-function mergeWithStaticData(supabaseCourse: any): CourseData {
-  // Find matching static course by title or slug
-  const staticCourse = staticCourses.find(
-    (c) => c.slug === supabaseCourse.slug || c.title === supabaseCourse.title,
-  ) as any;
-
-  return {
-    id: supabaseCourse.id,
-    slug: supabaseCourse.slug || staticCourse?.slug || "",
-    title: supabaseCourse.title || staticCourse?.title || "",
-    category: supabaseCourse.category || staticCourse?.categories?.[0] || "",
-    categories: supabaseCourse.categories || staticCourse?.categories || [],
-    image: supabaseCourse.image_url || staticCourse?.image || "",
-    program: supabaseCourse.program || staticCourse?.program || "Certificate",
-    priceINR: supabaseCourse.price || staticCourse?.priceINR || 0,
-    // Use static data for lessons and months as Supabase doesn't always have these
-    lessons: staticCourse?.lessons || null,
-    months: staticCourse?.months || 0,
-    level: supabaseCourse.level || staticCourse?.level || "",
-    rating: supabaseCourse.rating || staticCourse?.rating || null,
-    reviewCount: supabaseCourse.review_count || staticCourse?.reviewCount || 0,
-    overview:
-      supabaseCourse.overview || supabaseCourse.short_description || staticCourse?.overview || "",
-    heroDescription: staticCourse?.heroDescription || "",
-    learn: staticCourse?.learn || [],
-    requirements: staticCourse?.requirements || [],
-    modules: staticCourse?.modules || [],
-    moduleDetails: staticCourse?.moduleDetails,
-    faqs: staticCourse?.faqs || [],
-    trainers: staticCourse?.trainers,
-    reviews: staticCourse?.reviews,
-    meta: staticCourse?.meta || {},
-  };
-}
+const mergeWithStaticData = (course: Parameters<typeof mergeCourseListData>[0]) =>
+  mergeCourseListData(course, staticCourses);
 
 /**
  * Hook to fetch courses from Supabase with intelligent caching
@@ -134,9 +106,7 @@ export function useCoursesData() {
           try {
             const { data: freshData, error: supabaseError } = await supabaseClient
               .from("courses")
-              .select(
-                "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,created_at",
-              )
+              .select(courseListFields)
               .order("created_at", { ascending: false })
               .limit(200);
             if (!supabaseError && freshData && Array.isArray(freshData)) {
@@ -156,9 +126,7 @@ export function useCoursesData() {
       // Fetch only essential courses for faster initial render (reduced from 200)
       const { data, error: supabaseError } = await supabaseClient
         .from("courses")
-        .select(
-          "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,created_at",
-        )
+        .select(courseListFields)
         .order("created_at", { ascending: false })
         .limit(30); // Reduced for fast initial load
 
@@ -169,9 +137,7 @@ export function useCoursesData() {
       // Fetch remaining courses in background (non-blocking)
       supabaseClient
         .from("courses")
-        .select(
-          "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,created_at",
-        )
+        .select(courseListFields)
         .order("created_at", { ascending: false })
         .limit(200)
         .then((result) => {
@@ -223,7 +189,7 @@ export function useCoursesData() {
       try {
         if (typeof sessionStorage !== "undefined") {
           sessionStorage.setItem(
-            "dmhca_courses_cache",
+            cacheKey,
             JSON.stringify({ data: processedCourses, timestamp: now }),
           );
         }
@@ -329,6 +295,11 @@ export function useCoursesData() {
 export function invalidateCoursesCache() {
   coursesCache.data = null;
   coursesCache.timestamp = 0;
+  try {
+    if (typeof sessionStorage !== "undefined") sessionStorage.removeItem(cacheKey);
+  } catch (error) {
+    console.warn("Could not clear the course cache", error);
+  }
 }
 
 /**
