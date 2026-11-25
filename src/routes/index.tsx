@@ -8,7 +8,7 @@ import {
   ChevronRight,
   Users,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import { lazy, Suspense, useState, useEffect, useMemo, useRef, type ReactNode } from "react";
 import { categories } from "@/data/course-categories";
 import { HeroArtwork } from "@/components/site/HeroArtwork";
@@ -103,8 +103,16 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Home,
+  component: HomeWithMotion,
 });
+
+function HomeWithMotion() {
+  return (
+    <LazyMotion features={domAnimation} strict>
+      <Home />
+    </LazyMotion>
+  );
+}
 
 const slides = [
   {
@@ -425,7 +433,7 @@ function Home() {
                   </p>
                 </div>
 
-                <motion.div
+                <m.div
                   className="flex flex-wrap justify-center gap-2.5"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -467,10 +475,10 @@ function Home() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
 
                 <div className="hero-details hidden sm:flex flex-wrap lg:flex-nowrap justify-center lg:justify-between items-center gap-6 pt-7 text-left">
-                  <motion.div
+                  <m.div
                     className="text-center lg:text-left"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -482,7 +490,7 @@ function Home() {
                     <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs font-medium">
                       {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map(
                         (s, i) => (
-                          <motion.div
+                          <m.div
                             key={s}
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
@@ -495,11 +503,11 @@ function Home() {
                             >
                               {categories.find((c) => c.slug === s)?.name}
                             </Link>
-                          </motion.div>
+                          </m.div>
                         ),
                       )}
                     </div>
-                  </motion.div>
+                  </m.div>
 
                   <div className="flex shrink-0 flex-wrap justify-center items-stretch gap-3 text-sm">
                     <div className="hero-trust-item flex items-center gap-3 py-2">
@@ -582,7 +590,7 @@ function Home() {
               All categories →
             </Link>
           </div>
-            <motion.div
+            <m.div
               className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
               initial="hidden"
               whileInView="visible"
@@ -617,9 +625,9 @@ function Home() {
                   endocrinology: "/courses/Endocrinology.webp",
                   cardiology: "/courses/cardiology.webp",
                   emergency: "/courses/emergency.webp",
-                  orthopedics: "/courses/orthopedics.webp",
-                  medicine: "/courses/medicine.webp",
-                  oncology: "/courses/oncology.webp",
+                  orthopedics: "/courses/home-orthopedics-optimized.webp",
+                  medicine: "/courses/home-medicine-optimized.webp",
+                  oncology: "/courses/home-oncology-optimized.webp",
                 };
 
                 const imageUrl = specialtyImages[slug] || "/courses/default.webp";
@@ -628,7 +636,7 @@ function Home() {
                   : null;
 
                 return (
-                  <motion.div
+                  <m.div
                     key={slug}
                     variants={{
                       hidden: { opacity: 0, y: 30 },
@@ -670,7 +678,7 @@ function Home() {
                       <div className="home-specialty-overlay absolute inset-0" />
 
                       {/* Content - bottom left */}
-                      <motion.div
+                      <m.div
                         className="absolute bottom-0 left-0 right-0 p-5 md:p-6 z-10"
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -679,12 +687,12 @@ function Home() {
                         <h3 className="font-display text-lg md:text-2xl text-white leading-tight group-hover:text-gold transition">
                           {category.name}
                         </h3>
-                      </motion.div>
+                      </m.div>
                     </Link>
-                  </motion.div>
+                  </m.div>
                 );
               })}
-            </motion.div>
+            </m.div>
         </div>
       </section>
 
@@ -730,7 +738,7 @@ function Home() {
             {[
               {
                 file: "AAA-logo.png",
-                src: "/aaa-logo-349.webp",
+                src: "/academic-aaa-320.webp",
                 name: "American Accreditation Association",
                 width: 349,
                 height: 141,
@@ -743,7 +751,7 @@ function Home() {
               },
               {
                 file: "duke logo.webp",
-                src: "/duke-logo-480.webp",
+                src: "/academic-duke-320.webp",
                 name: "Duke International University",
                 width: 480,
                 height: 187,
@@ -756,14 +764,14 @@ function Home() {
               },
               {
                 file: "logo-srdu.webp",
-                src: "/srdu-logo-480.webp",
+                src: "/academic-srdu-320.webp",
                 name: "Shri Rukmani Dwarkadhish University",
                 width: 480,
                 height: 196,
               },
               {
                 file: "ACTD-logo.png",
-                src: "/ACTD-logo-240.webp",
+                src: "/academic-actd-176.webp",
                 name: "ACTD",
                 width: 240,
                 height: 240,
@@ -829,7 +837,7 @@ function Home() {
             </button>
             <div className="flex-1 min-w-0 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {displayedReviews.map((r) => (
-                  <motion.div
+                  <m.div
                     key={r.name}
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -887,7 +895,7 @@ function Home() {
                         return nodes;
                       })()}
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
             </div>
             <button
@@ -937,12 +945,27 @@ function Home() {
                 const logos = [
                   { file: "images (1).webp", width: 288, height: 175 },
                   { file: "images.webp", width: 331, height: 152 },
-                  { file: "KIMS_Main_Logo_Col-01.webp", width: 901, height: 402 },
+                  {
+                    file: "KIMS_Main_Logo_Col-01.webp",
+                    src: "/training-kims-480.webp",
+                    width: 901,
+                    height: 402,
+                  },
                   { file: "Logo-medicover.webp", width: 250, height: 250 },
                   { file: "logo.webp", width: 109, height: 56 },
-                  { file: "Noora-Logo-01.webp", width: 2250, height: 869 },
+                  {
+                    file: "Noora-Logo-01.webp",
+                    src: "/training-noora-480.webp",
+                    width: 2250,
+                    height: 869,
+                  },
                   { file: "Untitled-design.webp", width: 500, height: 500 },
-                  { file: "VPH_New-Logo-1024x462.webp", width: 1024, height: 462 },
+                  {
+                    file: "VPH_New-Logo-1024x462.webp",
+                    src: "/training-vph-480.webp",
+                    width: 1024,
+                    height: 462,
+                  },
                 ];
                 return [0, 1].map((copy) => (
                   <div
@@ -950,13 +973,13 @@ function Home() {
                     key={copy}
                     aria-hidden={copy === 1 ? true : undefined}
                   >
-                    {logos.map(({ file, width, height }) => (
+                    {logos.map(({ file, src, width, height }) => (
                       <div
                         key={file}
                         className="training-logo-item flex-shrink-0 w-44 h-24 sm:w-52 sm:h-28 flex items-center justify-center px-4"
                       >
                         <img
-                          src={`/Training partners/${file}`}
+                          src={src ?? `/Training partners/${file}`}
                           alt={file}
                           width={width}
                           height={height}
