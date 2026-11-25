@@ -72,6 +72,8 @@ function BlogsListing() {
                   <img
                     src={`/blog-images/${blogImages[blog.slug]}`}
                     alt={blog.title}
+                    width={1024}
+                    height={512}
                     loading="lazy"
                     className="h-full w-full object-cover"
                   />

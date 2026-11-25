@@ -170,6 +170,8 @@ function CartPage() {
                       "/logo.webp"
                     }
                     alt={it.title}
+                    width={112}
+                    height={80}
                     className="w-full h-full object-cover"
                   />
                 </div>

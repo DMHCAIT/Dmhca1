@@ -194,6 +194,9 @@ function CityWiseMedicalCourses() {
                       <img
                         src={event.image}
                         alt={event.title}
+                        width={320}
+                        height={160}
+                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>

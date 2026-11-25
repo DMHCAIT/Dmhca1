@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 const server = (await import("../.vercel/output/functions/__server.func/index.mjs")).default;
 const origin = "https://www.dmhca.in";
@@ -54,4 +55,41 @@ test("nested fellowship pages do not inherit the fellowship listing canonical", 
     html,
     /rel="canonical" href="https:\/\/www\.dmhca\.in\/top-medical-courses\/fellowships"/,
   );
+});
+
+test("filtered course listings are noindex without blocking normal listings", async () => {
+  for (const path of [
+    "/top-medical-courses?cat=cardiology",
+    "/top-medical-courses?fmt=Fellowship&q=heart",
+    "/top-medical-courses/fellowships?cat=cardiology",
+  ]) {
+    const response = await server.fetch(new Request(`${origin}${path}`), {}, context);
+    assert.equal(response.status, 200, path);
+    assert.equal(response.headers.get("x-robots-tag"), "noindex, follow", path);
+  }
+
+  for (const path of [
+    "/top-medical-courses",
+    "/top-medical-courses?utm_source=newsletter",
+    "/blog?cat=cardiology",
+  ]) {
+    const response = await server.fetch(new Request(`${origin}${path}`), {}, context);
+    assert.equal(response.status, 200, path);
+    assert.equal(response.headers.get("x-robots-tag"), null, path);
+  }
+});
+
+test("legacy unfiltered search URLs still permanently redirect", async () => {
+  const response = await server.fetch(
+    new Request(`${origin}/top-medical-courses?q=heart`),
+    {},
+    context,
+  );
+  assert.equal(response.status, 301);
+  assert.equal(response.headers.get("location"), `${origin}/top-medical-courses`);
+});
+
+test("robots.txt allows search engines to crawl filtered course listings", () => {
+  const robots = readFileSync(new URL("../public/robots.txt", import.meta.url), "utf8");
+  assert.doesNotMatch(robots, /^Disallow:\s*\/top-medical-courses\?/im);
 });

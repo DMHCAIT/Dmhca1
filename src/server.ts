@@ -214,7 +214,28 @@ export default {
 
       response = await normalizeCatastrophicSsrResponse(request, response);
       const normalizedPath = normalizePath(requestUrl.pathname);
-      return await applyCanonical(response, canonicalMap[normalizedPath]);
+      response = await applyCanonical(response, canonicalMap[normalizedPath]);
+      const isCourseListing =
+        normalizedPath === "/top-medical-courses" ||
+        normalizedPath.startsWith("/top-medical-courses/");
+      const hasFilter = ["cat", "fmt", "q", "s", "search_term_string", "organizer"].some((name) =>
+        requestUrl.searchParams.has(name),
+      );
+      if (
+        isCourseListing &&
+        hasFilter &&
+        response.status === 200 &&
+        response.headers.get("content-type")?.includes("text/html")
+      ) {
+        const headers = new Headers(response.headers);
+        headers.set("X-Robots-Tag", "noindex, follow");
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers,
+        });
+      }
+      return response;
     } catch (error) {
       const abortedResponse = getAbortedRequestResponse(request);
       if (abortedResponse) return abortedResponse;

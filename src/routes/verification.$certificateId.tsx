@@ -253,6 +253,8 @@ function VerificationDetail() {
                     <img
                       src={qrCodeUrl}
                       alt="QR code"
+                      width={80}
+                      height={80}
                       className="w-20 h-20 border border-gray-300 p-0.5 bg-white"
                       onError={(e) => {
                         e.currentTarget.style.display = "none";
@@ -313,6 +315,8 @@ function VerificationDetail() {
                 <img
                   src={qrCodeUrl}
                   alt="QR code"
+                  width={128}
+                  height={128}
                   className="w-32 h-32"
                   onError={(e) => {
                     console.error("QR preview failed");

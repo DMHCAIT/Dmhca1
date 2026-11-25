@@ -153,6 +153,9 @@ export function CourseDetailNew({
                                   <img
                                     src={review.studentImage}
                                     alt={review.studentName}
+                                    width={48}
+                                    height={48}
+                                    loading="lazy"
                                     className="w-full h-full object-cover"
                                   />
                                 ) : (
@@ -346,6 +349,8 @@ export function CourseDetailNew({
                 src={course.image}
                 srcSet={`${course.image} 1x, ${course.image.replace(/(\.\w+)$/, "-2x$1")} 2x`}
                 alt={`${course.title} - Sidebar Image`}
+                width={500}
+                height={300}
                 referrerPolicy="no-referrer"
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -461,6 +466,8 @@ export function CourseDetailNew({
                     <img
                       src={r.image}
                       alt={r.title}
+                      width={500}
+                      height={300}
                       loading="lazy"
                       referrerPolicy="no-referrer"
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

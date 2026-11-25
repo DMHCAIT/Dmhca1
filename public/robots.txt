@@ -7,6 +7,6 @@ Disallow: /api/
 Disallow: /dashboard
 Disallow: /cart
 Disallow: /payment
-Disallow: /top-medical-courses?
 
+# Filtered course listings remain crawlable so their noindex header can be read.
 Sitemap: https://www.dmhca.in/sitemap.xml

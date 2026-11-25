@@ -76,6 +76,8 @@ function BlogContent() {
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
               src="/blog-images/How-to-Become-an-Endocrinologist.webp"
+              width={1024}
+              height={512}
               alt="How to Become an Endocrinologist"
               className="w-full h-auto aspect-[992/496] object-cover"
             />

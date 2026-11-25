@@ -154,6 +154,9 @@ function AdminMedia() {
                     <img
                       src={getPublicUrl(tab, file.name)}
                       alt={file.name}
+                      width={320}
+                      height={180}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                   ) : (

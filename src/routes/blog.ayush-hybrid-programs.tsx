@@ -104,6 +104,8 @@ function AYUSHContent() {
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
               src="/blog-images/ayush_doctor_blog.webp"
+              width={992}
+              height={496}
               alt="AYUSH Hybrid Programs"
               className="w-full h-auto aspect-[992/496] object-cover"
             />

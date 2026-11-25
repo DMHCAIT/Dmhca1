@@ -731,6 +731,8 @@ export function CourseDetail({
                           <img
                             src={trainer.image || "/logo.webp"}
                             alt={trainer.name}
+                            width={64}
+                            height={64}
                             className="w-full h-full object-contain"
                           />
                         </div>
@@ -800,6 +802,9 @@ export function CourseDetail({
                         <img
                           src="https://img.youtube.com/vi/5-2QOkBu180/maxresdefault.jpg"
                           alt="Course Video"
+                          width={1280}
+                          height={720}
+                          loading="lazy"
                           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           onError={(e) => {
                             (e.currentTarget as HTMLImageElement).src =
@@ -1056,6 +1061,9 @@ export function CourseDetail({
                             <img
                               src={r.image}
                               alt={r.title}
+                              width={56}
+                              height={56}
+                              loading="lazy"
                               className="w-full h-full object-cover"
                             />
                           </div>

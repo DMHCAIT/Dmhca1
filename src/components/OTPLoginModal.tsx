@@ -123,7 +123,13 @@ export function OTPLoginModal({ isOpen, onClose, onSuccess, onSwitchToSignup }) 
         </button>
 
         <div className="mb-8 text-center">
-          <img src={titleLogo} alt="DMHCA" className="h-12 w-auto mb-4 mx-auto" />
+          <img
+            src={titleLogo}
+            alt="DMHCA"
+            width={489}
+            height={510}
+            className="h-12 w-auto mb-4 mx-auto"
+          />
           <h2 className="text-3xl font-bold text-gray-900 dark:text-slate-100 mb-2">
             Login to DMHCA
           </h2>

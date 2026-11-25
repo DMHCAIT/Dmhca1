@@ -81,6 +81,8 @@ function BlogContent() {
           <div className="relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl w-full max-w-[992px]">
             <img
               src="/blog-images/How-to-Crack-NEET-PG.webp"
+              width={1024}
+              height={512}
               alt="How to Crack NEET PG"
               className="w-full h-auto aspect-[992/496] object-cover"
             />
