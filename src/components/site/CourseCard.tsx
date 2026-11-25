@@ -1,16 +1,24 @@
 import { Link } from "@tanstack/react-router";
 import { Clock, BookOpen, Star, Award } from "lucide-react";
-import { type Course, formatINR, getCategory } from "@/data/courses";
+import { getCategory } from "@/data/courses";
 import { memo } from "react";
 
 // Accept both Course type and dynamic course data from Supabase
-type CourseData = Course & {
+type CourseData = {
+  slug: string;
+  title: string;
+  category?: string;
+  categories?: string[];
+  image?: string;
+  program?: string;
+  level?: string;
+  overview?: string;
+  meta?: { skill_level?: string };
   lessons?: number | null;
   months?: number | null;
   rating?: number | null;
   reviewCount?: number | null;
   heroDescription?: string;
-  [key: string]: any;
 };
 
 // Mapping of DMHCA course titles to IBM Practitioner course names for form pre-selection
@@ -46,7 +54,7 @@ function CourseCardComponent({
   compact?: boolean;
 }) {
   const categoryName = Array.isArray(course.categories) ? course.categories[0] : course.category;
-  const cat = getCategory(categoryName);
+  const cat = getCategory(categoryName ?? "");
   const programType =
     course.program ||
     course.meta?.skill_level ||
@@ -85,6 +93,8 @@ function CourseCardComponent({
         <img
           src={course.image}
           alt={`${course.title} - ${cat?.name || "Medical"} Course`}
+          width={500}
+          height={300}
           loading="lazy"
           referrerPolicy="no-referrer"
           className="absolute inset-0 w-full h-full object-cover"
@@ -128,7 +138,7 @@ function CourseCardComponent({
           {course.title}
         </div>
         <p className="mb-2.5 mt-0 line-clamp-2 text-sm leading-relaxed text-slate-700">
-          {(course as any).heroDescription ||
+          {course.heroDescription ||
             course.overview ||
             `Comprehensive ${programName.toLowerCase()} program in ${cat?.name || "Medical Science"} with expert-led training.`}
         </p>

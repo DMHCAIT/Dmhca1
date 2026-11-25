@@ -9,14 +9,23 @@ import {
   Users,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useState, useEffect, useMemo } from "react";
-const heroImg = "/herofellowshiplarge.webp";
-import { categories } from "@/data/courses";
-import { useCoursesData } from "@/hooks/useCoursesData";
-import { CourseCard } from "@/components/site/CourseCard";
+import { lazy, Suspense, useState, useEffect, useMemo, useRef, type ReactNode } from "react";
+import { categories } from "@/data/course-categories";
 import { HeroArtwork } from "@/components/site/HeroArtwork";
 import { SignupFlow } from "@/components/SignupFlow";
 import { OTPLoginModal } from "@/components/OTPLoginModal";
+
+const FeaturedPrograms = lazy(() => import("@/components/site/FeaturedPrograms"));
+
+function FeaturedProgramsLoading() {
+  return (
+    <div className="home-program-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-busy="true">
+      {Array.from({ length: 3 }).map((_, i) => (
+        <div key={i} className="h-64 rounded-md bg-card animate-pulse" />
+      ))}
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -97,6 +106,51 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const slides = [
+  {
+    program: "Certificate",
+    titleMain: "Upskill clinically,",
+    titleSub: "fast and focused.",
+    desc: "Short certificate courses designed to build practical skills and clinical confidence for busy clinicians.",
+  },
+  {
+    program: "PG Diploma",
+    titleMain: "Deep clinical training,",
+    titleSub: "structured for practice.",
+    desc: "Comprehensive PG Diploma programs blending theory and supervised clinical exposure over months.",
+  },
+  {
+    program: "Fellowship",
+    titleMain: "Medical mastery,",
+    titleSub: "delivered with precision.",
+    desc: "Develop your medical career with accessible online fellowships and hands-on training from leading universities.",
+  },
+];
+
+function HeroCarousel({
+  children,
+}: {
+  children: (state: {
+    slide: number;
+    setSlide: (slide: number) => void;
+    setIsPaused: (paused: boolean) => void;
+  }) => ReactNode;
+}) {
+  const [slide, setSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    setSlide((current) => (current + 1) % slides.length);
+    const timer = setInterval(() => {
+      setSlide((current) => (current + 1) % slides.length);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  return children({ slide, setSlide, setIsPaused });
+}
+
 function Home() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -108,9 +162,6 @@ function Home() {
       return null;
     }
   })();
-
-  // Fetch courses dynamically from Supabase
-  const { courses, loading } = useCoursesData();
 
   // Auth modal states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -128,68 +179,9 @@ function Home() {
   }, []);
 
   const [reviewIndex, setReviewIndex] = useState(0);
-  const [slide, setSlide] = useState(0);
   const [screenSize, setScreenSize] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024,
   );
-  // Slides order intentionally set to Certificate → PG Diploma → Fellowship
-  const slides = [
-    {
-      id: 0,
-      program: "Certificate",
-      theme: "dark",
-      heroImg: "/herocertificatelarge.webp",
-      blockImg: "/herocertificateblock.webp",
-      titleMain: "Upskill clinically,",
-      titleSub: "fast and focused.",
-      desc: "Short certificate courses designed to build practical skills and clinical confidence for busy clinicians.",
-    },
-    {
-      id: 1,
-      program: "PG Diploma",
-      theme: "muted",
-      heroImg: "/heropgdiplomalarge.webp",
-      blockImg: "/heropgdiplomablock-v2.webp",
-      titleMain: "Deep clinical training,",
-      titleSub: "structured for practice.",
-      desc: "Comprehensive PG Diploma programs blending theory and supervised clinical exposure over months.",
-    },
-    {
-      id: 2,
-      program: "Fellowship",
-      theme: "dark",
-      heroImg: "/herofellowshiplarge.webp",
-      blockImg: "/herofellowshipblock.webp",
-      titleMain: "Medical mastery,",
-      titleSub: "delivered with precision.",
-      desc: "Develop your medical career with accessible online fellowships and hands-on training from leading universities.",
-    },
-  ];
-
-  const [isPaused, setIsPaused] = useState(false);
-  useEffect(() => {
-    if (isPaused) return;
-    console.log("starting slide interval, isPaused=", isPaused);
-    // Advance immediately once when autoplay starts
-    setSlide((s) => {
-      const next = (s + 1) % slides.length;
-      console.log("advancing slide (immediate)", s, "->", next);
-      return next;
-    });
-    const t = setInterval(() => {
-      setSlide((s) => {
-        const next = (s + 1) % slides.length;
-        console.log("advancing slide", s, "->", next);
-        return next;
-      });
-    }, 1000);
-    return () => clearInterval(t);
-  }, [isPaused]);
-
-  useEffect(() => {
-    console.log("slide state changed:", slide);
-  }, [slide]);
-
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
     window.addEventListener("resize", handleResize);
@@ -198,33 +190,27 @@ function Home() {
 
   const reviewsPerPage = screenSize < 640 ? 1 : screenSize < 1024 ? 2 : 3;
 
-  // Memoize featured courses computation to avoid recalculation on every render
-  const featured = useMemo(() => {
-    if (!courses || courses.length === 0) return [];
-    const result = [...courses].sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0)).slice(0, 6);
-    // Replace specific courses with requested alternatives in featured programs
-    const replacementMap = [
-      { find: /interventional cardiology/i, replaceWith: "Fellowship in Pediatrics" },
-      { find: /pediatric rheumatology/i, replaceWith: "PG Diploma in HIV Medicine" },
-      { find: /cardiothoracic surgery/i, replaceWith: "PG Diploma In Diabetology" },
-      { find: /cardio oncology/i, replaceWith: "Certificate in Child Health" },
-      { find: /abdominal imaging/i, replaceWith: "Fellowship in Clinical Hematology" },
-    ];
-    try {
-      for (const { find, replaceWith } of replacementMap) {
-        const idx = result.findIndex((c) => find.test(c.title));
-        if (idx !== -1) {
-          const replacement = courses.find((c) => c.title.includes(replaceWith));
-          if (replacement) {
-            result[idx] = replacement;
-          }
-        }
-      }
-    } catch (e) {
-      // silent fallback if courses data shape differs
+  const featuredRef = useRef<HTMLElement>(null);
+  const [loadFeatured, setLoadFeatured] = useState(false);
+  useEffect(() => {
+    const section = featuredRef.current;
+    if (!section) return;
+    if (!("IntersectionObserver" in window)) {
+      setLoadFeatured(true);
+      return;
     }
-    return result;
-  }, [courses]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setLoadFeatured(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "600px" },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   // Memoize reviews array to prevent recreation on every render
   const reviews = useMemo(
@@ -405,184 +391,161 @@ function Home() {
       />
 
       {/* Centered, text-focused hero */}
-      <section
-        className="home-hero relative overflow-hidden mx-6 my-4 rounded-[1.75rem] sm:mx-16 sm:my-5 sm:rounded-[2rem] lg:mx-32"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <HeroArtwork />
-        <div className="container-home max-w-[76rem] py-7 sm:py-10 lg:py-12 relative z-10">
-          <motion.div
-            className="mx-auto max-w-5xl space-y-4 sm:space-y-6 text-center relative z-30"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+      <HeroCarousel>
+        {({ slide, setSlide, setIsPaused }) => (
+          <section
+            className="home-hero relative overflow-hidden mx-6 my-4 rounded-[1.75rem] sm:mx-16 sm:my-5 sm:rounded-[2rem] lg:mx-32"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            {/* Premium badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 w-fit text-center"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-              <span className="text-xs font-semibold text-gold uppercase tracking-wider">
-                Excellence in Medical Education
-              </span>
-            </motion.div>
-
-            <div className="space-y-3 sm:space-y-4">
-              <h1 className="mx-auto flex min-h-[4.32em] sm:min-h-0 items-center justify-center font-display text-[1.875rem] sm:text-5xl lg:text-[3.75rem] text-foreground leading-[1.12] tracking-[-0.04em] max-w-5xl">
-                <div>
-                  <motion.span
-                    className="relative inline-block"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25, delay: 0.1 }}
-                  >
-                    {slides[slide].titleMain}
-                  </motion.span>
-                  <br />
-                  <motion.span
-                    className="home-hero-highlight font-semibold text-gold not-italic"
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.25, delay: 0.15 }}
-                  >
-                    {slides[slide].titleSub}
-                  </motion.span>
-                </div>
-              </h1>
-
-              <motion.p
-                className="mx-auto pt-1 text-sm text-foreground/75 max-w-xl leading-relaxed"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.25, delay: 0.2 }}
-              >
-                {slides[slide].desc}
-              </motion.p>
-            </div>
-
-            <motion.div
-              className="flex flex-wrap justify-center gap-2.5"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-            >
-              <Link
-                to="/top-medical-courses"
-                className="hero-primary-action group inline-flex min-h-12 items-center gap-3 px-7 py-3 text-sm font-semibold shadow-[0_12px_28px_-12px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 hover:shadow-lg transition rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-              >
-                Explore Courses{" "}
-                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </Link>
-              <div className="inline-flex items-center gap-2">
-                <Link
-                  to="/top-medical-courses"
-                  search={{ fmt: slides[slide].program }}
-                  className="inline-flex min-h-12 items-center px-5 py-2 rounded-full text-sm text-foreground bg-white/10 hover:bg-white/20 transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-                >
-                  {slides[slide].program}
-                </Link>
-                <div className="ml-2 inline-flex items-center gap-1">
-                  <button
-                    aria-label="Previous slide"
-                    onClick={() => {
-                      setSlide((slide - 1 + slides.length) % slides.length);
-                    }}
-                    className="flex h-11 w-11 items-center justify-center rounded-full text-foreground bg-white/10 hover:bg-white/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-                  >
-                    ‹
-                  </button>
-                  <button
-                    aria-label="Next slide"
-                    onClick={() => {
-                      setSlide((slide + 1) % slides.length);
-                    }}
-                    className="flex h-11 w-11 items-center justify-center rounded-full text-foreground bg-white/10 hover:bg-white/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-                  >
-                    ›
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-
-            <div className="hero-details hidden sm:flex flex-wrap lg:flex-nowrap justify-center lg:justify-between items-center gap-6 pt-7 text-left">
-              <motion.div
-                className="text-center lg:text-left"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-              >
-                <p className="hero-specialties-label uppercase tracking-widest mb-3 hidden sm:block">
-                  Trending specialties
-                </p>
-                <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs font-medium">
-                  {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map(
-                    (s, i) => (
-                      <motion.div
-                        key={s}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
-                      >
-                        <Link
-                          to="/top-medical-courses"
-                          search={{ cat: s }}
-                          className="hero-specialty-link inline-flex rounded-full px-3 py-2 text-foreground transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-                        >
-                          {categories.find((c) => c.slug === s)?.name}
-                        </Link>
-                      </motion.div>
-                    ),
-                  )}
-                </div>
-              </motion.div>
-
-              <div className="flex shrink-0 flex-wrap justify-center items-stretch gap-3 text-sm">
-                <div className="hero-trust-item flex items-center gap-3 py-2">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
-                    <Users className="h-5 w-5 text-gold" aria-hidden="true" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-display text-2xl font-bold leading-tight text-foreground">
-                      15,000<span className="text-gold">+</span>
-                    </div>
-                    <span className="text-xs text-foreground/75">Active Learners</span>
-                  </div>
-                </div>
-                <div className="hero-trust-item flex items-center gap-3 py-2">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
-                    <Star className="h-5 w-5 fill-gold text-gold" aria-hidden="true" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-baseline gap-1.5 whitespace-nowrap text-foreground">
-                      <span className="font-display text-2xl font-bold leading-tight">4.8</span>
-                      <span className="text-xs text-foreground/75">/ 5</span>
-                    </div>
-                    <span className="text-xs text-foreground/75">Learner rating</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {currentFmt ? (
-              <div className="mt-4">
-                <Link
-                  to="/top-medical-courses"
-                  search={{ fmt: currentFmt }}
-                  className="inline-block"
-                >
-                  <span className="inline-block bg-navy-deep text-primary-foreground px-3 py-1 rounded-full text-sm hover:opacity-95">
-                    Showing: {currentFmt}
+            <HeroArtwork />
+            <div className="container-home max-w-[76rem] py-7 sm:py-10 lg:py-12 relative z-10">
+              <div className="mx-auto max-w-5xl space-y-4 sm:space-y-6 text-center relative z-30">
+                {/* Premium badge */}
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 w-fit text-center">
+                  <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
+                  <span className="text-xs font-semibold text-gold uppercase tracking-wider">
+                    Excellence in Medical Education
                   </span>
-                </Link>
+                </div>
+
+                <div className="space-y-3 sm:space-y-4">
+                  <h1 className="mx-auto flex min-h-[4.32em] sm:min-h-0 items-center justify-center font-display text-[1.875rem] sm:text-5xl lg:text-[3.75rem] text-foreground leading-[1.12] tracking-[-0.04em] max-w-5xl">
+                    <div>
+                      <span className="relative inline-block">{slides[slide].titleMain}</span>
+                      <br />
+                      <span className="home-hero-highlight font-semibold text-gold not-italic">
+                        {slides[slide].titleSub}
+                      </span>
+                    </div>
+                  </h1>
+
+                  <p className="mx-auto pt-1 text-sm text-foreground/75 max-w-xl leading-relaxed">
+                    {slides[slide].desc}
+                  </p>
+                </div>
+
+                <motion.div
+                  className="flex flex-wrap justify-center gap-2.5"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                >
+                  <Link
+                    to="/top-medical-courses"
+                    className="hero-primary-action group inline-flex min-h-12 items-center gap-3 px-7 py-3 text-sm font-semibold shadow-[0_12px_28px_-12px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 hover:shadow-lg transition rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                  >
+                    Explore Courses{" "}
+                    <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </Link>
+                  <div className="inline-flex items-center gap-2">
+                    <Link
+                      to="/top-medical-courses"
+                      search={{ fmt: slides[slide].program }}
+                      className="inline-flex min-h-12 items-center px-5 py-2 rounded-full text-sm text-foreground bg-white/10 hover:bg-white/20 transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                    >
+                      {slides[slide].program}
+                    </Link>
+                    <div className="ml-2 inline-flex items-center gap-1">
+                      <button
+                        aria-label="Previous slide"
+                        onClick={() => {
+                          setSlide((slide - 1 + slides.length) % slides.length);
+                        }}
+                        className="flex h-11 w-11 items-center justify-center rounded-full text-foreground bg-white/10 hover:bg-white/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                      >
+                        ‹
+                      </button>
+                      <button
+                        aria-label="Next slide"
+                        onClick={() => {
+                          setSlide((slide + 1) % slides.length);
+                        }}
+                        className="flex h-11 w-11 items-center justify-center rounded-full text-foreground bg-white/10 hover:bg-white/20 transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                      >
+                        ›
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <div className="hero-details hidden sm:flex flex-wrap lg:flex-nowrap justify-center lg:justify-between items-center gap-6 pt-7 text-left">
+                  <motion.div
+                    className="text-center lg:text-left"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, delay: 0.6 }}
+                  >
+                    <p className="hero-specialties-label uppercase tracking-widest mb-3 hidden sm:block">
+                      Trending specialties
+                    </p>
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-2 text-xs font-medium">
+                      {["radiology", "dermatology", "obs-gynae", "cardiology", "endocrinology"].map(
+                        (s, i) => (
+                          <motion.div
+                            key={s}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.4, delay: 0.7 + i * 0.05 }}
+                          >
+                            <Link
+                              to="/top-medical-courses"
+                              search={{ cat: s }}
+                              className="hero-specialty-link inline-flex rounded-full px-3 py-2 text-foreground transition focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                            >
+                              {categories.find((c) => c.slug === s)?.name}
+                            </Link>
+                          </motion.div>
+                        ),
+                      )}
+                    </div>
+                  </motion.div>
+
+                  <div className="flex shrink-0 flex-wrap justify-center items-stretch gap-3 text-sm">
+                    <div className="hero-trust-item flex items-center gap-3 py-2">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
+                        <Users className="h-5 w-5 text-gold" aria-hidden="true" />
+                      </div>
+                      <div className="text-left">
+                        <div className="font-display text-2xl font-bold leading-tight text-foreground">
+                          15,000<span className="text-gold">+</span>
+                        </div>
+                        <span className="text-xs text-foreground/75">Active Learners</span>
+                      </div>
+                    </div>
+                    <div className="hero-trust-item flex items-center gap-3 py-2">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10">
+                        <Star className="h-5 w-5 fill-gold text-gold" aria-hidden="true" />
+                      </div>
+                      <div className="text-left">
+                        <div className="flex items-baseline gap-1.5 whitespace-nowrap text-foreground">
+                          <span className="font-display text-2xl font-bold leading-tight">4.8</span>
+                          <span className="text-xs text-foreground/75">/ 5</span>
+                        </div>
+                        <span className="text-xs text-foreground/75">Learner rating</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {currentFmt ? (
+                  <div className="mt-4">
+                    <Link
+                      to="/top-medical-courses"
+                      search={{ fmt: currentFmt }}
+                      className="inline-block"
+                    >
+                      <span className="inline-block bg-navy-deep text-primary-foreground px-3 py-1 rounded-full text-sm hover:opacity-95">
+                        Showing: {currentFmt}
+                      </span>
+                    </Link>
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-          </motion.div>
-        </div>
-      </section>
+            </div>
+          </section>
+        )}
+      </HeroCarousel>
 
       {/* Stats bar */}
       <section className="home-impact mx-6 sm:mx-16 lg:mx-32 rounded-[1.75rem]">
@@ -619,13 +582,6 @@ function Home() {
               All categories →
             </Link>
           </div>
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-44 rounded-2xl bg-card animate-pulse" />
-              ))}
-            </div>
-          ) : (
             <motion.div
               className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
               initial="hidden"
@@ -667,6 +623,9 @@ function Home() {
                 };
 
                 const imageUrl = specialtyImages[slug] || "/courses/default.webp";
+                const responsiveImage = ["radiology", "dermatology", "emergency"].includes(slug)
+                  ? `/courses/home-${slug}`
+                  : null;
 
                 return (
                   <motion.div
@@ -691,7 +650,19 @@ function Home() {
                     >
                       <img
                         loading="lazy"
-                        src={imageUrl}
+                        src={responsiveImage ? `${responsiveImage}-800.webp` : imageUrl}
+                        srcSet={
+                          responsiveImage
+                            ? `${responsiveImage}-400.webp 400w, ${responsiveImage}-800.webp 800w`
+                            : undefined
+                        }
+                        sizes={
+                          responsiveImage
+                            ? "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                            : undefined
+                        }
+                        width={1254}
+                        height={1254}
                         alt={category.name}
                         className="absolute inset-0 w-full h-full object-cover"
                       />
@@ -714,12 +685,11 @@ function Home() {
                 );
               })}
             </motion.div>
-          )}
         </div>
       </section>
 
       {/* Featured / Top Rated */}
-      <section className="home-light-panel home-programs home-section-panel py-10 md:py-14">
+      <section ref={featuredRef} className="home-light-panel home-programs home-section-panel py-10 md:py-14">
         <div className="container-home">
           <div className="flex items-end justify-between flex-wrap gap-4 mb-10">
             <div>
@@ -734,19 +704,11 @@ function Home() {
               View all courses →
             </Link>
           </div>
-          {loading ? (
-            <div className="home-program-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="h-64 rounded-md bg-card animate-pulse" />
-              ))}
-            </div>
-          ) : (
-            <div className="home-program-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featured.map((c) => (
-                <CourseCard key={c.slug} course={c as any} />
-              ))}
-            </div>
-          )}
+          {loadFeatured ? (
+            <Suspense fallback={<FeaturedProgramsLoading />}>
+              <FeaturedPrograms loadingFallback={<FeaturedProgramsLoading />} />
+            </Suspense>
+          ) : <FeaturedProgramsLoading />}
         </div>
       </section>
 
@@ -768,7 +730,7 @@ function Home() {
             {[
               {
                 file: "AAA-logo.png",
-                src: "/AAA-logo-dark-text.png",
+                src: "/aaa-logo-349.webp",
                 name: "American Accreditation Association",
                 width: 349,
                 height: 141,
@@ -781,9 +743,10 @@ function Home() {
               },
               {
                 file: "duke logo.webp",
+                src: "/duke-logo-480.webp",
                 name: "Duke International University",
-                width: 1627,
-                height: 633,
+                width: 480,
+                height: 187,
               },
               {
                 file: "ibmp-logo.webp",
@@ -793,16 +756,17 @@ function Home() {
               },
               {
                 file: "logo-srdu.webp",
+                src: "/srdu-logo-480.webp",
                 name: "Shri Rukmani Dwarkadhish University",
-                width: 752,
-                height: 307,
+                width: 480,
+                height: 196,
               },
               {
                 file: "ACTD-logo.png",
-                src: "/ACTD-logo.png",
+                src: "/ACTD-logo-240.webp",
                 name: "ACTD",
-                width: 500,
-                height: 500,
+                width: 240,
+                height: 240,
               },
             ].map(
               ({
@@ -864,15 +828,7 @@ function Home() {
               <ChevronLeft className="w-5 h-5 text-primary-foreground" />
             </button>
             <div className="flex-1 min-w-0 w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {loading &&
-                Array.from({ length: reviewsPerPage }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="rounded-2xl bg-card p-5 sm:p-6 flex flex-col shadow-lg animate-pulse min-h-[18rem]"
-                  />
-                ))}
-              {!loading &&
-                displayedReviews.map((r) => (
+              {displayedReviews.map((r) => (
                   <motion.div
                     key={r.name}
                     initial={{ opacity: 0, x: 20 }}
@@ -985,11 +941,6 @@ function Home() {
                   { file: "Logo-medicover.webp", width: 250, height: 250 },
                   { file: "logo.webp", width: 109, height: 56 },
                   { file: "Noora-Logo-01.webp", width: 2250, height: 869 },
-                  {
-                    file: "skinfinity-skin-hair-laser-and-aesthetic-clinic-noida-625ce89ba1d3f.webp",
-                    width: 888,
-                    height: 588,
-                  },
                   { file: "Untitled-design.webp", width: 500, height: 500 },
                   { file: "VPH_New-Logo-1024x462.webp", width: 1024, height: 462 },
                 ];
@@ -1009,6 +960,7 @@ function Home() {
                           alt={file}
                           width={width}
                           height={height}
+                          loading="lazy"
                           style={{ maxWidth: width / 2, maxHeight: Math.min(80, height / 2) }}
                           className="max-w-full max-h-full object-contain"
                         />

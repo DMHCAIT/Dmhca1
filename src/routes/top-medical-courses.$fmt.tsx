@@ -1,7 +1,8 @@
-import { createFileRoute, Outlet, useLocation, useParams } from "@tanstack/react-router";
+import { createFileRoute, Outlet, redirect, useLocation, useParams } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { CourseCatalogue } from "@/components/site/CourseCatalogue";
-import { categories, type Course, courses } from "@/data/courses";
+import { categories } from "@/data/course-categories";
+import { type Course, courses } from "@/data/courses";
 import { fetchCoursesFromSupabase } from "@/lib/courses-remote";
 
 const formatMap: Record<string, string> = {
@@ -11,7 +12,16 @@ const formatMap: Record<string, string> = {
 };
 
 export const Route = createFileRoute("/top-medical-courses/$fmt")({
-  head: ({ params }) => {
+  beforeLoad: ({ params }) => {
+    if (params.fmt === "paediatrics") {
+      throw redirect({
+        to: "/top-medical-courses/$fmt",
+        params: { fmt: "pediatrics" },
+        statusCode: 301,
+      });
+    }
+  },
+  head: ({ params, match, matches }) => {
     const formatName = formatMap[params.fmt];
     const specialty = categories.find((category) => category.slug === params.fmt);
     const title = specialty
@@ -27,6 +37,10 @@ export const Route = createFileRoute("/top-medical-courses/$fmt")({
             : `Browse ${(formatName || "medical courses").toLowerCase()} across every medical specialty.`,
         },
       ],
+      links: matches[matches.length - 1]?.routeId === match.routeId &&
+        ["pediatrics", "radiology", "fellowships"].includes(params.fmt)
+        ? [{ rel: "canonical", href: `https://www.dmhca.in/top-medical-courses/${params.fmt}` }]
+        : [],
     };
   },
   component: FilteredCourses,

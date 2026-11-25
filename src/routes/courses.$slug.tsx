@@ -11,7 +11,7 @@ import {
   GraduationCap,
   Globe,
 } from "lucide-react";
-import { getCourse, getCategory, relatedCourses, formatINR, type Course } from "@/data/courses";
+import { getCategory, relatedCourses, formatINR, type Course } from "@/data/courses";
 import { getCoursePage } from "@/lib/course-pricing.function";
 import { CourseCard } from "@/components/site/CourseCard";
 import CourseDetail from "@/components/site/CourseDetail";
@@ -31,6 +31,7 @@ export const Route = createFileRoute("/courses/$slug")({
     }
 
     // Fallback to local data
+    const { getCourse } = await import("@/data/courses");
     const course = getCourse(params.slug);
     if (!course) throw notFound();
     return {

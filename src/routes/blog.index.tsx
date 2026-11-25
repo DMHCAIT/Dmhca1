@@ -13,6 +13,7 @@ export const Route = createFileRoute("/blog/")({
           "Explore comprehensive medical blogs covering career guidance, specializations, courses, and educational resources.",
       },
     ],
+    links: [{ rel: "canonical", href: "https://www.dmhca.in/blog" }],
   }),
   component: BlogsListing,
 });

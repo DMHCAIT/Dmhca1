@@ -1,5 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { supabaseAdmin, supabaseClient } from "@/lib/supabase";
 
 export const saveCart = createServerFn().handler(
   async ({ userId, cartItems }: { userId?: string; cartItems?: any[] }) => {
@@ -13,8 +12,8 @@ export const saveCart = createServerFn().handler(
         return { success: false, message: "userId required" };
       }
       const payload = Array.isArray(cartItems) ? cartItems : [];
-      const sb = supabaseAdmin || supabaseClient;
-      if (!sb) throw new Error("No database connection");
+      const { getCartDatabaseClient } = await import("@/lib/cart-database.server");
+      const sb = getCartDatabaseClient();
       const { data, error } = await sb
         .from("carts")
         .upsert(

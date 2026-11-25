@@ -11,8 +11,6 @@ import {
   Search,
   X,
 } from "lucide-react";
-import { courses } from "@/data/courses";
-import { searchSite } from "@/lib/site-search";
 
 export function HeaderSearch() {
   const [open, setOpen] = useState(false);
@@ -22,6 +20,19 @@ export function HeaderSearch() {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
+  const searchIndex = useQuery({
+    queryKey: ["header-search-index"],
+    queryFn: async () => {
+      const [catalogue, search] = await Promise.all([
+        import("@/data/courses"),
+        import("@/lib/site-search"),
+      ]);
+      return { courses: catalogue.courses, searchSite: search.searchSite };
+    },
+    enabled: open,
+    staleTime: Infinity,
+    retry: 1,
+  });
   const { data, isFetching, isError } = useQuery({
     queryKey: ["header-search-courses"],
     queryFn: async () => {
@@ -34,7 +45,9 @@ export function HeaderSearch() {
     staleTime: 5 * 60 * 1000,
     retry: 1,
   });
-  const results = searchSite(query, data?.length ? data : courses);
+  const results = searchIndex.data
+    ? searchIndex.data.searchSite(query, data?.length ? data : searchIndex.data.courses)
+    : [];
 
   const closeSearch = (restoreFocus = false) => {
     setOpen(false);
@@ -134,22 +147,31 @@ export function HeaderSearch() {
               </button>
             </div>
           </form>
-          {(query.trim() || isError) && (
+          {(query.trim() || isError || searchIndex.isError) && (
             <div className="absolute inset-x-1 top-full mt-2 overflow-hidden rounded-xl border border-border/40 bg-popover text-popover-foreground shadow-lg sm:left-0 sm:right-auto sm:w-72">
               {isError && (
                 <p role="alert" className="px-3 pt-3 text-xs text-destructive">
                   Could not refresh courses. Showing the saved catalogue.
                 </p>
               )}
+              {searchIndex.isError && (
+                <p role="alert" className="px-3 pt-3 text-xs text-destructive">
+                  Search is unavailable. Please close it and try again.
+                </p>
+              )}
               <p
                 role="status"
                 className="border-b border-border/50 px-3 py-2.5 text-[11px] font-medium text-muted-foreground"
               >
-                {!query.trim()
-                  ? "Type to find courses or website pages."
-                  : results.length
-                    ? `${results.length} result${results.length === 1 ? "" : "s"}`
-                    : "No results found. Try another course or page name."}
+                {searchIndex.isPending
+                  ? "Loading search..."
+                  : searchIndex.isError
+                    ? "Unable to load search."
+                    : !query.trim()
+                      ? "Type to find courses or website pages."
+                      : results.length
+                        ? `${results.length} result${results.length === 1 ? "" : "s"}`
+                        : "No results found. Try another course or page name."}
                 {isFetching && " Updating courses..."}
               </p>
               <div

@@ -21,9 +21,14 @@ import { EventRegistrationDialog } from "@/components/site/EventRegistrationDial
 import { CopdEventRegistrationDialog } from "@/components/site/CopdEventRegistrationDialog";
 
 export const Route = createFileRoute("/events/$slug")({
-  component: EventDetailPage,
-  head: ({ params }) => {
+  loader: async ({ params }) => {
+    const { getEventBySlug } = await import("@/data/events");
     const event = getEventBySlug(params.slug);
+    if (!event) throw notFound();
+    return { title: event.title, shortDescription: event.shortDescription };
+  },
+  component: EventDetailPage,
+  head: ({ loaderData: event }) => {
     return {
       meta: [
         { title: `${event?.title || "Event"} - DMHCA` },
@@ -181,6 +186,9 @@ function EventDetailPage() {
                           <img
                             src={speaker.image}
                             alt={speaker.name}
+                            width={80}
+                            height={80}
+                            loading="lazy"
                             className="h-full w-full object-cover object-top"
                           />
                         ) : (

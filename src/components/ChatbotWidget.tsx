@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, JSX } from "react";
-import { X, Send, Sparkles, Loader, Search } from "lucide-react";
+import { X, Send, Loader, Search } from "lucide-react";
 import { COUNTRIES } from "@/lib/countries";
 import { submitChatbotInquiry } from "@/routes/api/chatbot-inquiry";
+import { ChatbotLauncher } from "@/components/ChatbotLauncher";
 
 type Step = "greeting" | "name" | "email" | "countryCode" | "mobile" | "course" | "submitted";
 
@@ -20,8 +21,8 @@ interface Message {
   timestamp: Date;
 }
 
-export function ChatbotWidget(): JSX.Element {
-  const [isOpen, setIsOpen] = useState(false);
+export function ChatbotWidget({ initialOpen = false }: { initialOpen?: boolean }): JSX.Element {
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [currentStep, setCurrentStep] = useState<Step>("greeting");
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -430,13 +431,7 @@ export function ChatbotWidget(): JSX.Element {
           )}
         </div>
       ) : (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="w-full h-full bg-gradient-to-br from-navy-deep to-slate-800 dark:from-cyan-500 dark:via-teal-500 dark:to-cyan-600 text-white rounded-full shadow-2xl hover:shadow-2xl transition flex items-center justify-center hover:scale-110 transform group active:scale-95"
-          title="AI Chat Assistant"
-        >
-          <Sparkles className="w-6 sm:w-7 h-6 sm:h-7 group-hover:animate-spin" />
-        </button>
+        <ChatbotLauncher onClick={() => setIsOpen(true)} />
       )}
     </div>
   );

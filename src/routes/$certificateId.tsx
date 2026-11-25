@@ -1,5 +1,4 @@
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
-import { supabaseClient } from "@/lib/supabase";
 import { ArrowLeft, BookOpen } from "lucide-react";
 
 // Blog posts data - same as in $slug.tsx
@@ -410,10 +409,22 @@ export const Route = createFileRoute("/$certificateId")({
   loader: async ({ params }) => {
     const certificateId = params.certificateId;
 
-    if (blogSlugs.has(certificateId) || blogPosts[certificateId]) {
+    if (certificateId === "scope-of-radiology") {
+      throw redirect({ to: "/blog", statusCode: 301 });
+    }
+    if (certificateId === "radiology-courses-after-12th-in-india") {
+      throw redirect({
+        to: "/top-medical-courses/$fmt",
+        params: { fmt: "radiology" },
+        statusCode: 301,
+      });
+    }
+
+    if (blogSlugs.has(certificateId)) {
       throw redirect({ to: `/blog/${certificateId}` });
     }
 
+    const { supabaseClient } = await import("@/lib/supabase");
     const { data } = await supabaseClient
       .from("certificates")
       .select("id")

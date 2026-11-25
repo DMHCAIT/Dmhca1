@@ -1,5 +1,4 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
-import { supabaseClient } from "@/lib/supabase";
 import {
   CheckCircle2,
   ArrowLeft,
@@ -21,6 +20,7 @@ import { useState, useMemo, useRef } from "react";
 export const Route = createFileRoute("/verification/$certificateId")({
   loader: async ({ params }) => {
     try {
+      const { supabaseClient } = await import("@/lib/supabase");
       const { data, error } = await supabaseClient
         .from("certificates")
         .select("*")

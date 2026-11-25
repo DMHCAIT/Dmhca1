@@ -1,5 +1,4 @@
 import { saveCart } from "@/routes/api/save-cart";
-import { supabaseClient } from "./supabase";
 
 export async function syncLocalCartToServer(userId?: string) {
   if (!userId) return;
@@ -16,6 +15,7 @@ export async function syncLocalCartToServer(userId?: string) {
 export async function loadServerCartToLocal(userId?: string) {
   if (!userId) return;
   try {
+    const { supabaseClient } = await import("./supabase");
     const { data, error } = await supabaseClient
       .from("carts")
       .select("cart")

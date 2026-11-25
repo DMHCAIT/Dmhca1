@@ -187,7 +187,13 @@ export function SignupFlow({ isOpen, onClose, onSuccess, onSwitchToLogin }) {
         {/* Header */}
         <div className="-mx-4 -mt-4 mb-4 rounded-t-2xl border-b border-border bg-muted/40 px-12 pb-3 pt-4 text-center sm:-mx-8 sm:-mt-5 sm:px-8 sm:pb-4 sm:pt-5">
           <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white shadow-sm sm:h-12 sm:w-12">
-            <img src={titleLogo} alt="DMHCA" className="h-6 w-auto sm:h-8" />
+            <img
+              src={titleLogo}
+              alt="DMHCA"
+              width={489}
+              height={510}
+              className="h-6 w-auto sm:h-8"
+            />
           </div>
           <h2 className="mb-1 text-xl font-bold text-foreground sm:mb-2 sm:text-2xl md:text-3xl">
             Create Your Account

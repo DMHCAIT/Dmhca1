@@ -31,8 +31,11 @@ function EventsIndexPage() {
               <div className="relative aspect-video overflow-hidden bg-muted">
                 {event.image ? (
                   <img
-                    src={event.image}
+                    src={event.thumbnail || event.image}
                     alt={event.title}
+                    width={600}
+                    height={338}
+                    loading="lazy"
                     className="w-full h-full object-cover"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "/placeholder-event.webp";

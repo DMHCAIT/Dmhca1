@@ -1,8 +1,15 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { courses } from "@/data/courses";
 import { CourseCard } from "@/components/site/CourseCard";
 
 export const Route = createFileRoute("/fellowship")({
+  beforeLoad: () => {
+    throw redirect({
+      to: "/top-medical-courses/$fmt",
+      params: { fmt: "fellowships" },
+      statusCode: 301,
+    });
+  },
   head: () => ({
     meta: [
       { title: "Fellowship Programs — DMHCA" },

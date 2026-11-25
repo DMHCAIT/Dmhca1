@@ -1,7 +1,8 @@
 import { createFileRoute, notFound, useParams } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { CourseCatalogue } from "@/components/site/CourseCatalogue";
-import { categories, type Course, courses } from "@/data/courses";
+import { categories } from "@/data/course-categories";
+import { type Course, courses } from "@/data/courses";
 import { fetchCoursesFromSupabase } from "@/lib/courses-remote";
 
 const formatMap: Record<string, string> = {

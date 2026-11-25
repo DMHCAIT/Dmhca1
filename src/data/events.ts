@@ -15,6 +15,7 @@ export interface Event {
   registrationPending?: boolean;
   location: string;
   image?: string;
+  thumbnail?: string;
   mobileImage?: string;
   shortDescription: string;
   description: string;
@@ -38,6 +39,7 @@ export const events: Event[] = [
     time: "5:00 to 6:00 PM IST",
     location: "Online",
     image: "/events&webinars/copd-event.webp",
+    thumbnail: "/events&webinars/copd-event-card.webp",
     registrationPending: true,
     shortDescription: "A one-hour session on how diet supports people living with chronic obstructive pulmonary disease, led by a dietitian and nutrition coach.",
     description:
@@ -109,6 +111,7 @@ export const events: Event[] = [
     date: "23/01/2026",
     location: "In-person",
     image: "/events&webinars/ultrasound-workshop.webp",
+    thumbnail: "/events&webinars/ultrasound-workshop-card.webp",
     shortDescription: "Hands-on ultrasound training program designed for medical professionals",
     description: `DMHCA is organizing a Hands-On Ultrasound Training Program designed for medical professionals who want practical experience and better confidence in ultrasound practice. This workshop focuses on learning by doing. Participants will work directly on ultrasound machines under the guidance of experienced faculty.`,
     whatYouLearn: [
@@ -138,6 +141,7 @@ export const events: Event[] = [
     date: "01/12/2025",
     location: "Zoom Meeting",
     image: "/events&webinars/hiv-awareness.webp",
+    thumbnail: "/events&webinars/hiv-awareness-card.webp",
     shortDescription:
       "HIV Awareness Webinar 2025 bringing together health experts and community advocates",
     description: `The HIV Awareness Webinar 2025 is set to bring together health experts, community advocates, educators, and individuals passionate about HIV prevention and empowerment. This year's webinar focuses on delivering practical knowledge, breaking stigma, and highlighting the latest advancements in treatment and prevention.`,
@@ -166,6 +170,7 @@ export const events: Event[] = [
     date: "14/11/2024",
     location: "Zoom meeting",
     image: "/events&webinars/cervical-cancer.webp",
+    thumbnail: "/events&webinars/cervical-cancer-card.webp",
     shortDescription:
       "Comprehensive webinar on cervical cancer prevention, diagnosis, and treatment",
     description: `Join us for an insightful webinar on cervical cancer, one of the most preventable yet impactful cancers affecting women worldwide. This event is designed for healthcare professionals, students, and anyone keen on deepening their understanding of cervical cancer prevention, diagnosis, and treatment options.`,
@@ -200,6 +205,7 @@ export const events: Event[] = [
     date: "06/04/2024",
     location: "Hyderabad, India",
     image: "/events&webinars/cardiology-conclave.webp",
+    thumbnail: "/events&webinars/cardiology-conclave-card.webp",
     shortDescription:
       "Prestigious event gathering top cardiologists for cardiovascular care advancement",
     description: `The Cardiology Conclave is a prestigious event that gathers top cardiologists, researchers, and healthcare professionals to explore the latest advancements in cardiovascular care. The event features expert sessions, panel discussions, and hands-on workshops.`,
@@ -277,6 +283,7 @@ export const events: Event[] = [
     date: "26/05/2024",
     location: "Online on Zoom",
     image: "/events&webinars/trauma-fracture.webp",
+    thumbnail: "/events&webinars/trauma-fracture-card.webp",
     shortDescription: "Comprehensive understanding of trauma and fracture management approaches",
     description: `The objective of this webinar is to provide healthcare professionals with a comprehensive understanding of trauma and fracture management, from initial assessment and diagnosis to treatment. Participants will explore both surgical and non-surgical approaches.`,
     whatYouLearn: [
@@ -313,6 +320,7 @@ export const events: Event[] = [
     date: "08/06/2024",
     location: "Online on Zoom",
     image: "/events&webinars/msk-ultrasound.webp",
+    thumbnail: "/events&webinars/msk-ultrasound-card.webp",
     shortDescription:
       "Practical knowledge about musculoskeletal ultrasound applications and techniques",
     description: `This webinar aims to provide orthopedic professionals with practical knowledge about the applications, techniques, and benefits of musculoskeletal ultrasound (MSK-US). It will cover the diagnostic and interventional uses of ultrasound for musculoskeletal conditions.`,

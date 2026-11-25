@@ -1,6 +1,7 @@
 import { createFileRoute, useParams, notFound } from "@tanstack/react-router";
 import { useMemo, useState, useEffect } from "react";
-import { categories, type Course, courses } from "@/data/courses";
+import { categories } from "@/data/course-categories";
+import { type Course, courses } from "@/data/courses";
 import { fetchCoursesFromSupabase } from "@/lib/courses-remote";
 import { CourseCatalogue } from "@/components/site/CourseCatalogue";
 

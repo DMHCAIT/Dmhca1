@@ -1,17 +1,11 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/paediatrics-courses/")({
-  component: PaediatricsCoursesIndex,
+  beforeLoad: () => {
+    throw redirect({
+      to: "/top-medical-courses/$fmt",
+      params: { fmt: "pediatrics" },
+      statusCode: 301,
+    });
+  },
 });
-
-function PaediatricsCoursesIndex() {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Redirect to the main paediatrics-courses page
-    navigate({ to: "/paediatrics-courses" });
-  }, [navigate]);
-
-  return null;
-}

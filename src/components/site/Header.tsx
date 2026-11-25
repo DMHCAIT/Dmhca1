@@ -1,13 +1,34 @@
 import { Link, useNavigate, useSearch, useLocation } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { SignupFlow } from "@/components/SignupFlow";
 import { OTPLoginModal } from "@/components/OTPLoginModal";
-import { ChatbotWidget } from "@/components/ChatbotWidget";
+import { ChatbotLauncher } from "@/components/ChatbotLauncher";
 import { syncLocalCartToServer, loadServerCartToLocal } from "@/lib/cart-sync";
 
 import { BrandLogo } from "@/components/site/BrandLogo";
 import { HeaderSearch } from "@/components/site/HeaderSearch";
+
+const ChatbotWidget = lazy(() =>
+  import("@/components/ChatbotWidget").then(({ ChatbotWidget }) => ({ default: ChatbotWidget })),
+);
+
+function DeferredChatbot() {
+  const [requested, setRequested] = useState(false);
+  const launcher = (
+    <div className="fixed right-4 sm:right-6 z-50 bottom-8 sm:bottom-10 w-14 sm:w-16 h-14 sm:h-16">
+      <ChatbotLauncher onClick={() => setRequested(true)} loading={requested} />
+    </div>
+  );
+
+  if (!requested) return launcher;
+  return (
+    <Suspense fallback={launcher}>
+      <ChatbotWidget initialOpen />
+    </Suspense>
+  );
+}
+
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about-dmhca", label: "About" },
@@ -401,7 +422,7 @@ export function Header() {
         />
       </header>
 
-      {!isAdminRoute && <ChatbotWidget />}
+      {!isAdminRoute && <DeferredChatbot />}
     </>
   );
 }

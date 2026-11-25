@@ -3,6 +3,7 @@ import "./lib/error-capture";
 import { consumeLastCapturedError } from "./lib/error-capture";
 import { renderErrorPage } from "./lib/error-page";
 import { getAbortedRequestResponse } from "./lib/request-abort";
+import { normalizeHtmlMetadata } from "./lib/html-metadata";
 
 type ServerEntry = {
   fetch: (request: Request, env: unknown, ctx: unknown) => Promise<Response> | Response;
@@ -12,13 +13,17 @@ let serverEntryPromise: Promise<ServerEntry> | undefined;
 
 const redirectMap: Record<string, string> = {
   "/scope-of-cardiology": "/blog",
+  "/scope-of-radiology": "/blog",
+  "/radiology-courses-after-12th-in-india": "/top-medical-courses/radiology",
+  "/fellowship": "/top-medical-courses/fellowships",
   "/cardiology-courses/city": "/top-medical-courses/cardiology",
   "/what-is-mrcp-and-why-should-mbbs-students-pursue-it": "/blog",
   "/obstetrics-and-gynecology-courses": "/top-medical-courses/obs-gynae",
   "/critical-care-medicine-courses": "/top-medical-courses/emergency",
   "/neurology-courses": "/top-medical-courses/neurology",
   "/embryology-courses": "/top-medical-courses/reproductive",
-  "/paediatrics-courses": "/top-medical-courses/paediatrics",
+  "/paediatrics-courses": "/top-medical-courses/pediatrics",
+  "/top-medical-courses/paediatrics": "/top-medical-courses/pediatrics",
   "/oncology-courses": "/top-medical-courses/oncology",
   "/emergency-medicine-courses": "/top-medical-courses/emergency",
   "/clinical-embryology-courses": "/top-medical-courses/reproductive",
@@ -40,7 +45,7 @@ const redirectPrefixes: Array<[string, string]> = [
   ["/cardiology-courses/", "/top-medical-courses/cardiology"],
   ["/emergency-medicine-courses/", "/top-medical-courses/emergency"],
   ["/clinical-cardiology-courses/", "/top-medical-courses/cardiology"],
-  ["/paediatrics-courses/", "/top-medical-courses/paediatrics"],
+  ["/paediatrics-courses/", "/top-medical-courses/pediatrics"],
   ["/cosmetology-courses/", "/courses/fellowship-in-cosmetology-and-aesthetic-medicine"],
   ["/critical-care-medicine-courses/", "/top-medical-courses/medicine"],
   ["/oncology-courses/", "/top-medical-courses/oncology"],
@@ -66,8 +71,8 @@ const canonicalMap: Record<string, string> = {
     "https://www.dmhca.in/top-medical-courses/neurology",
   "/top-medical-courses/reproductive":
     "https://www.dmhca.in/top-medical-courses/reproductive",
-  "/top-medical-courses/paediatrics":
-    "https://www.dmhca.in/top-medical-courses/paediatrics",
+  "/top-medical-courses/pediatrics":
+    "https://www.dmhca.in/top-medical-courses/pediatrics",
   "/top-medical-courses/oncology":
     "https://www.dmhca.in/top-medical-courses/oncology",
   "/top-medical-courses/nutrition":
@@ -105,38 +110,7 @@ async function applyCanonical(
   const contentType = response.headers.get("content-type") ?? "";
   if (!contentType.includes("text/html")) return response;
 
-  let html = await response.text();
-
-  const titleMatches = [...html.matchAll(/<title\b[^>]*>[\s\S]*?<\/title>/gi)];
-  if (titleMatches.length > 1) {
-    const lastTitle = titleMatches[titleMatches.length - 1][0];
-    html = html.replace(/<title\b[^>]*>[\s\S]*?<\/title>/gi, "");
-    html = html.replace("</head>", `  ${lastTitle}\n</head>`);
-  }
-
-  const descriptionMatches = [
-    ...html.matchAll(
-      /<meta\b[^>]*\b(?:name|property)=["'](?:description|og:description)["'][^>]*>/gi,
-    ),
-  ];
-  if (descriptionMatches.length > 1) {
-    const lastDescription = descriptionMatches[descriptionMatches.length - 1][0];
-    html = html.replace(
-      /<meta\b[^>]*\b(?:name|property)=["'](?:description|og:description)["'][^>]*>/gi,
-      "",
-    );
-    html = html.replace("</head>", `  ${lastDescription}\n</head>`);
-  }
-
-  html = html
-    .replace(/<meta\b[^>]*\bname=["']canonical["'][^>]*>\s*/gi, "")
-    .replace(/<link\b[^>]*\brel=["']canonical["'][^>]*>\s*/gi, "");
-
-  const updated = canonical
-    ? html.includes("</head>")
-      ? html.replace("</head>", `  <link rel="canonical" href="${canonical}" />\n</head>`)
-      : html.replace(/<head([^>]*)>/i, `<head$1>\n  <link rel="canonical" href="${canonical}" />`)
-    : html;
+  const updated = normalizeHtmlMetadata(await response.text(), canonical);
 
   const headers = new Headers(response.headers);
   headers.delete("content-length");
@@ -203,14 +177,20 @@ export default {
       return Response.redirect(`${requestUrl.origin}/verification`, 301);
     }
     if (requestUrl.pathname === "/top-medical-courses") {
-      const legacyParams = ["q", "s", "search_term_string", "cat", "organizer", "fmt"];
-      if (legacyParams.some((name) => requestUrl.searchParams.has(name))) {
+      const legacyParams = ["q", "s", "search_term_string", "organizer"];
+      if (
+        legacyParams.some((name) => requestUrl.searchParams.has(name)) &&
+        !["cat", "fmt"].some((name) => requestUrl.searchParams.has(name))
+      ) {
         return Response.redirect(`${requestUrl.origin}/top-medical-courses`, 301);
       }
     }
     if (requestUrl.pathname.startsWith("/top-medical-courses/")) {
-      const legacyParams = ["q", "s", "search_term_string", "cat", "organizer", "fmt"];
-      if (legacyParams.some((name) => requestUrl.searchParams.has(name))) {
+      const legacyParams = ["q", "s", "search_term_string", "organizer"];
+      if (
+        legacyParams.some((name) => requestUrl.searchParams.has(name)) &&
+        !["cat", "fmt"].some((name) => requestUrl.searchParams.has(name))
+      ) {
         return Response.redirect(
           `${requestUrl.origin}${requestUrl.pathname}`,
           301,

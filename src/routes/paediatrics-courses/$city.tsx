@@ -1,11 +1,18 @@
 import React from "react";
-import { createFileRoute, useParams } from "@tanstack/react-router";
+import { createFileRoute, redirect, useParams } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 import { getCourseBySlug, getCoursesBySpecialty } from "@/data/cityWiseCourses";
 import { courses, categories } from "@/data/courses";
 import { CourseCard } from "@/components/site/CourseCard";
 
 export const Route = createFileRoute("/paediatrics-courses/$city")({
+  beforeLoad: () => {
+    throw redirect({
+      to: "/top-medical-courses/$fmt",
+      params: { fmt: "pediatrics" },
+      statusCode: 301,
+    });
+  },
   component: PaediatricsCoursesPage,
 });
 

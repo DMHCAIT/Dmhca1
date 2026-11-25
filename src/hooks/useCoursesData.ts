@@ -135,7 +135,7 @@ export function useCoursesData() {
             const { data: freshData, error: supabaseError } = await supabaseClient
               .from("courses")
               .select(
-                "id,slug,title,category,categories,image_url,program,price,rating,review_count,overview,short_description,created_at",
+                "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,created_at",
               )
               .order("created_at", { ascending: false })
               .limit(200);
@@ -157,7 +157,7 @@ export function useCoursesData() {
       const { data, error: supabaseError } = await supabaseClient
         .from("courses")
         .select(
-          "id,slug,title,category,categories,image_url,program,price,rating,review_count,overview,short_description,created_at",
+          "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,created_at",
         )
         .order("created_at", { ascending: false })
         .limit(30); // Reduced for fast initial load
@@ -170,7 +170,7 @@ export function useCoursesData() {
       supabaseClient
         .from("courses")
         .select(
-          "id,slug,title,category,categories,image_url,program,price,rating,review_count,overview,short_description,created_at",
+          "id,slug,title,category,categories,image_url,program,price,rating,review_count,short_description,created_at",
         )
         .order("created_at", { ascending: false })
         .limit(200)
